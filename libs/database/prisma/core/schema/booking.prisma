@@ -1,0 +1,78 @@
+model BookingRules {
+  id                  String        @id @default(ulid())
+  minDaysInAdvance    Int           @default(0)
+  maxDaysInAdvance    Int           @default(90)
+  minGuestsPerBooking Int           @default(1)
+  maxGuestsPerBooking Int           @default(10)
+  defaultDuration     Int           @default(120)
+  autoConfirm         Boolean       @default(true)
+  allowCancellation   Boolean       @default(true)
+  cancellationHours   Int           @default(24)
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  establishmentId     String        @unique
+  establishment       Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+
+  @@index([establishmentId])
+}
+
+model EstablishmentAvailability {
+  id              String                 @id @default(ulid())
+  availableDate   DateTime               @db.Date
+  isClosed        Boolean                @default(false)
+  closureReason   String?
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
+  establishmentId String
+  timeSlots       AvailabilityTimeSlot[]
+  establishment   Establishment          @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+
+  @@unique([establishmentId, availableDate])
+  @@index([establishmentId])
+  @@index([availableDate])
+}
+
+model AvailabilityTimeSlot {
+  id             String                    @id @default(ulid())
+  slot           String
+  maxBookings    Int                       @default(10)
+  isActive       Boolean                   @default(true)
+  createdAt      DateTime                  @default(now())
+  updatedAt      DateTime                  @updatedAt
+  availabilityId String
+  availability   EstablishmentAvailability @relation(fields: [availabilityId], references: [id], onDelete: Cascade)
+  bookings       Booking[]
+
+  @@unique([availabilityId, slot])
+  @@index([availabilityId])
+}
+
+model Booking {
+  id                 String               @id @default(ulid())
+  bookingDate        DateTime             @db.Date
+  bookingTime        String
+  numberOfGuests     Int
+  customerName       String
+  customerEmail      String
+  customerPhone      String?
+  specialRequests    String?
+  status             BookingStatus        @default(PENDING)
+  confirmationCode   String               @unique @default(ulid())
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  cancelledAt        DateTime?
+  cancellationReason String?
+  userId             String?
+  establishmentId    String
+  timeSlotId         String
+  establishment      Establishment        @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  timeSlot           AvailabilityTimeSlot @relation(fields: [timeSlotId], references: [id], onDelete: Cascade)
+  user               User?                @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([establishmentId])
+  @@index([bookingDate])
+  @@index([status])
+  @@index([confirmationCode])
+  @@index([customerEmail])
+}

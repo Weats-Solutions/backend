@@ -1,0 +1,40 @@
+model AuditLog {
+  id              String        @id @default(cuid())
+  establishmentId String
+  actorId         String?
+  actorName       String?
+  actorType       ActorType
+  action          LogAction
+  resource        String
+  resourceId      String?
+  changes         Json?
+  metadata        Json?
+  ipAddress       String?
+  userAgent       String?
+  createdAt       DateTime      @default(now())
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+
+  @@index([establishmentId, createdAt])
+  @@index([actorId])
+  @@index([action])
+  @@index([resource])
+  @@map("audit_logs")
+}
+
+enum ActorType {
+  USER
+  EMPLOYEE
+  SYSTEM
+  GUEST
+  OWNER
+}
+
+enum LogAction {
+  CREATE
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  EXPORT
+  IMPORT
+}

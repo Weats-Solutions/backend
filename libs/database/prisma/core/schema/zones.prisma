@@ -1,0 +1,39 @@
+model ServiceZone {
+  id              String         @id @default(ulid())
+  name            String
+  isActive        Boolean        @default(true)
+  position        Int            @default(0)
+  establishmentId String
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  servicePoints   ServicePoint[]
+  establishment   Establishment  @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+
+  @@index([establishmentId])
+}
+
+model ServicePoint {
+  id           String           @id @default(ulid())
+  name         String
+  type         ServicePointType @default(TABLE)
+  maxCapacity  Int              @default(4)
+  minCapacity  Int              @default(1)
+  isReservable Boolean          @default(true)
+  isPriority   Boolean          @default(false)
+  isActive     Boolean          @default(true)
+  token        String?          @unique @default(ulid())
+  zoneId       String
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  color        String           @default("gray")
+  height       Float            @default(1)
+  rotation     Float            @default(0)
+  shape        String           @default("rectangle")
+  width        Float            @default(1)
+  x            Float            @default(0)
+  y            Float            @default(0)
+  z            Float            @default(0)
+  zone         ServiceZone      @relation(fields: [zoneId], references: [id], onDelete: Cascade)
+
+  @@index([zoneId])
+}

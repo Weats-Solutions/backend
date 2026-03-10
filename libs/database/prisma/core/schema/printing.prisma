@@ -1,0 +1,30 @@
+model Device {
+  id              String        @id @default(ulid())
+  name            String?
+  pairingKey      String?       @unique
+  deviceToken     String?       @unique
+  isActive        Boolean       @default(false)
+  lastSeen        DateTime?
+  establishmentId String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  printers        Printer[]
+
+  @@map("devices")
+}
+
+model Printer {
+  id           String   @id @default(ulid())
+  name         String
+  friendlyName String?
+  isDefault    Boolean  @default(false)
+  isEnabled    Boolean  @default(true)
+  deviceId     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  device       Device   @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+
+  @@unique([deviceId, name])
+  @@map("printers")
+}

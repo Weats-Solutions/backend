@@ -1,0 +1,41 @@
+model HomePage {
+  id                   String                @id @default(ulid())
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  establishmentId      String                @unique
+  establishment        Establishment         @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  homePageConfig       HomePageConfig?
+  homePageTranslations HomePageTranslation[]
+}
+
+model HomePageConfig {
+  id                      String    @id @default(ulid())
+  logo                    String?
+  shortName               String
+  primaryColor            String
+  secondaryColor          String
+  banner                  String?
+  backgroundSize          String
+  highlightPrimaryColor   String
+  highlightSecondaryColor String
+  highlightIconColor      String
+  highlightBackground     String
+  location                String
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+  homePageId              String?   @unique
+  bannerImage             Image?    @relation("BannerHomePageImage", fields: [banner], references: [id])
+  homePage                HomePage? @relation(fields: [homePageId], references: [id], onDelete: Cascade)
+  logoImage               Image?    @relation("LogoHomePageImage", fields: [logo], references: [id])
+}
+
+model HomePageTranslation {
+  id          String   @id @default(ulid())
+  locale      String
+  title       String
+  description String
+  homePageId  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  homePage    HomePage @relation(fields: [homePageId], references: [id], onDelete: Cascade)
+}

@@ -1,0 +1,11 @@
+model Schedule {
+  id                    String                  @id @default(ulid())
+  openTime              String
+  closeTime             String
+  dayOfWeek             DayOfWeek
+  type                  ScheduleType
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  establishmentSchedule EstablishmentSchedule[]
+  menuSchedule          MenuSchedule[]
+}

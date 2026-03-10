@@ -1,0 +1,115 @@
+model Establishment {
+  id                           String                        @id @default(ulid())
+  name                         String
+  slug                         String                        @unique
+  type                         EstablishmentType
+  isOnline                     Boolean                       @default(false)
+  ownerId                      String
+  stripeCustomerId             String                        @unique
+  status                       EstablishmentStatus           @default(ACTIVE)
+  createdAt                    DateTime                      @default(now())
+  updatedAt                    DateTime                      @updatedAt
+  activeThemeId                String?
+  addons                       Addon[]
+  bookings                     Booking[]
+  bookingRules                 BookingRules?
+  employees                    Employee[]
+  activeTheme                  Theme?                        @relation("ActiveTheme", fields: [activeThemeId], references: [id])
+  owner                        User                          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  establishmentAvailabilities  EstablishmentAvailability[]
+  establishmentBookingSettings EstablishmentBookingSettings?
+  establishmentBrand           EstablishmentBrand?
+  establishmentDetails         EstablishmentDetails?
+  establishmentSchedule        EstablishmentSchedule[]
+  establishmentSettings        EstablishmentSettings?
+  establishmentSocialMedia     EstablishmentSocialMedia?
+  homePage                     HomePage?
+  images                       Image[]
+  invoices                     Invoice[]
+  Item                         Item[]
+  landingPage                  LandingPage?
+  menus                        Menu[]
+  serviceZones                 ServiceZone[]
+  subscription                 Subscription?
+  themes                       Theme[]
+  variantOptions               VariantOption[]
+  auditLogs                    AuditLog[]
+  devices                      Device[]
+
+  @@index([name])
+  @@index([ownerId])
+}
+
+model EstablishmentSchedule {
+  id              String        @id @default(ulid())
+  establishmentId String
+  scheduleId      String
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  schedule        Schedule      @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+}
+
+model EstablishmentDetails {
+  id              String        @id @default(ulid())
+  email           String
+  address         String?
+  city            String?
+  state           String?
+  zipCode         String?
+  country         String?
+  countryCode     String?
+  phoneNumber     String?
+  cuisine         String?
+  billingName     String?
+  billingTaxId    String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  establishmentId String        @unique
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}
+
+model EstablishmentSocialMedia {
+  id              String        @id @default(ulid())
+  instagramUrl    String?
+  tiktokUrl       String?
+  facebookUrl     String?
+  googleReviewUrl String?
+  tripAdvisorUrl  String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  establishmentId String        @unique
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}
+
+model EstablishmentBookingSettings {
+  id              String        @id @default(ulid())
+  enabled         Boolean       @default(false)
+  themeName       String        @default("default")
+  themeMode       String        @default("light")
+  establishmentId String        @unique
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}
+
+model EstablishmentSettings {
+  id                 String                  @id @default(ulid())
+  primaryLanguage    EstablishmentLanguage   @default(PT)
+  availableLanguages EstablishmentLanguage[] @default([PT])
+  timezone           String                  @default("Europe/Lisbon")
+  onlyMenu           Boolean                 @default(false)
+  needSession        Boolean                 @default(true)
+  createdAt          DateTime                @default(now())
+  updatedAt          DateTime                @updatedAt
+  establishmentId    String                  @unique
+  establishment      Establishment           @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}
+
+model EstablishmentBrand {
+  id              String        @id @default(ulid())
+  logoImageId     String?
+  bannerImageId   String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  establishmentId String        @unique
+  bannerImage     Image?        @relation("BannerImage", fields: [bannerImageId], references: [id])
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  logoImage       Image?        @relation("LogoImage", fields: [logoImageId], references: [id])
+}

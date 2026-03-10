@@ -1,0 +1,17 @@
+model Employee {
+  id                    String        @id @default(ulid())
+  email                 String        @unique
+  authCode              Int
+  firstName             String
+  lastName              String
+  role                  EmployeeRoles
+  isActive              Boolean       @default(true)
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+  refreshTokenHash      String?
+  refreshTokenExpiresAt DateTime?
+  establishmentId       String
+  establishment         Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+
+  @@index([establishmentId, role])
+}

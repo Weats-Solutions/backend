@@ -1,0 +1,15 @@
+model WebhookEvent {
+  id          String   @id @default(ulid())
+  provider    String
+  eventId     String
+  eventType   String
+  status      String
+  processedAt DateTime
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+
+  @@unique([provider, eventId])
+  @@index([provider])
+  @@index([status])
+  @@index([expiresAt])
+}

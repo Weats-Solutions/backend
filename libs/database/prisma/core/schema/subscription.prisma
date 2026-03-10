@@ -1,0 +1,79 @@
+model Subscription {
+  id                   String             @id @default(ulid())
+  establishmentId      String             @unique
+  stripeSubscriptionId String             @unique
+  planCycleId          String
+  status               SubscriptionStatus @default(TRIALING)
+  currentPeriodStart   DateTime?
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean
+  cancelAt             DateTime?
+  canceledAt           DateTime?
+  stripeCustomerId     String             @unique
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  establishment        Establishment      @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  planCycle            PlanCycle          @relation(fields: [planCycleId], references: [id])
+
+  @@index([stripeCustomerId])
+  @@index([establishmentId])
+  @@index([status])
+  @@index([stripeCustomerId, status])
+}
+
+model Plan {
+  id         String        @id @default(ulid())
+  name       String
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  planCycles PlanCycle[]
+  features   PlanFeature[]
+}
+
+model PlanCycle {
+  id           String         @id @default(ulid())
+  planId       String
+  cycle        BillingCycle
+  price        Decimal        @db.Decimal(10, 2)
+  priceId      String         @unique
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  plan         Plan           @relation(fields: [planId], references: [id], onDelete: Cascade)
+  Subscription Subscription[]
+
+  @@unique([planId, cycle])
+}
+
+model Feature {
+  id           String        @id @default(ulid())
+  name         String        @unique
+  type         FeatureType
+  planFeatures PlanFeature[]
+}
+
+model PlanFeature {
+  id            String   @id @default(ulid())
+  planId        String
+  featureId     String
+  valueBoolean  Boolean?
+  valueQuantity Int?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  feature       Feature  @relation(fields: [featureId], references: [id], onDelete: Cascade)
+  plan          Plan     @relation(fields: [planId], references: [id], onDelete: Cascade)
+
+  @@unique([planId, featureId])
+  @@index([featureId])
+}
+
+model Invoice {
+  id              String        @id @default(ulid())
+  customerId      String
+  establishmentId String
+  stripeInvoiceId String
+  subscriptionId  String
+  amountPaid      Int
+  status          String
+  createdAt       DateTime      @default(now())
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}

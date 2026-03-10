@@ -1,0 +1,123 @@
+model Menu {
+  id               String            @id @default(ulid())
+  position         Int               @default(0)
+  isVisible        Boolean           @default(false)
+  isHighlighted    Boolean           @default(false)
+  color            String?
+  type             MenuType          @default(DEFAULT)
+  price            Float?
+  maxItemsPerOrder Int?
+  establishmentId  String
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  establishment    Establishment     @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  categories       MenuCategory[]
+  menuSchedule     MenuSchedule[]
+  translations     MenuTranslation[]
+
+  @@index([establishmentId])
+  @@index([establishmentId, position])
+}
+
+model MenuSchedule {
+  id         String   @id @default(ulid())
+  menuId     String
+  scheduleId String
+  menu       Menu     @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  schedule   Schedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+}
+
+model MenuTranslation {
+  id           String   @id @default(ulid())
+  locale       String
+  name         String
+  description  String?
+  observations String?
+  menuId       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  menu         Menu     @relation(fields: [menuId], references: [id], onDelete: Cascade)
+
+  @@unique([menuId, locale])
+  @@index([menuId])
+}
+
+model MenuCategory {
+  id            String                    @id @default(ulid())
+  isVisible     Boolean                   @default(true)
+  imageId       String?
+  menuId        String
+  position      Int                       @default(0)
+  createdAt     DateTime                  @default(now())
+  updatedAt     DateTime                  @updatedAt
+  image         Image?                    @relation("ImageMenuCategory", fields: [imageId], references: [id])
+  menu          Menu                      @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  translations  MenuCategoryTranslation[]
+  subcategories MenuSubcategory[]
+
+  @@index([menuId])
+  @@index([menuId, position])
+}
+
+model MenuCategoryTranslation {
+  id         String       @id @default(ulid())
+  locale     String
+  name       String
+  categoryId String
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  category   MenuCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, locale])
+}
+
+model MenuSubcategory {
+  id           String                       @id @default(ulid())
+  isVisible    Boolean                      @default(true)
+  categoryId   String?
+  position     Int                          @default(0)
+  createdAt    DateTime                     @default(now())
+  updatedAt    DateTime                     @updatedAt
+  items        MenuItemPosition[]
+  category     MenuCategory?                @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  translations MenuSubcategoryTranslation[]
+
+  @@index([categoryId])
+  @@index([categoryId, position])
+}
+
+model MenuSubcategoryTranslation {
+  id            String          @id @default(ulid())
+  locale        String
+  name          String
+  description   String?
+  subcategoryId String
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  subcategory   MenuSubcategory @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
+
+  @@unique([subcategoryId, locale])
+}
+
+model MenuItemPosition {
+  id            String          @id @default(ulid())
+  itemId        String
+  subcategoryId String
+  position      Int             @default(0)
+  isIncluded    Boolean         @default(false)
+  isVisible     Boolean         @default(true)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  item          Item            @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  subcategory   MenuSubcategory @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, subcategoryId])
+  @@index([itemId])
+  @@index([subcategoryId])
+  @@index([subcategoryId, position])
+}
+
+enum MenuType {
+  DEFAULT
+  RODIZIO
+}

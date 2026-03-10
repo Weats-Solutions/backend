@@ -1,0 +1,10 @@
+model Theme {
+  id                   String          @id @default(cuid())
+  name                 String
+  config               Json
+  isDefault            Boolean         @default(false)
+  establishmentId      String?
+  activeEstablishments Establishment[] @relation("ActiveTheme")
+  landingPages         LandingPage[]
+  establishment        Establishment?  @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}

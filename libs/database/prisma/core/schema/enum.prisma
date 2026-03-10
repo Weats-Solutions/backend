@@ -1,0 +1,119 @@
+enum EmployeeRoles {
+  MANAGER
+  KITCHEN
+  WAITER
+  CHECKOUT
+}
+
+enum ScheduleType {
+  ESTABLISHMENT
+  MENU
+}
+
+enum EstablishmentLanguage {
+  PT
+  EN
+  ES
+  FR
+  DE
+  IT
+}
+
+enum EstablishmentStatus {
+  ACTIVE
+  PAYMENT_PENDING
+  INACTIVE
+  SUSPENDED
+}
+
+enum EstablishmentType {
+  RESTAURANT
+  COFFEE
+  HOTEL
+  BAR
+  CATERING
+  CASINO
+  DISCO
+  CLUB
+  ARENA
+  CINEMA
+  LOUNGE
+  RESORT
+  MOTEL
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  INCOMPLETE
+  INCOMPLETE_EXPIRED
+  TRIALING
+}
+
+enum BillingCycle {
+  MONTHLY
+  TIMESTRAL
+  YEARLY
+}
+
+enum FeatureType {
+  BOOLEAN
+  QUANTITY
+}
+
+enum DayOfWeek {
+  SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+}
+
+enum UnitType {
+  CUP
+  DOSE
+  PEOPLE
+  PIECE
+  PORTION
+  SLICE
+  UNIT
+  GLASS
+  MILLILITRE
+  CENTILITRE
+  LITRE
+  GRAM
+  KILOGRAM
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+enum ServicePointType {
+  TABLE
+  BOOTH
+  COUNTER
+  TERRACE
+  ROOM
+  SUITE
+  POOL_SIDE
+  SUNBED
+  CABANA
+  SEAT
+  SECTOR
+  VIP_BOX
+  STANDING_TABLE
+  LOUNGE_AREA
+  PICKUP_POINT
+  PARKING_SPOT
+  KITCHEN
+  GENERAL
+  OBSTACLE
+}

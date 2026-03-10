@@ -1,0 +1,6 @@
+model POSCategory {
+  id              String @id @default(ulid())
+  name            String
+  establishmentId String
+  items           Item[]
+}
