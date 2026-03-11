@@ -4,7 +4,7 @@ import { Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice(DashboardModule, {
-    transport: Transport.TCP, // Transport.TCP
+    transport: Transport.TCP, 
     options: { port: 3002 },
   });
   await app.listen();

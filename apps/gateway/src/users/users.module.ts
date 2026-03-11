@@ -1,19 +1,24 @@
 import { Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ClientProxyFactory } from '@nestjs/microservices';
+import { DASHBOARD_SERVICE } from '@weats/common';
+import { ConfigsModule } from '@weats/configs';
+import { GatewayConfigService } from '@weats/configs/gateway-config.service';
 
 @Module({
-  imports: [
-    ClientsModule.register([
-      {
-        name: 'DASHBOARD_SERVICE',
-        transport: Transport.TCP, // Transport.TCP
-        options: { port: 3002 },
+  imports: [ConfigsModule],
+  providers: [
+    UsersService,
+    {
+      provide: DASHBOARD_SERVICE,
+      useFactory: (configService: GatewayConfigService) => {
+        const clientOptions = configService.dashboardClientOptions;
+        return ClientProxyFactory.create(clientOptions);
       },
-    ]),
+      inject: [GatewayConfigService],
+    },
   ],
-  providers: [UsersService],
   controllers: [UsersController],
 })
 export class UsersModule {}

@@ -33,17 +33,26 @@
     "prisma:orders:studio": "cross-env PRISMA_DB_TYPE=orders prisma studio"
   },
   "dependencies": {
+    "@clerk/backend": "^3.2.0",
+    "@nestjs/bull": "^11.0.4",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.0.1",
+    "@nestjs/mapped-types": "*",
     "@nestjs/microservices": "^11.1.16",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/throttler": "^6.5.0",
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.2",
     "@prisma/client-runtime-utils": "^7.4.2",
+    "bull": "^4.16.5",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
     "pg": "^8.20.0",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "stripe": "^20.4.1",
+    "ulid": "^3.0.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
@@ -94,6 +103,11 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
+      "^@weats/common(|/.*)$": "<rootDir>/libs/common/src/$1",
+      "^@weats/configs(|/.*)$": "<rootDir>/libs/configs/src/$1",
+      "^@weats/integrations(|/.*)$": "<rootDir>/libs/integrations/src/$1",
+      "^@weats/types(|/.*)$": "<rootDir>/libs/types/src/$1",
+      "^weats/contracts(|/.*)$": "<rootDir>/libs/contracts/src/$1",
       "^weats/database(|/.*)$": "<rootDir>/libs/database/src/$1"
     }
   }

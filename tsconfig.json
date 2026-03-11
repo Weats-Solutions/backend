@@ -15,19 +15,60 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
+    "tsBuildInfoFile": "./dist/.tsbuildinfo",
     "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "weats/database": [
+      "@weats/common": [
+        "libs/common/src"
+      ],
+      "@weats/common/*": [
+        "libs/common/src/*"
+      ],
+      "@weats/configs": [
+        "libs/configs/src"
+      ],
+      "@weats/configs/*": [
+        "libs/configs/src/*"
+      ],
+      "@weats/contracts": [
+        "libs/contracts/src"
+      ],
+      "@weats/contracts/*": [
+        "libs/contracts/src/*"
+      ],
+      "@weats/database": [
         "libs/database/src"
       ],
-      "weats/database/*": [
+      "@weats/database/*": [
         "libs/database/src/*"
+      ],
+      "@weats/integrations": [
+        "libs/integrations/src"
+      ],
+      "@weats/integrations/*": [
+        "libs/integrations/src/*"
+      ],
+      "@weats/types": [
+        "libs/types/src"
+      ],
+      "@weats/types/*": [
+        "libs/types/src/*"
       ]
-    }
-  }
+    },
+    "composite": false,
+    "projectReferences": false
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test",
+    "**/*spec.ts",
+    "**/prisma/*/generated"
+  ]
 }

@@ -1,0 +1,14 @@
+{
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/prisma/*/generated": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/prisma/*/generated": true
+  }
+}

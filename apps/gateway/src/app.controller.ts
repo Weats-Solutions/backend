@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
-import { OrdersPrismaService } from 'weats/database';
+import { OrdersPrismaService } from '@weats/database';
 
 @Controller()
 export class AppController {
