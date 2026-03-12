@@ -1,15 +1,18 @@
 import { Module } from '@nestjs/common';
-import { DashboardService } from './dashboard.service';
-import { DashboardController } from './dashboard.controller';
 import { ClientProxyFactory } from '@nestjs/microservices';
 import { GatewayConfigService } from '@weats/configs/gateway-config.service';
 import { DASHBOARD_SERVICE } from '@weats/common';
 import { ConfigModule } from '@nestjs/config';
+import { ConfigsModule } from '@weats/configs';
+import { IntegrationsModule } from '@weats/integrations';
+import { DatabaseModule } from '@weats/database';
+import { EstablishmentController } from './establishment/establishment.controller';
+import { UserController } from './user/user.controller';
+import { PlanController } from './plan/plan.controller';
 
 @Module({
-  imports: [ConfigModule],
+  imports: [ConfigsModule, IntegrationsModule, DatabaseModule],
   providers: [
-    DashboardService,
     {
       provide: DASHBOARD_SERVICE,
       useFactory: (configService: GatewayConfigService) => {
@@ -19,6 +22,6 @@ import { ConfigModule } from '@nestjs/config';
       inject: [GatewayConfigService],
     },
   ],
-  controllers: [DashboardController],
+  controllers: [EstablishmentController, UserController, PlanController],
 })
-export class DashboardModule {}
+export class DashboardModule { }

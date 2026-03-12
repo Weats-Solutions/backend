@@ -3,13 +3,17 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AppConfigService {
-  constructor(private configService: ConfigService) {}
+  constructor(private configService: ConfigService) { }
 
   getAppUrl(): string {
     return this.configService.getOrThrow<string>('APP_URL');
   }
 
-  getAppPort(): string {
-    return this.configService.getOrThrow<string>('APP_PORT');
+  getApiPort(): string {
+    return this.configService.getOrThrow<string>('API_PORT');
+  }
+
+  getNodeEnv(): string {
+    return this.configService.getOrThrow<string>('NODE_ENV');
   }
 }

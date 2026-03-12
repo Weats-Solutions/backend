@@ -1,0 +1,93 @@
+model OrderItem {
+  id              String   @id @default(ulid())
+  orderId         String
+  itemId          String
+  itemVariantId   String? // se aplicável
+  quantity        Int
+  basePrice       Decimal  @db.Decimal(10, 2) // preço unitário sem promoções
+  modifierTotal   Decimal  @db.Decimal(10, 2) // total de modificadores
+  subtotal        Decimal  @db.Decimal(10, 2) // basePrice * quantity + modifiers
+  discountAmount  Decimal  @db.Decimal(10, 2) // desconto aplicado neste item
+  promotionAmount Decimal  @db.Decimal(10, 2) // recompensa/promo aplicada
+  finalPrice      Decimal  @db.Decimal(10, 2) // subtotal - discountAmount - promotionAmount
+  promotionId     String? // referência a promoção aplicada
+  discountId      String? // referência a desconto aplicado
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+/**
+ * model Order {
+ * id              String         @id @default(ulid())
+ * establishmentId String
+ * customerName    String?
+ * status          OrderStatus    @default(PENDING)
+ * total           Decimal        @db.Decimal(10, 2)
+ * tax             Decimal?       @db.Decimal(10, 2)
+ * createdAt       DateTime       @default(now())
+ * updatedAt       DateTime       @updatedAt
+ * fiscalRecords   FiscalRecord[]
+ * establishment   Establishment  @relation(fields: [establishmentId], references: [id])
+ * items           OrderItem[]
+ * payments        Payment[]
+ * }
+ * model OrderItem {
+ * id            String              @id @default(ulid())
+ * orderId       String
+ * itemId        String
+ * itemVariantId String?
+ * quantity      Int                 @default(1)
+ * unitPrice     Decimal             @db.Decimal(10, 2)
+ * totalPrice    Decimal             @db.Decimal(10, 2)
+ * item          Item                @relation(fields: [itemId], references: [id])
+ * variant       ItemVariant?        @relation(fields: [itemVariantId], references: [id])
+ * order         Order               @relation(fields: [orderId], references: [id], onDelete: Cascade)
+ * modifiers     OrderItemModifier[]
+ * }
+ * model OrderItemModifier {
+ * id               String             @id @default(ulid())
+ * orderItemId      String
+ * modifierOptionId String
+ * quantity         Int                @default(1)
+ * price            Decimal            @db.Decimal(10, 2)
+ * modifierOption   ItemModifierOption @relation(fields: [modifierOptionId], references: [id])
+ * orderItem        OrderItem          @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
+ * }
+ * model Payment {
+ * id        String        @id @default(ulid())
+ * orderId   String
+ * method    PaymentMethod
+ * amount    Decimal       @db.Decimal(10, 2)
+ * createdAt DateTime      @default(now())
+ * order     Order         @relation(fields: [orderId], references: [id])
+ * }
+ * model FiscalRecord {
+ * id        String       @id @default(ulid())
+ * orderId   String
+ * status    FiscalStatus @default(PENDING)
+ * xml       String?
+ * pdf       String?
+ * createdAt DateTime     @default(now())
+ * updatedAt DateTime     @updatedAt
+ * order     Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+ * }
+ * enum OrderStatus {
+ * PENDING
+ * CONFIRMED
+ * CANCELLED
+ * COMPLETED
+ * }
+ * enum PaymentMethod {
+ * CASH
+ * CARD
+ * DIGITAL
+ * GIFT_CARD
+ * }
+ * enum FiscalStatus {
+ * PENDING
+ * SENT
+ * CANCELLED
+ * FAILED
+ * COMPLETED
+ * }
+ */

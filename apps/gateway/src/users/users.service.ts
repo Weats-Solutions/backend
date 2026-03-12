@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { DASHBOARD_SERVICE } from '../constants';
+import { DASHBOARD_SERVICE } from '@weats/common';
 
 @Injectable()
 export class UsersService {

@@ -5,6 +5,8 @@ import {
   validateSync,
   IsOptional,
   IsIn,
+  isInt,
+  IsInt,
 } from 'class-validator';
 
 class EnvironmentVariables {
@@ -21,6 +23,9 @@ class EnvironmentVariables {
 
   @IsString()
   CORE_DB_URL: string;
+
+  @IsInt()
+  API_PORT: number;
 }
 
 export function validate(config: Record<string, unknown>) {

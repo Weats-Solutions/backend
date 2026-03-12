@@ -4,10 +4,10 @@ import { ClientOptions, Transport } from '@nestjs/microservices';
 
 @Injectable()
 export class GatewayConfigService {
-  constructor(private configService: ConfigService) {}
+  constructor(private configService: ConfigService) { }
 
   getDashboardClientPort(): number {
-    return this.configService.getOrThrow<number>('DASHBOARD_CLIENT_PORT');
+    return parseInt(this.configService.getOrThrow<string>('DASHBOARD_CLIENT_PORT'), 10);
   }
 
   get dashboardClientOptions(): ClientOptions {

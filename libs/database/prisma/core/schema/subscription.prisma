@@ -12,6 +12,11 @@ model Subscription {
   stripeCustomerId     String             @unique
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt
+  cancellationComment  String?
+  cancellationFeedback String?
+  cancellationReason   String?
+  endedAt              DateTime?
+  trialEnd             DateTime?
   establishment        Establishment      @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
   planCycle            PlanCycle          @relation(fields: [planCycleId], references: [id])
 
@@ -48,6 +53,7 @@ model Feature {
   id           String        @id @default(ulid())
   name         String        @unique
   type         FeatureType
+  showInPlans  Boolean       @default(true)
   planFeatures PlanFeature[]
 }
 

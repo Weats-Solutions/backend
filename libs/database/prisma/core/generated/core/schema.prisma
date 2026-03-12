@@ -106,9 +106,12 @@ model Booking {
   userId             String?
   establishmentId    String
   timeSlotId         String
+  internalNotes      String?
+  source             BookingSource        @default(ONLINE)
   establishment      Establishment        @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
   timeSlot           AvailabilityTimeSlot @relation(fields: [timeSlotId], references: [id], onDelete: Cascade)
   user               User?                @relation(fields: [userId], references: [id])
+  logs               BookingLog[]
 
   @@index([userId])
   @@index([establishmentId])
@@ -116,6 +119,279 @@ model Booking {
   @@index([status])
   @@index([confirmationCode])
   @@index([customerEmail])
+}
+
+model BookingLog {
+  id          String           @id @default(ulid())
+  bookingId   String
+  event       BookingEventType
+  actorId     String?
+  actorName   String?
+  actorType   ActorType
+  description String
+  metadata    Json?
+  createdAt   DateTime         @default(now())
+  booking     Booking          @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId, createdAt])
+  @@index([bookingId, event])
+  @@map("booking_logs")
+}
+
+enum BookingEventType {
+  CREATED
+  UPDATED
+  STATUS_CHANGED
+  EMAIL_SENT
+  CANCELLED
+  CONFIRMED
+  COMPLETED
+  NO_SHOW
+  NOTE_UPDATED
+  DELETED
+}
+
+enum BookingSource {
+  ONLINE
+  PHONE
+  WALK_IN
+  STAFF
+}
+
+/// =======================================================
+/// DISCOUNTS (Redução direta de preço)
+/// =======================================================
+model Discount {
+  id              String       @id @default(ulid())
+  establishmentId String
+  name            String
+  description     String?
+  type            DiscountType
+  value           Decimal      @db.Decimal(10, 2)
+  isActive        Boolean      @default(true)
+  stackable       Boolean      @default(false)
+  startsAt        DateTime?
+  endsAt          DateTime?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  establishment Establishment      @relation(fields: [establishmentId], references: [id])
+  targets       DiscountTarget[]
+  schedules     DiscountSchedule[]
+
+  @@index([establishmentId, isActive])
+}
+
+enum DiscountType {
+  PERCENTAGE
+  FIXED_AMOUNT
+}
+
+model DiscountTarget {
+  id            String  @id @default(ulid())
+  discountId    String
+  itemId        String?
+  posCategoryId String?
+
+  discount Discount @relation(fields: [discountId], references: [id], onDelete: Cascade)
+  item     Item?    @relation(fields: [itemId], references: [id])
+
+  @@index([discountId])
+}
+
+model DiscountSchedule {
+  id         String @id @default(ulid())
+  discountId String
+  scheduleId String
+
+  discount Discount @relation(fields: [discountId], references: [id], onDelete: Cascade)
+  schedule Schedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+
+  @@unique([discountId, scheduleId])
+}
+
+/// =======================================================
+/// PROMOTIONS (Regras condicionais, ex: Buy X Get Y)
+/// =======================================================
+model Promotion {
+  id              String        @id @default(ulid())
+  establishmentId String
+  name            String
+  description     String?
+  type            PromotionType
+  isActive        Boolean       @default(true)
+  startsAt        DateTime?
+  endsAt          DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  establishment Establishment       @relation(fields: [establishmentId], references: [id])
+  buyXGetYRule  BuyXGetYRule?
+  schedules     PromotionSchedule[]
+
+  @@index([establishmentId, isActive])
+}
+
+enum PromotionType {
+  BUY_X_GET_Y
+  // futuro: SPEND_X_GET_Y, BUNDLE, FREE_DELIVERY
+}
+
+/// Regras de Buy X Get Y (aplicado ao nível de Item)
+model BuyXGetYRule {
+  id          String @id @default(ulid())
+  promotionId String @unique
+
+  requiredItemId   String
+  requiredQuantity Int
+
+  rewardItemId   String
+  rewardQuantity Int
+  applyCheapest  Boolean @default(true) // aplica reward no item de menor valor
+
+  promotion    Promotion @relation(fields: [promotionId], references: [id], onDelete: Cascade)
+  requiredItem Item      @relation("RequiredItem", fields: [requiredItemId], references: [id])
+  rewardItem   Item      @relation("RewardItem", fields: [rewardItemId], references: [id])
+}
+
+model PromotionSchedule {
+  id          String @id @default(ulid())
+  promotionId String
+  scheduleId  String
+
+  promotion Promotion @relation(fields: [promotionId], references: [id], onDelete: Cascade)
+  schedule  Schedule  @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+
+  @@unique([promotionId, scheduleId])
+}
+
+model EmailLog {
+  id                 String        @id
+  establishmentId    String
+  userId             String?
+  to                 String
+  template           EmailTemplate
+  type               EmailLogType  @default(TRANSACTIONAL)
+  lang               String        @db.VarChar(5)
+  subject            String
+  status             EmailStatus   @default(QUEUED)
+  provider           EmailProvider @default(ZEPTO)
+  providerMessageId  String?       @unique
+  providerStatusCode Int?
+  providerMessage    String?
+  attempts           Int           @default(0)
+  context            Json?
+  hasAttachments     Boolean       @default(false)
+  attachmentsCount   Int           @default(0)
+  queuedAt           DateTime      @default(now())
+  sentAt             DateTime?
+  deliveredAt        DateTime?
+  openedAt           DateTime?
+  clickedAt          DateTime?
+  bouncedAt          DateTime?
+  complainedAt       DateTime?
+  failedAt           DateTime?
+  metadata           Json?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime
+  emailEvents        EmailEvent[]
+  Establishment      Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+
+  @@index([establishmentId, type, createdAt, status])
+  @@index([establishmentId, createdAt])
+  @@index([establishmentId, status])
+  @@index([establishmentId, template])
+  @@index([providerMessageId])
+  @@index([status, createdAt])
+  @@index([template, type])
+  @@index([to])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model EmailEvent {
+  id         String         @id @default(ulid())
+  emailLogId String
+  event      EmailEventType
+  occurredAt DateTime       @default(now())
+  /// Payload bruto do webhook para debugging
+  payload    Json?
+  emailLog   EmailLog       @relation(fields: [emailLogId], references: [id], onDelete: Cascade)
+
+  @@index([emailLogId])
+  @@index([emailLogId, event])
+  @@index([occurredAt])
+}
+
+enum EmailTemplate {
+  WELCOME
+  CREATE_ESTABLISHMENT
+  INVITE_EMPLOYEE
+  QRCODES
+  CREATE_BOOKING
+  CONFIRM_BOOKING
+  CANCEL_BOOKING
+  BOOKING_RECEIVED
+  BOOKING_CANCELLED
+  SUBSCRIPTION_ACTIVATED
+  SUBSCRIPTION_REACTIVATED
+  SUBSCRIPTION_CANCELED
+  SUBSCRIPTION_PAST_DUE
+  SUBSCRIPTION_TRIAL_STARTED
+  SUBSCRIPTION_TRIAL_ENDED
+  TRIAL_ENDING
+  PLAN_CHANGED
+  INVOICE_PAID
+  INVOICE_FAILED
+  PAYMENT_SUCCEEDED
+  PAYMENT_FAILED
+  UPDATE_BOOKING
+}
+
+enum EmailStatus {
+  /// Na fila BullMQ, ainda não processado
+  QUEUED
+  /// A ser processado pelo worker
+  PROCESSING
+  /// Aceite pelo provider (request 200)
+  SENT
+  /// Confirmado pelo provider via webhook
+  DELIVERED
+  /// Email aberto pelo destinatário
+  OPENED
+  /// Link clicado pelo destinatário
+  CLICKED
+  /// Bounce (hard ou soft)
+  BOUNCED
+  /// Marcado como spam
+  COMPLAINED
+  /// Erro irrecuperável
+  FAILED
+}
+
+enum EmailProvider {
+  ZEPTO
+  RESEND
+  SENDGRID
+  SES
+}
+
+enum EmailEventType {
+  QUEUED
+  PROCESSING
+  SENT
+  DELIVERED
+  OPENED
+  CLICKED
+  BOUNCED
+  COMPLAINED
+  FAILED
+  RETRY
+}
+
+enum EmailLogType {
+  SYSTEM
+  TRANSACTIONAL
 }
 
 model Employee {
@@ -146,6 +422,8 @@ enum EmployeeRoles {
 enum ScheduleType {
   ESTABLISHMENT
   MENU
+  DISCOUNT
+  PROMOTION
 }
 
 enum EstablishmentLanguage {
@@ -238,11 +516,12 @@ enum ServicePointType {
   TABLE
   BOOTH
   COUNTER
-  TERRACE
   ROOM
+  SUNBED
+  GENERAL
+  TERRACE
   SUITE
   POOL_SIDE
-  SUNBED
   CABANA
   SEAT
   SECTOR
@@ -252,8 +531,125 @@ enum ServicePointType {
   PICKUP_POINT
   PARKING_SPOT
   KITCHEN
-  GENERAL
   OBSTACLE
+  BEDROOM
+}
+
+// ─────────────────────────────────────────────────────────
+// STOCK MANAGEMENT ENUMS
+// ─────────────────────────────────────────────────────────
+
+enum StockUnit {
+  UNIT
+  KG
+  GRAM
+  LITRE
+  ML
+  CL
+  PACK
+  BOX
+  BOTTLE
+  CAN
+  BAG
+  PORTION
+  DOSE
+  SHEET
+  METER
+  CM
+}
+
+enum StockStorageTemp {
+  AMBIENT // temperatura ambiente
+  REFRIGERATED // refrigerado (0-8°C)
+  FROZEN // congelado (<-18°C)
+  CONTROLLED // temperatura controlada (8-15°C)
+}
+
+enum StockBatchStatus {
+  ACTIVE
+  DEPLETED // esgotado
+  EXPIRED // expirado
+  QUARANTINE // em quarentena
+  RECALLED // recolhido
+}
+
+enum StockEntryType {
+  PURCHASE // compra a fornecedor
+  RECEPTION // receção de encomenda pendente
+  RETURN_FROM_CLIENT // devolução de cliente
+  INITIAL_STOCK // stock inicial / abertura
+  TRANSFER_IN // transferência entrada
+  ADJUSTMENT_IN // ajuste positivo manual
+}
+
+enum StockEntryStatus {
+  DRAFT // rascunho
+  ORDERED // encomendado
+  PARTIAL // receção parcial
+  RECEIVED // rececionado
+  CANCELLED // cancelado
+  APPROVED // aprovado
+}
+
+enum StockExitType {
+  CONSUMPTION // consumo interno / produção
+  SALE // venda direta
+  WASTE // desperdício / quebra
+  RETURN_TO_SUPPLIER // devolução a fornecedor
+  TRANSFER_OUT // transferência saída
+  ADJUSTMENT_OUT // ajuste negativo manual
+  SAMPLE // amostra
+}
+
+enum StockExitStatus {
+  DRAFT
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+enum StockMovementType {
+  PURCHASE
+  RECEPTION
+  CONSUMPTION
+  SALE
+  WASTE
+  RETURN_IN
+  RETURN_OUT
+  TRANSFER_IN
+  TRANSFER_OUT
+  ADJUSTMENT_IN
+  ADJUSTMENT_OUT
+  INVENTORY_CORRECTION
+  INITIAL_STOCK
+}
+
+enum StockMovementDir {
+  IN
+  OUT
+}
+
+enum StockAlertType {
+  LOW_STOCK // stock abaixo do mínimo
+  OUT_OF_STOCK // sem stock
+  EXPIRING_SOON // validade a expirar em breve
+  EXPIRED // validade expirada
+  OVERSTOCK // stock acima do máximo
+  REORDER_POINT // atingiu ponto de reposição
+}
+
+enum StockAlertStatus {
+  ACTIVE
+  ACKNOWLEDGED // reconhecida
+  RESOLVED
+  DISMISSED // ignorada
+}
+
+enum StockInventoryStatus {
+  DRAFT
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
 }
 
 model Establishment {
@@ -268,9 +664,11 @@ model Establishment {
   createdAt                    DateTime                      @default(now())
   updatedAt                    DateTime                      @updatedAt
   activeThemeId                String?
+  email                        String
   addons                       Addon[]
   bookings                     Booking[]
   bookingRules                 BookingRules?
+  emailLogs                    EmailLog[]
   employees                    Employee[]
   activeTheme                  Theme?                        @relation("ActiveTheme", fields: [activeThemeId], references: [id])
   owner                        User                          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
@@ -278,6 +676,7 @@ model Establishment {
   establishmentBookingSettings EstablishmentBookingSettings?
   establishmentBrand           EstablishmentBrand?
   establishmentDetails         EstablishmentDetails?
+  integrations                 EstablishmentIntegrations?
   establishmentSchedule        EstablishmentSchedule[]
   establishmentSettings        EstablishmentSettings?
   establishmentSocialMedia     EstablishmentSocialMedia?
@@ -293,6 +692,21 @@ model Establishment {
   variantOptions               VariantOption[]
   auditLogs                    AuditLog[]
   devices                      Device[]
+  discounts                    Discount[]
+  promotions                   Promotion[]
+  vivaTerminals                VivaTerminal[]
+  sumupReaders                 SumupReader[]
+
+  // Stock Management
+  suppliers            Supplier[]
+  stockCategories      StockCategory[]
+  stockItems           StockItem[]
+  stockEntries         StockEntry[]
+  stockExits           StockExit[]
+  stockMovements       StockMovement[]
+  stockAlerts          StockAlert[]
+  stockInventoryCounts StockInventoryCount[]
+  stockWarehouses      StockWarehouse[]
 
   @@index([name])
   @@index([ownerId])
@@ -308,7 +722,6 @@ model EstablishmentSchedule {
 
 model EstablishmentDetails {
   id              String        @id @default(ulid())
-  email           String
   address         String?
   city            String?
   state           String?
@@ -339,12 +752,17 @@ model EstablishmentSocialMedia {
 }
 
 model EstablishmentBookingSettings {
-  id              String        @id @default(ulid())
-  enabled         Boolean       @default(false)
-  themeName       String        @default("default")
-  themeMode       String        @default("light")
-  establishmentId String        @unique
-  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  id                String        @id @default(ulid())
+  enabled           Boolean       @default(false)
+  themeName         String        @default("default")
+  themeMode         String        @default("light")
+  establishmentId   String        @unique
+  createdAt         DateTime      @default(now())
+  notificationEmail String?
+  notificationPhone String?
+  primaryColor      String        @default("#f97316")
+  updatedAt         DateTime      @updatedAt
+  establishment     Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
 }
 
 model EstablishmentSettings {
@@ -430,201 +848,453 @@ model Image {
   logoUsedInConfigs   HomePageConfig[]     @relation("LogoHomePageImage")
   establishment       Establishment        @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
   item                Item[]               @relation("ImageItem")
+  itemVariants        ItemVariant[]        @relation("ItemVariantImage")
   menuCategory        MenuCategory[]       @relation("ImageMenuCategory")
 
   @@index([establishmentId])
 }
 
-// ==========================================
-// 1. O NÚCLEO (ITEM)
-// ==========================================
+/// Stores all third-party integration credentials and toggle states for an establishment.
+/// All sensitive values (API keys, secrets) are stored AES-256 encrypted.
+/// The `*Enabled` flags control whether the integration is actively used at runtime,
+/// independently of whether credentials are present.
+model EstablishmentIntegrations {
+  id              String   @id @default(ulid())
+  establishmentId String   @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
-model Item {
-  id              String  @id @default(ulid())
-  // O nome aqui serve como "Nome Interno" (para o staff/POS na língua principal)
-  name            String
-  description     String? // Descrição interna
-  imageId         String?
+  // ─── EuPago ───────────────────────────────────────────────────────────────
+  // Payment gateway: Multibanco, MB WAY, Visa/Mastercard.
+  // eupagoApiKey    — encrypted EuPago API key
+  // eupagoCryptoKey — optional encryption key for MB WAY payloads
+  eupagoEnabled   Boolean @default(false)
+  eupagoApiKey    String?
+  eupagoCryptoKey String?
+
+  // ─── Biziq ────────────────────────────────────────────────────────────────
+  // Portuguese e-invoicing platform (AT / SAF-T compliant).
+  // biziqAccountId  — encrypted Biziq account identifier
+  // biziqApiKey     — encrypted Biziq API key
+  // biziqCompanyVat — optional encrypted company VAT for invoice issuer data
+  biziqEnabled    Boolean @default(false)
+  biziqAccountId  String?
+  biziqApiKey     String?
+  biziqCompanyVat String?
+
+  // ─── Viva Wallet EFT-POS ──────────────────────────────────────────────────
+  // Physical card terminal integration via REST EFT-POS API (OAuth2).
+  // vivaClientId     — encrypted OAuth2 client ID
+  // vivaClientSecret — encrypted OAuth2 client secret
+  vivaEnabled      Boolean @default(false)
+  vivaClientId     String?
+  vivaClientSecret String?
+
+  // ─── SumUp Cloud API ──────────────────────────────────────────────────────────
+  // Solo card reader integration via HTTPS Cloud API.
+  // sumupApiKey       — encrypted Bearer token (Personal API Key or OAuth2)
+  // sumupMerchantCode — encrypted merchant account code (required for reader endpoints)
+  sumupEnabled      Boolean @default(false)
+  sumupApiKey       String?
+  sumupMerchantCode String?
+
+  // ─── Vendus ───────────────────────────────────────────────────────────────
+  // Portuguese fiscal invoicing platform (Faturas, Recibos, etc.).
+  // vendusApiKey — encrypted Vendus API key (Bearer token for all requests)
+  vendusEnabled Boolean @default(false)
+  vendusApiKey  String?
+
+  establishment Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}
+
+// ─── SumUp Solo Reader ────────────────────────────────────────────────────────
+// Represents a Solo card reader paired to an establishment via the Cloud API.
+// readerId   — SumUp reader ID returned after pairing (used for checkouts)
+// name       — human-readable label set by the operator (e.g. "Caixa 1")
+// deviceId   — physical device identifier (optional, from SumUp response)
+model SumupReader {
+  id              String        @id @default(ulid())
   establishmentId String
-  posCategoryId   String?
+  readerId        String // SumUp Cloud API reader identifier
+  name            String? // operator label, e.g. "Balcão Principal"
+  deviceId        String? // physical device id from SumUp
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
 
-  // Relações
-  variants       ItemVariant[]
-  modifierGroups ItemModifierGroup[]
+  @@unique([establishmentId, readerId])
+}
 
-  // TRADUÇÕES DO ITEM (Nome e Descrição para o Menu)
-  translations ItemTranslation[]
-  Image        Image?            @relation("ImageItem", fields: [imageId], references: [id])
+// ─── Viva Wallet Physical Terminal ────────────────────────────────────────────
+// Represents a card terminal (POS) registered for an establishment.
+// terminalId  — the Viva terminal serial/identifier (from their dashboard)
+// posId       — the numeric POS id returned by Viva's API when the terminal is registered
+// alias       — a human-readable label set by the operator (e.g. "Caixa 1")
+model VivaTerminal {
+  id              String        @id @default(ulid())
+  establishmentId String
+  terminalId      String // Viva terminal serial number / identifier
+  alias           String? // operator label, e.g. "Caixa 1"
+  posId           String? // Viva POS id (returned after registration, used for payments)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
 
-  posCategory              POSCategory?         @relation(fields: [posCategoryId], references: [id])
-  establishment            Establishment        @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-  modifierOptionsAsProduct ItemModifierOption[] @relation("ProductAsModifier")
-  menuItemPositions        MenuItemPosition[]
+  @@unique([establishmentId, terminalId])
+}
+
+/// =======================================================
+/// 1. ITEM (Produto Pai / Raiz do Catálogo)
+/// =======================================================
+model Item {
+  id                  String               @id @default(ulid())
+  imageId             String?
+  establishmentId     String
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  /// O basePrice APENAS é usado se o item NÃO tiver variantes.
+  basePrice           Decimal?             @db.Decimal(10, 2)
+  deletedAt           DateTime?
+  posCategoryId       String?
+  quantity            Float?
+  sku                 String?
+  unit                String?
+  status              ItemStatus           @default(ACTIVE)
+  taxTableId          String
+  allergens           ItemAllergen[]
+  establishment       Establishment        @relation(fields: [establishmentId], references: [id])
+  image               Image?               @relation("ImageItem", fields: [imageId], references: [id])
+  posCategory         POSCategory?         @relation(fields: [posCategoryId], references: [id])
+  taxTable            TaxTable             @relation(fields: [taxTableId], references: [id])
+  modifierGroups      ItemModifierGroup[]
+  itemModifierOptions ItemModifierOption[]
+  translations        ItemTranslation[]
+  variants            ItemVariant[]
+  itemVariantGroups   ItemVariantGroup[]
+  menuItemPositions   MenuItemPosition[]
+  nutritionInfo       ItemNutritionInfo?
+  discounts           DiscountTarget[]
+  requiredItemRules   BuyXGetYRule[]       @relation("RequiredItem")
+  rewardItemRules     BuyXGetYRule[]       @relation("RewardItem")
+  marketingTag        MarketingTag?
+  spiceLevel          SpiceLevel?
+  isFeatured          Boolean              @default(false)
+  attributes          ItemAttribute[]
+  vendusProductId     Int?
+
+  @@unique([establishmentId, sku])
+  @@index([establishmentId, status])
+  @@index([deletedAt])
+}
+
+model ItemNutritionInfo {
+  id            String   @id @default(ulid())
+  energyKcal    Float?
+  fat           Float?
+  saturatedFat  Float?
+  carbohydrates Float?
+  sugars        Float?
+  fiber         Float?
+  protein       Float?
+  salt          Float?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  itemId        String?  @unique
+  item          Item?    @relation(fields: [itemId], references: [id])
+}
+
+model VariantNutrionalInfo {
+  id            String       @id @default(ulid())
+  energyKcal    Float?
+  fat           Float?
+  saturatedFat  Float?
+  carbohydrates Float?
+  sugars        Float?
+  fiber         Float?
+  protein       Float?
+  salt          Float?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  itemVariantId String?      @unique
+  itemVariant   ItemVariant? @relation(fields: [itemVariantId], references: [id])
 }
 
 model ItemTranslation {
-  id     String @id @default(ulid())
-  itemId String
-  locale String // "en", "fr", "es"
-
-  name        String // O que aparece no menu QR
+  id          String  @id @default(ulid())
+  locale      String
+  name        String
   description String?
+  itemId      String
+  item        Item    @relation(fields: [itemId], references: [id], onDelete: Cascade)
 
-  item Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
-
-  @@unique([itemId, locale]) // Garante 1 tradução por língua por item
+  @@unique([itemId, locale])
 }
 
-// ==========================================
-// 2. VARIANTES (Tamanhos, Pontos, Tipos)
-// ==========================================
-
-model ItemVariant {
-  id              String  @id @default(ulid())
-  itemId          String
-  variantOptionId String
-  price           Float // Preço Base
-  isDefault       Boolean @default(false)
-
-  item   Item          @relation(fields: [itemId], references: [id], onDelete: Cascade)
-  option VariantOption @relation(fields: [variantOptionId], references: [id])
-
-  @@unique([itemId, variantOptionId])
-}
-
+/// A. O Dicionário de Opções (Ex: "Pequena", "Média", "33cl")
 model VariantOption {
-  id              String      @id @default(ulid())
-  name            String
-  code            String?     @unique
-  type            VariantType @default(SIZE)
+  id              String                     @id @default(ulid())
   establishmentId String?
-  quantity        Float? // Para guardar "20", "33", "1"
-  unit            String? // Para guardar "CL", "L", "KG"
+  isGlobal        Boolean                    @default(false)
+  code            String?                    @unique
+  isActive        Boolean                    @default(true)
+  quantity        Float?
+  unit            String?
+  type            VariantType                @default(OTHER)
+  itemVariants    ItemVariant[]
+  establishment   Establishment?             @relation(fields: [establishmentId], references: [id])
+  translations    VariantOptionTranslation[]
 
-  variants ItemVariant[]
-  isGlobal Boolean       @default(false)
-
-  translations  VariantOptionTranslation[]
-  establishment Establishment?             @relation(fields: [establishmentId], references: [id])
-}
-
-enum VariantType {
-  SIZE // Frontend desenha: Selector de Tamanho (Copo, Litros)
-  PREPARATION // Frontend desenha: Lista de Ponto de Carne
-  FLAVOR // Frontend desenha: Bolinhas de cor ou lista de sabores
-  COLOR // Frontend desenha: Selector de cor
-  OTHER
+  @@index([establishmentId])
 }
 
 model VariantOptionTranslation {
-  id              String @id @default(ulid())
+  id              String        @id @default(ulid())
   variantOptionId String
   locale          String
-  name            String // ex: "Well Done", "Bien Cuit"
-
-  variantOption VariantOption @relation(fields: [variantOptionId], references: [id], onDelete: Cascade)
+  name            String
+  variantOption   VariantOption @relation(fields: [variantOptionId], references: [id], onDelete: Cascade)
 
   @@unique([variantOptionId, locale])
 }
 
-// ==========================================
-// 3. MODIFICADORES E GRUPOS (Acompanhamentos)
-// ==========================================
+/// B. O Grupo Local (Simetria perfeita com Modifiers)
+/// Ex: "Escolha o Tamanho"
+model ItemVariantGroup {
+  itemId       String
+  position     Int                           @default(0)
+  id           String                        @id @default(ulid())
+  variants     ItemVariant[]
+  item         Item                          @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  translations ItemVariantGroupTranslation[]
 
-enum ModifierDisplayMode {
-  RADIO // Para escolha única obrigatória (Ponto da Carne)
-  CHECKBOX // Para lista de Sim/Não (Pizza Toppings, Remover Ingredientes)
-  QUANTITY // Para incrementos (Extras do Burger)
+  @@index([itemId])
 }
 
+model ItemVariantGroupTranslation {
+  id                 String           @id @default(ulid())
+  itemVariantGroupId String
+  locale             String
+  name               String
+  itemVariantGroup   ItemVariantGroup @relation(fields: [itemVariantGroupId], references: [id], onDelete: Cascade)
+
+  @@unique([itemVariantGroupId, locale])
+}
+
+model ItemVariant {
+  id                 String                @id @default(ulid())
+  itemId             String
+  price              Decimal               @db.Decimal(10, 2)
+  sku                String?
+  isDefault          Boolean               @default(false)
+  isActive           Boolean               @default(true)
+  imageId            String?
+  itemVariantGroupId String
+  position           Int                   @default(0)
+  variantOptionId    String
+  allergens          ItemVariantAllergen[]
+  modifierOptions    ItemModifierOption[]
+  image              Image?                @relation("ItemVariantImage", fields: [imageId], references: [id])
+  item               Item                  @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  group              ItemVariantGroup      @relation(fields: [itemVariantGroupId], references: [id], onDelete: Cascade)
+  variantOption      VariantOption         @relation(fields: [variantOptionId], references: [id])
+  nutritionInfo      VariantNutrionalInfo?
+  deletedAt          DateTime?
+
+  @@unique([itemVariantGroupId, variantOptionId])
+  @@unique([id, sku])
+  @@index([itemId])
+  @@index([deletedAt])
+}
+
+/// A. Grupo de Modificadores (As perguntas feitas ao cliente)
 model ItemModifierGroup {
-  id     String @id @default(ulid())
-  itemId String
-
-  name String // Nome Interno (ex: "Escolha o Molho")
-  code String? // ex: "SAUCE_CHOICE"
-
-  displayMode  ModifierDisplayMode @default(RADIO)
-  minSelection Int                 @default(0)
+  id           String                         @id @default(ulid())
+  itemId       String
+  minSelection Int                            @default(0)
   maxSelection Int?
-  position     Int                 @default(0)
-
-  item    Item                 @relation(fields: [itemId], references: [id], onDelete: Cascade)
-  options ItemModifierOption[]
-
-  // TRADUÇÕES DO TÍTULO DO GRUPO (Importante!)
+  position     Int                            @default(0)
+  displayMode  ModifierDisplayMode            @default(RADIO)
+  isActive     Boolean                        @default(true)
+  item         Item                           @relation(fields: [itemId], references: [id], onDelete: Cascade)
   translations ItemModifierGroupTranslation[]
+  options      ItemModifierOption[]
+  deletedAt    DateTime?
+
+  @@index([deletedAt])
 }
 
 model ItemModifierGroupTranslation {
-  id              String @id @default(ulid())
+  id              String            @id @default(ulid())
   modifierGroupId String
   locale          String
-  name            String // ex: "Choose your Sauce", "Choisissez votre sauce"
-
-  modifierGroup ItemModifierGroup @relation(fields: [modifierGroupId], references: [id], onDelete: Cascade)
+  name            String
+  modifierGroup   ItemModifierGroup @relation(fields: [modifierGroupId], references: [id], onDelete: Cascade)
+  deletedAt       DateTime?
 
   @@unique([modifierGroupId, locale])
 }
 
-model ItemModifierOption {
-  id              String @id @default(ulid())
-  modifierGroupId String
-
-  // Configurações de Venda neste contexto
-  price    Float? // Se null, usa o preço original do item. Se definido (ex: 0), sobrepõe.
-  position Int    @default(0)
-
-  // Quantidade permitida para esta opção específica
-  minQuantity     Int @default(0) // Mínimo que pode selecionar (normalmente 0)
-  maxQuantity     Int @default(1) // Máximo que pode selecionar (1 = radio, >1 = counter)
-  defaultQuantity Int @default(0) // Quantidade pré-selecionada (ex: 2 fatias incluídas, extras custam mais)
-
-  // --- A MUDANÇA ESTÁ AQUI (Campos Opcionais) ---
-
-  // CASO 1: É uma instrução ou ingrediente simples (ex: "Sem Cebola")
-  addonId String?
-  addon   Addon?  @relation(fields: [addonId], references: [id])
-
-  // CASO 2: É um Item real que já existe (ex: "Batata Frita", "Coca-Cola")
-  productId String?
-  product   Item?   @relation("ProductAsModifier", fields: [productId], references: [id])
-
-  group ItemModifierGroup @relation(fields: [modifierGroupId], references: [id], onDelete: Cascade)
-
-  // Regra de Validação (Database constraint se possível, ou lógica de app): 
-  // Tem de ter OU addonId OU productId, nunca os dois.
-  @@index([modifierGroupId])
-  @@index([productId])
-  @@index([addonId])
-}
-
-// ==========================================
-// 4. BIBLIOTECA DE EXTRAS (ADDONS)
-// ==========================================
-
+/// B. O Dicionário de Addons Simples (Instruções de cozinha, extras)
+/// Coisas que não existem como Item (Ex: "Massa Fina", "Sem Gelo")
 model Addon {
-  id              String               @id @default(ulid())
-  name            String // Nome Interno (ex: "Batata Frita")
-  establishmentId String?
-  modifierOptions ItemModifierOption[]
-  isGlobal        Boolean              @default(false)
+  id                  String               @id @default(ulid())
+  establishmentId     String?
+  isActive            Boolean              @default(true)
+  isGlobal            Boolean              @default(false)
+  establishment       Establishment?       @relation(fields: [establishmentId], references: [id])
+  translations        AddonTranslation[]
+  itemModifierOptions ItemModifierOption[]
 
-  // TRADUÇÕES DOS EXTRAS
-  translations  AddonTranslation[]
-  establishment Establishment?     @relation(fields: [establishmentId], references: [id])
+  @@index([establishmentId])
+  @@index([isGlobal])
 }
 
 model AddonTranslation {
   id      String @id @default(ulid())
   addonId String
   locale  String
-  name    String // ex: "French Fries", "Frites"
-
-  addon Addon @relation(fields: [addonId], references: [id], onDelete: Cascade)
+  name    String
+  addon   Addon  @relation(fields: [addonId], references: [id], onDelete: Cascade)
 
   @@unique([addonId, locale])
 }
+
+model Allergen {
+  id                   String                @id @default(ulid())
+  code                 AllergenCode          @unique
+  itemAllergens        ItemAllergen[]
+  itemVariantAllergens ItemVariantAllergen[]
+}
+
+model ItemAllergen {
+  id         String   @id @default(ulid())
+  itemId     String
+  allergenId String
+  allergen   Allergen @relation(fields: [allergenId], references: [id], onDelete: Cascade)
+  item       Item     @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, allergenId])
+}
+
+model ItemVariantAllergen {
+  id            String   @id @default(ulid())
+  itemVariantId String
+  allergenId    String
+  allergen      Allergen @relation(fields: [allergenId], references: [id], onDelete: Cascade)
+
+  itemVariant ItemVariant @relation(fields: [itemVariantId], references: [id], onDelete: Cascade)
+
+  @@unique([itemVariantId, allergenId])
+}
+
+/// C. As Opções do Modificador (Polimorfismo!)
+/// REGRA SQL (CONSTRAINT): Apenas 1 alvo pode ser preenchido (addonId, productId ou itemVariantId)
+model ItemModifierOption {
+  id              String            @id @default(ulid())
+  modifierGroupId String
+  price           Decimal?          @db.Decimal(10, 2)
+  position        Int               @default(0)
+  defaultQuantity Int               @default(0)
+  minQuantity     Int               @default(0)
+  maxQuantity     Int               @default(1)
+  addonId         String?
+  productId       String?
+  itemVariantId   String?
+  addon           Addon?            @relation(fields: [addonId], references: [id])
+  itemVariant     ItemVariant?      @relation(fields: [itemVariantId], references: [id])
+  group           ItemModifierGroup @relation(fields: [modifierGroupId], references: [id], onDelete: Cascade)
+  product         Item?             @relation(fields: [productId], references: [id])
+
+  @@index([modifierGroupId])
+}
+
+enum ItemStatus {
+  ACTIVE
+  DRAFT
+  INACTIVE
+}
+
+enum AllergenCode {
+  CELERY
+  CRUSTACEAN
+  EGG
+  FISH
+  GLUTEN
+  LUPINS
+  MILK
+  MUSTARD
+  NUTS
+  PEANUTS
+  SESAME
+  SHELLFISH
+  SOY
+  SULFITES
+}
+
+enum VariantType {
+  SIZE
+  FLAVOR
+  PREPARATION
+  COLOR
+  OTHER
+}
+
+enum ModifierDisplayMode {
+  RADIO
+  CHECKBOX
+  QUANTITY
+}
+
+enum SpiceLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model ItemAttribute {
+  id     String        @id @default(ulid())
+  type   AttributeType
+  itemId String
+
+  item Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, type])
+}
+
+enum AttributeType {
+  VEGAN
+  VEGETARIAN
+  GLUTEN_FREE
+  DAIRY_FREE
+  HALAL
+  KOSHER
+}
+
+enum MarketingTag {
+  BESTSELLER
+  NEW
+  POPULAR
+  LIMITED
+}
+
+/**
+ * model ItemBundle {
+ * id        String  @id @default(ulid())
+ * itemId    String
+ * position  Int     @default(0)
+ * item      Item    @relation(fields: [itemId], references: [id], onDelete: Cascade)
+ * options   ItemBundleOption[]
+ * }
+ * model ItemBundleOption {
+ * id            String  @id @default(ulid())
+ * bundleId      String
+ * productId     String
+ * minSelection  Int     @default(1)
+ * maxSelection  Int     @default(1)
+ * bundle        ItemBundle @relation(fields: [bundleId], references: [id], onDelete: Cascade)
+ * product       Item       @relation(fields: [productId], references: [id])
+ * }
+ */
 
 model LandingPage {
   id                      String                   @id @default(ulid())
@@ -655,12 +1325,12 @@ model Menu {
   isVisible        Boolean           @default(false)
   isHighlighted    Boolean           @default(false)
   color            String?
-  type             MenuType          @default(DEFAULT)
-  price            Float?
-  maxItemsPerOrder Int?
   establishmentId  String
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
+  maxItemsPerOrder Int?
+  price            Float?
+  type             MenuType          @default(DEFAULT)
   establishment    Establishment     @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
   categories       MenuCategory[]
   menuSchedule     MenuSchedule[]
@@ -755,10 +1425,10 @@ model MenuItemPosition {
   itemId        String
   subcategoryId String
   position      Int             @default(0)
-  isIncluded    Boolean         @default(false)
   isVisible     Boolean         @default(true)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
+  isIncluded    Boolean         @default(false)
   item          Item            @relation(fields: [itemId], references: [id], onDelete: Cascade)
   subcategory   MenuSubcategory @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
 
@@ -785,6 +1455,100 @@ model MoloniToken {
 
   @@map("moloni_tokens")
 }
+
+model OrderItem {
+  id              String   @id @default(ulid())
+  orderId         String
+  itemId          String
+  itemVariantId   String? // se aplicável
+  quantity        Int
+  basePrice       Decimal  @db.Decimal(10, 2) // preço unitário sem promoções
+  modifierTotal   Decimal  @db.Decimal(10, 2) // total de modificadores
+  subtotal        Decimal  @db.Decimal(10, 2) // basePrice * quantity + modifiers
+  discountAmount  Decimal  @db.Decimal(10, 2) // desconto aplicado neste item
+  promotionAmount Decimal  @db.Decimal(10, 2) // recompensa/promo aplicada
+  finalPrice      Decimal  @db.Decimal(10, 2) // subtotal - discountAmount - promotionAmount
+  promotionId     String? // referência a promoção aplicada
+  discountId      String? // referência a desconto aplicado
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+/**
+ * model Order {
+ * id              String         @id @default(ulid())
+ * establishmentId String
+ * customerName    String?
+ * status          OrderStatus    @default(PENDING)
+ * total           Decimal        @db.Decimal(10, 2)
+ * tax             Decimal?       @db.Decimal(10, 2)
+ * createdAt       DateTime       @default(now())
+ * updatedAt       DateTime       @updatedAt
+ * fiscalRecords   FiscalRecord[]
+ * establishment   Establishment  @relation(fields: [establishmentId], references: [id])
+ * items           OrderItem[]
+ * payments        Payment[]
+ * }
+ * model OrderItem {
+ * id            String              @id @default(ulid())
+ * orderId       String
+ * itemId        String
+ * itemVariantId String?
+ * quantity      Int                 @default(1)
+ * unitPrice     Decimal             @db.Decimal(10, 2)
+ * totalPrice    Decimal             @db.Decimal(10, 2)
+ * item          Item                @relation(fields: [itemId], references: [id])
+ * variant       ItemVariant?        @relation(fields: [itemVariantId], references: [id])
+ * order         Order               @relation(fields: [orderId], references: [id], onDelete: Cascade)
+ * modifiers     OrderItemModifier[]
+ * }
+ * model OrderItemModifier {
+ * id               String             @id @default(ulid())
+ * orderItemId      String
+ * modifierOptionId String
+ * quantity         Int                @default(1)
+ * price            Decimal            @db.Decimal(10, 2)
+ * modifierOption   ItemModifierOption @relation(fields: [modifierOptionId], references: [id])
+ * orderItem        OrderItem          @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
+ * }
+ * model Payment {
+ * id        String        @id @default(ulid())
+ * orderId   String
+ * method    PaymentMethod
+ * amount    Decimal       @db.Decimal(10, 2)
+ * createdAt DateTime      @default(now())
+ * order     Order         @relation(fields: [orderId], references: [id])
+ * }
+ * model FiscalRecord {
+ * id        String       @id @default(ulid())
+ * orderId   String
+ * status    FiscalStatus @default(PENDING)
+ * xml       String?
+ * pdf       String?
+ * createdAt DateTime     @default(now())
+ * updatedAt DateTime     @updatedAt
+ * order     Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+ * }
+ * enum OrderStatus {
+ * PENDING
+ * CONFIRMED
+ * CANCELLED
+ * COMPLETED
+ * }
+ * enum PaymentMethod {
+ * CASH
+ * CARD
+ * DIGITAL
+ * GIFT_CARD
+ * }
+ * enum FiscalStatus {
+ * PENDING
+ * SENT
+ * CANCELLED
+ * FAILED
+ * COMPLETED
+ * }
+ */
 
 model POSCategory {
   id              String @id @default(ulid())
@@ -834,6 +1598,8 @@ model Schedule {
   updatedAt             DateTime                @updatedAt
   establishmentSchedule EstablishmentSchedule[]
   menuSchedule          MenuSchedule[]
+  discountSchedule      DiscountSchedule[]
+  promotionSchedule     PromotionSchedule[]
 }
 
 generator client {
@@ -843,6 +1609,419 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+/// =======================================================
+/// STOCK MANAGEMENT SYSTEM
+/// Gestão Completa de Stock: Fornecedores, Entradas,
+/// Saídas, Lotes, Validades, Inventário, Alertas,
+/// Armazéns e Localizações
+/// =======================================================
+
+// ─────────────────────────────────────────────────────────
+// 0. WAREHOUSE (Armazéns / Espaços de Armazenamento)
+// ─────────────────────────────────────────────────────────
+model StockWarehouse {
+  id              String    @id @default(ulid())
+  establishmentId String
+  name            String // ex: "Armazém Principal", "Câmara Fria"
+  code            String? // código curto ex: "ARM-01"
+  description     String?
+  address         String?
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+
+  establishment Establishment   @relation(fields: [establishmentId], references: [id])
+  locations     StockLocation[]
+  stockItems    StockItem[]
+
+  @@unique([establishmentId, code])
+  @@index([establishmentId, isActive])
+}
+
+// ─────────────────────────────────────────────────────────
+// 0b. STOCK LOCATION (Localizações dentro de um Armazém)
+// ─────────────────────────────────────────────────────────
+model StockLocation {
+  id          String   @id @default(ulid())
+  warehouseId String
+  name        String // ex: "Prateleira A1", "Câmara B2"
+  code        String? // código legível ex: "A1-P3"
+  aisle       String? // corredor
+  shelf       String? // prateleira
+  bin         String? // posição/bin
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  warehouse  StockWarehouse @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+  stockItems StockItem[]
+  batches    StockBatch[]
+
+  @@unique([warehouseId, code])
+  @@index([warehouseId])
+}
+
+// ─────────────────────────────────────────────────────────
+// 1. SUPPLIER (Fornecedores)
+// ─────────────────────────────────────────────────────────
+model Supplier {
+  id              String    @id @default(ulid())
+  establishmentId String
+  name            String
+  code            String?
+  taxId           String? // NIF / VAT Number
+  email           String?
+  phone           String?
+  website         String?
+  address         String?
+  city            String?
+  postalCode      String?
+  country         String?   @default("PT")
+  contactPerson   String?
+  paymentTermDays Int?      @default(30)
+  currency        String?   @default("EUR")
+  notes           String?
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+
+  establishment Establishment       @relation(fields: [establishmentId], references: [id])
+  stockEntries  StockEntry[]
+  stockItems    StockItemSupplier[]
+
+  @@unique([establishmentId, code])
+  @@index([establishmentId, isActive])
+  @@index([establishmentId, name])
+}
+
+// ─────────────────────────────────────────────────────────
+// 2. STOCK CATEGORY (Categorias de Stock)
+// ─────────────────────────────────────────────────────────
+model StockCategory {
+  id              String   @id @default(ulid())
+  establishmentId String
+  name            String
+  color           String?  @default("#6366f1")
+  icon            String?
+  parentId        String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  establishment Establishment   @relation(fields: [establishmentId], references: [id])
+  parent        StockCategory?  @relation("CategoryChildren", fields: [parentId], references: [id])
+  children      StockCategory[] @relation("CategoryChildren")
+  stockItems    StockItem[]
+
+  @@unique([establishmentId, name])
+  @@index([establishmentId])
+}
+
+// ─────────────────────────────────────────────────────────
+// 3. STOCK ITEM (Produto de Stock / Ingrediente)
+// ─────────────────────────────────────────────────────────
+model StockItem {
+  id              String            @id @default(ulid())
+  establishmentId String
+  categoryId      String?
+  warehouseId     String? // armazém padrão
+  locationId      String? // localização padrão (prateleira/bin)
+  name            String
+  description     String?
+  sku             String?
+  barcode         String?
+  unit            StockUnit         @default(UNIT)
+  unitWeight      Float? // peso por unidade em gramas/ml
+  currentStock    Float             @default(0)
+  reservedStock   Float             @default(0) // reservado para pedidos em aberto
+  minStockLevel   Float? // nível de alerta mínimo
+  maxStockLevel   Float? // nível máximo de encomenda
+  reorderPoint    Float? // ponto de reposição automática
+  reorderQty      Float? // quantidade sugerida de encomenda
+  averageCost     Decimal?          @db.Decimal(10, 4) // custo médio ponderado
+  lastCost        Decimal?          @db.Decimal(10, 4) // último custo de compra
+  isPerishable    Boolean           @default(false)
+  shelfLifeDays   Int? // prazo de validade padrão em dias
+  storageTemp     StockStorageTemp?
+  isActive        Boolean           @default(true)
+  isTracked       Boolean           @default(true) // se false, não controla stock
+  imageUrl        String?
+  notes           String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  deletedAt       DateTime?
+
+  establishment  Establishment             @relation(fields: [establishmentId], references: [id])
+  category       StockCategory?            @relation(fields: [categoryId], references: [id])
+  warehouse      StockWarehouse?           @relation(fields: [warehouseId], references: [id])
+  location       StockLocation?            @relation(fields: [locationId], references: [id])
+  batches        StockBatch[]
+  entryItems     StockEntryItem[]
+  exitItems      StockExitItem[]
+  movements      StockMovement[]
+  alerts         StockAlert[]
+  suppliers      StockItemSupplier[]
+  inventoryItems StockInventoryCountItem[]
+
+  @@unique([establishmentId, sku])
+  @@index([establishmentId, isActive])
+  @@index([establishmentId, categoryId])
+  @@index([establishmentId, warehouseId])
+}
+
+// ─────────────────────────────────────────────────────────
+// 4. STOCK ITEM × SUPPLIER (Relação N-N com dados extra)
+// ─────────────────────────────────────────────────────────
+model StockItemSupplier {
+  id                String   @id @default(ulid())
+  stockItemId       String
+  supplierId        String
+  supplierCode      String? // código do produto no fornecedor
+  lastPurchasePrice Decimal? @db.Decimal(10, 4)
+  isPreferred       Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  stockItem StockItem @relation(fields: [stockItemId], references: [id], onDelete: Cascade)
+  supplier  Supplier  @relation(fields: [supplierId], references: [id])
+
+  @@unique([stockItemId, supplierId])
+}
+
+// ─────────────────────────────────────────────────────────
+// 5. STOCK BATCH (Lotes com Validade - Rastreabilidade)
+// ─────────────────────────────────────────────────────────
+model StockBatch {
+  id              String           @id @default(ulid())
+  stockItemId     String
+  locationId      String? // localização específica deste lote
+  batchNumber     String
+  lotNumber       String?
+  expiryDate      DateTime?
+  manufactureDate DateTime?
+  quantity        Float // quantidade inicial do lote
+  remainingQty    Float // quantidade restante
+  costPerUnit     Decimal?         @db.Decimal(10, 4)
+  status          StockBatchStatus @default(ACTIVE)
+  notes           String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  stockItem  StockItem        @relation(fields: [stockItemId], references: [id])
+  location   StockLocation?   @relation(fields: [locationId], references: [id])
+  entryItems StockEntryItem[]
+  exitItems  StockExitItem[]
+
+  @@index([stockItemId, status])
+  @@index([expiryDate])
+}
+
+// ─────────────────────────────────────────────────────────
+// 6. STOCK ENTRY (Entrada: Compra / Receção / Ajuste+)
+// ─────────────────────────────────────────────────────────
+model StockEntry {
+  id              String           @id @default(ulid())
+  establishmentId String
+  supplierId      String?
+  type            StockEntryType
+  status          StockEntryStatus @default(DRAFT)
+  reference       String? // número de PO / fatura
+  supplierRef     String? // referência do fornecedor
+  entryDate       DateTime         @default(now())
+  expectedDate    DateTime?
+  receivedDate    DateTime?
+  totalAmount     Decimal?         @db.Decimal(10, 2)
+  taxAmount       Decimal?         @db.Decimal(10, 2)
+  discountAmount  Decimal?         @db.Decimal(10, 2)
+  notes           String?
+  createdBy       String?
+  approvedBy      String?
+  approvedAt      DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  establishment Establishment    @relation(fields: [establishmentId], references: [id])
+  supplier      Supplier?        @relation(fields: [supplierId], references: [id])
+  items         StockEntryItem[]
+  movements     StockMovement[]
+
+  @@index([establishmentId, status])
+  @@index([establishmentId, entryDate])
+  @@index([establishmentId, type])
+}
+
+// ─────────────────────────────────────────────────────────
+// 7. STOCK ENTRY ITEM (Linha de Entrada)
+// ─────────────────────────────────────────────────────────
+model StockEntryItem {
+  id           String    @id @default(ulid())
+  entryId      String
+  stockItemId  String
+  batchId      String?
+  orderedQty   Float? // quantidade encomendada
+  receivedQty  Float // quantidade recebida
+  unitCost     Decimal   @db.Decimal(10, 4)
+  totalCost    Decimal   @db.Decimal(10, 4)
+  taxRate      Decimal?  @db.Decimal(5, 2)
+  discountRate Decimal?  @db.Decimal(5, 2)
+  expiryDate   DateTime?
+  lotNumber    String?
+  notes        String?
+  createdAt    DateTime  @default(now())
+
+  entry     StockEntry  @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  stockItem StockItem   @relation(fields: [stockItemId], references: [id])
+  batch     StockBatch? @relation(fields: [batchId], references: [id])
+
+  @@index([entryId])
+  @@index([stockItemId])
+}
+
+// ─────────────────────────────────────────────────────────
+// 8. STOCK EXIT (Saída: Consumo / Venda / Perda / Ajuste-)
+// ─────────────────────────────────────────────────────────
+model StockExit {
+  id              String          @id @default(ulid())
+  establishmentId String
+  type            StockExitType
+  status          StockExitStatus @default(DRAFT)
+  reference       String?
+  exitDate        DateTime        @default(now())
+  reason          String?
+  totalAmount     Decimal?        @db.Decimal(10, 2)
+  notes           String?
+  createdBy       String?
+  approvedBy      String?
+  approvedAt      DateTime?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  establishment Establishment   @relation(fields: [establishmentId], references: [id])
+  items         StockExitItem[]
+  movements     StockMovement[]
+
+  @@index([establishmentId, status])
+  @@index([establishmentId, exitDate])
+  @@index([establishmentId, type])
+}
+
+// ─────────────────────────────────────────────────────────
+// 9. STOCK EXIT ITEM (Linha de Saída)
+// ─────────────────────────────────────────────────────────
+model StockExitItem {
+  id          String   @id @default(ulid())
+  exitId      String
+  stockItemId String
+  batchId     String?
+  quantity    Float
+  unitCost    Decimal? @db.Decimal(10, 4)
+  totalCost   Decimal? @db.Decimal(10, 4)
+  notes       String?
+  createdAt   DateTime @default(now())
+
+  exit      StockExit   @relation(fields: [exitId], references: [id], onDelete: Cascade)
+  stockItem StockItem   @relation(fields: [stockItemId], references: [id])
+  batch     StockBatch? @relation(fields: [batchId], references: [id])
+
+  @@index([exitId])
+  @@index([stockItemId])
+}
+
+// ─────────────────────────────────────────────────────────
+// 10. STOCK MOVEMENT (Livro de Movimentos - Auditoria)
+// ─────────────────────────────────────────────────────────
+model StockMovement {
+  id              String            @id @default(ulid())
+  establishmentId String
+  stockItemId     String
+  type            StockMovementType
+  direction       StockMovementDir // IN ou OUT
+  quantity        Float
+  quantityBefore  Float
+  quantityAfter   Float
+  unitCost        Decimal?          @db.Decimal(10, 4)
+  entryId         String?
+  exitId          String?
+  reference       String?
+  notes           String?
+  createdBy       String?
+  createdAt       DateTime          @default(now())
+
+  establishment Establishment @relation(fields: [establishmentId], references: [id])
+  stockItem     StockItem     @relation(fields: [stockItemId], references: [id])
+  entry         StockEntry?   @relation(fields: [entryId], references: [id])
+  exit          StockExit?    @relation(fields: [exitId], references: [id])
+
+  @@index([establishmentId, stockItemId])
+  @@index([establishmentId, createdAt])
+  @@index([establishmentId, type])
+}
+
+// ─────────────────────────────────────────────────────────
+// 11. STOCK ALERT (Alertas Automáticos)
+// ─────────────────────────────────────────────────────────
+model StockAlert {
+  id              String           @id @default(ulid())
+  establishmentId String
+  stockItemId     String
+  type            StockAlertType
+  status          StockAlertStatus @default(ACTIVE)
+  message         String
+  threshold       Float?
+  currentValue    Float?
+  resolvedAt      DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  establishment Establishment @relation(fields: [establishmentId], references: [id])
+  stockItem     StockItem     @relation(fields: [stockItemId], references: [id])
+
+  @@index([establishmentId, status])
+  @@index([establishmentId, type])
+}
+
+// ─────────────────────────────────────────────────────────
+// 12. STOCK INVENTORY COUNT (Contagem Física / Inventário)
+// ─────────────────────────────────────────────────────────
+model StockInventoryCount {
+  id              String               @id @default(ulid())
+  establishmentId String
+  name            String
+  status          StockInventoryStatus @default(DRAFT)
+  startedAt       DateTime?
+  completedAt     DateTime?
+  notes           String?
+  createdBy       String?
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+
+  establishment Establishment             @relation(fields: [establishmentId], references: [id])
+  items         StockInventoryCountItem[]
+
+  @@index([establishmentId, status])
+}
+
+model StockInventoryCountItem {
+  id          String    @id @default(ulid())
+  inventoryId String
+  stockItemId String
+  expectedQty Float // quantidade no sistema antes da contagem
+  countedQty  Float? // quantidade contada fisicamente
+  difference  Float? // diferença (contada - esperada)
+  unitCost    Decimal?  @db.Decimal(10, 4)
+  notes       String?
+  countedAt   DateTime?
+  createdAt   DateTime  @default(now())
+
+  inventory StockInventoryCount @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  stockItem StockItem           @relation(fields: [stockItemId], references: [id])
+
+  @@unique([inventoryId, stockItemId])
+  @@index([inventoryId])
 }
 
 model Subscription {
@@ -859,6 +2038,11 @@ model Subscription {
   stripeCustomerId     String             @unique
   createdAt            DateTime           @default(now())
   updatedAt            DateTime           @updatedAt
+  cancellationComment  String?
+  cancellationFeedback String?
+  cancellationReason   String?
+  endedAt              DateTime?
+  trialEnd             DateTime?
   establishment        Establishment      @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
   planCycle            PlanCycle          @relation(fields: [planCycleId], references: [id])
 
@@ -895,6 +2079,7 @@ model Feature {
   id           String        @id @default(ulid())
   name         String        @unique
   type         FeatureType
+  showInPlans  Boolean       @default(true)
   planFeatures PlanFeature[]
 }
 
@@ -923,6 +2108,19 @@ model Invoice {
   status          String
   createdAt       DateTime      @default(now())
   establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}
+
+model TaxTable {
+  id          String  @id @default(ulid())
+  countryCode String
+  region      String?
+  name        String
+  rate        Decimal @db.Decimal(5, 2)
+  fiscalCode  String
+  items       Item[]
+
+  @@unique([countryCode, region, fiscalCode])
+  @@index([countryCode])
 }
 
 model Theme {

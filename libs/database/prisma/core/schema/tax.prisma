@@ -1,0 +1,12 @@
+model TaxTable {
+  id          String  @id @default(ulid())
+  countryCode String
+  region      String?
+  name        String
+  rate        Decimal @db.Decimal(5, 2)
+  fiscalCode  String
+  items       Item[]
+
+  @@unique([countryCode, region, fiscalCode])
+  @@index([countryCode])
+}

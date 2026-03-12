@@ -1,0 +1,128 @@
+model EmailLog {
+  id                 String        @id
+  establishmentId    String
+  userId             String?
+  to                 String
+  template           EmailTemplate
+  type               EmailLogType  @default(TRANSACTIONAL)
+  lang               String        @db.VarChar(5)
+  subject            String
+  status             EmailStatus   @default(QUEUED)
+  provider           EmailProvider @default(ZEPTO)
+  providerMessageId  String?       @unique
+  providerStatusCode Int?
+  providerMessage    String?
+  attempts           Int           @default(0)
+  context            Json?
+  hasAttachments     Boolean       @default(false)
+  attachmentsCount   Int           @default(0)
+  queuedAt           DateTime      @default(now())
+  sentAt             DateTime?
+  deliveredAt        DateTime?
+  openedAt           DateTime?
+  clickedAt          DateTime?
+  bouncedAt          DateTime?
+  complainedAt       DateTime?
+  failedAt           DateTime?
+  metadata           Json?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime
+  emailEvents        EmailEvent[]
+  Establishment      Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+
+  @@index([establishmentId, type, createdAt, status])
+  @@index([establishmentId, createdAt])
+  @@index([establishmentId, status])
+  @@index([establishmentId, template])
+  @@index([providerMessageId])
+  @@index([status, createdAt])
+  @@index([template, type])
+  @@index([to])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model EmailEvent {
+  id         String         @id @default(ulid())
+  emailLogId String
+  event      EmailEventType
+  occurredAt DateTime       @default(now())
+  /// Payload bruto do webhook para debugging
+  payload    Json?
+  emailLog   EmailLog       @relation(fields: [emailLogId], references: [id], onDelete: Cascade)
+
+  @@index([emailLogId])
+  @@index([emailLogId, event])
+  @@index([occurredAt])
+}
+
+enum EmailTemplate {
+  WELCOME
+  CREATE_ESTABLISHMENT
+  INVITE_EMPLOYEE
+  QRCODES
+  CREATE_BOOKING
+  CONFIRM_BOOKING
+  CANCEL_BOOKING
+  BOOKING_RECEIVED
+  BOOKING_CANCELLED
+  SUBSCRIPTION_ACTIVATED
+  SUBSCRIPTION_REACTIVATED
+  SUBSCRIPTION_CANCELED
+  SUBSCRIPTION_PAST_DUE
+  SUBSCRIPTION_TRIAL_STARTED
+  SUBSCRIPTION_TRIAL_ENDED
+  TRIAL_ENDING
+  PLAN_CHANGED
+  INVOICE_PAID
+  INVOICE_FAILED
+  PAYMENT_SUCCEEDED
+  PAYMENT_FAILED
+  UPDATE_BOOKING
+}
+
+enum EmailStatus {
+  /// Na fila BullMQ, ainda não processado
+  QUEUED
+  /// A ser processado pelo worker
+  PROCESSING
+  /// Aceite pelo provider (request 200)
+  SENT
+  /// Confirmado pelo provider via webhook
+  DELIVERED
+  /// Email aberto pelo destinatário
+  OPENED
+  /// Link clicado pelo destinatário
+  CLICKED
+  /// Bounce (hard ou soft)
+  BOUNCED
+  /// Marcado como spam
+  COMPLAINED
+  /// Erro irrecuperável
+  FAILED
+}
+
+enum EmailProvider {
+  ZEPTO
+  RESEND
+  SENDGRID
+  SES
+}
+
+enum EmailEventType {
+  QUEUED
+  PROCESSING
+  SENT
+  DELIVERED
+  OPENED
+  CLICKED
+  BOUNCED
+  COMPLAINED
+  FAILED
+  RETRY
+}
+
+enum EmailLogType {
+  SYSTEM
+  TRANSACTIONAL
+}

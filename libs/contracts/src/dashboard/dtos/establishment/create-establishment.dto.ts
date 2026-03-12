@@ -1,6 +1,7 @@
 import {
   IsEmail,
   IsEnum,
+  IsOptional,
   IsString,
   Length,
   ValidateNested,
@@ -40,13 +41,19 @@ export class EstablishmentDetailsDto {
   @IsString()
   phoneNumber: string;
 
-  @Length(10, 200)
+  @Length(3, 50)
   @IsString()
   billingName: string;
+
+  @IsString()
+  @IsOptional()
+  cuisine?: string;
 
   @Length(9, 20)
   @IsString()
   billingTaxId: string;
+
+
 }
 
 export class EstablishmentSettingsDto {

@@ -1,0 +1,412 @@
+/// =======================================================
+/// STOCK MANAGEMENT SYSTEM
+/// Gestão Completa de Stock: Fornecedores, Entradas,
+/// Saídas, Lotes, Validades, Inventário, Alertas,
+/// Armazéns e Localizações
+/// =======================================================
+
+// ─────────────────────────────────────────────────────────
+// 0. WAREHOUSE (Armazéns / Espaços de Armazenamento)
+// ─────────────────────────────────────────────────────────
+model StockWarehouse {
+  id              String           @id @default(ulid())
+  establishmentId String
+  name            String           // ex: "Armazém Principal", "Câmara Fria"
+  code            String?          // código curto ex: "ARM-01"
+  description     String?
+  address         String?
+  isActive        Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  deletedAt       DateTime?
+
+  establishment   Establishment    @relation(fields: [establishmentId], references: [id])
+  locations       StockLocation[]
+  stockItems      StockItem[]
+
+  @@index([establishmentId, isActive])
+  @@unique([establishmentId, code])
+}
+
+// ─────────────────────────────────────────────────────────
+// 0b. STOCK LOCATION (Localizações dentro de um Armazém)
+// ─────────────────────────────────────────────────────────
+model StockLocation {
+  id          String         @id @default(ulid())
+  warehouseId String
+  name        String         // ex: "Prateleira A1", "Câmara B2"
+  code        String?        // código legível ex: "A1-P3"
+  aisle       String?        // corredor
+  shelf       String?        // prateleira
+  bin         String?        // posição/bin
+  description String?
+  isActive    Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  warehouse   StockWarehouse @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+  stockItems  StockItem[]
+  batches     StockBatch[]
+
+  @@index([warehouseId])
+  @@unique([warehouseId, code])
+}
+
+// ─────────────────────────────────────────────────────────
+// 1. SUPPLIER (Fornecedores)
+// ─────────────────────────────────────────────────────────
+model Supplier {
+  id              String           @id @default(ulid())
+  establishmentId String
+  name            String
+  code            String?
+  taxId           String?          // NIF / VAT Number
+  email           String?
+  phone           String?
+  website         String?
+  address         String?
+  city            String?
+  postalCode      String?
+  country         String?          @default("PT")
+  contactPerson   String?
+  paymentTermDays Int?             @default(30)
+  currency        String?          @default("EUR")
+  notes           String?
+  isActive        Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  deletedAt       DateTime?
+
+  establishment   Establishment    @relation(fields: [establishmentId], references: [id])
+  stockEntries    StockEntry[]
+  stockItems      StockItemSupplier[]
+
+  @@index([establishmentId, isActive])
+  @@index([establishmentId, name])
+  @@unique([establishmentId, code])
+}
+
+// ─────────────────────────────────────────────────────────
+// 2. STOCK CATEGORY (Categorias de Stock)
+// ─────────────────────────────────────────────────────────
+model StockCategory {
+  id              String       @id @default(ulid())
+  establishmentId String
+  name            String
+  color           String?      @default("#6366f1")
+  icon            String?
+  parentId        String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  establishment   Establishment  @relation(fields: [establishmentId], references: [id])
+  parent          StockCategory? @relation("CategoryChildren", fields: [parentId], references: [id])
+  children        StockCategory[] @relation("CategoryChildren")
+  stockItems      StockItem[]
+
+  @@index([establishmentId])
+  @@unique([establishmentId, name])
+}
+
+// ─────────────────────────────────────────────────────────
+// 3. STOCK ITEM (Produto de Stock / Ingrediente)
+// ─────────────────────────────────────────────────────────
+model StockItem {
+  id               String              @id @default(ulid())
+  establishmentId  String
+  categoryId       String?
+  warehouseId      String?             // armazém padrão
+  locationId       String?             // localização padrão (prateleira/bin)
+  name             String
+  description      String?
+  sku              String?
+  barcode          String?
+  unit             StockUnit           @default(UNIT)
+  unitWeight       Float?              // peso por unidade em gramas/ml
+  currentStock     Float               @default(0)
+  reservedStock    Float               @default(0)  // reservado para pedidos em aberto
+  minStockLevel    Float?              // nível de alerta mínimo
+  maxStockLevel    Float?              // nível máximo de encomenda
+  reorderPoint     Float?              // ponto de reposição automática
+  reorderQty       Float?              // quantidade sugerida de encomenda
+  averageCost      Decimal?            @db.Decimal(10, 4)  // custo médio ponderado
+  lastCost         Decimal?            @db.Decimal(10, 4)  // último custo de compra
+  isPerishable     Boolean             @default(false)
+  shelfLifeDays    Int?                // prazo de validade padrão em dias
+  storageTemp      StockStorageTemp?
+  isActive         Boolean             @default(true)
+  isTracked        Boolean             @default(true)  // se false, não controla stock
+  imageUrl         String?
+  notes            String?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  deletedAt        DateTime?
+
+  establishment    Establishment       @relation(fields: [establishmentId], references: [id])
+  category         StockCategory?      @relation(fields: [categoryId], references: [id])
+  warehouse        StockWarehouse?     @relation(fields: [warehouseId], references: [id])
+  location         StockLocation?      @relation(fields: [locationId], references: [id])
+  batches          StockBatch[]
+  entryItems       StockEntryItem[]
+  exitItems        StockExitItem[]
+  movements        StockMovement[]
+  alerts           StockAlert[]
+  suppliers        StockItemSupplier[]
+  inventoryItems   StockInventoryCountItem[]
+
+  @@index([establishmentId, isActive])
+  @@index([establishmentId, categoryId])
+  @@index([establishmentId, warehouseId])
+  @@unique([establishmentId, sku])
+}
+
+// ─────────────────────────────────────────────────────────
+// 4. STOCK ITEM × SUPPLIER (Relação N-N com dados extra)
+// ─────────────────────────────────────────────────────────
+model StockItemSupplier {
+  id              String      @id @default(ulid())
+  stockItemId     String
+  supplierId      String
+  supplierCode    String?     // código do produto no fornecedor
+  lastPurchasePrice Decimal?  @db.Decimal(10, 4)
+  isPreferred     Boolean     @default(false)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  stockItem       StockItem   @relation(fields: [stockItemId], references: [id], onDelete: Cascade)
+  supplier        Supplier    @relation(fields: [supplierId], references: [id])
+
+  @@unique([stockItemId, supplierId])
+}
+
+// ─────────────────────────────────────────────────────────
+// 5. STOCK BATCH (Lotes com Validade - Rastreabilidade)
+// ─────────────────────────────────────────────────────────
+model StockBatch {
+  id              String           @id @default(ulid())
+  stockItemId     String
+  locationId      String?          // localização específica deste lote
+  batchNumber     String
+  lotNumber       String?
+  expiryDate      DateTime?
+  manufactureDate DateTime?
+  quantity        Float            // quantidade inicial do lote
+  remainingQty    Float            // quantidade restante
+  costPerUnit     Decimal?         @db.Decimal(10, 4)
+  status          StockBatchStatus @default(ACTIVE)
+  notes           String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  stockItem       StockItem        @relation(fields: [stockItemId], references: [id])
+  location        StockLocation?   @relation(fields: [locationId], references: [id])
+  entryItems      StockEntryItem[]
+  exitItems       StockExitItem[]
+
+  @@index([stockItemId, status])
+  @@index([expiryDate])
+}
+
+// ─────────────────────────────────────────────────────────
+// 6. STOCK ENTRY (Entrada: Compra / Receção / Ajuste+)
+// ─────────────────────────────────────────────────────────
+model StockEntry {
+  id              String            @id @default(ulid())
+  establishmentId String
+  supplierId      String?
+  type            StockEntryType
+  status          StockEntryStatus  @default(DRAFT)
+  reference       String?           // número de PO / fatura
+  supplierRef     String?           // referência do fornecedor
+  entryDate       DateTime          @default(now())
+  expectedDate    DateTime?
+  receivedDate    DateTime?
+  totalAmount     Decimal?          @db.Decimal(10, 2)
+  taxAmount       Decimal?          @db.Decimal(10, 2)
+  discountAmount  Decimal?          @db.Decimal(10, 2)
+  notes           String?
+  createdBy       String?
+  approvedBy      String?
+  approvedAt      DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  establishment   Establishment     @relation(fields: [establishmentId], references: [id])
+  supplier        Supplier?         @relation(fields: [supplierId], references: [id])
+  items           StockEntryItem[]
+  movements       StockMovement[]
+
+  @@index([establishmentId, status])
+  @@index([establishmentId, entryDate])
+  @@index([establishmentId, type])
+}
+
+// ─────────────────────────────────────────────────────────
+// 7. STOCK ENTRY ITEM (Linha de Entrada)
+// ─────────────────────────────────────────────────────────
+model StockEntryItem {
+  id             String      @id @default(ulid())
+  entryId        String
+  stockItemId    String
+  batchId        String?
+  orderedQty     Float?      // quantidade encomendada
+  receivedQty    Float       // quantidade recebida
+  unitCost       Decimal     @db.Decimal(10, 4)
+  totalCost      Decimal     @db.Decimal(10, 4)
+  taxRate        Decimal?    @db.Decimal(5, 2)
+  discountRate   Decimal?    @db.Decimal(5, 2)
+  expiryDate     DateTime?
+  lotNumber      String?
+  notes          String?
+  createdAt      DateTime    @default(now())
+
+  entry          StockEntry  @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  stockItem      StockItem   @relation(fields: [stockItemId], references: [id])
+  batch          StockBatch? @relation(fields: [batchId], references: [id])
+
+  @@index([entryId])
+  @@index([stockItemId])
+}
+
+// ─────────────────────────────────────────────────────────
+// 8. STOCK EXIT (Saída: Consumo / Venda / Perda / Ajuste-)
+// ─────────────────────────────────────────────────────────
+model StockExit {
+  id              String           @id @default(ulid())
+  establishmentId String
+  type            StockExitType
+  status          StockExitStatus  @default(DRAFT)
+  reference       String?
+  exitDate        DateTime         @default(now())
+  reason          String?
+  totalAmount     Decimal?         @db.Decimal(10, 2)
+  notes           String?
+  createdBy       String?
+  approvedBy      String?
+  approvedAt      DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  establishment   Establishment    @relation(fields: [establishmentId], references: [id])
+  items           StockExitItem[]
+  movements       StockMovement[]
+
+  @@index([establishmentId, status])
+  @@index([establishmentId, exitDate])
+  @@index([establishmentId, type])
+}
+
+// ─────────────────────────────────────────────────────────
+// 9. STOCK EXIT ITEM (Linha de Saída)
+// ─────────────────────────────────────────────────────────
+model StockExitItem {
+  id           String      @id @default(ulid())
+  exitId       String
+  stockItemId  String
+  batchId      String?
+  quantity     Float
+  unitCost     Decimal?    @db.Decimal(10, 4)
+  totalCost    Decimal?    @db.Decimal(10, 4)
+  notes        String?
+  createdAt    DateTime    @default(now())
+
+  exit         StockExit   @relation(fields: [exitId], references: [id], onDelete: Cascade)
+  stockItem    StockItem   @relation(fields: [stockItemId], references: [id])
+  batch        StockBatch? @relation(fields: [batchId], references: [id])
+
+  @@index([exitId])
+  @@index([stockItemId])
+}
+
+// ─────────────────────────────────────────────────────────
+// 10. STOCK MOVEMENT (Livro de Movimentos - Auditoria)
+// ─────────────────────────────────────────────────────────
+model StockMovement {
+  id              String              @id @default(ulid())
+  establishmentId String
+  stockItemId     String
+  type            StockMovementType
+  direction       StockMovementDir    // IN ou OUT
+  quantity        Float
+  quantityBefore  Float
+  quantityAfter   Float
+  unitCost        Decimal?            @db.Decimal(10, 4)
+  entryId         String?
+  exitId          String?
+  reference       String?
+  notes           String?
+  createdBy       String?
+  createdAt       DateTime            @default(now())
+
+  establishment   Establishment       @relation(fields: [establishmentId], references: [id])
+  stockItem       StockItem           @relation(fields: [stockItemId], references: [id])
+  entry           StockEntry?         @relation(fields: [entryId], references: [id])
+  exit            StockExit?          @relation(fields: [exitId], references: [id])
+
+  @@index([establishmentId, stockItemId])
+  @@index([establishmentId, createdAt])
+  @@index([establishmentId, type])
+}
+
+// ─────────────────────────────────────────────────────────
+// 11. STOCK ALERT (Alertas Automáticos)
+// ─────────────────────────────────────────────────────────
+model StockAlert {
+  id              String           @id @default(ulid())
+  establishmentId String
+  stockItemId     String
+  type            StockAlertType
+  status          StockAlertStatus @default(ACTIVE)
+  message         String
+  threshold       Float?
+  currentValue    Float?
+  resolvedAt      DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  establishment   Establishment    @relation(fields: [establishmentId], references: [id])
+  stockItem       StockItem        @relation(fields: [stockItemId], references: [id])
+
+  @@index([establishmentId, status])
+  @@index([establishmentId, type])
+}
+
+// ─────────────────────────────────────────────────────────
+// 12. STOCK INVENTORY COUNT (Contagem Física / Inventário)
+// ─────────────────────────────────────────────────────────
+model StockInventoryCount {
+  id              String                      @id @default(ulid())
+  establishmentId String
+  name            String
+  status          StockInventoryStatus        @default(DRAFT)
+  startedAt       DateTime?
+  completedAt     DateTime?
+  notes           String?
+  createdBy       String?
+  createdAt       DateTime                    @default(now())
+  updatedAt       DateTime                    @updatedAt
+
+  establishment   Establishment               @relation(fields: [establishmentId], references: [id])
+  items           StockInventoryCountItem[]
+
+  @@index([establishmentId, status])
+}
+
+model StockInventoryCountItem {
+  id              String              @id @default(ulid())
+  inventoryId     String
+  stockItemId     String
+  expectedQty     Float               // quantidade no sistema antes da contagem
+  countedQty      Float?              // quantidade contada fisicamente
+  difference      Float?              // diferença (contada - esperada)
+  unitCost        Decimal?            @db.Decimal(10, 4)
+  notes           String?
+  countedAt       DateTime?
+  createdAt       DateTime            @default(now())
+
+  inventory       StockInventoryCount @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  stockItem       StockItem           @relation(fields: [stockItemId], references: [id])
+
+  @@unique([inventoryId, stockItemId])
+  @@index([inventoryId])
+}

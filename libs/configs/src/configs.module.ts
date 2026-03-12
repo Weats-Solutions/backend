@@ -4,14 +4,18 @@ import { ClerkConfigService } from './clerk-config.service';
 import { AppConfigService } from './app-config.service';
 import { StripeConfigService } from './stripe-config.service';
 import { RedisConfigService } from './redis-config.service';
+import { CloudflareConfigService } from './cloudflare-config.service';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
+  imports: [ConfigModule],
   providers: [
     GatewayConfigService,
     ClerkConfigService,
     AppConfigService,
     StripeConfigService,
     RedisConfigService,
+    CloudflareConfigService,
   ],
   exports: [
     GatewayConfigService,
@@ -19,6 +23,7 @@ import { RedisConfigService } from './redis-config.service';
     AppConfigService,
     StripeConfigService,
     RedisConfigService,
+    CloudflareConfigService,
   ],
 })
-export class ConfigsModule {}
+export class ConfigsModule { }

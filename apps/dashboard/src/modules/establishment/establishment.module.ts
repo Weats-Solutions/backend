@@ -8,12 +8,15 @@ import { RedisConfigService } from '@weats/configs/redis-config.service';
 import { IntegrationsModule } from '@weats/integrations';
 import { DatabaseModule } from '@weats/database';
 
+import { ConfigsModule } from '@weats/configs';
+
 @Module({
   imports: [
     ConfigModule,
+    ConfigsModule,
     BullModule.registerQueueAsync({
       name: 'emails',
-      imports: [RedisConfigService],
+      imports: [ConfigsModule],
       inject: [RedisConfigService],
       useFactory: async (
         redisConfig: RedisConfigService,
@@ -32,9 +35,9 @@ import { DatabaseModule } from '@weats/database';
         appConfig.getAppUrl(),
       inject: [AppConfigService],
     },
-   
+
     EstablishmentService,
   ],
   exports: [EstablishmentService],
 })
-export class EstablishmentModule {}
+export class EstablishmentModule { }

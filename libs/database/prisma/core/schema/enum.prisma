@@ -8,6 +8,8 @@ enum EmployeeRoles {
 enum ScheduleType {
   ESTABLISHMENT
   MENU
+  DISCOUNT
+  PROMOTION
 }
 
 enum EstablishmentLanguage {
@@ -100,11 +102,12 @@ enum ServicePointType {
   TABLE
   BOOTH
   COUNTER
-  TERRACE
   ROOM
+  SUNBED
+  GENERAL
+  TERRACE
   SUITE
   POOL_SIDE
-  SUNBED
   CABANA
   SEAT
   SECTOR
@@ -114,6 +117,123 @@ enum ServicePointType {
   PICKUP_POINT
   PARKING_SPOT
   KITCHEN
-  GENERAL
   OBSTACLE
+  BEDROOM
+}
+
+// ─────────────────────────────────────────────────────────
+// STOCK MANAGEMENT ENUMS
+// ─────────────────────────────────────────────────────────
+
+enum StockUnit {
+  UNIT
+  KG
+  GRAM
+  LITRE
+  ML
+  CL
+  PACK
+  BOX
+  BOTTLE
+  CAN
+  BAG
+  PORTION
+  DOSE
+  SHEET
+  METER
+  CM
+}
+
+enum StockStorageTemp {
+  AMBIENT       // temperatura ambiente
+  REFRIGERATED  // refrigerado (0-8°C)
+  FROZEN        // congelado (<-18°C)
+  CONTROLLED    // temperatura controlada (8-15°C)
+}
+
+enum StockBatchStatus {
+  ACTIVE
+  DEPLETED    // esgotado
+  EXPIRED     // expirado
+  QUARANTINE  // em quarentena
+  RECALLED    // recolhido
+}
+
+enum StockEntryType {
+  PURCHASE        // compra a fornecedor
+  RECEPTION       // receção de encomenda pendente
+  RETURN_FROM_CLIENT  // devolução de cliente
+  INITIAL_STOCK   // stock inicial / abertura
+  TRANSFER_IN     // transferência entrada
+  ADJUSTMENT_IN   // ajuste positivo manual
+}
+
+enum StockEntryStatus {
+  DRAFT       // rascunho
+  ORDERED     // encomendado
+  PARTIAL     // receção parcial
+  RECEIVED    // rececionado
+  CANCELLED   // cancelado
+  APPROVED    // aprovado
+}
+
+enum StockExitType {
+  CONSUMPTION     // consumo interno / produção
+  SALE            // venda direta
+  WASTE           // desperdício / quebra
+  RETURN_TO_SUPPLIER  // devolução a fornecedor
+  TRANSFER_OUT    // transferência saída
+  ADJUSTMENT_OUT  // ajuste negativo manual
+  SAMPLE          // amostra
+}
+
+enum StockExitStatus {
+  DRAFT
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+enum StockMovementType {
+  PURCHASE
+  RECEPTION
+  CONSUMPTION
+  SALE
+  WASTE
+  RETURN_IN
+  RETURN_OUT
+  TRANSFER_IN
+  TRANSFER_OUT
+  ADJUSTMENT_IN
+  ADJUSTMENT_OUT
+  INVENTORY_CORRECTION
+  INITIAL_STOCK
+}
+
+enum StockMovementDir {
+  IN
+  OUT
+}
+
+enum StockAlertType {
+  LOW_STOCK        // stock abaixo do mínimo
+  OUT_OF_STOCK     // sem stock
+  EXPIRING_SOON    // validade a expirar em breve
+  EXPIRED          // validade expirada
+  OVERSTOCK        // stock acima do máximo
+  REORDER_POINT    // atingiu ponto de reposição
+}
+
+enum StockAlertStatus {
+  ACTIVE
+  ACKNOWLEDGED  // reconhecida
+  RESOLVED
+  DISMISSED     // ignorada
+}
+
+enum StockInventoryStatus {
+  DRAFT
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
 }

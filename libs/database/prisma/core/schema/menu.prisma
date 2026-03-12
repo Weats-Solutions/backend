@@ -4,12 +4,12 @@ model Menu {
   isVisible        Boolean           @default(false)
   isHighlighted    Boolean           @default(false)
   color            String?
-  type             MenuType          @default(DEFAULT)
-  price            Float?
-  maxItemsPerOrder Int?
   establishmentId  String
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
+  maxItemsPerOrder Int?
+  price            Float?
+  type             MenuType          @default(DEFAULT)
   establishment    Establishment     @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
   categories       MenuCategory[]
   menuSchedule     MenuSchedule[]
@@ -104,10 +104,10 @@ model MenuItemPosition {
   itemId        String
   subcategoryId String
   position      Int             @default(0)
-  isIncluded    Boolean         @default(false)
   isVisible     Boolean         @default(true)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
+  isIncluded    Boolean         @default(false)
   item          Item            @relation(fields: [itemId], references: [id], onDelete: Cascade)
   subcategory   MenuSubcategory @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
 

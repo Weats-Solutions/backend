@@ -3,6 +3,8 @@ import { StripeService } from './stripe.service';
 import { StripeConfigService } from '@weats/configs/stripe-config.service';
 import { DatabaseModule } from '@weats/database';
 
+import { ConfigModule } from '@nestjs/config';
+
 @Module({
   providers: [
     StripeService,
@@ -20,7 +22,7 @@ import { DatabaseModule } from '@weats/database';
       inject: [StripeConfigService],
     },
   ],
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, ConfigModule],
   exports: [StripeService],
 })
-export class StripeModule {}
+export class StripeModule { }

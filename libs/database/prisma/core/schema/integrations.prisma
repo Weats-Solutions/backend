@@ -1,0 +1,88 @@
+/// Stores all third-party integration credentials and toggle states for an establishment.
+/// All sensitive values (API keys, secrets) are stored AES-256 encrypted.
+/// The `*Enabled` flags control whether the integration is actively used at runtime,
+/// independently of whether credentials are present.
+model EstablishmentIntegrations {
+  id              String   @id @default(ulid())
+  establishmentId String   @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // ─── EuPago ───────────────────────────────────────────────────────────────
+  // Payment gateway: Multibanco, MB WAY, Visa/Mastercard.
+  // eupagoApiKey    — encrypted EuPago API key
+  // eupagoCryptoKey — optional encryption key for MB WAY payloads
+  eupagoEnabled   Boolean @default(false)
+  eupagoApiKey    String?
+  eupagoCryptoKey String?
+
+  // ─── Biziq ────────────────────────────────────────────────────────────────
+  // Portuguese e-invoicing platform (AT / SAF-T compliant).
+  // biziqAccountId  — encrypted Biziq account identifier
+  // biziqApiKey     — encrypted Biziq API key
+  // biziqCompanyVat — optional encrypted company VAT for invoice issuer data
+  biziqEnabled    Boolean @default(false)
+  biziqAccountId  String?
+  biziqApiKey     String?
+  biziqCompanyVat String?
+
+  // ─── Viva Wallet EFT-POS ──────────────────────────────────────────────────
+  // Physical card terminal integration via REST EFT-POS API (OAuth2).
+  // vivaClientId     — encrypted OAuth2 client ID
+  // vivaClientSecret — encrypted OAuth2 client secret
+  vivaEnabled      Boolean @default(false)
+  vivaClientId     String?
+  vivaClientSecret String?
+
+  // ─── SumUp Cloud API ──────────────────────────────────────────────────────────
+  // Solo card reader integration via HTTPS Cloud API.
+  // sumupApiKey       — encrypted Bearer token (Personal API Key or OAuth2)
+  // sumupMerchantCode — encrypted merchant account code (required for reader endpoints)
+  sumupEnabled      Boolean @default(false)
+  sumupApiKey       String?
+  sumupMerchantCode String?
+
+  // ─── Vendus ───────────────────────────────────────────────────────────────
+  // Portuguese fiscal invoicing platform (Faturas, Recibos, etc.).
+  // vendusApiKey — encrypted Vendus API key (Bearer token for all requests)
+  vendusEnabled Boolean @default(false)
+  vendusApiKey  String?
+
+  establishment Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}
+
+// ─── SumUp Solo Reader ────────────────────────────────────────────────────────
+// Represents a Solo card reader paired to an establishment via the Cloud API.
+// readerId   — SumUp reader ID returned after pairing (used for checkouts)
+// name       — human-readable label set by the operator (e.g. "Caixa 1")
+// deviceId   — physical device identifier (optional, from SumUp response)
+model SumupReader {
+  id              String        @id @default(ulid())
+  establishmentId String
+  readerId        String        // SumUp Cloud API reader identifier
+  name            String?       // operator label, e.g. "Balcão Principal"
+  deviceId        String?       // physical device id from SumUp
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+
+  @@unique([establishmentId, readerId])
+}
+
+// ─── Viva Wallet Physical Terminal ────────────────────────────────────────────
+// Represents a card terminal (POS) registered for an establishment.
+// terminalId  — the Viva terminal serial/identifier (from their dashboard)
+// posId       — the numeric POS id returned by Viva's API when the terminal is registered
+// alias       — a human-readable label set by the operator (e.g. "Caixa 1")
+model VivaTerminal {
+  id              String        @id @default(ulid())
+  establishmentId String
+  terminalId      String // Viva terminal serial number / identifier
+  alias           String? // operator label, e.g. "Caixa 1"
+  posId           String? // Viva POS id (returned after registration, used for payments)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+
+  @@unique([establishmentId, terminalId])
+}

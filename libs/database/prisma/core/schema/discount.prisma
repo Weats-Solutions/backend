@@ -1,0 +1,106 @@
+/// =======================================================
+/// DISCOUNTS (Redução direta de preço)
+/// =======================================================
+model Discount {
+    id              String       @id @default(ulid())
+    establishmentId String
+    name            String
+    description     String?
+    type            DiscountType
+    value           Decimal      @db.Decimal(10, 2)
+    isActive        Boolean      @default(true)
+    stackable       Boolean      @default(false)
+    startsAt        DateTime?
+    endsAt          DateTime?
+    createdAt       DateTime     @default(now())
+    updatedAt       DateTime     @updatedAt
+
+    establishment Establishment      @relation(fields: [establishmentId], references: [id])
+    targets       DiscountTarget[]
+    schedules     DiscountSchedule[]
+
+    @@index([establishmentId, isActive])
+}
+
+enum DiscountType {
+    PERCENTAGE
+    FIXED_AMOUNT
+}
+
+model DiscountTarget {
+    id            String  @id @default(ulid())
+    discountId    String
+    itemId        String?
+    posCategoryId String?
+
+    discount Discount @relation(fields: [discountId], references: [id], onDelete: Cascade)
+    item     Item?    @relation(fields: [itemId], references: [id])
+
+    @@index([discountId])
+}
+
+model DiscountSchedule {
+    id         String @id @default(ulid())
+    discountId String
+    scheduleId String
+
+    discount Discount @relation(fields: [discountId], references: [id], onDelete: Cascade)
+    schedule Schedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+
+    @@unique([discountId, scheduleId])
+}
+
+/// =======================================================
+/// PROMOTIONS (Regras condicionais, ex: Buy X Get Y)
+/// =======================================================
+model Promotion {
+    id              String        @id @default(ulid())
+    establishmentId String
+    name            String
+    description     String?
+    type            PromotionType
+    isActive        Boolean       @default(true)
+    startsAt        DateTime?
+    endsAt          DateTime?
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+
+    establishment Establishment       @relation(fields: [establishmentId], references: [id])
+    buyXGetYRule  BuyXGetYRule?
+    schedules     PromotionSchedule[]
+
+    @@index([establishmentId, isActive])
+}
+
+enum PromotionType {
+    BUY_X_GET_Y
+    // futuro: SPEND_X_GET_Y, BUNDLE, FREE_DELIVERY
+}
+
+/// Regras de Buy X Get Y (aplicado ao nível de Item)
+model BuyXGetYRule {
+    id          String @id @default(ulid())
+    promotionId String @unique
+
+    requiredItemId   String
+    requiredQuantity Int
+
+    rewardItemId   String
+    rewardQuantity Int
+    applyCheapest  Boolean @default(true) // aplica reward no item de menor valor
+
+    promotion    Promotion @relation(fields: [promotionId], references: [id], onDelete: Cascade)
+    requiredItem Item      @relation("RequiredItem", fields: [requiredItemId], references: [id])
+    rewardItem   Item      @relation("RewardItem", fields: [rewardItemId], references: [id])
+}
+
+model PromotionSchedule {
+    id          String @id @default(ulid())
+    promotionId String
+    scheduleId  String
+
+    promotion Promotion @relation(fields: [promotionId], references: [id], onDelete: Cascade)
+    schedule  Schedule  @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+
+    @@unique([promotionId, scheduleId])
+}

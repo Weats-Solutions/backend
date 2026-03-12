@@ -8,4 +8,6 @@ model Schedule {
   updatedAt             DateTime                @updatedAt
   establishmentSchedule EstablishmentSchedule[]
   menuSchedule          MenuSchedule[]
+  discountSchedule      DiscountSchedule[]
+  promotionSchedule     PromotionSchedule[]
 }

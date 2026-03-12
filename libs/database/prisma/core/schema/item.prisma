@@ -1,190 +1,352 @@
-// ==========================================
-// 1. O NÚCLEO (ITEM)
-// ==========================================
-
+/// =======================================================
+/// 1. ITEM (Produto Pai / Raiz do Catálogo)
+/// =======================================================
 model Item {
-    id              String  @id @default(ulid())
-    // O nome aqui serve como "Nome Interno" (para o staff/POS na língua principal)
-    name            String
-    description     String? // Descrição interna
-    imageId         String?
-    establishmentId String
-    posCategoryId   String?
+  id                  String               @id @default(ulid())
+  imageId             String?
+  establishmentId     String
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  /// O basePrice APENAS é usado se o item NÃO tiver variantes.
+  basePrice           Decimal?             @db.Decimal(10, 2)
+  deletedAt           DateTime?
+  posCategoryId       String?
+  quantity            Float?
+  sku                 String?
+  unit                String?
+  status              ItemStatus           @default(ACTIVE)
+  taxTableId          String
+  allergens           ItemAllergen[]
+  establishment       Establishment        @relation(fields: [establishmentId], references: [id])
+  image               Image?               @relation("ImageItem", fields: [imageId], references: [id])
+  posCategory         POSCategory?         @relation(fields: [posCategoryId], references: [id])
+  taxTable            TaxTable             @relation(fields: [taxTableId], references: [id])
+  modifierGroups      ItemModifierGroup[]
+  itemModifierOptions ItemModifierOption[]
+  translations        ItemTranslation[]
+  variants            ItemVariant[]
+  itemVariantGroups   ItemVariantGroup[]
+  menuItemPositions   MenuItemPosition[]
+  nutritionInfo       ItemNutritionInfo?
+  discounts           DiscountTarget[]
+  requiredItemRules   BuyXGetYRule[]       @relation("RequiredItem")
+  rewardItemRules     BuyXGetYRule[]       @relation("RewardItem")
+  marketingTag        MarketingTag?
+  spiceLevel          SpiceLevel?
+  isFeatured          Boolean              @default(false)
+  attributes          ItemAttribute[]
+  vendusProductId     Int?
 
-    // Relações
-    variants       ItemVariant[]
-    modifierGroups ItemModifierGroup[]
+  @@unique([establishmentId, sku])
+  @@index([establishmentId, status])
+  @@index([deletedAt])
+}
 
-    // TRADUÇÕES DO ITEM (Nome e Descrição para o Menu)
-    translations ItemTranslation[]
-    Image        Image?            @relation("ImageItem", fields: [imageId], references: [id])
+model ItemNutritionInfo {
+  id            String   @id @default(ulid())
+  energyKcal    Float?
+  fat           Float?
+  saturatedFat  Float?
+  carbohydrates Float?
+  sugars        Float?
+  fiber         Float?
+  protein       Float?
+  salt          Float?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  itemId        String?  @unique
+  item          Item?    @relation(fields: [itemId], references: [id])
+}
 
-    posCategory              POSCategory?         @relation(fields: [posCategoryId], references: [id])
-    establishment            Establishment        @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-    modifierOptionsAsProduct ItemModifierOption[] @relation("ProductAsModifier")
-    menuItemPositions        MenuItemPosition[]
+model VariantNutrionalInfo {
+  id            String       @id @default(ulid())
+  energyKcal    Float?
+  fat           Float?
+  saturatedFat  Float?
+  carbohydrates Float?
+  sugars        Float?
+  fiber         Float?
+  protein       Float?
+  salt          Float?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  itemVariantId String?      @unique
+  itemVariant   ItemVariant? @relation(fields: [itemVariantId], references: [id])
 }
 
 model ItemTranslation {
-    id     String @id @default(ulid())
-    itemId String
-    locale String // "en", "fr", "es"
+  id          String  @id @default(ulid())
+  locale      String
+  name        String
+  description String?
+  itemId      String
+  item        Item    @relation(fields: [itemId], references: [id], onDelete: Cascade)
 
-    name        String // O que aparece no menu QR
-    description String?
-
-    item Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
-
-    @@unique([itemId, locale]) // Garante 1 tradução por língua por item
+  @@unique([itemId, locale])
 }
 
-// ==========================================
-// 2. VARIANTES (Tamanhos, Pontos, Tipos)
-// ==========================================
-
-model ItemVariant {
-    id              String  @id @default(ulid())
-    itemId          String
-    variantOptionId String
-    price           Float // Preço Base
-    isDefault       Boolean @default(false)
-
-    item   Item          @relation(fields: [itemId], references: [id], onDelete: Cascade)
-    option VariantOption @relation(fields: [variantOptionId], references: [id])
-
-    @@unique([itemId, variantOptionId])
-}
-
+/// A. O Dicionário de Opções (Ex: "Pequena", "Média", "33cl")
 model VariantOption {
-    id              String      @id @default(ulid())
-    name            String
-    code            String?     @unique
-    type            VariantType @default(SIZE)
-    establishmentId String?
-    quantity        Float? // Para guardar "20", "33", "1"
-    unit            String? // Para guardar "CL", "L", "KG"
+  id              String                     @id @default(ulid())
+  establishmentId String?
+  isGlobal        Boolean                    @default(false)
+  code            String?                    @unique
+  isActive        Boolean                    @default(true)
+  quantity        Float?
+  unit            String?
+  type            VariantType                @default(OTHER)
+  itemVariants    ItemVariant[]
+  establishment   Establishment?             @relation(fields: [establishmentId], references: [id])
+  translations    VariantOptionTranslation[]
 
-    variants ItemVariant[]
-    isGlobal Boolean       @default(false)
-
-    translations  VariantOptionTranslation[]
-    establishment Establishment?             @relation(fields: [establishmentId], references: [id])
-}
-
-enum VariantType {
-    SIZE // Frontend desenha: Selector de Tamanho (Copo, Litros)
-    PREPARATION // Frontend desenha: Lista de Ponto de Carne
-    FLAVOR // Frontend desenha: Bolinhas de cor ou lista de sabores
-    COLOR // Frontend desenha: Selector de cor
-    OTHER
+  @@index([establishmentId])
 }
 
 model VariantOptionTranslation {
-    id              String @id @default(ulid())
-    variantOptionId String
-    locale          String
-    name            String // ex: "Well Done", "Bien Cuit"
+  id              String        @id @default(ulid())
+  variantOptionId String
+  locale          String
+  name            String
+  variantOption   VariantOption @relation(fields: [variantOptionId], references: [id], onDelete: Cascade)
 
-    variantOption VariantOption @relation(fields: [variantOptionId], references: [id], onDelete: Cascade)
-
-    @@unique([variantOptionId, locale])
+  @@unique([variantOptionId, locale])
 }
 
-// ==========================================
-// 3. MODIFICADORES E GRUPOS (Acompanhamentos)
-// ==========================================
+/// B. O Grupo Local (Simetria perfeita com Modifiers)
+/// Ex: "Escolha o Tamanho"
+model ItemVariantGroup {
+  itemId       String
+  position     Int                           @default(0)
+  id           String                        @id @default(ulid())
+  variants     ItemVariant[]
+  item         Item                          @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  translations ItemVariantGroupTranslation[]
 
-enum ModifierDisplayMode {
-    RADIO // Para escolha única obrigatória (Ponto da Carne)
-    CHECKBOX // Para lista de Sim/Não (Pizza Toppings, Remover Ingredientes)
-    QUANTITY // Para incrementos (Extras do Burger)
+  @@index([itemId])
 }
 
+model ItemVariantGroupTranslation {
+  id                 String           @id @default(ulid())
+  itemVariantGroupId String
+  locale             String
+  name               String
+  itemVariantGroup   ItemVariantGroup @relation(fields: [itemVariantGroupId], references: [id], onDelete: Cascade)
+
+  @@unique([itemVariantGroupId, locale])
+}
+
+model ItemVariant {
+  id                 String                @id @default(ulid())
+  itemId             String
+  price              Decimal               @db.Decimal(10, 2)
+  sku                String?
+  isDefault          Boolean               @default(false)
+  isActive           Boolean               @default(true)
+  imageId            String?
+  itemVariantGroupId String
+  position           Int                   @default(0)
+  variantOptionId    String
+  allergens          ItemVariantAllergen[]
+  modifierOptions    ItemModifierOption[]
+  image              Image?                @relation("ItemVariantImage", fields: [imageId], references: [id])
+  item               Item                  @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  group              ItemVariantGroup      @relation(fields: [itemVariantGroupId], references: [id], onDelete: Cascade)
+  variantOption      VariantOption         @relation(fields: [variantOptionId], references: [id])
+  nutritionInfo      VariantNutrionalInfo?
+  deletedAt          DateTime?
+
+  @@unique([itemVariantGroupId, variantOptionId])
+  @@unique([id, sku])
+  @@index([itemId])
+  @@index([deletedAt])
+}
+
+/// A. Grupo de Modificadores (As perguntas feitas ao cliente)
 model ItemModifierGroup {
-    id     String @id @default(ulid())
-    itemId String
+  id           String                         @id @default(ulid())
+  itemId       String
+  minSelection Int                            @default(0)
+  maxSelection Int?
+  position     Int                            @default(0)
+  displayMode  ModifierDisplayMode            @default(RADIO)
+  isActive     Boolean                        @default(true)
+  item         Item                           @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  translations ItemModifierGroupTranslation[]
+  options      ItemModifierOption[]
+  deletedAt    DateTime?
 
-    name String // Nome Interno (ex: "Escolha o Molho")
-    code String? // ex: "SAUCE_CHOICE"
-
-    displayMode  ModifierDisplayMode @default(RADIO)
-    minSelection Int                 @default(0)
-    maxSelection Int?
-    position     Int                 @default(0)
-
-    item    Item                 @relation(fields: [itemId], references: [id], onDelete: Cascade)
-    options ItemModifierOption[]
-
-    // TRADUÇÕES DO TÍTULO DO GRUPO (Importante!)
-    translations ItemModifierGroupTranslation[]
+  @@index([deletedAt])
 }
 
 model ItemModifierGroupTranslation {
-    id              String @id @default(ulid())
-    modifierGroupId String
-    locale          String
-    name            String // ex: "Choose your Sauce", "Choisissez votre sauce"
+  id              String            @id @default(ulid())
+  modifierGroupId String
+  locale          String
+  name            String
+  modifierGroup   ItemModifierGroup @relation(fields: [modifierGroupId], references: [id], onDelete: Cascade)
+  deletedAt       DateTime?
 
-    modifierGroup ItemModifierGroup @relation(fields: [modifierGroupId], references: [id], onDelete: Cascade)
-
-    @@unique([modifierGroupId, locale])
+  @@unique([modifierGroupId, locale])
 }
 
-model ItemModifierOption {
-    id              String @id @default(ulid())
-    modifierGroupId String
-
-    // Configurações de Venda neste contexto
-    price    Float? // Se null, usa o preço original do item. Se definido (ex: 0), sobrepõe.
-    position Int    @default(0)
-
-    // Quantidade permitida para esta opção específica
-    minQuantity     Int @default(0) // Mínimo que pode selecionar (normalmente 0)
-    maxQuantity     Int @default(1) // Máximo que pode selecionar (1 = radio, >1 = counter)
-    defaultQuantity Int @default(0) // Quantidade pré-selecionada (ex: 2 fatias incluídas, extras custam mais)
-
-    // --- A MUDANÇA ESTÁ AQUI (Campos Opcionais) ---
-
-    // CASO 1: É uma instrução ou ingrediente simples (ex: "Sem Cebola")
-    addonId String?
-    addon   Addon?  @relation(fields: [addonId], references: [id])
-
-    // CASO 2: É um Item real que já existe (ex: "Batata Frita", "Coca-Cola")
-    productId String?
-    product   Item?   @relation("ProductAsModifier", fields: [productId], references: [id])
-
-    group ItemModifierGroup @relation(fields: [modifierGroupId], references: [id], onDelete: Cascade)
-
-    // Regra de Validação (Database constraint se possível, ou lógica de app): 
-    // Tem de ter OU addonId OU productId, nunca os dois.
-    @@index([modifierGroupId])
-    @@index([productId])
-    @@index([addonId])
-}
-
-// ==========================================
-// 4. BIBLIOTECA DE EXTRAS (ADDONS)
-// ==========================================
-
+/// B. O Dicionário de Addons Simples (Instruções de cozinha, extras)
+/// Coisas que não existem como Item (Ex: "Massa Fina", "Sem Gelo")
 model Addon {
-    id              String               @id @default(ulid())
-    name            String // Nome Interno (ex: "Batata Frita")
-    establishmentId String?
-    modifierOptions ItemModifierOption[]
-    isGlobal        Boolean              @default(false)
+  id                  String               @id @default(ulid())
+  establishmentId     String?
+  isActive            Boolean              @default(true)
+  isGlobal            Boolean              @default(false)
+  establishment       Establishment?       @relation(fields: [establishmentId], references: [id])
+  translations        AddonTranslation[]
+  itemModifierOptions ItemModifierOption[]
 
-    // TRADUÇÕES DOS EXTRAS
-    translations  AddonTranslation[]
-    establishment Establishment?     @relation(fields: [establishmentId], references: [id])
+  @@index([establishmentId])
+  @@index([isGlobal])
 }
 
 model AddonTranslation {
-    id      String @id @default(ulid())
-    addonId String
-    locale  String
-    name    String // ex: "French Fries", "Frites"
+  id      String @id @default(ulid())
+  addonId String
+  locale  String
+  name    String
+  addon   Addon  @relation(fields: [addonId], references: [id], onDelete: Cascade)
 
-    addon Addon @relation(fields: [addonId], references: [id], onDelete: Cascade)
-
-    @@unique([addonId, locale])
+  @@unique([addonId, locale])
 }
+
+model Allergen {
+  id                   String                @id @default(ulid())
+  code                 AllergenCode          @unique
+  itemAllergens        ItemAllergen[]
+  itemVariantAllergens ItemVariantAllergen[]
+}
+
+model ItemAllergen {
+  id         String   @id @default(ulid())
+  itemId     String
+  allergenId String
+  allergen   Allergen @relation(fields: [allergenId], references: [id], onDelete: Cascade)
+  item       Item     @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, allergenId])
+}
+
+model ItemVariantAllergen {
+  id            String   @id @default(ulid())
+  itemVariantId String
+  allergenId    String
+  allergen      Allergen @relation(fields: [allergenId], references: [id], onDelete: Cascade)
+
+  itemVariant ItemVariant @relation(fields: [itemVariantId], references: [id], onDelete: Cascade)
+
+  @@unique([itemVariantId, allergenId])
+}
+
+/// C. As Opções do Modificador (Polimorfismo!)
+/// REGRA SQL (CONSTRAINT): Apenas 1 alvo pode ser preenchido (addonId, productId ou itemVariantId)
+model ItemModifierOption {
+  id              String            @id @default(ulid())
+  modifierGroupId String
+  price           Decimal?          @db.Decimal(10, 2)
+  position        Int               @default(0)
+  defaultQuantity Int               @default(0)
+  minQuantity     Int               @default(0)
+  maxQuantity     Int               @default(1)
+  addonId         String?
+  productId       String?
+  itemVariantId   String?
+  addon           Addon?            @relation(fields: [addonId], references: [id])
+  itemVariant     ItemVariant?      @relation(fields: [itemVariantId], references: [id])
+  group           ItemModifierGroup @relation(fields: [modifierGroupId], references: [id], onDelete: Cascade)
+  product         Item?             @relation(fields: [productId], references: [id])
+
+  @@index([modifierGroupId])
+}
+
+enum ItemStatus {
+  ACTIVE
+  DRAFT
+  INACTIVE
+}
+
+enum AllergenCode {
+  CELERY
+  CRUSTACEAN
+  EGG
+  FISH
+  GLUTEN
+  LUPINS
+  MILK
+  MUSTARD
+  NUTS
+  PEANUTS
+  SESAME
+  SHELLFISH
+  SOY
+  SULFITES
+}
+
+enum VariantType {
+  SIZE
+  FLAVOR
+  PREPARATION
+  COLOR
+  OTHER
+}
+
+enum ModifierDisplayMode {
+  RADIO
+  CHECKBOX
+  QUANTITY
+}
+
+enum SpiceLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model ItemAttribute {
+  id     String        @id @default(ulid())
+  type   AttributeType
+  itemId String
+
+  item Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, type])
+}
+
+enum AttributeType {
+  VEGAN
+  VEGETARIAN
+  GLUTEN_FREE
+  DAIRY_FREE
+  HALAL
+  KOSHER
+}
+
+enum MarketingTag {
+  BESTSELLER
+  NEW
+  POPULAR
+  LIMITED
+}
+
+/**
+ * model ItemBundle {
+ * id        String  @id @default(ulid())
+ * itemId    String
+ * position  Int     @default(0)
+ * item      Item    @relation(fields: [itemId], references: [id], onDelete: Cascade)
+ * options   ItemBundleOption[]
+ * }
+ * model ItemBundleOption {
+ * id            String  @id @default(ulid())
+ * bundleId      String
+ * productId     String
+ * minSelection  Int     @default(1)
+ * maxSelection  Int     @default(1)
+ * bundle        ItemBundle @relation(fields: [bundleId], references: [id], onDelete: Cascade)
+ * product       Item       @relation(fields: [productId], references: [id])
+ * }
+ */

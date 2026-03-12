@@ -10,9 +10,11 @@ model Establishment {
   createdAt                    DateTime                      @default(now())
   updatedAt                    DateTime                      @updatedAt
   activeThemeId                String?
+  email                        String
   addons                       Addon[]
   bookings                     Booking[]
   bookingRules                 BookingRules?
+  emailLogs                    EmailLog[]
   employees                    Employee[]
   activeTheme                  Theme?                        @relation("ActiveTheme", fields: [activeThemeId], references: [id])
   owner                        User                          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
@@ -20,6 +22,7 @@ model Establishment {
   establishmentBookingSettings EstablishmentBookingSettings?
   establishmentBrand           EstablishmentBrand?
   establishmentDetails         EstablishmentDetails?
+  integrations                 EstablishmentIntegrations?
   establishmentSchedule        EstablishmentSchedule[]
   establishmentSettings        EstablishmentSettings?
   establishmentSocialMedia     EstablishmentSocialMedia?
@@ -35,6 +38,21 @@ model Establishment {
   variantOptions               VariantOption[]
   auditLogs                    AuditLog[]
   devices                      Device[]
+  discounts                    Discount[]
+  promotions                   Promotion[]
+  vivaTerminals                VivaTerminal[]
+  sumupReaders                 SumupReader[]
+
+  // Stock Management
+  suppliers                    Supplier[]
+  stockCategories              StockCategory[]
+  stockItems                   StockItem[]
+  stockEntries                 StockEntry[]
+  stockExits                   StockExit[]
+  stockMovements               StockMovement[]
+  stockAlerts                  StockAlert[]
+  stockInventoryCounts         StockInventoryCount[]
+  stockWarehouses              StockWarehouse[]
 
   @@index([name])
   @@index([ownerId])
@@ -50,7 +68,6 @@ model EstablishmentSchedule {
 
 model EstablishmentDetails {
   id              String        @id @default(ulid())
-  email           String
   address         String?
   city            String?
   state           String?
@@ -81,12 +98,17 @@ model EstablishmentSocialMedia {
 }
 
 model EstablishmentBookingSettings {
-  id              String        @id @default(ulid())
-  enabled         Boolean       @default(false)
-  themeName       String        @default("default")
-  themeMode       String        @default("light")
-  establishmentId String        @unique
-  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  id                String        @id @default(ulid())
+  enabled           Boolean       @default(false)
+  themeName         String        @default("default")
+  themeMode         String        @default("light")
+  establishmentId   String        @unique
+  createdAt         DateTime      @default(now())
+  notificationEmail String?
+  notificationPhone String?
+  primaryColor      String        @default("#f97316")
+  updatedAt         DateTime      @updatedAt
+  establishment     Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
 }
 
 model EstablishmentSettings {

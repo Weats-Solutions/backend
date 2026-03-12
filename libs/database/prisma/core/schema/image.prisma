@@ -14,6 +14,7 @@ model Image {
   logoUsedInConfigs   HomePageConfig[]     @relation("LogoHomePageImage")
   establishment       Establishment        @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
   item                Item[]               @relation("ImageItem")
+  itemVariants        ItemVariant[]        @relation("ItemVariantImage")
   menuCategory        MenuCategory[]       @relation("ImageMenuCategory")
 
   @@index([establishmentId])

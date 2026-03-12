@@ -5,7 +5,9 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from '@weats/database';
 import { validate } from './validators/env.validation';
-import { DashboardModule } from './dashboard/dashboard.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { ConfigsModule } from '@weats/configs';
+import { IntegrationsModule } from '@weats/integrations';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
       validate,
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
     }),
+    ConfigsModule,
+    IntegrationsModule,
     UsersModule,
     DatabaseModule,
     DashboardModule,
@@ -21,4 +25,4 @@ import { DashboardModule } from './dashboard/dashboard.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
