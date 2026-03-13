@@ -19,6 +19,7 @@ export class MicroserviceExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<Request>();
 
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
+    console.log(exception);
     let message: string | string[] = 'Internal server error';
     let errorName = 'InternalServerError';
     let code: string | undefined;

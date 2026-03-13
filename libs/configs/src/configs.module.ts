@@ -6,6 +6,7 @@ import { StripeConfigService } from './stripe-config.service';
 import { RedisConfigService } from './redis-config.service';
 import { CloudflareConfigService } from './cloudflare-config.service';
 import { ConfigModule } from '@nestjs/config';
+import { CryptoConfigService } from './crypto-config.service';
 
 @Module({
   imports: [ConfigModule],
@@ -16,6 +17,7 @@ import { ConfigModule } from '@nestjs/config';
     StripeConfigService,
     RedisConfigService,
     CloudflareConfigService,
+    CryptoConfigService,
   ],
   exports: [
     GatewayConfigService,
@@ -24,6 +26,7 @@ import { ConfigModule } from '@nestjs/config';
     StripeConfigService,
     RedisConfigService,
     CloudflareConfigService,
+    CryptoConfigService,
   ],
 })
 export class ConfigsModule { }

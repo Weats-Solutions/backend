@@ -4,3 +4,5 @@ export * from './employee';
 export * from './features';
 export * from './plan';
 export * from './custom-request';
+export * from './eupago';
+

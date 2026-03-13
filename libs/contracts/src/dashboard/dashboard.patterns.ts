@@ -12,4 +12,10 @@ export const DASHBOARD_PATTERNS = {
   USER_MANAGE_SUBSCRIPTION: 'dashboard.user.manage_subscription',
 
   PLAN_GET_PLANS: 'dashboard.plan.get_plans',
+
+  IMAGE_GET_BY_ESTABLISHMENT: 'dashboard.image.get_by_establishment',
+  IMAGE_UPDATE: 'dashboard.image.update',
+  IMAGE_DELETE: 'dashboard.image.delete',
+  IMAGE_GENERATE_UPLOAD_URLS: 'dashboard.image.generate_upload_urls',
+  IMAGE_CONFIRM_UPLOAD: 'dashboard.image.confirm_upload',
 };

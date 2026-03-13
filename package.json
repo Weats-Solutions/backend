@@ -113,6 +113,7 @@
     "moduleNameMapper": {
       "^@weats/common(|/.*)$": "<rootDir>/libs/common/src/$1",
       "^@weats/configs(|/.*)$": "<rootDir>/libs/configs/src/$1",
+      "^@weats/encryption(|/.*)$": "<rootDir>/libs/encryption/src/$1",
       "^@weats/integrations(|/.*)$": "<rootDir>/libs/integrations/src/$1",
       "^@weats/types(|/.*)$": "<rootDir>/libs/types/src/$1",
       "^weats/contracts(|/.*)$": "<rootDir>/libs/contracts/src/$1",

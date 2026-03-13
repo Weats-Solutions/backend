@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
 import { CloudflareService } from "./cloudflare.service";
-import { CloudflareConfigService } from "@weats/configs/cloudflare-config.service";
+import { CloudflareConfigService, ConfigsModule } from "@weats/configs";
 import { HttpModule } from "@nestjs/axios";
 
 @Module({
-    imports: [HttpModule],
+    imports: [HttpModule, ConfigsModule],
     providers: [CloudflareService,
         {
             provide: 'ACCOUNT_ID',
@@ -30,7 +30,20 @@ import { HttpModule } from "@nestjs/axios";
                 cloudflareConfig.getDirectUploadUrl(),
             inject: [CloudflareConfigService],
         },
+        {
+            provide: 'CLOUDFLARE_CDN_URL',
+            useFactory: async (cloudflareConfig: CloudflareConfigService) =>
+                cloudflareConfig.getCDNUrl(),
+            inject: [CloudflareConfigService],
+        },
     ],
-    exports: [CloudflareService],
+    exports: [
+        CloudflareService,
+        'ACCOUNT_ID',
+        'API_TOKEN',
+        'BASE_URL',
+        'DIRECT_UPLOAD_URL',
+        'CLOUDFLARE_CDN_URL',
+    ],
 })
 export class CloudflareModule { }

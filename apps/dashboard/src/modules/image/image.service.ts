@@ -12,10 +12,10 @@ import { CloudflareService } from '@weats/integrations/cloudflare/cloudflare.ser
 
 @Injectable()
 export class ImageService {
+    private readonly logger = new Logger(ImageService.name);
     constructor(
         private readonly prismaService: CorePrismaService,
         private readonly cloudflareService: CloudflareService,
-        private readonly logger: Logger,
         @Inject("CLOUDFLARE_CDN_URL") private readonly cloudflareCdnUrl: string,
     ) { }
 
@@ -112,7 +112,7 @@ export class ImageService {
             where: { id: imageId },
             data: { fileName: finalFileName },
         });
-        return updated;
+        return {status: 200, updated };
     }
 
     async deleteImage(
@@ -276,7 +276,7 @@ export class ImageService {
                 ),
             );
 
-            return createdImages;
+            return { count: images.length, images: createdImages };
         } catch (err) {
             this.logger.error('Error confirming direct uploads', err?.stack, 'ImagesService');
             throw new RpcException({

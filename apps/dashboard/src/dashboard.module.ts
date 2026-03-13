@@ -4,6 +4,7 @@ import { DashboardService } from './dashboard.service';
 import { EstablishmentModule } from './modules/establishment/establishment.module';
 import { UserModule } from './modules/user/user.module';
 import { PlanModule } from './modules/plan/plan.module';
+import { ImageModule } from './modules/image/image.module';
 
 import { ConfigModule } from '@nestjs/config';
 
@@ -16,6 +17,7 @@ import { ConfigModule } from '@nestjs/config';
     EstablishmentModule,
     UserModule,
     PlanModule,
+    ImageModule,
   ],
   controllers: [DashboardController],
   providers: [DashboardService],
