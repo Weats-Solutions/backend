@@ -7,6 +7,7 @@ import * as express from 'express';
 import { AppConfigService, getCorsOptions, helmetConfig, shouldEnableHelmet } from '@weats/configs';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
+import { EupagoConfigService } from '@weats/configs/eupago-config.service';
 
 
 async function bootstrap() {
@@ -14,10 +15,13 @@ async function bootstrap() {
   app.useGlobalFilters(new MicroserviceExceptionFilter());
   app.useGlobalInterceptors(new ResponseInterceptor());
   const appConfigService = app.get(AppConfigService);
+  const eupagoConfigService = app.get(EupagoConfigService);
   const apiPort = appConfigService.getApiPort();
   const nodeEnv = appConfigService.getNodeEnv();
+  const eupagoEnvironment = eupagoConfigService.getEupagoEnvironment();
 
-  const logger = new Logger('Bootstrap');
+
+  const logger = new Logger('Gateway');
 
   // Helmet security middleware
   if (shouldEnableHelmet(nodeEnv)) {
@@ -81,6 +85,7 @@ async function bootstrap() {
     logger.log(`Server keepAliveTimeout: ${server.keepAliveTimeout / 1000}s `);
     server.headersTimeout = 65 * 1000;
     logger.log(`Server headersTimeout: ${server.headersTimeout / 1000}s `);
+    logger.log(`Eupago em modo ${eupagoEnvironment}`)
   });
 }
 bootstrap();

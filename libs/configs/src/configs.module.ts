@@ -7,6 +7,7 @@ import { RedisConfigService } from './redis-config.service';
 import { CloudflareConfigService } from './cloudflare-config.service';
 import { ConfigModule } from '@nestjs/config';
 import { CryptoConfigService } from './crypto-config.service';
+import { EupagoConfigService } from './eupago-config.service';
 
 @Module({
   imports: [ConfigModule],
@@ -18,6 +19,7 @@ import { CryptoConfigService } from './crypto-config.service';
     RedisConfigService,
     CloudflareConfigService,
     CryptoConfigService,
+    EupagoConfigService,
   ],
   exports: [
     GatewayConfigService,
@@ -27,6 +29,7 @@ import { CryptoConfigService } from './crypto-config.service';
     RedisConfigService,
     CloudflareConfigService,
     CryptoConfigService,
+    EupagoConfigService,
   ],
 })
 export class ConfigsModule { }

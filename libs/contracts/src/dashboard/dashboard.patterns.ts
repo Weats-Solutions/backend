@@ -18,4 +18,15 @@ export const DASHBOARD_PATTERNS = {
   IMAGE_DELETE: 'dashboard.image.delete',
   IMAGE_GENERATE_UPLOAD_URLS: 'dashboard.image.generate_upload_urls',
   IMAGE_CONFIRM_UPLOAD: 'dashboard.image.confirm_upload',
+
+  EUPAGO_GET_STATUS: 'dashboard.eupago.get_status',
+  EUPAGO_SAVE_KEY: 'dashboard.eupago.save_key',
+  EUPAGO_DELETE_KEY: 'dashboard.eupago.delete_key',
+  EUPAGO_TOGGLE: 'dashboard.eupago.toggle',
+  EUPAGO_SAVE_CRYPTO_KEY: 'dashboard.eupago.save_crypto_key',
+  EUPAGO_DELETE_CRYPTO_KEY: 'dashboard.eupago.delete_crypto_key',
+  EUPAGO_GENERATE_CREDIT_CARD_PAYMENT: 'dashboard.eupago.generate_credit_card_payment',
+  EUPAGO_GENERATE_GOOGLE_PAY_PAYMENT: 'dashboard.eupago.generate_google_pay_payment',
+  EUPAGO_GENERATE_APPLE_PAY_PAYMENT: 'dashboard.eupago.generate_apple_pay_payment',
+  EUPAGO_GENERATE_MBWAY_PAYMENT: 'dashboard.eupago.generate_mbway_payment',
 };

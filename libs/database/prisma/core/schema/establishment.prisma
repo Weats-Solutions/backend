@@ -116,12 +116,19 @@ model EstablishmentSettings {
   primaryLanguage    EstablishmentLanguage   @default(PT)
   availableLanguages EstablishmentLanguage[] @default([PT])
   timezone           String                  @default("Europe/Lisbon")
+  currency           Currency                @default(EUR)
   onlyMenu           Boolean                 @default(false)
   needSession        Boolean                 @default(true)
   createdAt          DateTime                @default(now())
   updatedAt          DateTime                @updatedAt
   establishmentId    String                  @unique
   establishment      Establishment           @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}
+
+enum Currency {
+  EUR
+  USD
+  GBP
 }
 
 model EstablishmentBrand {

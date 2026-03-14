@@ -18,7 +18,7 @@ export class EstablishmentStaffGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
     private corePrismaService: CorePrismaService,
-  ) {}
+  ) { }
   private readonly logger = new Logger(EstablishmentStaffGuard.name);
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -51,7 +51,9 @@ export class EstablishmentStaffGuard implements CanActivate {
     if (
       !establishment ||
       !establishment.establishmentSettings?.primaryLanguage ||
-      !establishment.establishmentSettings?.availableLanguages
+      !establishment.establishmentSettings?.availableLanguages ||
+      !establishment.establishmentSettings?.currency ||
+      !establishment.establishmentSettings?.timezone
     ) {
       throw new BadRequestException({
         message: 'Establishment not found',
@@ -66,6 +68,8 @@ export class EstablishmentStaffGuard implements CanActivate {
       primaryLanguage: establishment.establishmentSettings.primaryLanguage,
       availableLanguages:
         establishment.establishmentSettings.availableLanguages,
+      currency: establishment.establishmentSettings.currency,
+      timezone: establishment.establishmentSettings.timezone,
     };
 
     // Recupera os roles exigidos pelo endpoint

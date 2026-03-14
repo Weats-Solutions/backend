@@ -58,6 +58,8 @@ export interface EupagoMbwayPaymentResult {
     referencia?: string;
 }
 
+
+
 // ─────────────────────────────────────────────────────────────────────────────
 // EuPago REST API — Shared Interfaces
 //
@@ -79,28 +81,32 @@ export interface EupagoMultibancoRequest {
     /** Channel identifier (your API key) */
     chave: string;
     /** Unique order/payment identifier */
-    id?: string;
+    id: string;
     /** Payment deadline (dd-mm-yyyy). Omit for no deadline. */
-    data_fim?: string;
+    data_fim: string;
     /**
      * Whether the reference can be paid more than once.
      * 0 = single payment, 1 = multiple payments.
      */
-    per_dup?: 0 | 1;
-    /** Minimum amount accepted (if no fixed amount) */
-    valor_min?: number;
-    /** Maximum amount accepted (if no fixed amount) */
-    valor_max?: number;
+    per_dup: 1;
 }
 
 export interface EupagoMultibancoResponse {
     /** "0" means success */
     sucesso: string;
-    entidade: string;
+    estado: string;
+    resposta: string;
     referencia: string;
-    /** Formatted amount (e.g. "10.00") */
     valor: string;
-    estado?: string;
+    entidade: string;
+    data_inicio: string;
+    data_fim: string;
+}
+
+export interface EupagoMultibancoErrorResponse {
+    sucesso: string;
+    estado: string;
+    resposta: string;
 }
 
 // ── MB WAY ────────────────────────────────────────────────────────────────────
@@ -112,79 +118,38 @@ export interface EupagoMultibancoResponse {
  *
  * Ref: https://eupago.readme.io/reference/mbway
  */
-export interface EupagoMbwayRequest {
-    /** Payment amount in EUR (min: 1, max: 99999) */
-    valor: number;
-    /** Channel identifier (your API key) */
-    chave: string;
-    /** Customer phone number in E.164 format without +, e.g. "351912345678" */
-    aliasCC: string;
-    /** Unique order/payment identifier */
-    id?: string;
-    /** Payment description shown in the MB WAY app */
-    descricao?: string;
-}
 
-export interface EupagoMbwayResponse {
-    /** "000" means success */
-    resposta: string;
-    estado?: string;
-    /** MB WAY transaction reference */
-    referencia?: string;
-    idOperacao?: string;
-}
 
-// ── Payshop ───────────────────────────────────────────────────────────────────
+
+// ── Hosted Checkout Response (Credit Card, Google Pay, Apple Pay) ──────────────
 
 /**
- * POST /clientes/rest_api/payshop/create
- * Creates a Payshop cash payment reference.
- *
- * Ref: https://eupago.readme.io/reference/payshop
- * Note: Authentication is passed in the request body, not the header.
+ * Base interface for all hosted checkout payment responses.
+ * Used by Credit Card, Google Pay, and Apple Pay endpoints.
  */
-export interface EupagoPayshopRequest {
-    /** Payment amount in EUR */
-    valor: number;
-    /** Channel identifier (your API key) — sent in body for Payshop */
-    chave: string;
-    /** Unique order/payment identifier */
-    id?: string;
-    /** Payment deadline (dd-mm-yyyy) */
-    data_fim?: string;
+export interface EupagoHostedCheckoutResponse {
+    transactionStatus: string;
+    transactionID: string;
+    reference: string;
+    redirectUrl: string;
 }
 
-export interface EupagoPayshopResponse {
-    sucesso: string;
-    referencia: string;
-    valor: string;
-    data_fim?: string;
-    estado?: string;
+// Aliases for backwards compatibility and explicit typing
+export type EupagoCreditCardSuccessResponse = EupagoHostedCheckoutResponse;
+export type EupagoGooglePayResponse = EupagoHostedCheckoutResponse;
+export type EupagoApplePayResponse = EupagoHostedCheckoutResponse;
+
+// Single canonical error response type for all hosted checkouts
+export interface EupagoHostedCheckoutErrorResponse {
+    transactionStatus: string;
+    code: string;
+    text: string;
 }
 
-// ── Reference Information ─────────────────────────────────────────────────────
-
-/**
- * POST /clientes/rest_api/multibanco/info
- * Checks the status of a Multibanco reference.
- *
- * Ref: https://eupago.readme.io/reference/reference-information
- */
-export interface EupagoReferenceInfoRequest {
-    chave: string;
-    referencia: string;
-    entidade?: string;
-}
-
-export interface EupagoReferenceInfoResponse {
-    sucesso: string;
-    referencia: string;
-    entidade?: string;
-    valor: string;
-    estado: string;
-    /** ISO date string of last payment */
-    data_pagamento?: string;
-}
+// Aliases for backwards compatibility
+export type EupagoCreditCardErrorResponse = EupagoHostedCheckoutErrorResponse;
+export type EupagoGooglePayErrorResponse = EupagoHostedCheckoutErrorResponse;
+export type EupagoApplePayErrorResponse = EupagoHostedCheckoutErrorResponse;
 
 // ── Credit Card ───────────────────────────────────────────────────────────────
 
@@ -197,54 +162,7 @@ export interface EupagoReferenceInfoResponse {
  * Max amount: 3999€
  */
 export interface EupagoCreditCardRequest {
-    payment: {
-        amount: {
-            value: number;
-            /** Currency code — defaults to EUR */
-            currency: string;
-        };
-        /** Language for the checkout page (e.g. "PT", "EN") */
-        lang?: string;
-        /** Form validity in minutes (e.g. 1440 = 24h) */
-        minutesFormUp?: number;
-        /** Redirect URL after successful payment */
-        successUrl: string;
-        /** Redirect URL after failed payment */
-        failUrl: string;
-        /** Redirect URL for the back button on the checkout page */
-        backUrl?: string;
-        /** Unique order/payment identifier */
-        id?: string;
-        /** Payment description shown on the checkout page */
-        descricao?: string;
-    };
-    customer?: {
-        /** Whether to notify the customer by email */
-        notify?: boolean;
-        name?: string;
-        email?: string;
-        phone?: string;
-    };
-}
-
-export interface EupagoCreditCardResponse {
-    transactionStatus?: string;
-    /** Hosted checkout URL — redirect the customer here to pay */
-    redirectUrl?: string;
-    transactionID?: string;
-    reference?: string;
-    code?: string;
-    text?: string;
-}
-
-// ── Generic error response ────────────────────────────────────────────────────
-
-export interface EupagoErrorResponse {
-    /** Non-zero / non-"0" value indicates an error */
-    sucesso?: string;
-    resposta?: string;
-    mensagem?: string;
-    erro?: string;
+    payment: PaymentRequest;
 }
 
 // ── Google Pay ────────────────────────────────────────────────────────────────
@@ -258,34 +176,7 @@ export interface EupagoErrorResponse {
  * Max amount: 99 999€
  */
 export interface EupagoGooglePayRequest {
-    payment: {
-        amount: {
-            value: number;
-            currency: string;
-        };
-        lang?: string;
-        minutesFormUp?: number;
-        successUrl: string;
-        failUrl: string;
-        backUrl: string;
-        /** Unique order/payment identifier */
-        identifier?: string;
-    };
-    customer?: {
-        notify?: boolean;
-        name?: string;
-        email?: string;
-        phone?: string;
-    };
-}
-
-export interface EupagoGooglePayResponse {
-    transactionStatus?: string;
-    redirectUrl?: string;
-    transactionID?: string;
-    reference?: string;
-    code?: string;
-    text?: string;
+    payment: PaymentRequest;
 }
 
 // ── Apple Pay ─────────────────────────────────────────────────────────────────
@@ -299,37 +190,38 @@ export interface EupagoGooglePayResponse {
  * Max amount: 99 999€
  */
 export interface EupagoApplePayRequest {
-    payment: {
-        amount: {
-            value: number;
-            currency: string;
-        };
-        lang?: string;
-        minutesFormUp?: number;
-        successUrl: string;
-        failUrl: string;
-        backUrl: string;
-        /** Unique order/payment identifier */
-        identifier?: string;
-    };
-    customer?: {
-        notify?: boolean;
-        name?: string;
-        email?: string;
-        phone?: string;
-    };
+    payment: PaymentRequest;
 }
 
-export interface EupagoApplePayResponse {
-    transactionStatus?: string;
-    redirectUrl?: string;
-    transactionID?: string;
-    reference?: string;
-    code?: string;
-    text?: string;
+// ── Generic error response ────────────────────────────────────────────────────
+
+export interface EupagoErrorResponse {
+    transactionStatus: string;
+    code: string;
+    text: string;
 }
 
-// ── MB WAY (v2 REST API) ──────────────────────────────────────────────────────
+// ── Shared Payment Request Structure ──────────────────────────────────────────
+
+/**
+ * Common payment object used by Credit Card, Google Pay, and Apple Pay.
+ * Represents the nested payment structure in hosted checkout APIs.
+ */
+export interface PaymentRequest {
+    amount: {
+        value: number;
+        currency: string;
+    };
+    lang: string;
+    minutesFormUp: number;
+    successUrl: string;
+    failUrl: string;
+    backUrl: string;
+    /** Unique order/payment identifier */
+    identifier: string;
+}
+
+// ── MB WAY ───────────────────────────────────────────────────────────────────
 
 /**
  * POST /api/v1.02/mbway/create
@@ -340,7 +232,7 @@ export interface EupagoApplePayResponse {
  * Auth: ApiKey header — "ApiKey <key>"
  * Max amount: 99 999€
  */
-export interface EupagoMbwayV2Request {
+export interface EupagoMbwayRequest {
     payment: {
         amount: {
             value: number;
@@ -351,18 +243,22 @@ export interface EupagoMbwayV2Request {
         /** Country dial code (e.g. "351" for Portugal) */
         countryCode: string;
         /** Unique order/payment identifier */
-        identifier?: string;
+        identifier: string;
     };
     customer?: {
         notify?: boolean;
     };
 }
 
-export interface EupagoMbwayV2Response {
-    transactionStatus?: string;
-    transactionID?: string;
-    reference?: string;
-    code?: string;
-    text?: string;
+export interface EupagoMbwayResponse {
+    transactionStatus: string;
+    transactionID: string;
+    reference: string;
+}
+
+export interface EupagoMbwayErrorResponse {
+    transactionStatus: string;
+    code: string;
+    text: string;
 }
 

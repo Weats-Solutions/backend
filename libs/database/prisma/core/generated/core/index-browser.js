@@ -384,6 +384,7 @@ exports.Prisma.EstablishmentSettingsScalarFieldEnum = {
   primaryLanguage: 'primaryLanguage',
   availableLanguages: 'availableLanguages',
   timezone: 'timezone',
+  currency: 'currency',
   onlyMenu: 'onlyMenu',
   needSession: 'needSession',
   createdAt: 'createdAt',
@@ -1395,6 +1396,12 @@ exports.EstablishmentLanguage = exports.$Enums.EstablishmentLanguage = {
   FR: 'FR',
   DE: 'DE',
   IT: 'IT'
+};
+
+exports.Currency = exports.$Enums.Currency = {
+  EUR: 'EUR',
+  USD: 'USD',
+  GBP: 'GBP'
 };
 
 exports.ItemStatus = exports.$Enums.ItemStatus = {

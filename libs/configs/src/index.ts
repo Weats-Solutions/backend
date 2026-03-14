@@ -8,4 +8,5 @@ export * from './stripe-config.service';
 export * from './cors.config';
 export * from './helmet.config';
 export * from './crypto-config.service';
+export * from './eupago-config.service';
 

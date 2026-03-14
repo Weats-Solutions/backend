@@ -930,6 +930,15 @@ export const StockInventoryStatus: {
 export type StockInventoryStatus = (typeof StockInventoryStatus)[keyof typeof StockInventoryStatus]
 
 
+export const Currency: {
+  EUR: 'EUR',
+  USD: 'USD',
+  GBP: 'GBP'
+};
+
+export type Currency = (typeof Currency)[keyof typeof Currency]
+
+
 export const ItemStatus: {
   ACTIVE: 'ACTIVE',
   DRAFT: 'DRAFT',
@@ -1158,6 +1167,10 @@ export const StockAlertStatus: typeof $Enums.StockAlertStatus
 export type StockInventoryStatus = $Enums.StockInventoryStatus
 
 export const StockInventoryStatus: typeof $Enums.StockInventoryStatus
+
+export type Currency = $Enums.Currency
+
+export const Currency: typeof $Enums.Currency
 
 export type ItemStatus = $Enums.ItemStatus
 
@@ -35643,6 +35656,7 @@ export namespace Prisma {
     id: string | null
     primaryLanguage: $Enums.EstablishmentLanguage | null
     timezone: string | null
+    currency: $Enums.Currency | null
     onlyMenu: boolean | null
     needSession: boolean | null
     createdAt: Date | null
@@ -35654,6 +35668,7 @@ export namespace Prisma {
     id: string | null
     primaryLanguage: $Enums.EstablishmentLanguage | null
     timezone: string | null
+    currency: $Enums.Currency | null
     onlyMenu: boolean | null
     needSession: boolean | null
     createdAt: Date | null
@@ -35666,6 +35681,7 @@ export namespace Prisma {
     primaryLanguage: number
     availableLanguages: number
     timezone: number
+    currency: number
     onlyMenu: number
     needSession: number
     createdAt: number
@@ -35679,6 +35695,7 @@ export namespace Prisma {
     id?: true
     primaryLanguage?: true
     timezone?: true
+    currency?: true
     onlyMenu?: true
     needSession?: true
     createdAt?: true
@@ -35690,6 +35707,7 @@ export namespace Prisma {
     id?: true
     primaryLanguage?: true
     timezone?: true
+    currency?: true
     onlyMenu?: true
     needSession?: true
     createdAt?: true
@@ -35702,6 +35720,7 @@ export namespace Prisma {
     primaryLanguage?: true
     availableLanguages?: true
     timezone?: true
+    currency?: true
     onlyMenu?: true
     needSession?: true
     createdAt?: true
@@ -35787,6 +35806,7 @@ export namespace Prisma {
     primaryLanguage: $Enums.EstablishmentLanguage
     availableLanguages: $Enums.EstablishmentLanguage[]
     timezone: string
+    currency: $Enums.Currency
     onlyMenu: boolean
     needSession: boolean
     createdAt: Date
@@ -35816,6 +35836,7 @@ export namespace Prisma {
     primaryLanguage?: boolean
     availableLanguages?: boolean
     timezone?: boolean
+    currency?: boolean
     onlyMenu?: boolean
     needSession?: boolean
     createdAt?: boolean
@@ -35829,6 +35850,7 @@ export namespace Prisma {
     primaryLanguage?: boolean
     availableLanguages?: boolean
     timezone?: boolean
+    currency?: boolean
     onlyMenu?: boolean
     needSession?: boolean
     createdAt?: boolean
@@ -35842,6 +35864,7 @@ export namespace Prisma {
     primaryLanguage?: boolean
     availableLanguages?: boolean
     timezone?: boolean
+    currency?: boolean
     onlyMenu?: boolean
     needSession?: boolean
     createdAt?: boolean
@@ -35855,6 +35878,7 @@ export namespace Prisma {
     primaryLanguage?: boolean
     availableLanguages?: boolean
     timezone?: boolean
+    currency?: boolean
     onlyMenu?: boolean
     needSession?: boolean
     createdAt?: boolean
@@ -35862,7 +35886,7 @@ export namespace Prisma {
     establishmentId?: boolean
   }
 
-  export type EstablishmentSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "primaryLanguage" | "availableLanguages" | "timezone" | "onlyMenu" | "needSession" | "createdAt" | "updatedAt" | "establishmentId", ExtArgs["result"]["establishmentSettings"]>
+  export type EstablishmentSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "primaryLanguage" | "availableLanguages" | "timezone" | "currency" | "onlyMenu" | "needSession" | "createdAt" | "updatedAt" | "establishmentId", ExtArgs["result"]["establishmentSettings"]>
   export type EstablishmentSettingsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
   }
@@ -35883,6 +35907,7 @@ export namespace Prisma {
       primaryLanguage: $Enums.EstablishmentLanguage
       availableLanguages: $Enums.EstablishmentLanguage[]
       timezone: string
+      currency: $Enums.Currency
       onlyMenu: boolean
       needSession: boolean
       createdAt: Date
@@ -36316,6 +36341,7 @@ export namespace Prisma {
     readonly primaryLanguage: FieldRef<"EstablishmentSettings", 'EstablishmentLanguage'>
     readonly availableLanguages: FieldRef<"EstablishmentSettings", 'EstablishmentLanguage[]'>
     readonly timezone: FieldRef<"EstablishmentSettings", 'String'>
+    readonly currency: FieldRef<"EstablishmentSettings", 'Currency'>
     readonly onlyMenu: FieldRef<"EstablishmentSettings", 'Boolean'>
     readonly needSession: FieldRef<"EstablishmentSettings", 'Boolean'>
     readonly createdAt: FieldRef<"EstablishmentSettings", 'DateTime'>
@@ -117702,6 +117728,7 @@ export namespace Prisma {
     primaryLanguage: 'primaryLanguage',
     availableLanguages: 'availableLanguages',
     timezone: 'timezone',
+    currency: 'currency',
     onlyMenu: 'onlyMenu',
     needSession: 'needSession',
     createdAt: 'createdAt',
@@ -119091,6 +119118,20 @@ export namespace Prisma {
    * Reference to a field of type 'EstablishmentLanguage[]'
    */
   export type ListEnumEstablishmentLanguageFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstablishmentLanguage[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Currency'
+   */
+  export type EnumCurrencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Currency'>
+    
+
+
+  /**
+   * Reference to a field of type 'Currency[]'
+   */
+  export type ListEnumCurrencyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Currency[]'>
     
 
 
@@ -121261,6 +121302,7 @@ export namespace Prisma {
     primaryLanguage?: EnumEstablishmentLanguageFilter<"EstablishmentSettings"> | $Enums.EstablishmentLanguage
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"EstablishmentSettings">
     timezone?: StringFilter<"EstablishmentSettings"> | string
+    currency?: EnumCurrencyFilter<"EstablishmentSettings"> | $Enums.Currency
     onlyMenu?: BoolFilter<"EstablishmentSettings"> | boolean
     needSession?: BoolFilter<"EstablishmentSettings"> | boolean
     createdAt?: DateTimeFilter<"EstablishmentSettings"> | Date | string
@@ -121274,6 +121316,7 @@ export namespace Prisma {
     primaryLanguage?: SortOrder
     availableLanguages?: SortOrder
     timezone?: SortOrder
+    currency?: SortOrder
     onlyMenu?: SortOrder
     needSession?: SortOrder
     createdAt?: SortOrder
@@ -121291,6 +121334,7 @@ export namespace Prisma {
     primaryLanguage?: EnumEstablishmentLanguageFilter<"EstablishmentSettings"> | $Enums.EstablishmentLanguage
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"EstablishmentSettings">
     timezone?: StringFilter<"EstablishmentSettings"> | string
+    currency?: EnumCurrencyFilter<"EstablishmentSettings"> | $Enums.Currency
     onlyMenu?: BoolFilter<"EstablishmentSettings"> | boolean
     needSession?: BoolFilter<"EstablishmentSettings"> | boolean
     createdAt?: DateTimeFilter<"EstablishmentSettings"> | Date | string
@@ -121303,6 +121347,7 @@ export namespace Prisma {
     primaryLanguage?: SortOrder
     availableLanguages?: SortOrder
     timezone?: SortOrder
+    currency?: SortOrder
     onlyMenu?: SortOrder
     needSession?: SortOrder
     createdAt?: SortOrder
@@ -121321,6 +121366,7 @@ export namespace Prisma {
     primaryLanguage?: EnumEstablishmentLanguageWithAggregatesFilter<"EstablishmentSettings"> | $Enums.EstablishmentLanguage
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"EstablishmentSettings">
     timezone?: StringWithAggregatesFilter<"EstablishmentSettings"> | string
+    currency?: EnumCurrencyWithAggregatesFilter<"EstablishmentSettings"> | $Enums.Currency
     onlyMenu?: BoolWithAggregatesFilter<"EstablishmentSettings"> | boolean
     needSession?: BoolWithAggregatesFilter<"EstablishmentSettings"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"EstablishmentSettings"> | Date | string
@@ -128853,6 +128899,7 @@ export namespace Prisma {
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentSettingsCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     timezone?: string
+    currency?: $Enums.Currency
     onlyMenu?: boolean
     needSession?: boolean
     createdAt?: Date | string
@@ -128865,6 +128912,7 @@ export namespace Prisma {
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentSettingsCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     timezone?: string
+    currency?: $Enums.Currency
     onlyMenu?: boolean
     needSession?: boolean
     createdAt?: Date | string
@@ -128877,6 +128925,7 @@ export namespace Prisma {
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentSettingsUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     timezone?: StringFieldUpdateOperationsInput | string
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     onlyMenu?: BoolFieldUpdateOperationsInput | boolean
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -128889,6 +128938,7 @@ export namespace Prisma {
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentSettingsUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     timezone?: StringFieldUpdateOperationsInput | string
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     onlyMenu?: BoolFieldUpdateOperationsInput | boolean
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -128901,6 +128951,7 @@ export namespace Prisma {
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentSettingsCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     timezone?: string
+    currency?: $Enums.Currency
     onlyMenu?: boolean
     needSession?: boolean
     createdAt?: Date | string
@@ -128913,6 +128964,7 @@ export namespace Prisma {
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentSettingsUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     timezone?: StringFieldUpdateOperationsInput | string
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     onlyMenu?: BoolFieldUpdateOperationsInput | boolean
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -128924,6 +128976,7 @@ export namespace Prisma {
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentSettingsUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     timezone?: StringFieldUpdateOperationsInput | string
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     onlyMenu?: BoolFieldUpdateOperationsInput | boolean
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -136753,11 +136806,19 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
+  export type EnumCurrencyFilter<$PrismaModel = never> = {
+    equals?: $Enums.Currency | EnumCurrencyFieldRefInput<$PrismaModel>
+    in?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumCurrencyFilter<$PrismaModel> | $Enums.Currency
+  }
+
   export type EstablishmentSettingsCountOrderByAggregateInput = {
     id?: SortOrder
     primaryLanguage?: SortOrder
     availableLanguages?: SortOrder
     timezone?: SortOrder
+    currency?: SortOrder
     onlyMenu?: SortOrder
     needSession?: SortOrder
     createdAt?: SortOrder
@@ -136769,6 +136830,7 @@ export namespace Prisma {
     id?: SortOrder
     primaryLanguage?: SortOrder
     timezone?: SortOrder
+    currency?: SortOrder
     onlyMenu?: SortOrder
     needSession?: SortOrder
     createdAt?: SortOrder
@@ -136780,6 +136842,7 @@ export namespace Prisma {
     id?: SortOrder
     primaryLanguage?: SortOrder
     timezone?: SortOrder
+    currency?: SortOrder
     onlyMenu?: SortOrder
     needSession?: SortOrder
     createdAt?: SortOrder
@@ -136795,6 +136858,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumEstablishmentLanguageFilter<$PrismaModel>
     _max?: NestedEnumEstablishmentLanguageFilter<$PrismaModel>
+  }
+
+  export type EnumCurrencyWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Currency | EnumCurrencyFieldRefInput<$PrismaModel>
+    in?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumCurrencyWithAggregatesFilter<$PrismaModel> | $Enums.Currency
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCurrencyFilter<$PrismaModel>
+    _max?: NestedEnumCurrencyFilter<$PrismaModel>
   }
 
   export type ImageNullableScalarRelationFilter = {
@@ -143287,6 +143360,10 @@ export namespace Prisma {
     push?: $Enums.EstablishmentLanguage | $Enums.EstablishmentLanguage[]
   }
 
+  export type EnumCurrencyFieldUpdateOperationsInput = {
+    set?: $Enums.Currency
+  }
+
   export type EstablishmentUpdateOneRequiredWithoutEstablishmentSettingsNestedInput = {
     create?: XOR<EstablishmentCreateWithoutEstablishmentSettingsInput, EstablishmentUncheckedCreateWithoutEstablishmentSettingsInput>
     connectOrCreate?: EstablishmentCreateOrConnectWithoutEstablishmentSettingsInput
@@ -148672,6 +148749,13 @@ export namespace Prisma {
     not?: NestedEnumEstablishmentLanguageFilter<$PrismaModel> | $Enums.EstablishmentLanguage
   }
 
+  export type NestedEnumCurrencyFilter<$PrismaModel = never> = {
+    equals?: $Enums.Currency | EnumCurrencyFieldRefInput<$PrismaModel>
+    in?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumCurrencyFilter<$PrismaModel> | $Enums.Currency
+  }
+
   export type NestedEnumEstablishmentLanguageWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.EstablishmentLanguage | EnumEstablishmentLanguageFieldRefInput<$PrismaModel>
     in?: $Enums.EstablishmentLanguage[] | ListEnumEstablishmentLanguageFieldRefInput<$PrismaModel>
@@ -148680,6 +148764,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumEstablishmentLanguageFilter<$PrismaModel>
     _max?: NestedEnumEstablishmentLanguageFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCurrencyWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Currency | EnumCurrencyFieldRefInput<$PrismaModel>
+    in?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Currency[] | ListEnumCurrencyFieldRefInput<$PrismaModel>
+    not?: NestedEnumCurrencyWithAggregatesFilter<$PrismaModel> | $Enums.Currency
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCurrencyFilter<$PrismaModel>
+    _max?: NestedEnumCurrencyFilter<$PrismaModel>
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -153207,6 +153301,7 @@ export namespace Prisma {
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentSettingsCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     timezone?: string
+    currency?: $Enums.Currency
     onlyMenu?: boolean
     needSession?: boolean
     createdAt?: Date | string
@@ -153218,6 +153313,7 @@ export namespace Prisma {
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentSettingsCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     timezone?: string
+    currency?: $Enums.Currency
     onlyMenu?: boolean
     needSession?: boolean
     createdAt?: Date | string
@@ -154726,6 +154822,7 @@ export namespace Prisma {
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentSettingsUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     timezone?: StringFieldUpdateOperationsInput | string
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     onlyMenu?: BoolFieldUpdateOperationsInput | boolean
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -154737,6 +154834,7 @@ export namespace Prisma {
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentSettingsUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     timezone?: StringFieldUpdateOperationsInput | string
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     onlyMenu?: BoolFieldUpdateOperationsInput | boolean
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
