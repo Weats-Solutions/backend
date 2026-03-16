@@ -1,61 +1,110 @@
 model Establishment {
-  id                           String                        @id @default(ulid())
-  name                         String
-  slug                         String                        @unique
-  type                         EstablishmentType
-  isOnline                     Boolean                       @default(false)
-  ownerId                      String
-  stripeCustomerId             String                        @unique
-  status                       EstablishmentStatus           @default(ACTIVE)
-  createdAt                    DateTime                      @default(now())
-  updatedAt                    DateTime                      @updatedAt
-  activeThemeId                String?
-  email                        String
-  addons                       Addon[]
+  // ─── Identificação ─────────────────────────────────────────────────────────
+  id       String              @id @default(ulid())
+  name     String
+  slug     String              @unique
+  type     EstablishmentType
+  status   EstablishmentStatus @default(ACTIVE)
+  isOnline Boolean             @default(false)
+
+  // ─── Contactos & Localização ────────────────────────────────────────────────
+  email       String
+  phoneNumber String
+  address     String
+  city        String
+  state       String
+  zipCode     String
+  country     String
+  countryCode String
+
+  // ─── Detalhes & Faturação ──────────────────────────────────────────────────
+  cuisine          String
+  billingName      String
+  billingTaxId     String
+  stripeCustomerId String @unique
+
+  // ─── Social Media ──────────────────────────────────────────────────────────
+  instagramUrl    String?
+  tiktokUrl       String?
+  facebookUrl     String?
+  googleReviewUrl String?
+  tripAdvisorUrl  String?
+
+  // ─── Configurações ─────────────────────────────────────────────────────────
+  primaryLanguage    EstablishmentLanguage   @default(PT)
+  availableLanguages EstablishmentLanguage[] @default([PT])
+  currency           Currency                @default(EUR)
+  timezone           String                  @default("Europe/Lisbon")
+  onlyMenu           Boolean                 @default(false)
+  needSession        Boolean                 @default(true)
+
+  // ─── Branding & Visuals ────────────────────────────────────────────────────
+  logoImageId   String?
+  bannerImageId String?
+  activeThemeId String?
+
+  // ─── Sistema ───────────────────────────────────────────────────────────────
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ownerId   String
+
+  // ─── Relações: Core ────────────────────────────────────────────────────────
+  owner       User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  activeTheme Theme? @relation("ActiveTheme", fields: [activeThemeId], references: [id])
+  logoImage   Image? @relation("LogoImage", fields: [logoImageId], references: [id])
+  bannerImage Image? @relation("BannerImage", fields: [bannerImageId], references: [id])
+
+  // ─── Relações: Módulos & Features ──────────────────────────────────────────
+  images         Image[]
+  themes         Theme[]
+  employees      Employee[]
+  serviceZones   ServiceZone[]
+  menus          Menu[]
+  Item           Item[]
+  addons         Addon[]
+  variantOptions VariantOption[]
+
+  // ─── Relações: Reservas & Horários ─────────────────────────────────────────
   bookings                     Booking[]
   bookingRules                 BookingRules?
-  emailLogs                    EmailLog[]
-  employees                    Employee[]
-  activeTheme                  Theme?                        @relation("ActiveTheme", fields: [activeThemeId], references: [id])
-  owner                        User                          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  establishmentAvailabilities  EstablishmentAvailability[]
   establishmentBookingSettings EstablishmentBookingSettings?
-  establishmentBrand           EstablishmentBrand?
-  establishmentDetails         EstablishmentDetails?
-  integrations                 EstablishmentIntegrations?
+  establishmentAvailabilities  EstablishmentAvailability[]
   establishmentSchedule        EstablishmentSchedule[]
-  establishmentSettings        EstablishmentSettings?
-  establishmentSocialMedia     EstablishmentSocialMedia?
-  homePage                     HomePage?
-  images                       Image[]
-  invoices                     Invoice[]
-  Item                         Item[]
-  landingPage                  LandingPage?
-  menus                        Menu[]
-  serviceZones                 ServiceZone[]
-  subscription                 Subscription?
-  themes                       Theme[]
-  variantOptions               VariantOption[]
-  auditLogs                    AuditLog[]
-  devices                      Device[]
-  discounts                    Discount[]
-  promotions                   Promotion[]
-  vivaTerminals                VivaTerminal[]
-  sumupReaders                 SumupReader[]
 
-  // Stock Management
-  suppliers                    Supplier[]
-  stockCategories              StockCategory[]
-  stockItems                   StockItem[]
-  stockEntries                 StockEntry[]
-  stockExits                   StockExit[]
-  stockMovements               StockMovement[]
-  stockAlerts                  StockAlert[]
-  stockInventoryCounts         StockInventoryCount[]
-  stockWarehouses              StockWarehouse[]
+  // ─── Relações: Integrações & Pagamentos ────────────────────────────────────
+  integrations  EstablishmentIntegrations?
+  subscription  Subscription?
+  invoices      Invoice[]
+  devices       Device[]
+  vivaTerminals VivaTerminal[]
+  sumupReaders  SumupReader[]
+
+  // ─── Relações: Marketing & Logs ────────────────────────────────────────────
+  landingPage LandingPage?
+  emailLogs   EmailLog[]
+  auditLogs   AuditLog[]
+  discounts   Discount[]
+  promotions  Promotion[]
+
+  // ─── Stock Management ──────────────────────────────────────────────────────
+  suppliers            Supplier[]
+  stockCategories      StockCategory[]
+  stockItems           StockItem[]
+  stockEntries         StockEntry[]
+  stockExits           StockExit[]
+  stockMovements       StockMovement[]
+  stockAlerts          StockAlert[]
+  stockInventoryCounts StockInventoryCount[]
+  stockWarehouses      StockWarehouse[]
 
   @@index([name])
   @@index([ownerId])
+}
+
+enum Currency {
+  EUR
+  USD
+  GBP
 }
 
 model EstablishmentSchedule {
@@ -64,37 +113,6 @@ model EstablishmentSchedule {
   scheduleId      String
   establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
   schedule        Schedule      @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
-}
-
-model EstablishmentDetails {
-  id              String        @id @default(ulid())
-  address         String?
-  city            String?
-  state           String?
-  zipCode         String?
-  country         String?
-  countryCode     String?
-  phoneNumber     String?
-  cuisine         String?
-  billingName     String?
-  billingTaxId    String?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  establishmentId String        @unique
-  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-}
-
-model EstablishmentSocialMedia {
-  id              String        @id @default(ulid())
-  instagramUrl    String?
-  tiktokUrl       String?
-  facebookUrl     String?
-  googleReviewUrl String?
-  tripAdvisorUrl  String?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  establishmentId String        @unique
-  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
 }
 
 model EstablishmentBookingSettings {
@@ -109,36 +127,4 @@ model EstablishmentBookingSettings {
   primaryColor      String        @default("#f97316")
   updatedAt         DateTime      @updatedAt
   establishment     Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-}
-
-model EstablishmentSettings {
-  id                 String                  @id @default(ulid())
-  primaryLanguage    EstablishmentLanguage   @default(PT)
-  availableLanguages EstablishmentLanguage[] @default([PT])
-  timezone           String                  @default("Europe/Lisbon")
-  currency           Currency                @default(EUR)
-  onlyMenu           Boolean                 @default(false)
-  needSession        Boolean                 @default(true)
-  createdAt          DateTime                @default(now())
-  updatedAt          DateTime                @updatedAt
-  establishmentId    String                  @unique
-  establishment      Establishment           @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-}
-
-enum Currency {
-  EUR
-  USD
-  GBP
-}
-
-model EstablishmentBrand {
-  id              String        @id @default(ulid())
-  logoImageId     String?
-  bannerImageId   String?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  establishmentId String        @unique
-  bannerImage     Image?        @relation("BannerImage", fields: [bannerImageId], references: [id])
-  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-  logoImage       Image?        @relation("LogoImage", fields: [logoImageId], references: [id])
 }
