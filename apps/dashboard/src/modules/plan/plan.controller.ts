@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { PlanService } from './plan.service';
 import { MessagePattern } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/contracts/dashboard/dashboard.patterns';
+import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 
 @Controller('')
 export class PlanController {

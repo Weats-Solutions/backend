@@ -5,7 +5,7 @@ import { Establishment } from '@weats/types';
 import { SaveEupagoKeyDto, SaveEupagoCryptoKeyDto, EupagoCreatePaymentDto, EupagoCreateMbwayPaymentDto } from '@weats/contracts/dashboard/dtos/eupago';
 import { ClientProxy } from '@nestjs/microservices';
 import { DASHBOARD_SERVICE } from '@weats/common/constants';
-import { DASHBOARD_PATTERNS } from '@weats/contracts/dashboard/dashboard.patterns';
+import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 
 @Roles()
 @UseGuards(ClerkGuard, EstablishmentStaffGuard)
@@ -99,10 +99,10 @@ export class EupagoIntegrationController {
         @CurrentEstablishment() establishment: Establishment,
         @Body() dto: EupagoCreatePaymentDto,
     ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_GENERATE_CREDIT_CARD_PAYMENT, { 
-            establishment, 
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_GENERATE_CREDIT_CARD_PAYMENT, {
+            establishment,
             identifier: `cc-${establishment.id}`,
-            dto 
+            dto
         });
     }
 
@@ -120,10 +120,10 @@ export class EupagoIntegrationController {
         @CurrentEstablishment() establishment: Establishment,
         @Body() dto: EupagoCreatePaymentDto,
     ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_GENERATE_GOOGLE_PAY_PAYMENT, { 
-            establishment, 
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_GENERATE_GOOGLE_PAY_PAYMENT, {
+            establishment,
             identifier: `gp-${establishment.id}`,
-            dto 
+            dto
         });
     }
 
@@ -141,10 +141,10 @@ export class EupagoIntegrationController {
         @CurrentEstablishment() establishment: Establishment,
         @Body() dto: EupagoCreatePaymentDto,
     ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_GENERATE_APPLE_PAY_PAYMENT, { 
-            establishment, 
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_GENERATE_APPLE_PAY_PAYMENT, {
+            establishment,
             identifier: `ap-${establishment.id}`,
-            dto 
+            dto
         });
     }
 
@@ -162,10 +162,10 @@ export class EupagoIntegrationController {
         @CurrentEstablishment() establishment: Establishment,
         @Body() dto: EupagoCreateMbwayPaymentDto,
     ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_GENERATE_MBWAY_PAYMENT, { 
-            establishment, 
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_GENERATE_MBWAY_PAYMENT, {
+            establishment,
             identifier: `mbw-${establishment.id}`,
-            dto 
+            dto
         });
     }
 }

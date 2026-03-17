@@ -18,7 +18,6 @@ model Establishment {
   countryCode String
 
   // ─── Detalhes & Faturação ──────────────────────────────────────────────────
-  cuisine          String
   billingName      String
   billingTaxId     String
   stripeCustomerId String @unique

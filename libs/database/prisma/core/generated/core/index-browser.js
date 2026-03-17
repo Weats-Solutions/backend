@@ -321,49 +321,42 @@ exports.Prisma.EstablishmentScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
   type: 'type',
-  isOnline: 'isOnline',
-  ownerId: 'ownerId',
-  stripeCustomerId: 'stripeCustomerId',
   status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  activeThemeId: 'activeThemeId',
-  email: 'email'
-};
-
-exports.Prisma.EstablishmentScheduleScalarFieldEnum = {
-  id: 'id',
-  establishmentId: 'establishmentId',
-  scheduleId: 'scheduleId'
-};
-
-exports.Prisma.EstablishmentDetailsScalarFieldEnum = {
-  id: 'id',
+  isOnline: 'isOnline',
+  email: 'email',
+  phoneNumber: 'phoneNumber',
   address: 'address',
   city: 'city',
   state: 'state',
   zipCode: 'zipCode',
   country: 'country',
   countryCode: 'countryCode',
-  phoneNumber: 'phoneNumber',
-  cuisine: 'cuisine',
   billingName: 'billingName',
   billingTaxId: 'billingTaxId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  establishmentId: 'establishmentId'
-};
-
-exports.Prisma.EstablishmentSocialMediaScalarFieldEnum = {
-  id: 'id',
+  stripeCustomerId: 'stripeCustomerId',
   instagramUrl: 'instagramUrl',
   tiktokUrl: 'tiktokUrl',
   facebookUrl: 'facebookUrl',
   googleReviewUrl: 'googleReviewUrl',
   tripAdvisorUrl: 'tripAdvisorUrl',
+  primaryLanguage: 'primaryLanguage',
+  availableLanguages: 'availableLanguages',
+  currency: 'currency',
+  timezone: 'timezone',
+  onlyMenu: 'onlyMenu',
+  needSession: 'needSession',
+  logoImageId: 'logoImageId',
+  bannerImageId: 'bannerImageId',
+  activeThemeId: 'activeThemeId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  establishmentId: 'establishmentId'
+  ownerId: 'ownerId'
+};
+
+exports.Prisma.EstablishmentScheduleScalarFieldEnum = {
+  id: 'id',
+  establishmentId: 'establishmentId',
+  scheduleId: 'scheduleId'
 };
 
 exports.Prisma.EstablishmentBookingSettingsScalarFieldEnum = {
@@ -376,63 +369,6 @@ exports.Prisma.EstablishmentBookingSettingsScalarFieldEnum = {
   notificationEmail: 'notificationEmail',
   notificationPhone: 'notificationPhone',
   primaryColor: 'primaryColor',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.EstablishmentSettingsScalarFieldEnum = {
-  id: 'id',
-  primaryLanguage: 'primaryLanguage',
-  availableLanguages: 'availableLanguages',
-  timezone: 'timezone',
-  currency: 'currency',
-  onlyMenu: 'onlyMenu',
-  needSession: 'needSession',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  establishmentId: 'establishmentId'
-};
-
-exports.Prisma.EstablishmentBrandScalarFieldEnum = {
-  id: 'id',
-  logoImageId: 'logoImageId',
-  bannerImageId: 'bannerImageId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  establishmentId: 'establishmentId'
-};
-
-exports.Prisma.HomePageScalarFieldEnum = {
-  id: 'id',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  establishmentId: 'establishmentId'
-};
-
-exports.Prisma.HomePageConfigScalarFieldEnum = {
-  id: 'id',
-  logo: 'logo',
-  shortName: 'shortName',
-  primaryColor: 'primaryColor',
-  secondaryColor: 'secondaryColor',
-  banner: 'banner',
-  backgroundSize: 'backgroundSize',
-  highlightPrimaryColor: 'highlightPrimaryColor',
-  highlightSecondaryColor: 'highlightSecondaryColor',
-  highlightIconColor: 'highlightIconColor',
-  highlightBackground: 'highlightBackground',
-  location: 'location',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  homePageId: 'homePageId'
-};
-
-exports.Prisma.HomePageTranslationScalarFieldEnum = {
-  id: 'id',
-  locale: 'locale',
-  title: 'title',
-  description: 'description',
-  homePageId: 'homePageId',
-  createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
@@ -1175,6 +1111,9 @@ exports.Prisma.WebhookEventScalarFieldEnum = {
   eventId: 'eventId',
   eventType: 'eventType',
   status: 'status',
+  retryCount: 'retryCount',
+  lastError: 'lastError',
+  requestId: 'requestId',
   processedAt: 'processedAt',
   expiresAt: 'expiresAt',
   createdAt: 'createdAt'
@@ -1659,14 +1598,7 @@ exports.Prisma.ModelName = {
   Employee: 'Employee',
   Establishment: 'Establishment',
   EstablishmentSchedule: 'EstablishmentSchedule',
-  EstablishmentDetails: 'EstablishmentDetails',
-  EstablishmentSocialMedia: 'EstablishmentSocialMedia',
   EstablishmentBookingSettings: 'EstablishmentBookingSettings',
-  EstablishmentSettings: 'EstablishmentSettings',
-  EstablishmentBrand: 'EstablishmentBrand',
-  HomePage: 'HomePage',
-  HomePageConfig: 'HomePageConfig',
-  HomePageTranslation: 'HomePageTranslation',
   Image: 'Image',
   EstablishmentIntegrations: 'EstablishmentIntegrations',
   SumupReader: 'SumupReader',

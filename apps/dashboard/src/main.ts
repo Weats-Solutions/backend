@@ -1,13 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { DashboardModule } from './dashboard.module';
-import { Transport } from '@nestjs/microservices';
+import { MicroserviceOptions } from '@nestjs/microservices';
 import { AllRpcExceptionsFilter } from '@weats/common';
+import { GatewayConfigService } from '@weats/configs';
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice(DashboardModule, {
-    transport: Transport.TCP,
-    options: { port: 3002 },
-  });
+  const appContext = await NestFactory.createApplicationContext(DashboardModule);
+  const configService = appContext.get(GatewayConfigService);
+
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(DashboardModule, configService.dashboardClientOptions as MicroserviceOptions);
   app.useGlobalFilters(new AllRpcExceptionsFilter());
   await app.listen();
 }

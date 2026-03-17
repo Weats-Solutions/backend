@@ -1,0 +1,159 @@
+import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import Stripe from 'stripe';
+import { HandleCustomerService } from './stripe/handle-customer.service';
+import { HandleSubscriptionsService } from './stripe/handle-subscriptions.service';
+import { HandlePaymentsService } from './stripe/handle-payments.service';
+import { DiscordService } from '@weats/integrations/discord/discord.service';
+import { CorePrismaService } from '@weats/database';
+
+@Injectable()
+export class WebhooksService {
+  private readonly logger = new Logger(WebhooksService.name);
+
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly stripe: Stripe,
+    private readonly handleCustomerService: HandleCustomerService,
+    private readonly handleSubscriptionsService: HandleSubscriptionsService,
+    private readonly handlePaymentsService: HandlePaymentsService,
+    private readonly discordService: DiscordService,
+    private readonly prisma: CorePrismaService,
+  ) {
+    this.logger.log('Service initialized');
+  }
+
+  async handleStripeWebhook(event: Stripe.Event) {
+    // Gerar requestId único (Stripe event ID é único por definição)
+    const requestId = `stripe-${event.id}-${Date.now()}`;
+    
+    this.logger.log(`🔍 Checking idempotency for Stripe event: ${event.id} (requestId: ${requestId})`);
+
+    // 1. Usar UPSERT atomicamente para evitar race condition
+    // Se evento já existe com mesmo eventId, não faz nada (apenas retorna)
+    // Se não existe, cria com status PROCESSING
+    const webhookEvent = await this.prisma.webhookEvent.upsert({
+      where: {
+        provider_eventId: {
+          provider: 'stripe',
+          eventId: event.id,
+        },
+      },
+      update: {}, // Não atualiza se já existe
+      create: {
+        provider: 'stripe',
+        eventId: event.id,
+        eventType: event.type,
+        status: 'PROCESSING',
+        requestId: requestId,
+        processedAt: new Date(),
+        expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // Expira em 7 dias
+      },
+    });
+
+    // 2. Verificar se foi recém-criado ou já existia
+    // Se status não for PROCESSING (já foi processado), skip
+    if (webhookEvent.status !== 'PROCESSING') {
+      this.logger.warn(`⚠️ Stripe event ${event.id} already processed (status: ${webhookEvent.status}). Skipping...`);
+      return;
+    }
+
+    // 3. Verificar se está muito tempo em PROCESSING (crashed/stuck)
+    const processingDuration = Date.now() - webhookEvent.processedAt.getTime();
+    const MAX_PROCESSING_TIME = 5 * 60 * 1000; // 5 minutos
+    
+    if (processingDuration > MAX_PROCESSING_TIME && webhookEvent.status === 'PROCESSING') {
+      this.logger.warn(`⚠️ Stripe event ${event.id} stuck in PROCESSING for ${processingDuration}ms. Resetting...`);
+      // Deixar processar novamente (reset o status)
+      await this.prisma.webhookEvent.update({
+        where: { id: webhookEvent.id },
+        data: { status: 'PROCESSING', processedAt: new Date() },
+      });
+    }
+
+    try {
+      this.logger.log(`Processing stripe webhook: ${event.type}`);
+      if (
+        event.type === 'customer.created' ||
+        event.type === 'customer.updated' ||
+        event.type === 'customer.deleted' ||
+        event.type === 'customer.subscription.created' ||
+        event.type === 'customer.subscription.updated' ||
+        event.type === 'customer.subscription.deleted' ||
+        event.type === 'invoice.payment_succeeded' ||
+        event.type === 'invoice.payment_failed' ||
+        event.type === 'subscription_schedule.completed' ||
+        event.type === 'subscription_schedule.released'
+      ) {
+        this.discordService.sendToDiscord(
+          'Webhook received',
+          `Webhook received -> ${event.type}`,
+        );
+
+        switch (event.type) {
+          case 'customer.created':
+            await this.handleCustomerService.handleCustomerCreated(event);
+            break;
+          case 'customer.updated':
+            await this.handleCustomerService.handleCustomerUpdated(event);
+            break;
+          case 'customer.deleted':
+            await this.handleCustomerService.handleCustomerDeleted(event);
+            break;
+          case 'customer.subscription.created':
+            await this.handleSubscriptionsService.handleCustomerSubscriptionCreated(
+              event,
+            );
+            break;
+          case 'customer.subscription.updated':
+            await this.handleSubscriptionsService.handleCustomerSubscriptionUpdated(
+              event,
+            );
+            break;
+          case 'customer.subscription.deleted':
+            await this.handleSubscriptionsService.handleCustomerSubscriptionDeleted(
+              event,
+            );
+            break;
+          case 'invoice.payment_succeeded':
+            await this.handlePaymentsService.handleInvoicePaymentSucceeded(event);
+            break;
+          case 'invoice.payment_failed':
+            await this.handlePaymentsService.handleInvoicePaymentFailed(event);
+            break;
+          default:
+            this.logger.warn(`Evento Stripe não tratado: ${event.type}`);
+            break;
+        }
+      }
+
+      // 3. Marcar como processado com sucesso
+      await this.prisma.webhookEvent.update({
+        where: {
+          provider_eventId: {
+            provider: 'stripe',
+            eventId: event.id,
+          },
+        },
+        data: { status: 'PROCESSED' },
+      });
+      this.logger.log(`✅ Stripe event ${event.id} processed successfully.`);
+
+    } catch (error) {
+      this.logger.error(`❌ Failed to process Stripe event ${event.id}: ${error.message}`);
+
+      // Marcar como falha no banco
+      await this.prisma.webhookEvent.update({
+        where: {
+          provider_eventId: {
+            provider: 'stripe',
+            eventId: event.id,
+          },
+        },
+        data: { status: 'FAILED' },
+      }).catch(() => null); // Ignora se o update em si falhar
+
+      throw error;
+    }
+  }
+}

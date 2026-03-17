@@ -1,5 +1,5 @@
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/contracts/dashboard/dashboard.patterns';
+import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { ImageService } from './image.service';
 import { CloudflareService } from '@weats/integrations/cloudflare/cloudflare.service';
 import { Controller } from '@nestjs/common';

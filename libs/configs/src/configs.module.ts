@@ -8,6 +8,7 @@ import { CloudflareConfigService } from './cloudflare-config.service';
 import { ConfigModule } from '@nestjs/config';
 import { CryptoConfigService } from './crypto-config.service';
 import { EupagoConfigService } from './eupago-config.service';
+import { DiscordConfigService } from './discord-config.service';
 
 @Module({
   imports: [ConfigModule],
@@ -20,6 +21,7 @@ import { EupagoConfigService } from './eupago-config.service';
     CloudflareConfigService,
     CryptoConfigService,
     EupagoConfigService,
+    DiscordConfigService,
   ],
   exports: [
     GatewayConfigService,
@@ -30,6 +32,7 @@ import { EupagoConfigService } from './eupago-config.service';
     CloudflareConfigService,
     CryptoConfigService,
     EupagoConfigService,
+    DiscordConfigService,
   ],
 })
 export class ConfigsModule { }

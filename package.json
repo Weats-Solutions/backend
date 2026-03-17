@@ -34,6 +34,8 @@
     "prisma:orders:studio": "cross-env PRISMA_DB_TYPE=orders prisma studio"
   },
   "dependencies": {
+    "@bull-board/api": "^6.20.5",
+    "@bull-board/express": "^6.20.5",
     "@clerk/backend": "^3.2.0",
     "@nestjs/axios": "^4.0.1",
     "@nestjs/bull": "^11.0.4",
@@ -60,6 +62,7 @@
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "stripe": "^20.4.1",
+    "svix": "^1.88.0",
     "ulid": "^3.0.2"
   },
   "devDependencies": {

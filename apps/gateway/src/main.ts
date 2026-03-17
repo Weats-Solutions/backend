@@ -8,6 +8,11 @@ import { AppConfigService, getCorsOptions, helmetConfig, shouldEnableHelmet } fr
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import { EupagoConfigService } from '@weats/configs/eupago-config.service';
+import { Queue } from 'bull';
+import { createBullBoard } from '@bull-board/api';
+import { BullAdapter } from '@bull-board/api/bullAdapter';
+import { ExpressAdapter as BBExpressAdapter } from '@bull-board/express';
+import { getQueueToken } from '@nestjs/bull';
 
 
 async function bootstrap() {
@@ -53,28 +58,28 @@ async function bootstrap() {
   );
 
   const server = app.getHttpServer();
-  // Get the underlying Express instance from Nest's HTTP adapter so we can mount
-  // third-party express middleware/routers (like bull-board).
-  // `server` above is the raw Node http.Server which does not have `.use()`.
-  const expressApp = app.getHttpAdapter().getInstance() as express.Express;
 
   // pegar filas registradas no Nest
   //const webhookQueue = app.get<Queue>(getQueueToken('webhook-queue'));
-  /*
+
   const emailQueue = app.get<Queue>(getQueueToken('emails'));
-  const qrCodesQueue = app.get<Queue>(getQueueToken('qrcodes'));
+  //const qrCodesQueue = app.get<Queue>(getQueueToken('qrcodes'));
+  const webhookQueue = app.get<Queue>(getQueueToken('webhooks-queue'));
+
 
   const serverAdapter = new BBExpressAdapter();
-  serverAdapter.setBasePath('/admin/queues');
+  serverAdapter.setBasePath('/v1/admin/queues'); // Alinhado com o versionamento v1 se desejar, ou mantenha /admin/queues
 
   createBullBoard({
     queues: [
       new BullAdapter(emailQueue),
-      new BullAdapter(qrCodesQueue),
+      new BullAdapter(webhookQueue),
     ],
     serverAdapter,
   });
-  */
+
+  app.use('/admin/queues', serverAdapter.getRouter());
+
 
   app.enableShutdownHooks();
 

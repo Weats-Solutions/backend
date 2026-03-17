@@ -4,6 +4,9 @@ model WebhookEvent {
   eventId     String
   eventType   String
   status      String
+  retryCount  Int      @default(0)
+  lastError   String?
+  requestId   String?  @unique  // Para distribuída race condition protection
   processedAt DateTime
   expiresAt   DateTime
   createdAt   DateTime @default(now())
@@ -12,4 +15,5 @@ model WebhookEvent {
   @@index([provider])
   @@index([status])
   @@index([expiresAt])
+  @@index([requestId])
 }

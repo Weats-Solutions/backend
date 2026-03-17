@@ -3,6 +3,7 @@ import { verifyToken, createClerkClient } from '@clerk/backend';
 import { User } from '@weats/types';
 import { ClerkConfigService } from '@weats/configs/clerk-config.service';
 import { CorePrismaService } from '@weats/database';
+import { Webhook } from 'svix';
 
 @Injectable()
 export class ClerkService {
@@ -16,6 +17,28 @@ export class ClerkService {
     this.clerkClient = createClerkClient({
       secretKey: this.clerkConfig.getClerkSecretKey(),
     });
+  }
+
+  verifySignature(
+    rawBody: Buffer,
+    svixSignature: string,
+    svixId: string,
+    svixTimestamp: string,
+  ): boolean {
+    try {
+      const wh = new Webhook(this.clerkConfig.getClerkWebhookSecret());
+
+      wh.verify(rawBody, {
+        'svix-id': svixId,
+        'svix-timestamp': svixTimestamp,
+        'svix-signature': svixSignature,
+      });
+
+      return true;
+    } catch (err) {
+      console.error('Erro ao verificar assinatura:', err);
+      return false;
+    }
   }
 
   async verifyJwtToken(token: string): Promise<User> {

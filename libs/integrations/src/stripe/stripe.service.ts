@@ -2,6 +2,7 @@ import {
   Inject,
   Injectable,
   InternalServerErrorException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import Stripe from 'stripe';
 
@@ -65,10 +66,31 @@ export class StripeService {
   constructor(
     @Inject('STRIPE_API_KEY') private readonly apiKey: string,
     @Inject('STRIPE_API_VERSION') private readonly apiVersion: string,
+    @Inject('STRIPE_WEBHOOK_SECRET') private readonly webhookSecret: string,
   ) {
     this.stripe = new Stripe(this.apiKey, {
       apiVersion: this.apiVersion as Stripe.LatestApiVersion,
     });
+  }
+
+  verifySignature(
+    rawBody: Buffer,
+    signature: string,
+  ) {
+    let event: Stripe.Event;
+
+    try {
+      event = this.stripe.webhooks.constructEvent(
+        rawBody,
+        signature,
+        this.webhookSecret
+      );
+    } catch (err) {
+      console.log(`⚠️ Webhook signature verification failed.`, err.message);
+      throw new UnauthorizedException('Invalid signature');
+    }
+
+    return event;
   }
 
   async createCustomer(data: CreateCustomer): Promise<Stripe.Customer> {

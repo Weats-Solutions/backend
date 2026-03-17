@@ -22,7 +22,7 @@ import {
     ThrottleRead,
     ThrottleWrite,
 } from '@weats/common/decorators/throttle.decorator';
-import { DASHBOARD_PATTERNS } from '@weats/contracts/dashboard/dashboard.patterns';
+import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { ClientProxy } from '@nestjs/microservices';
 import { DASHBOARD_SERVICE } from '@weats/common';
 

@@ -33,47 +33,30 @@ export class EstablishmentService {
         name: true,
         type: true,
         isOnline: true,
+        address: true,
+        city: true,
+        state: true,
+        zipCode: true,
+        country: true,
+        countryCode: true,
+        phoneNumber: true,
+        primaryLanguage: true,
+        availableLanguages: true,
+        onlyMenu: true,
+        needSession: true,
+        instagramUrl: true,
+        tiktokUrl: true,
+        facebookUrl: true,
+        googleReviewUrl: true,
+        tripAdvisorUrl: true,
+        logoImage: {
+          select: { id: true, url: true },
+        },
         subscription: {
           select: {
             status: true,
             currentPeriodEnd: true,
             cancelAtPeriodEnd: true,
-          },
-        },
-        establishmentDetails: {
-          select: {
-            address: true,
-            city: true,
-            state: true,
-            zipCode: true,
-            country: true,
-            countryCode: true,
-            phoneNumber: true,
-            cuisine: true,
-          },
-        },
-        establishmentSettings: {
-          select: {
-            primaryLanguage: true,
-            availableLanguages: true,
-            onlyMenu: true,
-            needSession: true,
-          },
-        },
-        establishmentSocialMedia: {
-          select: {
-            instagramUrl: true,
-            tiktokUrl: true,
-            facebookUrl: true,
-            googleReviewUrl: true,
-            tripAdvisorUrl: true,
-          },
-        },
-        establishmentBrand: {
-          select: {
-            logoImage: {
-              select: { id: true, url: true },
-            },
           },
         },
       },
@@ -98,33 +81,9 @@ export class EstablishmentService {
     const establishment = await this.prisma.establishment.findUnique({
       where: { id },
       include: {
+        logoImage: { select: { id: true, url: true } },
+        bannerImage: { select: { id: true, url: true } },
         subscription: true,
-        establishmentDetails: true,
-        establishmentSettings: {
-          select: {
-            id: true,
-            primaryLanguage: true,
-            availableLanguages: true,
-            onlyMenu: true,
-            needSession: true,
-          },
-        },
-        establishmentSocialMedia: {
-          select: {
-            id: true,
-            instagramUrl: true,
-            tiktokUrl: true,
-            facebookUrl: true,
-            googleReviewUrl: true,
-            tripAdvisorUrl: true,
-          },
-        },
-        establishmentBrand: {
-          include: {
-            logoImage: { select: { id: true, url: true } },
-            bannerImage: { select: { id: true, url: true } },
-          },
-        },
       },
     });
 
@@ -167,15 +126,15 @@ export class EstablishmentService {
     user: User,
   ) {
     const countryCode = (
-      createEstablishmentDto.establishmentDetails.countryCode || 'PT'
+      createEstablishmentDto.countryCode || 'PT'
     ).toUpperCase();
     const phonePrefixes: Record<string, string> = { PT: '+351', ES: '+34' };
     const phonePrefix = phonePrefixes[countryCode] || '+351';
 
     const cleanPhone =
-      createEstablishmentDto.establishmentDetails.phoneNumber.replace(/\D/g, '');
+      createEstablishmentDto.phoneNumber.replace(/\D/g, '');
     const cleanTaxId =
-      createEstablishmentDto.establishmentDetails.billingTaxId
+      createEstablishmentDto.billingTaxId
         .toUpperCase()
         .replace(/[^A-Z0-9]/g, '');
 
@@ -184,17 +143,17 @@ export class EstablishmentService {
       email: createEstablishmentDto.email,
       phone: phonePrefix + cleanPhone,
       address: {
-        line1: createEstablishmentDto.establishmentDetails.address,
-        city: createEstablishmentDto.establishmentDetails.city,
-        state: createEstablishmentDto.establishmentDetails.state,
-        postal_code: createEstablishmentDto.establishmentDetails.zipCode,
+        line1: createEstablishmentDto.address,
+        city: createEstablishmentDto.city,
+        state: createEstablishmentDto.state,
+        postal_code: createEstablishmentDto.zipCode,
         country: countryCode,
       },
       tax_id_data: cleanTaxId
         ? [{ type: 'eu_vat', value: countryCode + cleanTaxId }]
         : [],
       metadata: {
-        business_name: createEstablishmentDto.establishmentDetails.billingName,
+        business_name: createEstablishmentDto.billingName,
         owner_id: user.id,
       },
     });
@@ -209,32 +168,26 @@ export class EstablishmentService {
         ownerId: user.id,
         stripeCustomerId: customer.id,
         email: createEstablishmentDto.email,
-        establishmentDetails: {
-          create: {
-            address: createEstablishmentDto.establishmentDetails.address,
-            city: createEstablishmentDto.establishmentDetails.city,
-            state: createEstablishmentDto.establishmentDetails.state,
-            zipCode: createEstablishmentDto.establishmentDetails.zipCode,
-            country: createEstablishmentDto.establishmentDetails.country,
-            countryCode:
-              createEstablishmentDto.establishmentDetails.countryCode || '',
-            phoneNumber:
-              createEstablishmentDto.establishmentDetails.phoneNumber,
-            billingName:
-              createEstablishmentDto.establishmentDetails.billingName,
-            billingTaxId:
-              createEstablishmentDto.establishmentDetails.billingTaxId,
-          },
-        },
-        establishmentSettings: {
-          create: {
-            primaryLanguage:
-              createEstablishmentDto.establishmentSettings.primaryLanguage,
-            availableLanguages: [
-              createEstablishmentDto.establishmentSettings.primaryLanguage,
-            ],
-          },
-        },
+        address: createEstablishmentDto.address,
+        city: createEstablishmentDto.city,
+        state: createEstablishmentDto.state,
+        zipCode: createEstablishmentDto.zipCode,
+        country: createEstablishmentDto.country,
+        countryCode:
+          createEstablishmentDto.countryCode,
+        phoneNumber:
+          createEstablishmentDto.phoneNumber,
+        billingName:
+          createEstablishmentDto.billingName,
+        billingTaxId:
+          createEstablishmentDto.billingTaxId,
+        primaryLanguage:
+          createEstablishmentDto.primaryLanguage,
+        availableLanguages: [
+          createEstablishmentDto.primaryLanguage,
+        ],
+        currency: createEstablishmentDto.currency,
+        timezone: createEstablishmentDto.timezone,
       },
     });
 
@@ -269,7 +222,7 @@ export class EstablishmentService {
   ) {
     const establishment = await this.getFullEstablishmentInfo(id);
 
-    if (!establishment.establishmentDetails) {
+    if (!establishment) {
       throw new RpcException({
         status: 400,
         message: ERRORS.ESTABLISHMENT_DETAILS_NOT_FOUND,
@@ -289,16 +242,16 @@ export class EstablishmentService {
         },
       });
 
-      const updatedDetails = await prisma.establishmentDetails.update({
-        where: { id: establishment.establishmentDetails!.id },
+      const updatedDetails = await prisma.establishment.update({
+        where: { id: establishment.id },
         data: {
-          address: updateEstablishmentDto.establishmentDetails.address,
-          city: updateEstablishmentDto.establishmentDetails.city,
-          state: updateEstablishmentDto.establishmentDetails.state,
-          zipCode: updateEstablishmentDto.establishmentDetails.zipCode,
-          country: updateEstablishmentDto.establishmentDetails.country,
-          countryCode: updateEstablishmentDto.establishmentDetails.countryCode,
-          phoneNumber: updateEstablishmentDto.establishmentDetails.phoneNumber,
+          address: updateEstablishmentDto.address,
+          city: updateEstablishmentDto.city,
+          state: updateEstablishmentDto.state,
+          zipCode: updateEstablishmentDto.zipCode,
+          country: updateEstablishmentDto.country,
+          countryCode: updateEstablishmentDto.countryCode,
+          phoneNumber: updateEstablishmentDto.phoneNumber,
         },
       });
 

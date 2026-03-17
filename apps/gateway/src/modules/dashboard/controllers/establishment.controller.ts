@@ -21,7 +21,7 @@ import {
 import type { Establishment, User } from '@weats/types';
 import { CreateEstablishmentDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { ClientProxy } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/contracts/dashboard/dashboard.patterns';
+import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 
 @Controller('establishments')
 export class EstablishmentController {

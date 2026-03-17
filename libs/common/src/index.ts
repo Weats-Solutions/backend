@@ -5,3 +5,4 @@ export * from './constants';
 export * from './errors';
 export * from './response';
 export * from './validators';
+export * from './patterns';

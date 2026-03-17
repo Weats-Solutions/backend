@@ -38,7 +38,6 @@ export class EstablishmentStaffGuard implements CanActivate {
       {
         where: { id: establishmentId },
         include: {
-          establishmentSettings: true,
           owner: true,
           subscription: {
             select: {
@@ -50,10 +49,10 @@ export class EstablishmentStaffGuard implements CanActivate {
     );
     if (
       !establishment ||
-      !establishment.establishmentSettings?.primaryLanguage ||
-      !establishment.establishmentSettings?.availableLanguages ||
-      !establishment.establishmentSettings?.currency ||
-      !establishment.establishmentSettings?.timezone
+      !establishment.primaryLanguage ||
+      !establishment.availableLanguages ||
+      !establishment.currency ||
+      !establishment.timezone
     ) {
       throw new BadRequestException({
         message: 'Establishment not found',
@@ -65,11 +64,11 @@ export class EstablishmentStaffGuard implements CanActivate {
       id: establishment.id,
       ownerId: establishment.ownerId,
       stripeCustomerId: establishment.stripeCustomerId,
-      primaryLanguage: establishment.establishmentSettings.primaryLanguage,
+      primaryLanguage: establishment.primaryLanguage,
       availableLanguages:
-        establishment.establishmentSettings.availableLanguages,
-      currency: establishment.establishmentSettings.currency,
-      timezone: establishment.establishmentSettings.timezone,
+        establishment.availableLanguages,
+      currency: establishment.currency,
+      timezone: establishment.timezone,
     };
 
     // Recupera os roles exigidos pelo endpoint

@@ -19,11 +19,11 @@ export class FeatureUsageService {
     });
 
     this.register('languages', async (establishmentId: string) => {
-      const settings =
-        await this.corePirismaService.establishmentSettings.findUnique({
-          where: { establishmentId },
+      const est =
+        await this.corePirismaService.establishment.findUnique({
+          where: { id: establishmentId },
         });
-      return (settings?.availableLanguages || []).length;
+      return (est?.availableLanguages || []).length;
     });
 
     this.register('points', async (establishmentId: string) => {

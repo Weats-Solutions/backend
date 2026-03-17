@@ -21,6 +21,12 @@ import { ConfigModule } from '@nestjs/config';
         stripeConfig.getStripeApiVersion(),
       inject: [StripeConfigService],
     },
+    {
+      provide: 'STRIPE_WEBHOOK_SECRET',
+      useFactory: async (stripeConfig: StripeConfigService) =>
+        stripeConfig.getStripeWebhookSecret(),
+      inject: [StripeConfigService],
+    },
   ],
   imports: [DatabaseModule, ConfigModule],
   exports: [StripeService],

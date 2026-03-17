@@ -3,7 +3,7 @@ import { ClerkGuard } from '@weats/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { DASHBOARD_SERVICE } from '@weats/common';
 import { Inject } from '@nestjs/common';
-import { DASHBOARD_PATTERNS } from '@weats/contracts/dashboard/dashboard.patterns';
+import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 
 @Controller('plans')
 export class PlanController {

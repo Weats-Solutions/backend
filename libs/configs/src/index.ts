@@ -9,4 +9,6 @@ export * from './cors.config';
 export * from './helmet.config';
 export * from './crypto-config.service';
 export * from './eupago-config.service';
+export * from './discord-config.service';
+
 

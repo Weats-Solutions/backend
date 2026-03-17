@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/contracts/dashboard/dashboard.patterns';
+import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { EstablishmentService } from './establishment.service';
 import { CreateEstablishmentDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { User, Establishment } from '@weats/types';

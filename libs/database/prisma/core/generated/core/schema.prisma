@@ -653,51 +653,93 @@ enum StockInventoryStatus {
 }
 
 model Establishment {
-  id                           String                        @id @default(ulid())
-  name                         String
-  slug                         String                        @unique
-  type                         EstablishmentType
-  isOnline                     Boolean                       @default(false)
-  ownerId                      String
-  stripeCustomerId             String                        @unique
-  status                       EstablishmentStatus           @default(ACTIVE)
-  createdAt                    DateTime                      @default(now())
-  updatedAt                    DateTime                      @updatedAt
-  activeThemeId                String?
-  email                        String
-  addons                       Addon[]
+  // ─── Identificação ─────────────────────────────────────────────────────────
+  id       String              @id @default(ulid())
+  name     String
+  slug     String              @unique
+  type     EstablishmentType
+  status   EstablishmentStatus @default(ACTIVE)
+  isOnline Boolean             @default(false)
+
+  // ─── Contactos & Localização ────────────────────────────────────────────────
+  email       String
+  phoneNumber String
+  address     String
+  city        String
+  state       String
+  zipCode     String
+  country     String
+  countryCode String
+
+  // ─── Detalhes & Faturação ──────────────────────────────────────────────────
+  billingName      String
+  billingTaxId     String
+  stripeCustomerId String @unique
+
+  // ─── Social Media ──────────────────────────────────────────────────────────
+  instagramUrl    String?
+  tiktokUrl       String?
+  facebookUrl     String?
+  googleReviewUrl String?
+  tripAdvisorUrl  String?
+
+  // ─── Configurações ─────────────────────────────────────────────────────────
+  primaryLanguage    EstablishmentLanguage   @default(PT)
+  availableLanguages EstablishmentLanguage[] @default([PT])
+  currency           Currency                @default(EUR)
+  timezone           String                  @default("Europe/Lisbon")
+  onlyMenu           Boolean                 @default(false)
+  needSession        Boolean                 @default(true)
+
+  // ─── Branding & Visuals ────────────────────────────────────────────────────
+  logoImageId   String?
+  bannerImageId String?
+  activeThemeId String?
+
+  // ─── Sistema ───────────────────────────────────────────────────────────────
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ownerId   String
+
+  // ─── Relações: Core ────────────────────────────────────────────────────────
+  owner       User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  activeTheme Theme? @relation("ActiveTheme", fields: [activeThemeId], references: [id])
+  logoImage   Image? @relation("LogoImage", fields: [logoImageId], references: [id])
+  bannerImage Image? @relation("BannerImage", fields: [bannerImageId], references: [id])
+
+  // ─── Relações: Módulos & Features ──────────────────────────────────────────
+  images         Image[]
+  themes         Theme[]
+  employees      Employee[]
+  serviceZones   ServiceZone[]
+  menus          Menu[]
+  Item           Item[]
+  addons         Addon[]
+  variantOptions VariantOption[]
+
+  // ─── Relações: Reservas & Horários ─────────────────────────────────────────
   bookings                     Booking[]
   bookingRules                 BookingRules?
-  emailLogs                    EmailLog[]
-  employees                    Employee[]
-  activeTheme                  Theme?                        @relation("ActiveTheme", fields: [activeThemeId], references: [id])
-  owner                        User                          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  establishmentAvailabilities  EstablishmentAvailability[]
   establishmentBookingSettings EstablishmentBookingSettings?
-  establishmentBrand           EstablishmentBrand?
-  establishmentDetails         EstablishmentDetails?
-  integrations                 EstablishmentIntegrations?
+  establishmentAvailabilities  EstablishmentAvailability[]
   establishmentSchedule        EstablishmentSchedule[]
-  establishmentSettings        EstablishmentSettings?
-  establishmentSocialMedia     EstablishmentSocialMedia?
-  homePage                     HomePage?
-  images                       Image[]
-  invoices                     Invoice[]
-  Item                         Item[]
-  landingPage                  LandingPage?
-  menus                        Menu[]
-  serviceZones                 ServiceZone[]
-  subscription                 Subscription?
-  themes                       Theme[]
-  variantOptions               VariantOption[]
-  auditLogs                    AuditLog[]
-  devices                      Device[]
-  discounts                    Discount[]
-  promotions                   Promotion[]
-  vivaTerminals                VivaTerminal[]
-  sumupReaders                 SumupReader[]
 
-  // Stock Management
+  // ─── Relações: Integrações & Pagamentos ────────────────────────────────────
+  integrations  EstablishmentIntegrations?
+  subscription  Subscription?
+  invoices      Invoice[]
+  devices       Device[]
+  vivaTerminals VivaTerminal[]
+  sumupReaders  SumupReader[]
+
+  // ─── Relações: Marketing & Logs ────────────────────────────────────────────
+  landingPage LandingPage?
+  emailLogs   EmailLog[]
+  auditLogs   AuditLog[]
+  discounts   Discount[]
+  promotions  Promotion[]
+
+  // ─── Stock Management ──────────────────────────────────────────────────────
   suppliers            Supplier[]
   stockCategories      StockCategory[]
   stockItems           StockItem[]
@@ -712,43 +754,18 @@ model Establishment {
   @@index([ownerId])
 }
 
+enum Currency {
+  EUR
+  USD
+  GBP
+}
+
 model EstablishmentSchedule {
   id              String        @id @default(ulid())
   establishmentId String
   scheduleId      String
   establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
   schedule        Schedule      @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
-}
-
-model EstablishmentDetails {
-  id              String        @id @default(ulid())
-  address         String?
-  city            String?
-  state           String?
-  zipCode         String?
-  country         String?
-  countryCode     String?
-  phoneNumber     String?
-  cuisine         String?
-  billingName     String?
-  billingTaxId    String?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  establishmentId String        @unique
-  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-}
-
-model EstablishmentSocialMedia {
-  id              String        @id @default(ulid())
-  instagramUrl    String?
-  tiktokUrl       String?
-  facebookUrl     String?
-  googleReviewUrl String?
-  tripAdvisorUrl  String?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  establishmentId String        @unique
-  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
 }
 
 model EstablishmentBookingSettings {
@@ -765,98 +782,22 @@ model EstablishmentBookingSettings {
   establishment     Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
 }
 
-model EstablishmentSettings {
-  id                 String                  @id @default(ulid())
-  primaryLanguage    EstablishmentLanguage   @default(PT)
-  availableLanguages EstablishmentLanguage[] @default([PT])
-  timezone           String                  @default("Europe/Lisbon")
-  currency           Currency                @default(EUR)
-  onlyMenu           Boolean                 @default(false)
-  needSession        Boolean                 @default(true)
-  createdAt          DateTime                @default(now())
-  updatedAt          DateTime                @updatedAt
-  establishmentId    String                  @unique
-  establishment      Establishment           @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-}
-
-enum Currency {
-  EUR
-  USD
-  GBP
-}
-
-model EstablishmentBrand {
-  id              String        @id @default(ulid())
-  logoImageId     String?
-  bannerImageId   String?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  establishmentId String        @unique
-  bannerImage     Image?        @relation("BannerImage", fields: [bannerImageId], references: [id])
-  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-  logoImage       Image?        @relation("LogoImage", fields: [logoImageId], references: [id])
-}
-
-model HomePage {
-  id                   String                @id @default(ulid())
-  createdAt            DateTime              @default(now())
-  updatedAt            DateTime              @updatedAt
-  establishmentId      String                @unique
-  establishment        Establishment         @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-  homePageConfig       HomePageConfig?
-  homePageTranslations HomePageTranslation[]
-}
-
-model HomePageConfig {
-  id                      String    @id @default(ulid())
-  logo                    String?
-  shortName               String
-  primaryColor            String
-  secondaryColor          String
-  banner                  String?
-  backgroundSize          String
-  highlightPrimaryColor   String
-  highlightSecondaryColor String
-  highlightIconColor      String
-  highlightBackground     String
-  location                String
-  createdAt               DateTime  @default(now())
-  updatedAt               DateTime  @updatedAt
-  homePageId              String?   @unique
-  bannerImage             Image?    @relation("BannerHomePageImage", fields: [banner], references: [id])
-  homePage                HomePage? @relation(fields: [homePageId], references: [id], onDelete: Cascade)
-  logoImage               Image?    @relation("LogoHomePageImage", fields: [logo], references: [id])
-}
-
-model HomePageTranslation {
-  id          String   @id @default(ulid())
-  locale      String
-  title       String
-  description String
-  homePageId  String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  homePage    HomePage @relation(fields: [homePageId], references: [id], onDelete: Cascade)
-}
-
 model Image {
-  id                  String               @id @default(ulid())
-  cloudflareImageId   String               @unique
-  fileName            String
-  url                 String
-  fileSize            Float
-  metadata            Json?
-  establishmentId     String
-  createdAt           DateTime             @default(now())
-  updatedAt           DateTime             @updatedAt
-  bannerUsedInBrands  EstablishmentBrand[] @relation("BannerImage")
-  logoUsedInBrands    EstablishmentBrand[] @relation("LogoImage")
-  bannerUsedInConfigs HomePageConfig[]     @relation("BannerHomePageImage")
-  logoUsedInConfigs   HomePageConfig[]     @relation("LogoHomePageImage")
-  establishment       Establishment        @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-  item                Item[]               @relation("ImageItem")
-  itemVariants        ItemVariant[]        @relation("ItemVariantImage")
-  menuCategory        MenuCategory[]       @relation("ImageMenuCategory")
+  id                 String          @id @default(ulid())
+  cloudflareImageId  String          @unique
+  fileName           String
+  url                String
+  fileSize           Float
+  metadata           Json?
+  establishmentId    String
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  bannerUsedInBrands Establishment[] @relation("BannerImage")
+  logoUsedInBrands   Establishment[] @relation("LogoImage")
+  establishment      Establishment   @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  item               Item[]          @relation("ImageItem")
+  itemVariants       ItemVariant[]   @relation("ItemVariantImage")
+  menuCategory       MenuCategory[]  @relation("ImageMenuCategory")
 
   @@index([establishmentId])
 }
@@ -2159,6 +2100,9 @@ model WebhookEvent {
   eventId     String
   eventType   String
   status      String
+  retryCount  Int      @default(0)
+  lastError   String?
+  requestId   String?  @unique // Para distribuída race condition protection
   processedAt DateTime
   expiresAt   DateTime
   createdAt   DateTime @default(now())
@@ -2167,6 +2111,7 @@ model WebhookEvent {
   @@index([provider])
   @@index([status])
   @@index([expiresAt])
+  @@index([requestId])
 }
 
 model ServiceZone {

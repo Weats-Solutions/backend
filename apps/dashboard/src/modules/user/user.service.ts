@@ -30,44 +30,32 @@ export class UserService {
                         cancelAtPeriodEnd: true,
                     },
                 },
-                establishmentDetails: {
-                    select: {
-                        address: true,
-                        city: true,
-                        state: true,
-                        zipCode: true,
-                        country: true,
-                        countryCode: true,
-                        phoneNumber: true,
-                        cuisine: true,
-                    },
+                address: true,
+                city: true,
+                state: true,
+                zipCode: true,
+                country: true,
+                countryCode: true,
+                phoneNumber: true,
+
+
+
+                primaryLanguage: true,
+                availableLanguages: true,
+                onlyMenu: true,
+                needSession: true,
+
+
+                instagramUrl: true,
+                tiktokUrl: true,
+                facebookUrl: true,
+                googleReviewUrl: true,
+                tripAdvisorUrl: true,
+                logoImage: {
+                    select: { id: true, url: true },
                 },
-                establishmentSettings: {
-                    select: {
-                        primaryLanguage: true,
-                        availableLanguages: true,
-                        onlyMenu: true,
-                        needSession: true,
-                    },
-                },
-                establishmentSocialMedia: {
-                    select: {
-                        instagramUrl: true,
-                        tiktokUrl: true,
-                        facebookUrl: true,
-                        googleReviewUrl: true,
-                        tripAdvisorUrl: true,
-                    },
-                },
-                establishmentBrand: {
-                    select: {
-                        logoImage: {
-                            select: { id: true, url: true },
-                        },
-                        bannerImage: {
-                            select: { id: true, url: true },
-                        },
-                    },
+                bannerImage: {
+                    select: { id: true, url: true },
                 },
             },
         });

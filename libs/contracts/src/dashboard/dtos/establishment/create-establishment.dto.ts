@@ -1,18 +1,30 @@
 import {
   IsEmail,
   IsEnum,
+  IsNotEmpty,
   IsOptional,
   IsString,
   Length,
   ValidateNested,
 } from 'class-validator';
 import {
+  Currency,
   EstablishmentLanguage,
   EstablishmentType,
 } from '@weats/database/core-prisma.service';
-import { Type } from 'class-transformer';
 
-export class EstablishmentDetailsDto {
+export class CreateEstablishmentDto {
+  @Length(2, 50)
+  @IsString()
+  name: string;
+
+  @IsString()
+  type: EstablishmentType;
+
+  @Length(7, 100)
+  @IsEmail()
+  email: string;
+
   @Length(3, 100)
   @IsString()
   address: string;
@@ -45,39 +57,18 @@ export class EstablishmentDetailsDto {
   @IsString()
   billingName: string;
 
-  @IsString()
-  @IsOptional()
-  cuisine?: string;
-
   @Length(9, 20)
   @IsString()
   billingTaxId: string;
 
-
-}
-
-export class EstablishmentSettingsDto {
   @IsEnum(EstablishmentLanguage)
   primaryLanguage: EstablishmentLanguage;
-}
 
-export class CreateEstablishmentDto {
-  @Length(3, 50)
-  @IsString()
-  name: string;
+  @IsEnum(Currency)
+  @IsNotEmpty()
+  currency: Currency;
 
   @IsString()
-  type: EstablishmentType;
-
-  @Length(7, 100)
-  @IsEmail()
-  email: string;
-
-  @ValidateNested()
-  @Type(() => EstablishmentDetailsDto)
-  establishmentDetails: EstablishmentDetailsDto;
-
-  @ValidateNested()
-  @Type(() => EstablishmentSettingsDto)
-  establishmentSettings: EstablishmentSettingsDto;
+  @IsNotEmpty()
+  timezone: string;
 }

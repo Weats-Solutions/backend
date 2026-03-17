@@ -13,7 +13,7 @@ import {
 } from '@weats/common';
 import type { Establishment, User } from '@weats/types';
 import { ClientProxy } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/contracts/dashboard/dashboard.patterns';
+import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 
 @Controller('users')
 export class UserController {

@@ -1,6 +1,6 @@
 import { SaveEupagoKeyDto, SaveEupagoCryptoKeyDto, EupagoCreatePaymentDto, EupagoCreateMbwayPaymentDto } from '@weats/contracts/dashboard/dtos/eupago';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/contracts/dashboard/dashboard.patterns';
+import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { Controller } from '@nestjs/common';
 import { EupagoService } from '@weats/integrations/eupago/eupago.service';
 import { Establishment } from '@weats/types';
