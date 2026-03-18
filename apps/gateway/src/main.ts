@@ -60,15 +60,19 @@ async function bootstrap() {
   const server = app.getHttpServer();
 
   // pegar filas registradas no Nest
-  //const webhookQueue = app.get<Queue>(getQueueToken('webhook-queue'));
-
   const emailQueue = app.get<Queue>(getQueueToken('emails'));
-  //const qrCodesQueue = app.get<Queue>(getQueueToken('qrcodes'));
   const webhookQueue = app.get<Queue>(getQueueToken('webhooks-queue'));
 
+  logger.log(`📊 Registando filas Bull Board...`);
+  logger.log(`   - Email queue: ${emailQueue.name} (${emailQueue.client?.options?.host}:${emailQueue.client?.options?.port})`);
+  logger.log(`   - Webhooks queue: ${webhookQueue.name} (${webhookQueue.client?.options?.host}:${webhookQueue.client?.options?.port})`);
 
+  // Configurar Bull Board
   const serverAdapter = new BBExpressAdapter();
-  serverAdapter.setBasePath('/v1/admin/queues'); // Alinhado com o versionamento v1 se desejar, ou mantenha /admin/queues
+  
+  // IMPORTANTE: basePath deve match com o route path registado
+  // Ambos devem estar sem /v1/ porque a rota é registada antes do versioning
+  serverAdapter.setBasePath('/admin/queues');
 
   createBullBoard({
     queues: [
@@ -78,7 +82,9 @@ async function bootstrap() {
     serverAdapter,
   });
 
+  // Registar a rota ANTES do versioning ser aplicado
   app.use('/admin/queues', serverAdapter.getRouter());
+  logger.log(`✅ Bull Board disponível em http://localhost:${apiPort}/admin/queues`);
 
 
   app.enableShutdownHooks();
