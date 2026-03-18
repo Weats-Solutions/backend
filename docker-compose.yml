@@ -12,7 +12,7 @@ services:
     restart: always
     ports:
       - '4000:4000'
-    environment:
+    env_file:
       - .env
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:4000/health']
@@ -31,7 +31,7 @@ services:
         ORDERS_DB_URL: ${ORDERS_DB_URL}
     container_name: weats-webhooks
     restart: always
-    environment:
+    env_file:
       - .env
     networks:
       - weats-network
@@ -50,7 +50,7 @@ services:
         ORDERS_DB_URL: ${ORDERS_DB_URL}
     container_name: weats-dashboard
     restart: always
-    environment:
+    env_file:
       - .env
     logging:
       driver: 'json-file'
