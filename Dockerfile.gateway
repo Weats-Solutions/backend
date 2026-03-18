@@ -8,7 +8,6 @@ RUN npm install -g pnpm@9
 
 # Copy monorepo files
 COPY package.json pnpm-lock.yaml ./
-COPY prisma ./prisma
 COPY apps/gateway ./apps/gateway
 COPY libs ./libs
 COPY nest-cli.json tsconfig.json tsconfig.build.json ./
