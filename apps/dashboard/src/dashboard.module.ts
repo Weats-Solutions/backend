@@ -5,7 +5,7 @@ import { EstablishmentModule } from './modules/establishment/establishment.modul
 import { UserModule } from './modules/user/user.module';
 import { PlanModule } from './modules/plan/plan.module';
 import { ImageModule } from './modules/image/image.module';
-
+import { LandingpageModule } from './modules/landingpage/landingpage.module';
 import { ConfigsModule } from '@weats/configs';
 import { ConfigModule } from '@nestjs/config';
 
@@ -20,6 +20,7 @@ import { ConfigModule } from '@nestjs/config';
     UserModule,
     PlanModule,
     ImageModule,
+    LandingpageModule,
   ],
   controllers: [DashboardController],
   providers: [DashboardService],
