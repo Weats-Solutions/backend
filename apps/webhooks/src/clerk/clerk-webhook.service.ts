@@ -61,13 +61,13 @@ export class ClerkWebhookService {
         try {
             switch (eventType) {
                 case 'user.created':
-                    const primaryEmail = body?.data?.email_addresses?.[0]?.email_address;
+                    const primaryEmail = body.data.email_addresses?.[0]?.email_address;
                     if (!primaryEmail) {
                         throw new BadRequestException('Email address is required');
                     }
                     
                     const existingUser = await this.prisma.user.findUnique({
-                        where: { clerkUserId: body?.data?.id },
+                        where: { clerkUserId: body.data.id },
                     });
 
                     if (!existingUser) {
@@ -75,15 +75,15 @@ export class ClerkWebhookService {
                             data: {
                                 clerkUserId: body.data.id,
                                 email: primaryEmail,
-                                firstName: body.data?.first_name || '',
-                                lastName: body.data?.last_name || '',
-                                createdAt: new Date(body.data?.created_at),
+                                firstName: body.data.first_name || '',
+                                lastName: body.data.last_name || '',
+                                createdAt: new Date(body.data.created_at),
                             },
                         });
                     }
 
                     const availableLocales = ['en', 'es', 'fr', 'de', 'it', 'pt', 'nl'];
-                    let lang = body?.data?.unsafe_metadata?.locale || 'en';
+                    let lang = body.data.unsafe_metadata?.locale || 'en';
 
                     if (!availableLocales.includes(lang)) {
                         lang = 'en';
@@ -97,8 +97,8 @@ export class ClerkWebhookService {
                             template: 'welcome',
                             lang,
                             context: {
-                                firstName: body.data?.first_name,
-                                lastName: body.data?.last_name,
+                                firstName: body.data.first_name,
+                                lastName: body.data.last_name,
                                 redirectUrl: this.appUrl,
                             },
                         },
@@ -112,27 +112,34 @@ export class ClerkWebhookService {
                     break;
 
                 case 'user.updated':
+                    const updateEmail = body?.data?.email_addresses?.[0]?.email_address;
+                    
+                    // Validate email is not empty before updating
+                    if (!updateEmail) {
+                        this.logger.warn(`⚠️ Clerk user.updated event has no email address, skipping email update`);
+                    }
+
                     await this.prisma.user.upsert({
-                        where: { clerkUserId: body?.data?.id },
+                        where: { clerkUserId: body.data.id },
                         update: {
-                            email: body?.data?.email_addresses?.[0]?.email_address,
-                            firstName: body?.data?.first_name || '',
-                            lastName: body?.data?.last_name || '',
-                            updatedAt: new Date(body?.data?.updated_at),
+                            ...(updateEmail && { email: updateEmail }),
+                            firstName: body.data.first_name || '',
+                            lastName: body.data.last_name || '',
+                            updatedAt: new Date(body.data.updated_at),
                         },
                         create: {
-                            clerkUserId: body?.data?.id,
-                            email: body?.data?.email_addresses?.[0]?.email_address,
-                            firstName: body?.data?.first_name || '',
-                            lastName: body?.data?.last_name || '',
-                            createdAt: new Date(body?.data?.created_at),
+                            clerkUserId: body.data.id,
+                            email: updateEmail || 'no-email@placeholder.com',
+                            firstName: body.data.first_name || '',
+                            lastName: body.data.last_name || '',
+                            createdAt: new Date(body.data.created_at),
                         }
                     });
                     break;
 
                 case 'user.deleted':
                     await this.prisma.user.deleteMany({
-                        where: { clerkUserId: body?.data?.id },
+                        where: { clerkUserId: body.data.id },
                     });
                     break;
 
@@ -155,7 +162,8 @@ export class ClerkWebhookService {
         } catch (error) {
             this.logger.error(`❌ Failed to process Clerk event ${eventId}: ${error.message}`);
             
-            await this.prisma.webhookEvent.update({
+            try {
+              await this.prisma.webhookEvent.update({
                 where: {
                     provider_eventId: {
                         provider: 'clerk',
@@ -167,7 +175,12 @@ export class ClerkWebhookService {
                     lastError: error.message,
                     retryCount: { increment: 1 }
                 },
-            }).catch(() => null);
+              });
+            } catch (dbUpdateError) {
+              this.logger.error(
+                `⚠️ Failed to update webhook status to FAILED: ${dbUpdateError.message}. Original error: ${error.message}`,
+              );
+            }
 
             throw error;
         }

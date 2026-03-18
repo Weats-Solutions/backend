@@ -1,22 +1,25 @@
 import { Module } from '@nestjs/common';
 import { WebhooksController } from './webhook.controller';
-import { GatewayConfigService } from '@weats/configs';
-import { ClientProxyFactory } from '@nestjs/microservices';
-import { WEBHOOK_SERVICE } from '@weats/common';
-import { ConfigsModule } from '@weats/configs';
+import { ConfigsModule, RedisConfigService } from '@weats/configs';
+import { IntegrationsModule } from '@weats/integrations';
+import { BullModule, BullModuleOptions } from '@nestjs/bull';
 
 @Module({
-    imports: [ConfigsModule],
-    controllers: [WebhooksController],
-    providers: [
-        {
-            provide: WEBHOOK_SERVICE,
-            useFactory: (configService: GatewayConfigService) => {
-                const clientOptions = configService.webhooksClientOptions;
-                return ClientProxyFactory.create(clientOptions);
-            },
-            inject: [GatewayConfigService],
-        },
+    imports: [
+        ConfigsModule,
+        IntegrationsModule,
+        BullModule.registerQueueAsync({
+            name: 'webhooks-queue',
+            imports: [ConfigsModule],
+            inject: [RedisConfigService],
+            useFactory: async (
+                redisConfig: RedisConfigService,
+            ): Promise<BullModuleOptions> => ({
+                redis: redisConfig.getConnectionOptions('webhooks'),
+            }),
+        }),
     ],
+    controllers: [WebhooksController],
+    providers: [],
 })
 export class WebhooksModule { }

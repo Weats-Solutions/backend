@@ -11,12 +11,10 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ThrottleLenient } from '@weats/common/decorators/throttle.decorator';
-import { WEBHOOK_SERVICE } from '@weats/common';
-import { ClientProxy } from '@nestjs/microservices';
-import { Inject } from '@nestjs/common';
-import { WEBHOOK_PATTERNS } from '@weats/common/patterns/webhook.patterns';
 import { ClerkService } from "@weats/integrations/clerk/clerk.service"
 import { StripeService } from "@weats/integrations/stripe/stripe.service"
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
 
 @Controller('webhooks')
 @ThrottleLenient() // 200 requests por minuto para webhooks
@@ -24,7 +22,7 @@ export class WebhooksController {
     private readonly logger = new Logger(WebhooksController.name);
 
     constructor(
-        @Inject(WEBHOOK_SERVICE) private readonly webhooksClient: ClientProxy,
+        @InjectQueue('webhooks-queue') private readonly webhooksQueue: Queue,
         private readonly stripeService: StripeService,
         private readonly clerkService: ClerkService,
     ) { }
@@ -52,13 +50,24 @@ export class WebhooksController {
                 return res.status(401).send('Unauthorized');
             }
 
-            // Emit para microserviço (fire-and-forget via Redis)
-            // Redis garante que a mensagem é entregue mesmo que haja delay
-            this.webhooksClient.emit(WEBHOOK_PATTERNS.STRIPE_WEBHOOK, event);
-            
-            // Retornar OK imediatamente (Stripe recebe confirmação)
-            // O processamento acontece assincronamente na fila
-            res.status(200).send('Webhook recebido com sucesso');
+            // ✅ NOVO: Adicionar direto à fila Bull com error handling
+            try {
+                await this.webhooksQueue.add('stripe-event', event, {
+                    attempts: 5,
+                    backoff: {
+                        type: 'exponential',
+                        delay: 5000,
+                    },
+                    timeout: 60000,
+                    removeOnComplete: true,
+                });
+                this.logger.log(`✅ Stripe webhook ${event.id} enqueued for processing`);
+                res.status(200).send('Webhook recebido com sucesso');
+            } catch (queueError) {
+                this.logger.error(`❌ Failed to enqueue Stripe webhook: ${queueError.message}`);
+                // Queue error is a server issue (Redis down, etc)
+                return res.status(503).send('Service temporarily unavailable');
+            }
         } catch (error) {
             this.logger.error(`❌ Erro no webhook Stripe: ${error.message}`);
             res.status(500).send(`Erro no webhook: ${error.message}`);
@@ -92,16 +101,37 @@ export class WebhooksController {
             }
 
             if (!verified) {
-                this.logger.warn('⚠️ Assinatura inválida!');
+                this.logger.warn('⚠️ Clerk signature inválida!');
                 return res.status(400).send('Invalid signature');
             }
 
-            const body = JSON.parse(rawBody.toString('utf8'));
-            
-            // Emit para microserviço (fire-and-forget via Redis)
-            this.webhooksClient.emit(WEBHOOK_PATTERNS.CLERK_WEBHOOK, body);
+            // ✅ NOVO: Parse JSON with error handling (400 for malformed JSON)
+            let body: any;
+            try {
+                body = JSON.parse(rawBody.toString('utf8'));
+            } catch (parseError) {
+                this.logger.error(`❌ Failed to parse Clerk webhook JSON: ${parseError.message}`);
+                return res.status(400).send('Invalid JSON payload');
+            }
 
-            return res.send('ok');
+            // ✅ NOVO: Adicionar direto à fila Bull com error handling
+            try {
+                await this.webhooksQueue.add('clerk-event', body, {
+                    attempts: 3,
+                    backoff: {
+                        type: 'fixed',
+                        delay: 5000,
+                    },
+                    timeout: 30000,
+                    removeOnComplete: true,
+                });
+                this.logger.log(`✅ Clerk webhook ${body.id} (${body.type}) enqueued for processing`);
+                return res.status(200).send('ok');
+            } catch (queueError) {
+                this.logger.error(`❌ Failed to enqueue Clerk webhook: ${queueError.message}`);
+                // Queue error is a server issue (Redis down, etc)
+                return res.status(503).send('Service temporarily unavailable');
+            }
         } catch (err) {
             this.logger.error(`❌ Erro ao processar webhook Clerk: ${err.message}`);
             return res.status(500).send('Erro interno');

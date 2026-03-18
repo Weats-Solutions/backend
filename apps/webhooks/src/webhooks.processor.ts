@@ -47,13 +47,18 @@ export class WebhooksProcessor {
     if (isLastAttempt) {
       this.logger.error(`❌ Job ${job.id} falhou definitivamente: ${error.message}`);
 
-      await this.discordService.sendToDiscord(
-        '🚨 ERRO CRÍTICO NO WEBHOOK',
-        `O evento **${job.name}** falhou após todas as tentativas.\n\n` +
-        `**Job ID:** ${job.id}\n` +
-        `**Erro:** ${error.message}\n` +
-        `**Payload:** \`\`\`json\n${JSON.stringify(job.data, null, 2).substring(0, 1000)}\n\`\`\``
-      );
+      try {
+        await this.discordService.sendToDiscord(
+          '🚨 ERRO CRÍTICO NO WEBHOOK',
+          `O evento **${job.name}** falhou após todas as tentativas.\n\n` +
+          `**Job ID:** ${job.id}\n` +
+          `**Erro:** ${error.message}\n` +
+          `**Payload:** \`\`\`json\n${JSON.stringify(job.data, null, 2).substring(0, 1000)}\n\`\`\``
+        );
+      } catch (discordError) {
+        this.logger.error(`⚠️ Failed to send failure alert to Discord: ${discordError.message}`);
+        // Don't throw - notification failure shouldn't affect job failure handling
+      }
     } else {
       this.logger.warn(`⚠️ Job ${job.id} falhou (tentativa ${job.attemptsMade}). Retentando...`);
     }

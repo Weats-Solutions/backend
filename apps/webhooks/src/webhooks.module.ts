@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { WebhooksController } from './webhooks.controller';
 import { WebhooksService } from './webhooks.service';
 import { AppConfigService, ConfigsModule, RedisConfigService } from '@weats/configs';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -43,12 +42,11 @@ import { DatabaseModule } from '@weats/database';
           redis: redisConfig.getConnectionOptions('webhooks'),
         }),
       },
-      
     ),
     StripeModule,
     DiscordModule,
   ],
-  controllers: [WebhooksController],
+  controllers: [], // ✅ Removido: WebhooksController já não é necessário
   providers: [
     WebhooksService,
     WebhooksProcessor,

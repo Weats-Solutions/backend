@@ -24,7 +24,6 @@ export class WebhooksService {
   }
 
   async handleStripeWebhook(event: Stripe.Event) {
-    // Gerar requestId único (Stripe event ID é único por definição)
     const requestId = `stripe-${event.id}-${Date.now()}`;
     
     this.logger.log(`🔍 Checking idempotency for Stripe event: ${event.id} (requestId: ${requestId})`);
@@ -64,10 +63,12 @@ export class WebhooksService {
     
     if (processingDuration > MAX_PROCESSING_TIME && webhookEvent.status === 'PROCESSING') {
       this.logger.warn(`⚠️ Stripe event ${event.id} stuck in PROCESSING for ${processingDuration}ms. Resetting...`);
-      // Deixar processar novamente (reset o status)
+      // Reset the timestamp but keep processing
       await this.prisma.webhookEvent.update({
         where: { id: webhookEvent.id },
-        data: { status: 'PROCESSING', processedAt: new Date() },
+        data: { processedAt: new Date() },
+      }).catch((err) => {
+        this.logger.error(`⚠️ Failed to reset stuck webhook timestamp: ${err.message}`);
       });
     }
 
@@ -85,10 +86,15 @@ export class WebhooksService {
         event.type === 'subscription_schedule.completed' ||
         event.type === 'subscription_schedule.released'
       ) {
-        this.discordService.sendToDiscord(
-          'Webhook received',
-          `Webhook received -> ${event.type}`,
-        );
+        try {
+          await this.discordService.sendToDiscord(
+            'Webhook received',
+            `Webhook received -> ${event.type}`,
+          );
+        } catch (discordError) {
+          this.logger.warn(`⚠️ Failed to send Discord notification: ${discordError.message}`);
+          // Don't throw - webhook processing should continue even if Discord is down
+        }
 
         switch (event.type) {
           case 'customer.created':
@@ -142,16 +148,23 @@ export class WebhooksService {
     } catch (error) {
       this.logger.error(`❌ Failed to process Stripe event ${event.id}: ${error.message}`);
 
-      // Marcar como falha no banco
-      await this.prisma.webhookEvent.update({
-        where: {
-          provider_eventId: {
-            provider: 'stripe',
-            eventId: event.id,
+      // Marcar como falha no banco - with proper error handling
+      try {
+        await this.prisma.webhookEvent.update({
+          where: {
+            provider_eventId: {
+              provider: 'stripe',
+              eventId: event.id,
+            },
           },
-        },
-        data: { status: 'FAILED' },
-      }).catch(() => null); // Ignora se o update em si falhar
+          data: { status: 'FAILED' },
+        });
+      } catch (dbUpdateError) {
+        this.logger.error(
+          `❌ Failed to update webhook status to FAILED: ${dbUpdateError.message}. Original error: ${error.message}`,
+        );
+        // Log both errors but don't swallow the original error
+      }
 
       throw error;
     }
