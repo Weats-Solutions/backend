@@ -1,5 +1,5 @@
 import { Injectable, BadRequestException, Inject } from '@nestjs/common';
-import { SubscriptionStatus, EmailTemplate } from '@prisma/client';
+import { SubscriptionStatus, EmailTemplate } from '@weats/database';
 import { Stripe } from 'stripe';
 import { Logger } from '@nestjs/common';
 import { ClerkService } from '@weats/integrations';

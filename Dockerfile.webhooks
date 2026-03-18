@@ -6,16 +6,26 @@ WORKDIR /app
 # Install pnpm
 RUN npm install -g pnpm@9
 
-# Copy monorepo files
+# Copy project files
 COPY package.json pnpm-lock.yaml ./
-COPY apps/webhooks ./apps/webhooks
-COPY libs ./libs
-COPY nest-cli.json tsconfig.json tsconfig.build.json ./
+COPY nest-cli.json tsconfig.json tsconfig.build.json prisma.config.ts ./
 
-# Install dependencies
+# Install all dependencies (frozen lockfile)
 RUN pnpm install --frozen-lockfile
 
-# Build only webhooks app
+# Copy source code
+COPY apps/webhooks ./apps/webhooks
+COPY libs ./libs
+
+# Generate Prisma Client
+ARG CORE_DB_URL
+ARG ORDERS_DB_URL
+ENV CORE_DB_URL=${CORE_DB_URL}
+ENV ORDERS_DB_URL=${ORDERS_DB_URL}
+
+RUN pnpm prisma:core:gen && pnpm prisma:orders:gen
+
+# Build project
 RUN pnpm exec nest build webhooks
 
 # Production stage
@@ -26,10 +36,13 @@ WORKDIR /app
 # Install pnpm and curl for health checks
 RUN npm install -g pnpm@9 && apk add --no-cache curl
 
-# Copy built application from builder
-COPY --from=builder /app/dist/apps/webhooks ./dist/apps/webhooks
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./
+# Copy package.json and install production dependencies
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --prod --frozen-lockfile
+
+# Copy built application and generated client
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/libs/database/prisma/generated ./libs/database/prisma/generated
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S nodejs && \

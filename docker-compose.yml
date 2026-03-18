@@ -5,12 +5,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.gateway
+      args:
+        CORE_DB_URL: ${CORE_DB_URL}
+        ORDERS_DB_URL: ${ORDERS_DB_URL}
     container_name: weats-gateway
     restart: always
     ports:
       - "4000:4000"
     environment:
       - NODE_ENV=production
+      - CORE_DB_URL=${CORE_DB_URL}
+      - ORDERS_DB_URL=${ORDERS_DB_URL}
       # As variáveis de ambiente podem ser passadas aqui ou no painel do Dokploy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
@@ -24,10 +29,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.webhooks
+      args:
+        CORE_DB_URL: ${CORE_DB_URL}
+        ORDERS_DB_URL: ${ORDERS_DB_URL}
     container_name: weats-webhooks
     restart: always
     environment:
       - NODE_ENV=production
+      - CORE_DB_URL=${CORE_DB_URL}
+      - ORDERS_DB_URL=${ORDERS_DB_URL}
     networks:
       - weats-network
     logging:
@@ -40,10 +50,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dashboard
+      args:
+        CORE_DB_URL: ${CORE_DB_URL}
+        ORDERS_DB_URL: ${ORDERS_DB_URL}
     container_name: weats-dashboard
     restart: always
     environment:
       - NODE_ENV=production
+      - CORE_DB_URL=${CORE_DB_URL}
+      - ORDERS_DB_URL=${ORDERS_DB_URL}
     networks:
       - weats-network
     logging:
