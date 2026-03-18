@@ -8,8 +8,12 @@ export const getCorsOptions = (appConfigService: AppConfigService): CorsOptions 
             'http://localhost:3000',
             'http://localhost:3001',
             'https://staff.weats.pro',
+            'https://app.weats.pro',
         ];
-        if (!origin || allowedOrigins.includes(origin)) {
+        // Check if the origin matches our allowed list, or if it's an ngrok tunnel
+        const isNgrok = origin && (origin.endsWith('.ngrok-free.dev') || origin.endsWith('.ngrok.io') || origin.endsWith('.loca.lt'));
+
+        if (!origin || allowedOrigins.includes(origin) || isNgrok) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
