@@ -1,25 +1,35 @@
-version: '3.9'
+version: '3.8'
 
 services:
   gateway:
-    image: weats-proj-gateway:latest
     build:
       context: .
       dockerfile: Dockerfile.gateway
+    container_name: weats-gateway
+    restart: always
     ports:
       - "4000:4000"
-    deploy:
-      restart_policy:
-        condition: on-failure
+    environment:
+      - NODE_ENV=production
+      # As variáveis de ambiente podem ser passadas aqui ou no painel do Dokploy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - weats-network
 
   webhooks:
-    image: weats-proj-webhooks:latest
     build:
       context: .
       dockerfile: Dockerfile.webhooks
-    deploy:
-      restart_policy:
-        condition: on-failure
+    container_name: weats-webhooks
+    restart: always
+    environment:
+      - NODE_ENV=production
+    networks:
+      - weats-network
     logging:
       driver: "json-file"
       options:
@@ -27,19 +37,21 @@ services:
         max-file: "3"
 
   dashboard:
-    image: weats-proj-dashboard:latest
     build:
       context: .
       dockerfile: Dockerfile.dashboard
-    deploy:
-      restart_policy:
-        condition: on-failure
+    container_name: weats-dashboard
+    restart: always
+    environment:
+      - NODE_ENV=production
+    networks:
+      - weats-network
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
 
-# Removi a seção 'networks' e os 'networks:' em cada serviço.
-# O Docker Stack criará uma rede chamada 'default' automaticamente 
-# e todos os serviços conseguirão falar entre si pelos nomes (ex: http://gateway:4000)
+networks:
+  weats-network:
+    driver: bridge
