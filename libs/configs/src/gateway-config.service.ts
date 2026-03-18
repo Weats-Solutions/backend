@@ -8,16 +8,28 @@ export class GatewayConfigService {
   constructor(
     private configService: ConfigService,
     private redisConfig: RedisConfigService,
-  ) { }
+  ) {}
+
+  getDashboardClientHost(): string {
+    const isProd = this.configService.get('NODE_ENV') === 'production';
+    return (
+      this.configService.get('DASHBOARD_HOST') ||
+      (isProd ? 'dashboard' : '0.0.0.0')
+    );
+  }
 
   getDashboardClientPort(): number {
-    return parseInt(this.configService.getOrThrow<string>('DASHBOARD_CLIENT_PORT'), 10);
+    return parseInt(
+      this.configService.getOrThrow<string>('DASHBOARD_CLIENT_PORT'),
+      10,
+    );
   }
 
   get dashboardClientOptions(): ClientOptions {
     return {
       transport: Transport.TCP,
       options: {
+        host: this.getDashboardClientHost(),
         port: this.getDashboardClientPort(),
       },
     };
