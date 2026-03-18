@@ -11,14 +11,14 @@ services:
     container_name: weats-gateway
     restart: always
     ports:
-      - "4000:4000"
+      - '4000:4000'
     environment:
       - NODE_ENV=production
       - CORE_DB_URL=${CORE_DB_URL}
       - ORDERS_DB_URL=${ORDERS_DB_URL}
       # As variáveis de ambiente podem ser passadas aqui ou no painel do Dokploy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      test: ['CMD', 'curl', '-f', 'http://localhost:4000/health']
       interval: 30s
       timeout: 10s
       retries: 3
@@ -41,10 +41,10 @@ services:
     networks:
       - weats-network
     logging:
-      driver: "json-file"
+      driver: 'json-file'
       options:
-        max-size: "10m"
-        max-file: "3"
+        max-size: '10m'
+        max-file: '3'
 
   dashboard:
     build:
@@ -62,10 +62,10 @@ services:
     networks:
       - weats-network
     logging:
-      driver: "json-file"
+      driver: 'json-file'
       options:
-        max-size: "10m"
-        max-file: "3"
+        max-size: '10m'
+        max-file: '3'
 
 networks:
   weats-network:
