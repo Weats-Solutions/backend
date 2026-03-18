@@ -1,18 +1,16 @@
 version: '3.9'
 
 services:
-
   gateway:
-    env_file:
-      - .env
+    image: gateway:latest  # Nome da imagem para o Dokploy associar o build
     build:
       context: .
       dockerfile: Dockerfile.gateway
-    container_name: weats-gateway
     ports:
       - "4000:4000"
-   
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
       interval: 15s
@@ -22,13 +20,13 @@ services:
       - weats-network
 
   webhooks:
-    env_file:
-      - .env
+    image: webhooks:latest
     build:
       context: .
       dockerfile: Dockerfile.webhooks
-    container_name: weats-webhooks
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
     logging:
       driver: "json-file"
       options:
@@ -38,13 +36,13 @@ services:
       - weats-network
 
   dashboard:
-    env_file:
-      - .env
+    image: dashboard:latest
     build:
       context: .
       dockerfile: Dockerfile.dashboard
-    container_name: weats-dashboard
-    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
     logging:
       driver: "json-file"
       options:
@@ -55,4 +53,4 @@ services:
 
 networks:
   weats-network:
-    driver: bridge
+    driver: overlay # Essencial para Docker Swarm/Stack
