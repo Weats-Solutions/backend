@@ -2,8 +2,7 @@ version: '3.9'
 
 services:
   gateway:
-    # Mudamos o nome para algo único do projeto para o Docker local não se perder
-    image: weats-proj-gateway:latest 
+    image: weats-proj-gateway:latest
     build:
       context: .
       dockerfile: Dockerfile.gateway
@@ -12,9 +11,6 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-    # Removi o healthcheck temporariamente para garantir que o container sobe
-    networks:
-      - weats-net
 
   webhooks:
     image: weats-proj-webhooks:latest
@@ -24,8 +20,11 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-    networks:
-      - weats-net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   dashboard:
     image: weats-proj-dashboard:latest
@@ -35,10 +34,12 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-    networks:
-      - weats-net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
-networks:
-  weats-net:
-    driver: overlay
-    # Removida a configuração manual de IP para evitar o erro de "Pool overlaps"
+# Removi a seção 'networks' e os 'networks:' em cada serviço.
+# O Docker Stack criará uma rede chamada 'default' automaticamente 
+# e todos os serviços conseguirão falar entre si pelos nomes (ex: http://gateway:4000)
