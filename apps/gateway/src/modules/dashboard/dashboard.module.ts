@@ -9,6 +9,7 @@ import { EstablishmentController } from './controllers/establishment.controller'
 import { UserController } from './controllers/user.controller';
 import { ImageController } from './controllers/image.controller';
 import { PlanController } from './controllers/plan.controller';
+import { LandingpageController } from './controllers/landingpage.controller';
 
 @Module({
   imports: [ConfigsModule, IntegrationsModule, DatabaseModule],
@@ -27,6 +28,7 @@ import { PlanController } from './controllers/plan.controller';
     UserController,
     PlanController,
     ImageController,
+    LandingpageController,
   ],
 })
 export class DashboardModule { }

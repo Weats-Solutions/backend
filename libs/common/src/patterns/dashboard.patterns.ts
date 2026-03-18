@@ -29,4 +29,6 @@ export const DASHBOARD_PATTERNS = {
   EUPAGO_GENERATE_GOOGLE_PAY_PAYMENT: 'dashboard.eupago.generate_google_pay_payment',
   EUPAGO_GENERATE_APPLE_PAY_PAYMENT: 'dashboard.eupago.generate_apple_pay_payment',
   EUPAGO_GENERATE_MBWAY_PAYMENT: 'dashboard.eupago.generate_mbway_payment',
+
+  LANDINGPAGE_GET_BY_SLUG: 'dashboard.landingpage.get_by_slug',
 };
