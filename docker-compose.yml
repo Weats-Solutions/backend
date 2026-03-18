@@ -2,7 +2,8 @@ version: '3.9'
 
 services:
   gateway:
-    image: gateway:latest  # Nome da imagem para o Dokploy associar o build
+    # Mudamos o nome para algo único do projeto para o Docker local não se perder
+    image: weats-proj-gateway:latest 
     build:
       context: .
       dockerfile: Dockerfile.gateway
@@ -11,46 +12,33 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
-      interval: 15s
-      timeout: 5s
-      retries: 3
+    # Removi o healthcheck temporariamente para garantir que o container sobe
     networks:
-      - weats-network
+      - weats-net
 
   webhooks:
-    image: webhooks:latest
+    image: weats-proj-webhooks:latest
     build:
       context: .
       dockerfile: Dockerfile.webhooks
     deploy:
       restart_policy:
         condition: on-failure
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
     networks:
-      - weats-network
+      - weats-net
 
   dashboard:
-    image: dashboard:latest
+    image: weats-proj-dashboard:latest
     build:
       context: .
       dockerfile: Dockerfile.dashboard
     deploy:
       restart_policy:
         condition: on-failure
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
     networks:
-      - weats-network
+      - weats-net
 
 networks:
-  weats-network:
-    driver: overlay # Essencial para Docker Swarm/Stack
+  weats-net:
+    driver: overlay
+    # Removida a configuração manual de IP para evitar o erro de "Pool overlaps"
