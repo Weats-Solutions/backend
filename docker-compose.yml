@@ -1,0 +1,252 @@
+version: '3.9'
+
+# NOTE: Este docker-compose contém apenas os 3 apps (Gateway, Webhooks, Dashboard)
+# 
+# Serviços externos (do Dokploy ou outro):
+#   - PostgreSQL Core (via CORE_DB_URL env var)
+#   - PostgreSQL Orders (via ORDERS_DB_URL env var)
+#   - Redis (via REDIS_HOST, REDIS_PORT env vars)
+#   - Nginx/Load Balancer (Dokploy gerencia)
+#
+# Benefícios:
+#   ✅ Simples: só os apps que escalam
+#   ✅ Reutiliza DB/Redis do Dokploy
+#   ✅ Load balancer gerido pelo Dokploy
+#   ✅ Menor footprint
+#   ✅ Mais fácil para monitorar
+
+services:
+
+  # ─────────────────────────────────────────────────────────────────
+  # GATEWAY API (HTTP REST - 3 REPLICAS)
+  # Dokploy gerencia load balancing entre replicas
+  # ─────────────────────────────────────────────────────────────────
+
+  gateway1:
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway
+    container_name: weats-gateway-1
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      API_PORT: 4000
+      
+      # ⚠️ External Database URLs (from Dokploy)
+      CORE_DB_URL: ${CORE_DB_URL}
+      ORDERS_DB_URL: ${ORDERS_DB_URL}
+      
+      # ⚠️ External Redis (from Dokploy)
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_USERNAME: ${REDIS_USERNAME:-default}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_EMAIL_DB: ${REDIS_EMAIL_DB:-1}
+      REDIS_IMAGES_DB: ${REDIS_IMAGES_DB:-2}
+      REDIS_WEBHOOK_DB: ${REDIS_WEBHOOK_DB:-3}
+      REDIS_CACHE_DB: ${REDIS_CACHE_DB:-4}
+      REDIS_QRCODES_DB: ${REDIS_QRCODES_DB:-5}
+      REDIS_SESSION_DB: ${REDIS_SESSION_DB:-6}
+      
+      # Third-party APIs
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      CLERK_WEBHOOK_SECRET: ${CLERK_WEBHOOK_SECRET}
+      STRIPE_API_KEY: ${STRIPE_API_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      
+      # Cloudflare
+      CLOUDFLARE_IMAGES_ACCOUNT_ID: ${CLOUDFLARE_IMAGES_ACCOUNT_ID}
+      CLOUDFLARE_CDN_URL: ${CLOUDFLARE_CDN_URL}
+      
+      # Encryption
+      ENCRYPTION_ALGORITHM: ${ENCRYPTION_ALGORITHM:-aes-256-ctr}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      ENCRYPTION_SALT: ${ENCRYPTION_SALT}
+      ENCRYPTION_IV: ${ENCRYPTION_IV}
+      
+      # App Configuration
+      APP_URL: ${APP_URL}
+      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
+      EUPAGO_API_URL: ${EUPAGO_API_URL}
+
+    networks:
+      - weats-network
+    ports:
+      - "4001:4000"  # Único externamente para debug
+    restart: unless-stopped
+
+  gateway2:
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway
+    container_name: weats-gateway-2
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      API_PORT: 4000
+      CORE_DB_URL: ${CORE_DB_URL}
+      ORDERS_DB_URL: ${ORDERS_DB_URL}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_USERNAME: ${REDIS_USERNAME:-default}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_EMAIL_DB: ${REDIS_EMAIL_DB:-1}
+      REDIS_IMAGES_DB: ${REDIS_IMAGES_DB:-2}
+      REDIS_WEBHOOK_DB: ${REDIS_WEBHOOK_DB:-3}
+      REDIS_CACHE_DB: ${REDIS_CACHE_DB:-4}
+      REDIS_QRCODES_DB: ${REDIS_QRCODES_DB:-5}
+      REDIS_SESSION_DB: ${REDIS_SESSION_DB:-6}
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      CLERK_WEBHOOK_SECRET: ${CLERK_WEBHOOK_SECRET}
+      STRIPE_API_KEY: ${STRIPE_API_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      CLOUDFLARE_IMAGES_ACCOUNT_ID: ${CLOUDFLARE_IMAGES_ACCOUNT_ID}
+      CLOUDFLARE_CDN_URL: ${CLOUDFLARE_CDN_URL}
+      ENCRYPTION_ALGORITHM: ${ENCRYPTION_ALGORITHM:-aes-256-ctr}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      ENCRYPTION_SALT: ${ENCRYPTION_SALT}
+      ENCRYPTION_IV: ${ENCRYPTION_IV}
+      APP_URL: ${APP_URL}
+      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
+      EUPAGO_API_URL: ${EUPAGO_API_URL}
+
+    networks:
+      - weats-network
+    ports:
+      - "4002:4000"
+    restart: unless-stopped
+
+  gateway3:
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway
+    container_name: weats-gateway-3
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      API_PORT: 4000
+      CORE_DB_URL: ${CORE_DB_URL}
+      ORDERS_DB_URL: ${ORDERS_DB_URL}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_USERNAME: ${REDIS_USERNAME:-default}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_EMAIL_DB: ${REDIS_EMAIL_DB:-1}
+      REDIS_IMAGES_DB: ${REDIS_IMAGES_DB:-2}
+      REDIS_WEBHOOK_DB: ${REDIS_WEBHOOK_DB:-3}
+      REDIS_CACHE_DB: ${REDIS_CACHE_DB:-4}
+      REDIS_QRCODES_DB: ${REDIS_QRCODES_DB:-5}
+      REDIS_SESSION_DB: ${REDIS_SESSION_DB:-6}
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      CLERK_WEBHOOK_SECRET: ${CLERK_WEBHOOK_SECRET}
+      STRIPE_API_KEY: ${STRIPE_API_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      CLOUDFLARE_IMAGES_ACCOUNT_ID: ${CLOUDFLARE_IMAGES_ACCOUNT_ID}
+      CLOUDFLARE_CDN_URL: ${CLOUDFLARE_CDN_URL}
+      ENCRYPTION_ALGORITHM: ${ENCRYPTION_ALGORITHM:-aes-256-ctr}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      ENCRYPTION_SALT: ${ENCRYPTION_SALT}
+      ENCRYPTION_IV: ${ENCRYPTION_IV}
+      APP_URL: ${APP_URL}
+      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
+      EUPAGO_API_URL: ${EUPAGO_API_URL}
+
+    networks:
+      - weats-network
+    ports:
+      - "4003:4000"
+    restart: unless-stopped
+
+  # ─────────────────────────────────────────────────────────────────
+  # WEBHOOKS PROCESSOR (Bull Queue Worker - NO EXTERNAL PORT)
+  # ─────────────────────────────────────────────────────────────────
+
+  webhooks:
+    build:
+      context: .
+      dockerfile: Dockerfile.webhooks
+    container_name: weats-webhooks
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      
+      # ⚠️ External Database (from Dokploy)
+      CORE_DB_URL: ${CORE_DB_URL}
+      
+      # ⚠️ External Redis (from Dokploy)
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_USERNAME: ${REDIS_USERNAME:-default}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_WEBHOOK_DB: ${REDIS_WEBHOOK_DB:-3}
+      
+      # Third-party APIs
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      STRIPE_API_KEY: ${STRIPE_API_KEY}
+      
+      # Encryption
+      ENCRYPTION_ALGORITHM: ${ENCRYPTION_ALGORITHM:-aes-256-ctr}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      ENCRYPTION_SALT: ${ENCRYPTION_SALT}
+      ENCRYPTION_IV: ${ENCRYPTION_IV}
+      
+      # Discord
+      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
+
+    networks:
+      - weats-network
+    # ⚠️ NO PORT EXPOSED - Uses internal Redis
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ─────────────────────────────────────────────────────────────────
+  # DASHBOARD MICROSERVICE (TCP Communication)
+  # ─────────────────────────────────────────────────────────────────
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: weats-dashboard
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      DASHBOARD_PORT: 3002
+      
+      # ⚠️ External Database (from Dokploy)
+      CORE_DB_URL: ${CORE_DB_URL}
+      
+      # ⚠️ External Redis (from Dokploy)
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_USERNAME: ${REDIS_USERNAME:-default}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_CACHE_DB: ${REDIS_CACHE_DB:-4}
+      
+      # Encryption
+      ENCRYPTION_ALGORITHM: ${ENCRYPTION_ALGORITHM:-aes-256-ctr}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      ENCRYPTION_SALT: ${ENCRYPTION_SALT}
+      ENCRYPTION_IV: ${ENCRYPTION_IV}
+
+    networks:
+      - weats-network
+    # ⚠️ Internal only - TCP communication with Gateway
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# ─────────────────────────────────────────────────────────────────
+# VOLUMES - REMOVED (Using Dokploy external services)
+# ─────────────────────────────────────────────────────────────────
+# No volumes needed - databases managed by Dokploy
+
+# ─────────────────────────────────────────────────────────────────
+# NETWORKS
+# ─────────────────────────────────────────────────────────────────
+
+networks:
+  weats-network:
+    driver: bridge

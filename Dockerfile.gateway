@@ -1,0 +1,49 @@
+# Build stage
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm@9
+
+# Copy monorepo files
+COPY package.json pnpm-lock.yaml ./
+COPY prisma ./prisma
+COPY apps/gateway ./apps/gateway
+COPY libs ./libs
+COPY nest-cli.json tsconfig.json tsconfig.build.json ./
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Build only gateway app
+RUN pnpm exec nest build gateway
+
+# Production stage
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install pnpm and curl for health checks
+RUN npm install -g pnpm@9 && apk add --no-cache curl
+
+# Copy built application from builder
+COPY --from=builder /app/dist/apps/gateway ./dist/apps/gateway
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001
+
+USER nodejs
+
+# Health check
+HEALTHCHECK --interval=15s --timeout=5s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:4000 || exit 1
+
+# Expose port
+EXPOSE 4000
+
+# Start gateway
+CMD ["node", "dist/apps/gateway/main"]

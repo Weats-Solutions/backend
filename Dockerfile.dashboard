@@ -1,0 +1,45 @@
+# Build stage
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm@9
+
+# Copy monorepo files
+COPY package.json pnpm-lock.yaml ./
+COPY prisma ./prisma
+COPY apps/dashboard ./apps/dashboard
+COPY libs ./libs
+COPY nest-cli.json tsconfig.json tsconfig.build.json ./
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Build only dashboard app
+RUN pnpm exec nest build dashboard
+
+# Production stage
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm@9
+
+# Copy built application from builder
+COPY --from=builder /app/dist/apps/dashboard ./dist/apps/dashboard
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001
+
+USER nodejs
+
+# Expose port (internal only, for TCP communication)
+EXPOSE 3002
+
+# Start dashboard microservice
+CMD ["node", "dist/apps/dashboard/main"]
