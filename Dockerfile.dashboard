@@ -42,7 +42,8 @@ RUN pnpm install --prod --frozen-lockfile
 
 # Copy built application
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/libs/database/prisma/generated ./libs/database/prisma/generated
+COPY --from=builder /app/libs/database/prisma/core/generated ./libs/database/prisma/core/generated
+COPY --from=builder /app/libs/database/prisma/orders/generated ./libs/database/prisma/orders/generated
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S nodejs && \
