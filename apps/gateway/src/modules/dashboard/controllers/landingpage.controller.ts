@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Query, Inject } from '@nestjs/common';
 import { ThrottlePublic } from '@weats/common/decorators/throttle.decorator';
-import { EstablishmentLanguage } from '@prisma/client';
+import { EstablishmentLanguage } from '@weats/database';
 import { ToUpperCasePipe } from '@weats/common/pipes/upper-case.pipe';
 import { ClientProxy } from '@nestjs/microservices';
 import { DASHBOARD_SERVICE } from '@weats/common/constants/services';

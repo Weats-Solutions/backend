@@ -1,6 +1,6 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { CorePrismaService } from '@weats/database';
-import { EstablishmentLanguage } from '@prisma/client';
+import { EstablishmentLanguage } from '@weats/database';
 import { RpcException } from '@nestjs/microservices';
 import { ERRORS } from '@weats/common';
 

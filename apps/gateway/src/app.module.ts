@@ -24,6 +24,7 @@ import { WebhooksModule } from './modules/webhook/webhook.module';
     UsersModule,
     DatabaseModule,
     DashboardModule,
+    
     WebhooksModule,  // ✅ Registra webhooks-queue aqui
     BullModule.registerQueueAsync(
       {
