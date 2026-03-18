@@ -9,34 +9,6 @@ services:
     container_name: weats-gateway
     ports:
       - "4000:4000"
-    environment:
-      NODE_ENV: ${NODE_ENV}
-      API_PORT: 4000
-      CORE_DB_URL: ${CORE_DB_URL}
-      ORDERS_DB_URL: ${ORDERS_DB_URL}
-      REDIS_HOST: ${REDIS_HOST}
-      REDIS_PORT: ${REDIS_PORT}
-      REDIS_USERNAME: ${REDIS_USERNAME}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      REDIS_EMAIL_DB: ${REDIS_EMAIL_DB}
-      REDIS_IMAGES_DB: ${REDIS_IMAGES_DB}
-      REDIS_WEBHOOK_DB: ${REDIS_WEBHOOK_DB}
-      REDIS_CACHE_DB: ${REDIS_CACHE_DB}
-      REDIS_QRCODES_DB: ${REDIS_QRCODES_DB}
-      REDIS_SESSION_DB: ${REDIS_SESSION_DB}
-      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
-      CLERK_WEBHOOK_SECRET: ${CLERK_WEBHOOK_SECRET}
-      STRIPE_API_KEY: ${STRIPE_API_KEY}
-      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
-      CLOUDFLARE_IMAGES_ACCOUNT_ID: ${CLOUDFLARE_IMAGES_ACCOUNT_ID}
-      CLOUDFLARE_CDN_URL: ${CLOUDFLARE_CDN_URL}
-      ENCRYPTION_ALGORITHM: ${ENCRYPTION_ALGORITHM}
-      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
-      ENCRYPTION_SALT: ${ENCRYPTION_SALT}
-      ENCRYPTION_IV: ${ENCRYPTION_IV}
-      APP_URL: ${APP_URL}
-      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
-      EUPAGO_API_URL: ${EUPAGO_API_URL}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
@@ -52,21 +24,6 @@ services:
       context: .
       dockerfile: Dockerfile.webhooks
     container_name: weats-webhooks
-    environment:
-      NODE_ENV: ${NODE_ENV}
-      CORE_DB_URL: ${CORE_DB_URL}
-      REDIS_HOST: ${REDIS_HOST}
-      REDIS_PORT: ${REDIS_PORT}
-      REDIS_USERNAME: ${REDIS_USERNAME}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      REDIS_WEBHOOK_DB: ${REDIS_WEBHOOK_DB}
-      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
-      STRIPE_API_KEY: ${STRIPE_API_KEY}
-      ENCRYPTION_ALGORITHM: ${ENCRYPTION_ALGORITHM}
-      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
-      ENCRYPTION_SALT: ${ENCRYPTION_SALT}
-      ENCRYPTION_IV: ${ENCRYPTION_IV}
-      DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
     restart: unless-stopped
     logging:
       driver: "json-file"
@@ -81,19 +38,6 @@ services:
       context: .
       dockerfile: Dockerfile.dashboard
     container_name: weats-dashboard
-    environment:
-      NODE_ENV: ${NODE_ENV}
-      DASHBOARD_PORT: 3002
-      CORE_DB_URL: ${CORE_DB_URL}
-      REDIS_HOST: ${REDIS_HOST}
-      REDIS_PORT: ${REDIS_PORT}
-      REDIS_USERNAME: ${REDIS_USERNAME}
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-      REDIS_CACHE_DB: ${REDIS_CACHE_DB}
-      ENCRYPTION_ALGORITHM: ${ENCRYPTION_ALGORITHM}
-      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
-      ENCRYPTION_SALT: ${ENCRYPTION_SALT}
-      ENCRYPTION_IV: ${ENCRYPTION_IV}
     restart: unless-stopped
     logging:
       driver: "json-file"
