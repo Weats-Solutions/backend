@@ -23,6 +23,7 @@ export class ImageService {
         establishmentId: string,
         options?: { cursor?: string | null; limit?: number; search?: string },
     ) {
+        //teste
         const limit = options?.limit ?? 18;
         const cursor = options?.cursor ?? null;
         const search = options?.search?.trim() ?? null;
