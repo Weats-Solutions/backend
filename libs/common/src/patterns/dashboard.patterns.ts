@@ -28,7 +28,10 @@ export const DASHBOARD_PATTERNS = {
   EUPAGO_GENERATE_CREDIT_CARD_PAYMENT: 'dashboard.eupago.generate_credit_card_payment',
   EUPAGO_GENERATE_GOOGLE_PAY_PAYMENT: 'dashboard.eupago.generate_google_pay_payment',
   EUPAGO_GENERATE_APPLE_PAY_PAYMENT: 'dashboard.eupago.generate_apple_pay_payment',
+  EUPAGO_GENERATE_HOSTED_PAYMENT: 'dashboard.eupago.generate_hosted_payment',
   EUPAGO_GENERATE_MBWAY_PAYMENT: 'dashboard.eupago.generate_mbway_payment',
 
   LANDINGPAGE_GET_BY_SLUG: 'dashboard.landingpage.get_by_slug',
+  LANDINGPAGE_GET_THEME: 'dashboard.landingpage.get_theme',
+  THEME_UPDATE: 'dashboard.theme.update',
 };

@@ -52,7 +52,8 @@ export class EstablishmentStaffGuard implements CanActivate {
       !establishment.primaryLanguage ||
       !establishment.availableLanguages ||
       !establishment.currency ||
-      !establishment.timezone
+      !establishment.timezone ||
+      !establishment.slug
     ) {
       throw new BadRequestException({
         message: 'Establishment not found',
@@ -63,6 +64,7 @@ export class EstablishmentStaffGuard implements CanActivate {
     request.establishment = {
       id: establishment.id,
       ownerId: establishment.ownerId,
+      slug: establishment.slug,
       stripeCustomerId: establishment.stripeCustomerId,
       primaryLanguage: establishment.primaryLanguage,
       availableLanguages:

@@ -10,9 +10,11 @@ import { UserController } from './controllers/user.controller';
 import { ImageController } from './controllers/image.controller';
 import { PlanController } from './controllers/plan.controller';
 import { LandingpageController } from './controllers/landingpage.controller';
+import { EupagoIntegrationController } from './controllers/integrations/eupago.controller';
+import { EncryptionModule } from '@weats/encryption';
 
 @Module({
-  imports: [ConfigsModule, IntegrationsModule, DatabaseModule],
+  imports: [ConfigsModule, IntegrationsModule, DatabaseModule, EncryptionModule],
   providers: [
     {
       provide: DASHBOARD_SERVICE,
@@ -29,6 +31,7 @@ import { LandingpageController } from './controllers/landingpage.controller';
     PlanController,
     ImageController,
     LandingpageController,
+    EupagoIntegrationController,
   ],
 })
 export class DashboardModule { }

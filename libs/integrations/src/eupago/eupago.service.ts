@@ -9,13 +9,7 @@ import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import {
     EupagoMultibancoRequest,
-    EupagoMultibancoResponse,
-    EupagoCreditCardRequest,
-    EupagoCreditCardSuccessResponse,
-    EupagoGooglePayRequest,
-    EupagoGooglePayResponse,
-    EupagoApplePayRequest,
-    EupagoApplePayResponse,
+    EupagoMultibancoResponse, EupagoCreditCardSuccessResponse, EupagoGooglePayResponse, EupagoApplePayResponse,
     EupagoMbwayRequest,
     EupagoMbwayResponse,
     EupagoKeyStatus,
@@ -23,7 +17,7 @@ import {
     EupagoDeleteResult,
     EupagoCryptoKeyResult,
     Establishment,
-    PaymentRequest,
+    PaymentRequest
 } from '@weats/types';
 import { CorePrismaService } from '@weats/database';
 import { EncryptionService } from '@weats/encryption';
@@ -42,7 +36,17 @@ type EupagoOperation =
     | 'ReferenceInfo'
     | 'CreditCard'
     | 'GooglePay'
-    | 'ApplePay'
+    | 'ApplePay';
+
+const EUPAGO_ENDPOINTS: Record<EupagoOperation, string> = {
+    Multibanco: '/clientes/rest_api/multibanco/create',
+    MBWAY: '/api/v1.02/mbway/create',
+    CreditCard: '/api/v1.02/creditcard/create',
+    GooglePay: '/api/v1.02/googlepay/create',
+    ApplePay: '/api/v1.02/euapplepay/create',
+    Payshop: '/api/v1.02/payshop/create',
+    ReferenceInfo: '/api/v1.02/reference/info',
+};
 
 
 /** Parameters for the unified private `post()` helper. */
@@ -237,16 +241,13 @@ export class EupagoService {
 
     /**
      * Creates a Multibanco payment reference.
-     *
-     * POST /clientes/rest_api/multibanco/create
-     * Auth: ApiKey header
      */
     async createMultibancoReference(
         establishmentId: string,
         dto: Omit<EupagoMultibancoRequest, 'chave'>,
     ): Promise<EupagoMultibancoResponse> {
         const apiKey = await this.getDecryptedKey(establishmentId);
-        const url = `${this.eupagoApiUrl}/clientes/rest_api/multibanco/create`;
+        const url = `${this.eupagoApiUrl}${EUPAGO_ENDPOINTS.Multibanco}`;
         const body: EupagoMultibancoRequest = { ...dto, chave: apiKey };
 
         return this.post<EupagoMultibancoResponse>({
@@ -258,85 +259,72 @@ export class EupagoService {
         });
     }
 
-    // ─── Credit Card ────────────────────────────────────────────────────────
+    // ─── Hosted Payments (Credit Card, Google Pay, Apple Pay) ────────────────
 
     /**
-     * Creates a hosted checkout URL for a Credit Card payment (3D Secure).
-     *
-     * POST /api/v1.02/creditcard/create — Max amount: 3999€
+     * Unified method for payment methods that share the same hosted checkout structure.
      */
+    async createHostedPayment<T>(
+        operation: 'CreditCard' | 'GooglePay' | 'ApplePay',
+        establishment: Establishment,
+        identifier: string,
+        dto: EupagoCreatePaymentDto,
+    ): Promise<T> {
+        const apiKey = await this.getDecryptedKey(establishment.id);
+        const payment = this.buildHostedCheckoutPayment(dto, establishment.currency, identifier);
+        const url = `${this.eupagoApiUrl}${EUPAGO_ENDPOINTS[operation]}`;
+
+        return this.post<T>({
+            url,
+            body: { payment },
+            apiKey,
+            operation,
+        });
+    }
+
     async createCreditCardPayment(
         establishment: Establishment,
         identifier: string,
         dto: EupagoCreatePaymentDto,
     ): Promise<EupagoCreditCardSuccessResponse> {
-        const apiKey = await this.getDecryptedKey(establishment.id);
-        const payment = this.buildHostedCheckoutPayment(dto, establishment.currency, identifier);
-        const url = `${this.eupagoApiUrl}/api/v1.02/creditcard/create`;
-
-        return this.post<EupagoCreditCardSuccessResponse>({
-            url,
-            body: { payment },
-            apiKey,
-            operation: 'CreditCard',
-        });
+        return this.createHostedPayment<EupagoCreditCardSuccessResponse>(
+            'CreditCard',
+            establishment,
+            identifier,
+            dto,
+        );
     }
 
-    // ─── Google Pay ─────────────────────────────────────────────────────────
-
-    /**
-     * Creates a hosted Google Pay checkout URL.
-     *
-     * POST /api/v1.02/googlepay/create
-     */
     async createGooglePayPayment(
         establishment: Establishment,
         identifier: string,
         dto: EupagoCreatePaymentDto,
     ): Promise<EupagoGooglePayResponse> {
-        const apiKey = await this.getDecryptedKey(establishment.id);
-        const payment = this.buildHostedCheckoutPayment(dto, establishment.currency, identifier);
-        const url = `${this.eupagoApiUrl}/api/v1.02/googlepay/create`;
-
-        return this.post<EupagoGooglePayResponse>({
-            url,
-            body: { payment },
-            apiKey,
-            operation: 'GooglePay',
-        });
+        return this.createHostedPayment<EupagoGooglePayResponse>(
+            'GooglePay',
+            establishment,
+            identifier,
+            dto,
+        );
     }
 
-    // ─── Apple Pay ──────────────────────────────────────────────────────────
-
-    /**
-     * Creates a hosted Apple Pay checkout URL.
-     *
-     * POST /api/v1.02/euapplepay/create
-     */
     async createApplePayPayment(
         establishment: Establishment,
         identifier: string,
         dto: EupagoCreatePaymentDto,
     ): Promise<EupagoApplePayResponse> {
-        const apiKey = await this.getDecryptedKey(establishment.id);
-        const payment = this.buildHostedCheckoutPayment(dto, establishment.currency, identifier);
-        const url = `${this.eupagoApiUrl}/api/v1.02/euapplepay/create`;
-
-        return this.post<EupagoApplePayResponse>({
-            url,
-            body: { payment },
-            apiKey,
-            operation: 'ApplePay',
-        });
+        return this.createHostedPayment<EupagoApplePayResponse>(
+            'ApplePay',
+            establishment,
+            identifier,
+            dto,
+        );
     }
 
     // ─── MB WAY (v2) ────────────────────────────────────────────────────────
 
     /**
      * Sends a push notification to the customer's MB WAY app.
-     * No redirect URLs needed — the customer accepts in the app within 5 min.
-     *
-     * POST /api/v1.02/mbway/create
      */
     async createMbwayPayment(
         establishment: Establishment,
@@ -344,7 +332,7 @@ export class EupagoService {
         dto: EupagoCreateMbwayPaymentDto,
     ): Promise<EupagoMbwayResponse> {
         const apiKey = await this.getDecryptedKey(establishment.id);
-        const url = `${this.eupagoApiUrl}/api/v1.02/mbway/create`;
+        const url = `${this.eupagoApiUrl}${EUPAGO_ENDPOINTS.MBWAY}`;
 
         const body: EupagoMbwayRequest = {
             payment: {

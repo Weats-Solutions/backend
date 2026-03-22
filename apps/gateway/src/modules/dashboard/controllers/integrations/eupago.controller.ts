@@ -2,7 +2,7 @@ import { Controller, Post, Get, Delete, Patch, Body, UseGuards, Inject } from '@
 import { CurrentEstablishment, ClerkGuard, EstablishmentStaffGuard, Roles } from '@weats/common';
 import { EupagoConfigGuard } from '@weats/common/guards/eupago-config.guard';
 import { Establishment } from '@weats/types';
-import { SaveEupagoKeyDto, SaveEupagoCryptoKeyDto, EupagoCreatePaymentDto, EupagoCreateMbwayPaymentDto } from '@weats/contracts/dashboard/dtos/eupago';
+import { SaveEupagoKeyDto, SaveEupagoCryptoKeyDto, EupagoCreatePaymentDto, EupagoCreateMbwayPaymentDto, EupagoCreateHostedPaymentDto } from '@weats/contracts/dashboard/dtos/eupago';
 import { ClientProxy } from '@nestjs/microservices';
 import { DASHBOARD_SERVICE } from '@weats/common/constants';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
@@ -35,7 +35,7 @@ export class EupagoIntegrationController {
         @CurrentEstablishment() establishment: Establishment,
         @Body() dto: SaveEupagoKeyDto,
     ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_SAVE_KEY, { establishmentId: establishment.id, apiKey: dto.apiKey });
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_SAVE_KEY, { establishmentId: establishment.id, dto });
     }
 
     /**
@@ -93,57 +93,27 @@ export class EupagoIntegrationController {
      * Returns { url, referencia? } — redirect the customer to `url` to pay.
      */
 
-    @Post('credit-card/generate')
-    @UseGuards(EupagoConfigGuard)
-    generateCreditCardPayment(
-        @CurrentEstablishment() establishment: Establishment,
-        @Body() dto: EupagoCreatePaymentDto,
-    ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_GENERATE_CREDIT_CARD_PAYMENT, {
-            establishment,
-            identifier: `cc-${establishment.id}`,
-            dto
-        });
-    }
-
-    // ─── Google Pay Payment ───────────────────────────────────────────────────
-
+    // ─── Hosted Payment (Generic) ───────────────────────────────────────────
     /**
-     * POST /v1/integrations/eupago/google-pay/generate
-     * Creates a hosted checkout URL for a Google Pay payment.
-     * Requires valid EuPago configuration.
-     * Returns { url, referencia? } — redirect the customer to `url` to pay.
+     * POST /v1/integrations/eupago/hosted-payment
+     * Generates a hosted checkout URL for Credit Card, Google Pay or Apple Pay.
      */
-    @Post('google-pay/generate')
+    @Post('hosted-payment')
     @UseGuards(EupagoConfigGuard)
-    generateGooglePayPayment(
+    generateHostedPayment(
         @CurrentEstablishment() establishment: Establishment,
-        @Body() dto: EupagoCreatePaymentDto,
+        @Body() dto: EupagoCreateHostedPaymentDto,
     ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_GENERATE_GOOGLE_PAY_PAYMENT, {
-            establishment,
-            identifier: `gp-${establishment.id}`,
-            dto
-        });
-    }
+        const typePrefixes = {
+            CreditCard: 'cc',
+            GooglePay: 'gp',
+            ApplePay: 'ap'
+        };
 
-    // ─── Apple Pay Payment ────────────────────────────────────────────────────
-
-    /**
-     * POST /v1/integrations/eupago/apple-pay/generate
-     * Creates a hosted checkout URL for an Apple Pay payment.
-     * Requires valid EuPago configuration.
-     * Returns { url, referencia? } — redirect the customer to `url` to pay.
-     */
-    @Post('apple-pay/generate')
-    @UseGuards(EupagoConfigGuard)
-    generateApplePayPayment(
-        @CurrentEstablishment() establishment: Establishment,
-        @Body() dto: EupagoCreatePaymentDto,
-    ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_GENERATE_APPLE_PAY_PAYMENT, {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.EUPAGO_GENERATE_HOSTED_PAYMENT, {
             establishment,
-            identifier: `ap-${establishment.id}`,
+            type: dto.type,
+            identifier: `${typePrefixes[dto.type]}-${establishment.id}`,
             dto
         });
     }

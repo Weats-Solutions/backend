@@ -14,7 +14,7 @@ export class GatewayConfigService {
     const isProd = this.configService.get('NODE_ENV') === 'production';
     return (
       this.configService.get('DASHBOARD_HOST') ||
-      (isProd ? 'dashboard' : '0.0.0.0')
+      (isProd ? 'dashboard' : 'localhost')
     );
   }
 

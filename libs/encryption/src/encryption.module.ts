@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { EncryptionService } from './encryption.service';
+import { ConfigsModule } from '@weats/configs';
 import { CryptoConfigService } from '@weats/configs/crypto-config.service';
 
 @Module({
+  imports: [ConfigsModule],
   providers: [EncryptionService,
     {
       provide: 'ENCRYPTION_ALGORITHM',

@@ -4,9 +4,11 @@ import { HttpModule } from "@nestjs/axios";
 import { EupagoConfigService } from "@weats/configs/eupago-config.service";
 import { EupagoService } from "./eupago.service";
 import { EupagoConfigGuard } from "../../../common/src/guards/eupago-config.guard";
+import { DatabaseModule } from "@weats/database";
+import { EncryptionModule } from "@weats/encryption";
 
 @Module({
-    imports: [HttpModule, ConfigsModule],
+    imports: [HttpModule, ConfigsModule, DatabaseModule, EncryptionModule],
     providers: [EupagoService, EupagoConfigGuard,
         {
             provide: 'EUPAGO_API_URL',

@@ -8,6 +8,7 @@ import { ImageModule } from './modules/image/image.module';
 import { LandingpageModule } from './modules/landingpage/landingpage.module';
 import { ConfigsModule } from '@weats/configs';
 import { ConfigModule } from '@nestjs/config';
+import { EupagoModule } from './modules/integrations/eupago/eupago.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ConfigModule } from '@nestjs/config';
     PlanModule,
     ImageModule,
     LandingpageModule,
+    EupagoModule,
   ],
   controllers: [DashboardController],
   providers: [DashboardService],

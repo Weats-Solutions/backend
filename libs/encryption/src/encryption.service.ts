@@ -3,13 +3,13 @@ import { createCipheriv, createDecipheriv, scryptSync } from 'node:crypto';
 
 @Injectable()
 export class EncryptionService {
+    private readonly key: Buffer;
+    private readonly iv: Buffer;
+
     constructor(@Inject('ENCRYPTION_ALGORITHM') private readonly algorithm: string,
         @Inject('ENCRYPTION_IV') private readonly EncryptionIv: string,
         @Inject('ENCRYPTION_KEY') private readonly EncryptionKey: string,
         @Inject('ENCRYPTION_SALT') private readonly EncryptionSalt: string,
-
-        private readonly key: Buffer,
-        private readonly iv: Buffer,
     ) {
         try {
             // 1. Transformamos o Salt e o IV que estão no .env (Hex) de volta em Buffers

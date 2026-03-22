@@ -5,3 +5,5 @@ export * from './discord/discord.service';
 export * from './discord/discord.module';
 export * from './clerk/clerk.module';
 export * from './clerk/clerk.service';
+export * from './eupago/eupago.module';
+export * from './eupago/eupago.service';

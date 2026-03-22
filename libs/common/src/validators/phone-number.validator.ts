@@ -3,6 +3,7 @@ import {
     ValidationOptions,
     ValidatorConstraint,
     ValidatorConstraintInterface,
+    ValidationArguments,
 } from 'class-validator';
 import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js';
 
@@ -12,8 +13,15 @@ import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js';
  */
 @ValidatorConstraint({ name: 'isValidPhoneNumber', async: false })
 export class IsValidPhoneNumberConstraint implements ValidatorConstraintInterface {
-    validate(value: string, args: any): boolean {
-        const [countryCode] = args.constraints;
+    validate(value: string, args: ValidationArguments): boolean {
+        const [propertyName] = args.constraints;
+        const countryCode = (args.object as any)[propertyName];
+
+        // If countryCode is not present, we can't validate the phone number properly.
+        // Usually, another validator (@IsNotEmpty or @IsValidCountryCode) should handle this.
+        if (!countryCode || typeof countryCode !== 'string') {
+            return false;
+        }
 
         // Phone number should be digits only
         if (!/^\d+$/.test(value)) {
@@ -27,9 +35,10 @@ export class IsValidPhoneNumberConstraint implements ValidatorConstraintInterfac
         return isValidPhoneNumber(e164);
     }
 
-    defaultMessage(args: any): string {
-        const [countryCode] = args.constraints;
-        return `customerPhone: Número de telefone inválido para o país ${countryCode}`;
+    defaultMessage(args: ValidationArguments): string {
+        const [propertyName] = args.constraints;
+        const countryCode = (args.object as any)[propertyName];
+        return `customerPhone: Número de telefone inválido para o país ${countryCode || 'desconhecido'}`;
     }
 }
 
