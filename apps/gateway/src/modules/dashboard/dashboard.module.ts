@@ -12,9 +12,11 @@ import { PlanController } from './controllers/plan.controller';
 import { LandingpageController } from './controllers/landingpage.controller';
 import { EupagoIntegrationController } from './controllers/integrations/eupago.controller';
 import { EncryptionModule } from '@weats/encryption';
+import { FeatureUsageModule } from '@weats/common/feature/feature-usage.module';
+import { MenuController } from './controllers/menu.controller';
 
 @Module({
-  imports: [ConfigsModule, IntegrationsModule, DatabaseModule, EncryptionModule],
+  imports: [ConfigsModule, IntegrationsModule, DatabaseModule, EncryptionModule, FeatureUsageModule],
   providers: [
     {
       provide: DASHBOARD_SERVICE,
@@ -31,6 +33,7 @@ import { EncryptionModule } from '@weats/encryption';
     PlanController,
     ImageController,
     LandingpageController,
+    MenuController,
     EupagoIntegrationController,
   ],
 })

@@ -4,12 +4,13 @@ import { AppConfigService } from '@weats/configs/app-config.service';
 import { InjectQueue } from '@nestjs/bull';
 import type { Queue } from 'bull';
 import { User, Establishment } from '@weats/types';
-import { RESPONSE_CODES, ERRORS } from '@weats/common';
-import { CreateEstablishmentDto } from '@weats/contracts/dashboard/dtos/establishment';
-import { CorePrismaService } from '@weats/database';
+import { RESPONSE_CODES, ERRORS, FeatureUsageService } from '@weats/common';
+import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
+import { CorePrismaService, EstablishmentLanguage } from '@weats/database';
 import { EstablishmentStatus } from '@weats/database';
 import { ulid } from 'ulid';
 import { ClerkService, StripeService } from '@weats/integrations';
+import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 
 @Injectable()
 export class EstablishmentService {
@@ -21,6 +22,7 @@ export class EstablishmentService {
     @InjectQueue('emails') private readonly emailQueue: Queue,
     @Inject('APP_URL') private readonly appUrl: string,
     private readonly clerkService: ClerkService,
+    private readonly featureUsageService: FeatureUsageService,
   ) { }
 
   // ─── Queries ────────────────────────────────────────────────────────
@@ -57,6 +59,29 @@ export class EstablishmentService {
             status: true,
             currentPeriodEnd: true,
             cancelAtPeriodEnd: true,
+            planCycle: {
+              select: {
+                cycle: true,
+                price: true,
+                plan: {
+                  select: {
+                    name: true,
+                    features: {
+                      select: {
+                        valueBoolean: true,
+                        valueQuantity: true,
+                        feature: {
+                          select: {
+                            name: true,
+                            type: true,
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
           },
         },
       },
@@ -263,6 +288,67 @@ export class EstablishmentService {
     });
 
     return result;
+  }
+
+  async updateLanguages(establishment: Establishment, updateEstablishmentLanguagesDto: UpdateEstablishmentLanguagesDto) {
+    const { limit } = await this.featureUsageService.getUsageAndLimit("languages", establishment.id)
+    if (limit !== null && updateEstablishmentLanguagesDto.availableLanguages.length > limit) {
+      throw new RpcException({
+        status: 400,
+        message: ERRORS.FEATURE_LIMIT_REACHED,
+        code: ERRORS.FEATURE_LIMIT_REACHED,
+      });
+    }
+
+    if (!updateEstablishmentLanguagesDto.availableLanguages.includes(establishment.primaryLanguage as EstablishmentLanguage)) {
+      throw new RpcException({
+        status: 400,
+        message: ERRORS.BAD_REQUEST,
+        code: ERRORS.BAD_REQUEST,
+      });
+    }
+
+    const updatedEstablishment = await this.prisma.establishment.update({
+      where: { id: establishment.id },
+      data: {
+        availableLanguages: updateEstablishmentLanguagesDto.availableLanguages,
+      },
+    });
+
+    return {
+      message: RESPONSE_CODES.ESTABLISHMENT.UPDATED,
+      updatedEstablishment,
+    };
+  }
+
+  async updateBranding(establishmentId: string, updateEstablishmentBrandingDto: UpdateEstablishmentBrandingDto) {
+
+    const updatedEstablishment = await this.prisma.establishment.update({
+      where: { id: establishmentId },
+      data: {
+        logoImageId: updateEstablishmentBrandingDto.logoImage?.id ?? null,
+        bannerImageId: updateEstablishmentBrandingDto.bannerImage?.id ?? null,
+      },
+      select: {
+        logoImage: {
+          select: {
+            id: true,
+            url: true,
+          },
+        },
+        bannerImage: {
+          select: {
+            id: true,
+            url: true,
+          },
+        },
+      },
+    });
+
+    return {
+      message: RESPONSE_CODES.ESTABLISHMENT.UPDATED,
+
+    };
   }
 
   // ─── Stripe / Subscriptions ─────────────────────────────────────────

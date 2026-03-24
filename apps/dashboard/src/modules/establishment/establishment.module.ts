@@ -9,6 +9,7 @@ import { IntegrationsModule } from '@weats/integrations';
 import { DatabaseModule } from '@weats/database';
 
 import { ConfigsModule } from '@weats/configs';
+import { FeatureUsageModule } from '@weats/common/feature/feature-usage.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ConfigsModule } from '@weats/configs';
     }),
     DatabaseModule,
     IntegrationsModule,
+    FeatureUsageModule
   ],
   controllers: [EstablishmentController],
   providers: [

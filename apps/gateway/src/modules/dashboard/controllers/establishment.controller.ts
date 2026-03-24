@@ -1,10 +1,12 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   ForbiddenException,
   Get,
   Inject,
   Param,
+  Patch,
   Post,
   Put,
   UseGuards,
@@ -17,16 +19,21 @@ import {
   EstablishmentStaffGuard,
   DASHBOARD_SERVICE,
   ERRORS,
+  FeatureLimitGuard,
+  RequiresFeature,
+  FeatureUsageService,
 } from '@weats/common';
 import type { Establishment, User } from '@weats/types';
-import { CreateEstablishmentDto } from '@weats/contracts/dashboard/dtos/establishment';
+import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { ClientProxy } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
+import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 
 @Controller('establishments')
 export class EstablishmentController {
   constructor(
     @Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy,
+    private readonly featureUsageService: FeatureUsageService,
   ) { }
 
   @UseGuards(ClerkGuard)
@@ -92,5 +99,34 @@ export class EstablishmentController {
     @CurrentUser() user: User,
   ) {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE, { id, updateEstablishmentDto, user });
+  }
+
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Patch(':id/languages')
+  async updateLanguages(
+    @Body() updateEstablishmentLanguagesDto: UpdateEstablishmentLanguagesDto,
+    @CurrentEstablishment() establishment: Establishment,
+  ) {
+    const { limit } = await this.featureUsageService.getUsageAndLimit('languages', establishment.id);
+    if (limit !== null && updateEstablishmentLanguagesDto.availableLanguages.length > limit) {
+      throw new ForbiddenException({
+        message: ERRORS.FEATURE_LIMIT_REACHED,
+        code: ERRORS.FEATURE_LIMIT_REACHED,
+      });
+    }
+
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_LANGUAGES, { establishment, updateEstablishmentLanguagesDto });
+  }
+
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Patch(':id/branding')
+  updateBranding(
+    @Body() updateEstablishmentBrandingDto: UpdateEstablishmentBrandingDto,
+    @CurrentEstablishment() currentEstablishment: Establishment,
+  ) {
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_BRANDING, {
+      establishmentId: currentEstablishment.id,
+      updateEstablishmentBrandingDto,
+    });
   }
 }

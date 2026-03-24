@@ -6,6 +6,17 @@ export const DASHBOARD_PATTERNS = {
   ESTABLISHMENT_GET_PORTAL_SESSION: 'dashboard.establishment.get_portal_session',
   ESTABLISHMENT_SUBSCRIBE_TO_PLAN: 'dashboard.establishment.subscribe_to_plan',
   ESTABLISHMENT_CANCEL_SUBSCRIPTION: 'dashboard.establishment.cancel_subscription',
+  ESTABLISHMENT_UPDATE_LANGUAGES: 'dashboard.establishment.update_languages',
+  ESTABLISHMENT_UPDATE_BRANDING: 'dashboard.establishment.update_branding',
+
+  MENU_LIST: 'dashboard.menu.list',
+  MENU_GET_BY_ID: 'dashboard.menu.get_by_id',
+  MENU_CREATE: 'dashboard.menu.create',
+  MENU_UPDATE_SETTINGS: 'dashboard.menu.update_settings',
+  MENU_UPDATE_CONTENT: 'dashboard.menu.update_content',
+  MENU_UPDATE_POSITIONS: 'dashboard.menu.update_positions',
+  MENU_DELETE: 'dashboard.menu.delete',
+
 
 
   USER_GET_ESTABLISHMENTS: 'dashboard.user.get_establishments',
