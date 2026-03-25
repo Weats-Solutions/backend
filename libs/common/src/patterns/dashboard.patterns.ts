@@ -18,6 +18,28 @@ export const DASHBOARD_PATTERNS = {
   MENU_DELETE: 'dashboard.menu.delete',
 
 
+  ITEM_CREATE: 'dashboard.item.create',
+  ITEM_UPDATE: 'dashboard.item.update',
+  ITEM_GET_BY_ID: 'dashboard.item.get_by_id',
+  ITEM_GET_ALL: 'dashboard.item.get_all',
+  ITEM_DELETE: 'dashboard.item.delete',
+  ITEM_DUPLICATE: 'dashboard.item.duplicate',
+  ITEM_BULK_UPDATE_STATUS: 'dashboard.item.bulk_update_status',
+  ITEM_BULK_DELETE: 'dashboard.item.bulk_delete',
+  ITEM_GET_ALLERGENS: 'dashboard.item.get_allergens',
+  ITEM_GET_TAXES: 'dashboard.item.get_taxes',
+
+  ADDON_CREATE: 'dashboard.addon.create',
+  ADDON_EDIT: 'dashboard.addon.edit',
+  ADDON_GET_BY_ESTABLISHMENT: 'dashboard.addon.get_by_establishment',
+
+  VARIANT_OPTION_CREATE: 'dashboard.variant-option.create',
+  VARIANT_OPTION_EDIT: 'dashboard.variant-option.edit',
+  VARIANT_OPTION_GET_BY_ESTABLISHMENT: 'dashboard.variant-option.get_by_establishment',
+  VARIANT_OPTION_GET_BY_ID: 'dashboard.variant-option.get_by_id',
+  VARIANT_OPTION_DELETE: 'dashboard.variant-option.delete',
+
+
 
   USER_GET_ESTABLISHMENTS: 'dashboard.user.get_establishments',
   USER_MANAGE_SUBSCRIPTION: 'dashboard.user.manage_subscription',

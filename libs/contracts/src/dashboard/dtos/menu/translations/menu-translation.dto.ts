@@ -11,8 +11,8 @@ export class MenuTranslationDto {
   name: string;
 
   @IsString()
-  @IsOptional()
-  description?: string;
+  @IsNotEmpty()
+  description: string;
 
   @IsString()
   @IsOptional()

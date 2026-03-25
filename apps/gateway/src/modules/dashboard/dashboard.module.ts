@@ -14,6 +14,7 @@ import { EupagoIntegrationController } from './controllers/integrations/eupago.c
 import { EncryptionModule } from '@weats/encryption';
 import { FeatureUsageModule } from '@weats/common/feature/feature-usage.module';
 import { MenuController } from './controllers/menu.controller';
+import { ItemController } from './controllers/item.controller';
 
 @Module({
   imports: [ConfigsModule, IntegrationsModule, DatabaseModule, EncryptionModule, FeatureUsageModule],
@@ -34,6 +35,7 @@ import { MenuController } from './controllers/menu.controller';
     ImageController,
     LandingpageController,
     MenuController,
+    ItemController,
     EupagoIntegrationController,
   ],
 })

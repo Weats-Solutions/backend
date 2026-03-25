@@ -54,6 +54,9 @@ export class EstablishmentService {
         logoImage: {
           select: { id: true, url: true },
         },
+        bannerImage: {
+          select: { id: true, url: true },
+        },
         subscription: {
           select: {
             status: true,
@@ -94,6 +97,9 @@ export class EstablishmentService {
         code: ERRORS.ESTABLISHMENT_NOT_FOUND,
       });
     }
+
+    console.log("LOGO IMAGE", establishment.logoImage?.id)
+    console.log("BANNER IMAGE", establishment.bannerImage?.id)
 
     return establishment;
   }
@@ -344,6 +350,9 @@ export class EstablishmentService {
         },
       },
     });
+
+    console.log("LOGO IMAGE", updateEstablishmentBrandingDto.logoImage?.id)
+    console.log("BANNER IMAGE", updateEstablishmentBrandingDto.bannerImage?.id)
 
     return {
       message: RESPONSE_CODES.ESTABLISHMENT.UPDATED,
