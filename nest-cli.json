@@ -91,6 +91,15 @@
         "tsConfigPath": "libs/integrations/tsconfig.lib.json"
       }
     },
+    "translate": {
+      "type": "library",
+      "root": "libs/translate",
+      "entryFile": "index",
+      "sourceRoot": "libs/translate/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/translate/tsconfig.lib.json"
+      }
+    },
     "types": {
       "type": "library",
       "root": "libs/types",

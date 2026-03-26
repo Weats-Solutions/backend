@@ -17,6 +17,16 @@ export const DASHBOARD_PATTERNS = {
   MENU_UPDATE_POSITIONS: 'dashboard.menu.update_positions',
   MENU_DELETE: 'dashboard.menu.delete',
 
+  CATEGORY_CREATE: 'dashboard.category.create',
+  CATEGORY_GET_BY_MENU: 'dashboard.category.get_by_menu',
+  CATEGORY_EDIT: 'dashboard.category.edit',
+  CATEGORY_DELETE: 'dashboard.category.delete',
+
+  SUBCATEGORY_CREATE: 'dashboard.subcategory.create',
+  SUBCATEGORY_GET_BY_CATEGORY: 'dashboard.subcategory.get_by_category',
+  SUBCATEGORY_EDIT: 'dashboard.subcategory.edit',
+  SUBCATEGORY_DELETE: 'dashboard.subcategory.delete',
+
 
   ITEM_CREATE: 'dashboard.item.create',
   ITEM_UPDATE: 'dashboard.item.update',

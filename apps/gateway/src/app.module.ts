@@ -11,6 +11,7 @@ import { IntegrationsModule } from '@weats/integrations';
 import { BullModule, BullModuleOptions } from '@nestjs/bull';
 import { RedisConfigService } from '@weats/configs';
 import { WebhooksModule } from './modules/webhook/webhook.module';
+import { TranslateModule } from './modules/translate/translate.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { WebhooksModule } from './modules/webhook/webhook.module';
     UsersModule,
     DatabaseModule,
     DashboardModule,
-    
+    TranslateModule,
+
     WebhooksModule,  // ✅ Registra webhooks-queue aqui
     BullModule.registerQueueAsync(
       {

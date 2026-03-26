@@ -17,6 +17,8 @@ import { MenuController } from './controllers/menu.controller';
 import { ItemController } from './controllers/item.controller';
 import { AddonController } from './controllers/addon.controller';
 import { VariantOptionsController } from './controllers/variant-options.controller';
+import { MenuCategoryController } from './controllers/menu/category.controller';
+import { MenuSubcategoryController } from './controllers/menu/subcategory.controller';
 
 @Module({
   imports: [ConfigsModule, IntegrationsModule, DatabaseModule, EncryptionModule, FeatureUsageModule],
@@ -37,6 +39,8 @@ import { VariantOptionsController } from './controllers/variant-options.controll
     ImageController,
     LandingpageController,
     MenuController,
+    MenuCategoryController,
+    MenuSubcategoryController,
     AddonController,
     VariantOptionsController,
     ItemController,

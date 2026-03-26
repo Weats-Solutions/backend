@@ -59,6 +59,12 @@
       "@weats/integrations/*": [
         "libs/integrations/src/*"
       ],
+      "@weats/translate": [
+        "libs/translate/src"
+      ],
+      "@weats/translate/*": [
+        "libs/translate/src/*"
+      ],
       "@weats/types": [
         "libs/types/src"
       ],

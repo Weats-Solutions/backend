@@ -10,6 +10,7 @@ import { ConfigsModule } from '@weats/configs';
 import { ConfigModule } from '@nestjs/config';
 import { EupagoModule } from './modules/integrations/eupago/eupago.module';
 import { MenuModule } from './modules/menu/menu.module';
+import { ItemModule } from './modules/item/item.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { MenuModule } from './modules/menu/menu.module';
     LandingpageModule,
     EupagoModule,
     MenuModule,
+    ItemModule,
   ],
   controllers: [DashboardController],
   providers: [DashboardService],
