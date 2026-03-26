@@ -4,7 +4,7 @@ import {
     Body
 } from '@nestjs/common';
 import { TranslateService } from '@weats/translate';
-import { EstablishmentLanguage } from '@prisma/client';
+import { EstablishmentLanguage } from '@weats/database';
 
 @Controller('translate')
 export class TranslateController {

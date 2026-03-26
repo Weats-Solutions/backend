@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
-import { EstablishmentLanguage } from "@prisma/client";
+import { EstablishmentLanguage } from "@weats/database";
 import { lastValueFrom } from "rxjs";
 
 @Injectable()

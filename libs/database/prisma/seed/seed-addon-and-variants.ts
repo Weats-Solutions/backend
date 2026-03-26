@@ -1,6 +1,7 @@
 import 'dotenv/config';
-import { PrismaClient, VariantType } from '@weats/database';
+import { PrismaClient } from '@prisma/a';
 import { PrismaPg } from '@prisma/adapter-pg';
+import { VariantType }from '@weats/database';
 
 // ============================================
 // CONFIGURAÇÃO
