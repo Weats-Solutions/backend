@@ -11,7 +11,7 @@ import {
   Min
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { EstablishmentLanguage, ItemStatus, MarketingTag, ModifierDisplayMode, SpiceLevel } from '@prisma/client';
+import { EstablishmentLanguage, ItemStatus, MarketingTag, ModifierDisplayMode, SpiceLevel } from '@weats/database';
 
 // =======================================================
 // DTO: A Variante Final (SKU) que vai ser gerada

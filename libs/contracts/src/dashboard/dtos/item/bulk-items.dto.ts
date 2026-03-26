@@ -1,5 +1,5 @@
 import { IsArray, IsEnum, IsString } from 'class-validator';
-import { ItemStatus } from '@prisma/client';
+import { ItemStatus } from '@weats/database';
 
 export class BulkStatusDto {
   @IsArray()

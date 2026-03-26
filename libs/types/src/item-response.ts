@@ -1,5 +1,5 @@
 // src/modules/item/types/item-response.types.ts
-import { ItemStatus, MarketingTag, SpiceLevel, ModifierDisplayMode } from '@prisma/client';
+import { ItemStatus, MarketingTag, SpiceLevel, ModifierDisplayMode } from '@weats/database';
 
 // ─── Shared Sub-types ──────────────────────────────────────────
 

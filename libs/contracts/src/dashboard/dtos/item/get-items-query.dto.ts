@@ -8,7 +8,7 @@ import {
     Max,
 } from 'class-validator';
 import { Type, Transform } from 'class-transformer';
-import { ItemStatus, MarketingTag, SpiceLevel } from '@prisma/client';
+import { ItemStatus, MarketingTag, SpiceLevel } from '@weats/database';
 
 export enum ItemSortBy {
     NAME = 'name',

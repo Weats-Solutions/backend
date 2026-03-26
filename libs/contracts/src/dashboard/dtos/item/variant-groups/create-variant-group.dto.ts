@@ -1,6 +1,6 @@
 import { IsString, IsEnum, IsBoolean, IsOptional, IsInt, Min, ValidateNested, IsArray } from 'class-validator';
 import { Type } from 'class-transformer';
-import { EstablishmentLanguage, VariantType } from '@prisma/client';
+import { EstablishmentLanguage, VariantType } from '@weats/database';
 
 
 export class VariantGroupTranslationDto {
