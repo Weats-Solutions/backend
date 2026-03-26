@@ -31,7 +31,11 @@
     "prisma:orders:gen": "cross-env PRISMA_DB_TYPE=orders prisma generate",
     "prisma:orders:push": "cross-env PRISMA_DB_TYPE=orders prisma db push",
     "prisma:orders:mig": "cross-env PRISMA_DB_TYPE=orders prisma migrate dev",
-    "prisma:orders:studio": "cross-env PRISMA_DB_TYPE=orders prisma studio"
+    "prisma:orders:studio": "cross-env PRISMA_DB_TYPE=orders prisma studio",
+    "seed:plans": "ts-node -r tsconfig-paths/register --transpile-only libs/database/prisma/seed/seed-plans.ts",
+    "seed:items": "ts-node -r tsconfig-paths/register --transpile-only libs/database/prisma/seed/seed-addon-and-variants.ts",
+    "seed:tax": "ts-node -r tsconfig-paths/register --transpile-only libs/database/prisma/seed/seed-tax.ts",
+    "seed:allergens": "ts-node -r tsconfig-paths/register --transpile-only libs/database/prisma/seed/seed-allergens.ts"
   },
   "dependencies": {
     "@bull-board/api": "^6.20.5",

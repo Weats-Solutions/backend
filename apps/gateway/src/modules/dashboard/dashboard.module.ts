@@ -15,6 +15,8 @@ import { EncryptionModule } from '@weats/encryption';
 import { FeatureUsageModule } from '@weats/common/feature/feature-usage.module';
 import { MenuController } from './controllers/menu.controller';
 import { ItemController } from './controllers/item.controller';
+import { AddonController } from './controllers/addon.controller';
+import { VariantOptionsController } from './controllers/variant-options.controller';
 
 @Module({
   imports: [ConfigsModule, IntegrationsModule, DatabaseModule, EncryptionModule, FeatureUsageModule],
@@ -35,6 +37,8 @@ import { ItemController } from './controllers/item.controller';
     ImageController,
     LandingpageController,
     MenuController,
+    AddonController,
+    VariantOptionsController,
     ItemController,
     EupagoIntegrationController,
   ],
