@@ -122,8 +122,6 @@ export class AddonService {
                 },
             });
 
-            console.log(globalAddons)
-
             return [...globalAddons, ...establishmentAddons];
         } catch (error) {
             console.error("Failed to find establishment addons:", error);
