@@ -12,6 +12,17 @@ import { ulid } from 'ulid';
 import { ClerkService, StripeService } from '@weats/integrations';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 
+export type NormalizedFeature =
+  | { type: "BOOLEAN"; enabled: boolean }
+  | { type: "QUANTITY"; limit: number };
+
+export interface NormalizedPlan {
+  id: string;
+  name: string;
+  features: Record<string, NormalizedFeature>;
+}
+
+
 @Injectable()
 export class EstablishmentService {
   private readonly logger = new Logger(EstablishmentService.name);
@@ -57,36 +68,6 @@ export class EstablishmentService {
         bannerImage: {
           select: { id: true, url: true },
         },
-        subscription: {
-          select: {
-            status: true,
-            currentPeriodEnd: true,
-            cancelAtPeriodEnd: true,
-            planCycle: {
-              select: {
-                cycle: true,
-                price: true,
-                plan: {
-                  select: {
-                    name: true,
-                    features: {
-                      select: {
-                        valueBoolean: true,
-                        valueQuantity: true,
-                        feature: {
-                          select: {
-                            name: true,
-                            type: true,
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
       },
     });
 
@@ -98,10 +79,16 @@ export class EstablishmentService {
       });
     }
 
+    const plan = await this.getPlan(id);
+    const subscription = await this.getSubscription(id);
+
+    console.log("PLAN", plan)
+    console.log("SUBSCRIPTION", subscription)
+
     console.log("LOGO IMAGE", establishment.logoImage?.id)
     console.log("BANNER IMAGE", establishment.bannerImage?.id)
 
-    return establishment;
+    return { ...establishment, subscription, plan };
   }
 
   /**
@@ -129,7 +116,8 @@ export class EstablishmentService {
     return establishment;
   }
 
-  async getSubscription(establishmentId: string) {
+
+  async getPlan(establishmentId: string): Promise<NormalizedPlan | null> {
     const subscription = await this.prisma.subscription.findUnique({
       where: { establishmentId },
       include: {
@@ -142,6 +130,46 @@ export class EstablishmentService {
                 },
               },
             },
+          },
+        },
+      },
+    });
+
+    if (!subscription) return null;
+
+    const plan = subscription.planCycle.plan;
+
+    const features: Record<string, NormalizedFeature> = {};
+
+    for (const f of plan.features) {
+      const featureName = f.feature.name;
+
+      if (f.feature.type === "BOOLEAN") {
+        features[featureName] = { type: "BOOLEAN", enabled: f.valueBoolean ?? false };
+      } else if (f.feature.type === "QUANTITY") {
+        features[featureName] = { type: "QUANTITY", limit: f.valueQuantity ?? 0 };
+      }
+    }
+
+    return {
+      id: plan.id,
+      name: plan.name,
+      features,
+    };
+  }
+
+
+  async getSubscription(establishmentId: string) {
+    const subscription = await this.prisma.subscription.findUnique({
+      where: { establishmentId },
+      select: {
+        status: true,
+        currentPeriodEnd: true,
+        cancelAtPeriodEnd: true,
+        planCycle: {
+          select: {
+            cycle: true,
+            price: true,
           },
         },
       },
