@@ -12,9 +12,7 @@ import { BullModule, BullModuleOptions } from '@nestjs/bull';
 import { RedisConfigService } from '@weats/configs';
 import { WebhooksModule } from './modules/webhook/webhook.module';
 import { TranslateModule } from './modules/translate/translate.module';
-import { SecurityMiddleware } from './common/middleware/security.middleware';
-import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
-import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 import { throttlerConfig } from '@weats/common';
 
@@ -25,9 +23,11 @@ import { throttlerConfig } from '@weats/common';
       validate,
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
     }),
+    /*
     ThrottlerModule.forRootAsync({
       useFactory: () => throttlerConfig,
     }),
+    */
     ConfigsModule,
     IntegrationsModule,
     UsersModule,
