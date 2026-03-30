@@ -57,15 +57,10 @@ export class ClerkService {
       const userId = payload.sub;
       this.logger.debug(`Token verified for user: ${userId}`);
 
-      const clerkUser = await this.clerkClient.users.getUser(userId);
-
-      if (!clerkUser) {
-        throw new UnauthorizedException('User not found');
-      }
-
-      // 1) Tenta encontrar pelo clerkUserId
+      // 1) OTIMIZAÇÃO CRUCIAL: Tenta encontrar na nossa DB primeiro!
+      // Evita chamadas de rede à Clerk API (getUser) em CADA request do painel.
       let dbUser = await this.corePrismaService.user.findUnique({
-        where: { clerkUserId: clerkUser.id },
+        where: { clerkUserId: userId },
         select: {
           id: true,
           clerkUserId: true,
@@ -75,8 +70,15 @@ export class ClerkService {
         },
       });
 
-      // 2) Se não existir, tenta procurar pelo email primário do Clerk
+      // 2) Se o user não existir na nossa DB local (primeiro login dele), ENTÃO fazemos fetch ao Clerk
       if (!dbUser) {
+        this.logger.warn(`User ${userId} not in DB yet. Fetching from Clerk API...`);
+        const clerkUser = await this.clerkClient.users.getUser(userId);
+
+        if (!clerkUser) {
+          throw new UnauthorizedException('User not found in Clerk');
+        }
+
         const primaryEmail =
           clerkUser.emailAddresses.find(
             (ea) => ea.id === clerkUser.primaryEmailAddressId,
@@ -85,20 +87,11 @@ export class ClerkService {
         if (primaryEmail) {
           const existingByEmail = await this.corePrismaService.user.findUnique({
             where: { email: primaryEmail },
-            select: {
-              id: true,
-              clerkUserId: true,
-              email: true,
-              firstName: true,
-              lastName: true,
-            },
+            select: { id: true, firstName: true, lastName: true },
           });
 
           if (existingByEmail) {
-            this.logger.warn(
-              `Found DB user by email (${primaryEmail}). Updating clerkUserId to ${clerkUser.id}`,
-            );
-
+            this.logger.warn(`Found DB user by email (${primaryEmail}). Updating clerkUserId to ${clerkUser.id}`);
             dbUser = await this.corePrismaService.user.update({
               where: { id: existingByEmail.id },
               data: {
@@ -106,30 +99,14 @@ export class ClerkService {
                 firstName: clerkUser.firstName || existingByEmail.firstName,
                 lastName: clerkUser.lastName || existingByEmail.lastName,
               },
-              select: {
-                id: true,
-                clerkUserId: true,
-                email: true,
-                firstName: true,
-                lastName: true,
-              },
+              select: { id: true, clerkUserId: true, email: true, firstName: true, lastName: true },
             });
           }
         }
 
-        // 3) Se ainda não existir, cria o usuário. Protege contra condição de corrida (unique constraint) tentando update por email se create falhar.
+        // 3) Se ainda não existir, cria o usuário novo
         if (!dbUser) {
-          this.logger.warn(
-            `User ${clerkUser.id} not found in DB. Creating from Clerk data.`,
-          );
-
-          const emailToUse =
-            clerkUser.emailAddresses.find(
-              (ea) => ea.id === clerkUser.primaryEmailAddressId,
-            )?.emailAddress ||
-            clerkUser.emailAddresses[0]?.emailAddress ||
-            null;
-
+          const emailToUse = primaryEmail || null;
           try {
             dbUser = await this.corePrismaService.user.create({
               data: {
@@ -138,13 +115,7 @@ export class ClerkService {
                 firstName: clerkUser.firstName || null,
                 lastName: clerkUser.lastName || null,
               },
-              select: {
-                id: true,
-                clerkUserId: true,
-                email: true,
-                firstName: true,
-                lastName: true,
-              },
+              select: { id: true, clerkUserId: true, email: true, firstName: true, lastName: true },
             });
           } catch (e: any) {
             // Prisma unique constraint on email (P2002) - outra request criou o user simultaneamente
@@ -183,17 +154,17 @@ export class ClerkService {
 
       if (!dbUser) {
         this.logger.error(
-          `Could not find or create DB user for Clerk id ${clerkUser.id}`,
+          `Could not find or create DB user for Clerk id ${userId}`,
         );
         throw new UnauthorizedException('User not found after synchronization');
       }
 
       const user: User = {
         id: dbUser.id,
-        clerkUserId: clerkUser.id,
+        clerkUserId: dbUser.clerkUserId,
         email: dbUser.email,
-        firstName: clerkUser.firstName,
-        lastName: clerkUser.lastName,
+        firstName: dbUser.firstName,
+        lastName: dbUser.lastName,
       };
 
       return user;
