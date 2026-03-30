@@ -14,6 +14,10 @@ export class ClerkConfigService {
   }
 
   getClerkJwtKey(): string | undefined {
-    return this.configService.get<string>('CLERK_JWT_KEY');
+    let key = this.configService.get<string>('CLERK_JWT_KEY');
+    if (key) {
+      key = key.replace(/\\n/g, '\n');
+    }
+    return key;
   }
 }
