@@ -27,7 +27,7 @@ async function bootstrap() {
 
 
   const logger = new Logger('Gateway');
-  app.enableCors(getCorsOptions(appConfigService));
+  //app.enableCors(getCorsOptions(appConfigService));
   app.use(cookieParser());
 
 
