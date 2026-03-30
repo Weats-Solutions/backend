@@ -43,40 +43,22 @@ export class SecurityMiddleware implements NestMiddleware {
     const rawUrl = req.originalUrl.toLowerCase();
     const url = path.posix.normalize(rawUrl);
     const ip = req.ip || req.get('x-forwarded-for') || 'unknown';
-
-    // 1. Verificamos primeiro se a requisição atual já é de um caminho proibido
+    // 1. SEMPRE incrementamos o contador de rate limit para este IP
+    // Usamos o nome 'bots' que configurámos no throttle.ts
+    // @ts-ignore - Reverting to old code for testing purposes
+    const { totalHits } = await this.throttlerStorage.increment(ip, 60000); 
+    // 2. Se já passou o limite de 15 (BOTS), nem verificamos a blacklist, barramos logo por 429
+    if (totalHits > 15) {
+      throw new HttpException('Too many suspicious requests', HttpStatus.TOO_MANY_REQUESTS);
+    }
+    // 3. Se não passou o rate limit, mas está na blacklist, barramos por Forbidden (403)
     const isBlacklistedPath = this.blacklist.some(item => url.includes(item.toLowerCase()));
     const pathOnly = url.split('?')[0];
     const hasSuspiciousExtension = this.blacklistedExtensions.some(ext => pathOnly.endsWith(ext));
-
-    // 2. Definimos os parâmetros do throttler (se for blacklist, o limite é ZERO para banir na hora)
-    const isSuspicious = isBlacklistedPath || hasSuspiciousExtension;
-    const ttl = isSuspicious ? 60000 : THROTTLE_LIMITS.BOTS.ttl;
-    const limit = isSuspicious ? 0 : THROTTLE_LIMITS.BOTS.limit;
-    const blockDuration = isSuspicious ? 60000 : THROTTLE_LIMITS.BOTS.ttl;
-
-    // 3. Uma única chamada ao storage
-    const { totalHits, isBlocked } = await this.throttlerStorage.increment(
-      ip,
-      ttl,
-      limit,
-      blockDuration,
-      'bots',
-    );
-
-    // 4. Se estiver bloqueado ou exceder o limite, barramos
-    if (isBlocked || totalHits > limit) {
-      this.logger.warn(`🚫 Blocked IP (Rate Limit/Ban): ${ip} | Hits: ${totalHits}`);
-      
-      // Se foi por causa da blacklist (ou já estava banido por ela), logamos o motivo específico
-      if (isSuspicious) {
-        this.logger.error(`🛡️ Blacklist Hit - BANNING IP: ${ip} | ${req.method} ${req.originalUrl}`);
-        throw new ForbiddenException('Access denied');
-      }
-      
-      throw new HttpException('Too many suspicious requests', HttpStatus.TOO_MANY_REQUESTS);
+    if (isBlacklistedPath || hasSuspiciousExtension) {
+      this.logger.warn(`🛡️ Blocked IP: ${ip} | ${req.method} ${req.originalUrl}`);
+      throw new ForbiddenException('Access denied');
     }
-
     next();
   }
 }

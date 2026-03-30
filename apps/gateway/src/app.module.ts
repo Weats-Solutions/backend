@@ -52,16 +52,18 @@ import { throttlerConfig } from '@weats/common';
   controllers: [AppController],
   providers: [
     AppService,
-    {
+    /*{
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
-    },
+    },*/
   ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
+    /*
     consumer
       .apply(SecurityMiddleware)
       .forRoutes('*'); // Aplica a TODAS as rotas, incluindo 404s
+    */
   }
 }
