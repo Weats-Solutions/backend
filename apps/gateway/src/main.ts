@@ -31,6 +31,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
 
+  /*
   // Helmet security middleware
   if (shouldEnableHelmet(nodeEnv)) {
     app.use(helmet(helmetConfig));
@@ -38,6 +39,7 @@ async function bootstrap() {
   } else {
     logger.log('⚠️  Helmet security disabled (Development mode)');
   }
+    */
 
   app.use('/v1/webhooks/clerk', express.raw({ type: '*/*' }));
   app.use('/v1/webhooks/stripe', express.raw({ type: '*/*' }));
