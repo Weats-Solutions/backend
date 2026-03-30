@@ -57,13 +57,13 @@ import { throttlerConfig } from '@weats/common';
       useClass: ThrottlerGuard,
     },*/
   ],
-})
+}) export class AppModule { }
+/*
 export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    /*
-    consumer
-      .apply(SecurityMiddleware)
-      .forRoutes('*'); // Aplica a TODAS as rotas, incluindo 404s
-    */
-  }
+ configure(consumer: MiddlewareConsumer) {
+   consumer
+     .apply(SecurityMiddleware)
+     .forRoutes('*'); // Aplica a TODAS as rotas, incluindo 404s
+ }
 }
+*/

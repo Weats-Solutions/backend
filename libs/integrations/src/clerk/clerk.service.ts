@@ -44,7 +44,27 @@ export class ClerkService {
   async verifyJwtToken(token: string): Promise<User> {
     try {
       const jwtKey = this.clerkConfig.getClerkJwtKey();
-      
+
+      try {
+        const [, payloadBase64] = token.split('.');
+        if (payloadBase64) {
+          const decodedRaw = JSON.parse(Buffer.from(payloadBase64, 'base64').toString('utf8'));
+          const nowSecs = Math.floor(Date.now() / 1000);
+          
+          this.logger.debug(`=== JWT DIAGNOSTICS ===`);
+          this.logger.debug(`Server Current Time: ${nowSecs} (${new Date().toISOString()})`);
+          if (decodedRaw.iat) this.logger.debug(`Token Issued At (iat): ${decodedRaw.iat} (${new Date(decodedRaw.iat * 1000).toISOString()})`);
+          if (decodedRaw.nbf) this.logger.debug(`Token Not Before (nbf): ${decodedRaw.nbf} (${new Date(decodedRaw.nbf * 1000).toISOString()})`);
+          if (decodedRaw.exp) this.logger.debug(`Token Expires (exp): ${decodedRaw.exp} (${new Date(decodedRaw.exp * 1000).toISOString()})`);
+          
+          if (decodedRaw.iat > nowSecs) {
+            this.logger.error(`🚨 DETECTADO SKEW DE RELÓGIO! A data de emissão do token (iat) está no futuro! O servidor local atrasou ${decodedRaw.iat - nowSecs} segundos. A API Clerk irá atirar erro de assinatura!`);
+          }
+        }
+      } catch (err) {
+        this.logger.warn(`Failed to parse raw JWT for logs: ${err}`);
+      }
+
       const payload = await verifyToken(token, {
         secretKey: this.clerkConfig.getClerkSecretKey(),
         ...(jwtKey ? { jwtKey } : {}), // Pass JWK local key if available to avoid fetch()
@@ -186,6 +206,11 @@ export class ClerkService {
     }
 
     return token;
+  }
+
+
+  async getUsers() {
+    return this.clerkClient.users.getUserList();
   }
 
   async getUser(userId: string) {

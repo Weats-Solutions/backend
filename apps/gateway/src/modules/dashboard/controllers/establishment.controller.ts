@@ -28,13 +28,20 @@ import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/
 import { ClientProxy } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
+import { ClerkService } from '@weats/integrations';
 
 @Controller('establishments')
 export class EstablishmentController {
   constructor(
     @Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy,
     private readonly featureUsageService: FeatureUsageService,
+    private readonly clerkService: ClerkService,
   ) { }
+
+  @Get('test')
+  test() {
+    return this.clerkService.getUsers();
+  }
 
   @UseGuards(ClerkGuard)
   @Post()
