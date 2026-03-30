@@ -4,12 +4,15 @@ import { LandingpageController } from './landingpage.controller';
 import { LandingpageService } from './landingpage.service';
 import { HttpModule } from '@nestjs/axios';
 import { ConfigsModule } from '@weats/configs';
+import { MenuService } from '../menu/menu.service';
+import { MenuModule } from '../menu/menu.module';
 
 @Module({
     imports: [
         DatabaseModule,
         HttpModule,
         ConfigsModule,
+        MenuModule
     ],
     controllers: [LandingpageController],
     providers: [

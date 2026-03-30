@@ -72,5 +72,6 @@ export const helmetConfig: HelmetOptions = {
  * @returns true if Helmet should be enabled, false otherwise
  */
 export function shouldEnableHelmet(nodeEnv: string | undefined): boolean {
-    return nodeEnv !== 'development';
+    // TEMPORARILY DISABLED globally to test if Helmet is the cause of the Clerk 401 errors
+    return false;
 }

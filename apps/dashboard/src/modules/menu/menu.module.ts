@@ -22,5 +22,10 @@ import { MenuSubcategoryService } from './subcategory/subcategory.service';
         MenuCategoryService,
         MenuSubcategoryService,
     ],
+    exports: [
+        MenuService,
+        MenuCategoryService,
+        MenuSubcategoryService,
+    ],
 })
 export class MenuModule { }

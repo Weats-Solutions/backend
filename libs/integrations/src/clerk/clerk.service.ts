@@ -195,8 +195,8 @@ export class ClerkService {
       };
 
       return user;
-    } catch (error) {
-      this.logger.error('Token verification failed:', error.message);
+    } catch (error: any) {
+      this.logger.error(`Token verification failed: ${error?.message || JSON.stringify(error) || error}`);
       throw new UnauthorizedException('Invalid or expired token');
     }
   }
