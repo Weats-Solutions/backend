@@ -43,9 +43,11 @@ export class ClerkService {
 
   async verifyJwtToken(token: string): Promise<User> {
     try {
-      // 1. Verificar e decodificar o token JWT usando apenas secret key
+      const jwtKey = this.clerkConfig.getClerkJwtKey();
+      
       const payload = await verifyToken(token, {
         secretKey: this.clerkConfig.getClerkSecretKey(),
+        ...(jwtKey ? { jwtKey } : {}), // Pass JWK local key if available to avoid fetch()
       });
 
       if (!payload || !payload.sub) {
