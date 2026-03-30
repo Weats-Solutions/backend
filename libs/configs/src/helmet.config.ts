@@ -24,26 +24,14 @@ export const helmetConfig: HelmetOptions = {
         preload: true, // allows inclusion in browser HSTS preload list
     },
 
-    // Content Security Policy - defines trusted content sources
-    contentSecurityPolicy: {
-        directives: {
-            defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-inline'"],
-            styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
-            imgSrc: ["'self'", 'data:', 'https:', 'blob:'],
-            fontSrc: ["'self'", 'data:', 'https://fonts.gstatic.com'],
-            connectSrc: ["'self'", 'https://api.clerk.com', 'https://api.stripe.com'],
-            frameSrc: ["'none'"],
-            objectSrc: ["'none'"],
-            upgradeInsecureRequests: [],
-        },
-    },
+    // Content Security Policy - primarily for HTML. Disabled for API to avoid cross-origin conflicts.
+    contentSecurityPolicy: false,
 
-    // Cross-Origin Opener Policy - protects against cross-origin window attacks
-    crossOriginOpenerPolicy: { policy: "same-origin" },
+    // Cross-Origin Opener Policy - Disabled for API
+    crossOriginOpenerPolicy: false,
 
-    // Cross-Origin Resource Policy - allows resources to be shared across origins safely
-    crossOriginResourcePolicy: { policy: "cross-origin" },
+    // Cross-Origin Resource Policy - Disabled for API to let standard CORS handle cross-origin access
+    crossOriginResourcePolicy: false,
 
     // X-Frame-Options - clickjacking protection
     frameguard: {
