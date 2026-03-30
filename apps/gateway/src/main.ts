@@ -27,6 +27,9 @@ async function bootstrap() {
 
 
   const logger = new Logger('Gateway');
+  app.enableCors(getCorsOptions(appConfigService));
+  app.use(cookieParser());
+
 
   // Helmet security middleware
   if (shouldEnableHelmet(nodeEnv)) {
@@ -40,8 +43,7 @@ async function bootstrap() {
   app.use('/v1/webhooks/stripe', express.raw({ type: '*/*' }));
   app.use('/v1/webhooks/eupago', express.raw({ type: '*/*' })); // cobre /eupago/:establishmentId
 
-  app.enableCors(getCorsOptions(appConfigService));
-  app.use(cookieParser());
+
 
   app.enableVersioning({
     type: VersioningType.URI,
@@ -69,7 +71,7 @@ async function bootstrap() {
 
   // Configurar Bull Board
   const serverAdapter = new BBExpressAdapter();
-  
+
   // IMPORTANTE: basePath deve match com o route path registado
   // Ambos devem estar sem /v1/ porque a rota é registada antes do versioning
   serverAdapter.setBasePath('/admin/queues');

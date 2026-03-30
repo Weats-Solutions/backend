@@ -27,17 +27,23 @@ export const helmetConfig: HelmetOptions = {
     // Content Security Policy - defines trusted content sources
     contentSecurityPolicy: {
         directives: {
-            defaultSrc: ["'self'"], // only resources from own domain by default
-            scriptSrc: ["'self'"], // scripts only from own domain
-            styleSrc: ["'self'", "'unsafe-inline'"], // styles from own domain + inline (needed for some libraries)
-            imgSrc: ["'self'", 'data:', 'https:'], // images from own domain, data URIs, and HTTPS
-            fontSrc: ["'self'", 'data:'], // fonts from own domain and data URIs
-            connectSrc: ["'self'"], // API connections only to own domain
-            frameSrc: ["'none'"], // no iframes allowed
-            objectSrc: ["'none'"], // no plugins (Flash, etc)
-            upgradeInsecureRequests: [], // forces HTTP to HTTPS upgrade
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'"],
+            styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+            imgSrc: ["'self'", 'data:', 'https:', 'blob:'],
+            fontSrc: ["'self'", 'data:', 'https://fonts.gstatic.com'],
+            connectSrc: ["'self'", 'https://api.clerk.com', 'https://api.stripe.com'],
+            frameSrc: ["'none'"],
+            objectSrc: ["'none'"],
+            upgradeInsecureRequests: [],
         },
     },
+
+    // Cross-Origin Opener Policy - protects against cross-origin window attacks
+    crossOriginOpenerPolicy: { policy: "same-origin" },
+
+    // Cross-Origin Resource Policy - allows resources to be shared across origins safely
+    crossOriginResourcePolicy: { policy: "cross-origin" },
 
     // X-Frame-Options - clickjacking protection
     frameguard: {

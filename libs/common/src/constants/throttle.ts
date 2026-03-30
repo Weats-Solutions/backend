@@ -56,10 +56,18 @@ export const THROTTLE_LIMITS = {
     ttl: 60000, // 1 minuto em ms
     limit: 100,
   },
+  BOTS: {
+    name: 'bots',
+    ttl: 60000, // 1 minuto em ms
+    limit: 15,
+  },
 } as const;
 
 export const throttlerConfig: ThrottlerModuleOptions = {
-  throttlers: [THROTTLE_LIMITS.DEFAULT],
+  throttlers: [
+    THROTTLE_LIMITS.STRICT, // Como limite global padrão, usamos o Strict para todos
+    THROTTLE_LIMITS.BOTS,   // E o limite de bots em paralelo
+  ],
   ignoreUserAgents: [/^kube-probe/i, /^HealthCheck/i],
   skipIf: () => process.env.NODE_ENV === 'test',
 };

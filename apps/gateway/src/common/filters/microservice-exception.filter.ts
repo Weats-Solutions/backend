@@ -18,8 +18,7 @@ export class MicroserviceExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
 
-    let status = HttpStatus.INTERNAL_SERVER_ERROR;
-    console.log(exception);
+    let status: number = HttpStatus.INTERNAL_SERVER_ERROR;
     let message: string | string[] = 'Internal server error';
     let errorName = 'InternalServerError';
     let code: string | undefined;
@@ -95,10 +94,20 @@ export class MicroserviceExceptionFilter implements ExceptionFilter {
       finalMessage = JSON.stringify(message);
     }
 
-    this.logger.error(
-      `[${status}] ${request.method} ${request.url} - ${errorName}: ${finalMessage}`,
-      exception?.stack,
-    );
+    // --- LOGGING LOGIC ---
+    const isBotNoise = status === HttpStatus.NOT_FOUND || status === HttpStatus.FORBIDDEN;
+
+    if (status >= 500) {
+      this.logger.error(
+        `[${status}] ${request.method} ${request.url} - ${errorName}: ${finalMessage}`,
+        exception?.stack,
+      );
+    } else if (!isBotNoise) {
+      // Only log warnings for real client errors, ignoring bot noise (403/404)
+      this.logger.warn(
+        `[${status}] ${request.method} ${request.url} - ${errorName}: ${finalMessage}`
+      );
+    }
 
     response.status(status).json({
       success: false,

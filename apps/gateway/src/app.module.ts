@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './user/users.module';
@@ -12,6 +12,11 @@ import { BullModule, BullModuleOptions } from '@nestjs/bull';
 import { RedisConfigService } from '@weats/configs';
 import { WebhooksModule } from './modules/webhook/webhook.module';
 import { TranslateModule } from './modules/translate/translate.module';
+import { SecurityMiddleware } from './common/middleware/security.middleware';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
+
+import { throttlerConfig } from '@weats/common';
 
 @Module({
   imports: [
@@ -19,6 +24,9 @@ import { TranslateModule } from './modules/translate/translate.module';
       isGlobal: true,
       validate,
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
+    }),
+    ThrottlerModule.forRootAsync({
+      useFactory: () => throttlerConfig,
     }),
     ConfigsModule,
     IntegrationsModule,
@@ -42,6 +50,18 @@ import { TranslateModule } from './modules/translate/translate.module';
     ),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
-export class AppModule { }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(SecurityMiddleware)
+      .forRoutes('*'); // Aplica a TODAS as rotas, incluindo 404s
+  }
+}
