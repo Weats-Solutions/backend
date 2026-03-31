@@ -116,6 +116,7 @@ export class WebhooksController {
 
             // ✅ NOVO: Adicionar direto à fila Bull com error handling
             try {
+                body.eventId = svixId; // 👈 Injectamos o ID real do Clerk no body para o processador conseguir gravar
                 await this.webhooksQueue.add('clerk-event', body, {
                     attempts: 3,
                     backoff: {

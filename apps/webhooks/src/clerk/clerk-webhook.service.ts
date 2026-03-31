@@ -14,8 +14,12 @@ export class ClerkWebhookService {
     ) { }
 
     async handleEvent(body: any) {
+        console.log(body)
         const eventType = body.type;
-        const eventId = body.id; // Clerk (Svix) envia um ID único para o evento
+        // O Svix envia o ID no header (que a gateway vai injetar como body.eventId a partir de agora).
+        // Para os jobs antigos que falharam na fila e não têm eventId, usamos um fallback.
+        const eventId = body.eventId || body.id || `fallback_${Date.now()}_${Math.round(Math.random() * 10000)}`;
+        console.log(eventId)
         const requestId = `clerk-${eventId}-${Date.now()}`;
 
         this.logger.log(`🔍 Checking idempotency for Clerk event: ${eventId} (${eventType})`);
@@ -49,7 +53,7 @@ export class ClerkWebhookService {
         // 3. Verificar se está muito tempo em PROCESSING (crashed/stuck)
         const processingDuration = Date.now() - webhookEvent.processedAt.getTime();
         const MAX_PROCESSING_TIME = 5 * 60 * 1000; // 5 minutos
-        
+
         if (processingDuration > MAX_PROCESSING_TIME && webhookEvent.status === 'PROCESSING') {
             this.logger.warn(`⚠️ Clerk event ${eventId} stuck in PROCESSING for ${processingDuration}ms. Resetting...`);
             await this.prisma.webhookEvent.update({
@@ -65,7 +69,7 @@ export class ClerkWebhookService {
                     if (!primaryEmail) {
                         throw new BadRequestException('Email address is required');
                     }
-                    
+
                     const existingUser = await this.prisma.user.findUnique({
                         where: { clerkUserId: body.data.id },
                     });
@@ -113,7 +117,7 @@ export class ClerkWebhookService {
 
                 case 'user.updated':
                     const updateEmail = body?.data?.email_addresses?.[0]?.email_address;
-                    
+
                     // Validate email is not empty before updating
                     if (!updateEmail) {
                         this.logger.warn(`⚠️ Clerk user.updated event has no email address, skipping email update`);
@@ -161,25 +165,25 @@ export class ClerkWebhookService {
 
         } catch (error) {
             this.logger.error(`❌ Failed to process Clerk event ${eventId}: ${error.message}`);
-            
+
             try {
-              await this.prisma.webhookEvent.update({
-                where: {
-                    provider_eventId: {
-                        provider: 'clerk',
-                        eventId: eventId,
+                await this.prisma.webhookEvent.update({
+                    where: {
+                        provider_eventId: {
+                            provider: 'clerk',
+                            eventId: eventId,
+                        },
                     },
-                },
-                data: { 
-                    status: 'FAILED',
-                    lastError: error.message,
-                    retryCount: { increment: 1 }
-                },
-              });
+                    data: {
+                        status: 'FAILED',
+                        lastError: error.message,
+                        retryCount: { increment: 1 }
+                    },
+                });
             } catch (dbUpdateError) {
-              this.logger.error(
-                `⚠️ Failed to update webhook status to FAILED: ${dbUpdateError.message}. Original error: ${error.message}`,
-              );
+                this.logger.error(
+                    `⚠️ Failed to update webhook status to FAILED: ${dbUpdateError.message}. Original error: ${error.message}`,
+                );
             }
 
             throw error;
