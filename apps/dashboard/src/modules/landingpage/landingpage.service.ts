@@ -32,17 +32,26 @@ export class LandingpageService {
         const currentDayOfWeek = now.format('dddd').toUpperCase();
         const currentTime = now.format('HH:mm');
 
+        const timeToMinutes = (time: string): number => {
+            const [hours, minutes] = time.split(':').map(Number);
+            return hours * 60 + minutes;
+        };
+
+        const currentTimeInMinutes = timeToMinutes(currentTime);
+
         return establishmentSchedules.some((schedule) => {
             if (schedule.dayOfWeek !== currentDayOfWeek) return false;
 
             const openTime = schedule.openTime;
             const closeTime = schedule.closeTime;
+            const openTimeInMinutes = timeToMinutes(openTime);
+            const closeTimeInMinutes = timeToMinutes(closeTime);
 
-            if (closeTime < openTime) {
-                return currentTime >= openTime || currentTime < closeTime;
+            if (closeTimeInMinutes < openTimeInMinutes) {
+                return currentTimeInMinutes >= openTimeInMinutes || currentTimeInMinutes < closeTimeInMinutes;
             }
 
-            return currentTime >= openTime && currentTime < closeTime;
+            return currentTimeInMinutes >= openTimeInMinutes && currentTimeInMinutes < closeTimeInMinutes;
         });
     }
 
@@ -53,17 +62,27 @@ export class LandingpageService {
         const currentDayOfWeek = now.format('dddd').toUpperCase();
         const currentTime = now.format('HH:mm');
 
+        // Converter tempo em minutos para comparação numérica
+        const timeToMinutes = (time: string): number => {
+            const [hours, minutes] = time.split(':').map(Number);
+            return hours * 60 + minutes;
+        };
+
+        const currentTimeInMinutes = timeToMinutes(currentTime);
+
         return menuSchedules.some((schedule) => {
             if (schedule.dayOfWeek !== currentDayOfWeek) return false;
 
             const openTime = schedule.openTime;
             const closeTime = schedule.closeTime;
+            const openTimeInMinutes = timeToMinutes(openTime);
+            const closeTimeInMinutes = timeToMinutes(closeTime);
 
-            if (closeTime < openTime) {
-                return currentTime >= openTime || currentTime < closeTime;
+            if (closeTimeInMinutes < openTimeInMinutes) {
+                return currentTimeInMinutes >= openTimeInMinutes || currentTimeInMinutes < closeTimeInMinutes;
             }
 
-            return currentTime >= openTime && currentTime < closeTime;
+            return currentTimeInMinutes >= openTimeInMinutes && currentTimeInMinutes < closeTimeInMinutes;
         });
     }
 
