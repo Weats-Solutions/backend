@@ -13,7 +13,6 @@ import { BullAdapter } from '@bull-board/api/bullAdapter';
 import { ExpressAdapter as BBExpressAdapter } from '@bull-board/express';
 import { getQueueToken } from '@nestjs/bull';
 
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalFilters(new MicroserviceExceptionFilter());

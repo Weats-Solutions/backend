@@ -16,6 +16,9 @@ services:
       - .env
     networks:
       - weats-network
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
 
   webhooks:
     build:
@@ -30,6 +33,9 @@ services:
       - .env
     networks:
       - weats-network
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     logging:
       driver: 'json-file'
       options:
@@ -47,6 +53,9 @@ services:
     restart: always
     env_file:
       - .env
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     logging:
       driver: 'json-file'
       options:
