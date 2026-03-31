@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CorePrismaService, Schedule } from '@weats/database';
 import { EstablishmentLanguage } from '@weats/database';
 import { RpcException } from '@nestjs/microservices';
@@ -8,6 +8,7 @@ import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import { Establishment, EupagoMultibancoResponse } from '@weats/types';
 import { AppConfigService } from '@weats/configs/app-config.service';
+import { MenuService } from '../menu/menu.service';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
@@ -21,7 +22,7 @@ export class LandingpageService {
         private readonly prisma: CorePrismaService,
         private readonly http: HttpService,
         private readonly appConfigService: AppConfigService,
-
+        private readonly menuService: MenuService,
         //@Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     ) { }
 
@@ -190,6 +191,28 @@ export class LandingpageService {
                 message: ERRORS.BAD_REQUEST,
                 code: ERRORS.BAD_REQUEST,
             });
+        }
+    }
+
+    async getMenuContent(establishmentSlug: string, menuId: string, lang: EstablishmentLanguage) {
+        try {
+            // Verify the menu belongs to this establishment (security check)
+            const menu = await this.prisma.menu.findFirst({
+                where: {
+                    id: menuId,
+                    establishment: { slug: establishmentSlug },
+                },
+                select: { id: true },
+            });
+
+            if (!menu) {
+                throw new RpcException({ status: 404, message: ERRORS.ESTABLISHMENT_NOT_FOUND, code: ERRORS.ESTABLISHMENT_NOT_FOUND });
+            }
+
+            return this.menuService.getMenuContent(menuId, lang);
+        } catch (error) {
+            if (error instanceof RpcException) throw error;
+            throw new RpcException({ status: 400, message: ERRORS.BAD_REQUEST, code: ERRORS.BAD_REQUEST });
         }
     }
 

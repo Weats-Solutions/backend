@@ -7,7 +7,7 @@ import { CreateMenuDto, UpdateMenuPositionsDto, UpdateMenuDto } from '@weats/con
 import { Establishment } from '@weats/types';
 import { FeatureUsageService } from '@weats/common/feature/feature-usage.service';
 import { MENU_COLOR_PALETTE } from '@weats/common';
-import { CorePrismaService, ScheduleType } from '@weats/database';
+import { CorePrismaService, EstablishmentLanguage, ScheduleType } from '@weats/database';
 
 @Injectable()
 export class MenuService {
@@ -410,5 +410,222 @@ export class MenuService {
         }
     }
 
+
+    /**
+     * Returns the complete menu tree in a single query:
+     * categories → subcategories → items (with variants, modifiers, allergens, attributes).
+     *
+     * Loading everything upfront avoids per-section round trips, keeping the
+     * catalog fluid even when the user swipes through sections rapidly.
+     */
+    async getMenuContent(menuId: string, lang: EstablishmentLanguage) {
+        try {
+            const menu = await this.prisma.menu.findFirst({
+                where: { id: menuId },
+                select: {
+                    id: true,
+                    type: true,
+                    color: true,
+                    isHighlighted: true,
+                    translations: {
+                        where: { locale: lang },
+                        select: {
+                            name: true,
+                            description: true,
+                            observations: true,
+                        },
+                    },
+                    categories: {
+                        orderBy: { position: 'asc' },
+                        where: { isVisible: true },
+                        select: {
+                            id: true,
+                            image: {
+                                select: { url: true },
+                            },
+                            translations: {
+                                where: { locale: lang },
+                                select: { name: true },
+                            },
+                            subcategories: {
+                                orderBy: { position: 'asc' },
+                                where: { isVisible: true },
+                                select: {
+                                    id: true,
+                                    translations: {
+                                        where: { locale: lang },
+                                        select: {
+                                            name: true,
+                                            description: true,
+                                        },
+                                    },
+                                    // ─── Items ───────────────────────────────────
+                                    items: {
+                                        orderBy: { position: 'asc' },
+                                        where: {
+                                            isVisible: true,
+                                            item: { status: 'ACTIVE' },
+                                        },
+                                        select: {
+                                            id: true,
+                                            position: true,
+                                            isIncluded: true,
+                                            item: {
+                                                select: {
+                                                    id: true,
+                                                    basePrice: true,
+                                                    spiceLevel: true,
+                                                    marketingTag: true,
+                                                    isFeatured: true,
+                                                    // Image
+                                                    image: {
+                                                        select: { url: true },
+                                                    },
+                                                    // Translation
+                                                    translations: {
+                                                        where: { locale: lang },
+                                                        select: {
+                                                            name: true,
+                                                            description: true,
+                                                        },
+                                                    },
+                                                    // Dietary attributes (vegan, gluten-free...)
+                                                    attributes: {
+                                                        select: { type: true },
+                                                    },
+                                                    // Allergens - item level
+                                                    allergens: {
+                                                        select: {
+                                                            allergen: {
+                                                                select: { code: true },
+                                                            },
+                                                        },
+                                                    },
+                                                    // --- Variant groups ("Choose size") ---
+                                                    itemVariantGroups: {
+                                                        orderBy: { position: 'asc' },
+                                                        select: {
+                                                            id: true,
+                                                            translations: {
+                                                                where: { locale: lang },
+                                                                select: { name: true },
+                                                            },
+                                                            variants: {
+                                                                orderBy: { position: 'asc' },
+                                                                where: { isActive: true, deletedAt: null },
+                                                                select: {
+                                                                    id: true,
+                                                                    price: true,
+                                                                    isDefault: true,
+                                                                    image: {
+                                                                        select: { url: true },
+                                                                    },
+                                                                    variantOption: {
+                                                                        select: {
+                                                                            id: true,
+                                                                            type: true,
+                                                                            translations: {
+                                                                                where: { locale: lang },
+                                                                                select: { name: true },
+                                                                            },
+                                                                        },
+                                                                    },
+                                                                    // Allergens - variant level
+                                                                    allergens: {
+                                                                        select: {
+                                                                            allergen: {
+                                                                                select: { code: true },
+                                                                            },
+                                                                        },
+                                                                    },
+                                                                },
+                                                            },
+                                                        },
+                                                    },
+                                                    // --- Modifier groups (addons/customizations) ---
+                                                    modifierGroups: {
+                                                        orderBy: { position: 'asc' },
+                                                        where: { isActive: true, deletedAt: null },
+                                                        select: {
+                                                            id: true,
+                                                            minSelection: true,
+                                                            maxSelection: true,
+                                                            displayMode: true,
+                                                            translations: {
+                                                                where: { locale: lang },
+                                                                select: { name: true },
+                                                            },
+                                                            options: {
+                                                                orderBy: { position: 'asc' },
+                                                                select: {
+                                                                    id: true,
+                                                                    price: true,
+                                                                    defaultQuantity: true,
+                                                                    minQuantity: true,
+                                                                    maxQuantity: true,
+                                                                    // Target A: simple addon ("No ice", "Extra spicy")
+                                                                    addon: {
+                                                                        select: {
+                                                                            id: true,
+                                                                            translations: {
+                                                                                where: { locale: lang },
+                                                                                select: { name: true },
+                                                                            },
+                                                                        },
+                                                                    },
+                                                                    // Target B: variant upsell
+                                                                    itemVariant: {
+                                                                        select: {
+                                                                            id: true,
+                                                                            price: true,
+                                                                            variantOption: {
+                                                                                select: {
+                                                                                    translations: {
+                                                                                        where: { locale: lang },
+                                                                                        select: { name: true },
+                                                                                    },
+                                                                                },
+                                                                            },
+                                                                        },
+                                                                    },
+                                                                    // Target C: another item as modifier
+                                                                    product: {
+                                                                        select: {
+                                                                            id: true,
+                                                                            basePrice: true,
+                                                                            image: {
+                                                                                select: { url: true },
+                                                                            },
+                                                                            translations: {
+                                                                                where: { locale: lang },
+                                                                                select: { name: true },
+                                                                            },
+                                                                        },
+                                                                    },
+                                                                },
+                                                            },
+                                                        },
+                                                    },
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+
+            if (!menu) {
+                throw new NotFoundException('Menu not found');
+            }
+
+            return menu;
+        } catch (error) {
+            console.error('Error getting menu content:', error);
+            throw error;
+        }
+    }
 
 }

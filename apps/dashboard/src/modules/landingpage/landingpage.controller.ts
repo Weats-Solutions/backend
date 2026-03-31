@@ -17,6 +17,11 @@ export class LandingpageController {
         return this.landingpageService.getLandingpage(payload.establishmentSlug, payload.lang);
     }
 
+    @MessagePattern(DASHBOARD_PATTERNS.LANDINGPAGE_GET_MENU_CONTENT)
+    getMenuContent(@Payload() payload: { establishmentSlug: string; menuId: string; lang: EstablishmentLanguage }) {
+        return this.landingpageService.getMenuContent(payload.establishmentSlug, payload.menuId, payload.lang);
+    }
+
     @MessagePattern(DASHBOARD_PATTERNS.LANDINGPAGE_GET_THEME)
     getTheme(@Payload() payload: { establishmentId: string }) {
         return this.landingpageService.getTheme(payload);

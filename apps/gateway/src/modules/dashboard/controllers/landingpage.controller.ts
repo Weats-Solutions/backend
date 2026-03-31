@@ -58,4 +58,14 @@ export class LandingpageController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_BY_SLUG, { establishmentSlug, lang });
   }
 
+  @Get('/:establishmentSlug/menu/:menuId')
+  async getMenuContent(
+    @Param('establishmentSlug') establishmentSlug: string,
+    @Param('menuId') menuId: string,
+    @Query('lang', ToUpperCasePipe) lang: EstablishmentLanguage,
+  ) {
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_MENU_CONTENT, { establishmentSlug, menuId, lang });
+  }
+
+
 }

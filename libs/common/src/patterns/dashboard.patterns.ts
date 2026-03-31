@@ -76,5 +76,7 @@ export const DASHBOARD_PATTERNS = {
 
   LANDINGPAGE_GET_BY_SLUG: 'dashboard.landingpage.get_by_slug',
   LANDINGPAGE_GET_THEME: 'dashboard.landingpage.get_theme',
+  LANDINGPAGE_GET_MENU_CONTENT: 'dashboard.landingpage.get_menu_content',
+  LANDINGPAGE_GET_SUBCATEGORY_ITEMS: 'dashboard.landingpage.get_subcategory_items',
   THEME_UPDATE: 'dashboard.theme.update',
 };
