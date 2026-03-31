@@ -4,8 +4,7 @@ import { MicroserviceExceptionFilter } from './common/filters/microservice-excep
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import * as express from 'express';
-import { AppConfigService, getCorsOptions, helmetConfig, shouldEnableHelmet } from '@weats/configs';
-import helmet from 'helmet';
+import { AppConfigService, getCorsOptions } from '@weats/configs';
 import cookieParser from 'cookie-parser';
 import { EupagoConfigService } from '@weats/configs/eupago-config.service';
 import { Queue } from 'bull';
