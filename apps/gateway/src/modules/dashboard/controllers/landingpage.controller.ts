@@ -54,8 +54,10 @@ export class LandingpageController {
   async getLandingpage(
     @Param('establishmentSlug') establishmentSlug: string,
     @Query('lang', ToUpperCasePipe) lang: EstablishmentLanguage,
+    @Query('targetId') targetId?: string,
   ) {
-    return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_BY_SLUG, { establishmentSlug, lang });
+    console.log(targetId);
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_BY_SLUG, { establishmentSlug, lang, targetId });
   }
 
   //@UseGuards(EstablishmentOpenGuard, MenuOpenGuard)

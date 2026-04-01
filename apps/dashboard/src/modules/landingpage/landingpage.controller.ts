@@ -13,8 +13,8 @@ export class LandingpageController {
     ) { }
 
     @MessagePattern(DASHBOARD_PATTERNS.LANDINGPAGE_GET_BY_SLUG)
-    getLandingpage(@Payload() payload: { establishmentSlug: string; lang: EstablishmentLanguage }) {
-        return this.landingpageService.getLandingpage(payload.establishmentSlug, payload.lang);
+    getLandingpage(@Payload() payload: { establishmentSlug: string; lang: EstablishmentLanguage; targetId?: string }) {
+        return this.landingpageService.getLandingpage(payload.establishmentSlug, payload.lang, payload.targetId);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.LANDINGPAGE_GET_MENU_CONTENT)
