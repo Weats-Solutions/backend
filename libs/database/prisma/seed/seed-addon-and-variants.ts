@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
-import { VariantType } from '@weats/database';
+import { EstablishmentLanguage, VariantType } from '@weats/database';
 
 // ============================================
 // CONFIGURAÇÃO
@@ -14,12 +14,12 @@ const prisma = new PrismaClient({ adapter });
 
 // Tipos para as nossas traduções
 type MultiLangString = {
-    pt: string;
-    en: string;
-    es: string;
-    fr: string;
-    de: string;
-    it: string;
+  PT: string;
+  EN: string;
+  ES: string;
+  FR: string;
+  DE: string;
+  IT: string;
 };
 
 // ============================================
@@ -27,117 +27,117 @@ type MultiLangString = {
 // ============================================
 
 const GLOBAL_VARIANTS: { name: MultiLangString; type: VariantType; unit?: string; quantity?: number }[] = [
-    // --- TAMANHOS GENÉRICOS (SIZE) ---
-    { type: 'SIZE', name: { pt: 'Mini', en: 'Mini', es: 'Mini', fr: 'Mini', de: 'Mini', it: 'Mini' } },
-    { type: 'SIZE', name: { pt: 'Pequena', en: 'Small', es: 'Pequeña', fr: 'Petite', de: 'Klein', it: 'Piccola' } },
-    { type: 'SIZE', name: { pt: 'Média', en: 'Medium', es: 'Mediana', fr: 'Moyenne', de: 'Mittel', it: 'Media' } },
-    { type: 'SIZE', name: { pt: 'Grande', en: 'Large', es: 'Grande', fr: 'Grande', de: 'Groß', it: 'Grande' } },
-    { type: 'SIZE', name: { pt: 'Extra Grande (XL)', en: 'Extra Large (XL)', es: 'Extra Grande (XL)', fr: 'Extra Grande (XL)', de: 'Extra Groß (XL)', it: 'Extra Grande (XL)' } },
-    { type: 'SIZE', name: { pt: 'Familiar', en: 'Family Size', es: 'Familiar', fr: 'Familiale', de: 'Familien', it: 'Familiare' } },
-    { type: 'SIZE', name: { pt: 'Dose', en: 'Serving', es: 'Ración', fr: 'Portion', de: 'Portion', it: 'Porzione' } },
-    { type: 'SIZE', name: { pt: 'Meia Dose', en: 'Half Serving', es: 'Media Ración', fr: 'Demi-portion', de: 'Halbe Portion', it: 'Mezza Porzione' } },
-    { type: 'SIZE', name: { pt: 'Fatia', en: 'Slice', es: 'Porción', fr: 'Part', de: 'Stück', it: 'Trancio' } },
+  // --- TAMANHOS GENÉRICOS (SIZE) ---
+  { type: 'SIZE', name: { PT: 'Mini', EN: 'Mini', ES: 'Mini', FR: 'Mini', DE: 'Mini', IT: 'Mini' } },
+  { type: 'SIZE', name: { PT: 'Pequena', EN: 'Small', ES: 'Pequeña', FR: 'Petite', DE: 'Klein', IT: 'Piccola' } },
+  { type: 'SIZE', name: { PT: 'Média', EN: 'Medium', ES: 'Mediana', FR: 'Moyenne', DE: 'Mittel', IT: 'Media' } },
+  { type: 'SIZE', name: { PT: 'Grande', EN: 'Large', ES: 'Grande', FR: 'Grande', DE: 'Groß', IT: 'Grande' } },
+  { type: 'SIZE', name: { PT: 'Extra Grande (XL)', EN: 'Extra Large (XL)', ES: 'Extra Grande (XL)', FR: 'Extra Grande (XL)', DE: 'Extra Groß (XL)', IT: 'Extra Grande (XL)' } },
+  { type: 'SIZE', name: { PT: 'Familiar', EN: 'Family Size', ES: 'Familiar', FR: 'Familiale', DE: 'Familien', IT: 'Familiare' } },
+  { type: 'SIZE', name: { PT: 'Dose', EN: 'Serving', ES: 'Ración', FR: 'Portion', DE: 'Portion', IT: 'Porzione' } },
+  { type: 'SIZE', name: { PT: 'Meia Dose', EN: 'Half Serving', ES: 'Media Ración', FR: 'Demi-portion', DE: 'Halbe Portion', IT: 'Mezza Porzione' } },
+  { type: 'SIZE', name: { PT: 'Fatia', EN: 'Slice', ES: 'Porción', FR: 'Part', DE: 'Stück', IT: 'Trancio' } },
 
-    // --- VOLUMES (SIZE) ---
-    { type: 'SIZE', name: { pt: 'Shot', en: 'Shot', es: 'Chupito', fr: 'Shooter', de: 'Shot', it: 'Cicchetto' } },
-    { type: 'SIZE', name: { pt: 'Copo / Caneca (Pint)', en: 'Pint', es: 'Pinta', fr: 'Pinte', de: 'Pint', it: 'Pinta' } },
-    { type: 'SIZE', name: { pt: 'Jarro', en: 'Pitcher', es: 'Jarra', fr: 'Pichet', de: 'Krug', it: 'Caraffa' } },
-    { type: 'SIZE', name: { pt: 'Garrafa', en: 'Bottle', es: 'Botella', fr: 'Bouteille', de: 'Flasche', it: 'Bottiglia' } },
-    { type: 'SIZE', name: { pt: '20cl', en: '20cl', es: '20cl', fr: '20cl', de: '20cl', it: '20cl' }, unit: 'cl', quantity: 20 },
-    { type: 'SIZE', name: { pt: '33cl', en: '33cl', es: '33cl', fr: '33cl', de: '33cl', it: '33cl' }, unit: 'cl', quantity: 33 },
-    { type: 'SIZE', name: { pt: '50cl', en: '50cl', es: '50cl', fr: '50cl', de: '50cl', it: '50cl' }, unit: 'cl', quantity: 50 },
-    { type: 'SIZE', name: { pt: '75cl', en: '75cl', es: '75cl', fr: '75cl', de: '75cl', it: '75cl' }, unit: 'cl', quantity: 75 },
-    { type: 'SIZE', name: { pt: '1L', en: '1L', es: '1L', fr: '1L', de: '1L', it: '1L' }, unit: 'L', quantity: 1 },
-    { type: 'SIZE', name: { pt: '1.5L', en: '1.5L', es: '1.5L', fr: '1.5L', de: '1.5L', it: '1.5L' }, unit: 'L', quantity: 1.5 },
+  // --- VOLUMES (SIZE) ---
+  { type: 'SIZE', name: { PT: 'Shot', EN: 'Shot', ES: 'Chupito', FR: 'Shooter', DE: 'Shot', IT: 'Cicchetto' } },
+  { type: 'SIZE', name: { PT: 'Copo / Caneca (Pint)', EN: 'Pint', ES: 'Pinta', FR: 'Pinte', DE: 'Pint', IT: 'Pinta' } },
+  { type: 'SIZE', name: { PT: 'Jarro', EN: 'Pitcher', ES: 'Jarra', FR: 'Pichet', DE: 'Krug', IT: 'Caraffa' } },
+  { type: 'SIZE', name: { PT: 'Garrafa', EN: 'Bottle', ES: 'Botella', FR: 'Bouteille', DE: 'Flasche', IT: 'Bottiglia' } },
+  { type: 'SIZE', name: { PT: '20cl', EN: '20cl', ES: '20cl', FR: '20cl', DE: '20cl', IT: '20cl' }, unit: 'cl', quantity: 20 },
+  { type: 'SIZE', name: { PT: '33cl', EN: '33cl', ES: '33cl', FR: '33cl', DE: '33cl', IT: '33cl' }, unit: 'cl', quantity: 33 },
+  { type: 'SIZE', name: { PT: '50cl', EN: '50cl', ES: '50cl', FR: '50cl', DE: '50cl', IT: '50cl' }, unit: 'cl', quantity: 50 },
+  { type: 'SIZE', name: { PT: '75cl', EN: '75cl', ES: '75cl', FR: '75cl', DE: '75cl', IT: '75cl' }, unit: 'cl', quantity: 75 },
+  { type: 'SIZE', name: { PT: '1L', EN: '1L', ES: '1L', FR: '1L', DE: '1L', IT: '1L' }, unit: 'L', quantity: 1 },
+  { type: 'SIZE', name: { PT: '1.5L', EN: '1.5L', ES: '1.5L', FR: '1.5L', DE: '1.5L', IT: '1.5L' }, unit: 'L', quantity: 1.5 },
 
-    // --- PESOS (SIZE) ---
-    { type: 'SIZE', name: { pt: '100g', en: '100g', es: '100g', fr: '100g', de: '100g', it: '100g' }, unit: 'g', quantity: 100 },
-    { type: 'SIZE', name: { pt: '200g', en: '200g', es: '200g', fr: '200g', de: '200g', it: '200g' }, unit: 'g', quantity: 200 },
-    { type: 'SIZE', name: { pt: '300g', en: '300g', es: '300g', fr: '300g', de: '300g', it: '300g' }, unit: 'g', quantity: 300 },
-    { type: 'SIZE', name: { pt: '500g', en: '500g', es: '500g', fr: '500g', de: '500g', it: '500g' }, unit: 'g', quantity: 500 },
-    { type: 'SIZE', name: { pt: '1kg', en: '1kg', es: '1kg', fr: '1kg', de: '1kg', it: '1kg' }, unit: 'kg', quantity: 1 },
+  // --- PESOS (SIZE) ---
+  { type: 'SIZE', name: { PT: '100g', EN: '100g', ES: '100g', FR: '100g', DE: '100g', IT: '100g' }, unit: 'g', quantity: 100 },
+  { type: 'SIZE', name: { PT: '200g', EN: '200g', ES: '200g', FR: '200g', DE: '200g', IT: '200g' }, unit: 'g', quantity: 200 },
+  { type: 'SIZE', name: { PT: '300g', EN: '300g', ES: '300g', FR: '300g', DE: '300g', IT: '300g' }, unit: 'g', quantity: 300 },
+  { type: 'SIZE', name: { PT: '500g', EN: '500g', ES: '500g', FR: '500g', DE: '500g', IT: '500g' }, unit: 'g', quantity: 500 },
+  { type: 'SIZE', name: { PT: '1kg', EN: '1kg', ES: '1kg', FR: '1kg', DE: '1kg', IT: '1kg' }, unit: 'kg', quantity: 1 },
 
-    // --- QUANTIDADES (SIZE) ---
-    { type: 'SIZE', name: { pt: '4 Unidades', en: '4 Pieces', es: '4 Piezas', fr: '4 Pièces', de: '4 Stück', it: '4 Pezzi' }, quantity: 4 },
-    { type: 'SIZE', name: { pt: '6 Unidades', en: '6 Pieces', es: '6 Piezas', fr: '6 Pièces', de: '6 Stück', it: '6 Pezzi' }, quantity: 6 },
-    { type: 'SIZE', name: { pt: '8 Unidades', en: '8 Pieces', es: '8 Piezas', fr: '8 Pièces', de: '8 Stück', it: '8 Pezzi' }, quantity: 8 },
-    { type: 'SIZE', name: { pt: '10 Unidades', en: '10 Pieces', es: '10 Piezas', fr: '10 Pièces', de: '10 Stück', it: '10 Pezzi' }, quantity: 10 },
-    { type: 'SIZE', name: { pt: '20 Unidades', en: '20 Pieces', es: '20 Piezas', fr: '20 Pièces', de: '20 Stück', it: '20 Pezzi' }, quantity: 20 },
+  // --- QUANTIDADES (SIZE) ---
+  { type: 'SIZE', name: { PT: '4 Unidades', EN: '4 Pieces', ES: '4 Piezas', FR: '4 Pièces', DE: '4 Stück', IT: '4 Pezzi' }, quantity: 4 },
+  { type: 'SIZE', name: { PT: '6 Unidades', EN: '6 Pieces', ES: '6 Piezas', FR: '6 Pièces', DE: '6 Stück', IT: '6 Pezzi' }, quantity: 6 },
+  { type: 'SIZE', name: { PT: '8 Unidades', EN: '8 Pieces', ES: '8 Piezas', FR: '8 Pièces', DE: '8 Stück', IT: '8 Pezzi' }, quantity: 8 },
+  { type: 'SIZE', name: { PT: '10 Unidades', EN: '10 Pieces', ES: '10 Piezas', FR: '10 Pièces', DE: '10 Stück', IT: '10 Pezzi' }, quantity: 10 },
+  { type: 'SIZE', name: { PT: '20 Unidades', EN: '20 Pieces', ES: '20 Piezas', FR: '20 Pièces', DE: '20 Stück', IT: '20 Pezzi' }, quantity: 20 },
 
-    // --- SABORES (FLAVOR) ---
-    { type: 'FLAVOR', name: { pt: 'Limão', en: 'Lemon', es: 'Limón', fr: 'Citron', de: 'Zitrone', it: 'Limone' } },
-    { type: 'FLAVOR', name: { pt: 'Pêssego', en: 'Peach', es: 'Melocotón', fr: 'Pêche', de: 'Pfirsich', it: 'Pesca' } },
-    { type: 'FLAVOR', name: { pt: 'Morango', en: 'Strawberry', es: 'Fresa', fr: 'Fraise', de: 'Erdbeere', it: 'Fragola' } },
-    { type: 'FLAVOR', name: { pt: 'Baunilha', en: 'Vanilla', es: 'Vainilla', fr: 'Vanille', de: 'Vanille', it: 'Vaniglia' } },
-    { type: 'FLAVOR', name: { pt: 'Chocolate', en: 'Chocolate', es: 'Chocolate', fr: 'Chocolat', de: 'Schokolade', it: 'Cioccolato' } },
-    { type: 'FLAVOR', name: { pt: 'Caramelo', en: 'Caramel', es: 'Caramelo', fr: 'Caramel', de: 'Karamell', it: 'Caramello' } },
+  // --- SABORES (FLAVOR) ---
+  { type: 'FLAVOR', name: { PT: 'Limão', EN: 'Lemon', ES: 'Limón', FR: 'Citron', DE: 'Zitrone', IT: 'Limone' } },
+  { type: 'FLAVOR', name: { PT: 'Pêssego', EN: 'Peach', ES: 'Melocotón', FR: 'Pêche', DE: 'Pfirsich', IT: 'Pesca' } },
+  { type: 'FLAVOR', name: { PT: 'Morango', EN: 'Strawberry', ES: 'Fresa', FR: 'Fraise', DE: 'Erdbeere', IT: 'Fragola' } },
+  { type: 'FLAVOR', name: { PT: 'Baunilha', EN: 'Vanilla', ES: 'Vainilla', FR: 'Vanille', DE: 'Vanille', IT: 'Vaniglia' } },
+  { type: 'FLAVOR', name: { PT: 'Chocolate', EN: 'Chocolate', ES: 'Chocolate', FR: 'Chocolat', DE: 'Schokolade', IT: 'Cioccolato' } },
+  { type: 'FLAVOR', name: { PT: 'Caramelo', EN: 'Caramel', ES: 'Caramelo', FR: 'Caramel', DE: 'Karamell', IT: 'Caramello' } },
 
-    // --- CORES (COLOR - Pode ser útil para Merchandising de Restaurantes / Copos) ---
-    { type: 'COLOR', name: { pt: 'Branco', en: 'White', es: 'Blanco', fr: 'Blanc', de: 'Weiß', it: 'Bianco' } },
-    { type: 'COLOR', name: { pt: 'Preto', en: 'Black', es: 'Negro', fr: 'Noir', de: 'Schwarz', it: 'Nero' } },
-    { type: 'COLOR', name: { pt: 'Vermelho', en: 'Red', es: 'Rojo', fr: 'Rouge', de: 'Rot', it: 'Rosso' } },
+  // --- CORES (COLOR - Pode ser útil para Merchandising de Restaurantes / Copos) ---
+  { type: 'COLOR', name: { PT: 'Branco', EN: 'White', ES: 'Blanco', FR: 'Blanc', DE: 'Weiß', IT: 'Bianco' } },
+  { type: 'COLOR', name: { PT: 'Preto', EN: 'Black', ES: 'Negro', FR: 'Noir', DE: 'Schwarz', IT: 'Nero' } },
+  { type: 'COLOR', name: { PT: 'Vermelho', EN: 'Red', ES: 'Rojo', FR: 'Rouge', DE: 'Rot', IT: 'Rosso' } },
 ];
 
 const GLOBAL_ADDONS: { name: MultiLangString }[] = [
-    // --- INSTRUÇÕES GERAIS / DIETAS / ALERGIAS ---
-    { name: { pt: 'Sem Glúten', en: 'Gluten-Free', es: 'Sin Gluten', fr: 'Sans Gluten', de: 'Glutenfrei', it: 'Senza Glutine' } },
-    { name: { pt: 'Opção Vegan', en: 'Vegan Option', es: 'Opción Vegana', fr: 'Option Végane', de: 'Vegane Option', it: 'Opzione Vegana' } },
-    { name: { pt: 'Sem Sal', en: 'No Salt', es: 'Sin Sal', fr: 'Sans Sel', de: 'Ohne Salz', it: 'Senza Sale' } },
-    { name: { pt: 'Bem Quente', en: 'Very Hot', es: 'Muy Caliente', fr: 'Bien Chaud', de: 'Sehr Heiß', it: 'Molto Caldo' } },
-    { name: { pt: 'Muito Picante', en: 'Extra Spicy', es: 'Muy Picante', fr: 'Très Épicé', de: 'Sehr Scharf', it: 'Molto Piccante' } },
-    { name: { pt: 'Talheres de Plástico', en: 'Plastic Cutlery', es: 'Cubiertos', fr: 'Couverts', de: 'Besteck', it: 'Posate' } },
+  // --- INSTRUÇÕES GERAIS / DIETAS / ALERGIAS ---
+  { name: { PT: 'Sem Glúten', EN: 'Gluten-Free', ES: 'Sin Gluten', FR: 'Sans Gluten', DE: 'Glutenfrei', IT: 'Senza Glutine' } },
+  { name: { PT: 'Opção Vegan', EN: 'Vegan Option', ES: 'Opción Vegana', FR: 'Option Végane', DE: 'Vegane Option', IT: 'Opzione Vegana' } },
+  { name: { PT: 'Sem Sal', EN: 'No Salt', ES: 'Sin Sal', FR: 'Sans Sel', DE: 'Ohne Salz', IT: 'Senza Sale' } },
+  { name: { PT: 'Bem Quente', EN: 'Very Hot', ES: 'Muy Caliente', FR: 'Bien Chaud', DE: 'Sehr Heiß', IT: 'Molto Caldo' } },
+  { name: { PT: 'Muito Picante', EN: 'Extra Spicy', ES: 'Muy Picante', FR: 'Très Épicé', DE: 'Sehr Scharf', IT: 'Molto Piccante' } },
+  { name: { PT: 'Talheres de Plástico', EN: 'Plastic Cutlery', ES: 'Cubiertos', FR: 'Couverts', DE: 'Besteck', IT: 'Posate' } },
 
-    // --- BEBIDAS & CAFÉ (Brunch / Cafetaria) ---
-    { name: { pt: 'Sem Gelo', en: 'No Ice', es: 'Sin Hielo', fr: 'Sans Glace', de: 'Kein Eis', it: 'Senza Ghiaccio' } },
-    { name: { pt: 'Com Gelo', en: 'With Ice', es: 'Con Hielo', fr: 'Avec Glace', de: 'Mit Eis', it: 'Con Ghiaccio' } },
-    { name: { pt: 'Rodela de Limão', en: 'Lemon Slice', es: 'Rodaja de Limón', fr: 'Tranche de Citron', de: 'Zitronenscheibe', it: 'Fetta di Limone' } },
-    { name: { pt: 'Descafeinado', en: 'Decaf', es: 'Descafeinado', fr: 'Décaféiné', de: 'Koffeinfrei', it: 'Decaffeinato' } },
-    { name: { pt: 'Leite de Soja', en: 'Soy Milk', es: 'Leche de Soja', fr: 'Lait de Soja', de: 'Sojamilch', it: 'Latte di Soia' } },
-    { name: { pt: 'Leite de Aveia', en: 'Oat Milk', es: 'Leche de Avena', fr: 'Lait d\'Avoine', de: 'Hafermilch', it: 'Latte di Avena' } },
-    { name: { pt: 'Leite de Amêndoa', en: 'Almond Milk', es: 'Leche de Almendra', fr: 'Lait d\'Amande', de: 'Mandelmilch', it: 'Latte di Mandorla' } },
-    { name: { pt: 'Extra Shot de Café', en: 'Extra Espresso Shot', es: 'Shot Extra', fr: 'Dose Supplémentaire', de: 'Extra Shot', it: 'Extra Shot' } },
+  // --- BEBIDAS & CAFÉ (Brunch / Cafetaria) ---
+  { name: { PT: 'Sem Gelo', EN: 'No Ice', ES: 'Sin Hielo', FR: 'Sans Glace', DE: 'Kein Eis', IT: 'Senza Ghiaccio' } },
+  { name: { PT: 'Com Gelo', EN: 'With Ice', ES: 'Con Hielo', FR: 'Avec Glace', DE: 'Mit Eis', IT: 'Con Ghiaccio' } },
+  { name: { PT: 'Rodela de Limão', EN: 'Lemon Slice', ES: 'Rodaja de Limón', FR: 'Tranche de Citron', DE: 'Zitronenscheibe', IT: 'Fetta di Limone' } },
+  { name: { PT: 'Descafeinado', EN: 'Decaf', ES: 'Descafeinado', FR: 'Décaféiné', DE: 'Koffeinfrei', IT: 'Decaffeinato' } },
+  { name: { PT: 'Leite de Soja', EN: 'Soy Milk', ES: 'Leche de Soja', FR: 'Lait de Soja', DE: 'Sojamilch', IT: 'Latte di Soia' } },
+  { name: { PT: 'Leite de Aveia', EN: 'Oat Milk', ES: 'Leche de Avena', FR: 'Lait d\'Avoine', DE: 'Hafermilch', IT: 'Latte di Avena' } },
+  { name: { PT: 'Leite de Amêndoa', EN: 'Almond Milk', ES: 'Leche de Almendra', FR: 'Lait d\'Amande', DE: 'Mandelmilch', IT: 'Latte di Mandorla' } },
+  { name: { PT: 'Extra Shot de Café', EN: 'Extra Espresso Shot', ES: 'Shot Extra', FR: 'Dose Supplémentaire', DE: 'Extra Shot', IT: 'Extra Shot' } },
 
-    // --- PONTOS DA CARNE (Steakhouse / Burgers) ---
-    { name: { pt: 'Mal Passado', en: 'Rare', es: 'Poco Hecho', fr: 'Saignant', de: 'Blutig', it: 'Al Sangue' } },
-    { name: { pt: 'Médio', en: 'Medium', es: 'Al Punto', fr: 'À Point', de: 'Medium', it: 'Media Cottura' } },
-    { name: { pt: 'Bem Passado', en: 'Well Done', es: 'Muy Hecho', fr: 'Bien Cuit', de: 'Durchgebraten', it: 'Ben Cotta' } },
+  // --- PONTOS DA CARNE (Steakhouse / Burgers) ---
+  { name: { PT: 'Mal Passado', EN: 'Rare', ES: 'Poco Hecho', FR: 'Saignant', DE: 'Blutig', IT: 'Al Sangue' } },
+  { name: { PT: 'Médio', EN: 'Medium', ES: 'Al Punto', FR: 'À Point', DE: 'Medium', IT: 'Media Cottura' } },
+  { name: { PT: 'Bem Passado', EN: 'Well Done', ES: 'Muy Hecho', FR: 'Bien Cuit', DE: 'Durchgebraten', IT: 'Ben Cotta' } },
 
-    // --- BURGERS / SANDWICHES / KEBABS ---
-    { name: { pt: 'Sem Cebola', en: 'No Onion', es: 'Sin Cebolla', fr: 'Sans Oignon', de: 'Keine Zwiebeln', it: 'Senza Cipolla' } },
-    { name: { pt: 'Sem Tomate', en: 'No Tomato', es: 'Sin Tomate', fr: 'Sans Tomate', de: 'Keine Tomaten', it: 'Senza Pomodoro' } },
-    { name: { pt: 'Sem Salada', en: 'No Salad', es: 'Sin Ensalada', fr: 'Sans Salade', de: 'Ohne Salat', it: 'Senza Insalata' } },
-    { name: { pt: 'Extra Queijo', en: 'Extra Cheese', es: 'Extra Queso', fr: 'Supplément Fromage', de: 'Extra Käse', it: 'Extra Formaggio' } },
-    { name: { pt: 'Extra Bacon', en: 'Extra Bacon', es: 'Extra Bacon', fr: 'Supplément Bacon', de: 'Extra Speck', it: 'Extra Pancetta' } },
-    { name: { pt: 'Extra Hambúrguer', en: 'Double Patty', es: 'Doble Carne', fr: 'Double Steak', de: 'Doppeltes Fleisch', it: 'Doppio Hamburger' } },
-    { name: { pt: 'Jalapeños', en: 'Jalapeños', es: 'Jalapeños', fr: 'Jalapeños', de: 'Jalapeños', it: 'Jalapeños' } },
+  // --- BURGERS / SANDWICHES / KEBABS ---
+  { name: { PT: 'Sem Cebola', EN: 'No Onion', ES: 'Sin Cebolla', FR: 'Sans Oignon', DE: 'Keine Zwiebeln', IT: 'Senza Cipolla' } },
+  { name: { PT: 'Sem Tomate', EN: 'No Tomato', ES: 'Sin Tomate', FR: 'Sans Tomate', DE: 'Keine Tomaten', IT: 'Senza Pomodoro' } },
+  { name: { PT: 'Sem Salada', EN: 'No Salad', ES: 'Sin Ensalada', FR: 'Sans Salade', DE: 'Ohne Salat', IT: 'Senza Insalata' } },
+  { name: { PT: 'Extra Queijo', EN: 'Extra Cheese', ES: 'Extra Queso', FR: 'Supplément Fromage', DE: 'Extra Käse', IT: 'Extra Formaggio' } },
+  { name: { PT: 'Extra Bacon', EN: 'Extra Bacon', ES: 'Extra Bacon', FR: 'Supplément Bacon', DE: 'Extra Speck', IT: 'Extra Pancetta' } },
+  { name: { PT: 'Extra Hambúrguer', EN: 'Double Patty', ES: 'Doble Carne', FR: 'Double Steak', DE: 'Doppeltes Fleisch', IT: 'Doppio Hamburger' } },
+  { name: { PT: 'Jalapeños', EN: 'Jalapeños', ES: 'Jalapeños', FR: 'Jalapeños', DE: 'Jalapeños', IT: 'Jalapeños' } },
 
-    // --- PIZZA ---
-    { name: { pt: 'Massa Fina', en: 'Thin Crust', es: 'Masa Fina', fr: 'Pâte Fine', de: 'Dünner Teig', it: 'Pasta Sottile' } },
-    { name: { pt: 'Massa Alta', en: 'Thick Crust', es: 'Masa Gruesa', fr: 'Pâte Épaisse', de: 'Dicker Teig', it: 'Pasta Alta' } },
-    { name: { pt: 'Borda Recheada', en: 'Stuffed Crust', es: 'Borde Relleno', fr: 'Croûte Fourrée', de: 'Gefüllter Rand', it: 'Bordo Ripieno' } },
-    { name: { pt: 'Extra Mozzarella', en: 'Extra Mozzarella', es: 'Extra Mozzarella', fr: 'Supplément Mozzarella', de: 'Extra Mozzarella', it: 'Extra Mozzarella' } },
-    { name: { pt: 'Extra Cogumelos', en: 'Extra Mushrooms', es: 'Extra Champiñones', fr: 'Supplément Champignons', de: 'Extra Pilze', it: 'Extra Funghi' } },
+  // --- PIZZA ---
+  { name: { PT: 'Massa Fina', EN: 'Thin Crust', ES: 'Masa Fina', FR: 'Pâte Fine', DE: 'Dünner Teig', IT: 'Pasta Sottile' } },
+  { name: { PT: 'Massa Alta', EN: 'Thick Crust', ES: 'Masa Gruesa', FR: 'Pâte Épaisse', DE: 'Dicker Teig', IT: 'Pasta Alta' } },
+  { name: { PT: 'Borda Recheada', EN: 'Stuffed Crust', ES: 'Borde Relleno', FR: 'Croûte Fourrée', DE: 'Gefüllter Rand', IT: 'Bordo Ripieno' } },
+  { name: { PT: 'Extra Mozzarella', EN: 'Extra Mozzarella', ES: 'Extra Mozzarella', FR: 'Supplément Mozzarella', DE: 'Extra Mozzarella', IT: 'Extra Mozzarella' } },
+  { name: { PT: 'Extra Cogumelos', EN: 'Extra Mushrooms', ES: 'Extra Champiñones', FR: 'Supplément Champignons', DE: 'Extra Pilze', IT: 'Extra Funghi' } },
 
-    // --- SUSHI & ASIÁTICO ---
-    { name: { pt: 'Com Pauzinhos', en: 'With Chopsticks', es: 'Con Palillos', fr: 'Avec Baguettes', de: 'Mit Stäbchen', it: 'Con Bacchette' } },
-    { name: { pt: 'Extra Soja', en: 'Extra Soy Sauce', es: 'Extra Soja', fr: 'Supplément Soja', de: 'Extra Sojasauce', it: 'Extra Soia' } },
-    { name: { pt: 'Extra Soja Doce (Teriyaki)', en: 'Sweet Soy (Teriyaki)', es: 'Soja Dulce', fr: 'Soja Sucrée', de: 'Süße Sojasauce', it: 'Soia Dolce' } },
-    { name: { pt: 'Extra Gengibre', en: 'Extra Ginger', es: 'Extra Jengibre', fr: 'Supplément Gingembre', de: 'Extra Ingwer', it: 'Extra Zenzero' } },
-    { name: { pt: 'Extra Wasabi', en: 'Extra Wasabi', es: 'Extra Wasabi', fr: 'Supplément Wasabi', de: 'Extra Wasabi', it: 'Extra Wasabi' } },
-    { name: { pt: 'Maionese Picante', en: 'Spicy Mayo', es: 'Mayonesa Picante', fr: 'Mayo Épicée', de: 'Scharfe Mayo', it: 'Maionese Piccante' } },
+  // --- SUSHI & ASIÁTICO ---
+  { name: { PT: 'Com Pauzinhos', EN: 'With Chopsticks', ES: 'Con Palillos', FR: 'Avec Baguettes', DE: 'Mit Stäbchen', IT: 'Con Bacchette' } },
+  { name: { PT: 'Extra Soja', EN: 'Extra Soy Sauce', ES: 'Extra Soja', FR: 'Supplément Soja', DE: 'Extra Sojasauce', IT: 'Extra Soia' } },
+  { name: { PT: 'Extra Soja Doce (Teriyaki)', EN: 'Sweet Soy (Teriyaki)', ES: 'Soja Dulce', FR: 'Soja Sucrée', DE: 'Süße Sojasauce', IT: 'Soia Dolce' } },
+  { name: { PT: 'Extra Gengibre', EN: 'Extra Ginger', ES: 'Extra Jengibre', FR: 'Supplément Gingembre', DE: 'Extra Ingwer', IT: 'Extra Zenzero' } },
+  { name: { PT: 'Extra Wasabi', EN: 'Extra Wasabi', ES: 'Extra Wasabi', FR: 'Supplément Wasabi', DE: 'Extra Wasabi', IT: 'Extra Wasabi' } },
+  { name: { PT: 'Maionese Picante', EN: 'Spicy Mayo', ES: 'Mayonesa Picante', FR: 'Mayo Épicée', DE: 'Scharfe Mayo', IT: 'Maionese Piccante' } },
 
-    // --- MOLHOS (Para Acompanhamentos) ---
-    { name: { pt: 'Ketchup', en: 'Ketchup', es: 'Kétchup', fr: 'Ketchup', de: 'Ketchup', it: 'Ketchup' } },
-    { name: { pt: 'Maionese', en: 'Mayonnaise', es: 'Mayonesa', fr: 'Mayonnaise', de: 'Mayonnaise', it: 'Maionese' } },
-    { name: { pt: 'Mostarda', en: 'Mustard', es: 'Mostaza', fr: 'Moutarde', de: 'Senf', it: 'Senape' } },
-    { name: { pt: 'Molho BBQ', en: 'BBQ Sauce', es: 'Salsa Barbacoa', fr: 'Sauce Barbecue', de: 'BBQ-Sauce', it: 'Salsa BBQ' } },
-    { name: { pt: 'Maionese de Alho', en: 'Garlic Mayo', es: 'Mayonesa de Ajo', fr: 'Mayo à l\'ail', de: 'Knoblauch-Mayo', it: 'Maionese all\'Aglio' } },
-    { name: { pt: 'Molho à Parte', en: 'Sauce on the Side', es: 'Salsa Aparte', fr: 'Sauce à part', de: 'Soße extra', it: 'Salsa a parte' } },
+  // --- MOLHOS (Para Acompanhamentos) ---
+  { name: { PT: 'Ketchup', EN: 'Ketchup', ES: 'Kétchup', FR: 'Ketchup', DE: 'Ketchup', IT: 'Ketchup' } },
+  { name: { PT: 'Maionese', EN: 'Mayonnaise', ES: 'Mayonesa', FR: 'Mayonnaise', DE: 'Mayonnaise', IT: 'Maionese' } },
+  { name: { PT: 'Mostarda', EN: 'Mustard', ES: 'Mostaza', FR: 'Moutarde', DE: 'Senf', IT: 'Senape' } },
+  { name: { PT: 'Molho BBQ', EN: 'BBQ Sauce', ES: 'Salsa Barbacoa', FR: 'Sauce Barbecue', DE: 'BBQ-Sauce', IT: 'Salsa BBQ' } },
+  { name: { PT: 'Maionese de Alho', EN: 'Garlic Mayo', ES: 'Mayonesa de Ajo', FR: 'Mayo à l\'ail', DE: 'Knoblauch-Mayo', IT: 'Maionese all\'Aglio' } },
+  { name: { PT: 'Molho à Parte', EN: 'Sauce on the Side', ES: 'Salsa Aparte', FR: 'Sauce à part', DE: 'Soße extra', IT: 'Salsa a parte' } },
 
-    // --- ACOMPANHAMENTOS GERAIS (Podem ser usados como addons em pratos) ---
-    { name: { pt: 'Batata Frita', en: 'French Fries', es: 'Patatas Fritas', fr: 'Frites', de: 'Pommes Frites', it: 'Patatine Fritte' } },
-    { name: { pt: 'Arroz Branco', en: 'White Rice', es: 'Arroz Blanco', fr: 'Riz Blanc', de: 'Weißer Reis', it: 'Riso Bianco' } },
-    { name: { pt: 'Salada Mista', en: 'Mixed Salad', es: 'Ensalada Mixta', fr: 'Salade Mixte', de: 'Gemischter Salat', it: 'Insalata Mista' } },
+  // --- ACOMPANHAMENTOS GERAIS (Podem ser usados como addons em pratos) ---
+  { name: { PT: 'Batata Frita', EN: 'French Fries', ES: 'Patatas Fritas', FR: 'Frites', DE: 'Pommes Frites', IT: 'Patatine Fritte' } },
+  { name: { PT: 'Arroz Branco', EN: 'White Rice', ES: 'Arroz Blanco', FR: 'Riz Blanc', DE: 'Weißer Reis', IT: 'Riso Bianco' } },
+  { name: { PT: 'Salada Mista', EN: 'Mixed Salad', ES: 'Ensalada Mixta', FR: 'Salade Mixte', DE: 'Gemischter Salat', IT: 'Insalata Mista' } },
 ];
 
 // ============================================
@@ -145,63 +145,63 @@ const GLOBAL_ADDONS: { name: MultiLangString }[] = [
 // ============================================
 
 async function seedGlobalVariants() {
-    console.log('🌍 A criar Variantes Globais (PT, EN, ES, FR, DE, IT)...');
+  console.log('🌍 A criar Variantes Globais (PT, EN, ES, FR, DE, IT)...');
 
-    for (const variant of GLOBAL_VARIANTS) {
-        // Busca pela tradução 'pt' para verificar se já existe
-        const exists = await prisma.variantOption.findFirst({
-            where: { translations: { some: { locale: 'pt', name: variant.name.pt } }, isGlobal: true }
-        });
+  for (const variant of GLOBAL_VARIANTS) {
+    // Busca pela tradução 'pt' para verificar se já existe
+    const exists = await prisma.variantOption.findFirst({
+      where: { translations: { some: { locale: EstablishmentLanguage.PT, name: variant.name.PT } }, isGlobal: true }
+    });
 
-        if (!exists) {
-            await prisma.variantOption.create({
-                data: {
-                    type: variant.type,
-                    isGlobal: true,
-                    unit: variant.unit,
-                    quantity: variant.quantity,
-                    translations: {
-                        create: [
-                            { locale: 'pt', name: variant.name.pt },
-                            { locale: 'en', name: variant.name.en },
-                            { locale: 'es', name: variant.name.es },
-                            { locale: 'fr', name: variant.name.fr },
-                            { locale: 'de', name: variant.name.de },
-                            { locale: 'it', name: variant.name.it },
-                        ]
-                    }
-                }
-            });
+    if (!exists) {
+      await prisma.variantOption.create({
+        data: {
+          type: variant.type,
+          isGlobal: true,
+          unit: variant.unit,
+          quantity: variant.quantity,
+          translations: {
+            create: [
+              { locale: EstablishmentLanguage.PT, name: variant.name.PT },
+              { locale: EstablishmentLanguage.EN, name: variant.name.EN },
+              { locale: EstablishmentLanguage.ES, name: variant.name.ES },
+              { locale: EstablishmentLanguage.FR, name: variant.name.FR },
+              { locale: EstablishmentLanguage.DE, name: variant.name.DE },
+              { locale: EstablishmentLanguage.IT, name: variant.name.IT },
+            ]
+          }
         }
+      });
     }
+  }
 }
 
 async function seedGlobalAddons() {
-    console.log('🌍 A criar Addons Globais (PT, EN, ES, FR, DE, IT)...');
+  console.log('🌍 A criar Addons Globais (PT, EN, ES, FR, DE, IT)...');
 
-    for (const addon of GLOBAL_ADDONS) {
-        const exists = await prisma.addon.findFirst({
-            where: { translations: { some: { locale: 'pt', name: addon.name.pt } }, isGlobal: true }
-        });
+  for (const addon of GLOBAL_ADDONS) {
+    const exists = await prisma.addon.findFirst({
+      where: { translations: { some: { locale: EstablishmentLanguage.PT, name: addon.name.PT } }, isGlobal: true }
+    });
 
-        if (!exists) {
-            await prisma.addon.create({
-                data: {
-                    isGlobal: true,
-                    translations: {
-                        create: [
-                            { locale: 'pt', name: addon.name.pt },
-                            { locale: 'en', name: addon.name.en },
-                            { locale: 'es', name: addon.name.es },
-                            { locale: 'fr', name: addon.name.fr },
-                            { locale: 'de', name: addon.name.de },
-                            { locale: 'it', name: addon.name.it },
-                        ]
-                    }
-                }
-            });
+    if (!exists) {
+      await prisma.addon.create({
+        data: {
+          isGlobal: true,
+          translations: {
+            create: [
+              { locale: EstablishmentLanguage.PT, name: addon.name.PT },
+              { locale: EstablishmentLanguage.EN, name: addon.name.EN },
+              { locale: EstablishmentLanguage.ES, name: addon.name.ES },
+              { locale: EstablishmentLanguage.FR, name: addon.name.FR },
+              { locale: EstablishmentLanguage.DE, name: addon.name.DE },
+              { locale: EstablishmentLanguage.IT, name: addon.name.IT },
+            ]
+          }
         }
+      });
     }
+  }
 }
 
 // ============================================
@@ -329,23 +329,23 @@ async function seedTestItem() {
 // ============================================
 
 async function main() {
-    console.log('🌱 A iniciar Seed da Base de Dados...\n');
+  console.log('🌱 A iniciar Seed da Base de Dados...\n');
 
-    // 1. OBRIGATÓRIO: Dicionários Globais
-    await seedGlobalVariants();
-    await seedGlobalAddons();
+  // 1. OBRIGATÓRIO: Dicionários Globais
+  await seedGlobalVariants();
+  await seedGlobalAddons();
 
-    // 2. OPCIONAL: Item de Teste (Comentar em Prod)
-    // await seedTestItem();
+  // 2. OPCIONAL: Item de Teste (Comentar em Prod)
+  // await seedTestItem();
 
-    console.log('\n🎉 Seed completo finalizado com sucesso!');
+  console.log('\n🎉 Seed completo finalizado com sucesso!');
 }
 
 main()
-    .catch((e) => {
-        console.error('❌ Erro no Seed: ', e);
-        process.exit(1);
-    })
-    .finally(async () => {
-        await prisma.$disconnect();
-    });
+  .catch((e) => {
+    console.error('❌ Erro no Seed: ', e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

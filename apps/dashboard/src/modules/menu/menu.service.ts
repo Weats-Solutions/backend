@@ -464,6 +464,7 @@ export class MenuService {
                                                                     image: {
                                                                         select: { url: true },
                                                                     },
+                                                                    nutritionInfo: true,
                                                                     variantOption: {
                                                                         select: {
                                                                             id: true,
