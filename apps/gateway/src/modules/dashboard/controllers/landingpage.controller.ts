@@ -50,7 +50,6 @@ export class LandingpageController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.THEME_UPDATE, { updateThemeSettingsDto, establishment });
   }
 
-  @UseGuards(EstablishmentOpenGuard)
   @Get('/:establishmentSlug')
   async getLandingpage(
     @Param('establishmentSlug') establishmentSlug: string,
@@ -59,7 +58,7 @@ export class LandingpageController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_BY_SLUG, { establishmentSlug, lang });
   }
 
-  @UseGuards(EstablishmentOpenGuard, MenuOpenGuard)
+  //@UseGuards(EstablishmentOpenGuard, MenuOpenGuard)
   @Get('/:establishmentSlug/menu/:menuId')
   async getMenuContent(
     @Param('establishmentSlug') establishmentSlug: string,

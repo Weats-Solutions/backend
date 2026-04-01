@@ -4,8 +4,8 @@ import { AppConfigService } from '@weats/configs/app-config.service';
 import { InjectQueue } from '@nestjs/bull';
 import type { Queue } from 'bull';
 import { User, Establishment } from '@weats/types';
-import { RESPONSE_CODES, ERRORS, FeatureUsageService, normalizeSchedule } from '@weats/common';
-import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
+import { RESPONSE_CODES, ERRORS, FeatureUsageService, normalizeSchedule, DEFAULT_SCHEDULE_NAMES } from '@weats/common';
+import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto, UpdateEstablishmentScheduleDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { CorePrismaService, EstablishmentLanguage } from '@weats/database';
 import { EstablishmentStatus } from '@weats/database';
 import { ulid } from 'ulid';
@@ -335,6 +335,49 @@ export class EstablishmentService {
         message: RESPONSE_CODES.ESTABLISHMENT.UPDATED,
         updatedEstablishment,
         updatedDetails,
+      };
+    });
+
+    return result;
+  }
+
+  async updateSchedule(establishment: Establishment, updateEstablishmentScheduleDto: UpdateEstablishmentScheduleDto) {
+    const schedule = await this.prisma.schedule.findUnique({
+      where: { id: updateEstablishmentScheduleDto.scheduleId },
+    });
+
+    if (!schedule) {
+      throw new RpcException({
+        status: 400,
+        message: ERRORS.SCHEDULE_NOT_FOUND,
+        code: ERRORS.SCHEDULE_NOT_FOUND,
+      });
+    }
+
+    const result = await this.prisma.$transaction(async (prisma) => {
+      const updatedSchedule = await prisma.schedule.update({
+        where: { id: schedule.id },
+        data: {
+          name: DEFAULT_SCHEDULE_NAMES[establishment.primaryLanguage as keyof typeof DEFAULT_SCHEDULE_NAMES] || DEFAULT_SCHEDULE_NAMES.PT,
+          days: {
+            deleteMany: {},
+            create: updateEstablishmentScheduleDto.schedule.days.map((day) => ({
+              dayOfWeek: day.dayOfWeek,
+              isOpen: day.isOpen,
+              intervals: {
+                create: day.intervals.map((interval) => ({
+                  startTime: interval.startTime,
+                  endTime: interval.endTime,
+                })),
+              },
+            })),
+          },
+        },
+      });
+
+      return {
+        message: RESPONSE_CODES.ESTABLISHMENT.UPDATED,
+        updatedSchedule,
       };
     });
 

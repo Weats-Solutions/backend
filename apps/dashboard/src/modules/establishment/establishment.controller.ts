@@ -2,7 +2,7 @@ import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { EstablishmentService } from './establishment.service';
-import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
+import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto, UpdateEstablishmentScheduleDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { User, Establishment } from '@weats/types';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 
@@ -50,6 +50,11 @@ export class EstablishmentController {
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE)
     updateEstablishment(@Payload() payload: { id: string; updateEstablishmentDto: CreateEstablishmentDto; user: User }) {
         return this.establishmentService.updateEstablishment(payload.id, payload.updateEstablishmentDto, payload.user);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SCHEDULE)
+    updateSchedule(@Payload() payload: { establishment: Establishment; updateEstablishmentScheduleDto: UpdateEstablishmentScheduleDto }) {
+        return this.establishmentService.updateSchedule(payload.establishment, payload.updateEstablishmentScheduleDto);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_LANGUAGES)

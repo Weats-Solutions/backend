@@ -9,6 +9,7 @@ export const DASHBOARD_PATTERNS = {
   ESTABLISHMENT_CANCEL_SUBSCRIPTION: 'dashboard.establishment.cancel_subscription',
   ESTABLISHMENT_UPDATE_LANGUAGES: 'dashboard.establishment.update_languages',
   ESTABLISHMENT_UPDATE_BRANDING: 'dashboard.establishment.update_branding',
+  ESTABLISHMENT_UPDATE_SCHEDULE: 'dashboard.establishment.update_schedule',
 
   MENU_LIST: 'dashboard.menu.list',
   MENU_GET_BY_ID: 'dashboard.menu.get_by_id',
