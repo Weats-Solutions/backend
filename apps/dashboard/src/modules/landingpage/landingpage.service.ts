@@ -133,6 +133,7 @@ export class LandingpageService {
 
             return result;
         } catch (error) {
+            console.log(error);
             throw new RpcException({
                 status: 400,
                 message: ERRORS.BAD_REQUEST,
