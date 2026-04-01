@@ -7,4 +7,5 @@ export * from './response';
 export * from './validators';
 export * from './patterns';
 export * from './pipes';
+export * from './utils';
 export * from "./feature/feature-usage.service";

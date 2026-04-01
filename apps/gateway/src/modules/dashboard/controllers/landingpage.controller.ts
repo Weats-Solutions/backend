@@ -5,7 +5,7 @@ import { ToUpperCasePipe } from '@weats/common/pipes/upper-case.pipe';
 import { ClientProxy } from '@nestjs/microservices';
 import { DASHBOARD_SERVICE } from '@weats/common/constants/services';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
-import { ClerkGuard, CurrentEstablishment, EstablishmentStaffGuard } from '@weats/common';
+import { ClerkGuard, CurrentEstablishment, EstablishmentStaffGuard, EstablishmentOpenGuard, MenuOpenGuard } from '@weats/common';
 import { Establishment } from '@weats/types';
 import { UpdateThemeSettingsDto } from '@weats/contracts/dashboard/dtos/theme/update-theme-settings.dto';
 
@@ -50,6 +50,7 @@ export class LandingpageController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.THEME_UPDATE, { updateThemeSettingsDto, establishment });
   }
 
+  @UseGuards(EstablishmentOpenGuard)
   @Get('/:establishmentSlug')
   async getLandingpage(
     @Param('establishmentSlug') establishmentSlug: string,
@@ -58,6 +59,7 @@ export class LandingpageController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_BY_SLUG, { establishmentSlug, lang });
   }
 
+  @UseGuards(EstablishmentOpenGuard, MenuOpenGuard)
   @Get('/:establishmentSlug/menu/:menuId')
   async getMenuContent(
     @Param('establishmentSlug') establishmentSlug: string,
@@ -66,6 +68,4 @@ export class LandingpageController {
   ) {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_MENU_CONTENT, { establishmentSlug, menuId, lang });
   }
-
-
 }

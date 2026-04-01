@@ -40,4 +40,11 @@ export class MenuSubcategoryController {
     ) {
         return this.subcategoryService.deleteSubcategory(payload.subcategoryId);
     }
+
+    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_LINK_ITEM)
+    linkItemToSubcategory(
+        @Payload() payload: { subcategoryId: string, itemId: string },
+    ) {
+        return this.subcategoryService.linkItemToSubcategory(payload.subcategoryId, payload.itemId);
+    }
 }

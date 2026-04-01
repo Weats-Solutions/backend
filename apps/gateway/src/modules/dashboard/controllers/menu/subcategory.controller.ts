@@ -11,7 +11,6 @@ import { Inject } from '@nestjs/common';
 export class MenuSubcategoryController {
     constructor(@Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy) { }
 
-
     @Roles(EmployeeRoles.MANAGER)
     @UseGuards(ClerkGuard, EstablishmentStaffGuard)
     @Get()
@@ -52,4 +51,14 @@ export class MenuSubcategoryController {
     ) {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.SUBCATEGORY_DELETE, { subcategoryId });
     }
+
+    @Post('/:subcategoryId/items/:itemId')
+    linkItemToSubcategory(
+        @Param('subcategoryId') subcategoryId: string,
+        @Param('itemId') itemId: string,
+    ) {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.SUBCATEGORY_LINK_ITEM, { subcategoryId, itemId });
+    }
+
+
 }

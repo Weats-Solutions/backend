@@ -4,6 +4,7 @@
 model Discount {
     id              String       @id @default(ulid())
     establishmentId String
+    scheduleId      String?
     name            String
     description     String?
     type            DiscountType
@@ -16,10 +17,11 @@ model Discount {
     updatedAt       DateTime     @updatedAt
 
     establishment Establishment      @relation(fields: [establishmentId], references: [id])
+    schedule      Schedule?          @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
     targets       DiscountTarget[]
-    schedules     DiscountSchedule[]
 
     @@index([establishmentId, isActive])
+    @@index([scheduleId])
 }
 
 enum DiscountType {
@@ -39,23 +41,13 @@ model DiscountTarget {
     @@index([discountId])
 }
 
-model DiscountSchedule {
-    id         String @id @default(ulid())
-    discountId String
-    scheduleId String
-
-    discount Discount @relation(fields: [discountId], references: [id], onDelete: Cascade)
-    schedule Schedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
-
-    @@unique([discountId, scheduleId])
-}
-
 /// =======================================================
 /// PROMOTIONS (Regras condicionais, ex: Buy X Get Y)
 /// =======================================================
 model Promotion {
     id              String        @id @default(ulid())
     establishmentId String
+    scheduleId      String?
     name            String
     description     String?
     type            PromotionType
@@ -65,11 +57,12 @@ model Promotion {
     createdAt       DateTime      @default(now())
     updatedAt       DateTime      @updatedAt
 
-    establishment Establishment       @relation(fields: [establishmentId], references: [id])
+    establishment Establishment  @relation(fields: [establishmentId], references: [id])
+    schedule      Schedule?      @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
     buyXGetYRule  BuyXGetYRule?
-    schedules     PromotionSchedule[]
 
     @@index([establishmentId, isActive])
+    @@index([scheduleId])
 }
 
 enum PromotionType {
@@ -92,15 +85,4 @@ model BuyXGetYRule {
     promotion    Promotion @relation(fields: [promotionId], references: [id], onDelete: Cascade)
     requiredItem Item      @relation("RequiredItem", fields: [requiredItemId], references: [id])
     rewardItem   Item      @relation("RewardItem", fields: [rewardItemId], references: [id])
-}
-
-model PromotionSchedule {
-    id          String @id @default(ulid())
-    promotionId String
-    scheduleId  String
-
-    promotion Promotion @relation(fields: [promotionId], references: [id], onDelete: Cascade)
-    schedule  Schedule  @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
-
-    @@unique([promotionId, scheduleId])
 }

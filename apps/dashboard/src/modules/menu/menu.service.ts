@@ -6,7 +6,7 @@ import {
 import { CreateMenuDto, UpdateMenuPositionsDto, UpdateMenuDto } from '@weats/contracts';
 import { Establishment } from '@weats/types';
 import { FeatureUsageService } from '@weats/common/feature/feature-usage.service';
-import { MENU_COLOR_PALETTE } from '@weats/common';
+import { MENU_COLOR_PALETTE, normalizeSchedule } from '@weats/common';
 import { CorePrismaService, EstablishmentLanguage, ScheduleType } from '@weats/database';
 
 @Injectable()
@@ -35,16 +35,8 @@ export class MenuService {
                             observations: true,
                         },
                     },
-                    menuSchedule: {
-                        select: {
-                            schedule: {
-                                select: {
-                                    dayOfWeek: true,
-                                    openTime: true,
-                                    closeTime: true,
-                                },
-                            },
-                        },
+                    schedule: {
+                        include: { days: { include: { intervals: true } } }
                     },
                 },
             });
@@ -56,11 +48,7 @@ export class MenuService {
 
             // Transform data
             const menuList = menus.map((menu) => {
-                const schedules = menu.menuSchedule.map((ms) => ({
-                    dayOfWeek: ms.schedule.dayOfWeek,
-                    openTime: ms.schedule.openTime,
-                    closeTime: ms.schedule.closeTime,
-                }));
+                const normalizedSchedule = menu.schedule ? normalizeSchedule(menu.schedule) : null;
 
                 return {
                     id: menu.id,
@@ -69,7 +57,7 @@ export class MenuService {
                     color: menu.color,
                     isHighlighted: menu.isHighlighted,
                     translations: menu.translations,
-                    menuSchedule: schedules, // Return as array to match frontend schema
+                    schedule: normalizedSchedule,
                 };
             });
 
@@ -90,42 +78,24 @@ export class MenuService {
         try {
             const menu = await this.prisma.menu.findFirst({
                 where: { id: menuId, establishmentId: establishment.id },
-                select: {
-                    id: true,
-                    isVisible: true,
-                    position: true,
-                    color: true,
-                    isHighlighted: true,
-                    translations: {
-                        select: {
-                            locale: true,
-                            name: true,
-                            description: true,
-                            observations: true,
-                        },
-                    },
-                    menuSchedule: {
-                        select: {
-                            schedule: {
-                                select: {
-                                    dayOfWeek: true,
-                                    openTime: true,
-                                    closeTime: true,
+                include: {
+                    translations: true,
+                    schedule: {
+                        include: {
+                            days: {
+                                include: {
+                                    intervals: true,
                                 },
                             },
                         },
                     },
                 },
-                orderBy: { position: 'asc' },
             });
+
             if (!menu) {
                 throw new NotFoundException('Menu not found');
             }
-            const schedules = menu.menuSchedule.map((ms) => ({
-                dayOfWeek: ms.schedule.dayOfWeek,
-                openTime: ms.schedule.openTime,
-                closeTime: ms.schedule.closeTime,
-            }));
+
             return {
                 id: menu.id,
                 isVisible: menu.isVisible,
@@ -133,7 +103,7 @@ export class MenuService {
                 color: menu.color,
                 isHighlighted: menu.isHighlighted,
                 translations: menu.translations,
-                menuSchedule: schedules, // Return as array to match frontend schema
+                schedule: menu.schedule ? normalizeSchedule(menu.schedule) : null,
             };
         } catch (error) {
             console.error('Error getting menu details:', error);
@@ -143,7 +113,7 @@ export class MenuService {
 
     async createMenu(createMenuDto: CreateMenuDto, establishmentId: string) {
         try {
-            const { translations, menuSchedule } = createMenuDto;
+            const { translations, schedule } = createMenuDto;
 
             const menuCount = await this.prisma.menu.count({
                 where: { establishmentId },
@@ -155,29 +125,52 @@ export class MenuService {
                 Math.floor(Math.random() * MENU_COLOR_PALETTE.length)
                 ];
 
-            const menu = await this.prisma.menu.create({
-                data: {
-                    establishmentId,
-                    position: menuCount + 1,
-                    color: selectedColor,
-                    translations: {
-                        create: translations,
-                    },
-                    menuSchedule: {
-                        create: menuSchedule.map((schedule) => ({
-                            schedule: {
-                                create: {
-                                    openTime: schedule.openTime,
-                                    closeTime: schedule.closeTime,
-                                    dayOfWeek: schedule.dayOfWeek,
-                                    type: ScheduleType.MENU,
-                                },
+            return await this.prisma.$transaction(async (prisma) => {
+                let scheduleId: string | undefined;
+                if (schedule) {
+                    const createdSchedule = await prisma.schedule.create({
+                        data: {
+                            name: schedule.name,
+                            type: ScheduleType.MENU,
+                            days: {
+                                create: schedule.days.map((day) => ({
+                                    dayOfWeek: day.dayOfWeek,
+                                    isOpen: day.isOpen ?? true,
+                                    intervals: {
+                                        create: day.intervals,
+                                    },
+                                })),
                             },
-                        })),
+                        },
+                    });
+                    scheduleId = createdSchedule.id;
+                }
+
+                const menuCount = await prisma.menu.count({ where: { establishmentId } });
+                const selectedColor = MENU_COLOR_PALETTE[Math.floor(Math.random() * MENU_COLOR_PALETTE.length)];
+
+                const menu = await prisma.menu.create({
+                    data: {
+                        establishmentId,
+                        position: menuCount + 1,
+                        color: selectedColor,
+                        translations: { create: translations },
+                        ...(scheduleId && { scheduleId }),
                     },
-                },
+                    select: {
+                        translations: {
+                            select: {
+                                locale: true,
+                                name: true,
+                                description: true,
+                                observations: true,
+                            },
+                        }, schedule: { include: { days: { include: { intervals: true } } } }
+                    },
+                });
+
+                return { ...menu, schedule: menu.schedule ? normalizeSchedule(menu.schedule) : null };
             });
-            return menu;
         } catch (error) {
             console.error('Error creating menu:', error);
             throw error;
@@ -212,25 +205,11 @@ export class MenuService {
                             observations: true,
                         },
                     },
-                    menuSchedule: {
-                        select: {
-                            schedule: {
-                                select: {
-                                    dayOfWeek: true,
-                                    openTime: true,
-                                    closeTime: true,
-                                },
-                            },
-                        },
+                    schedule: {
+                        include: { days: { include: { intervals: true } } },
                     },
                 },
             });
-
-            const schedules = menu.menuSchedule.map((ms) => ({
-                dayOfWeek: ms.schedule.dayOfWeek,
-                openTime: ms.schedule.openTime,
-                closeTime: ms.schedule.closeTime,
-            }));
 
             return {
                 id: menu.id,
@@ -239,7 +218,7 @@ export class MenuService {
                 color: menu.color,
                 isHighlighted: menu.isHighlighted,
                 translations: menu.translations,
-                menuSchedule: schedules, // Return as array to match frontend schema
+                schedule: menu.schedule ? normalizeSchedule(menu.schedule) : null,
             };
         } catch (error) {
             console.error('Error updating menu:', error);
@@ -253,11 +232,10 @@ export class MenuService {
         establishment: Establishment,
     ) {
         try {
-            const { translations, menuSchedule } = createMenuDto;
-            const menu = await this.prisma.menu.update({
+            const { translations, schedule } = createMenuDto;
+            await this.prisma.menu.update({
                 where: { id: menuId },
                 data: {
-                    // Update translations
                     translations: {
                         upsert: translations.map((translation) => ({
                             where: {
@@ -278,49 +256,29 @@ export class MenuService {
                                 observations: translation.observations,
                             },
                         })),
-                        // Update menu schedule
                     },
-                },
-            });
-
-            // Find existing schedules for this menu
-            const existingMenuSchedules = await this.prisma.menuSchedule.findMany({
-                where: { menuId },
-                select: { scheduleId: true },
-            });
-
-            const scheduleIdsToDelete = existingMenuSchedules.map(
-                (ms) => ms.scheduleId,
-            );
-
-            // Create new schedule entries
-            // Delete existing MenuSchedule entries
-            await this.prisma.menuSchedule.deleteMany({
-                where: { menuId },
-            });
-
-            // Cleanup orphan schedules
-            if (scheduleIdsToDelete.length > 0) {
-                await this.prisma.schedule.deleteMany({
-                    where: { id: { in: scheduleIdsToDelete } },
-                });
-            }
-
-            for (const schedule of menuSchedule) {
-                await this.prisma.menuSchedule.create({
-                    data: {
-                        menu: { connect: { id: menuId } },
-                        schedule: {
-                            create: {
-                                openTime: schedule.openTime,
-                                closeTime: schedule.closeTime,
-                                dayOfWeek: schedule.dayOfWeek,
-                                type: ScheduleType.MENU,
+                    schedule: {
+                        update: {
+                            name: schedule.name,
+                            type: ScheduleType.MENU,
+                            days: {
+                                deleteMany: {},
+                                create: schedule.days.map((day) => ({
+                                    dayOfWeek: day.dayOfWeek,
+                                    isOpen: day.isOpen ?? true,
+                                    intervals: {
+                                        create: day.intervals,
+                                    },
+                                })),
                             },
                         },
                     },
-                });
-            }
+                },
+                include: {
+                    schedule: { include: { days: { include: { intervals: true } } } },
+                },
+            });
+
             return this.getMenuDetails(menuId, establishment);
         } catch (error) {
             console.error('Error updating menu details:', error);
@@ -361,23 +319,8 @@ export class MenuService {
                 if (!menu) {
                     throw new NotFoundException('Menu not found');
                 }
-
-                // 2. Find schedules to delete
-                const menuSchedules = await tx.menuSchedule.findMany({
-                    where: { menuId },
-                    select: { scheduleId: true },
-                });
-                const scheduleIds = menuSchedules.map((ms) => ms.scheduleId);
-
                 // 3. Delete the menu
                 await tx.menu.delete({ where: { id: menuId } });
-
-                // 4. Cleanup orphan schedules
-                if (scheduleIds.length > 0) {
-                    await tx.schedule.deleteMany({
-                        where: { id: { in: scheduleIds } },
-                    });
-                }
 
                 // 5. Reorder remaining menus (Normalize all positions to ensure no gaps)
                 const allRemainingMenus = await tx.menu.findMany({

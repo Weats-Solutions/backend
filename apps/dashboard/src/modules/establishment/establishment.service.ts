@@ -4,7 +4,7 @@ import { AppConfigService } from '@weats/configs/app-config.service';
 import { InjectQueue } from '@nestjs/bull';
 import type { Queue } from 'bull';
 import { User, Establishment } from '@weats/types';
-import { RESPONSE_CODES, ERRORS, FeatureUsageService } from '@weats/common';
+import { RESPONSE_CODES, ERRORS, FeatureUsageService, normalizeSchedule } from '@weats/common';
 import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { CorePrismaService, EstablishmentLanguage } from '@weats/database';
 import { EstablishmentStatus } from '@weats/database';
@@ -114,6 +114,23 @@ export class EstablishmentService {
     }
 
     return establishment;
+  }
+
+  async getEstablishmentSchedule(id: string) {
+    const establishment = await this.prisma.establishment.findUniqueOrThrow({
+      where: { id },
+      include: {
+        schedule: {
+          include: { days: { include: { intervals: true } } }
+        },
+      }
+    });
+
+    if (!establishment.schedule) {
+      return null;
+    }
+
+    return normalizeSchedule(establishment.schedule);
   }
 
 

@@ -65,13 +65,13 @@ enum FeatureType {
 }
 
 enum DayOfWeek {
-  SUNDAY
   MONDAY
   TUESDAY
   WEDNESDAY
   THURSDAY
   FRIDAY
   SATURDAY
+  SUNDAY
 }
 
 enum UnitType {
@@ -145,46 +145,46 @@ enum StockUnit {
 }
 
 enum StockStorageTemp {
-  AMBIENT       // temperatura ambiente
-  REFRIGERATED  // refrigerado (0-8°C)
-  FROZEN        // congelado (<-18°C)
-  CONTROLLED    // temperatura controlada (8-15°C)
+  AMBIENT // temperatura ambiente
+  REFRIGERATED // refrigerado (0-8°C)
+  FROZEN // congelado (<-18°C)
+  CONTROLLED // temperatura controlada (8-15°C)
 }
 
 enum StockBatchStatus {
   ACTIVE
-  DEPLETED    // esgotado
-  EXPIRED     // expirado
-  QUARANTINE  // em quarentena
-  RECALLED    // recolhido
+  DEPLETED // esgotado
+  EXPIRED // expirado
+  QUARANTINE // em quarentena
+  RECALLED // recolhido
 }
 
 enum StockEntryType {
-  PURCHASE        // compra a fornecedor
-  RECEPTION       // receção de encomenda pendente
-  RETURN_FROM_CLIENT  // devolução de cliente
-  INITIAL_STOCK   // stock inicial / abertura
-  TRANSFER_IN     // transferência entrada
-  ADJUSTMENT_IN   // ajuste positivo manual
+  PURCHASE // compra a fornecedor
+  RECEPTION // receção de encomenda pendente
+  RETURN_FROM_CLIENT // devolução de cliente
+  INITIAL_STOCK // stock inicial / abertura
+  TRANSFER_IN // transferência entrada
+  ADJUSTMENT_IN // ajuste positivo manual
 }
 
 enum StockEntryStatus {
-  DRAFT       // rascunho
-  ORDERED     // encomendado
-  PARTIAL     // receção parcial
-  RECEIVED    // rececionado
-  CANCELLED   // cancelado
-  APPROVED    // aprovado
+  DRAFT // rascunho
+  ORDERED // encomendado
+  PARTIAL // receção parcial
+  RECEIVED // rececionado
+  CANCELLED // cancelado
+  APPROVED // aprovado
 }
 
 enum StockExitType {
-  CONSUMPTION     // consumo interno / produção
-  SALE            // venda direta
-  WASTE           // desperdício / quebra
-  RETURN_TO_SUPPLIER  // devolução a fornecedor
-  TRANSFER_OUT    // transferência saída
-  ADJUSTMENT_OUT  // ajuste negativo manual
-  SAMPLE          // amostra
+  CONSUMPTION // consumo interno / produção
+  SALE // venda direta
+  WASTE // desperdício / quebra
+  RETURN_TO_SUPPLIER // devolução a fornecedor
+  TRANSFER_OUT // transferência saída
+  ADJUSTMENT_OUT // ajuste negativo manual
+  SAMPLE // amostra
 }
 
 enum StockExitStatus {
@@ -216,19 +216,19 @@ enum StockMovementDir {
 }
 
 enum StockAlertType {
-  LOW_STOCK        // stock abaixo do mínimo
-  OUT_OF_STOCK     // sem stock
-  EXPIRING_SOON    // validade a expirar em breve
-  EXPIRED          // validade expirada
-  OVERSTOCK        // stock acima do máximo
-  REORDER_POINT    // atingiu ponto de reposição
+  LOW_STOCK // stock abaixo do mínimo
+  OUT_OF_STOCK // sem stock
+  EXPIRING_SOON // validade a expirar em breve
+  EXPIRED // validade expirada
+  OVERSTOCK // stock acima do máximo
+  REORDER_POINT // atingiu ponto de reposição
 }
 
 enum StockAlertStatus {
   ACTIVE
-  ACKNOWLEDGED  // reconhecida
+  ACKNOWLEDGED // reconhecida
   RESOLVED
-  DISMISSED     // ignorada
+  DISMISSED // ignorada
 }
 
 enum StockInventoryStatus {

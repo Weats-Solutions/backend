@@ -5,26 +5,21 @@ model Menu {
   isHighlighted    Boolean           @default(false)
   color            String?
   establishmentId  String
+  scheduleId       String?
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   maxItemsPerOrder Int?
   price            Float?
   type             MenuType          @default(DEFAULT)
+  
   establishment    Establishment     @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  schedule         Schedule?         @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
   categories       MenuCategory[]
-  menuSchedule     MenuSchedule[]
   translations     MenuTranslation[]
 
   @@index([establishmentId])
   @@index([establishmentId, position])
-}
-
-model MenuSchedule {
-  id         String   @id @default(ulid())
-  menuId     String
-  scheduleId String
-  menu       Menu     @relation(fields: [menuId], references: [id], onDelete: Cascade)
-  schedule   Schedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+  @@index([scheduleId])
 }
 
 model MenuTranslation {

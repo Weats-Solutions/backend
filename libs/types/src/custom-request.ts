@@ -6,4 +6,5 @@ export interface CustomRequest extends Request {
   user?: User;
   employee?: Employee;
   establishment?: Establishment;
+  params: Record<string, string>;
 }

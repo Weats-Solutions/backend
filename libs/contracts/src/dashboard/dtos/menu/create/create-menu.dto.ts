@@ -1,26 +1,9 @@
 import { Type } from 'class-transformer';
 import {
-    IsArray,
-    IsEnum,
-    IsNotEmpty,
-    IsString,
-    ValidateNested,
+    IsArray, ValidateNested
 } from 'class-validator';
-import { DayOfWeek } from '@weats/database';
 import { MenuTranslationDto } from '../translations/menu-translation.dto';
-
-export class CreateScheduleDto {
-    @IsEnum(DayOfWeek)
-    dayOfWeek: DayOfWeek;
-
-    @IsString()
-    @IsNotEmpty()
-    openTime: string;
-
-    @IsString()
-    @IsNotEmpty()
-    closeTime: string;
-}
+import { CreateScheduleDto } from '../../schedule/create-schedule.dto';
 
 export class CreateMenuDto {
     @IsArray()
@@ -28,8 +11,7 @@ export class CreateMenuDto {
     @ValidateNested({ each: true })
     translations: MenuTranslationDto[];
 
-    @IsArray()
     @Type(() => CreateScheduleDto)
-    @ValidateNested({ each: true })
-    menuSchedule: CreateScheduleDto[];
+    @ValidateNested()
+    schedule: CreateScheduleDto;
 }

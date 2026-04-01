@@ -12,6 +12,7 @@ import { MenuService } from '../menu/menu.service';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
+import { isScheduleOpenNow } from '@weats/common/utils/schedule.utils';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -25,67 +26,6 @@ export class LandingpageService {
         private readonly menuService: MenuService,
         //@Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     ) { }
-
-    private isEstablishmentOpen(establishmentSchedules: Schedule[], timezone: string): boolean {
-        if (!establishmentSchedules || establishmentSchedules.length === 0) return false;
-
-        const now = dayjs().tz(timezone);
-        const currentDayOfWeek = now.format('dddd').toUpperCase();
-        const currentTime = now.format('HH:mm');
-
-        const timeToMinutes = (time: string): number => {
-            const [hours, minutes] = time.split(':').map(Number);
-            return hours * 60 + minutes;
-        };
-
-        const currentTimeInMinutes = timeToMinutes(currentTime);
-
-        return establishmentSchedules.some((schedule) => {
-            if (schedule.dayOfWeek !== currentDayOfWeek) return false;
-
-            const openTime = schedule.openTime;
-            const closeTime = schedule.closeTime;
-            const openTimeInMinutes = timeToMinutes(openTime);
-            const closeTimeInMinutes = timeToMinutes(closeTime);
-
-            if (closeTimeInMinutes < openTimeInMinutes) {
-                return currentTimeInMinutes >= openTimeInMinutes || currentTimeInMinutes < closeTimeInMinutes;
-            }
-
-            return currentTimeInMinutes >= openTimeInMinutes && currentTimeInMinutes < closeTimeInMinutes;
-        });
-    }
-
-    private isMenuOpen(menuSchedules: Schedule[], timezone: string): boolean {
-        if (!menuSchedules || menuSchedules.length === 0) return false;
-
-        const now = dayjs().tz(timezone);
-        const currentDayOfWeek = now.format('dddd').toUpperCase();
-        const currentTime = now.format('HH:mm');
-
-        // Converter tempo em minutos para comparação numérica
-        const timeToMinutes = (time: string): number => {
-            const [hours, minutes] = time.split(':').map(Number);
-            return hours * 60 + minutes;
-        };
-
-        const currentTimeInMinutes = timeToMinutes(currentTime);
-
-        return menuSchedules.some((schedule) => {
-            if (schedule.dayOfWeek !== currentDayOfWeek) return false;
-
-            const openTime = schedule.openTime;
-            const closeTime = schedule.closeTime;
-            const openTimeInMinutes = timeToMinutes(openTime);
-            const closeTimeInMinutes = timeToMinutes(closeTime);
-
-            if (closeTimeInMinutes < openTimeInMinutes) {
-                return currentTimeInMinutes >= openTimeInMinutes || currentTimeInMinutes < closeTimeInMinutes;
-            }
-
-            return currentTimeInMinutes >= openTimeInMinutes && currentTimeInMinutes < closeTimeInMinutes;
-        });
-    }
 
     async getLandingpage(establishmentSlug: string, lang: string) {
         try {
@@ -101,11 +41,7 @@ export class LandingpageService {
                     },
                     logoImage: true,
                     bannerImage: true,
-                    establishmentSchedule: {
-                        include: {
-                            schedule: true,
-                        }
-                    },
+                    schedule: true,
                 },
             });
 
@@ -126,8 +62,21 @@ export class LandingpageService {
             }
 
             // Check if establishment is open
-            const establishmentSchedules = establishment.establishmentSchedule.map((es) => es.schedule);
-            const isEstablishmentOpenNow = this.isEstablishmentOpen(establishmentSchedules, establishment.timezone);
+            if (!establishment.schedule) {
+                return {
+                    name: establishment.name,
+                    themeName: establishment.activeTheme?.name,
+                    themeConfig: establishment.activeTheme?.config,
+                    logo: establishment.logoImage?.url || null,
+                    banner: establishment.bannerImage?.url || null,
+                    primaryLanguage: establishment.primaryLanguage,
+                    availableLocales: establishment.availableLanguages,
+                    isOpen: false,
+                    message: 'O estabelecimento está fechado no momento',
+                    menus: [],
+                };
+            }
+            const isEstablishmentOpenNow = isScheduleOpenNow(establishment.schedule, establishment.timezone);
 
             if (!isEstablishmentOpenNow) {
                 return {
@@ -153,10 +102,8 @@ export class LandingpageService {
                     id: true,
                     isHighlighted: true,
                     isVisible: true,
-                    menuSchedule: {
-                        include: {
-                            schedule: true,
-                        }
+                    schedule: {
+                        include: { days: { include: { intervals: true } } }
                     },
                     translations: {
                         where: { locale: lang },
@@ -166,8 +113,8 @@ export class LandingpageService {
 
             // Filter menus that are open according to establishment timezone
             const visibleAndOpenMenus = menus.filter((menu) => {
-                const menuSchedules = menu.menuSchedule.map((ms) => ms.schedule);
-                return this.isMenuOpen(menuSchedules, establishment.timezone);
+                if (!menu.schedule) return false;
+                return isScheduleOpenNow(menu.schedule, establishment.timezone);
             });
 
             const result = {
@@ -196,7 +143,7 @@ export class LandingpageService {
 
     async getMenuContent(establishmentSlug: string, menuId: string, lang: EstablishmentLanguage) {
         try {
-            // Verify the menu belongs to this establishment (security check)
+            // Ownership check: ensure the menu belongs to this establishment
             const menu = await this.prisma.menu.findFirst({
                 where: {
                     id: menuId,

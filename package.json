@@ -35,7 +35,9 @@
     "seed:plans": "ts-node -r tsconfig-paths/register --transpile-only libs/database/prisma/seed/seed-plans.ts",
     "seed:items": "ts-node -r tsconfig-paths/register --transpile-only libs/database/prisma/seed/seed-addon-and-variants.ts",
     "seed:tax": "ts-node -r tsconfig-paths/register --transpile-only libs/database/prisma/seed/seed-tax.ts",
-    "seed:allergens": "ts-node -r tsconfig-paths/register --transpile-only libs/database/prisma/seed/seed-allergens.ts"
+    "seed:allergens": "ts-node -r tsconfig-paths/register --transpile-only libs/database/prisma/seed/seed-allergens.ts",
+    "seed:themes": "ts-node -r tsconfig-paths/register --transpile-only libs/database/prisma/seed/seed-themes.ts",
+    "seed:all": "pnpm seed:plans && pnpm seed:items && pnpm seed:tax && pnpm seed:allergens && pnpm seed:themes"
   },
   "dependencies": {
     "@bull-board/api": "^6.20.5",

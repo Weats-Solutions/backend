@@ -22,6 +22,11 @@ export class EstablishmentController {
         return this.establishmentService.getEstablishmentInfo(payload.id);
     }
 
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SCHEDULE_BY_ID)
+    getEstablishmentSchedule(@Payload() payload: { id: string }) {
+        return this.establishmentService.getEstablishmentSchedule(payload.id);
+    }
+
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SUBSCRIPTION)
     getSubscription(@Payload() payload: { id: string }) {
         return this.establishmentService.getSubscription(payload.id);

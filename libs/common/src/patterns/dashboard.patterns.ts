@@ -2,6 +2,7 @@ export const DASHBOARD_PATTERNS = {
   ESTABLISHMENT_CREATE: 'dashboard.establishment.create',
   ESTABLISHMENT_UPDATE: 'dashboard.establishment.update',
   ESTABLISHMENT_GET_BY_ID: 'dashboard.establishment.get_by_id',
+  ESTABLISHMENT_GET_SCHEDULE_BY_ID: 'dashboard.establishment.get_schedule_by_id',
   ESTABLISHMENT_GET_SUBSCRIPTION: 'dashboard.establishment.get_subscription',
   ESTABLISHMENT_GET_PORTAL_SESSION: 'dashboard.establishment.get_portal_session',
   ESTABLISHMENT_SUBSCRIBE_TO_PLAN: 'dashboard.establishment.subscribe_to_plan',
@@ -26,6 +27,9 @@ export const DASHBOARD_PATTERNS = {
   SUBCATEGORY_GET_BY_CATEGORY: 'dashboard.subcategory.get_by_category',
   SUBCATEGORY_EDIT: 'dashboard.subcategory.edit',
   SUBCATEGORY_DELETE: 'dashboard.subcategory.delete',
+
+  //testes
+  SUBCATEGORY_LINK_ITEM: 'dashboard.subcategory.link_item',
 
 
   ITEM_CREATE: 'dashboard.item.create',

@@ -208,6 +208,7 @@ exports.Prisma.BookingLogScalarFieldEnum = {
 exports.Prisma.DiscountScalarFieldEnum = {
   id: 'id',
   establishmentId: 'establishmentId',
+  scheduleId: 'scheduleId',
   name: 'name',
   description: 'description',
   type: 'type',
@@ -227,15 +228,10 @@ exports.Prisma.DiscountTargetScalarFieldEnum = {
   posCategoryId: 'posCategoryId'
 };
 
-exports.Prisma.DiscountScheduleScalarFieldEnum = {
-  id: 'id',
-  discountId: 'discountId',
-  scheduleId: 'scheduleId'
-};
-
 exports.Prisma.PromotionScalarFieldEnum = {
   id: 'id',
   establishmentId: 'establishmentId',
+  scheduleId: 'scheduleId',
   name: 'name',
   description: 'description',
   type: 'type',
@@ -254,12 +250,6 @@ exports.Prisma.BuyXGetYRuleScalarFieldEnum = {
   rewardItemId: 'rewardItemId',
   rewardQuantity: 'rewardQuantity',
   applyCheapest: 'applyCheapest'
-};
-
-exports.Prisma.PromotionScheduleScalarFieldEnum = {
-  id: 'id',
-  promotionId: 'promotionId',
-  scheduleId: 'scheduleId'
 };
 
 exports.Prisma.EmailLogScalarFieldEnum = {
@@ -348,15 +338,10 @@ exports.Prisma.EstablishmentScalarFieldEnum = {
   logoImageId: 'logoImageId',
   bannerImageId: 'bannerImageId',
   activeThemeId: 'activeThemeId',
+  scheduleId: 'scheduleId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   ownerId: 'ownerId'
-};
-
-exports.Prisma.EstablishmentScheduleScalarFieldEnum = {
-  id: 'id',
-  establishmentId: 'establishmentId',
-  scheduleId: 'scheduleId'
 };
 
 exports.Prisma.EstablishmentBookingSettingsScalarFieldEnum = {
@@ -624,17 +609,12 @@ exports.Prisma.MenuScalarFieldEnum = {
   isHighlighted: 'isHighlighted',
   color: 'color',
   establishmentId: 'establishmentId',
+  scheduleId: 'scheduleId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   maxItemsPerOrder: 'maxItemsPerOrder',
   price: 'price',
   type: 'type'
-};
-
-exports.Prisma.MenuScheduleScalarFieldEnum = {
-  id: 'id',
-  menuId: 'menuId',
-  scheduleId: 'scheduleId'
 };
 
 exports.Prisma.MenuTranslationScalarFieldEnum = {
@@ -757,10 +737,26 @@ exports.Prisma.PrinterScalarFieldEnum = {
 
 exports.Prisma.ScheduleScalarFieldEnum = {
   id: 'id',
-  openTime: 'openTime',
-  closeTime: 'closeTime',
-  dayOfWeek: 'dayOfWeek',
+  name: 'name',
   type: 'type',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ScheduleDayScalarFieldEnum = {
+  id: 'id',
+  scheduleId: 'scheduleId',
+  dayOfWeek: 'dayOfWeek',
+  isOpen: 'isOpen',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TimeIntervalScalarFieldEnum = {
+  id: 'id',
+  scheduleDayId: 'scheduleDayId',
+  startTime: 'startTime',
+  endTime: 'endTime',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -1407,6 +1403,13 @@ exports.MenuType = exports.$Enums.MenuType = {
   RODIZIO: 'RODIZIO'
 };
 
+exports.ScheduleType = exports.$Enums.ScheduleType = {
+  ESTABLISHMENT: 'ESTABLISHMENT',
+  MENU: 'MENU',
+  DISCOUNT: 'DISCOUNT',
+  PROMOTION: 'PROMOTION'
+};
+
 exports.DayOfWeek = exports.$Enums.DayOfWeek = {
   SUNDAY: 'SUNDAY',
   MONDAY: 'MONDAY',
@@ -1415,13 +1418,6 @@ exports.DayOfWeek = exports.$Enums.DayOfWeek = {
   THURSDAY: 'THURSDAY',
   FRIDAY: 'FRIDAY',
   SATURDAY: 'SATURDAY'
-};
-
-exports.ScheduleType = exports.$Enums.ScheduleType = {
-  ESTABLISHMENT: 'ESTABLISHMENT',
-  MENU: 'MENU',
-  DISCOUNT: 'DISCOUNT',
-  PROMOTION: 'PROMOTION'
 };
 
 exports.StockUnit = exports.$Enums.StockUnit = {
@@ -1589,15 +1585,12 @@ exports.Prisma.ModelName = {
   BookingLog: 'BookingLog',
   Discount: 'Discount',
   DiscountTarget: 'DiscountTarget',
-  DiscountSchedule: 'DiscountSchedule',
   Promotion: 'Promotion',
   BuyXGetYRule: 'BuyXGetYRule',
-  PromotionSchedule: 'PromotionSchedule',
   EmailLog: 'EmailLog',
   EmailEvent: 'EmailEvent',
   Employee: 'Employee',
   Establishment: 'Establishment',
-  EstablishmentSchedule: 'EstablishmentSchedule',
   EstablishmentBookingSettings: 'EstablishmentBookingSettings',
   Image: 'Image',
   EstablishmentIntegrations: 'EstablishmentIntegrations',
@@ -1624,7 +1617,6 @@ exports.Prisma.ModelName = {
   LandingPage: 'LandingPage',
   LandingPageTranslation: 'LandingPageTranslation',
   Menu: 'Menu',
-  MenuSchedule: 'MenuSchedule',
   MenuTranslation: 'MenuTranslation',
   MenuCategory: 'MenuCategory',
   MenuCategoryTranslation: 'MenuCategoryTranslation',
@@ -1637,6 +1629,8 @@ exports.Prisma.ModelName = {
   Device: 'Device',
   Printer: 'Printer',
   Schedule: 'Schedule',
+  ScheduleDay: 'ScheduleDay',
+  TimeInterval: 'TimeInterval',
   StockWarehouse: 'StockWarehouse',
   StockLocation: 'StockLocation',
   Supplier: 'Supplier',

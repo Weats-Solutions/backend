@@ -145,4 +145,30 @@ export class MenuSubcategoryService {
             throw error;
         }
     }
+
+    async linkItemToSubcategory(subcategoryId: string, itemId: string) {
+        // 1️⃣ valida existência
+        const [subcategory, item] = await Promise.all([
+            this.prisma.menuSubcategory.findUnique({ where: { id: subcategoryId } }),
+            this.prisma.item.findUnique({ where: { id: itemId } }),
+        ]);
+
+        if (!subcategory) throw new Error(`Subcategory ${subcategoryId} not found`);
+        if (!item) throw new Error(`Item ${itemId} not found`);
+
+        // 2️⃣ conta itens
+        const itemsCount = await this.prisma.menuItemPosition.count({
+            where: { subcategoryId },
+        });
+
+        // 3️⃣ upsert seguro
+        await this.prisma.menuItemPosition.upsert({
+            where: { itemId_subcategoryId: { itemId, subcategoryId } },
+            update: { isVisible: true },
+            create: { itemId, subcategoryId, position: itemsCount + 1, isVisible: true },
+        });
+
+        return { success: true };
+    }
+
 }

@@ -164,6 +164,7 @@ enum BookingSource {
 model Discount {
   id              String       @id @default(ulid())
   establishmentId String
+  scheduleId      String?
   name            String
   description     String?
   type            DiscountType
@@ -175,11 +176,12 @@ model Discount {
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
 
-  establishment Establishment      @relation(fields: [establishmentId], references: [id])
+  establishment Establishment    @relation(fields: [establishmentId], references: [id])
+  schedule      Schedule?        @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
   targets       DiscountTarget[]
-  schedules     DiscountSchedule[]
 
   @@index([establishmentId, isActive])
+  @@index([scheduleId])
 }
 
 enum DiscountType {
@@ -199,23 +201,13 @@ model DiscountTarget {
   @@index([discountId])
 }
 
-model DiscountSchedule {
-  id         String @id @default(ulid())
-  discountId String
-  scheduleId String
-
-  discount Discount @relation(fields: [discountId], references: [id], onDelete: Cascade)
-  schedule Schedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
-
-  @@unique([discountId, scheduleId])
-}
-
 /// =======================================================
 /// PROMOTIONS (Regras condicionais, ex: Buy X Get Y)
 /// =======================================================
 model Promotion {
   id              String        @id @default(ulid())
   establishmentId String
+  scheduleId      String?
   name            String
   description     String?
   type            PromotionType
@@ -225,11 +217,12 @@ model Promotion {
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
-  establishment Establishment       @relation(fields: [establishmentId], references: [id])
+  establishment Establishment @relation(fields: [establishmentId], references: [id])
+  schedule      Schedule?     @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
   buyXGetYRule  BuyXGetYRule?
-  schedules     PromotionSchedule[]
 
   @@index([establishmentId, isActive])
+  @@index([scheduleId])
 }
 
 enum PromotionType {
@@ -252,17 +245,6 @@ model BuyXGetYRule {
   promotion    Promotion @relation(fields: [promotionId], references: [id], onDelete: Cascade)
   requiredItem Item      @relation("RequiredItem", fields: [requiredItemId], references: [id])
   rewardItem   Item      @relation("RewardItem", fields: [rewardItemId], references: [id])
-}
-
-model PromotionSchedule {
-  id          String @id @default(ulid())
-  promotionId String
-  scheduleId  String
-
-  promotion Promotion @relation(fields: [promotionId], references: [id], onDelete: Cascade)
-  schedule  Schedule  @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
-
-  @@unique([promotionId, scheduleId])
 }
 
 model EmailLog {
@@ -696,6 +678,10 @@ model Establishment {
   bannerImageId String?
   activeThemeId String?
 
+  // ─── Schedule ───────────────────────────────────────────────────────────────
+  scheduleId String?   @unique
+  schedule   Schedule? @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
+
   // ─── Sistema ───────────────────────────────────────────────────────────────
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -722,7 +708,6 @@ model Establishment {
   bookingRules                 BookingRules?
   establishmentBookingSettings EstablishmentBookingSettings?
   establishmentAvailabilities  EstablishmentAvailability[]
-  establishmentSchedule        EstablishmentSchedule[]
 
   // ─── Relações: Integrações & Pagamentos ────────────────────────────────────
   integrations  EstablishmentIntegrations?
@@ -752,20 +737,13 @@ model Establishment {
 
   @@index([name])
   @@index([ownerId])
+  @@index([scheduleId])
 }
 
 enum Currency {
   EUR
   USD
   GBP
-}
-
-model EstablishmentSchedule {
-  id              String        @id @default(ulid())
-  establishmentId String
-  scheduleId      String
-  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-  schedule        Schedule      @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
 }
 
 model EstablishmentBookingSettings {
@@ -1268,32 +1246,27 @@ model LandingPageTranslation {
 }
 
 model Menu {
-  id               String            @id @default(ulid())
-  position         Int               @default(0)
-  isVisible        Boolean           @default(false)
-  isHighlighted    Boolean           @default(false)
+  id               String   @id @default(ulid())
+  position         Int      @default(0)
+  isVisible        Boolean  @default(false)
+  isHighlighted    Boolean  @default(false)
   color            String?
   establishmentId  String
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
+  scheduleId       String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
   maxItemsPerOrder Int?
   price            Float?
-  type             MenuType          @default(DEFAULT)
-  establishment    Establishment     @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-  categories       MenuCategory[]
-  menuSchedule     MenuSchedule[]
-  translations     MenuTranslation[]
+  type             MenuType @default(DEFAULT)
+
+  establishment Establishment     @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  schedule      Schedule?         @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
+  categories    MenuCategory[]
+  translations  MenuTranslation[]
 
   @@index([establishmentId])
   @@index([establishmentId, position])
-}
-
-model MenuSchedule {
-  id         String   @id @default(ulid())
-  menuId     String
-  scheduleId String
-  menu       Menu     @relation(fields: [menuId], references: [id], onDelete: Cascade)
-  schedule   Schedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+  @@index([scheduleId])
 }
 
 model MenuTranslation {
@@ -1537,17 +1510,53 @@ model Printer {
 }
 
 model Schedule {
-  id                    String                  @id @default(ulid())
-  openTime              String
-  closeTime             String
-  dayOfWeek             DayOfWeek
-  type                  ScheduleType
-  createdAt             DateTime                @default(now())
-  updatedAt             DateTime                @updatedAt
-  establishmentSchedule EstablishmentSchedule[]
-  menuSchedule          MenuSchedule[]
-  discountSchedule      DiscountSchedule[]
-  promotionSchedule     PromotionSchedule[]
+  id        String       @id @default(ulid())
+  name      String // "Almoço", "Jantar", "Café da manhã", etc
+  type      ScheduleType
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  // Days of the schedule (one per day of week)
+  days ScheduleDay[]
+
+  // Relations to entities that use schedules
+  establishment Establishment?
+  menus         Menu[]
+  discounts     Discount[]
+  promotions    Promotion[]
+}
+
+model ScheduleDay {
+  id         String   @id @default(ulid())
+  scheduleId String
+  schedule   Schedule @relation(fields: [scheduleId], onDelete: Cascade, references: [id])
+
+  dayOfWeek DayOfWeek
+  isOpen    Boolean   @default(true)
+
+  // Time intervals for this day (e.g., 09:00-12:00, 14:00-18:00)
+  intervals TimeInterval[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Ensure each schedule has only one entry per day
+  @@unique([scheduleId, dayOfWeek])
+  @@index([scheduleId])
+}
+
+model TimeInterval {
+  id            String      @id @default(ulid())
+  scheduleDayId String
+  scheduleDay   ScheduleDay @relation(fields: [scheduleDayId], onDelete: Cascade, references: [id])
+
+  startTime String // Format: "HH:mm"
+  endTime   String // Format: "HH:mm"
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([scheduleDayId])
 }
 
 generator client {

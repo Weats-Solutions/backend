@@ -42,6 +42,10 @@ model Establishment {
   bannerImageId String?
   activeThemeId String?
 
+  // ─── Schedule ───────────────────────────────────────────────────────────────
+  scheduleId String? @unique
+  schedule   Schedule? @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
+
   // ─── Sistema ───────────────────────────────────────────────────────────────
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -68,7 +72,6 @@ model Establishment {
   bookingRules                 BookingRules?
   establishmentBookingSettings EstablishmentBookingSettings?
   establishmentAvailabilities  EstablishmentAvailability[]
-  establishmentSchedule        EstablishmentSchedule[]
 
   // ─── Relações: Integrações & Pagamentos ────────────────────────────────────
   integrations  EstablishmentIntegrations?
@@ -98,20 +101,13 @@ model Establishment {
 
   @@index([name])
   @@index([ownerId])
+  @@index([scheduleId])
 }
 
 enum Currency {
   EUR
   USD
   GBP
-}
-
-model EstablishmentSchedule {
-  id              String        @id @default(ulid())
-  establishmentId String
-  scheduleId      String
-  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-  schedule        Schedule      @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
 }
 
 model EstablishmentBookingSettings {

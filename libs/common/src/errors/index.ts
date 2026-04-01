@@ -62,7 +62,9 @@ export type ErrorCode =
   | 'EUPAGO_INTEGRATION_DISABLED'
   | 'EUPAGO_INTEGRATION_CONFIGURATION_INVALID'
   | 'UNKNOWN_ERROR'
-  | 'THEME_NOT_FOUND';
+  | 'THEME_NOT_FOUND'
+  | 'ESTABLISHMENT_CLOSED'
+  | 'MENU_CLOSED';
 
 export const ERRORS: Record<ErrorCode, ErrorCode> = {
   CLERK_AUTH_FAILED: 'CLERK_AUTH_FAILED',
@@ -131,6 +133,9 @@ export const ERRORS: Record<ErrorCode, ErrorCode> = {
 
   ERROR_CREATING_PAYMENT: 'ERROR_CREATING_PAYMENT',
   THEME_NOT_FOUND: 'THEME_NOT_FOUND',
+
+  ESTABLISHMENT_CLOSED: 'ESTABLISHMENT_CLOSED',
+  MENU_CLOSED: 'MENU_CLOSED',
 };
 
 export const availableErrors = Object.keys(ERRORS) as ErrorCode[];

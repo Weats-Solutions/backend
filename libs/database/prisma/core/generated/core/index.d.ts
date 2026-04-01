@@ -56,11 +56,6 @@ export type Discount = $Result.DefaultSelection<Prisma.$DiscountPayload>
  */
 export type DiscountTarget = $Result.DefaultSelection<Prisma.$DiscountTargetPayload>
 /**
- * Model DiscountSchedule
- * 
- */
-export type DiscountSchedule = $Result.DefaultSelection<Prisma.$DiscountSchedulePayload>
-/**
  * Model Promotion
  * =======================================================
  * PROMOTIONS (Regras condicionais, ex: Buy X Get Y)
@@ -72,11 +67,6 @@ export type Promotion = $Result.DefaultSelection<Prisma.$PromotionPayload>
  * Regras de Buy X Get Y (aplicado ao nível de Item)
  */
 export type BuyXGetYRule = $Result.DefaultSelection<Prisma.$BuyXGetYRulePayload>
-/**
- * Model PromotionSchedule
- * 
- */
-export type PromotionSchedule = $Result.DefaultSelection<Prisma.$PromotionSchedulePayload>
 /**
  * Model EmailLog
  * 
@@ -97,11 +87,6 @@ export type Employee = $Result.DefaultSelection<Prisma.$EmployeePayload>
  * 
  */
 export type Establishment = $Result.DefaultSelection<Prisma.$EstablishmentPayload>
-/**
- * Model EstablishmentSchedule
- * 
- */
-export type EstablishmentSchedule = $Result.DefaultSelection<Prisma.$EstablishmentSchedulePayload>
 /**
  * Model EstablishmentBookingSettings
  * 
@@ -241,11 +226,6 @@ export type LandingPageTranslation = $Result.DefaultSelection<Prisma.$LandingPag
  */
 export type Menu = $Result.DefaultSelection<Prisma.$MenuPayload>
 /**
- * Model MenuSchedule
- * 
- */
-export type MenuSchedule = $Result.DefaultSelection<Prisma.$MenuSchedulePayload>
-/**
  * Model MenuTranslation
  * 
  */
@@ -305,6 +285,16 @@ export type Printer = $Result.DefaultSelection<Prisma.$PrinterPayload>
  * 
  */
 export type Schedule = $Result.DefaultSelection<Prisma.$SchedulePayload>
+/**
+ * Model ScheduleDay
+ * 
+ */
+export type ScheduleDay = $Result.DefaultSelection<Prisma.$ScheduleDayPayload>
+/**
+ * Model TimeInterval
+ * 
+ */
+export type TimeInterval = $Result.DefaultSelection<Prisma.$TimeIntervalPayload>
 /**
  * Model StockWarehouse
  * 
@@ -1371,16 +1361,6 @@ export class PrismaClient<
   get discountTarget(): Prisma.DiscountTargetDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.discountSchedule`: Exposes CRUD operations for the **DiscountSchedule** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more DiscountSchedules
-    * const discountSchedules = await prisma.discountSchedule.findMany()
-    * ```
-    */
-  get discountSchedule(): Prisma.DiscountScheduleDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.promotion`: Exposes CRUD operations for the **Promotion** model.
     * Example usage:
     * ```ts
@@ -1399,16 +1379,6 @@ export class PrismaClient<
     * ```
     */
   get buyXGetYRule(): Prisma.BuyXGetYRuleDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.promotionSchedule`: Exposes CRUD operations for the **PromotionSchedule** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more PromotionSchedules
-    * const promotionSchedules = await prisma.promotionSchedule.findMany()
-    * ```
-    */
-  get promotionSchedule(): Prisma.PromotionScheduleDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.emailLog`: Exposes CRUD operations for the **EmailLog** model.
@@ -1449,16 +1419,6 @@ export class PrismaClient<
     * ```
     */
   get establishment(): Prisma.EstablishmentDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.establishmentSchedule`: Exposes CRUD operations for the **EstablishmentSchedule** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more EstablishmentSchedules
-    * const establishmentSchedules = await prisma.establishmentSchedule.findMany()
-    * ```
-    */
-  get establishmentSchedule(): Prisma.EstablishmentScheduleDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.establishmentBookingSettings`: Exposes CRUD operations for the **EstablishmentBookingSettings** model.
@@ -1721,16 +1681,6 @@ export class PrismaClient<
   get menu(): Prisma.MenuDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.menuSchedule`: Exposes CRUD operations for the **MenuSchedule** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more MenuSchedules
-    * const menuSchedules = await prisma.menuSchedule.findMany()
-    * ```
-    */
-  get menuSchedule(): Prisma.MenuScheduleDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.menuTranslation`: Exposes CRUD operations for the **MenuTranslation** model.
     * Example usage:
     * ```ts
@@ -1849,6 +1799,26 @@ export class PrismaClient<
     * ```
     */
   get schedule(): Prisma.ScheduleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.scheduleDay`: Exposes CRUD operations for the **ScheduleDay** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ScheduleDays
+    * const scheduleDays = await prisma.scheduleDay.findMany()
+    * ```
+    */
+  get scheduleDay(): Prisma.ScheduleDayDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.timeInterval`: Exposes CRUD operations for the **TimeInterval** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TimeIntervals
+    * const timeIntervals = await prisma.timeInterval.findMany()
+    * ```
+    */
+  get timeInterval(): Prisma.TimeIntervalDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.stockWarehouse`: Exposes CRUD operations for the **StockWarehouse** model.
@@ -2561,15 +2531,12 @@ export namespace Prisma {
     BookingLog: 'BookingLog',
     Discount: 'Discount',
     DiscountTarget: 'DiscountTarget',
-    DiscountSchedule: 'DiscountSchedule',
     Promotion: 'Promotion',
     BuyXGetYRule: 'BuyXGetYRule',
-    PromotionSchedule: 'PromotionSchedule',
     EmailLog: 'EmailLog',
     EmailEvent: 'EmailEvent',
     Employee: 'Employee',
     Establishment: 'Establishment',
-    EstablishmentSchedule: 'EstablishmentSchedule',
     EstablishmentBookingSettings: 'EstablishmentBookingSettings',
     Image: 'Image',
     EstablishmentIntegrations: 'EstablishmentIntegrations',
@@ -2596,7 +2563,6 @@ export namespace Prisma {
     LandingPage: 'LandingPage',
     LandingPageTranslation: 'LandingPageTranslation',
     Menu: 'Menu',
-    MenuSchedule: 'MenuSchedule',
     MenuTranslation: 'MenuTranslation',
     MenuCategory: 'MenuCategory',
     MenuCategoryTranslation: 'MenuCategoryTranslation',
@@ -2609,6 +2575,8 @@ export namespace Prisma {
     Device: 'Device',
     Printer: 'Printer',
     Schedule: 'Schedule',
+    ScheduleDay: 'ScheduleDay',
+    TimeInterval: 'TimeInterval',
     StockWarehouse: 'StockWarehouse',
     StockLocation: 'StockLocation',
     Supplier: 'Supplier',
@@ -2651,7 +2619,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "discountSchedule" | "promotion" | "buyXGetYRule" | "promotionSchedule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "establishmentSchedule" | "establishmentBookingSettings" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "landingPage" | "landingPageTranslation" | "menu" | "menuSchedule" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "schedule" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
+      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "promotion" | "buyXGetYRule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "establishmentBookingSettings" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "landingPage" | "landingPageTranslation" | "menu" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "schedule" | "scheduleDay" | "timeInterval" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3247,80 +3215,6 @@ export namespace Prisma {
           }
         }
       }
-      DiscountSchedule: {
-        payload: Prisma.$DiscountSchedulePayload<ExtArgs>
-        fields: Prisma.DiscountScheduleFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.DiscountScheduleFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscountSchedulePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.DiscountScheduleFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscountSchedulePayload>
-          }
-          findFirst: {
-            args: Prisma.DiscountScheduleFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscountSchedulePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.DiscountScheduleFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscountSchedulePayload>
-          }
-          findMany: {
-            args: Prisma.DiscountScheduleFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscountSchedulePayload>[]
-          }
-          create: {
-            args: Prisma.DiscountScheduleCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscountSchedulePayload>
-          }
-          createMany: {
-            args: Prisma.DiscountScheduleCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.DiscountScheduleCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscountSchedulePayload>[]
-          }
-          delete: {
-            args: Prisma.DiscountScheduleDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscountSchedulePayload>
-          }
-          update: {
-            args: Prisma.DiscountScheduleUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscountSchedulePayload>
-          }
-          deleteMany: {
-            args: Prisma.DiscountScheduleDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.DiscountScheduleUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.DiscountScheduleUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscountSchedulePayload>[]
-          }
-          upsert: {
-            args: Prisma.DiscountScheduleUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DiscountSchedulePayload>
-          }
-          aggregate: {
-            args: Prisma.DiscountScheduleAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDiscountSchedule>
-          }
-          groupBy: {
-            args: Prisma.DiscountScheduleGroupByArgs<ExtArgs>
-            result: $Utils.Optional<DiscountScheduleGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.DiscountScheduleCountArgs<ExtArgs>
-            result: $Utils.Optional<DiscountScheduleCountAggregateOutputType> | number
-          }
-        }
-      }
       Promotion: {
         payload: Prisma.$PromotionPayload<ExtArgs>
         fields: Prisma.PromotionFieldRefs
@@ -3466,80 +3360,6 @@ export namespace Prisma {
           count: {
             args: Prisma.BuyXGetYRuleCountArgs<ExtArgs>
             result: $Utils.Optional<BuyXGetYRuleCountAggregateOutputType> | number
-          }
-        }
-      }
-      PromotionSchedule: {
-        payload: Prisma.$PromotionSchedulePayload<ExtArgs>
-        fields: Prisma.PromotionScheduleFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.PromotionScheduleFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PromotionSchedulePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.PromotionScheduleFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PromotionSchedulePayload>
-          }
-          findFirst: {
-            args: Prisma.PromotionScheduleFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PromotionSchedulePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.PromotionScheduleFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PromotionSchedulePayload>
-          }
-          findMany: {
-            args: Prisma.PromotionScheduleFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PromotionSchedulePayload>[]
-          }
-          create: {
-            args: Prisma.PromotionScheduleCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PromotionSchedulePayload>
-          }
-          createMany: {
-            args: Prisma.PromotionScheduleCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.PromotionScheduleCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PromotionSchedulePayload>[]
-          }
-          delete: {
-            args: Prisma.PromotionScheduleDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PromotionSchedulePayload>
-          }
-          update: {
-            args: Prisma.PromotionScheduleUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PromotionSchedulePayload>
-          }
-          deleteMany: {
-            args: Prisma.PromotionScheduleDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.PromotionScheduleUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.PromotionScheduleUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PromotionSchedulePayload>[]
-          }
-          upsert: {
-            args: Prisma.PromotionScheduleUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PromotionSchedulePayload>
-          }
-          aggregate: {
-            args: Prisma.PromotionScheduleAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePromotionSchedule>
-          }
-          groupBy: {
-            args: Prisma.PromotionScheduleGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PromotionScheduleGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.PromotionScheduleCountArgs<ExtArgs>
-            result: $Utils.Optional<PromotionScheduleCountAggregateOutputType> | number
           }
         }
       }
@@ -3836,80 +3656,6 @@ export namespace Prisma {
           count: {
             args: Prisma.EstablishmentCountArgs<ExtArgs>
             result: $Utils.Optional<EstablishmentCountAggregateOutputType> | number
-          }
-        }
-      }
-      EstablishmentSchedule: {
-        payload: Prisma.$EstablishmentSchedulePayload<ExtArgs>
-        fields: Prisma.EstablishmentScheduleFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.EstablishmentScheduleFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentSchedulePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.EstablishmentScheduleFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentSchedulePayload>
-          }
-          findFirst: {
-            args: Prisma.EstablishmentScheduleFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentSchedulePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.EstablishmentScheduleFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentSchedulePayload>
-          }
-          findMany: {
-            args: Prisma.EstablishmentScheduleFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentSchedulePayload>[]
-          }
-          create: {
-            args: Prisma.EstablishmentScheduleCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentSchedulePayload>
-          }
-          createMany: {
-            args: Prisma.EstablishmentScheduleCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.EstablishmentScheduleCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentSchedulePayload>[]
-          }
-          delete: {
-            args: Prisma.EstablishmentScheduleDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentSchedulePayload>
-          }
-          update: {
-            args: Prisma.EstablishmentScheduleUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentSchedulePayload>
-          }
-          deleteMany: {
-            args: Prisma.EstablishmentScheduleDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.EstablishmentScheduleUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.EstablishmentScheduleUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentSchedulePayload>[]
-          }
-          upsert: {
-            args: Prisma.EstablishmentScheduleUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentSchedulePayload>
-          }
-          aggregate: {
-            args: Prisma.EstablishmentScheduleAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateEstablishmentSchedule>
-          }
-          groupBy: {
-            args: Prisma.EstablishmentScheduleGroupByArgs<ExtArgs>
-            result: $Utils.Optional<EstablishmentScheduleGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.EstablishmentScheduleCountArgs<ExtArgs>
-            result: $Utils.Optional<EstablishmentScheduleCountAggregateOutputType> | number
           }
         }
       }
@@ -5837,80 +5583,6 @@ export namespace Prisma {
           }
         }
       }
-      MenuSchedule: {
-        payload: Prisma.$MenuSchedulePayload<ExtArgs>
-        fields: Prisma.MenuScheduleFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.MenuScheduleFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MenuSchedulePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.MenuScheduleFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MenuSchedulePayload>
-          }
-          findFirst: {
-            args: Prisma.MenuScheduleFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MenuSchedulePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.MenuScheduleFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MenuSchedulePayload>
-          }
-          findMany: {
-            args: Prisma.MenuScheduleFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MenuSchedulePayload>[]
-          }
-          create: {
-            args: Prisma.MenuScheduleCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MenuSchedulePayload>
-          }
-          createMany: {
-            args: Prisma.MenuScheduleCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.MenuScheduleCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MenuSchedulePayload>[]
-          }
-          delete: {
-            args: Prisma.MenuScheduleDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MenuSchedulePayload>
-          }
-          update: {
-            args: Prisma.MenuScheduleUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MenuSchedulePayload>
-          }
-          deleteMany: {
-            args: Prisma.MenuScheduleDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.MenuScheduleUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.MenuScheduleUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MenuSchedulePayload>[]
-          }
-          upsert: {
-            args: Prisma.MenuScheduleUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MenuSchedulePayload>
-          }
-          aggregate: {
-            args: Prisma.MenuScheduleAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateMenuSchedule>
-          }
-          groupBy: {
-            args: Prisma.MenuScheduleGroupByArgs<ExtArgs>
-            result: $Utils.Optional<MenuScheduleGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.MenuScheduleCountArgs<ExtArgs>
-            result: $Utils.Optional<MenuScheduleCountAggregateOutputType> | number
-          }
-        }
-      }
       MenuTranslation: {
         payload: Prisma.$MenuTranslationPayload<ExtArgs>
         fields: Prisma.MenuTranslationFieldRefs
@@ -6796,6 +6468,154 @@ export namespace Prisma {
           count: {
             args: Prisma.ScheduleCountArgs<ExtArgs>
             result: $Utils.Optional<ScheduleCountAggregateOutputType> | number
+          }
+        }
+      }
+      ScheduleDay: {
+        payload: Prisma.$ScheduleDayPayload<ExtArgs>
+        fields: Prisma.ScheduleDayFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ScheduleDayFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleDayPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ScheduleDayFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleDayPayload>
+          }
+          findFirst: {
+            args: Prisma.ScheduleDayFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleDayPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ScheduleDayFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleDayPayload>
+          }
+          findMany: {
+            args: Prisma.ScheduleDayFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleDayPayload>[]
+          }
+          create: {
+            args: Prisma.ScheduleDayCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleDayPayload>
+          }
+          createMany: {
+            args: Prisma.ScheduleDayCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ScheduleDayCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleDayPayload>[]
+          }
+          delete: {
+            args: Prisma.ScheduleDayDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleDayPayload>
+          }
+          update: {
+            args: Prisma.ScheduleDayUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleDayPayload>
+          }
+          deleteMany: {
+            args: Prisma.ScheduleDayDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ScheduleDayUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ScheduleDayUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleDayPayload>[]
+          }
+          upsert: {
+            args: Prisma.ScheduleDayUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ScheduleDayPayload>
+          }
+          aggregate: {
+            args: Prisma.ScheduleDayAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateScheduleDay>
+          }
+          groupBy: {
+            args: Prisma.ScheduleDayGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ScheduleDayGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ScheduleDayCountArgs<ExtArgs>
+            result: $Utils.Optional<ScheduleDayCountAggregateOutputType> | number
+          }
+        }
+      }
+      TimeInterval: {
+        payload: Prisma.$TimeIntervalPayload<ExtArgs>
+        fields: Prisma.TimeIntervalFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TimeIntervalFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeIntervalPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TimeIntervalFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeIntervalPayload>
+          }
+          findFirst: {
+            args: Prisma.TimeIntervalFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeIntervalPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TimeIntervalFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeIntervalPayload>
+          }
+          findMany: {
+            args: Prisma.TimeIntervalFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeIntervalPayload>[]
+          }
+          create: {
+            args: Prisma.TimeIntervalCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeIntervalPayload>
+          }
+          createMany: {
+            args: Prisma.TimeIntervalCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TimeIntervalCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeIntervalPayload>[]
+          }
+          delete: {
+            args: Prisma.TimeIntervalDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeIntervalPayload>
+          }
+          update: {
+            args: Prisma.TimeIntervalUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeIntervalPayload>
+          }
+          deleteMany: {
+            args: Prisma.TimeIntervalDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TimeIntervalUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TimeIntervalUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeIntervalPayload>[]
+          }
+          upsert: {
+            args: Prisma.TimeIntervalUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TimeIntervalPayload>
+          }
+          aggregate: {
+            args: Prisma.TimeIntervalAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTimeInterval>
+          }
+          groupBy: {
+            args: Prisma.TimeIntervalGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TimeIntervalGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TimeIntervalCountArgs<ExtArgs>
+            result: $Utils.Optional<TimeIntervalCountAggregateOutputType> | number
           }
         }
       }
@@ -8913,15 +8733,12 @@ export namespace Prisma {
     bookingLog?: BookingLogOmit
     discount?: DiscountOmit
     discountTarget?: DiscountTargetOmit
-    discountSchedule?: DiscountScheduleOmit
     promotion?: PromotionOmit
     buyXGetYRule?: BuyXGetYRuleOmit
-    promotionSchedule?: PromotionScheduleOmit
     emailLog?: EmailLogOmit
     emailEvent?: EmailEventOmit
     employee?: EmployeeOmit
     establishment?: EstablishmentOmit
-    establishmentSchedule?: EstablishmentScheduleOmit
     establishmentBookingSettings?: EstablishmentBookingSettingsOmit
     image?: ImageOmit
     establishmentIntegrations?: EstablishmentIntegrationsOmit
@@ -8948,7 +8765,6 @@ export namespace Prisma {
     landingPage?: LandingPageOmit
     landingPageTranslation?: LandingPageTranslationOmit
     menu?: MenuOmit
-    menuSchedule?: MenuScheduleOmit
     menuTranslation?: MenuTranslationOmit
     menuCategory?: MenuCategoryOmit
     menuCategoryTranslation?: MenuCategoryTranslationOmit
@@ -8961,6 +8777,8 @@ export namespace Prisma {
     device?: DeviceOmit
     printer?: PrinterOmit
     schedule?: ScheduleOmit
+    scheduleDay?: ScheduleDayOmit
+    timeInterval?: TimeIntervalOmit
     stockWarehouse?: StockWarehouseOmit
     stockLocation?: StockLocationOmit
     supplier?: SupplierOmit
@@ -9162,12 +8980,10 @@ export namespace Prisma {
 
   export type DiscountCountOutputType = {
     targets: number
-    schedules: number
   }
 
   export type DiscountCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     targets?: boolean | DiscountCountOutputTypeCountTargetsArgs
-    schedules?: boolean | DiscountCountOutputTypeCountSchedulesArgs
   }
 
   // Custom InputTypes
@@ -9186,44 +9002,6 @@ export namespace Prisma {
    */
   export type DiscountCountOutputTypeCountTargetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DiscountTargetWhereInput
-  }
-
-  /**
-   * DiscountCountOutputType without action
-   */
-  export type DiscountCountOutputTypeCountSchedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DiscountScheduleWhereInput
-  }
-
-
-  /**
-   * Count Type PromotionCountOutputType
-   */
-
-  export type PromotionCountOutputType = {
-    schedules: number
-  }
-
-  export type PromotionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    schedules?: boolean | PromotionCountOutputTypeCountSchedulesArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * PromotionCountOutputType without action
-   */
-  export type PromotionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionCountOutputType
-     */
-    select?: PromotionCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * PromotionCountOutputType without action
-   */
-  export type PromotionCountOutputTypeCountSchedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PromotionScheduleWhereInput
   }
 
 
@@ -9273,7 +9051,6 @@ export namespace Prisma {
     variantOptions: number
     bookings: number
     establishmentAvailabilities: number
-    establishmentSchedule: number
     invoices: number
     devices: number
     vivaTerminals: number
@@ -9304,7 +9081,6 @@ export namespace Prisma {
     variantOptions?: boolean | EstablishmentCountOutputTypeCountVariantOptionsArgs
     bookings?: boolean | EstablishmentCountOutputTypeCountBookingsArgs
     establishmentAvailabilities?: boolean | EstablishmentCountOutputTypeCountEstablishmentAvailabilitiesArgs
-    establishmentSchedule?: boolean | EstablishmentCountOutputTypeCountEstablishmentScheduleArgs
     invoices?: boolean | EstablishmentCountOutputTypeCountInvoicesArgs
     devices?: boolean | EstablishmentCountOutputTypeCountDevicesArgs
     vivaTerminals?: boolean | EstablishmentCountOutputTypeCountVivaTerminalsArgs
@@ -9403,13 +9179,6 @@ export namespace Prisma {
    */
   export type EstablishmentCountOutputTypeCountEstablishmentAvailabilitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EstablishmentAvailabilityWhereInput
-  }
-
-  /**
-   * EstablishmentCountOutputType without action
-   */
-  export type EstablishmentCountOutputTypeCountEstablishmentScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EstablishmentScheduleWhereInput
   }
 
   /**
@@ -9997,13 +9766,11 @@ export namespace Prisma {
 
   export type MenuCountOutputType = {
     categories: number
-    menuSchedule: number
     translations: number
   }
 
   export type MenuCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     categories?: boolean | MenuCountOutputTypeCountCategoriesArgs
-    menuSchedule?: boolean | MenuCountOutputTypeCountMenuScheduleArgs
     translations?: boolean | MenuCountOutputTypeCountTranslationsArgs
   }
 
@@ -10023,13 +9790,6 @@ export namespace Prisma {
    */
   export type MenuCountOutputTypeCountCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MenuCategoryWhereInput
-  }
-
-  /**
-   * MenuCountOutputType without action
-   */
-  export type MenuCountOutputTypeCountMenuScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MenuScheduleWhereInput
   }
 
   /**
@@ -10187,17 +9947,17 @@ export namespace Prisma {
    */
 
   export type ScheduleCountOutputType = {
-    establishmentSchedule: number
-    menuSchedule: number
-    discountSchedule: number
-    promotionSchedule: number
+    days: number
+    menus: number
+    discounts: number
+    promotions: number
   }
 
   export type ScheduleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    establishmentSchedule?: boolean | ScheduleCountOutputTypeCountEstablishmentScheduleArgs
-    menuSchedule?: boolean | ScheduleCountOutputTypeCountMenuScheduleArgs
-    discountSchedule?: boolean | ScheduleCountOutputTypeCountDiscountScheduleArgs
-    promotionSchedule?: boolean | ScheduleCountOutputTypeCountPromotionScheduleArgs
+    days?: boolean | ScheduleCountOutputTypeCountDaysArgs
+    menus?: boolean | ScheduleCountOutputTypeCountMenusArgs
+    discounts?: boolean | ScheduleCountOutputTypeCountDiscountsArgs
+    promotions?: boolean | ScheduleCountOutputTypeCountPromotionsArgs
   }
 
   // Custom InputTypes
@@ -10214,29 +9974,60 @@ export namespace Prisma {
   /**
    * ScheduleCountOutputType without action
    */
-  export type ScheduleCountOutputTypeCountEstablishmentScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EstablishmentScheduleWhereInput
+  export type ScheduleCountOutputTypeCountDaysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScheduleDayWhereInput
   }
 
   /**
    * ScheduleCountOutputType without action
    */
-  export type ScheduleCountOutputTypeCountMenuScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MenuScheduleWhereInput
+  export type ScheduleCountOutputTypeCountMenusArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MenuWhereInput
   }
 
   /**
    * ScheduleCountOutputType without action
    */
-  export type ScheduleCountOutputTypeCountDiscountScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DiscountScheduleWhereInput
+  export type ScheduleCountOutputTypeCountDiscountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DiscountWhereInput
   }
 
   /**
    * ScheduleCountOutputType without action
    */
-  export type ScheduleCountOutputTypeCountPromotionScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PromotionScheduleWhereInput
+  export type ScheduleCountOutputTypeCountPromotionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PromotionWhereInput
+  }
+
+
+  /**
+   * Count Type ScheduleDayCountOutputType
+   */
+
+  export type ScheduleDayCountOutputType = {
+    intervals: number
+  }
+
+  export type ScheduleDayCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    intervals?: boolean | ScheduleDayCountOutputTypeCountIntervalsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ScheduleDayCountOutputType without action
+   */
+  export type ScheduleDayCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleDayCountOutputType
+     */
+    select?: ScheduleDayCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ScheduleDayCountOutputType without action
+   */
+  export type ScheduleDayCountOutputTypeCountIntervalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TimeIntervalWhereInput
   }
 
 
@@ -17971,6 +17762,7 @@ export namespace Prisma {
   export type DiscountMinAggregateOutputType = {
     id: string | null
     establishmentId: string | null
+    scheduleId: string | null
     name: string | null
     description: string | null
     type: $Enums.DiscountType | null
@@ -17986,6 +17778,7 @@ export namespace Prisma {
   export type DiscountMaxAggregateOutputType = {
     id: string | null
     establishmentId: string | null
+    scheduleId: string | null
     name: string | null
     description: string | null
     type: $Enums.DiscountType | null
@@ -18001,6 +17794,7 @@ export namespace Prisma {
   export type DiscountCountAggregateOutputType = {
     id: number
     establishmentId: number
+    scheduleId: number
     name: number
     description: number
     type: number
@@ -18026,6 +17820,7 @@ export namespace Prisma {
   export type DiscountMinAggregateInputType = {
     id?: true
     establishmentId?: true
+    scheduleId?: true
     name?: true
     description?: true
     type?: true
@@ -18041,6 +17836,7 @@ export namespace Prisma {
   export type DiscountMaxAggregateInputType = {
     id?: true
     establishmentId?: true
+    scheduleId?: true
     name?: true
     description?: true
     type?: true
@@ -18056,6 +17852,7 @@ export namespace Prisma {
   export type DiscountCountAggregateInputType = {
     id?: true
     establishmentId?: true
+    scheduleId?: true
     name?: true
     description?: true
     type?: true
@@ -18158,6 +17955,7 @@ export namespace Prisma {
   export type DiscountGroupByOutputType = {
     id: string
     establishmentId: string
+    scheduleId: string | null
     name: string
     description: string | null
     type: $Enums.DiscountType
@@ -18192,6 +17990,7 @@ export namespace Prisma {
   export type DiscountSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     establishmentId?: boolean
+    scheduleId?: boolean
     name?: boolean
     description?: boolean
     type?: boolean
@@ -18203,14 +18002,15 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Discount$scheduleArgs<ExtArgs>
     targets?: boolean | Discount$targetsArgs<ExtArgs>
-    schedules?: boolean | Discount$schedulesArgs<ExtArgs>
     _count?: boolean | DiscountCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["discount"]>
 
   export type DiscountSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     establishmentId?: boolean
+    scheduleId?: boolean
     name?: boolean
     description?: boolean
     type?: boolean
@@ -18222,11 +18022,13 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Discount$scheduleArgs<ExtArgs>
   }, ExtArgs["result"]["discount"]>
 
   export type DiscountSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     establishmentId?: boolean
+    scheduleId?: boolean
     name?: boolean
     description?: boolean
     type?: boolean
@@ -18238,11 +18040,13 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Discount$scheduleArgs<ExtArgs>
   }, ExtArgs["result"]["discount"]>
 
   export type DiscountSelectScalar = {
     id?: boolean
     establishmentId?: boolean
+    scheduleId?: boolean
     name?: boolean
     description?: boolean
     type?: boolean
@@ -18255,30 +18059,33 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type DiscountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "name" | "description" | "type" | "value" | "isActive" | "stackable" | "startsAt" | "endsAt" | "createdAt" | "updatedAt", ExtArgs["result"]["discount"]>
+  export type DiscountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "scheduleId" | "name" | "description" | "type" | "value" | "isActive" | "stackable" | "startsAt" | "endsAt" | "createdAt" | "updatedAt", ExtArgs["result"]["discount"]>
   export type DiscountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Discount$scheduleArgs<ExtArgs>
     targets?: boolean | Discount$targetsArgs<ExtArgs>
-    schedules?: boolean | Discount$schedulesArgs<ExtArgs>
     _count?: boolean | DiscountCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DiscountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Discount$scheduleArgs<ExtArgs>
   }
   export type DiscountIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Discount$scheduleArgs<ExtArgs>
   }
 
   export type $DiscountPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Discount"
     objects: {
       establishment: Prisma.$EstablishmentPayload<ExtArgs>
+      schedule: Prisma.$SchedulePayload<ExtArgs> | null
       targets: Prisma.$DiscountTargetPayload<ExtArgs>[]
-      schedules: Prisma.$DiscountSchedulePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       establishmentId: string
+      scheduleId: string | null
       name: string
       description: string | null
       type: $Enums.DiscountType
@@ -18684,8 +18491,8 @@ export namespace Prisma {
   export interface Prisma__DiscountClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     establishment<T extends EstablishmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EstablishmentDefaultArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    schedule<T extends Discount$scheduleArgs<ExtArgs> = {}>(args?: Subset<T, Discount$scheduleArgs<ExtArgs>>): Prisma__ScheduleClient<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     targets<T extends Discount$targetsArgs<ExtArgs> = {}>(args?: Subset<T, Discount$targetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscountTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    schedules<T extends Discount$schedulesArgs<ExtArgs> = {}>(args?: Subset<T, Discount$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscountSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -18717,6 +18524,7 @@ export namespace Prisma {
   interface DiscountFieldRefs {
     readonly id: FieldRef<"Discount", 'String'>
     readonly establishmentId: FieldRef<"Discount", 'String'>
+    readonly scheduleId: FieldRef<"Discount", 'String'>
     readonly name: FieldRef<"Discount", 'String'>
     readonly description: FieldRef<"Discount", 'String'>
     readonly type: FieldRef<"Discount", 'DiscountType'>
@@ -19123,6 +18931,25 @@ export namespace Prisma {
   }
 
   /**
+   * Discount.schedule
+   */
+  export type Discount$scheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Schedule
+     */
+    select?: ScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Schedule
+     */
+    omit?: ScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleInclude<ExtArgs> | null
+    where?: ScheduleWhereInput
+  }
+
+  /**
    * Discount.targets
    */
   export type Discount$targetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19144,30 +18971,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DiscountTargetScalarFieldEnum | DiscountTargetScalarFieldEnum[]
-  }
-
-  /**
-   * Discount.schedules
-   */
-  export type Discount$schedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DiscountSchedule
-     */
-    select?: DiscountScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DiscountSchedule
-     */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DiscountScheduleInclude<ExtArgs> | null
-    where?: DiscountScheduleWhereInput
-    orderBy?: DiscountScheduleOrderByWithRelationInput | DiscountScheduleOrderByWithRelationInput[]
-    cursor?: DiscountScheduleWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: DiscountScheduleScalarFieldEnum | DiscountScheduleScalarFieldEnum[]
   }
 
   /**
@@ -20262,1046 +20065,6 @@ export namespace Prisma {
 
 
   /**
-   * Model DiscountSchedule
-   */
-
-  export type AggregateDiscountSchedule = {
-    _count: DiscountScheduleCountAggregateOutputType | null
-    _min: DiscountScheduleMinAggregateOutputType | null
-    _max: DiscountScheduleMaxAggregateOutputType | null
-  }
-
-  export type DiscountScheduleMinAggregateOutputType = {
-    id: string | null
-    discountId: string | null
-    scheduleId: string | null
-  }
-
-  export type DiscountScheduleMaxAggregateOutputType = {
-    id: string | null
-    discountId: string | null
-    scheduleId: string | null
-  }
-
-  export type DiscountScheduleCountAggregateOutputType = {
-    id: number
-    discountId: number
-    scheduleId: number
-    _all: number
-  }
-
-
-  export type DiscountScheduleMinAggregateInputType = {
-    id?: true
-    discountId?: true
-    scheduleId?: true
-  }
-
-  export type DiscountScheduleMaxAggregateInputType = {
-    id?: true
-    discountId?: true
-    scheduleId?: true
-  }
-
-  export type DiscountScheduleCountAggregateInputType = {
-    id?: true
-    discountId?: true
-    scheduleId?: true
-    _all?: true
-  }
-
-  export type DiscountScheduleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which DiscountSchedule to aggregate.
-     */
-    where?: DiscountScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DiscountSchedules to fetch.
-     */
-    orderBy?: DiscountScheduleOrderByWithRelationInput | DiscountScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: DiscountScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DiscountSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DiscountSchedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned DiscountSchedules
-    **/
-    _count?: true | DiscountScheduleCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: DiscountScheduleMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: DiscountScheduleMaxAggregateInputType
-  }
-
-  export type GetDiscountScheduleAggregateType<T extends DiscountScheduleAggregateArgs> = {
-        [P in keyof T & keyof AggregateDiscountSchedule]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateDiscountSchedule[P]>
-      : GetScalarType<T[P], AggregateDiscountSchedule[P]>
-  }
-
-
-
-
-  export type DiscountScheduleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DiscountScheduleWhereInput
-    orderBy?: DiscountScheduleOrderByWithAggregationInput | DiscountScheduleOrderByWithAggregationInput[]
-    by: DiscountScheduleScalarFieldEnum[] | DiscountScheduleScalarFieldEnum
-    having?: DiscountScheduleScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: DiscountScheduleCountAggregateInputType | true
-    _min?: DiscountScheduleMinAggregateInputType
-    _max?: DiscountScheduleMaxAggregateInputType
-  }
-
-  export type DiscountScheduleGroupByOutputType = {
-    id: string
-    discountId: string
-    scheduleId: string
-    _count: DiscountScheduleCountAggregateOutputType | null
-    _min: DiscountScheduleMinAggregateOutputType | null
-    _max: DiscountScheduleMaxAggregateOutputType | null
-  }
-
-  type GetDiscountScheduleGroupByPayload<T extends DiscountScheduleGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<DiscountScheduleGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof DiscountScheduleGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], DiscountScheduleGroupByOutputType[P]>
-            : GetScalarType<T[P], DiscountScheduleGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type DiscountScheduleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    discountId?: boolean
-    scheduleId?: boolean
-    discount?: boolean | DiscountDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["discountSchedule"]>
-
-  export type DiscountScheduleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    discountId?: boolean
-    scheduleId?: boolean
-    discount?: boolean | DiscountDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["discountSchedule"]>
-
-  export type DiscountScheduleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    discountId?: boolean
-    scheduleId?: boolean
-    discount?: boolean | DiscountDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["discountSchedule"]>
-
-  export type DiscountScheduleSelectScalar = {
-    id?: boolean
-    discountId?: boolean
-    scheduleId?: boolean
-  }
-
-  export type DiscountScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "discountId" | "scheduleId", ExtArgs["result"]["discountSchedule"]>
-  export type DiscountScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    discount?: boolean | DiscountDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }
-  export type DiscountScheduleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    discount?: boolean | DiscountDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }
-  export type DiscountScheduleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    discount?: boolean | DiscountDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }
-
-  export type $DiscountSchedulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "DiscountSchedule"
-    objects: {
-      discount: Prisma.$DiscountPayload<ExtArgs>
-      schedule: Prisma.$SchedulePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      discountId: string
-      scheduleId: string
-    }, ExtArgs["result"]["discountSchedule"]>
-    composites: {}
-  }
-
-  type DiscountScheduleGetPayload<S extends boolean | null | undefined | DiscountScheduleDefaultArgs> = $Result.GetResult<Prisma.$DiscountSchedulePayload, S>
-
-  type DiscountScheduleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<DiscountScheduleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: DiscountScheduleCountAggregateInputType | true
-    }
-
-  export interface DiscountScheduleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DiscountSchedule'], meta: { name: 'DiscountSchedule' } }
-    /**
-     * Find zero or one DiscountSchedule that matches the filter.
-     * @param {DiscountScheduleFindUniqueArgs} args - Arguments to find a DiscountSchedule
-     * @example
-     * // Get one DiscountSchedule
-     * const discountSchedule = await prisma.discountSchedule.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends DiscountScheduleFindUniqueArgs>(args: SelectSubset<T, DiscountScheduleFindUniqueArgs<ExtArgs>>): Prisma__DiscountScheduleClient<$Result.GetResult<Prisma.$DiscountSchedulePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one DiscountSchedule that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {DiscountScheduleFindUniqueOrThrowArgs} args - Arguments to find a DiscountSchedule
-     * @example
-     * // Get one DiscountSchedule
-     * const discountSchedule = await prisma.discountSchedule.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends DiscountScheduleFindUniqueOrThrowArgs>(args: SelectSubset<T, DiscountScheduleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DiscountScheduleClient<$Result.GetResult<Prisma.$DiscountSchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first DiscountSchedule that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscountScheduleFindFirstArgs} args - Arguments to find a DiscountSchedule
-     * @example
-     * // Get one DiscountSchedule
-     * const discountSchedule = await prisma.discountSchedule.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends DiscountScheduleFindFirstArgs>(args?: SelectSubset<T, DiscountScheduleFindFirstArgs<ExtArgs>>): Prisma__DiscountScheduleClient<$Result.GetResult<Prisma.$DiscountSchedulePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first DiscountSchedule that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscountScheduleFindFirstOrThrowArgs} args - Arguments to find a DiscountSchedule
-     * @example
-     * // Get one DiscountSchedule
-     * const discountSchedule = await prisma.discountSchedule.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends DiscountScheduleFindFirstOrThrowArgs>(args?: SelectSubset<T, DiscountScheduleFindFirstOrThrowArgs<ExtArgs>>): Prisma__DiscountScheduleClient<$Result.GetResult<Prisma.$DiscountSchedulePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more DiscountSchedules that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscountScheduleFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all DiscountSchedules
-     * const discountSchedules = await prisma.discountSchedule.findMany()
-     * 
-     * // Get first 10 DiscountSchedules
-     * const discountSchedules = await prisma.discountSchedule.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const discountScheduleWithIdOnly = await prisma.discountSchedule.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends DiscountScheduleFindManyArgs>(args?: SelectSubset<T, DiscountScheduleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscountSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a DiscountSchedule.
-     * @param {DiscountScheduleCreateArgs} args - Arguments to create a DiscountSchedule.
-     * @example
-     * // Create one DiscountSchedule
-     * const DiscountSchedule = await prisma.discountSchedule.create({
-     *   data: {
-     *     // ... data to create a DiscountSchedule
-     *   }
-     * })
-     * 
-     */
-    create<T extends DiscountScheduleCreateArgs>(args: SelectSubset<T, DiscountScheduleCreateArgs<ExtArgs>>): Prisma__DiscountScheduleClient<$Result.GetResult<Prisma.$DiscountSchedulePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many DiscountSchedules.
-     * @param {DiscountScheduleCreateManyArgs} args - Arguments to create many DiscountSchedules.
-     * @example
-     * // Create many DiscountSchedules
-     * const discountSchedule = await prisma.discountSchedule.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends DiscountScheduleCreateManyArgs>(args?: SelectSubset<T, DiscountScheduleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many DiscountSchedules and returns the data saved in the database.
-     * @param {DiscountScheduleCreateManyAndReturnArgs} args - Arguments to create many DiscountSchedules.
-     * @example
-     * // Create many DiscountSchedules
-     * const discountSchedule = await prisma.discountSchedule.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many DiscountSchedules and only return the `id`
-     * const discountScheduleWithIdOnly = await prisma.discountSchedule.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends DiscountScheduleCreateManyAndReturnArgs>(args?: SelectSubset<T, DiscountScheduleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscountSchedulePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a DiscountSchedule.
-     * @param {DiscountScheduleDeleteArgs} args - Arguments to delete one DiscountSchedule.
-     * @example
-     * // Delete one DiscountSchedule
-     * const DiscountSchedule = await prisma.discountSchedule.delete({
-     *   where: {
-     *     // ... filter to delete one DiscountSchedule
-     *   }
-     * })
-     * 
-     */
-    delete<T extends DiscountScheduleDeleteArgs>(args: SelectSubset<T, DiscountScheduleDeleteArgs<ExtArgs>>): Prisma__DiscountScheduleClient<$Result.GetResult<Prisma.$DiscountSchedulePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one DiscountSchedule.
-     * @param {DiscountScheduleUpdateArgs} args - Arguments to update one DiscountSchedule.
-     * @example
-     * // Update one DiscountSchedule
-     * const discountSchedule = await prisma.discountSchedule.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends DiscountScheduleUpdateArgs>(args: SelectSubset<T, DiscountScheduleUpdateArgs<ExtArgs>>): Prisma__DiscountScheduleClient<$Result.GetResult<Prisma.$DiscountSchedulePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more DiscountSchedules.
-     * @param {DiscountScheduleDeleteManyArgs} args - Arguments to filter DiscountSchedules to delete.
-     * @example
-     * // Delete a few DiscountSchedules
-     * const { count } = await prisma.discountSchedule.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends DiscountScheduleDeleteManyArgs>(args?: SelectSubset<T, DiscountScheduleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more DiscountSchedules.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscountScheduleUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many DiscountSchedules
-     * const discountSchedule = await prisma.discountSchedule.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends DiscountScheduleUpdateManyArgs>(args: SelectSubset<T, DiscountScheduleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more DiscountSchedules and returns the data updated in the database.
-     * @param {DiscountScheduleUpdateManyAndReturnArgs} args - Arguments to update many DiscountSchedules.
-     * @example
-     * // Update many DiscountSchedules
-     * const discountSchedule = await prisma.discountSchedule.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more DiscountSchedules and only return the `id`
-     * const discountScheduleWithIdOnly = await prisma.discountSchedule.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends DiscountScheduleUpdateManyAndReturnArgs>(args: SelectSubset<T, DiscountScheduleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscountSchedulePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one DiscountSchedule.
-     * @param {DiscountScheduleUpsertArgs} args - Arguments to update or create a DiscountSchedule.
-     * @example
-     * // Update or create a DiscountSchedule
-     * const discountSchedule = await prisma.discountSchedule.upsert({
-     *   create: {
-     *     // ... data to create a DiscountSchedule
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the DiscountSchedule we want to update
-     *   }
-     * })
-     */
-    upsert<T extends DiscountScheduleUpsertArgs>(args: SelectSubset<T, DiscountScheduleUpsertArgs<ExtArgs>>): Prisma__DiscountScheduleClient<$Result.GetResult<Prisma.$DiscountSchedulePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of DiscountSchedules.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscountScheduleCountArgs} args - Arguments to filter DiscountSchedules to count.
-     * @example
-     * // Count the number of DiscountSchedules
-     * const count = await prisma.discountSchedule.count({
-     *   where: {
-     *     // ... the filter for the DiscountSchedules we want to count
-     *   }
-     * })
-    **/
-    count<T extends DiscountScheduleCountArgs>(
-      args?: Subset<T, DiscountScheduleCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], DiscountScheduleCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a DiscountSchedule.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscountScheduleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends DiscountScheduleAggregateArgs>(args: Subset<T, DiscountScheduleAggregateArgs>): Prisma.PrismaPromise<GetDiscountScheduleAggregateType<T>>
-
-    /**
-     * Group by DiscountSchedule.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {DiscountScheduleGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends DiscountScheduleGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: DiscountScheduleGroupByArgs['orderBy'] }
-        : { orderBy?: DiscountScheduleGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, DiscountScheduleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDiscountScheduleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the DiscountSchedule model
-   */
-  readonly fields: DiscountScheduleFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for DiscountSchedule.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__DiscountScheduleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    discount<T extends DiscountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DiscountDefaultArgs<ExtArgs>>): Prisma__DiscountClient<$Result.GetResult<Prisma.$DiscountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    schedule<T extends ScheduleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ScheduleDefaultArgs<ExtArgs>>): Prisma__ScheduleClient<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the DiscountSchedule model
-   */
-  interface DiscountScheduleFieldRefs {
-    readonly id: FieldRef<"DiscountSchedule", 'String'>
-    readonly discountId: FieldRef<"DiscountSchedule", 'String'>
-    readonly scheduleId: FieldRef<"DiscountSchedule", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * DiscountSchedule findUnique
-   */
-  export type DiscountScheduleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DiscountSchedule
-     */
-    select?: DiscountScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DiscountSchedule
-     */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DiscountScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which DiscountSchedule to fetch.
-     */
-    where: DiscountScheduleWhereUniqueInput
-  }
-
-  /**
-   * DiscountSchedule findUniqueOrThrow
-   */
-  export type DiscountScheduleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DiscountSchedule
-     */
-    select?: DiscountScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DiscountSchedule
-     */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DiscountScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which DiscountSchedule to fetch.
-     */
-    where: DiscountScheduleWhereUniqueInput
-  }
-
-  /**
-   * DiscountSchedule findFirst
-   */
-  export type DiscountScheduleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DiscountSchedule
-     */
-    select?: DiscountScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DiscountSchedule
-     */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DiscountScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which DiscountSchedule to fetch.
-     */
-    where?: DiscountScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DiscountSchedules to fetch.
-     */
-    orderBy?: DiscountScheduleOrderByWithRelationInput | DiscountScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for DiscountSchedules.
-     */
-    cursor?: DiscountScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DiscountSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DiscountSchedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of DiscountSchedules.
-     */
-    distinct?: DiscountScheduleScalarFieldEnum | DiscountScheduleScalarFieldEnum[]
-  }
-
-  /**
-   * DiscountSchedule findFirstOrThrow
-   */
-  export type DiscountScheduleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DiscountSchedule
-     */
-    select?: DiscountScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DiscountSchedule
-     */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DiscountScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which DiscountSchedule to fetch.
-     */
-    where?: DiscountScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DiscountSchedules to fetch.
-     */
-    orderBy?: DiscountScheduleOrderByWithRelationInput | DiscountScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for DiscountSchedules.
-     */
-    cursor?: DiscountScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DiscountSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DiscountSchedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of DiscountSchedules.
-     */
-    distinct?: DiscountScheduleScalarFieldEnum | DiscountScheduleScalarFieldEnum[]
-  }
-
-  /**
-   * DiscountSchedule findMany
-   */
-  export type DiscountScheduleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DiscountSchedule
-     */
-    select?: DiscountScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DiscountSchedule
-     */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DiscountScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which DiscountSchedules to fetch.
-     */
-    where?: DiscountScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of DiscountSchedules to fetch.
-     */
-    orderBy?: DiscountScheduleOrderByWithRelationInput | DiscountScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing DiscountSchedules.
-     */
-    cursor?: DiscountScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` DiscountSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` DiscountSchedules.
-     */
-    skip?: number
-    distinct?: DiscountScheduleScalarFieldEnum | DiscountScheduleScalarFieldEnum[]
-  }
-
-  /**
-   * DiscountSchedule create
-   */
-  export type DiscountScheduleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DiscountSchedule
-     */
-    select?: DiscountScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DiscountSchedule
-     */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DiscountScheduleInclude<ExtArgs> | null
-    /**
-     * The data needed to create a DiscountSchedule.
-     */
-    data: XOR<DiscountScheduleCreateInput, DiscountScheduleUncheckedCreateInput>
-  }
-
-  /**
-   * DiscountSchedule createMany
-   */
-  export type DiscountScheduleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many DiscountSchedules.
-     */
-    data: DiscountScheduleCreateManyInput | DiscountScheduleCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * DiscountSchedule createManyAndReturn
-   */
-  export type DiscountScheduleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DiscountSchedule
-     */
-    select?: DiscountScheduleSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the DiscountSchedule
-     */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
-    /**
-     * The data used to create many DiscountSchedules.
-     */
-    data: DiscountScheduleCreateManyInput | DiscountScheduleCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DiscountScheduleIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * DiscountSchedule update
-   */
-  export type DiscountScheduleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DiscountSchedule
-     */
-    select?: DiscountScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DiscountSchedule
-     */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DiscountScheduleInclude<ExtArgs> | null
-    /**
-     * The data needed to update a DiscountSchedule.
-     */
-    data: XOR<DiscountScheduleUpdateInput, DiscountScheduleUncheckedUpdateInput>
-    /**
-     * Choose, which DiscountSchedule to update.
-     */
-    where: DiscountScheduleWhereUniqueInput
-  }
-
-  /**
-   * DiscountSchedule updateMany
-   */
-  export type DiscountScheduleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update DiscountSchedules.
-     */
-    data: XOR<DiscountScheduleUpdateManyMutationInput, DiscountScheduleUncheckedUpdateManyInput>
-    /**
-     * Filter which DiscountSchedules to update
-     */
-    where?: DiscountScheduleWhereInput
-    /**
-     * Limit how many DiscountSchedules to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * DiscountSchedule updateManyAndReturn
-   */
-  export type DiscountScheduleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DiscountSchedule
-     */
-    select?: DiscountScheduleSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the DiscountSchedule
-     */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
-    /**
-     * The data used to update DiscountSchedules.
-     */
-    data: XOR<DiscountScheduleUpdateManyMutationInput, DiscountScheduleUncheckedUpdateManyInput>
-    /**
-     * Filter which DiscountSchedules to update
-     */
-    where?: DiscountScheduleWhereInput
-    /**
-     * Limit how many DiscountSchedules to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DiscountScheduleIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * DiscountSchedule upsert
-   */
-  export type DiscountScheduleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DiscountSchedule
-     */
-    select?: DiscountScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DiscountSchedule
-     */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DiscountScheduleInclude<ExtArgs> | null
-    /**
-     * The filter to search for the DiscountSchedule to update in case it exists.
-     */
-    where: DiscountScheduleWhereUniqueInput
-    /**
-     * In case the DiscountSchedule found by the `where` argument doesn't exist, create a new DiscountSchedule with this data.
-     */
-    create: XOR<DiscountScheduleCreateInput, DiscountScheduleUncheckedCreateInput>
-    /**
-     * In case the DiscountSchedule was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<DiscountScheduleUpdateInput, DiscountScheduleUncheckedUpdateInput>
-  }
-
-  /**
-   * DiscountSchedule delete
-   */
-  export type DiscountScheduleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DiscountSchedule
-     */
-    select?: DiscountScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DiscountSchedule
-     */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DiscountScheduleInclude<ExtArgs> | null
-    /**
-     * Filter which DiscountSchedule to delete.
-     */
-    where: DiscountScheduleWhereUniqueInput
-  }
-
-  /**
-   * DiscountSchedule deleteMany
-   */
-  export type DiscountScheduleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which DiscountSchedules to delete
-     */
-    where?: DiscountScheduleWhereInput
-    /**
-     * Limit how many DiscountSchedules to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * DiscountSchedule without action
-   */
-  export type DiscountScheduleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DiscountSchedule
-     */
-    select?: DiscountScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DiscountSchedule
-     */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DiscountScheduleInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Promotion
    */
 
@@ -21314,6 +20077,7 @@ export namespace Prisma {
   export type PromotionMinAggregateOutputType = {
     id: string | null
     establishmentId: string | null
+    scheduleId: string | null
     name: string | null
     description: string | null
     type: $Enums.PromotionType | null
@@ -21327,6 +20091,7 @@ export namespace Prisma {
   export type PromotionMaxAggregateOutputType = {
     id: string | null
     establishmentId: string | null
+    scheduleId: string | null
     name: string | null
     description: string | null
     type: $Enums.PromotionType | null
@@ -21340,6 +20105,7 @@ export namespace Prisma {
   export type PromotionCountAggregateOutputType = {
     id: number
     establishmentId: number
+    scheduleId: number
     name: number
     description: number
     type: number
@@ -21355,6 +20121,7 @@ export namespace Prisma {
   export type PromotionMinAggregateInputType = {
     id?: true
     establishmentId?: true
+    scheduleId?: true
     name?: true
     description?: true
     type?: true
@@ -21368,6 +20135,7 @@ export namespace Prisma {
   export type PromotionMaxAggregateInputType = {
     id?: true
     establishmentId?: true
+    scheduleId?: true
     name?: true
     description?: true
     type?: true
@@ -21381,6 +20149,7 @@ export namespace Prisma {
   export type PromotionCountAggregateInputType = {
     id?: true
     establishmentId?: true
+    scheduleId?: true
     name?: true
     description?: true
     type?: true
@@ -21467,6 +20236,7 @@ export namespace Prisma {
   export type PromotionGroupByOutputType = {
     id: string
     establishmentId: string
+    scheduleId: string | null
     name: string
     description: string | null
     type: $Enums.PromotionType
@@ -21497,6 +20267,7 @@ export namespace Prisma {
   export type PromotionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     establishmentId?: boolean
+    scheduleId?: boolean
     name?: boolean
     description?: boolean
     type?: boolean
@@ -21506,14 +20277,14 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Promotion$scheduleArgs<ExtArgs>
     buyXGetYRule?: boolean | Promotion$buyXGetYRuleArgs<ExtArgs>
-    schedules?: boolean | Promotion$schedulesArgs<ExtArgs>
-    _count?: boolean | PromotionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["promotion"]>
 
   export type PromotionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     establishmentId?: boolean
+    scheduleId?: boolean
     name?: boolean
     description?: boolean
     type?: boolean
@@ -21523,11 +20294,13 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Promotion$scheduleArgs<ExtArgs>
   }, ExtArgs["result"]["promotion"]>
 
   export type PromotionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     establishmentId?: boolean
+    scheduleId?: boolean
     name?: boolean
     description?: boolean
     type?: boolean
@@ -21537,11 +20310,13 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Promotion$scheduleArgs<ExtArgs>
   }, ExtArgs["result"]["promotion"]>
 
   export type PromotionSelectScalar = {
     id?: boolean
     establishmentId?: boolean
+    scheduleId?: boolean
     name?: boolean
     description?: boolean
     type?: boolean
@@ -21552,30 +20327,32 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type PromotionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "name" | "description" | "type" | "isActive" | "startsAt" | "endsAt" | "createdAt" | "updatedAt", ExtArgs["result"]["promotion"]>
+  export type PromotionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "scheduleId" | "name" | "description" | "type" | "isActive" | "startsAt" | "endsAt" | "createdAt" | "updatedAt", ExtArgs["result"]["promotion"]>
   export type PromotionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Promotion$scheduleArgs<ExtArgs>
     buyXGetYRule?: boolean | Promotion$buyXGetYRuleArgs<ExtArgs>
-    schedules?: boolean | Promotion$schedulesArgs<ExtArgs>
-    _count?: boolean | PromotionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PromotionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Promotion$scheduleArgs<ExtArgs>
   }
   export type PromotionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Promotion$scheduleArgs<ExtArgs>
   }
 
   export type $PromotionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Promotion"
     objects: {
       establishment: Prisma.$EstablishmentPayload<ExtArgs>
+      schedule: Prisma.$SchedulePayload<ExtArgs> | null
       buyXGetYRule: Prisma.$BuyXGetYRulePayload<ExtArgs> | null
-      schedules: Prisma.$PromotionSchedulePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       establishmentId: string
+      scheduleId: string | null
       name: string
       description: string | null
       type: $Enums.PromotionType
@@ -21979,8 +20756,8 @@ export namespace Prisma {
   export interface Prisma__PromotionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     establishment<T extends EstablishmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EstablishmentDefaultArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    schedule<T extends Promotion$scheduleArgs<ExtArgs> = {}>(args?: Subset<T, Promotion$scheduleArgs<ExtArgs>>): Prisma__ScheduleClient<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     buyXGetYRule<T extends Promotion$buyXGetYRuleArgs<ExtArgs> = {}>(args?: Subset<T, Promotion$buyXGetYRuleArgs<ExtArgs>>): Prisma__BuyXGetYRuleClient<$Result.GetResult<Prisma.$BuyXGetYRulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    schedules<T extends Promotion$schedulesArgs<ExtArgs> = {}>(args?: Subset<T, Promotion$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -22012,6 +20789,7 @@ export namespace Prisma {
   interface PromotionFieldRefs {
     readonly id: FieldRef<"Promotion", 'String'>
     readonly establishmentId: FieldRef<"Promotion", 'String'>
+    readonly scheduleId: FieldRef<"Promotion", 'String'>
     readonly name: FieldRef<"Promotion", 'String'>
     readonly description: FieldRef<"Promotion", 'String'>
     readonly type: FieldRef<"Promotion", 'PromotionType'>
@@ -22416,6 +21194,25 @@ export namespace Prisma {
   }
 
   /**
+   * Promotion.schedule
+   */
+  export type Promotion$scheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Schedule
+     */
+    select?: ScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Schedule
+     */
+    omit?: ScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleInclude<ExtArgs> | null
+    where?: ScheduleWhereInput
+  }
+
+  /**
    * Promotion.buyXGetYRule
    */
   export type Promotion$buyXGetYRuleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -22432,30 +21229,6 @@ export namespace Prisma {
      */
     include?: BuyXGetYRuleInclude<ExtArgs> | null
     where?: BuyXGetYRuleWhereInput
-  }
-
-  /**
-   * Promotion.schedules
-   */
-  export type Promotion$schedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionSchedule
-     */
-    select?: PromotionScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PromotionSchedule
-     */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PromotionScheduleInclude<ExtArgs> | null
-    where?: PromotionScheduleWhereInput
-    orderBy?: PromotionScheduleOrderByWithRelationInput | PromotionScheduleOrderByWithRelationInput[]
-    cursor?: PromotionScheduleWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PromotionScheduleScalarFieldEnum | PromotionScheduleScalarFieldEnum[]
   }
 
   /**
@@ -23612,1046 +22385,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: BuyXGetYRuleInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model PromotionSchedule
-   */
-
-  export type AggregatePromotionSchedule = {
-    _count: PromotionScheduleCountAggregateOutputType | null
-    _min: PromotionScheduleMinAggregateOutputType | null
-    _max: PromotionScheduleMaxAggregateOutputType | null
-  }
-
-  export type PromotionScheduleMinAggregateOutputType = {
-    id: string | null
-    promotionId: string | null
-    scheduleId: string | null
-  }
-
-  export type PromotionScheduleMaxAggregateOutputType = {
-    id: string | null
-    promotionId: string | null
-    scheduleId: string | null
-  }
-
-  export type PromotionScheduleCountAggregateOutputType = {
-    id: number
-    promotionId: number
-    scheduleId: number
-    _all: number
-  }
-
-
-  export type PromotionScheduleMinAggregateInputType = {
-    id?: true
-    promotionId?: true
-    scheduleId?: true
-  }
-
-  export type PromotionScheduleMaxAggregateInputType = {
-    id?: true
-    promotionId?: true
-    scheduleId?: true
-  }
-
-  export type PromotionScheduleCountAggregateInputType = {
-    id?: true
-    promotionId?: true
-    scheduleId?: true
-    _all?: true
-  }
-
-  export type PromotionScheduleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PromotionSchedule to aggregate.
-     */
-    where?: PromotionScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PromotionSchedules to fetch.
-     */
-    orderBy?: PromotionScheduleOrderByWithRelationInput | PromotionScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: PromotionScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PromotionSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PromotionSchedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned PromotionSchedules
-    **/
-    _count?: true | PromotionScheduleCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: PromotionScheduleMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: PromotionScheduleMaxAggregateInputType
-  }
-
-  export type GetPromotionScheduleAggregateType<T extends PromotionScheduleAggregateArgs> = {
-        [P in keyof T & keyof AggregatePromotionSchedule]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePromotionSchedule[P]>
-      : GetScalarType<T[P], AggregatePromotionSchedule[P]>
-  }
-
-
-
-
-  export type PromotionScheduleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PromotionScheduleWhereInput
-    orderBy?: PromotionScheduleOrderByWithAggregationInput | PromotionScheduleOrderByWithAggregationInput[]
-    by: PromotionScheduleScalarFieldEnum[] | PromotionScheduleScalarFieldEnum
-    having?: PromotionScheduleScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: PromotionScheduleCountAggregateInputType | true
-    _min?: PromotionScheduleMinAggregateInputType
-    _max?: PromotionScheduleMaxAggregateInputType
-  }
-
-  export type PromotionScheduleGroupByOutputType = {
-    id: string
-    promotionId: string
-    scheduleId: string
-    _count: PromotionScheduleCountAggregateOutputType | null
-    _min: PromotionScheduleMinAggregateOutputType | null
-    _max: PromotionScheduleMaxAggregateOutputType | null
-  }
-
-  type GetPromotionScheduleGroupByPayload<T extends PromotionScheduleGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<PromotionScheduleGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PromotionScheduleGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PromotionScheduleGroupByOutputType[P]>
-            : GetScalarType<T[P], PromotionScheduleGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type PromotionScheduleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    promotionId?: boolean
-    scheduleId?: boolean
-    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["promotionSchedule"]>
-
-  export type PromotionScheduleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    promotionId?: boolean
-    scheduleId?: boolean
-    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["promotionSchedule"]>
-
-  export type PromotionScheduleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    promotionId?: boolean
-    scheduleId?: boolean
-    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["promotionSchedule"]>
-
-  export type PromotionScheduleSelectScalar = {
-    id?: boolean
-    promotionId?: boolean
-    scheduleId?: boolean
-  }
-
-  export type PromotionScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "promotionId" | "scheduleId", ExtArgs["result"]["promotionSchedule"]>
-  export type PromotionScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }
-  export type PromotionScheduleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }
-  export type PromotionScheduleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    promotion?: boolean | PromotionDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }
-
-  export type $PromotionSchedulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "PromotionSchedule"
-    objects: {
-      promotion: Prisma.$PromotionPayload<ExtArgs>
-      schedule: Prisma.$SchedulePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      promotionId: string
-      scheduleId: string
-    }, ExtArgs["result"]["promotionSchedule"]>
-    composites: {}
-  }
-
-  type PromotionScheduleGetPayload<S extends boolean | null | undefined | PromotionScheduleDefaultArgs> = $Result.GetResult<Prisma.$PromotionSchedulePayload, S>
-
-  type PromotionScheduleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PromotionScheduleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PromotionScheduleCountAggregateInputType | true
-    }
-
-  export interface PromotionScheduleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PromotionSchedule'], meta: { name: 'PromotionSchedule' } }
-    /**
-     * Find zero or one PromotionSchedule that matches the filter.
-     * @param {PromotionScheduleFindUniqueArgs} args - Arguments to find a PromotionSchedule
-     * @example
-     * // Get one PromotionSchedule
-     * const promotionSchedule = await prisma.promotionSchedule.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends PromotionScheduleFindUniqueArgs>(args: SelectSubset<T, PromotionScheduleFindUniqueArgs<ExtArgs>>): Prisma__PromotionScheduleClient<$Result.GetResult<Prisma.$PromotionSchedulePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one PromotionSchedule that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {PromotionScheduleFindUniqueOrThrowArgs} args - Arguments to find a PromotionSchedule
-     * @example
-     * // Get one PromotionSchedule
-     * const promotionSchedule = await prisma.promotionSchedule.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends PromotionScheduleFindUniqueOrThrowArgs>(args: SelectSubset<T, PromotionScheduleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PromotionScheduleClient<$Result.GetResult<Prisma.$PromotionSchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PromotionSchedule that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PromotionScheduleFindFirstArgs} args - Arguments to find a PromotionSchedule
-     * @example
-     * // Get one PromotionSchedule
-     * const promotionSchedule = await prisma.promotionSchedule.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends PromotionScheduleFindFirstArgs>(args?: SelectSubset<T, PromotionScheduleFindFirstArgs<ExtArgs>>): Prisma__PromotionScheduleClient<$Result.GetResult<Prisma.$PromotionSchedulePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first PromotionSchedule that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PromotionScheduleFindFirstOrThrowArgs} args - Arguments to find a PromotionSchedule
-     * @example
-     * // Get one PromotionSchedule
-     * const promotionSchedule = await prisma.promotionSchedule.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends PromotionScheduleFindFirstOrThrowArgs>(args?: SelectSubset<T, PromotionScheduleFindFirstOrThrowArgs<ExtArgs>>): Prisma__PromotionScheduleClient<$Result.GetResult<Prisma.$PromotionSchedulePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more PromotionSchedules that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PromotionScheduleFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all PromotionSchedules
-     * const promotionSchedules = await prisma.promotionSchedule.findMany()
-     * 
-     * // Get first 10 PromotionSchedules
-     * const promotionSchedules = await prisma.promotionSchedule.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const promotionScheduleWithIdOnly = await prisma.promotionSchedule.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends PromotionScheduleFindManyArgs>(args?: SelectSubset<T, PromotionScheduleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a PromotionSchedule.
-     * @param {PromotionScheduleCreateArgs} args - Arguments to create a PromotionSchedule.
-     * @example
-     * // Create one PromotionSchedule
-     * const PromotionSchedule = await prisma.promotionSchedule.create({
-     *   data: {
-     *     // ... data to create a PromotionSchedule
-     *   }
-     * })
-     * 
-     */
-    create<T extends PromotionScheduleCreateArgs>(args: SelectSubset<T, PromotionScheduleCreateArgs<ExtArgs>>): Prisma__PromotionScheduleClient<$Result.GetResult<Prisma.$PromotionSchedulePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many PromotionSchedules.
-     * @param {PromotionScheduleCreateManyArgs} args - Arguments to create many PromotionSchedules.
-     * @example
-     * // Create many PromotionSchedules
-     * const promotionSchedule = await prisma.promotionSchedule.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends PromotionScheduleCreateManyArgs>(args?: SelectSubset<T, PromotionScheduleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many PromotionSchedules and returns the data saved in the database.
-     * @param {PromotionScheduleCreateManyAndReturnArgs} args - Arguments to create many PromotionSchedules.
-     * @example
-     * // Create many PromotionSchedules
-     * const promotionSchedule = await prisma.promotionSchedule.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many PromotionSchedules and only return the `id`
-     * const promotionScheduleWithIdOnly = await prisma.promotionSchedule.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends PromotionScheduleCreateManyAndReturnArgs>(args?: SelectSubset<T, PromotionScheduleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionSchedulePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a PromotionSchedule.
-     * @param {PromotionScheduleDeleteArgs} args - Arguments to delete one PromotionSchedule.
-     * @example
-     * // Delete one PromotionSchedule
-     * const PromotionSchedule = await prisma.promotionSchedule.delete({
-     *   where: {
-     *     // ... filter to delete one PromotionSchedule
-     *   }
-     * })
-     * 
-     */
-    delete<T extends PromotionScheduleDeleteArgs>(args: SelectSubset<T, PromotionScheduleDeleteArgs<ExtArgs>>): Prisma__PromotionScheduleClient<$Result.GetResult<Prisma.$PromotionSchedulePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one PromotionSchedule.
-     * @param {PromotionScheduleUpdateArgs} args - Arguments to update one PromotionSchedule.
-     * @example
-     * // Update one PromotionSchedule
-     * const promotionSchedule = await prisma.promotionSchedule.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends PromotionScheduleUpdateArgs>(args: SelectSubset<T, PromotionScheduleUpdateArgs<ExtArgs>>): Prisma__PromotionScheduleClient<$Result.GetResult<Prisma.$PromotionSchedulePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more PromotionSchedules.
-     * @param {PromotionScheduleDeleteManyArgs} args - Arguments to filter PromotionSchedules to delete.
-     * @example
-     * // Delete a few PromotionSchedules
-     * const { count } = await prisma.promotionSchedule.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends PromotionScheduleDeleteManyArgs>(args?: SelectSubset<T, PromotionScheduleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PromotionSchedules.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PromotionScheduleUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many PromotionSchedules
-     * const promotionSchedule = await prisma.promotionSchedule.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends PromotionScheduleUpdateManyArgs>(args: SelectSubset<T, PromotionScheduleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more PromotionSchedules and returns the data updated in the database.
-     * @param {PromotionScheduleUpdateManyAndReturnArgs} args - Arguments to update many PromotionSchedules.
-     * @example
-     * // Update many PromotionSchedules
-     * const promotionSchedule = await prisma.promotionSchedule.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more PromotionSchedules and only return the `id`
-     * const promotionScheduleWithIdOnly = await prisma.promotionSchedule.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends PromotionScheduleUpdateManyAndReturnArgs>(args: SelectSubset<T, PromotionScheduleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionSchedulePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one PromotionSchedule.
-     * @param {PromotionScheduleUpsertArgs} args - Arguments to update or create a PromotionSchedule.
-     * @example
-     * // Update or create a PromotionSchedule
-     * const promotionSchedule = await prisma.promotionSchedule.upsert({
-     *   create: {
-     *     // ... data to create a PromotionSchedule
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the PromotionSchedule we want to update
-     *   }
-     * })
-     */
-    upsert<T extends PromotionScheduleUpsertArgs>(args: SelectSubset<T, PromotionScheduleUpsertArgs<ExtArgs>>): Prisma__PromotionScheduleClient<$Result.GetResult<Prisma.$PromotionSchedulePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of PromotionSchedules.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PromotionScheduleCountArgs} args - Arguments to filter PromotionSchedules to count.
-     * @example
-     * // Count the number of PromotionSchedules
-     * const count = await prisma.promotionSchedule.count({
-     *   where: {
-     *     // ... the filter for the PromotionSchedules we want to count
-     *   }
-     * })
-    **/
-    count<T extends PromotionScheduleCountArgs>(
-      args?: Subset<T, PromotionScheduleCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], PromotionScheduleCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a PromotionSchedule.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PromotionScheduleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends PromotionScheduleAggregateArgs>(args: Subset<T, PromotionScheduleAggregateArgs>): Prisma.PrismaPromise<GetPromotionScheduleAggregateType<T>>
-
-    /**
-     * Group by PromotionSchedule.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PromotionScheduleGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends PromotionScheduleGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PromotionScheduleGroupByArgs['orderBy'] }
-        : { orderBy?: PromotionScheduleGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, PromotionScheduleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPromotionScheduleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the PromotionSchedule model
-   */
-  readonly fields: PromotionScheduleFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for PromotionSchedule.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__PromotionScheduleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    promotion<T extends PromotionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PromotionDefaultArgs<ExtArgs>>): Prisma__PromotionClient<$Result.GetResult<Prisma.$PromotionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    schedule<T extends ScheduleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ScheduleDefaultArgs<ExtArgs>>): Prisma__ScheduleClient<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the PromotionSchedule model
-   */
-  interface PromotionScheduleFieldRefs {
-    readonly id: FieldRef<"PromotionSchedule", 'String'>
-    readonly promotionId: FieldRef<"PromotionSchedule", 'String'>
-    readonly scheduleId: FieldRef<"PromotionSchedule", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * PromotionSchedule findUnique
-   */
-  export type PromotionScheduleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionSchedule
-     */
-    select?: PromotionScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PromotionSchedule
-     */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PromotionScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which PromotionSchedule to fetch.
-     */
-    where: PromotionScheduleWhereUniqueInput
-  }
-
-  /**
-   * PromotionSchedule findUniqueOrThrow
-   */
-  export type PromotionScheduleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionSchedule
-     */
-    select?: PromotionScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PromotionSchedule
-     */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PromotionScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which PromotionSchedule to fetch.
-     */
-    where: PromotionScheduleWhereUniqueInput
-  }
-
-  /**
-   * PromotionSchedule findFirst
-   */
-  export type PromotionScheduleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionSchedule
-     */
-    select?: PromotionScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PromotionSchedule
-     */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PromotionScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which PromotionSchedule to fetch.
-     */
-    where?: PromotionScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PromotionSchedules to fetch.
-     */
-    orderBy?: PromotionScheduleOrderByWithRelationInput | PromotionScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PromotionSchedules.
-     */
-    cursor?: PromotionScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PromotionSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PromotionSchedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PromotionSchedules.
-     */
-    distinct?: PromotionScheduleScalarFieldEnum | PromotionScheduleScalarFieldEnum[]
-  }
-
-  /**
-   * PromotionSchedule findFirstOrThrow
-   */
-  export type PromotionScheduleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionSchedule
-     */
-    select?: PromotionScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PromotionSchedule
-     */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PromotionScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which PromotionSchedule to fetch.
-     */
-    where?: PromotionScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PromotionSchedules to fetch.
-     */
-    orderBy?: PromotionScheduleOrderByWithRelationInput | PromotionScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for PromotionSchedules.
-     */
-    cursor?: PromotionScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PromotionSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PromotionSchedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of PromotionSchedules.
-     */
-    distinct?: PromotionScheduleScalarFieldEnum | PromotionScheduleScalarFieldEnum[]
-  }
-
-  /**
-   * PromotionSchedule findMany
-   */
-  export type PromotionScheduleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionSchedule
-     */
-    select?: PromotionScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PromotionSchedule
-     */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PromotionScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which PromotionSchedules to fetch.
-     */
-    where?: PromotionScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of PromotionSchedules to fetch.
-     */
-    orderBy?: PromotionScheduleOrderByWithRelationInput | PromotionScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing PromotionSchedules.
-     */
-    cursor?: PromotionScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` PromotionSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` PromotionSchedules.
-     */
-    skip?: number
-    distinct?: PromotionScheduleScalarFieldEnum | PromotionScheduleScalarFieldEnum[]
-  }
-
-  /**
-   * PromotionSchedule create
-   */
-  export type PromotionScheduleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionSchedule
-     */
-    select?: PromotionScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PromotionSchedule
-     */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PromotionScheduleInclude<ExtArgs> | null
-    /**
-     * The data needed to create a PromotionSchedule.
-     */
-    data: XOR<PromotionScheduleCreateInput, PromotionScheduleUncheckedCreateInput>
-  }
-
-  /**
-   * PromotionSchedule createMany
-   */
-  export type PromotionScheduleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many PromotionSchedules.
-     */
-    data: PromotionScheduleCreateManyInput | PromotionScheduleCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * PromotionSchedule createManyAndReturn
-   */
-  export type PromotionScheduleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionSchedule
-     */
-    select?: PromotionScheduleSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PromotionSchedule
-     */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
-    /**
-     * The data used to create many PromotionSchedules.
-     */
-    data: PromotionScheduleCreateManyInput | PromotionScheduleCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PromotionScheduleIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * PromotionSchedule update
-   */
-  export type PromotionScheduleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionSchedule
-     */
-    select?: PromotionScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PromotionSchedule
-     */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PromotionScheduleInclude<ExtArgs> | null
-    /**
-     * The data needed to update a PromotionSchedule.
-     */
-    data: XOR<PromotionScheduleUpdateInput, PromotionScheduleUncheckedUpdateInput>
-    /**
-     * Choose, which PromotionSchedule to update.
-     */
-    where: PromotionScheduleWhereUniqueInput
-  }
-
-  /**
-   * PromotionSchedule updateMany
-   */
-  export type PromotionScheduleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update PromotionSchedules.
-     */
-    data: XOR<PromotionScheduleUpdateManyMutationInput, PromotionScheduleUncheckedUpdateManyInput>
-    /**
-     * Filter which PromotionSchedules to update
-     */
-    where?: PromotionScheduleWhereInput
-    /**
-     * Limit how many PromotionSchedules to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * PromotionSchedule updateManyAndReturn
-   */
-  export type PromotionScheduleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionSchedule
-     */
-    select?: PromotionScheduleSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the PromotionSchedule
-     */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
-    /**
-     * The data used to update PromotionSchedules.
-     */
-    data: XOR<PromotionScheduleUpdateManyMutationInput, PromotionScheduleUncheckedUpdateManyInput>
-    /**
-     * Filter which PromotionSchedules to update
-     */
-    where?: PromotionScheduleWhereInput
-    /**
-     * Limit how many PromotionSchedules to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PromotionScheduleIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * PromotionSchedule upsert
-   */
-  export type PromotionScheduleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionSchedule
-     */
-    select?: PromotionScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PromotionSchedule
-     */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PromotionScheduleInclude<ExtArgs> | null
-    /**
-     * The filter to search for the PromotionSchedule to update in case it exists.
-     */
-    where: PromotionScheduleWhereUniqueInput
-    /**
-     * In case the PromotionSchedule found by the `where` argument doesn't exist, create a new PromotionSchedule with this data.
-     */
-    create: XOR<PromotionScheduleCreateInput, PromotionScheduleUncheckedCreateInput>
-    /**
-     * In case the PromotionSchedule was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<PromotionScheduleUpdateInput, PromotionScheduleUncheckedUpdateInput>
-  }
-
-  /**
-   * PromotionSchedule delete
-   */
-  export type PromotionScheduleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionSchedule
-     */
-    select?: PromotionScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PromotionSchedule
-     */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PromotionScheduleInclude<ExtArgs> | null
-    /**
-     * Filter which PromotionSchedule to delete.
-     */
-    where: PromotionScheduleWhereUniqueInput
-  }
-
-  /**
-   * PromotionSchedule deleteMany
-   */
-  export type PromotionScheduleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which PromotionSchedules to delete
-     */
-    where?: PromotionScheduleWhereInput
-    /**
-     * Limit how many PromotionSchedules to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * PromotionSchedule without action
-   */
-  export type PromotionScheduleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PromotionSchedule
-     */
-    select?: PromotionScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PromotionSchedule
-     */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PromotionScheduleInclude<ExtArgs> | null
   }
 
 
@@ -28357,6 +26090,7 @@ export namespace Prisma {
     logoImageId: string | null
     bannerImageId: string | null
     activeThemeId: string | null
+    scheduleId: string | null
     createdAt: Date | null
     updatedAt: Date | null
     ownerId: string | null
@@ -28393,6 +26127,7 @@ export namespace Prisma {
     logoImageId: string | null
     bannerImageId: string | null
     activeThemeId: string | null
+    scheduleId: string | null
     createdAt: Date | null
     updatedAt: Date | null
     ownerId: string | null
@@ -28430,6 +26165,7 @@ export namespace Prisma {
     logoImageId: number
     bannerImageId: number
     activeThemeId: number
+    scheduleId: number
     createdAt: number
     updatedAt: number
     ownerId: number
@@ -28468,6 +26204,7 @@ export namespace Prisma {
     logoImageId?: true
     bannerImageId?: true
     activeThemeId?: true
+    scheduleId?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -28504,6 +26241,7 @@ export namespace Prisma {
     logoImageId?: true
     bannerImageId?: true
     activeThemeId?: true
+    scheduleId?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -28541,6 +26279,7 @@ export namespace Prisma {
     logoImageId?: true
     bannerImageId?: true
     activeThemeId?: true
+    scheduleId?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -28651,6 +26390,7 @@ export namespace Prisma {
     logoImageId: string | null
     bannerImageId: string | null
     activeThemeId: string | null
+    scheduleId: string | null
     createdAt: Date
     updatedAt: Date
     ownerId: string
@@ -28705,9 +26445,11 @@ export namespace Prisma {
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
+    scheduleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
+    schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
     activeTheme?: boolean | Establishment$activeThemeArgs<ExtArgs>
     logoImage?: boolean | Establishment$logoImageArgs<ExtArgs>
@@ -28724,7 +26466,6 @@ export namespace Prisma {
     bookingRules?: boolean | Establishment$bookingRulesArgs<ExtArgs>
     establishmentBookingSettings?: boolean | Establishment$establishmentBookingSettingsArgs<ExtArgs>
     establishmentAvailabilities?: boolean | Establishment$establishmentAvailabilitiesArgs<ExtArgs>
-    establishmentSchedule?: boolean | Establishment$establishmentScheduleArgs<ExtArgs>
     integrations?: boolean | Establishment$integrationsArgs<ExtArgs>
     subscription?: boolean | Establishment$subscriptionArgs<ExtArgs>
     invoices?: boolean | Establishment$invoicesArgs<ExtArgs>
@@ -28780,9 +26521,11 @@ export namespace Prisma {
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
+    scheduleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
+    schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
     activeTheme?: boolean | Establishment$activeThemeArgs<ExtArgs>
     logoImage?: boolean | Establishment$logoImageArgs<ExtArgs>
@@ -28821,9 +26564,11 @@ export namespace Prisma {
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
+    scheduleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
+    schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
     activeTheme?: boolean | Establishment$activeThemeArgs<ExtArgs>
     logoImage?: boolean | Establishment$logoImageArgs<ExtArgs>
@@ -28862,13 +26607,15 @@ export namespace Prisma {
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
+    scheduleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
   }
 
-  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "countryCode" | "billingName" | "billingTaxId" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "onlyMenu" | "needSession" | "logoImageId" | "bannerImageId" | "activeThemeId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
+  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "countryCode" | "billingName" | "billingTaxId" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "onlyMenu" | "needSession" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
   export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
     activeTheme?: boolean | Establishment$activeThemeArgs<ExtArgs>
     logoImage?: boolean | Establishment$logoImageArgs<ExtArgs>
@@ -28885,7 +26632,6 @@ export namespace Prisma {
     bookingRules?: boolean | Establishment$bookingRulesArgs<ExtArgs>
     establishmentBookingSettings?: boolean | Establishment$establishmentBookingSettingsArgs<ExtArgs>
     establishmentAvailabilities?: boolean | Establishment$establishmentAvailabilitiesArgs<ExtArgs>
-    establishmentSchedule?: boolean | Establishment$establishmentScheduleArgs<ExtArgs>
     integrations?: boolean | Establishment$integrationsArgs<ExtArgs>
     subscription?: boolean | Establishment$subscriptionArgs<ExtArgs>
     invoices?: boolean | Establishment$invoicesArgs<ExtArgs>
@@ -28909,12 +26655,14 @@ export namespace Prisma {
     _count?: boolean | EstablishmentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EstablishmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
     activeTheme?: boolean | Establishment$activeThemeArgs<ExtArgs>
     logoImage?: boolean | Establishment$logoImageArgs<ExtArgs>
     bannerImage?: boolean | Establishment$bannerImageArgs<ExtArgs>
   }
   export type EstablishmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
     activeTheme?: boolean | Establishment$activeThemeArgs<ExtArgs>
     logoImage?: boolean | Establishment$logoImageArgs<ExtArgs>
@@ -28924,6 +26672,7 @@ export namespace Prisma {
   export type $EstablishmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Establishment"
     objects: {
+      schedule: Prisma.$SchedulePayload<ExtArgs> | null
       owner: Prisma.$UserPayload<ExtArgs>
       activeTheme: Prisma.$ThemePayload<ExtArgs> | null
       logoImage: Prisma.$ImagePayload<ExtArgs> | null
@@ -28940,7 +26689,6 @@ export namespace Prisma {
       bookingRules: Prisma.$BookingRulesPayload<ExtArgs> | null
       establishmentBookingSettings: Prisma.$EstablishmentBookingSettingsPayload<ExtArgs> | null
       establishmentAvailabilities: Prisma.$EstablishmentAvailabilityPayload<ExtArgs>[]
-      establishmentSchedule: Prisma.$EstablishmentSchedulePayload<ExtArgs>[]
       integrations: Prisma.$EstablishmentIntegrationsPayload<ExtArgs> | null
       subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
       invoices: Prisma.$InvoicePayload<ExtArgs>[]
@@ -28994,6 +26742,7 @@ export namespace Prisma {
       logoImageId: string | null
       bannerImageId: string | null
       activeThemeId: string | null
+      scheduleId: string | null
       createdAt: Date
       updatedAt: Date
       ownerId: string
@@ -29391,6 +27140,7 @@ export namespace Prisma {
    */
   export interface Prisma__EstablishmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    schedule<T extends Establishment$scheduleArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$scheduleArgs<ExtArgs>>): Prisma__ScheduleClient<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     owner<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     activeTheme<T extends Establishment$activeThemeArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$activeThemeArgs<ExtArgs>>): Prisma__ThemeClient<$Result.GetResult<Prisma.$ThemePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     logoImage<T extends Establishment$logoImageArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$logoImageArgs<ExtArgs>>): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -29407,7 +27157,6 @@ export namespace Prisma {
     bookingRules<T extends Establishment$bookingRulesArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$bookingRulesArgs<ExtArgs>>): Prisma__BookingRulesClient<$Result.GetResult<Prisma.$BookingRulesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     establishmentBookingSettings<T extends Establishment$establishmentBookingSettingsArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$establishmentBookingSettingsArgs<ExtArgs>>): Prisma__EstablishmentBookingSettingsClient<$Result.GetResult<Prisma.$EstablishmentBookingSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     establishmentAvailabilities<T extends Establishment$establishmentAvailabilitiesArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$establishmentAvailabilitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentAvailabilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    establishmentSchedule<T extends Establishment$establishmentScheduleArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$establishmentScheduleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     integrations<T extends Establishment$integrationsArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$integrationsArgs<ExtArgs>>): Prisma__EstablishmentIntegrationsClient<$Result.GetResult<Prisma.$EstablishmentIntegrationsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     subscription<T extends Establishment$subscriptionArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$subscriptionArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     invoices<T extends Establishment$invoicesArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -29488,6 +27237,7 @@ export namespace Prisma {
     readonly logoImageId: FieldRef<"Establishment", 'String'>
     readonly bannerImageId: FieldRef<"Establishment", 'String'>
     readonly activeThemeId: FieldRef<"Establishment", 'String'>
+    readonly scheduleId: FieldRef<"Establishment", 'String'>
     readonly createdAt: FieldRef<"Establishment", 'DateTime'>
     readonly updatedAt: FieldRef<"Establishment", 'DateTime'>
     readonly ownerId: FieldRef<"Establishment", 'String'>
@@ -29887,6 +27637,25 @@ export namespace Prisma {
   }
 
   /**
+   * Establishment.schedule
+   */
+  export type Establishment$scheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Schedule
+     */
+    select?: ScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Schedule
+     */
+    omit?: ScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleInclude<ExtArgs> | null
+    where?: ScheduleWhereInput
+  }
+
+  /**
    * Establishment.activeTheme
    */
   export type Establishment$activeThemeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -30219,30 +27988,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EstablishmentAvailabilityScalarFieldEnum | EstablishmentAvailabilityScalarFieldEnum[]
-  }
-
-  /**
-   * Establishment.establishmentSchedule
-   */
-  export type Establishment$establishmentScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentSchedule
-     */
-    select?: EstablishmentScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentSchedule
-     */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentScheduleInclude<ExtArgs> | null
-    where?: EstablishmentScheduleWhereInput
-    orderBy?: EstablishmentScheduleOrderByWithRelationInput | EstablishmentScheduleOrderByWithRelationInput[]
-    cursor?: EstablishmentScheduleWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EstablishmentScheduleScalarFieldEnum | EstablishmentScheduleScalarFieldEnum[]
   }
 
   /**
@@ -30726,1046 +28471,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EstablishmentInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model EstablishmentSchedule
-   */
-
-  export type AggregateEstablishmentSchedule = {
-    _count: EstablishmentScheduleCountAggregateOutputType | null
-    _min: EstablishmentScheduleMinAggregateOutputType | null
-    _max: EstablishmentScheduleMaxAggregateOutputType | null
-  }
-
-  export type EstablishmentScheduleMinAggregateOutputType = {
-    id: string | null
-    establishmentId: string | null
-    scheduleId: string | null
-  }
-
-  export type EstablishmentScheduleMaxAggregateOutputType = {
-    id: string | null
-    establishmentId: string | null
-    scheduleId: string | null
-  }
-
-  export type EstablishmentScheduleCountAggregateOutputType = {
-    id: number
-    establishmentId: number
-    scheduleId: number
-    _all: number
-  }
-
-
-  export type EstablishmentScheduleMinAggregateInputType = {
-    id?: true
-    establishmentId?: true
-    scheduleId?: true
-  }
-
-  export type EstablishmentScheduleMaxAggregateInputType = {
-    id?: true
-    establishmentId?: true
-    scheduleId?: true
-  }
-
-  export type EstablishmentScheduleCountAggregateInputType = {
-    id?: true
-    establishmentId?: true
-    scheduleId?: true
-    _all?: true
-  }
-
-  export type EstablishmentScheduleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which EstablishmentSchedule to aggregate.
-     */
-    where?: EstablishmentScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EstablishmentSchedules to fetch.
-     */
-    orderBy?: EstablishmentScheduleOrderByWithRelationInput | EstablishmentScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: EstablishmentScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EstablishmentSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EstablishmentSchedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned EstablishmentSchedules
-    **/
-    _count?: true | EstablishmentScheduleCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: EstablishmentScheduleMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: EstablishmentScheduleMaxAggregateInputType
-  }
-
-  export type GetEstablishmentScheduleAggregateType<T extends EstablishmentScheduleAggregateArgs> = {
-        [P in keyof T & keyof AggregateEstablishmentSchedule]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateEstablishmentSchedule[P]>
-      : GetScalarType<T[P], AggregateEstablishmentSchedule[P]>
-  }
-
-
-
-
-  export type EstablishmentScheduleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EstablishmentScheduleWhereInput
-    orderBy?: EstablishmentScheduleOrderByWithAggregationInput | EstablishmentScheduleOrderByWithAggregationInput[]
-    by: EstablishmentScheduleScalarFieldEnum[] | EstablishmentScheduleScalarFieldEnum
-    having?: EstablishmentScheduleScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: EstablishmentScheduleCountAggregateInputType | true
-    _min?: EstablishmentScheduleMinAggregateInputType
-    _max?: EstablishmentScheduleMaxAggregateInputType
-  }
-
-  export type EstablishmentScheduleGroupByOutputType = {
-    id: string
-    establishmentId: string
-    scheduleId: string
-    _count: EstablishmentScheduleCountAggregateOutputType | null
-    _min: EstablishmentScheduleMinAggregateOutputType | null
-    _max: EstablishmentScheduleMaxAggregateOutputType | null
-  }
-
-  type GetEstablishmentScheduleGroupByPayload<T extends EstablishmentScheduleGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<EstablishmentScheduleGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof EstablishmentScheduleGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], EstablishmentScheduleGroupByOutputType[P]>
-            : GetScalarType<T[P], EstablishmentScheduleGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type EstablishmentScheduleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    establishmentId?: boolean
-    scheduleId?: boolean
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["establishmentSchedule"]>
-
-  export type EstablishmentScheduleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    establishmentId?: boolean
-    scheduleId?: boolean
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["establishmentSchedule"]>
-
-  export type EstablishmentScheduleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    establishmentId?: boolean
-    scheduleId?: boolean
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["establishmentSchedule"]>
-
-  export type EstablishmentScheduleSelectScalar = {
-    id?: boolean
-    establishmentId?: boolean
-    scheduleId?: boolean
-  }
-
-  export type EstablishmentScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "scheduleId", ExtArgs["result"]["establishmentSchedule"]>
-  export type EstablishmentScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }
-  export type EstablishmentScheduleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }
-  export type EstablishmentScheduleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }
-
-  export type $EstablishmentSchedulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "EstablishmentSchedule"
-    objects: {
-      establishment: Prisma.$EstablishmentPayload<ExtArgs>
-      schedule: Prisma.$SchedulePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      establishmentId: string
-      scheduleId: string
-    }, ExtArgs["result"]["establishmentSchedule"]>
-    composites: {}
-  }
-
-  type EstablishmentScheduleGetPayload<S extends boolean | null | undefined | EstablishmentScheduleDefaultArgs> = $Result.GetResult<Prisma.$EstablishmentSchedulePayload, S>
-
-  type EstablishmentScheduleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EstablishmentScheduleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: EstablishmentScheduleCountAggregateInputType | true
-    }
-
-  export interface EstablishmentScheduleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EstablishmentSchedule'], meta: { name: 'EstablishmentSchedule' } }
-    /**
-     * Find zero or one EstablishmentSchedule that matches the filter.
-     * @param {EstablishmentScheduleFindUniqueArgs} args - Arguments to find a EstablishmentSchedule
-     * @example
-     * // Get one EstablishmentSchedule
-     * const establishmentSchedule = await prisma.establishmentSchedule.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends EstablishmentScheduleFindUniqueArgs>(args: SelectSubset<T, EstablishmentScheduleFindUniqueArgs<ExtArgs>>): Prisma__EstablishmentScheduleClient<$Result.GetResult<Prisma.$EstablishmentSchedulePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one EstablishmentSchedule that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {EstablishmentScheduleFindUniqueOrThrowArgs} args - Arguments to find a EstablishmentSchedule
-     * @example
-     * // Get one EstablishmentSchedule
-     * const establishmentSchedule = await prisma.establishmentSchedule.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends EstablishmentScheduleFindUniqueOrThrowArgs>(args: SelectSubset<T, EstablishmentScheduleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EstablishmentScheduleClient<$Result.GetResult<Prisma.$EstablishmentSchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first EstablishmentSchedule that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentScheduleFindFirstArgs} args - Arguments to find a EstablishmentSchedule
-     * @example
-     * // Get one EstablishmentSchedule
-     * const establishmentSchedule = await prisma.establishmentSchedule.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends EstablishmentScheduleFindFirstArgs>(args?: SelectSubset<T, EstablishmentScheduleFindFirstArgs<ExtArgs>>): Prisma__EstablishmentScheduleClient<$Result.GetResult<Prisma.$EstablishmentSchedulePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first EstablishmentSchedule that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentScheduleFindFirstOrThrowArgs} args - Arguments to find a EstablishmentSchedule
-     * @example
-     * // Get one EstablishmentSchedule
-     * const establishmentSchedule = await prisma.establishmentSchedule.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends EstablishmentScheduleFindFirstOrThrowArgs>(args?: SelectSubset<T, EstablishmentScheduleFindFirstOrThrowArgs<ExtArgs>>): Prisma__EstablishmentScheduleClient<$Result.GetResult<Prisma.$EstablishmentSchedulePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more EstablishmentSchedules that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentScheduleFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all EstablishmentSchedules
-     * const establishmentSchedules = await prisma.establishmentSchedule.findMany()
-     * 
-     * // Get first 10 EstablishmentSchedules
-     * const establishmentSchedules = await prisma.establishmentSchedule.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const establishmentScheduleWithIdOnly = await prisma.establishmentSchedule.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends EstablishmentScheduleFindManyArgs>(args?: SelectSubset<T, EstablishmentScheduleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a EstablishmentSchedule.
-     * @param {EstablishmentScheduleCreateArgs} args - Arguments to create a EstablishmentSchedule.
-     * @example
-     * // Create one EstablishmentSchedule
-     * const EstablishmentSchedule = await prisma.establishmentSchedule.create({
-     *   data: {
-     *     // ... data to create a EstablishmentSchedule
-     *   }
-     * })
-     * 
-     */
-    create<T extends EstablishmentScheduleCreateArgs>(args: SelectSubset<T, EstablishmentScheduleCreateArgs<ExtArgs>>): Prisma__EstablishmentScheduleClient<$Result.GetResult<Prisma.$EstablishmentSchedulePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many EstablishmentSchedules.
-     * @param {EstablishmentScheduleCreateManyArgs} args - Arguments to create many EstablishmentSchedules.
-     * @example
-     * // Create many EstablishmentSchedules
-     * const establishmentSchedule = await prisma.establishmentSchedule.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends EstablishmentScheduleCreateManyArgs>(args?: SelectSubset<T, EstablishmentScheduleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many EstablishmentSchedules and returns the data saved in the database.
-     * @param {EstablishmentScheduleCreateManyAndReturnArgs} args - Arguments to create many EstablishmentSchedules.
-     * @example
-     * // Create many EstablishmentSchedules
-     * const establishmentSchedule = await prisma.establishmentSchedule.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many EstablishmentSchedules and only return the `id`
-     * const establishmentScheduleWithIdOnly = await prisma.establishmentSchedule.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends EstablishmentScheduleCreateManyAndReturnArgs>(args?: SelectSubset<T, EstablishmentScheduleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentSchedulePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a EstablishmentSchedule.
-     * @param {EstablishmentScheduleDeleteArgs} args - Arguments to delete one EstablishmentSchedule.
-     * @example
-     * // Delete one EstablishmentSchedule
-     * const EstablishmentSchedule = await prisma.establishmentSchedule.delete({
-     *   where: {
-     *     // ... filter to delete one EstablishmentSchedule
-     *   }
-     * })
-     * 
-     */
-    delete<T extends EstablishmentScheduleDeleteArgs>(args: SelectSubset<T, EstablishmentScheduleDeleteArgs<ExtArgs>>): Prisma__EstablishmentScheduleClient<$Result.GetResult<Prisma.$EstablishmentSchedulePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one EstablishmentSchedule.
-     * @param {EstablishmentScheduleUpdateArgs} args - Arguments to update one EstablishmentSchedule.
-     * @example
-     * // Update one EstablishmentSchedule
-     * const establishmentSchedule = await prisma.establishmentSchedule.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends EstablishmentScheduleUpdateArgs>(args: SelectSubset<T, EstablishmentScheduleUpdateArgs<ExtArgs>>): Prisma__EstablishmentScheduleClient<$Result.GetResult<Prisma.$EstablishmentSchedulePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more EstablishmentSchedules.
-     * @param {EstablishmentScheduleDeleteManyArgs} args - Arguments to filter EstablishmentSchedules to delete.
-     * @example
-     * // Delete a few EstablishmentSchedules
-     * const { count } = await prisma.establishmentSchedule.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends EstablishmentScheduleDeleteManyArgs>(args?: SelectSubset<T, EstablishmentScheduleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more EstablishmentSchedules.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentScheduleUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many EstablishmentSchedules
-     * const establishmentSchedule = await prisma.establishmentSchedule.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends EstablishmentScheduleUpdateManyArgs>(args: SelectSubset<T, EstablishmentScheduleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more EstablishmentSchedules and returns the data updated in the database.
-     * @param {EstablishmentScheduleUpdateManyAndReturnArgs} args - Arguments to update many EstablishmentSchedules.
-     * @example
-     * // Update many EstablishmentSchedules
-     * const establishmentSchedule = await prisma.establishmentSchedule.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more EstablishmentSchedules and only return the `id`
-     * const establishmentScheduleWithIdOnly = await prisma.establishmentSchedule.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends EstablishmentScheduleUpdateManyAndReturnArgs>(args: SelectSubset<T, EstablishmentScheduleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentSchedulePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one EstablishmentSchedule.
-     * @param {EstablishmentScheduleUpsertArgs} args - Arguments to update or create a EstablishmentSchedule.
-     * @example
-     * // Update or create a EstablishmentSchedule
-     * const establishmentSchedule = await prisma.establishmentSchedule.upsert({
-     *   create: {
-     *     // ... data to create a EstablishmentSchedule
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the EstablishmentSchedule we want to update
-     *   }
-     * })
-     */
-    upsert<T extends EstablishmentScheduleUpsertArgs>(args: SelectSubset<T, EstablishmentScheduleUpsertArgs<ExtArgs>>): Prisma__EstablishmentScheduleClient<$Result.GetResult<Prisma.$EstablishmentSchedulePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of EstablishmentSchedules.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentScheduleCountArgs} args - Arguments to filter EstablishmentSchedules to count.
-     * @example
-     * // Count the number of EstablishmentSchedules
-     * const count = await prisma.establishmentSchedule.count({
-     *   where: {
-     *     // ... the filter for the EstablishmentSchedules we want to count
-     *   }
-     * })
-    **/
-    count<T extends EstablishmentScheduleCountArgs>(
-      args?: Subset<T, EstablishmentScheduleCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], EstablishmentScheduleCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a EstablishmentSchedule.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentScheduleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends EstablishmentScheduleAggregateArgs>(args: Subset<T, EstablishmentScheduleAggregateArgs>): Prisma.PrismaPromise<GetEstablishmentScheduleAggregateType<T>>
-
-    /**
-     * Group by EstablishmentSchedule.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentScheduleGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends EstablishmentScheduleGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EstablishmentScheduleGroupByArgs['orderBy'] }
-        : { orderBy?: EstablishmentScheduleGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, EstablishmentScheduleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEstablishmentScheduleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the EstablishmentSchedule model
-   */
-  readonly fields: EstablishmentScheduleFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for EstablishmentSchedule.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__EstablishmentScheduleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    establishment<T extends EstablishmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EstablishmentDefaultArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    schedule<T extends ScheduleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ScheduleDefaultArgs<ExtArgs>>): Prisma__ScheduleClient<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the EstablishmentSchedule model
-   */
-  interface EstablishmentScheduleFieldRefs {
-    readonly id: FieldRef<"EstablishmentSchedule", 'String'>
-    readonly establishmentId: FieldRef<"EstablishmentSchedule", 'String'>
-    readonly scheduleId: FieldRef<"EstablishmentSchedule", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * EstablishmentSchedule findUnique
-   */
-  export type EstablishmentScheduleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentSchedule
-     */
-    select?: EstablishmentScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentSchedule
-     */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which EstablishmentSchedule to fetch.
-     */
-    where: EstablishmentScheduleWhereUniqueInput
-  }
-
-  /**
-   * EstablishmentSchedule findUniqueOrThrow
-   */
-  export type EstablishmentScheduleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentSchedule
-     */
-    select?: EstablishmentScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentSchedule
-     */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which EstablishmentSchedule to fetch.
-     */
-    where: EstablishmentScheduleWhereUniqueInput
-  }
-
-  /**
-   * EstablishmentSchedule findFirst
-   */
-  export type EstablishmentScheduleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentSchedule
-     */
-    select?: EstablishmentScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentSchedule
-     */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which EstablishmentSchedule to fetch.
-     */
-    where?: EstablishmentScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EstablishmentSchedules to fetch.
-     */
-    orderBy?: EstablishmentScheduleOrderByWithRelationInput | EstablishmentScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for EstablishmentSchedules.
-     */
-    cursor?: EstablishmentScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EstablishmentSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EstablishmentSchedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of EstablishmentSchedules.
-     */
-    distinct?: EstablishmentScheduleScalarFieldEnum | EstablishmentScheduleScalarFieldEnum[]
-  }
-
-  /**
-   * EstablishmentSchedule findFirstOrThrow
-   */
-  export type EstablishmentScheduleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentSchedule
-     */
-    select?: EstablishmentScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentSchedule
-     */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which EstablishmentSchedule to fetch.
-     */
-    where?: EstablishmentScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EstablishmentSchedules to fetch.
-     */
-    orderBy?: EstablishmentScheduleOrderByWithRelationInput | EstablishmentScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for EstablishmentSchedules.
-     */
-    cursor?: EstablishmentScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EstablishmentSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EstablishmentSchedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of EstablishmentSchedules.
-     */
-    distinct?: EstablishmentScheduleScalarFieldEnum | EstablishmentScheduleScalarFieldEnum[]
-  }
-
-  /**
-   * EstablishmentSchedule findMany
-   */
-  export type EstablishmentScheduleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentSchedule
-     */
-    select?: EstablishmentScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentSchedule
-     */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which EstablishmentSchedules to fetch.
-     */
-    where?: EstablishmentScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EstablishmentSchedules to fetch.
-     */
-    orderBy?: EstablishmentScheduleOrderByWithRelationInput | EstablishmentScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing EstablishmentSchedules.
-     */
-    cursor?: EstablishmentScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EstablishmentSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EstablishmentSchedules.
-     */
-    skip?: number
-    distinct?: EstablishmentScheduleScalarFieldEnum | EstablishmentScheduleScalarFieldEnum[]
-  }
-
-  /**
-   * EstablishmentSchedule create
-   */
-  export type EstablishmentScheduleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentSchedule
-     */
-    select?: EstablishmentScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentSchedule
-     */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentScheduleInclude<ExtArgs> | null
-    /**
-     * The data needed to create a EstablishmentSchedule.
-     */
-    data: XOR<EstablishmentScheduleCreateInput, EstablishmentScheduleUncheckedCreateInput>
-  }
-
-  /**
-   * EstablishmentSchedule createMany
-   */
-  export type EstablishmentScheduleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many EstablishmentSchedules.
-     */
-    data: EstablishmentScheduleCreateManyInput | EstablishmentScheduleCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * EstablishmentSchedule createManyAndReturn
-   */
-  export type EstablishmentScheduleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentSchedule
-     */
-    select?: EstablishmentScheduleSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentSchedule
-     */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
-    /**
-     * The data used to create many EstablishmentSchedules.
-     */
-    data: EstablishmentScheduleCreateManyInput | EstablishmentScheduleCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentScheduleIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * EstablishmentSchedule update
-   */
-  export type EstablishmentScheduleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentSchedule
-     */
-    select?: EstablishmentScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentSchedule
-     */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentScheduleInclude<ExtArgs> | null
-    /**
-     * The data needed to update a EstablishmentSchedule.
-     */
-    data: XOR<EstablishmentScheduleUpdateInput, EstablishmentScheduleUncheckedUpdateInput>
-    /**
-     * Choose, which EstablishmentSchedule to update.
-     */
-    where: EstablishmentScheduleWhereUniqueInput
-  }
-
-  /**
-   * EstablishmentSchedule updateMany
-   */
-  export type EstablishmentScheduleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update EstablishmentSchedules.
-     */
-    data: XOR<EstablishmentScheduleUpdateManyMutationInput, EstablishmentScheduleUncheckedUpdateManyInput>
-    /**
-     * Filter which EstablishmentSchedules to update
-     */
-    where?: EstablishmentScheduleWhereInput
-    /**
-     * Limit how many EstablishmentSchedules to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * EstablishmentSchedule updateManyAndReturn
-   */
-  export type EstablishmentScheduleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentSchedule
-     */
-    select?: EstablishmentScheduleSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentSchedule
-     */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
-    /**
-     * The data used to update EstablishmentSchedules.
-     */
-    data: XOR<EstablishmentScheduleUpdateManyMutationInput, EstablishmentScheduleUncheckedUpdateManyInput>
-    /**
-     * Filter which EstablishmentSchedules to update
-     */
-    where?: EstablishmentScheduleWhereInput
-    /**
-     * Limit how many EstablishmentSchedules to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentScheduleIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * EstablishmentSchedule upsert
-   */
-  export type EstablishmentScheduleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentSchedule
-     */
-    select?: EstablishmentScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentSchedule
-     */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentScheduleInclude<ExtArgs> | null
-    /**
-     * The filter to search for the EstablishmentSchedule to update in case it exists.
-     */
-    where: EstablishmentScheduleWhereUniqueInput
-    /**
-     * In case the EstablishmentSchedule found by the `where` argument doesn't exist, create a new EstablishmentSchedule with this data.
-     */
-    create: XOR<EstablishmentScheduleCreateInput, EstablishmentScheduleUncheckedCreateInput>
-    /**
-     * In case the EstablishmentSchedule was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<EstablishmentScheduleUpdateInput, EstablishmentScheduleUncheckedUpdateInput>
-  }
-
-  /**
-   * EstablishmentSchedule delete
-   */
-  export type EstablishmentScheduleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentSchedule
-     */
-    select?: EstablishmentScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentSchedule
-     */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentScheduleInclude<ExtArgs> | null
-    /**
-     * Filter which EstablishmentSchedule to delete.
-     */
-    where: EstablishmentScheduleWhereUniqueInput
-  }
-
-  /**
-   * EstablishmentSchedule deleteMany
-   */
-  export type EstablishmentScheduleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which EstablishmentSchedules to delete
-     */
-    where?: EstablishmentScheduleWhereInput
-    /**
-     * Limit how many EstablishmentSchedules to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * EstablishmentSchedule without action
-   */
-  export type EstablishmentScheduleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentSchedule
-     */
-    select?: EstablishmentScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentSchedule
-     */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentScheduleInclude<ExtArgs> | null
   }
 
 
@@ -60564,6 +57269,7 @@ export namespace Prisma {
     isHighlighted: boolean | null
     color: string | null
     establishmentId: string | null
+    scheduleId: string | null
     createdAt: Date | null
     updatedAt: Date | null
     maxItemsPerOrder: number | null
@@ -60578,6 +57284,7 @@ export namespace Prisma {
     isHighlighted: boolean | null
     color: string | null
     establishmentId: string | null
+    scheduleId: string | null
     createdAt: Date | null
     updatedAt: Date | null
     maxItemsPerOrder: number | null
@@ -60592,6 +57299,7 @@ export namespace Prisma {
     isHighlighted: number
     color: number
     establishmentId: number
+    scheduleId: number
     createdAt: number
     updatedAt: number
     maxItemsPerOrder: number
@@ -60620,6 +57328,7 @@ export namespace Prisma {
     isHighlighted?: true
     color?: true
     establishmentId?: true
+    scheduleId?: true
     createdAt?: true
     updatedAt?: true
     maxItemsPerOrder?: true
@@ -60634,6 +57343,7 @@ export namespace Prisma {
     isHighlighted?: true
     color?: true
     establishmentId?: true
+    scheduleId?: true
     createdAt?: true
     updatedAt?: true
     maxItemsPerOrder?: true
@@ -60648,6 +57358,7 @@ export namespace Prisma {
     isHighlighted?: true
     color?: true
     establishmentId?: true
+    scheduleId?: true
     createdAt?: true
     updatedAt?: true
     maxItemsPerOrder?: true
@@ -60749,6 +57460,7 @@ export namespace Prisma {
     isHighlighted: boolean
     color: string | null
     establishmentId: string
+    scheduleId: string | null
     createdAt: Date
     updatedAt: Date
     maxItemsPerOrder: number | null
@@ -60782,14 +57494,15 @@ export namespace Prisma {
     isHighlighted?: boolean
     color?: boolean
     establishmentId?: boolean
+    scheduleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     maxItemsPerOrder?: boolean
     price?: boolean
     type?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Menu$scheduleArgs<ExtArgs>
     categories?: boolean | Menu$categoriesArgs<ExtArgs>
-    menuSchedule?: boolean | Menu$menuScheduleArgs<ExtArgs>
     translations?: boolean | Menu$translationsArgs<ExtArgs>
     _count?: boolean | MenuCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["menu"]>
@@ -60801,12 +57514,14 @@ export namespace Prisma {
     isHighlighted?: boolean
     color?: boolean
     establishmentId?: boolean
+    scheduleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     maxItemsPerOrder?: boolean
     price?: boolean
     type?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Menu$scheduleArgs<ExtArgs>
   }, ExtArgs["result"]["menu"]>
 
   export type MenuSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -60816,12 +57531,14 @@ export namespace Prisma {
     isHighlighted?: boolean
     color?: boolean
     establishmentId?: boolean
+    scheduleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     maxItemsPerOrder?: boolean
     price?: boolean
     type?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Menu$scheduleArgs<ExtArgs>
   }, ExtArgs["result"]["menu"]>
 
   export type MenuSelectScalar = {
@@ -60831,6 +57548,7 @@ export namespace Prisma {
     isHighlighted?: boolean
     color?: boolean
     establishmentId?: boolean
+    scheduleId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     maxItemsPerOrder?: boolean
@@ -60838,27 +57556,29 @@ export namespace Prisma {
     type?: boolean
   }
 
-  export type MenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "position" | "isVisible" | "isHighlighted" | "color" | "establishmentId" | "createdAt" | "updatedAt" | "maxItemsPerOrder" | "price" | "type", ExtArgs["result"]["menu"]>
+  export type MenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "position" | "isVisible" | "isHighlighted" | "color" | "establishmentId" | "scheduleId" | "createdAt" | "updatedAt" | "maxItemsPerOrder" | "price" | "type", ExtArgs["result"]["menu"]>
   export type MenuInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Menu$scheduleArgs<ExtArgs>
     categories?: boolean | Menu$categoriesArgs<ExtArgs>
-    menuSchedule?: boolean | Menu$menuScheduleArgs<ExtArgs>
     translations?: boolean | Menu$translationsArgs<ExtArgs>
     _count?: boolean | MenuCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MenuIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Menu$scheduleArgs<ExtArgs>
   }
   export type MenuIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    schedule?: boolean | Menu$scheduleArgs<ExtArgs>
   }
 
   export type $MenuPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Menu"
     objects: {
       establishment: Prisma.$EstablishmentPayload<ExtArgs>
+      schedule: Prisma.$SchedulePayload<ExtArgs> | null
       categories: Prisma.$MenuCategoryPayload<ExtArgs>[]
-      menuSchedule: Prisma.$MenuSchedulePayload<ExtArgs>[]
       translations: Prisma.$MenuTranslationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -60868,6 +57588,7 @@ export namespace Prisma {
       isHighlighted: boolean
       color: string | null
       establishmentId: string
+      scheduleId: string | null
       createdAt: Date
       updatedAt: Date
       maxItemsPerOrder: number | null
@@ -61268,8 +57989,8 @@ export namespace Prisma {
   export interface Prisma__MenuClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     establishment<T extends EstablishmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EstablishmentDefaultArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    schedule<T extends Menu$scheduleArgs<ExtArgs> = {}>(args?: Subset<T, Menu$scheduleArgs<ExtArgs>>): Prisma__ScheduleClient<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     categories<T extends Menu$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, Menu$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    menuSchedule<T extends Menu$menuScheduleArgs<ExtArgs> = {}>(args?: Subset<T, Menu$menuScheduleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     translations<T extends Menu$translationsArgs<ExtArgs> = {}>(args?: Subset<T, Menu$translationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuTranslationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -61306,6 +58027,7 @@ export namespace Prisma {
     readonly isHighlighted: FieldRef<"Menu", 'Boolean'>
     readonly color: FieldRef<"Menu", 'String'>
     readonly establishmentId: FieldRef<"Menu", 'String'>
+    readonly scheduleId: FieldRef<"Menu", 'String'>
     readonly createdAt: FieldRef<"Menu", 'DateTime'>
     readonly updatedAt: FieldRef<"Menu", 'DateTime'>
     readonly maxItemsPerOrder: FieldRef<"Menu", 'Int'>
@@ -61707,6 +58429,25 @@ export namespace Prisma {
   }
 
   /**
+   * Menu.schedule
+   */
+  export type Menu$scheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Schedule
+     */
+    select?: ScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Schedule
+     */
+    omit?: ScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleInclude<ExtArgs> | null
+    where?: ScheduleWhereInput
+  }
+
+  /**
    * Menu.categories
    */
   export type Menu$categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -61728,30 +58469,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MenuCategoryScalarFieldEnum | MenuCategoryScalarFieldEnum[]
-  }
-
-  /**
-   * Menu.menuSchedule
-   */
-  export type Menu$menuScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuSchedule
-     */
-    select?: MenuScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MenuSchedule
-     */
-    omit?: MenuScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuScheduleInclude<ExtArgs> | null
-    where?: MenuScheduleWhereInput
-    orderBy?: MenuScheduleOrderByWithRelationInput | MenuScheduleOrderByWithRelationInput[]
-    cursor?: MenuScheduleWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MenuScheduleScalarFieldEnum | MenuScheduleScalarFieldEnum[]
   }
 
   /**
@@ -61794,1046 +58511,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: MenuInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model MenuSchedule
-   */
-
-  export type AggregateMenuSchedule = {
-    _count: MenuScheduleCountAggregateOutputType | null
-    _min: MenuScheduleMinAggregateOutputType | null
-    _max: MenuScheduleMaxAggregateOutputType | null
-  }
-
-  export type MenuScheduleMinAggregateOutputType = {
-    id: string | null
-    menuId: string | null
-    scheduleId: string | null
-  }
-
-  export type MenuScheduleMaxAggregateOutputType = {
-    id: string | null
-    menuId: string | null
-    scheduleId: string | null
-  }
-
-  export type MenuScheduleCountAggregateOutputType = {
-    id: number
-    menuId: number
-    scheduleId: number
-    _all: number
-  }
-
-
-  export type MenuScheduleMinAggregateInputType = {
-    id?: true
-    menuId?: true
-    scheduleId?: true
-  }
-
-  export type MenuScheduleMaxAggregateInputType = {
-    id?: true
-    menuId?: true
-    scheduleId?: true
-  }
-
-  export type MenuScheduleCountAggregateInputType = {
-    id?: true
-    menuId?: true
-    scheduleId?: true
-    _all?: true
-  }
-
-  export type MenuScheduleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MenuSchedule to aggregate.
-     */
-    where?: MenuScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MenuSchedules to fetch.
-     */
-    orderBy?: MenuScheduleOrderByWithRelationInput | MenuScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: MenuScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MenuSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MenuSchedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned MenuSchedules
-    **/
-    _count?: true | MenuScheduleCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: MenuScheduleMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: MenuScheduleMaxAggregateInputType
-  }
-
-  export type GetMenuScheduleAggregateType<T extends MenuScheduleAggregateArgs> = {
-        [P in keyof T & keyof AggregateMenuSchedule]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateMenuSchedule[P]>
-      : GetScalarType<T[P], AggregateMenuSchedule[P]>
-  }
-
-
-
-
-  export type MenuScheduleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MenuScheduleWhereInput
-    orderBy?: MenuScheduleOrderByWithAggregationInput | MenuScheduleOrderByWithAggregationInput[]
-    by: MenuScheduleScalarFieldEnum[] | MenuScheduleScalarFieldEnum
-    having?: MenuScheduleScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: MenuScheduleCountAggregateInputType | true
-    _min?: MenuScheduleMinAggregateInputType
-    _max?: MenuScheduleMaxAggregateInputType
-  }
-
-  export type MenuScheduleGroupByOutputType = {
-    id: string
-    menuId: string
-    scheduleId: string
-    _count: MenuScheduleCountAggregateOutputType | null
-    _min: MenuScheduleMinAggregateOutputType | null
-    _max: MenuScheduleMaxAggregateOutputType | null
-  }
-
-  type GetMenuScheduleGroupByPayload<T extends MenuScheduleGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<MenuScheduleGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof MenuScheduleGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], MenuScheduleGroupByOutputType[P]>
-            : GetScalarType<T[P], MenuScheduleGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type MenuScheduleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    menuId?: boolean
-    scheduleId?: boolean
-    menu?: boolean | MenuDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["menuSchedule"]>
-
-  export type MenuScheduleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    menuId?: boolean
-    scheduleId?: boolean
-    menu?: boolean | MenuDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["menuSchedule"]>
-
-  export type MenuScheduleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    menuId?: boolean
-    scheduleId?: boolean
-    menu?: boolean | MenuDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["menuSchedule"]>
-
-  export type MenuScheduleSelectScalar = {
-    id?: boolean
-    menuId?: boolean
-    scheduleId?: boolean
-  }
-
-  export type MenuScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "menuId" | "scheduleId", ExtArgs["result"]["menuSchedule"]>
-  export type MenuScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    menu?: boolean | MenuDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }
-  export type MenuScheduleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    menu?: boolean | MenuDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }
-  export type MenuScheduleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    menu?: boolean | MenuDefaultArgs<ExtArgs>
-    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
-  }
-
-  export type $MenuSchedulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "MenuSchedule"
-    objects: {
-      menu: Prisma.$MenuPayload<ExtArgs>
-      schedule: Prisma.$SchedulePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      menuId: string
-      scheduleId: string
-    }, ExtArgs["result"]["menuSchedule"]>
-    composites: {}
-  }
-
-  type MenuScheduleGetPayload<S extends boolean | null | undefined | MenuScheduleDefaultArgs> = $Result.GetResult<Prisma.$MenuSchedulePayload, S>
-
-  type MenuScheduleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<MenuScheduleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: MenuScheduleCountAggregateInputType | true
-    }
-
-  export interface MenuScheduleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MenuSchedule'], meta: { name: 'MenuSchedule' } }
-    /**
-     * Find zero or one MenuSchedule that matches the filter.
-     * @param {MenuScheduleFindUniqueArgs} args - Arguments to find a MenuSchedule
-     * @example
-     * // Get one MenuSchedule
-     * const menuSchedule = await prisma.menuSchedule.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends MenuScheduleFindUniqueArgs>(args: SelectSubset<T, MenuScheduleFindUniqueArgs<ExtArgs>>): Prisma__MenuScheduleClient<$Result.GetResult<Prisma.$MenuSchedulePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one MenuSchedule that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {MenuScheduleFindUniqueOrThrowArgs} args - Arguments to find a MenuSchedule
-     * @example
-     * // Get one MenuSchedule
-     * const menuSchedule = await prisma.menuSchedule.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends MenuScheduleFindUniqueOrThrowArgs>(args: SelectSubset<T, MenuScheduleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MenuScheduleClient<$Result.GetResult<Prisma.$MenuSchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first MenuSchedule that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MenuScheduleFindFirstArgs} args - Arguments to find a MenuSchedule
-     * @example
-     * // Get one MenuSchedule
-     * const menuSchedule = await prisma.menuSchedule.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends MenuScheduleFindFirstArgs>(args?: SelectSubset<T, MenuScheduleFindFirstArgs<ExtArgs>>): Prisma__MenuScheduleClient<$Result.GetResult<Prisma.$MenuSchedulePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first MenuSchedule that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MenuScheduleFindFirstOrThrowArgs} args - Arguments to find a MenuSchedule
-     * @example
-     * // Get one MenuSchedule
-     * const menuSchedule = await prisma.menuSchedule.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends MenuScheduleFindFirstOrThrowArgs>(args?: SelectSubset<T, MenuScheduleFindFirstOrThrowArgs<ExtArgs>>): Prisma__MenuScheduleClient<$Result.GetResult<Prisma.$MenuSchedulePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more MenuSchedules that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MenuScheduleFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all MenuSchedules
-     * const menuSchedules = await prisma.menuSchedule.findMany()
-     * 
-     * // Get first 10 MenuSchedules
-     * const menuSchedules = await prisma.menuSchedule.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const menuScheduleWithIdOnly = await prisma.menuSchedule.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends MenuScheduleFindManyArgs>(args?: SelectSubset<T, MenuScheduleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a MenuSchedule.
-     * @param {MenuScheduleCreateArgs} args - Arguments to create a MenuSchedule.
-     * @example
-     * // Create one MenuSchedule
-     * const MenuSchedule = await prisma.menuSchedule.create({
-     *   data: {
-     *     // ... data to create a MenuSchedule
-     *   }
-     * })
-     * 
-     */
-    create<T extends MenuScheduleCreateArgs>(args: SelectSubset<T, MenuScheduleCreateArgs<ExtArgs>>): Prisma__MenuScheduleClient<$Result.GetResult<Prisma.$MenuSchedulePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many MenuSchedules.
-     * @param {MenuScheduleCreateManyArgs} args - Arguments to create many MenuSchedules.
-     * @example
-     * // Create many MenuSchedules
-     * const menuSchedule = await prisma.menuSchedule.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends MenuScheduleCreateManyArgs>(args?: SelectSubset<T, MenuScheduleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many MenuSchedules and returns the data saved in the database.
-     * @param {MenuScheduleCreateManyAndReturnArgs} args - Arguments to create many MenuSchedules.
-     * @example
-     * // Create many MenuSchedules
-     * const menuSchedule = await prisma.menuSchedule.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many MenuSchedules and only return the `id`
-     * const menuScheduleWithIdOnly = await prisma.menuSchedule.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends MenuScheduleCreateManyAndReturnArgs>(args?: SelectSubset<T, MenuScheduleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuSchedulePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a MenuSchedule.
-     * @param {MenuScheduleDeleteArgs} args - Arguments to delete one MenuSchedule.
-     * @example
-     * // Delete one MenuSchedule
-     * const MenuSchedule = await prisma.menuSchedule.delete({
-     *   where: {
-     *     // ... filter to delete one MenuSchedule
-     *   }
-     * })
-     * 
-     */
-    delete<T extends MenuScheduleDeleteArgs>(args: SelectSubset<T, MenuScheduleDeleteArgs<ExtArgs>>): Prisma__MenuScheduleClient<$Result.GetResult<Prisma.$MenuSchedulePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one MenuSchedule.
-     * @param {MenuScheduleUpdateArgs} args - Arguments to update one MenuSchedule.
-     * @example
-     * // Update one MenuSchedule
-     * const menuSchedule = await prisma.menuSchedule.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends MenuScheduleUpdateArgs>(args: SelectSubset<T, MenuScheduleUpdateArgs<ExtArgs>>): Prisma__MenuScheduleClient<$Result.GetResult<Prisma.$MenuSchedulePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more MenuSchedules.
-     * @param {MenuScheduleDeleteManyArgs} args - Arguments to filter MenuSchedules to delete.
-     * @example
-     * // Delete a few MenuSchedules
-     * const { count } = await prisma.menuSchedule.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends MenuScheduleDeleteManyArgs>(args?: SelectSubset<T, MenuScheduleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more MenuSchedules.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MenuScheduleUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many MenuSchedules
-     * const menuSchedule = await prisma.menuSchedule.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends MenuScheduleUpdateManyArgs>(args: SelectSubset<T, MenuScheduleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more MenuSchedules and returns the data updated in the database.
-     * @param {MenuScheduleUpdateManyAndReturnArgs} args - Arguments to update many MenuSchedules.
-     * @example
-     * // Update many MenuSchedules
-     * const menuSchedule = await prisma.menuSchedule.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more MenuSchedules and only return the `id`
-     * const menuScheduleWithIdOnly = await prisma.menuSchedule.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends MenuScheduleUpdateManyAndReturnArgs>(args: SelectSubset<T, MenuScheduleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuSchedulePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one MenuSchedule.
-     * @param {MenuScheduleUpsertArgs} args - Arguments to update or create a MenuSchedule.
-     * @example
-     * // Update or create a MenuSchedule
-     * const menuSchedule = await prisma.menuSchedule.upsert({
-     *   create: {
-     *     // ... data to create a MenuSchedule
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the MenuSchedule we want to update
-     *   }
-     * })
-     */
-    upsert<T extends MenuScheduleUpsertArgs>(args: SelectSubset<T, MenuScheduleUpsertArgs<ExtArgs>>): Prisma__MenuScheduleClient<$Result.GetResult<Prisma.$MenuSchedulePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of MenuSchedules.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MenuScheduleCountArgs} args - Arguments to filter MenuSchedules to count.
-     * @example
-     * // Count the number of MenuSchedules
-     * const count = await prisma.menuSchedule.count({
-     *   where: {
-     *     // ... the filter for the MenuSchedules we want to count
-     *   }
-     * })
-    **/
-    count<T extends MenuScheduleCountArgs>(
-      args?: Subset<T, MenuScheduleCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], MenuScheduleCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a MenuSchedule.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MenuScheduleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends MenuScheduleAggregateArgs>(args: Subset<T, MenuScheduleAggregateArgs>): Prisma.PrismaPromise<GetMenuScheduleAggregateType<T>>
-
-    /**
-     * Group by MenuSchedule.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MenuScheduleGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends MenuScheduleGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: MenuScheduleGroupByArgs['orderBy'] }
-        : { orderBy?: MenuScheduleGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, MenuScheduleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMenuScheduleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the MenuSchedule model
-   */
-  readonly fields: MenuScheduleFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for MenuSchedule.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__MenuScheduleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    menu<T extends MenuDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MenuDefaultArgs<ExtArgs>>): Prisma__MenuClient<$Result.GetResult<Prisma.$MenuPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    schedule<T extends ScheduleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ScheduleDefaultArgs<ExtArgs>>): Prisma__ScheduleClient<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the MenuSchedule model
-   */
-  interface MenuScheduleFieldRefs {
-    readonly id: FieldRef<"MenuSchedule", 'String'>
-    readonly menuId: FieldRef<"MenuSchedule", 'String'>
-    readonly scheduleId: FieldRef<"MenuSchedule", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * MenuSchedule findUnique
-   */
-  export type MenuScheduleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuSchedule
-     */
-    select?: MenuScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MenuSchedule
-     */
-    omit?: MenuScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which MenuSchedule to fetch.
-     */
-    where: MenuScheduleWhereUniqueInput
-  }
-
-  /**
-   * MenuSchedule findUniqueOrThrow
-   */
-  export type MenuScheduleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuSchedule
-     */
-    select?: MenuScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MenuSchedule
-     */
-    omit?: MenuScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which MenuSchedule to fetch.
-     */
-    where: MenuScheduleWhereUniqueInput
-  }
-
-  /**
-   * MenuSchedule findFirst
-   */
-  export type MenuScheduleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuSchedule
-     */
-    select?: MenuScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MenuSchedule
-     */
-    omit?: MenuScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which MenuSchedule to fetch.
-     */
-    where?: MenuScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MenuSchedules to fetch.
-     */
-    orderBy?: MenuScheduleOrderByWithRelationInput | MenuScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MenuSchedules.
-     */
-    cursor?: MenuScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MenuSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MenuSchedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MenuSchedules.
-     */
-    distinct?: MenuScheduleScalarFieldEnum | MenuScheduleScalarFieldEnum[]
-  }
-
-  /**
-   * MenuSchedule findFirstOrThrow
-   */
-  export type MenuScheduleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuSchedule
-     */
-    select?: MenuScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MenuSchedule
-     */
-    omit?: MenuScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which MenuSchedule to fetch.
-     */
-    where?: MenuScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MenuSchedules to fetch.
-     */
-    orderBy?: MenuScheduleOrderByWithRelationInput | MenuScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for MenuSchedules.
-     */
-    cursor?: MenuScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MenuSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MenuSchedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MenuSchedules.
-     */
-    distinct?: MenuScheduleScalarFieldEnum | MenuScheduleScalarFieldEnum[]
-  }
-
-  /**
-   * MenuSchedule findMany
-   */
-  export type MenuScheduleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuSchedule
-     */
-    select?: MenuScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MenuSchedule
-     */
-    omit?: MenuScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuScheduleInclude<ExtArgs> | null
-    /**
-     * Filter, which MenuSchedules to fetch.
-     */
-    where?: MenuScheduleWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of MenuSchedules to fetch.
-     */
-    orderBy?: MenuScheduleOrderByWithRelationInput | MenuScheduleOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing MenuSchedules.
-     */
-    cursor?: MenuScheduleWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` MenuSchedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` MenuSchedules.
-     */
-    skip?: number
-    distinct?: MenuScheduleScalarFieldEnum | MenuScheduleScalarFieldEnum[]
-  }
-
-  /**
-   * MenuSchedule create
-   */
-  export type MenuScheduleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuSchedule
-     */
-    select?: MenuScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MenuSchedule
-     */
-    omit?: MenuScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuScheduleInclude<ExtArgs> | null
-    /**
-     * The data needed to create a MenuSchedule.
-     */
-    data: XOR<MenuScheduleCreateInput, MenuScheduleUncheckedCreateInput>
-  }
-
-  /**
-   * MenuSchedule createMany
-   */
-  export type MenuScheduleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many MenuSchedules.
-     */
-    data: MenuScheduleCreateManyInput | MenuScheduleCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * MenuSchedule createManyAndReturn
-   */
-  export type MenuScheduleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuSchedule
-     */
-    select?: MenuScheduleSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the MenuSchedule
-     */
-    omit?: MenuScheduleOmit<ExtArgs> | null
-    /**
-     * The data used to create many MenuSchedules.
-     */
-    data: MenuScheduleCreateManyInput | MenuScheduleCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuScheduleIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * MenuSchedule update
-   */
-  export type MenuScheduleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuSchedule
-     */
-    select?: MenuScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MenuSchedule
-     */
-    omit?: MenuScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuScheduleInclude<ExtArgs> | null
-    /**
-     * The data needed to update a MenuSchedule.
-     */
-    data: XOR<MenuScheduleUpdateInput, MenuScheduleUncheckedUpdateInput>
-    /**
-     * Choose, which MenuSchedule to update.
-     */
-    where: MenuScheduleWhereUniqueInput
-  }
-
-  /**
-   * MenuSchedule updateMany
-   */
-  export type MenuScheduleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update MenuSchedules.
-     */
-    data: XOR<MenuScheduleUpdateManyMutationInput, MenuScheduleUncheckedUpdateManyInput>
-    /**
-     * Filter which MenuSchedules to update
-     */
-    where?: MenuScheduleWhereInput
-    /**
-     * Limit how many MenuSchedules to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * MenuSchedule updateManyAndReturn
-   */
-  export type MenuScheduleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuSchedule
-     */
-    select?: MenuScheduleSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the MenuSchedule
-     */
-    omit?: MenuScheduleOmit<ExtArgs> | null
-    /**
-     * The data used to update MenuSchedules.
-     */
-    data: XOR<MenuScheduleUpdateManyMutationInput, MenuScheduleUncheckedUpdateManyInput>
-    /**
-     * Filter which MenuSchedules to update
-     */
-    where?: MenuScheduleWhereInput
-    /**
-     * Limit how many MenuSchedules to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuScheduleIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * MenuSchedule upsert
-   */
-  export type MenuScheduleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuSchedule
-     */
-    select?: MenuScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MenuSchedule
-     */
-    omit?: MenuScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuScheduleInclude<ExtArgs> | null
-    /**
-     * The filter to search for the MenuSchedule to update in case it exists.
-     */
-    where: MenuScheduleWhereUniqueInput
-    /**
-     * In case the MenuSchedule found by the `where` argument doesn't exist, create a new MenuSchedule with this data.
-     */
-    create: XOR<MenuScheduleCreateInput, MenuScheduleUncheckedCreateInput>
-    /**
-     * In case the MenuSchedule was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<MenuScheduleUpdateInput, MenuScheduleUncheckedUpdateInput>
-  }
-
-  /**
-   * MenuSchedule delete
-   */
-  export type MenuScheduleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuSchedule
-     */
-    select?: MenuScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MenuSchedule
-     */
-    omit?: MenuScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuScheduleInclude<ExtArgs> | null
-    /**
-     * Filter which MenuSchedule to delete.
-     */
-    where: MenuScheduleWhereUniqueInput
-  }
-
-  /**
-   * MenuSchedule deleteMany
-   */
-  export type MenuScheduleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which MenuSchedules to delete
-     */
-    where?: MenuScheduleWhereInput
-    /**
-     * Limit how many MenuSchedules to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * MenuSchedule without action
-   */
-  export type MenuScheduleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuSchedule
-     */
-    select?: MenuScheduleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the MenuSchedule
-     */
-    omit?: MenuScheduleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuScheduleInclude<ExtArgs> | null
   }
 
 
@@ -75123,9 +70800,7 @@ export namespace Prisma {
 
   export type ScheduleMinAggregateOutputType = {
     id: string | null
-    openTime: string | null
-    closeTime: string | null
-    dayOfWeek: $Enums.DayOfWeek | null
+    name: string | null
     type: $Enums.ScheduleType | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -75133,9 +70808,7 @@ export namespace Prisma {
 
   export type ScheduleMaxAggregateOutputType = {
     id: string | null
-    openTime: string | null
-    closeTime: string | null
-    dayOfWeek: $Enums.DayOfWeek | null
+    name: string | null
     type: $Enums.ScheduleType | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -75143,9 +70816,7 @@ export namespace Prisma {
 
   export type ScheduleCountAggregateOutputType = {
     id: number
-    openTime: number
-    closeTime: number
-    dayOfWeek: number
+    name: number
     type: number
     createdAt: number
     updatedAt: number
@@ -75155,9 +70826,7 @@ export namespace Prisma {
 
   export type ScheduleMinAggregateInputType = {
     id?: true
-    openTime?: true
-    closeTime?: true
-    dayOfWeek?: true
+    name?: true
     type?: true
     createdAt?: true
     updatedAt?: true
@@ -75165,9 +70834,7 @@ export namespace Prisma {
 
   export type ScheduleMaxAggregateInputType = {
     id?: true
-    openTime?: true
-    closeTime?: true
-    dayOfWeek?: true
+    name?: true
     type?: true
     createdAt?: true
     updatedAt?: true
@@ -75175,9 +70842,7 @@ export namespace Prisma {
 
   export type ScheduleCountAggregateInputType = {
     id?: true
-    openTime?: true
-    closeTime?: true
-    dayOfWeek?: true
+    name?: true
     type?: true
     createdAt?: true
     updatedAt?: true
@@ -75258,9 +70923,7 @@ export namespace Prisma {
 
   export type ScheduleGroupByOutputType = {
     id: string
-    openTime: string
-    closeTime: string
-    dayOfWeek: $Enums.DayOfWeek
+    name: string
     type: $Enums.ScheduleType
     createdAt: Date
     updatedAt: Date
@@ -75285,24 +70948,21 @@ export namespace Prisma {
 
   export type ScheduleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    openTime?: boolean
-    closeTime?: boolean
-    dayOfWeek?: boolean
+    name?: boolean
     type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    establishmentSchedule?: boolean | Schedule$establishmentScheduleArgs<ExtArgs>
-    menuSchedule?: boolean | Schedule$menuScheduleArgs<ExtArgs>
-    discountSchedule?: boolean | Schedule$discountScheduleArgs<ExtArgs>
-    promotionSchedule?: boolean | Schedule$promotionScheduleArgs<ExtArgs>
+    days?: boolean | Schedule$daysArgs<ExtArgs>
+    establishment?: boolean | Schedule$establishmentArgs<ExtArgs>
+    menus?: boolean | Schedule$menusArgs<ExtArgs>
+    discounts?: boolean | Schedule$discountsArgs<ExtArgs>
+    promotions?: boolean | Schedule$promotionsArgs<ExtArgs>
     _count?: boolean | ScheduleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["schedule"]>
 
   export type ScheduleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    openTime?: boolean
-    closeTime?: boolean
-    dayOfWeek?: boolean
+    name?: boolean
     type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -75310,9 +70970,7 @@ export namespace Prisma {
 
   export type ScheduleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    openTime?: boolean
-    closeTime?: boolean
-    dayOfWeek?: boolean
+    name?: boolean
     type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -75320,20 +70978,19 @@ export namespace Prisma {
 
   export type ScheduleSelectScalar = {
     id?: boolean
-    openTime?: boolean
-    closeTime?: boolean
-    dayOfWeek?: boolean
+    name?: boolean
     type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "openTime" | "closeTime" | "dayOfWeek" | "type" | "createdAt" | "updatedAt", ExtArgs["result"]["schedule"]>
+  export type ScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "type" | "createdAt" | "updatedAt", ExtArgs["result"]["schedule"]>
   export type ScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    establishmentSchedule?: boolean | Schedule$establishmentScheduleArgs<ExtArgs>
-    menuSchedule?: boolean | Schedule$menuScheduleArgs<ExtArgs>
-    discountSchedule?: boolean | Schedule$discountScheduleArgs<ExtArgs>
-    promotionSchedule?: boolean | Schedule$promotionScheduleArgs<ExtArgs>
+    days?: boolean | Schedule$daysArgs<ExtArgs>
+    establishment?: boolean | Schedule$establishmentArgs<ExtArgs>
+    menus?: boolean | Schedule$menusArgs<ExtArgs>
+    discounts?: boolean | Schedule$discountsArgs<ExtArgs>
+    promotions?: boolean | Schedule$promotionsArgs<ExtArgs>
     _count?: boolean | ScheduleCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ScheduleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -75342,16 +70999,15 @@ export namespace Prisma {
   export type $SchedulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Schedule"
     objects: {
-      establishmentSchedule: Prisma.$EstablishmentSchedulePayload<ExtArgs>[]
-      menuSchedule: Prisma.$MenuSchedulePayload<ExtArgs>[]
-      discountSchedule: Prisma.$DiscountSchedulePayload<ExtArgs>[]
-      promotionSchedule: Prisma.$PromotionSchedulePayload<ExtArgs>[]
+      days: Prisma.$ScheduleDayPayload<ExtArgs>[]
+      establishment: Prisma.$EstablishmentPayload<ExtArgs> | null
+      menus: Prisma.$MenuPayload<ExtArgs>[]
+      discounts: Prisma.$DiscountPayload<ExtArgs>[]
+      promotions: Prisma.$PromotionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      openTime: string
-      closeTime: string
-      dayOfWeek: $Enums.DayOfWeek
+      name: string
       type: $Enums.ScheduleType
       createdAt: Date
       updatedAt: Date
@@ -75749,10 +71405,11 @@ export namespace Prisma {
    */
   export interface Prisma__ScheduleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    establishmentSchedule<T extends Schedule$establishmentScheduleArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$establishmentScheduleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    menuSchedule<T extends Schedule$menuScheduleArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$menuScheduleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    discountSchedule<T extends Schedule$discountScheduleArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$discountScheduleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscountSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    promotionSchedule<T extends Schedule$promotionScheduleArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$promotionScheduleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    days<T extends Schedule$daysArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$daysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleDayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    establishment<T extends Schedule$establishmentArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$establishmentArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    menus<T extends Schedule$menusArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$menusArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    discounts<T extends Schedule$discountsArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$discountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    promotions<T extends Schedule$promotionsArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$promotionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromotionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -75783,9 +71440,7 @@ export namespace Prisma {
    */
   interface ScheduleFieldRefs {
     readonly id: FieldRef<"Schedule", 'String'>
-    readonly openTime: FieldRef<"Schedule", 'String'>
-    readonly closeTime: FieldRef<"Schedule", 'String'>
-    readonly dayOfWeek: FieldRef<"Schedule", 'DayOfWeek'>
+    readonly name: FieldRef<"Schedule", 'String'>
     readonly type: FieldRef<"Schedule", 'ScheduleType'>
     readonly createdAt: FieldRef<"Schedule", 'DateTime'>
     readonly updatedAt: FieldRef<"Schedule", 'DateTime'>
@@ -76177,99 +71832,118 @@ export namespace Prisma {
   }
 
   /**
-   * Schedule.establishmentSchedule
+   * Schedule.days
    */
-  export type Schedule$establishmentScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Schedule$daysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the EstablishmentSchedule
+     * Select specific fields to fetch from the ScheduleDay
      */
-    select?: EstablishmentScheduleSelect<ExtArgs> | null
+    select?: ScheduleDaySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the EstablishmentSchedule
+     * Omit specific fields from the ScheduleDay
      */
-    omit?: EstablishmentScheduleOmit<ExtArgs> | null
+    omit?: ScheduleDayOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EstablishmentScheduleInclude<ExtArgs> | null
-    where?: EstablishmentScheduleWhereInput
-    orderBy?: EstablishmentScheduleOrderByWithRelationInput | EstablishmentScheduleOrderByWithRelationInput[]
-    cursor?: EstablishmentScheduleWhereUniqueInput
+    include?: ScheduleDayInclude<ExtArgs> | null
+    where?: ScheduleDayWhereInput
+    orderBy?: ScheduleDayOrderByWithRelationInput | ScheduleDayOrderByWithRelationInput[]
+    cursor?: ScheduleDayWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: EstablishmentScheduleScalarFieldEnum | EstablishmentScheduleScalarFieldEnum[]
+    distinct?: ScheduleDayScalarFieldEnum | ScheduleDayScalarFieldEnum[]
   }
 
   /**
-   * Schedule.menuSchedule
+   * Schedule.establishment
    */
-  export type Schedule$menuScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Schedule$establishmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the MenuSchedule
+     * Select specific fields to fetch from the Establishment
      */
-    select?: MenuScheduleSelect<ExtArgs> | null
+    select?: EstablishmentSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the MenuSchedule
+     * Omit specific fields from the Establishment
      */
-    omit?: MenuScheduleOmit<ExtArgs> | null
+    omit?: EstablishmentOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MenuScheduleInclude<ExtArgs> | null
-    where?: MenuScheduleWhereInput
-    orderBy?: MenuScheduleOrderByWithRelationInput | MenuScheduleOrderByWithRelationInput[]
-    cursor?: MenuScheduleWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MenuScheduleScalarFieldEnum | MenuScheduleScalarFieldEnum[]
+    include?: EstablishmentInclude<ExtArgs> | null
+    where?: EstablishmentWhereInput
   }
 
   /**
-   * Schedule.discountSchedule
+   * Schedule.menus
    */
-  export type Schedule$discountScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Schedule$menusArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the DiscountSchedule
+     * Select specific fields to fetch from the Menu
      */
-    select?: DiscountScheduleSelect<ExtArgs> | null
+    select?: MenuSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the DiscountSchedule
+     * Omit specific fields from the Menu
      */
-    omit?: DiscountScheduleOmit<ExtArgs> | null
+    omit?: MenuOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: DiscountScheduleInclude<ExtArgs> | null
-    where?: DiscountScheduleWhereInput
-    orderBy?: DiscountScheduleOrderByWithRelationInput | DiscountScheduleOrderByWithRelationInput[]
-    cursor?: DiscountScheduleWhereUniqueInput
+    include?: MenuInclude<ExtArgs> | null
+    where?: MenuWhereInput
+    orderBy?: MenuOrderByWithRelationInput | MenuOrderByWithRelationInput[]
+    cursor?: MenuWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: DiscountScheduleScalarFieldEnum | DiscountScheduleScalarFieldEnum[]
+    distinct?: MenuScalarFieldEnum | MenuScalarFieldEnum[]
   }
 
   /**
-   * Schedule.promotionSchedule
+   * Schedule.discounts
    */
-  export type Schedule$promotionScheduleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Schedule$discountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PromotionSchedule
+     * Select specific fields to fetch from the Discount
      */
-    select?: PromotionScheduleSelect<ExtArgs> | null
+    select?: DiscountSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PromotionSchedule
+     * Omit specific fields from the Discount
      */
-    omit?: PromotionScheduleOmit<ExtArgs> | null
+    omit?: DiscountOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PromotionScheduleInclude<ExtArgs> | null
-    where?: PromotionScheduleWhereInput
-    orderBy?: PromotionScheduleOrderByWithRelationInput | PromotionScheduleOrderByWithRelationInput[]
-    cursor?: PromotionScheduleWhereUniqueInput
+    include?: DiscountInclude<ExtArgs> | null
+    where?: DiscountWhereInput
+    orderBy?: DiscountOrderByWithRelationInput | DiscountOrderByWithRelationInput[]
+    cursor?: DiscountWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: PromotionScheduleScalarFieldEnum | PromotionScheduleScalarFieldEnum[]
+    distinct?: DiscountScalarFieldEnum | DiscountScalarFieldEnum[]
+  }
+
+  /**
+   * Schedule.promotions
+   */
+  export type Schedule$promotionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Promotion
+     */
+    select?: PromotionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Promotion
+     */
+    omit?: PromotionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromotionInclude<ExtArgs> | null
+    where?: PromotionWhereInput
+    orderBy?: PromotionOrderByWithRelationInput | PromotionOrderByWithRelationInput[]
+    cursor?: PromotionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PromotionScalarFieldEnum | PromotionScalarFieldEnum[]
   }
 
   /**
@@ -76288,6 +71962,2178 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ScheduleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ScheduleDay
+   */
+
+  export type AggregateScheduleDay = {
+    _count: ScheduleDayCountAggregateOutputType | null
+    _min: ScheduleDayMinAggregateOutputType | null
+    _max: ScheduleDayMaxAggregateOutputType | null
+  }
+
+  export type ScheduleDayMinAggregateOutputType = {
+    id: string | null
+    scheduleId: string | null
+    dayOfWeek: $Enums.DayOfWeek | null
+    isOpen: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ScheduleDayMaxAggregateOutputType = {
+    id: string | null
+    scheduleId: string | null
+    dayOfWeek: $Enums.DayOfWeek | null
+    isOpen: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ScheduleDayCountAggregateOutputType = {
+    id: number
+    scheduleId: number
+    dayOfWeek: number
+    isOpen: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ScheduleDayMinAggregateInputType = {
+    id?: true
+    scheduleId?: true
+    dayOfWeek?: true
+    isOpen?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ScheduleDayMaxAggregateInputType = {
+    id?: true
+    scheduleId?: true
+    dayOfWeek?: true
+    isOpen?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ScheduleDayCountAggregateInputType = {
+    id?: true
+    scheduleId?: true
+    dayOfWeek?: true
+    isOpen?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ScheduleDayAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ScheduleDay to aggregate.
+     */
+    where?: ScheduleDayWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ScheduleDays to fetch.
+     */
+    orderBy?: ScheduleDayOrderByWithRelationInput | ScheduleDayOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ScheduleDayWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ScheduleDays from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ScheduleDays.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ScheduleDays
+    **/
+    _count?: true | ScheduleDayCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ScheduleDayMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ScheduleDayMaxAggregateInputType
+  }
+
+  export type GetScheduleDayAggregateType<T extends ScheduleDayAggregateArgs> = {
+        [P in keyof T & keyof AggregateScheduleDay]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateScheduleDay[P]>
+      : GetScalarType<T[P], AggregateScheduleDay[P]>
+  }
+
+
+
+
+  export type ScheduleDayGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScheduleDayWhereInput
+    orderBy?: ScheduleDayOrderByWithAggregationInput | ScheduleDayOrderByWithAggregationInput[]
+    by: ScheduleDayScalarFieldEnum[] | ScheduleDayScalarFieldEnum
+    having?: ScheduleDayScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ScheduleDayCountAggregateInputType | true
+    _min?: ScheduleDayMinAggregateInputType
+    _max?: ScheduleDayMaxAggregateInputType
+  }
+
+  export type ScheduleDayGroupByOutputType = {
+    id: string
+    scheduleId: string
+    dayOfWeek: $Enums.DayOfWeek
+    isOpen: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: ScheduleDayCountAggregateOutputType | null
+    _min: ScheduleDayMinAggregateOutputType | null
+    _max: ScheduleDayMaxAggregateOutputType | null
+  }
+
+  type GetScheduleDayGroupByPayload<T extends ScheduleDayGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ScheduleDayGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ScheduleDayGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ScheduleDayGroupByOutputType[P]>
+            : GetScalarType<T[P], ScheduleDayGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ScheduleDaySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scheduleId?: boolean
+    dayOfWeek?: boolean
+    isOpen?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
+    intervals?: boolean | ScheduleDay$intervalsArgs<ExtArgs>
+    _count?: boolean | ScheduleDayCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["scheduleDay"]>
+
+  export type ScheduleDaySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scheduleId?: boolean
+    dayOfWeek?: boolean
+    isOpen?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["scheduleDay"]>
+
+  export type ScheduleDaySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scheduleId?: boolean
+    dayOfWeek?: boolean
+    isOpen?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["scheduleDay"]>
+
+  export type ScheduleDaySelectScalar = {
+    id?: boolean
+    scheduleId?: boolean
+    dayOfWeek?: boolean
+    isOpen?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ScheduleDayOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "scheduleId" | "dayOfWeek" | "isOpen" | "createdAt" | "updatedAt", ExtArgs["result"]["scheduleDay"]>
+  export type ScheduleDayInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
+    intervals?: boolean | ScheduleDay$intervalsArgs<ExtArgs>
+    _count?: boolean | ScheduleDayCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ScheduleDayIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
+  }
+  export type ScheduleDayIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedule?: boolean | ScheduleDefaultArgs<ExtArgs>
+  }
+
+  export type $ScheduleDayPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ScheduleDay"
+    objects: {
+      schedule: Prisma.$SchedulePayload<ExtArgs>
+      intervals: Prisma.$TimeIntervalPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      scheduleId: string
+      dayOfWeek: $Enums.DayOfWeek
+      isOpen: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["scheduleDay"]>
+    composites: {}
+  }
+
+  type ScheduleDayGetPayload<S extends boolean | null | undefined | ScheduleDayDefaultArgs> = $Result.GetResult<Prisma.$ScheduleDayPayload, S>
+
+  type ScheduleDayCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ScheduleDayFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ScheduleDayCountAggregateInputType | true
+    }
+
+  export interface ScheduleDayDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ScheduleDay'], meta: { name: 'ScheduleDay' } }
+    /**
+     * Find zero or one ScheduleDay that matches the filter.
+     * @param {ScheduleDayFindUniqueArgs} args - Arguments to find a ScheduleDay
+     * @example
+     * // Get one ScheduleDay
+     * const scheduleDay = await prisma.scheduleDay.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ScheduleDayFindUniqueArgs>(args: SelectSubset<T, ScheduleDayFindUniqueArgs<ExtArgs>>): Prisma__ScheduleDayClient<$Result.GetResult<Prisma.$ScheduleDayPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ScheduleDay that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ScheduleDayFindUniqueOrThrowArgs} args - Arguments to find a ScheduleDay
+     * @example
+     * // Get one ScheduleDay
+     * const scheduleDay = await prisma.scheduleDay.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ScheduleDayFindUniqueOrThrowArgs>(args: SelectSubset<T, ScheduleDayFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ScheduleDayClient<$Result.GetResult<Prisma.$ScheduleDayPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ScheduleDay that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleDayFindFirstArgs} args - Arguments to find a ScheduleDay
+     * @example
+     * // Get one ScheduleDay
+     * const scheduleDay = await prisma.scheduleDay.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ScheduleDayFindFirstArgs>(args?: SelectSubset<T, ScheduleDayFindFirstArgs<ExtArgs>>): Prisma__ScheduleDayClient<$Result.GetResult<Prisma.$ScheduleDayPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ScheduleDay that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleDayFindFirstOrThrowArgs} args - Arguments to find a ScheduleDay
+     * @example
+     * // Get one ScheduleDay
+     * const scheduleDay = await prisma.scheduleDay.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ScheduleDayFindFirstOrThrowArgs>(args?: SelectSubset<T, ScheduleDayFindFirstOrThrowArgs<ExtArgs>>): Prisma__ScheduleDayClient<$Result.GetResult<Prisma.$ScheduleDayPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ScheduleDays that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleDayFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ScheduleDays
+     * const scheduleDays = await prisma.scheduleDay.findMany()
+     * 
+     * // Get first 10 ScheduleDays
+     * const scheduleDays = await prisma.scheduleDay.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const scheduleDayWithIdOnly = await prisma.scheduleDay.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ScheduleDayFindManyArgs>(args?: SelectSubset<T, ScheduleDayFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleDayPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ScheduleDay.
+     * @param {ScheduleDayCreateArgs} args - Arguments to create a ScheduleDay.
+     * @example
+     * // Create one ScheduleDay
+     * const ScheduleDay = await prisma.scheduleDay.create({
+     *   data: {
+     *     // ... data to create a ScheduleDay
+     *   }
+     * })
+     * 
+     */
+    create<T extends ScheduleDayCreateArgs>(args: SelectSubset<T, ScheduleDayCreateArgs<ExtArgs>>): Prisma__ScheduleDayClient<$Result.GetResult<Prisma.$ScheduleDayPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ScheduleDays.
+     * @param {ScheduleDayCreateManyArgs} args - Arguments to create many ScheduleDays.
+     * @example
+     * // Create many ScheduleDays
+     * const scheduleDay = await prisma.scheduleDay.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ScheduleDayCreateManyArgs>(args?: SelectSubset<T, ScheduleDayCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ScheduleDays and returns the data saved in the database.
+     * @param {ScheduleDayCreateManyAndReturnArgs} args - Arguments to create many ScheduleDays.
+     * @example
+     * // Create many ScheduleDays
+     * const scheduleDay = await prisma.scheduleDay.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ScheduleDays and only return the `id`
+     * const scheduleDayWithIdOnly = await prisma.scheduleDay.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ScheduleDayCreateManyAndReturnArgs>(args?: SelectSubset<T, ScheduleDayCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleDayPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ScheduleDay.
+     * @param {ScheduleDayDeleteArgs} args - Arguments to delete one ScheduleDay.
+     * @example
+     * // Delete one ScheduleDay
+     * const ScheduleDay = await prisma.scheduleDay.delete({
+     *   where: {
+     *     // ... filter to delete one ScheduleDay
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ScheduleDayDeleteArgs>(args: SelectSubset<T, ScheduleDayDeleteArgs<ExtArgs>>): Prisma__ScheduleDayClient<$Result.GetResult<Prisma.$ScheduleDayPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ScheduleDay.
+     * @param {ScheduleDayUpdateArgs} args - Arguments to update one ScheduleDay.
+     * @example
+     * // Update one ScheduleDay
+     * const scheduleDay = await prisma.scheduleDay.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ScheduleDayUpdateArgs>(args: SelectSubset<T, ScheduleDayUpdateArgs<ExtArgs>>): Prisma__ScheduleDayClient<$Result.GetResult<Prisma.$ScheduleDayPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ScheduleDays.
+     * @param {ScheduleDayDeleteManyArgs} args - Arguments to filter ScheduleDays to delete.
+     * @example
+     * // Delete a few ScheduleDays
+     * const { count } = await prisma.scheduleDay.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ScheduleDayDeleteManyArgs>(args?: SelectSubset<T, ScheduleDayDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ScheduleDays.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleDayUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ScheduleDays
+     * const scheduleDay = await prisma.scheduleDay.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ScheduleDayUpdateManyArgs>(args: SelectSubset<T, ScheduleDayUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ScheduleDays and returns the data updated in the database.
+     * @param {ScheduleDayUpdateManyAndReturnArgs} args - Arguments to update many ScheduleDays.
+     * @example
+     * // Update many ScheduleDays
+     * const scheduleDay = await prisma.scheduleDay.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ScheduleDays and only return the `id`
+     * const scheduleDayWithIdOnly = await prisma.scheduleDay.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ScheduleDayUpdateManyAndReturnArgs>(args: SelectSubset<T, ScheduleDayUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleDayPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ScheduleDay.
+     * @param {ScheduleDayUpsertArgs} args - Arguments to update or create a ScheduleDay.
+     * @example
+     * // Update or create a ScheduleDay
+     * const scheduleDay = await prisma.scheduleDay.upsert({
+     *   create: {
+     *     // ... data to create a ScheduleDay
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ScheduleDay we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ScheduleDayUpsertArgs>(args: SelectSubset<T, ScheduleDayUpsertArgs<ExtArgs>>): Prisma__ScheduleDayClient<$Result.GetResult<Prisma.$ScheduleDayPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ScheduleDays.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleDayCountArgs} args - Arguments to filter ScheduleDays to count.
+     * @example
+     * // Count the number of ScheduleDays
+     * const count = await prisma.scheduleDay.count({
+     *   where: {
+     *     // ... the filter for the ScheduleDays we want to count
+     *   }
+     * })
+    **/
+    count<T extends ScheduleDayCountArgs>(
+      args?: Subset<T, ScheduleDayCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ScheduleDayCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ScheduleDay.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleDayAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ScheduleDayAggregateArgs>(args: Subset<T, ScheduleDayAggregateArgs>): Prisma.PrismaPromise<GetScheduleDayAggregateType<T>>
+
+    /**
+     * Group by ScheduleDay.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ScheduleDayGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ScheduleDayGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ScheduleDayGroupByArgs['orderBy'] }
+        : { orderBy?: ScheduleDayGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ScheduleDayGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetScheduleDayGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ScheduleDay model
+   */
+  readonly fields: ScheduleDayFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ScheduleDay.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ScheduleDayClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    schedule<T extends ScheduleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ScheduleDefaultArgs<ExtArgs>>): Prisma__ScheduleClient<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    intervals<T extends ScheduleDay$intervalsArgs<ExtArgs> = {}>(args?: Subset<T, ScheduleDay$intervalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeIntervalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ScheduleDay model
+   */
+  interface ScheduleDayFieldRefs {
+    readonly id: FieldRef<"ScheduleDay", 'String'>
+    readonly scheduleId: FieldRef<"ScheduleDay", 'String'>
+    readonly dayOfWeek: FieldRef<"ScheduleDay", 'DayOfWeek'>
+    readonly isOpen: FieldRef<"ScheduleDay", 'Boolean'>
+    readonly createdAt: FieldRef<"ScheduleDay", 'DateTime'>
+    readonly updatedAt: FieldRef<"ScheduleDay", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ScheduleDay findUnique
+   */
+  export type ScheduleDayFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleDay
+     */
+    select?: ScheduleDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleDay
+     */
+    omit?: ScheduleDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleDayInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduleDay to fetch.
+     */
+    where: ScheduleDayWhereUniqueInput
+  }
+
+  /**
+   * ScheduleDay findUniqueOrThrow
+   */
+  export type ScheduleDayFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleDay
+     */
+    select?: ScheduleDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleDay
+     */
+    omit?: ScheduleDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleDayInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduleDay to fetch.
+     */
+    where: ScheduleDayWhereUniqueInput
+  }
+
+  /**
+   * ScheduleDay findFirst
+   */
+  export type ScheduleDayFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleDay
+     */
+    select?: ScheduleDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleDay
+     */
+    omit?: ScheduleDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleDayInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduleDay to fetch.
+     */
+    where?: ScheduleDayWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ScheduleDays to fetch.
+     */
+    orderBy?: ScheduleDayOrderByWithRelationInput | ScheduleDayOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ScheduleDays.
+     */
+    cursor?: ScheduleDayWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ScheduleDays from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ScheduleDays.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ScheduleDays.
+     */
+    distinct?: ScheduleDayScalarFieldEnum | ScheduleDayScalarFieldEnum[]
+  }
+
+  /**
+   * ScheduleDay findFirstOrThrow
+   */
+  export type ScheduleDayFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleDay
+     */
+    select?: ScheduleDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleDay
+     */
+    omit?: ScheduleDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleDayInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduleDay to fetch.
+     */
+    where?: ScheduleDayWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ScheduleDays to fetch.
+     */
+    orderBy?: ScheduleDayOrderByWithRelationInput | ScheduleDayOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ScheduleDays.
+     */
+    cursor?: ScheduleDayWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ScheduleDays from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ScheduleDays.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ScheduleDays.
+     */
+    distinct?: ScheduleDayScalarFieldEnum | ScheduleDayScalarFieldEnum[]
+  }
+
+  /**
+   * ScheduleDay findMany
+   */
+  export type ScheduleDayFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleDay
+     */
+    select?: ScheduleDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleDay
+     */
+    omit?: ScheduleDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleDayInclude<ExtArgs> | null
+    /**
+     * Filter, which ScheduleDays to fetch.
+     */
+    where?: ScheduleDayWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ScheduleDays to fetch.
+     */
+    orderBy?: ScheduleDayOrderByWithRelationInput | ScheduleDayOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ScheduleDays.
+     */
+    cursor?: ScheduleDayWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ScheduleDays from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ScheduleDays.
+     */
+    skip?: number
+    distinct?: ScheduleDayScalarFieldEnum | ScheduleDayScalarFieldEnum[]
+  }
+
+  /**
+   * ScheduleDay create
+   */
+  export type ScheduleDayCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleDay
+     */
+    select?: ScheduleDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleDay
+     */
+    omit?: ScheduleDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleDayInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ScheduleDay.
+     */
+    data: XOR<ScheduleDayCreateInput, ScheduleDayUncheckedCreateInput>
+  }
+
+  /**
+   * ScheduleDay createMany
+   */
+  export type ScheduleDayCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ScheduleDays.
+     */
+    data: ScheduleDayCreateManyInput | ScheduleDayCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ScheduleDay createManyAndReturn
+   */
+  export type ScheduleDayCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleDay
+     */
+    select?: ScheduleDaySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleDay
+     */
+    omit?: ScheduleDayOmit<ExtArgs> | null
+    /**
+     * The data used to create many ScheduleDays.
+     */
+    data: ScheduleDayCreateManyInput | ScheduleDayCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleDayIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ScheduleDay update
+   */
+  export type ScheduleDayUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleDay
+     */
+    select?: ScheduleDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleDay
+     */
+    omit?: ScheduleDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleDayInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ScheduleDay.
+     */
+    data: XOR<ScheduleDayUpdateInput, ScheduleDayUncheckedUpdateInput>
+    /**
+     * Choose, which ScheduleDay to update.
+     */
+    where: ScheduleDayWhereUniqueInput
+  }
+
+  /**
+   * ScheduleDay updateMany
+   */
+  export type ScheduleDayUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ScheduleDays.
+     */
+    data: XOR<ScheduleDayUpdateManyMutationInput, ScheduleDayUncheckedUpdateManyInput>
+    /**
+     * Filter which ScheduleDays to update
+     */
+    where?: ScheduleDayWhereInput
+    /**
+     * Limit how many ScheduleDays to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ScheduleDay updateManyAndReturn
+   */
+  export type ScheduleDayUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleDay
+     */
+    select?: ScheduleDaySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleDay
+     */
+    omit?: ScheduleDayOmit<ExtArgs> | null
+    /**
+     * The data used to update ScheduleDays.
+     */
+    data: XOR<ScheduleDayUpdateManyMutationInput, ScheduleDayUncheckedUpdateManyInput>
+    /**
+     * Filter which ScheduleDays to update
+     */
+    where?: ScheduleDayWhereInput
+    /**
+     * Limit how many ScheduleDays to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleDayIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ScheduleDay upsert
+   */
+  export type ScheduleDayUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleDay
+     */
+    select?: ScheduleDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleDay
+     */
+    omit?: ScheduleDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleDayInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ScheduleDay to update in case it exists.
+     */
+    where: ScheduleDayWhereUniqueInput
+    /**
+     * In case the ScheduleDay found by the `where` argument doesn't exist, create a new ScheduleDay with this data.
+     */
+    create: XOR<ScheduleDayCreateInput, ScheduleDayUncheckedCreateInput>
+    /**
+     * In case the ScheduleDay was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ScheduleDayUpdateInput, ScheduleDayUncheckedUpdateInput>
+  }
+
+  /**
+   * ScheduleDay delete
+   */
+  export type ScheduleDayDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleDay
+     */
+    select?: ScheduleDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleDay
+     */
+    omit?: ScheduleDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleDayInclude<ExtArgs> | null
+    /**
+     * Filter which ScheduleDay to delete.
+     */
+    where: ScheduleDayWhereUniqueInput
+  }
+
+  /**
+   * ScheduleDay deleteMany
+   */
+  export type ScheduleDayDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ScheduleDays to delete
+     */
+    where?: ScheduleDayWhereInput
+    /**
+     * Limit how many ScheduleDays to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ScheduleDay.intervals
+   */
+  export type ScheduleDay$intervalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeInterval
+     */
+    select?: TimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeInterval
+     */
+    omit?: TimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeIntervalInclude<ExtArgs> | null
+    where?: TimeIntervalWhereInput
+    orderBy?: TimeIntervalOrderByWithRelationInput | TimeIntervalOrderByWithRelationInput[]
+    cursor?: TimeIntervalWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TimeIntervalScalarFieldEnum | TimeIntervalScalarFieldEnum[]
+  }
+
+  /**
+   * ScheduleDay without action
+   */
+  export type ScheduleDayDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ScheduleDay
+     */
+    select?: ScheduleDaySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ScheduleDay
+     */
+    omit?: ScheduleDayOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleDayInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TimeInterval
+   */
+
+  export type AggregateTimeInterval = {
+    _count: TimeIntervalCountAggregateOutputType | null
+    _min: TimeIntervalMinAggregateOutputType | null
+    _max: TimeIntervalMaxAggregateOutputType | null
+  }
+
+  export type TimeIntervalMinAggregateOutputType = {
+    id: string | null
+    scheduleDayId: string | null
+    startTime: string | null
+    endTime: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TimeIntervalMaxAggregateOutputType = {
+    id: string | null
+    scheduleDayId: string | null
+    startTime: string | null
+    endTime: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TimeIntervalCountAggregateOutputType = {
+    id: number
+    scheduleDayId: number
+    startTime: number
+    endTime: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TimeIntervalMinAggregateInputType = {
+    id?: true
+    scheduleDayId?: true
+    startTime?: true
+    endTime?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TimeIntervalMaxAggregateInputType = {
+    id?: true
+    scheduleDayId?: true
+    startTime?: true
+    endTime?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TimeIntervalCountAggregateInputType = {
+    id?: true
+    scheduleDayId?: true
+    startTime?: true
+    endTime?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TimeIntervalAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TimeInterval to aggregate.
+     */
+    where?: TimeIntervalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimeIntervals to fetch.
+     */
+    orderBy?: TimeIntervalOrderByWithRelationInput | TimeIntervalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TimeIntervalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimeIntervals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimeIntervals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TimeIntervals
+    **/
+    _count?: true | TimeIntervalCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TimeIntervalMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TimeIntervalMaxAggregateInputType
+  }
+
+  export type GetTimeIntervalAggregateType<T extends TimeIntervalAggregateArgs> = {
+        [P in keyof T & keyof AggregateTimeInterval]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTimeInterval[P]>
+      : GetScalarType<T[P], AggregateTimeInterval[P]>
+  }
+
+
+
+
+  export type TimeIntervalGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TimeIntervalWhereInput
+    orderBy?: TimeIntervalOrderByWithAggregationInput | TimeIntervalOrderByWithAggregationInput[]
+    by: TimeIntervalScalarFieldEnum[] | TimeIntervalScalarFieldEnum
+    having?: TimeIntervalScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TimeIntervalCountAggregateInputType | true
+    _min?: TimeIntervalMinAggregateInputType
+    _max?: TimeIntervalMaxAggregateInputType
+  }
+
+  export type TimeIntervalGroupByOutputType = {
+    id: string
+    scheduleDayId: string
+    startTime: string
+    endTime: string
+    createdAt: Date
+    updatedAt: Date
+    _count: TimeIntervalCountAggregateOutputType | null
+    _min: TimeIntervalMinAggregateOutputType | null
+    _max: TimeIntervalMaxAggregateOutputType | null
+  }
+
+  type GetTimeIntervalGroupByPayload<T extends TimeIntervalGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TimeIntervalGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TimeIntervalGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TimeIntervalGroupByOutputType[P]>
+            : GetScalarType<T[P], TimeIntervalGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TimeIntervalSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scheduleDayId?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    scheduleDay?: boolean | ScheduleDayDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["timeInterval"]>
+
+  export type TimeIntervalSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scheduleDayId?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    scheduleDay?: boolean | ScheduleDayDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["timeInterval"]>
+
+  export type TimeIntervalSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    scheduleDayId?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    scheduleDay?: boolean | ScheduleDayDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["timeInterval"]>
+
+  export type TimeIntervalSelectScalar = {
+    id?: boolean
+    scheduleDayId?: boolean
+    startTime?: boolean
+    endTime?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TimeIntervalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "scheduleDayId" | "startTime" | "endTime" | "createdAt" | "updatedAt", ExtArgs["result"]["timeInterval"]>
+  export type TimeIntervalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    scheduleDay?: boolean | ScheduleDayDefaultArgs<ExtArgs>
+  }
+  export type TimeIntervalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    scheduleDay?: boolean | ScheduleDayDefaultArgs<ExtArgs>
+  }
+  export type TimeIntervalIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    scheduleDay?: boolean | ScheduleDayDefaultArgs<ExtArgs>
+  }
+
+  export type $TimeIntervalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TimeInterval"
+    objects: {
+      scheduleDay: Prisma.$ScheduleDayPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      scheduleDayId: string
+      startTime: string
+      endTime: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["timeInterval"]>
+    composites: {}
+  }
+
+  type TimeIntervalGetPayload<S extends boolean | null | undefined | TimeIntervalDefaultArgs> = $Result.GetResult<Prisma.$TimeIntervalPayload, S>
+
+  type TimeIntervalCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TimeIntervalFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TimeIntervalCountAggregateInputType | true
+    }
+
+  export interface TimeIntervalDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TimeInterval'], meta: { name: 'TimeInterval' } }
+    /**
+     * Find zero or one TimeInterval that matches the filter.
+     * @param {TimeIntervalFindUniqueArgs} args - Arguments to find a TimeInterval
+     * @example
+     * // Get one TimeInterval
+     * const timeInterval = await prisma.timeInterval.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TimeIntervalFindUniqueArgs>(args: SelectSubset<T, TimeIntervalFindUniqueArgs<ExtArgs>>): Prisma__TimeIntervalClient<$Result.GetResult<Prisma.$TimeIntervalPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TimeInterval that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TimeIntervalFindUniqueOrThrowArgs} args - Arguments to find a TimeInterval
+     * @example
+     * // Get one TimeInterval
+     * const timeInterval = await prisma.timeInterval.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TimeIntervalFindUniqueOrThrowArgs>(args: SelectSubset<T, TimeIntervalFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TimeIntervalClient<$Result.GetResult<Prisma.$TimeIntervalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TimeInterval that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeIntervalFindFirstArgs} args - Arguments to find a TimeInterval
+     * @example
+     * // Get one TimeInterval
+     * const timeInterval = await prisma.timeInterval.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TimeIntervalFindFirstArgs>(args?: SelectSubset<T, TimeIntervalFindFirstArgs<ExtArgs>>): Prisma__TimeIntervalClient<$Result.GetResult<Prisma.$TimeIntervalPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TimeInterval that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeIntervalFindFirstOrThrowArgs} args - Arguments to find a TimeInterval
+     * @example
+     * // Get one TimeInterval
+     * const timeInterval = await prisma.timeInterval.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TimeIntervalFindFirstOrThrowArgs>(args?: SelectSubset<T, TimeIntervalFindFirstOrThrowArgs<ExtArgs>>): Prisma__TimeIntervalClient<$Result.GetResult<Prisma.$TimeIntervalPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TimeIntervals that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeIntervalFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TimeIntervals
+     * const timeIntervals = await prisma.timeInterval.findMany()
+     * 
+     * // Get first 10 TimeIntervals
+     * const timeIntervals = await prisma.timeInterval.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const timeIntervalWithIdOnly = await prisma.timeInterval.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TimeIntervalFindManyArgs>(args?: SelectSubset<T, TimeIntervalFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeIntervalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TimeInterval.
+     * @param {TimeIntervalCreateArgs} args - Arguments to create a TimeInterval.
+     * @example
+     * // Create one TimeInterval
+     * const TimeInterval = await prisma.timeInterval.create({
+     *   data: {
+     *     // ... data to create a TimeInterval
+     *   }
+     * })
+     * 
+     */
+    create<T extends TimeIntervalCreateArgs>(args: SelectSubset<T, TimeIntervalCreateArgs<ExtArgs>>): Prisma__TimeIntervalClient<$Result.GetResult<Prisma.$TimeIntervalPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TimeIntervals.
+     * @param {TimeIntervalCreateManyArgs} args - Arguments to create many TimeIntervals.
+     * @example
+     * // Create many TimeIntervals
+     * const timeInterval = await prisma.timeInterval.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TimeIntervalCreateManyArgs>(args?: SelectSubset<T, TimeIntervalCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TimeIntervals and returns the data saved in the database.
+     * @param {TimeIntervalCreateManyAndReturnArgs} args - Arguments to create many TimeIntervals.
+     * @example
+     * // Create many TimeIntervals
+     * const timeInterval = await prisma.timeInterval.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TimeIntervals and only return the `id`
+     * const timeIntervalWithIdOnly = await prisma.timeInterval.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TimeIntervalCreateManyAndReturnArgs>(args?: SelectSubset<T, TimeIntervalCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeIntervalPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TimeInterval.
+     * @param {TimeIntervalDeleteArgs} args - Arguments to delete one TimeInterval.
+     * @example
+     * // Delete one TimeInterval
+     * const TimeInterval = await prisma.timeInterval.delete({
+     *   where: {
+     *     // ... filter to delete one TimeInterval
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TimeIntervalDeleteArgs>(args: SelectSubset<T, TimeIntervalDeleteArgs<ExtArgs>>): Prisma__TimeIntervalClient<$Result.GetResult<Prisma.$TimeIntervalPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TimeInterval.
+     * @param {TimeIntervalUpdateArgs} args - Arguments to update one TimeInterval.
+     * @example
+     * // Update one TimeInterval
+     * const timeInterval = await prisma.timeInterval.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TimeIntervalUpdateArgs>(args: SelectSubset<T, TimeIntervalUpdateArgs<ExtArgs>>): Prisma__TimeIntervalClient<$Result.GetResult<Prisma.$TimeIntervalPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TimeIntervals.
+     * @param {TimeIntervalDeleteManyArgs} args - Arguments to filter TimeIntervals to delete.
+     * @example
+     * // Delete a few TimeIntervals
+     * const { count } = await prisma.timeInterval.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TimeIntervalDeleteManyArgs>(args?: SelectSubset<T, TimeIntervalDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TimeIntervals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeIntervalUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TimeIntervals
+     * const timeInterval = await prisma.timeInterval.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TimeIntervalUpdateManyArgs>(args: SelectSubset<T, TimeIntervalUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TimeIntervals and returns the data updated in the database.
+     * @param {TimeIntervalUpdateManyAndReturnArgs} args - Arguments to update many TimeIntervals.
+     * @example
+     * // Update many TimeIntervals
+     * const timeInterval = await prisma.timeInterval.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TimeIntervals and only return the `id`
+     * const timeIntervalWithIdOnly = await prisma.timeInterval.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TimeIntervalUpdateManyAndReturnArgs>(args: SelectSubset<T, TimeIntervalUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeIntervalPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TimeInterval.
+     * @param {TimeIntervalUpsertArgs} args - Arguments to update or create a TimeInterval.
+     * @example
+     * // Update or create a TimeInterval
+     * const timeInterval = await prisma.timeInterval.upsert({
+     *   create: {
+     *     // ... data to create a TimeInterval
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TimeInterval we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TimeIntervalUpsertArgs>(args: SelectSubset<T, TimeIntervalUpsertArgs<ExtArgs>>): Prisma__TimeIntervalClient<$Result.GetResult<Prisma.$TimeIntervalPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TimeIntervals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeIntervalCountArgs} args - Arguments to filter TimeIntervals to count.
+     * @example
+     * // Count the number of TimeIntervals
+     * const count = await prisma.timeInterval.count({
+     *   where: {
+     *     // ... the filter for the TimeIntervals we want to count
+     *   }
+     * })
+    **/
+    count<T extends TimeIntervalCountArgs>(
+      args?: Subset<T, TimeIntervalCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TimeIntervalCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TimeInterval.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeIntervalAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TimeIntervalAggregateArgs>(args: Subset<T, TimeIntervalAggregateArgs>): Prisma.PrismaPromise<GetTimeIntervalAggregateType<T>>
+
+    /**
+     * Group by TimeInterval.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TimeIntervalGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TimeIntervalGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TimeIntervalGroupByArgs['orderBy'] }
+        : { orderBy?: TimeIntervalGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TimeIntervalGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTimeIntervalGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TimeInterval model
+   */
+  readonly fields: TimeIntervalFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TimeInterval.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TimeIntervalClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    scheduleDay<T extends ScheduleDayDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ScheduleDayDefaultArgs<ExtArgs>>): Prisma__ScheduleDayClient<$Result.GetResult<Prisma.$ScheduleDayPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TimeInterval model
+   */
+  interface TimeIntervalFieldRefs {
+    readonly id: FieldRef<"TimeInterval", 'String'>
+    readonly scheduleDayId: FieldRef<"TimeInterval", 'String'>
+    readonly startTime: FieldRef<"TimeInterval", 'String'>
+    readonly endTime: FieldRef<"TimeInterval", 'String'>
+    readonly createdAt: FieldRef<"TimeInterval", 'DateTime'>
+    readonly updatedAt: FieldRef<"TimeInterval", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TimeInterval findUnique
+   */
+  export type TimeIntervalFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeInterval
+     */
+    select?: TimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeInterval
+     */
+    omit?: TimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeIntervalInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeInterval to fetch.
+     */
+    where: TimeIntervalWhereUniqueInput
+  }
+
+  /**
+   * TimeInterval findUniqueOrThrow
+   */
+  export type TimeIntervalFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeInterval
+     */
+    select?: TimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeInterval
+     */
+    omit?: TimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeIntervalInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeInterval to fetch.
+     */
+    where: TimeIntervalWhereUniqueInput
+  }
+
+  /**
+   * TimeInterval findFirst
+   */
+  export type TimeIntervalFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeInterval
+     */
+    select?: TimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeInterval
+     */
+    omit?: TimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeIntervalInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeInterval to fetch.
+     */
+    where?: TimeIntervalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimeIntervals to fetch.
+     */
+    orderBy?: TimeIntervalOrderByWithRelationInput | TimeIntervalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TimeIntervals.
+     */
+    cursor?: TimeIntervalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimeIntervals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimeIntervals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TimeIntervals.
+     */
+    distinct?: TimeIntervalScalarFieldEnum | TimeIntervalScalarFieldEnum[]
+  }
+
+  /**
+   * TimeInterval findFirstOrThrow
+   */
+  export type TimeIntervalFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeInterval
+     */
+    select?: TimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeInterval
+     */
+    omit?: TimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeIntervalInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeInterval to fetch.
+     */
+    where?: TimeIntervalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimeIntervals to fetch.
+     */
+    orderBy?: TimeIntervalOrderByWithRelationInput | TimeIntervalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TimeIntervals.
+     */
+    cursor?: TimeIntervalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimeIntervals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimeIntervals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TimeIntervals.
+     */
+    distinct?: TimeIntervalScalarFieldEnum | TimeIntervalScalarFieldEnum[]
+  }
+
+  /**
+   * TimeInterval findMany
+   */
+  export type TimeIntervalFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeInterval
+     */
+    select?: TimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeInterval
+     */
+    omit?: TimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeIntervalInclude<ExtArgs> | null
+    /**
+     * Filter, which TimeIntervals to fetch.
+     */
+    where?: TimeIntervalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TimeIntervals to fetch.
+     */
+    orderBy?: TimeIntervalOrderByWithRelationInput | TimeIntervalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TimeIntervals.
+     */
+    cursor?: TimeIntervalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TimeIntervals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TimeIntervals.
+     */
+    skip?: number
+    distinct?: TimeIntervalScalarFieldEnum | TimeIntervalScalarFieldEnum[]
+  }
+
+  /**
+   * TimeInterval create
+   */
+  export type TimeIntervalCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeInterval
+     */
+    select?: TimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeInterval
+     */
+    omit?: TimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeIntervalInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TimeInterval.
+     */
+    data: XOR<TimeIntervalCreateInput, TimeIntervalUncheckedCreateInput>
+  }
+
+  /**
+   * TimeInterval createMany
+   */
+  export type TimeIntervalCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TimeIntervals.
+     */
+    data: TimeIntervalCreateManyInput | TimeIntervalCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TimeInterval createManyAndReturn
+   */
+  export type TimeIntervalCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeInterval
+     */
+    select?: TimeIntervalSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeInterval
+     */
+    omit?: TimeIntervalOmit<ExtArgs> | null
+    /**
+     * The data used to create many TimeIntervals.
+     */
+    data: TimeIntervalCreateManyInput | TimeIntervalCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeIntervalIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TimeInterval update
+   */
+  export type TimeIntervalUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeInterval
+     */
+    select?: TimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeInterval
+     */
+    omit?: TimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeIntervalInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TimeInterval.
+     */
+    data: XOR<TimeIntervalUpdateInput, TimeIntervalUncheckedUpdateInput>
+    /**
+     * Choose, which TimeInterval to update.
+     */
+    where: TimeIntervalWhereUniqueInput
+  }
+
+  /**
+   * TimeInterval updateMany
+   */
+  export type TimeIntervalUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TimeIntervals.
+     */
+    data: XOR<TimeIntervalUpdateManyMutationInput, TimeIntervalUncheckedUpdateManyInput>
+    /**
+     * Filter which TimeIntervals to update
+     */
+    where?: TimeIntervalWhereInput
+    /**
+     * Limit how many TimeIntervals to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TimeInterval updateManyAndReturn
+   */
+  export type TimeIntervalUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeInterval
+     */
+    select?: TimeIntervalSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeInterval
+     */
+    omit?: TimeIntervalOmit<ExtArgs> | null
+    /**
+     * The data used to update TimeIntervals.
+     */
+    data: XOR<TimeIntervalUpdateManyMutationInput, TimeIntervalUncheckedUpdateManyInput>
+    /**
+     * Filter which TimeIntervals to update
+     */
+    where?: TimeIntervalWhereInput
+    /**
+     * Limit how many TimeIntervals to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeIntervalIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TimeInterval upsert
+   */
+  export type TimeIntervalUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeInterval
+     */
+    select?: TimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeInterval
+     */
+    omit?: TimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeIntervalInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TimeInterval to update in case it exists.
+     */
+    where: TimeIntervalWhereUniqueInput
+    /**
+     * In case the TimeInterval found by the `where` argument doesn't exist, create a new TimeInterval with this data.
+     */
+    create: XOR<TimeIntervalCreateInput, TimeIntervalUncheckedCreateInput>
+    /**
+     * In case the TimeInterval was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TimeIntervalUpdateInput, TimeIntervalUncheckedUpdateInput>
+  }
+
+  /**
+   * TimeInterval delete
+   */
+  export type TimeIntervalDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeInterval
+     */
+    select?: TimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeInterval
+     */
+    omit?: TimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeIntervalInclude<ExtArgs> | null
+    /**
+     * Filter which TimeInterval to delete.
+     */
+    where: TimeIntervalWhereUniqueInput
+  }
+
+  /**
+   * TimeInterval deleteMany
+   */
+  export type TimeIntervalDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TimeIntervals to delete
+     */
+    where?: TimeIntervalWhereInput
+    /**
+     * Limit how many TimeIntervals to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TimeInterval without action
+   */
+  export type TimeIntervalDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TimeInterval
+     */
+    select?: TimeIntervalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TimeInterval
+     */
+    omit?: TimeIntervalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TimeIntervalInclude<ExtArgs> | null
   }
 
 
@@ -109090,6 +106936,7 @@ export namespace Prisma {
   export const DiscountScalarFieldEnum: {
     id: 'id',
     establishmentId: 'establishmentId',
+    scheduleId: 'scheduleId',
     name: 'name',
     description: 'description',
     type: 'type',
@@ -109115,18 +106962,10 @@ export namespace Prisma {
   export type DiscountTargetScalarFieldEnum = (typeof DiscountTargetScalarFieldEnum)[keyof typeof DiscountTargetScalarFieldEnum]
 
 
-  export const DiscountScheduleScalarFieldEnum: {
-    id: 'id',
-    discountId: 'discountId',
-    scheduleId: 'scheduleId'
-  };
-
-  export type DiscountScheduleScalarFieldEnum = (typeof DiscountScheduleScalarFieldEnum)[keyof typeof DiscountScheduleScalarFieldEnum]
-
-
   export const PromotionScalarFieldEnum: {
     id: 'id',
     establishmentId: 'establishmentId',
+    scheduleId: 'scheduleId',
     name: 'name',
     description: 'description',
     type: 'type',
@@ -109151,15 +106990,6 @@ export namespace Prisma {
   };
 
   export type BuyXGetYRuleScalarFieldEnum = (typeof BuyXGetYRuleScalarFieldEnum)[keyof typeof BuyXGetYRuleScalarFieldEnum]
-
-
-  export const PromotionScheduleScalarFieldEnum: {
-    id: 'id',
-    promotionId: 'promotionId',
-    scheduleId: 'scheduleId'
-  };
-
-  export type PromotionScheduleScalarFieldEnum = (typeof PromotionScheduleScalarFieldEnum)[keyof typeof PromotionScheduleScalarFieldEnum]
 
 
   export const EmailLogScalarFieldEnum: {
@@ -109257,21 +107087,13 @@ export namespace Prisma {
     logoImageId: 'logoImageId',
     bannerImageId: 'bannerImageId',
     activeThemeId: 'activeThemeId',
+    scheduleId: 'scheduleId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     ownerId: 'ownerId'
   };
 
   export type EstablishmentScalarFieldEnum = (typeof EstablishmentScalarFieldEnum)[keyof typeof EstablishmentScalarFieldEnum]
-
-
-  export const EstablishmentScheduleScalarFieldEnum: {
-    id: 'id',
-    establishmentId: 'establishmentId',
-    scheduleId: 'scheduleId'
-  };
-
-  export type EstablishmentScheduleScalarFieldEnum = (typeof EstablishmentScheduleScalarFieldEnum)[keyof typeof EstablishmentScheduleScalarFieldEnum]
 
 
   export const EstablishmentBookingSettingsScalarFieldEnum: {
@@ -109614,6 +107436,7 @@ export namespace Prisma {
     isHighlighted: 'isHighlighted',
     color: 'color',
     establishmentId: 'establishmentId',
+    scheduleId: 'scheduleId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     maxItemsPerOrder: 'maxItemsPerOrder',
@@ -109622,15 +107445,6 @@ export namespace Prisma {
   };
 
   export type MenuScalarFieldEnum = (typeof MenuScalarFieldEnum)[keyof typeof MenuScalarFieldEnum]
-
-
-  export const MenuScheduleScalarFieldEnum: {
-    id: 'id',
-    menuId: 'menuId',
-    scheduleId: 'scheduleId'
-  };
-
-  export type MenuScheduleScalarFieldEnum = (typeof MenuScheduleScalarFieldEnum)[keyof typeof MenuScheduleScalarFieldEnum]
 
 
   export const MenuTranslationScalarFieldEnum: {
@@ -109786,15 +107600,37 @@ export namespace Prisma {
 
   export const ScheduleScalarFieldEnum: {
     id: 'id',
-    openTime: 'openTime',
-    closeTime: 'closeTime',
-    dayOfWeek: 'dayOfWeek',
+    name: 'name',
     type: 'type',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type ScheduleScalarFieldEnum = (typeof ScheduleScalarFieldEnum)[keyof typeof ScheduleScalarFieldEnum]
+
+
+  export const ScheduleDayScalarFieldEnum: {
+    id: 'id',
+    scheduleId: 'scheduleId',
+    dayOfWeek: 'dayOfWeek',
+    isOpen: 'isOpen',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ScheduleDayScalarFieldEnum = (typeof ScheduleDayScalarFieldEnum)[keyof typeof ScheduleDayScalarFieldEnum]
+
+
+  export const TimeIntervalScalarFieldEnum: {
+    id: 'id',
+    scheduleDayId: 'scheduleDayId',
+    startTime: 'startTime',
+    endTime: 'endTime',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TimeIntervalScalarFieldEnum = (typeof TimeIntervalScalarFieldEnum)[keyof typeof TimeIntervalScalarFieldEnum]
 
 
   export const StockWarehouseScalarFieldEnum: {
@@ -110760,20 +108596,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'DayOfWeek'
-   */
-  export type EnumDayOfWeekFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DayOfWeek'>
-    
-
-
-  /**
-   * Reference to a field of type 'DayOfWeek[]'
-   */
-  export type ListEnumDayOfWeekFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DayOfWeek[]'>
-    
-
-
-  /**
    * Reference to a field of type 'ScheduleType'
    */
   export type EnumScheduleTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScheduleType'>
@@ -110784,6 +108606,20 @@ export namespace Prisma {
    * Reference to a field of type 'ScheduleType[]'
    */
   export type ListEnumScheduleTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScheduleType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'DayOfWeek'
+   */
+  export type EnumDayOfWeekFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DayOfWeek'>
+    
+
+
+  /**
+   * Reference to a field of type 'DayOfWeek[]'
+   */
+  export type ListEnumDayOfWeekFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DayOfWeek[]'>
     
 
 
@@ -111558,6 +109394,7 @@ export namespace Prisma {
     NOT?: DiscountWhereInput | DiscountWhereInput[]
     id?: StringFilter<"Discount"> | string
     establishmentId?: StringFilter<"Discount"> | string
+    scheduleId?: StringNullableFilter<"Discount"> | string | null
     name?: StringFilter<"Discount"> | string
     description?: StringNullableFilter<"Discount"> | string | null
     type?: EnumDiscountTypeFilter<"Discount"> | $Enums.DiscountType
@@ -111569,13 +109406,14 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Discount"> | Date | string
     updatedAt?: DateTimeFilter<"Discount"> | Date | string
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+    schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     targets?: DiscountTargetListRelationFilter
-    schedules?: DiscountScheduleListRelationFilter
   }
 
   export type DiscountOrderByWithRelationInput = {
     id?: SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrderInput | SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     type?: SortOrder
@@ -111587,8 +109425,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     establishment?: EstablishmentOrderByWithRelationInput
+    schedule?: ScheduleOrderByWithRelationInput
     targets?: DiscountTargetOrderByRelationAggregateInput
-    schedules?: DiscountScheduleOrderByRelationAggregateInput
   }
 
   export type DiscountWhereUniqueInput = Prisma.AtLeast<{
@@ -111597,6 +109435,7 @@ export namespace Prisma {
     OR?: DiscountWhereInput[]
     NOT?: DiscountWhereInput | DiscountWhereInput[]
     establishmentId?: StringFilter<"Discount"> | string
+    scheduleId?: StringNullableFilter<"Discount"> | string | null
     name?: StringFilter<"Discount"> | string
     description?: StringNullableFilter<"Discount"> | string | null
     type?: EnumDiscountTypeFilter<"Discount"> | $Enums.DiscountType
@@ -111608,13 +109447,14 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Discount"> | Date | string
     updatedAt?: DateTimeFilter<"Discount"> | Date | string
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+    schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     targets?: DiscountTargetListRelationFilter
-    schedules?: DiscountScheduleListRelationFilter
   }, "id">
 
   export type DiscountOrderByWithAggregationInput = {
     id?: SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrderInput | SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     type?: SortOrder
@@ -111638,6 +109478,7 @@ export namespace Prisma {
     NOT?: DiscountScalarWhereWithAggregatesInput | DiscountScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Discount"> | string
     establishmentId?: StringWithAggregatesFilter<"Discount"> | string
+    scheduleId?: StringNullableWithAggregatesFilter<"Discount"> | string | null
     name?: StringWithAggregatesFilter<"Discount"> | string
     description?: StringNullableWithAggregatesFilter<"Discount"> | string | null
     type?: EnumDiscountTypeWithAggregatesFilter<"Discount"> | $Enums.DiscountType
@@ -111703,61 +109544,13 @@ export namespace Prisma {
     posCategoryId?: StringNullableWithAggregatesFilter<"DiscountTarget"> | string | null
   }
 
-  export type DiscountScheduleWhereInput = {
-    AND?: DiscountScheduleWhereInput | DiscountScheduleWhereInput[]
-    OR?: DiscountScheduleWhereInput[]
-    NOT?: DiscountScheduleWhereInput | DiscountScheduleWhereInput[]
-    id?: StringFilter<"DiscountSchedule"> | string
-    discountId?: StringFilter<"DiscountSchedule"> | string
-    scheduleId?: StringFilter<"DiscountSchedule"> | string
-    discount?: XOR<DiscountScalarRelationFilter, DiscountWhereInput>
-    schedule?: XOR<ScheduleScalarRelationFilter, ScheduleWhereInput>
-  }
-
-  export type DiscountScheduleOrderByWithRelationInput = {
-    id?: SortOrder
-    discountId?: SortOrder
-    scheduleId?: SortOrder
-    discount?: DiscountOrderByWithRelationInput
-    schedule?: ScheduleOrderByWithRelationInput
-  }
-
-  export type DiscountScheduleWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    discountId_scheduleId?: DiscountScheduleDiscountIdScheduleIdCompoundUniqueInput
-    AND?: DiscountScheduleWhereInput | DiscountScheduleWhereInput[]
-    OR?: DiscountScheduleWhereInput[]
-    NOT?: DiscountScheduleWhereInput | DiscountScheduleWhereInput[]
-    discountId?: StringFilter<"DiscountSchedule"> | string
-    scheduleId?: StringFilter<"DiscountSchedule"> | string
-    discount?: XOR<DiscountScalarRelationFilter, DiscountWhereInput>
-    schedule?: XOR<ScheduleScalarRelationFilter, ScheduleWhereInput>
-  }, "id" | "discountId_scheduleId">
-
-  export type DiscountScheduleOrderByWithAggregationInput = {
-    id?: SortOrder
-    discountId?: SortOrder
-    scheduleId?: SortOrder
-    _count?: DiscountScheduleCountOrderByAggregateInput
-    _max?: DiscountScheduleMaxOrderByAggregateInput
-    _min?: DiscountScheduleMinOrderByAggregateInput
-  }
-
-  export type DiscountScheduleScalarWhereWithAggregatesInput = {
-    AND?: DiscountScheduleScalarWhereWithAggregatesInput | DiscountScheduleScalarWhereWithAggregatesInput[]
-    OR?: DiscountScheduleScalarWhereWithAggregatesInput[]
-    NOT?: DiscountScheduleScalarWhereWithAggregatesInput | DiscountScheduleScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"DiscountSchedule"> | string
-    discountId?: StringWithAggregatesFilter<"DiscountSchedule"> | string
-    scheduleId?: StringWithAggregatesFilter<"DiscountSchedule"> | string
-  }
-
   export type PromotionWhereInput = {
     AND?: PromotionWhereInput | PromotionWhereInput[]
     OR?: PromotionWhereInput[]
     NOT?: PromotionWhereInput | PromotionWhereInput[]
     id?: StringFilter<"Promotion"> | string
     establishmentId?: StringFilter<"Promotion"> | string
+    scheduleId?: StringNullableFilter<"Promotion"> | string | null
     name?: StringFilter<"Promotion"> | string
     description?: StringNullableFilter<"Promotion"> | string | null
     type?: EnumPromotionTypeFilter<"Promotion"> | $Enums.PromotionType
@@ -111767,13 +109560,14 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Promotion"> | Date | string
     updatedAt?: DateTimeFilter<"Promotion"> | Date | string
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+    schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     buyXGetYRule?: XOR<BuyXGetYRuleNullableScalarRelationFilter, BuyXGetYRuleWhereInput> | null
-    schedules?: PromotionScheduleListRelationFilter
   }
 
   export type PromotionOrderByWithRelationInput = {
     id?: SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrderInput | SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     type?: SortOrder
@@ -111783,8 +109577,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     establishment?: EstablishmentOrderByWithRelationInput
+    schedule?: ScheduleOrderByWithRelationInput
     buyXGetYRule?: BuyXGetYRuleOrderByWithRelationInput
-    schedules?: PromotionScheduleOrderByRelationAggregateInput
   }
 
   export type PromotionWhereUniqueInput = Prisma.AtLeast<{
@@ -111793,6 +109587,7 @@ export namespace Prisma {
     OR?: PromotionWhereInput[]
     NOT?: PromotionWhereInput | PromotionWhereInput[]
     establishmentId?: StringFilter<"Promotion"> | string
+    scheduleId?: StringNullableFilter<"Promotion"> | string | null
     name?: StringFilter<"Promotion"> | string
     description?: StringNullableFilter<"Promotion"> | string | null
     type?: EnumPromotionTypeFilter<"Promotion"> | $Enums.PromotionType
@@ -111802,13 +109597,14 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Promotion"> | Date | string
     updatedAt?: DateTimeFilter<"Promotion"> | Date | string
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+    schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     buyXGetYRule?: XOR<BuyXGetYRuleNullableScalarRelationFilter, BuyXGetYRuleWhereInput> | null
-    schedules?: PromotionScheduleListRelationFilter
   }, "id">
 
   export type PromotionOrderByWithAggregationInput = {
     id?: SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrderInput | SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     type?: SortOrder
@@ -111828,6 +109624,7 @@ export namespace Prisma {
     NOT?: PromotionScalarWhereWithAggregatesInput | PromotionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Promotion"> | string
     establishmentId?: StringWithAggregatesFilter<"Promotion"> | string
+    scheduleId?: StringNullableWithAggregatesFilter<"Promotion"> | string | null
     name?: StringWithAggregatesFilter<"Promotion"> | string
     description?: StringNullableWithAggregatesFilter<"Promotion"> | string | null
     type?: EnumPromotionTypeWithAggregatesFilter<"Promotion"> | $Enums.PromotionType
@@ -111909,55 +109706,6 @@ export namespace Prisma {
     rewardItemId?: StringWithAggregatesFilter<"BuyXGetYRule"> | string
     rewardQuantity?: IntWithAggregatesFilter<"BuyXGetYRule"> | number
     applyCheapest?: BoolWithAggregatesFilter<"BuyXGetYRule"> | boolean
-  }
-
-  export type PromotionScheduleWhereInput = {
-    AND?: PromotionScheduleWhereInput | PromotionScheduleWhereInput[]
-    OR?: PromotionScheduleWhereInput[]
-    NOT?: PromotionScheduleWhereInput | PromotionScheduleWhereInput[]
-    id?: StringFilter<"PromotionSchedule"> | string
-    promotionId?: StringFilter<"PromotionSchedule"> | string
-    scheduleId?: StringFilter<"PromotionSchedule"> | string
-    promotion?: XOR<PromotionScalarRelationFilter, PromotionWhereInput>
-    schedule?: XOR<ScheduleScalarRelationFilter, ScheduleWhereInput>
-  }
-
-  export type PromotionScheduleOrderByWithRelationInput = {
-    id?: SortOrder
-    promotionId?: SortOrder
-    scheduleId?: SortOrder
-    promotion?: PromotionOrderByWithRelationInput
-    schedule?: ScheduleOrderByWithRelationInput
-  }
-
-  export type PromotionScheduleWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    promotionId_scheduleId?: PromotionSchedulePromotionIdScheduleIdCompoundUniqueInput
-    AND?: PromotionScheduleWhereInput | PromotionScheduleWhereInput[]
-    OR?: PromotionScheduleWhereInput[]
-    NOT?: PromotionScheduleWhereInput | PromotionScheduleWhereInput[]
-    promotionId?: StringFilter<"PromotionSchedule"> | string
-    scheduleId?: StringFilter<"PromotionSchedule"> | string
-    promotion?: XOR<PromotionScalarRelationFilter, PromotionWhereInput>
-    schedule?: XOR<ScheduleScalarRelationFilter, ScheduleWhereInput>
-  }, "id" | "promotionId_scheduleId">
-
-  export type PromotionScheduleOrderByWithAggregationInput = {
-    id?: SortOrder
-    promotionId?: SortOrder
-    scheduleId?: SortOrder
-    _count?: PromotionScheduleCountOrderByAggregateInput
-    _max?: PromotionScheduleMaxOrderByAggregateInput
-    _min?: PromotionScheduleMinOrderByAggregateInput
-  }
-
-  export type PromotionScheduleScalarWhereWithAggregatesInput = {
-    AND?: PromotionScheduleScalarWhereWithAggregatesInput | PromotionScheduleScalarWhereWithAggregatesInput[]
-    OR?: PromotionScheduleScalarWhereWithAggregatesInput[]
-    NOT?: PromotionScheduleScalarWhereWithAggregatesInput | PromotionScheduleScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"PromotionSchedule"> | string
-    promotionId?: StringWithAggregatesFilter<"PromotionSchedule"> | string
-    scheduleId?: StringWithAggregatesFilter<"PromotionSchedule"> | string
   }
 
   export type EmailLogWhereInput = {
@@ -112317,9 +110065,11 @@ export namespace Prisma {
     logoImageId?: StringNullableFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableFilter<"Establishment"> | string | null
+    scheduleId?: StringNullableFilter<"Establishment"> | string | null
     createdAt?: DateTimeFilter<"Establishment"> | Date | string
     updatedAt?: DateTimeFilter<"Establishment"> | Date | string
     ownerId?: StringFilter<"Establishment"> | string
+    schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
     activeTheme?: XOR<ThemeNullableScalarRelationFilter, ThemeWhereInput> | null
     logoImage?: XOR<ImageNullableScalarRelationFilter, ImageWhereInput> | null
@@ -112336,7 +110086,6 @@ export namespace Prisma {
     bookingRules?: XOR<BookingRulesNullableScalarRelationFilter, BookingRulesWhereInput> | null
     establishmentBookingSettings?: XOR<EstablishmentBookingSettingsNullableScalarRelationFilter, EstablishmentBookingSettingsWhereInput> | null
     establishmentAvailabilities?: EstablishmentAvailabilityListRelationFilter
-    establishmentSchedule?: EstablishmentScheduleListRelationFilter
     integrations?: XOR<EstablishmentIntegrationsNullableScalarRelationFilter, EstablishmentIntegrationsWhereInput> | null
     subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
     invoices?: InvoiceListRelationFilter
@@ -112391,9 +110140,11 @@ export namespace Prisma {
     logoImageId?: SortOrderInput | SortOrder
     bannerImageId?: SortOrderInput | SortOrder
     activeThemeId?: SortOrderInput | SortOrder
+    scheduleId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
+    schedule?: ScheduleOrderByWithRelationInput
     owner?: UserOrderByWithRelationInput
     activeTheme?: ThemeOrderByWithRelationInput
     logoImage?: ImageOrderByWithRelationInput
@@ -112410,7 +110161,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesOrderByWithRelationInput
     establishmentBookingSettings?: EstablishmentBookingSettingsOrderByWithRelationInput
     establishmentAvailabilities?: EstablishmentAvailabilityOrderByRelationAggregateInput
-    establishmentSchedule?: EstablishmentScheduleOrderByRelationAggregateInput
     integrations?: EstablishmentIntegrationsOrderByWithRelationInput
     subscription?: SubscriptionOrderByWithRelationInput
     invoices?: InvoiceOrderByRelationAggregateInput
@@ -112437,6 +110187,7 @@ export namespace Prisma {
     id?: string
     slug?: string
     stripeCustomerId?: string
+    scheduleId?: string
     AND?: EstablishmentWhereInput | EstablishmentWhereInput[]
     OR?: EstablishmentWhereInput[]
     NOT?: EstablishmentWhereInput | EstablishmentWhereInput[]
@@ -112471,6 +110222,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Establishment"> | Date | string
     updatedAt?: DateTimeFilter<"Establishment"> | Date | string
     ownerId?: StringFilter<"Establishment"> | string
+    schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
     activeTheme?: XOR<ThemeNullableScalarRelationFilter, ThemeWhereInput> | null
     logoImage?: XOR<ImageNullableScalarRelationFilter, ImageWhereInput> | null
@@ -112487,7 +110239,6 @@ export namespace Prisma {
     bookingRules?: XOR<BookingRulesNullableScalarRelationFilter, BookingRulesWhereInput> | null
     establishmentBookingSettings?: XOR<EstablishmentBookingSettingsNullableScalarRelationFilter, EstablishmentBookingSettingsWhereInput> | null
     establishmentAvailabilities?: EstablishmentAvailabilityListRelationFilter
-    establishmentSchedule?: EstablishmentScheduleListRelationFilter
     integrations?: XOR<EstablishmentIntegrationsNullableScalarRelationFilter, EstablishmentIntegrationsWhereInput> | null
     subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
     invoices?: InvoiceListRelationFilter
@@ -112508,7 +110259,7 @@ export namespace Prisma {
     stockAlerts?: StockAlertListRelationFilter
     stockInventoryCounts?: StockInventoryCountListRelationFilter
     stockWarehouses?: StockWarehouseListRelationFilter
-  }, "id" | "slug" | "stripeCustomerId">
+  }, "id" | "slug" | "stripeCustomerId" | "scheduleId">
 
   export type EstablishmentOrderByWithAggregationInput = {
     id?: SortOrder
@@ -112542,6 +110293,7 @@ export namespace Prisma {
     logoImageId?: SortOrderInput | SortOrder
     bannerImageId?: SortOrderInput | SortOrder
     activeThemeId?: SortOrderInput | SortOrder
+    scheduleId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -112585,57 +110337,10 @@ export namespace Prisma {
     logoImageId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    scheduleId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Establishment"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Establishment"> | Date | string
     ownerId?: StringWithAggregatesFilter<"Establishment"> | string
-  }
-
-  export type EstablishmentScheduleWhereInput = {
-    AND?: EstablishmentScheduleWhereInput | EstablishmentScheduleWhereInput[]
-    OR?: EstablishmentScheduleWhereInput[]
-    NOT?: EstablishmentScheduleWhereInput | EstablishmentScheduleWhereInput[]
-    id?: StringFilter<"EstablishmentSchedule"> | string
-    establishmentId?: StringFilter<"EstablishmentSchedule"> | string
-    scheduleId?: StringFilter<"EstablishmentSchedule"> | string
-    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
-    schedule?: XOR<ScheduleScalarRelationFilter, ScheduleWhereInput>
-  }
-
-  export type EstablishmentScheduleOrderByWithRelationInput = {
-    id?: SortOrder
-    establishmentId?: SortOrder
-    scheduleId?: SortOrder
-    establishment?: EstablishmentOrderByWithRelationInput
-    schedule?: ScheduleOrderByWithRelationInput
-  }
-
-  export type EstablishmentScheduleWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: EstablishmentScheduleWhereInput | EstablishmentScheduleWhereInput[]
-    OR?: EstablishmentScheduleWhereInput[]
-    NOT?: EstablishmentScheduleWhereInput | EstablishmentScheduleWhereInput[]
-    establishmentId?: StringFilter<"EstablishmentSchedule"> | string
-    scheduleId?: StringFilter<"EstablishmentSchedule"> | string
-    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
-    schedule?: XOR<ScheduleScalarRelationFilter, ScheduleWhereInput>
-  }, "id">
-
-  export type EstablishmentScheduleOrderByWithAggregationInput = {
-    id?: SortOrder
-    establishmentId?: SortOrder
-    scheduleId?: SortOrder
-    _count?: EstablishmentScheduleCountOrderByAggregateInput
-    _max?: EstablishmentScheduleMaxOrderByAggregateInput
-    _min?: EstablishmentScheduleMinOrderByAggregateInput
-  }
-
-  export type EstablishmentScheduleScalarWhereWithAggregatesInput = {
-    AND?: EstablishmentScheduleScalarWhereWithAggregatesInput | EstablishmentScheduleScalarWhereWithAggregatesInput[]
-    OR?: EstablishmentScheduleScalarWhereWithAggregatesInput[]
-    NOT?: EstablishmentScheduleScalarWhereWithAggregatesInput | EstablishmentScheduleScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"EstablishmentSchedule"> | string
-    establishmentId?: StringWithAggregatesFilter<"EstablishmentSchedule"> | string
-    scheduleId?: StringWithAggregatesFilter<"EstablishmentSchedule"> | string
   }
 
   export type EstablishmentBookingSettingsWhereInput = {
@@ -114470,14 +112175,15 @@ export namespace Prisma {
     isHighlighted?: BoolFilter<"Menu"> | boolean
     color?: StringNullableFilter<"Menu"> | string | null
     establishmentId?: StringFilter<"Menu"> | string
+    scheduleId?: StringNullableFilter<"Menu"> | string | null
     createdAt?: DateTimeFilter<"Menu"> | Date | string
     updatedAt?: DateTimeFilter<"Menu"> | Date | string
     maxItemsPerOrder?: IntNullableFilter<"Menu"> | number | null
     price?: FloatNullableFilter<"Menu"> | number | null
     type?: EnumMenuTypeFilter<"Menu"> | $Enums.MenuType
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+    schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     categories?: MenuCategoryListRelationFilter
-    menuSchedule?: MenuScheduleListRelationFilter
     translations?: MenuTranslationListRelationFilter
   }
 
@@ -114488,14 +112194,15 @@ export namespace Prisma {
     isHighlighted?: SortOrder
     color?: SortOrderInput | SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     maxItemsPerOrder?: SortOrderInput | SortOrder
     price?: SortOrderInput | SortOrder
     type?: SortOrder
     establishment?: EstablishmentOrderByWithRelationInput
+    schedule?: ScheduleOrderByWithRelationInput
     categories?: MenuCategoryOrderByRelationAggregateInput
-    menuSchedule?: MenuScheduleOrderByRelationAggregateInput
     translations?: MenuTranslationOrderByRelationAggregateInput
   }
 
@@ -114509,14 +112216,15 @@ export namespace Prisma {
     isHighlighted?: BoolFilter<"Menu"> | boolean
     color?: StringNullableFilter<"Menu"> | string | null
     establishmentId?: StringFilter<"Menu"> | string
+    scheduleId?: StringNullableFilter<"Menu"> | string | null
     createdAt?: DateTimeFilter<"Menu"> | Date | string
     updatedAt?: DateTimeFilter<"Menu"> | Date | string
     maxItemsPerOrder?: IntNullableFilter<"Menu"> | number | null
     price?: FloatNullableFilter<"Menu"> | number | null
     type?: EnumMenuTypeFilter<"Menu"> | $Enums.MenuType
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+    schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     categories?: MenuCategoryListRelationFilter
-    menuSchedule?: MenuScheduleListRelationFilter
     translations?: MenuTranslationListRelationFilter
   }, "id">
 
@@ -114527,6 +112235,7 @@ export namespace Prisma {
     isHighlighted?: SortOrder
     color?: SortOrderInput | SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     maxItemsPerOrder?: SortOrderInput | SortOrder
@@ -114549,59 +112258,12 @@ export namespace Prisma {
     isHighlighted?: BoolWithAggregatesFilter<"Menu"> | boolean
     color?: StringNullableWithAggregatesFilter<"Menu"> | string | null
     establishmentId?: StringWithAggregatesFilter<"Menu"> | string
+    scheduleId?: StringNullableWithAggregatesFilter<"Menu"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Menu"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Menu"> | Date | string
     maxItemsPerOrder?: IntNullableWithAggregatesFilter<"Menu"> | number | null
     price?: FloatNullableWithAggregatesFilter<"Menu"> | number | null
     type?: EnumMenuTypeWithAggregatesFilter<"Menu"> | $Enums.MenuType
-  }
-
-  export type MenuScheduleWhereInput = {
-    AND?: MenuScheduleWhereInput | MenuScheduleWhereInput[]
-    OR?: MenuScheduleWhereInput[]
-    NOT?: MenuScheduleWhereInput | MenuScheduleWhereInput[]
-    id?: StringFilter<"MenuSchedule"> | string
-    menuId?: StringFilter<"MenuSchedule"> | string
-    scheduleId?: StringFilter<"MenuSchedule"> | string
-    menu?: XOR<MenuScalarRelationFilter, MenuWhereInput>
-    schedule?: XOR<ScheduleScalarRelationFilter, ScheduleWhereInput>
-  }
-
-  export type MenuScheduleOrderByWithRelationInput = {
-    id?: SortOrder
-    menuId?: SortOrder
-    scheduleId?: SortOrder
-    menu?: MenuOrderByWithRelationInput
-    schedule?: ScheduleOrderByWithRelationInput
-  }
-
-  export type MenuScheduleWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: MenuScheduleWhereInput | MenuScheduleWhereInput[]
-    OR?: MenuScheduleWhereInput[]
-    NOT?: MenuScheduleWhereInput | MenuScheduleWhereInput[]
-    menuId?: StringFilter<"MenuSchedule"> | string
-    scheduleId?: StringFilter<"MenuSchedule"> | string
-    menu?: XOR<MenuScalarRelationFilter, MenuWhereInput>
-    schedule?: XOR<ScheduleScalarRelationFilter, ScheduleWhereInput>
-  }, "id">
-
-  export type MenuScheduleOrderByWithAggregationInput = {
-    id?: SortOrder
-    menuId?: SortOrder
-    scheduleId?: SortOrder
-    _count?: MenuScheduleCountOrderByAggregateInput
-    _max?: MenuScheduleMaxOrderByAggregateInput
-    _min?: MenuScheduleMinOrderByAggregateInput
-  }
-
-  export type MenuScheduleScalarWhereWithAggregatesInput = {
-    AND?: MenuScheduleScalarWhereWithAggregatesInput | MenuScheduleScalarWhereWithAggregatesInput[]
-    OR?: MenuScheduleScalarWhereWithAggregatesInput[]
-    NOT?: MenuScheduleScalarWhereWithAggregatesInput | MenuScheduleScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"MenuSchedule"> | string
-    menuId?: StringWithAggregatesFilter<"MenuSchedule"> | string
-    scheduleId?: StringWithAggregatesFilter<"MenuSchedule"> | string
   }
 
   export type MenuTranslationWhereInput = {
@@ -115392,30 +113054,28 @@ export namespace Prisma {
     OR?: ScheduleWhereInput[]
     NOT?: ScheduleWhereInput | ScheduleWhereInput[]
     id?: StringFilter<"Schedule"> | string
-    openTime?: StringFilter<"Schedule"> | string
-    closeTime?: StringFilter<"Schedule"> | string
-    dayOfWeek?: EnumDayOfWeekFilter<"Schedule"> | $Enums.DayOfWeek
+    name?: StringFilter<"Schedule"> | string
     type?: EnumScheduleTypeFilter<"Schedule"> | $Enums.ScheduleType
     createdAt?: DateTimeFilter<"Schedule"> | Date | string
     updatedAt?: DateTimeFilter<"Schedule"> | Date | string
-    establishmentSchedule?: EstablishmentScheduleListRelationFilter
-    menuSchedule?: MenuScheduleListRelationFilter
-    discountSchedule?: DiscountScheduleListRelationFilter
-    promotionSchedule?: PromotionScheduleListRelationFilter
+    days?: ScheduleDayListRelationFilter
+    establishment?: XOR<EstablishmentNullableScalarRelationFilter, EstablishmentWhereInput> | null
+    menus?: MenuListRelationFilter
+    discounts?: DiscountListRelationFilter
+    promotions?: PromotionListRelationFilter
   }
 
   export type ScheduleOrderByWithRelationInput = {
     id?: SortOrder
-    openTime?: SortOrder
-    closeTime?: SortOrder
-    dayOfWeek?: SortOrder
+    name?: SortOrder
     type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    establishmentSchedule?: EstablishmentScheduleOrderByRelationAggregateInput
-    menuSchedule?: MenuScheduleOrderByRelationAggregateInput
-    discountSchedule?: DiscountScheduleOrderByRelationAggregateInput
-    promotionSchedule?: PromotionScheduleOrderByRelationAggregateInput
+    days?: ScheduleDayOrderByRelationAggregateInput
+    establishment?: EstablishmentOrderByWithRelationInput
+    menus?: MenuOrderByRelationAggregateInput
+    discounts?: DiscountOrderByRelationAggregateInput
+    promotions?: PromotionOrderByRelationAggregateInput
   }
 
   export type ScheduleWhereUniqueInput = Prisma.AtLeast<{
@@ -115423,23 +113083,20 @@ export namespace Prisma {
     AND?: ScheduleWhereInput | ScheduleWhereInput[]
     OR?: ScheduleWhereInput[]
     NOT?: ScheduleWhereInput | ScheduleWhereInput[]
-    openTime?: StringFilter<"Schedule"> | string
-    closeTime?: StringFilter<"Schedule"> | string
-    dayOfWeek?: EnumDayOfWeekFilter<"Schedule"> | $Enums.DayOfWeek
+    name?: StringFilter<"Schedule"> | string
     type?: EnumScheduleTypeFilter<"Schedule"> | $Enums.ScheduleType
     createdAt?: DateTimeFilter<"Schedule"> | Date | string
     updatedAt?: DateTimeFilter<"Schedule"> | Date | string
-    establishmentSchedule?: EstablishmentScheduleListRelationFilter
-    menuSchedule?: MenuScheduleListRelationFilter
-    discountSchedule?: DiscountScheduleListRelationFilter
-    promotionSchedule?: PromotionScheduleListRelationFilter
+    days?: ScheduleDayListRelationFilter
+    establishment?: XOR<EstablishmentNullableScalarRelationFilter, EstablishmentWhereInput> | null
+    menus?: MenuListRelationFilter
+    discounts?: DiscountListRelationFilter
+    promotions?: PromotionListRelationFilter
   }, "id">
 
   export type ScheduleOrderByWithAggregationInput = {
     id?: SortOrder
-    openTime?: SortOrder
-    closeTime?: SortOrder
-    dayOfWeek?: SortOrder
+    name?: SortOrder
     type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -115453,12 +113110,134 @@ export namespace Prisma {
     OR?: ScheduleScalarWhereWithAggregatesInput[]
     NOT?: ScheduleScalarWhereWithAggregatesInput | ScheduleScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Schedule"> | string
-    openTime?: StringWithAggregatesFilter<"Schedule"> | string
-    closeTime?: StringWithAggregatesFilter<"Schedule"> | string
-    dayOfWeek?: EnumDayOfWeekWithAggregatesFilter<"Schedule"> | $Enums.DayOfWeek
+    name?: StringWithAggregatesFilter<"Schedule"> | string
     type?: EnumScheduleTypeWithAggregatesFilter<"Schedule"> | $Enums.ScheduleType
     createdAt?: DateTimeWithAggregatesFilter<"Schedule"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Schedule"> | Date | string
+  }
+
+  export type ScheduleDayWhereInput = {
+    AND?: ScheduleDayWhereInput | ScheduleDayWhereInput[]
+    OR?: ScheduleDayWhereInput[]
+    NOT?: ScheduleDayWhereInput | ScheduleDayWhereInput[]
+    id?: StringFilter<"ScheduleDay"> | string
+    scheduleId?: StringFilter<"ScheduleDay"> | string
+    dayOfWeek?: EnumDayOfWeekFilter<"ScheduleDay"> | $Enums.DayOfWeek
+    isOpen?: BoolFilter<"ScheduleDay"> | boolean
+    createdAt?: DateTimeFilter<"ScheduleDay"> | Date | string
+    updatedAt?: DateTimeFilter<"ScheduleDay"> | Date | string
+    schedule?: XOR<ScheduleScalarRelationFilter, ScheduleWhereInput>
+    intervals?: TimeIntervalListRelationFilter
+  }
+
+  export type ScheduleDayOrderByWithRelationInput = {
+    id?: SortOrder
+    scheduleId?: SortOrder
+    dayOfWeek?: SortOrder
+    isOpen?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    schedule?: ScheduleOrderByWithRelationInput
+    intervals?: TimeIntervalOrderByRelationAggregateInput
+  }
+
+  export type ScheduleDayWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    scheduleId_dayOfWeek?: ScheduleDayScheduleIdDayOfWeekCompoundUniqueInput
+    AND?: ScheduleDayWhereInput | ScheduleDayWhereInput[]
+    OR?: ScheduleDayWhereInput[]
+    NOT?: ScheduleDayWhereInput | ScheduleDayWhereInput[]
+    scheduleId?: StringFilter<"ScheduleDay"> | string
+    dayOfWeek?: EnumDayOfWeekFilter<"ScheduleDay"> | $Enums.DayOfWeek
+    isOpen?: BoolFilter<"ScheduleDay"> | boolean
+    createdAt?: DateTimeFilter<"ScheduleDay"> | Date | string
+    updatedAt?: DateTimeFilter<"ScheduleDay"> | Date | string
+    schedule?: XOR<ScheduleScalarRelationFilter, ScheduleWhereInput>
+    intervals?: TimeIntervalListRelationFilter
+  }, "id" | "scheduleId_dayOfWeek">
+
+  export type ScheduleDayOrderByWithAggregationInput = {
+    id?: SortOrder
+    scheduleId?: SortOrder
+    dayOfWeek?: SortOrder
+    isOpen?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ScheduleDayCountOrderByAggregateInput
+    _max?: ScheduleDayMaxOrderByAggregateInput
+    _min?: ScheduleDayMinOrderByAggregateInput
+  }
+
+  export type ScheduleDayScalarWhereWithAggregatesInput = {
+    AND?: ScheduleDayScalarWhereWithAggregatesInput | ScheduleDayScalarWhereWithAggregatesInput[]
+    OR?: ScheduleDayScalarWhereWithAggregatesInput[]
+    NOT?: ScheduleDayScalarWhereWithAggregatesInput | ScheduleDayScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ScheduleDay"> | string
+    scheduleId?: StringWithAggregatesFilter<"ScheduleDay"> | string
+    dayOfWeek?: EnumDayOfWeekWithAggregatesFilter<"ScheduleDay"> | $Enums.DayOfWeek
+    isOpen?: BoolWithAggregatesFilter<"ScheduleDay"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ScheduleDay"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ScheduleDay"> | Date | string
+  }
+
+  export type TimeIntervalWhereInput = {
+    AND?: TimeIntervalWhereInput | TimeIntervalWhereInput[]
+    OR?: TimeIntervalWhereInput[]
+    NOT?: TimeIntervalWhereInput | TimeIntervalWhereInput[]
+    id?: StringFilter<"TimeInterval"> | string
+    scheduleDayId?: StringFilter<"TimeInterval"> | string
+    startTime?: StringFilter<"TimeInterval"> | string
+    endTime?: StringFilter<"TimeInterval"> | string
+    createdAt?: DateTimeFilter<"TimeInterval"> | Date | string
+    updatedAt?: DateTimeFilter<"TimeInterval"> | Date | string
+    scheduleDay?: XOR<ScheduleDayScalarRelationFilter, ScheduleDayWhereInput>
+  }
+
+  export type TimeIntervalOrderByWithRelationInput = {
+    id?: SortOrder
+    scheduleDayId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    scheduleDay?: ScheduleDayOrderByWithRelationInput
+  }
+
+  export type TimeIntervalWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TimeIntervalWhereInput | TimeIntervalWhereInput[]
+    OR?: TimeIntervalWhereInput[]
+    NOT?: TimeIntervalWhereInput | TimeIntervalWhereInput[]
+    scheduleDayId?: StringFilter<"TimeInterval"> | string
+    startTime?: StringFilter<"TimeInterval"> | string
+    endTime?: StringFilter<"TimeInterval"> | string
+    createdAt?: DateTimeFilter<"TimeInterval"> | Date | string
+    updatedAt?: DateTimeFilter<"TimeInterval"> | Date | string
+    scheduleDay?: XOR<ScheduleDayScalarRelationFilter, ScheduleDayWhereInput>
+  }, "id">
+
+  export type TimeIntervalOrderByWithAggregationInput = {
+    id?: SortOrder
+    scheduleDayId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TimeIntervalCountOrderByAggregateInput
+    _max?: TimeIntervalMaxOrderByAggregateInput
+    _min?: TimeIntervalMinOrderByAggregateInput
+  }
+
+  export type TimeIntervalScalarWhereWithAggregatesInput = {
+    AND?: TimeIntervalScalarWhereWithAggregatesInput | TimeIntervalScalarWhereWithAggregatesInput[]
+    OR?: TimeIntervalScalarWhereWithAggregatesInput[]
+    NOT?: TimeIntervalScalarWhereWithAggregatesInput | TimeIntervalScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TimeInterval"> | string
+    scheduleDayId?: StringWithAggregatesFilter<"TimeInterval"> | string
+    startTime?: StringWithAggregatesFilter<"TimeInterval"> | string
+    endTime?: StringWithAggregatesFilter<"TimeInterval"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"TimeInterval"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TimeInterval"> | Date | string
   }
 
   export type StockWarehouseWhereInput = {
@@ -118595,13 +116374,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     establishment: EstablishmentCreateNestedOneWithoutDiscountsInput
+    schedule?: ScheduleCreateNestedOneWithoutDiscountsInput
     targets?: DiscountTargetCreateNestedManyWithoutDiscountInput
-    schedules?: DiscountScheduleCreateNestedManyWithoutDiscountInput
   }
 
   export type DiscountUncheckedCreateInput = {
     id?: string
     establishmentId: string
+    scheduleId?: string | null
     name: string
     description?: string | null
     type: $Enums.DiscountType
@@ -118613,7 +116393,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     targets?: DiscountTargetUncheckedCreateNestedManyWithoutDiscountInput
-    schedules?: DiscountScheduleUncheckedCreateNestedManyWithoutDiscountInput
   }
 
   export type DiscountUpdateInput = {
@@ -118629,13 +116408,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     establishment?: EstablishmentUpdateOneRequiredWithoutDiscountsNestedInput
+    schedule?: ScheduleUpdateOneWithoutDiscountsNestedInput
     targets?: DiscountTargetUpdateManyWithoutDiscountNestedInput
-    schedules?: DiscountScheduleUpdateManyWithoutDiscountNestedInput
   }
 
   export type DiscountUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
@@ -118647,12 +116427,12 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     targets?: DiscountTargetUncheckedUpdateManyWithoutDiscountNestedInput
-    schedules?: DiscountScheduleUncheckedUpdateManyWithoutDiscountNestedInput
   }
 
   export type DiscountCreateManyInput = {
     id?: string
     establishmentId: string
+    scheduleId?: string | null
     name: string
     description?: string | null
     type: $Enums.DiscountType
@@ -118682,6 +116462,7 @@ export namespace Prisma {
   export type DiscountUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
@@ -118741,46 +116522,6 @@ export namespace Prisma {
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type DiscountScheduleCreateInput = {
-    id?: string
-    discount: DiscountCreateNestedOneWithoutSchedulesInput
-    schedule: ScheduleCreateNestedOneWithoutDiscountScheduleInput
-  }
-
-  export type DiscountScheduleUncheckedCreateInput = {
-    id?: string
-    discountId: string
-    scheduleId: string
-  }
-
-  export type DiscountScheduleUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    discount?: DiscountUpdateOneRequiredWithoutSchedulesNestedInput
-    schedule?: ScheduleUpdateOneRequiredWithoutDiscountScheduleNestedInput
-  }
-
-  export type DiscountScheduleUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    discountId?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type DiscountScheduleCreateManyInput = {
-    id?: string
-    discountId: string
-    scheduleId: string
-  }
-
-  export type DiscountScheduleUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type DiscountScheduleUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    discountId?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
-  }
-
   export type PromotionCreateInput = {
     id?: string
     name: string
@@ -118792,13 +116533,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     establishment: EstablishmentCreateNestedOneWithoutPromotionsInput
+    schedule?: ScheduleCreateNestedOneWithoutPromotionsInput
     buyXGetYRule?: BuyXGetYRuleCreateNestedOneWithoutPromotionInput
-    schedules?: PromotionScheduleCreateNestedManyWithoutPromotionInput
   }
 
   export type PromotionUncheckedCreateInput = {
     id?: string
     establishmentId: string
+    scheduleId?: string | null
     name: string
     description?: string | null
     type: $Enums.PromotionType
@@ -118808,7 +116550,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     buyXGetYRule?: BuyXGetYRuleUncheckedCreateNestedOneWithoutPromotionInput
-    schedules?: PromotionScheduleUncheckedCreateNestedManyWithoutPromotionInput
   }
 
   export type PromotionUpdateInput = {
@@ -118822,13 +116563,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     establishment?: EstablishmentUpdateOneRequiredWithoutPromotionsNestedInput
+    schedule?: ScheduleUpdateOneWithoutPromotionsNestedInput
     buyXGetYRule?: BuyXGetYRuleUpdateOneWithoutPromotionNestedInput
-    schedules?: PromotionScheduleUpdateManyWithoutPromotionNestedInput
   }
 
   export type PromotionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumPromotionTypeFieldUpdateOperationsInput | $Enums.PromotionType
@@ -118838,12 +116580,12 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     buyXGetYRule?: BuyXGetYRuleUncheckedUpdateOneWithoutPromotionNestedInput
-    schedules?: PromotionScheduleUncheckedUpdateManyWithoutPromotionNestedInput
   }
 
   export type PromotionCreateManyInput = {
     id?: string
     establishmentId: string
+    scheduleId?: string | null
     name: string
     description?: string | null
     type: $Enums.PromotionType
@@ -118869,6 +116611,7 @@ export namespace Prisma {
   export type PromotionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumPromotionTypeFieldUpdateOperationsInput | $Enums.PromotionType
@@ -118944,46 +116687,6 @@ export namespace Prisma {
     rewardItemId?: StringFieldUpdateOperationsInput | string
     rewardQuantity?: IntFieldUpdateOperationsInput | number
     applyCheapest?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type PromotionScheduleCreateInput = {
-    id?: string
-    promotion: PromotionCreateNestedOneWithoutSchedulesInput
-    schedule: ScheduleCreateNestedOneWithoutPromotionScheduleInput
-  }
-
-  export type PromotionScheduleUncheckedCreateInput = {
-    id?: string
-    promotionId: string
-    scheduleId: string
-  }
-
-  export type PromotionScheduleUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    promotion?: PromotionUpdateOneRequiredWithoutSchedulesNestedInput
-    schedule?: ScheduleUpdateOneRequiredWithoutPromotionScheduleNestedInput
-  }
-
-  export type PromotionScheduleUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    promotionId?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PromotionScheduleCreateManyInput = {
-    id?: string
-    promotionId: string
-    scheduleId: string
-  }
-
-  export type PromotionScheduleUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PromotionScheduleUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    promotionId?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmailLogCreateInput = {
@@ -119396,6 +117099,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -119412,7 +117116,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -119467,6 +117170,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -119482,7 +117186,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -119536,6 +117239,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -119552,7 +117256,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -119607,6 +117310,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -119622,7 +117326,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -119677,6 +117380,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -119747,49 +117451,10 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type EstablishmentScheduleCreateInput = {
-    id?: string
-    establishment: EstablishmentCreateNestedOneWithoutEstablishmentScheduleInput
-    schedule: ScheduleCreateNestedOneWithoutEstablishmentScheduleInput
-  }
-
-  export type EstablishmentScheduleUncheckedCreateInput = {
-    id?: string
-    establishmentId: string
-    scheduleId: string
-  }
-
-  export type EstablishmentScheduleUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    establishment?: EstablishmentUpdateOneRequiredWithoutEstablishmentScheduleNestedInput
-    schedule?: ScheduleUpdateOneRequiredWithoutEstablishmentScheduleNestedInput
-  }
-
-  export type EstablishmentScheduleUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type EstablishmentScheduleCreateManyInput = {
-    id?: string
-    establishmentId: string
-    scheduleId: string
-  }
-
-  export type EstablishmentScheduleUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type EstablishmentScheduleUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EstablishmentBookingSettingsCreateInput = {
@@ -121698,8 +119363,8 @@ export namespace Prisma {
     price?: number | null
     type?: $Enums.MenuType
     establishment: EstablishmentCreateNestedOneWithoutMenusInput
+    schedule?: ScheduleCreateNestedOneWithoutMenusInput
     categories?: MenuCategoryCreateNestedManyWithoutMenuInput
-    menuSchedule?: MenuScheduleCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationCreateNestedManyWithoutMenuInput
   }
 
@@ -121710,13 +119375,13 @@ export namespace Prisma {
     isHighlighted?: boolean
     color?: string | null
     establishmentId: string
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
     type?: $Enums.MenuType
     categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
-    menuSchedule?: MenuScheduleUncheckedCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
   }
 
@@ -121732,8 +119397,8 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     establishment?: EstablishmentUpdateOneRequiredWithoutMenusNestedInput
+    schedule?: ScheduleUpdateOneWithoutMenusNestedInput
     categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
-    menuSchedule?: MenuScheduleUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUpdateManyWithoutMenuNestedInput
   }
 
@@ -121744,13 +119409,13 @@ export namespace Prisma {
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     establishmentId?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
-    menuSchedule?: MenuScheduleUncheckedUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
   }
 
@@ -121761,6 +119426,7 @@ export namespace Prisma {
     isHighlighted?: boolean
     color?: string | null
     establishmentId: string
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
@@ -121788,51 +119454,12 @@ export namespace Prisma {
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     establishmentId?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
-  }
-
-  export type MenuScheduleCreateInput = {
-    id?: string
-    menu: MenuCreateNestedOneWithoutMenuScheduleInput
-    schedule: ScheduleCreateNestedOneWithoutMenuScheduleInput
-  }
-
-  export type MenuScheduleUncheckedCreateInput = {
-    id?: string
-    menuId: string
-    scheduleId: string
-  }
-
-  export type MenuScheduleUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    menu?: MenuUpdateOneRequiredWithoutMenuScheduleNestedInput
-    schedule?: ScheduleUpdateOneRequiredWithoutMenuScheduleNestedInput
-  }
-
-  export type MenuScheduleUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    menuId?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MenuScheduleCreateManyInput = {
-    id?: string
-    menuId: string
-    scheduleId: string
-  }
-
-  export type MenuScheduleUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MenuScheduleUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    menuId?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MenuTranslationCreateInput = {
@@ -122677,65 +120304,59 @@ export namespace Prisma {
 
   export type ScheduleCreateInput = {
     id?: string
-    openTime: string
-    closeTime: string
-    dayOfWeek: $Enums.DayOfWeek
+    name: string
     type: $Enums.ScheduleType
     createdAt?: Date | string
     updatedAt?: Date | string
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutScheduleInput
-    menuSchedule?: MenuScheduleCreateNestedManyWithoutScheduleInput
-    discountSchedule?: DiscountScheduleCreateNestedManyWithoutScheduleInput
-    promotionSchedule?: PromotionScheduleCreateNestedManyWithoutScheduleInput
+    days?: ScheduleDayCreateNestedManyWithoutScheduleInput
+    establishment?: EstablishmentCreateNestedOneWithoutScheduleInput
+    menus?: MenuCreateNestedManyWithoutScheduleInput
+    discounts?: DiscountCreateNestedManyWithoutScheduleInput
+    promotions?: PromotionCreateNestedManyWithoutScheduleInput
   }
 
   export type ScheduleUncheckedCreateInput = {
     id?: string
-    openTime: string
-    closeTime: string
-    dayOfWeek: $Enums.DayOfWeek
+    name: string
     type: $Enums.ScheduleType
     createdAt?: Date | string
     updatedAt?: Date | string
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutScheduleInput
-    menuSchedule?: MenuScheduleUncheckedCreateNestedManyWithoutScheduleInput
-    discountSchedule?: DiscountScheduleUncheckedCreateNestedManyWithoutScheduleInput
-    promotionSchedule?: PromotionScheduleUncheckedCreateNestedManyWithoutScheduleInput
+    days?: ScheduleDayUncheckedCreateNestedManyWithoutScheduleInput
+    establishment?: EstablishmentUncheckedCreateNestedOneWithoutScheduleInput
+    menus?: MenuUncheckedCreateNestedManyWithoutScheduleInput
+    discounts?: DiscountUncheckedCreateNestedManyWithoutScheduleInput
+    promotions?: PromotionUncheckedCreateNestedManyWithoutScheduleInput
   }
 
   export type ScheduleUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    openTime?: StringFieldUpdateOperationsInput | string
-    closeTime?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    name?: StringFieldUpdateOperationsInput | string
     type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutScheduleNestedInput
-    menuSchedule?: MenuScheduleUpdateManyWithoutScheduleNestedInput
-    discountSchedule?: DiscountScheduleUpdateManyWithoutScheduleNestedInput
-    promotionSchedule?: PromotionScheduleUpdateManyWithoutScheduleNestedInput
+    days?: ScheduleDayUpdateManyWithoutScheduleNestedInput
+    establishment?: EstablishmentUpdateOneWithoutScheduleNestedInput
+    menus?: MenuUpdateManyWithoutScheduleNestedInput
+    discounts?: DiscountUpdateManyWithoutScheduleNestedInput
+    promotions?: PromotionUpdateManyWithoutScheduleNestedInput
   }
 
   export type ScheduleUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    openTime?: StringFieldUpdateOperationsInput | string
-    closeTime?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    name?: StringFieldUpdateOperationsInput | string
     type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-    menuSchedule?: MenuScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-    discountSchedule?: DiscountScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-    promotionSchedule?: PromotionScheduleUncheckedUpdateManyWithoutScheduleNestedInput
+    days?: ScheduleDayUncheckedUpdateManyWithoutScheduleNestedInput
+    establishment?: EstablishmentUncheckedUpdateOneWithoutScheduleNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutScheduleNestedInput
+    discounts?: DiscountUncheckedUpdateManyWithoutScheduleNestedInput
+    promotions?: PromotionUncheckedUpdateManyWithoutScheduleNestedInput
   }
 
   export type ScheduleCreateManyInput = {
     id?: string
-    openTime: string
-    closeTime: string
-    dayOfWeek: $Enums.DayOfWeek
+    name: string
     type: $Enums.ScheduleType
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -122743,9 +120364,7 @@ export namespace Prisma {
 
   export type ScheduleUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    openTime?: StringFieldUpdateOperationsInput | string
-    closeTime?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    name?: StringFieldUpdateOperationsInput | string
     type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -122753,10 +120372,136 @@ export namespace Prisma {
 
   export type ScheduleUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    openTime?: StringFieldUpdateOperationsInput | string
-    closeTime?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    name?: StringFieldUpdateOperationsInput | string
     type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduleDayCreateInput = {
+    id?: string
+    dayOfWeek: $Enums.DayOfWeek
+    isOpen?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedule: ScheduleCreateNestedOneWithoutDaysInput
+    intervals?: TimeIntervalCreateNestedManyWithoutScheduleDayInput
+  }
+
+  export type ScheduleDayUncheckedCreateInput = {
+    id?: string
+    scheduleId: string
+    dayOfWeek: $Enums.DayOfWeek
+    isOpen?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intervals?: TimeIntervalUncheckedCreateNestedManyWithoutScheduleDayInput
+  }
+
+  export type ScheduleDayUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    isOpen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneRequiredWithoutDaysNestedInput
+    intervals?: TimeIntervalUpdateManyWithoutScheduleDayNestedInput
+  }
+
+  export type ScheduleDayUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scheduleId?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    isOpen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intervals?: TimeIntervalUncheckedUpdateManyWithoutScheduleDayNestedInput
+  }
+
+  export type ScheduleDayCreateManyInput = {
+    id?: string
+    scheduleId: string
+    dayOfWeek: $Enums.DayOfWeek
+    isOpen?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ScheduleDayUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    isOpen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduleDayUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scheduleId?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    isOpen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeIntervalCreateInput = {
+    id?: string
+    startTime: string
+    endTime: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    scheduleDay: ScheduleDayCreateNestedOneWithoutIntervalsInput
+  }
+
+  export type TimeIntervalUncheckedCreateInput = {
+    id?: string
+    scheduleDayId: string
+    startTime: string
+    endTime: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TimeIntervalUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleDay?: ScheduleDayUpdateOneRequiredWithoutIntervalsNestedInput
+  }
+
+  export type TimeIntervalUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scheduleDayId?: StringFieldUpdateOperationsInput | string
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeIntervalCreateManyInput = {
+    id?: string
+    scheduleDayId: string
+    startTime: string
+    endTime: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TimeIntervalUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TimeIntervalUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scheduleDayId?: StringFieldUpdateOperationsInput | string
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -126219,29 +123964,25 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type ScheduleNullableScalarRelationFilter = {
+    is?: ScheduleWhereInput | null
+    isNot?: ScheduleWhereInput | null
+  }
+
   export type DiscountTargetListRelationFilter = {
     every?: DiscountTargetWhereInput
     some?: DiscountTargetWhereInput
     none?: DiscountTargetWhereInput
   }
 
-  export type DiscountScheduleListRelationFilter = {
-    every?: DiscountScheduleWhereInput
-    some?: DiscountScheduleWhereInput
-    none?: DiscountScheduleWhereInput
-  }
-
   export type DiscountTargetOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type DiscountScheduleOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type DiscountCountOrderByAggregateInput = {
     id?: SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrder
     name?: SortOrder
     description?: SortOrder
     type?: SortOrder
@@ -126261,6 +124002,7 @@ export namespace Prisma {
   export type DiscountMaxOrderByAggregateInput = {
     id?: SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrder
     name?: SortOrder
     description?: SortOrder
     type?: SortOrder
@@ -126276,6 +124018,7 @@ export namespace Prisma {
   export type DiscountMinOrderByAggregateInput = {
     id?: SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrder
     name?: SortOrder
     description?: SortOrder
     type?: SortOrder
@@ -126349,34 +124092,6 @@ export namespace Prisma {
     posCategoryId?: SortOrder
   }
 
-  export type ScheduleScalarRelationFilter = {
-    is?: ScheduleWhereInput
-    isNot?: ScheduleWhereInput
-  }
-
-  export type DiscountScheduleDiscountIdScheduleIdCompoundUniqueInput = {
-    discountId: string
-    scheduleId: string
-  }
-
-  export type DiscountScheduleCountOrderByAggregateInput = {
-    id?: SortOrder
-    discountId?: SortOrder
-    scheduleId?: SortOrder
-  }
-
-  export type DiscountScheduleMaxOrderByAggregateInput = {
-    id?: SortOrder
-    discountId?: SortOrder
-    scheduleId?: SortOrder
-  }
-
-  export type DiscountScheduleMinOrderByAggregateInput = {
-    id?: SortOrder
-    discountId?: SortOrder
-    scheduleId?: SortOrder
-  }
-
   export type EnumPromotionTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.PromotionType | EnumPromotionTypeFieldRefInput<$PrismaModel>
     in?: $Enums.PromotionType[] | ListEnumPromotionTypeFieldRefInput<$PrismaModel>
@@ -126389,19 +124104,10 @@ export namespace Prisma {
     isNot?: BuyXGetYRuleWhereInput | null
   }
 
-  export type PromotionScheduleListRelationFilter = {
-    every?: PromotionScheduleWhereInput
-    some?: PromotionScheduleWhereInput
-    none?: PromotionScheduleWhereInput
-  }
-
-  export type PromotionScheduleOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type PromotionCountOrderByAggregateInput = {
     id?: SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrder
     name?: SortOrder
     description?: SortOrder
     type?: SortOrder
@@ -126415,6 +124121,7 @@ export namespace Prisma {
   export type PromotionMaxOrderByAggregateInput = {
     id?: SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrder
     name?: SortOrder
     description?: SortOrder
     type?: SortOrder
@@ -126428,6 +124135,7 @@ export namespace Prisma {
   export type PromotionMinOrderByAggregateInput = {
     id?: SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrder
     name?: SortOrder
     description?: SortOrder
     type?: SortOrder
@@ -126496,29 +124204,6 @@ export namespace Prisma {
   export type BuyXGetYRuleSumOrderByAggregateInput = {
     requiredQuantity?: SortOrder
     rewardQuantity?: SortOrder
-  }
-
-  export type PromotionSchedulePromotionIdScheduleIdCompoundUniqueInput = {
-    promotionId: string
-    scheduleId: string
-  }
-
-  export type PromotionScheduleCountOrderByAggregateInput = {
-    id?: SortOrder
-    promotionId?: SortOrder
-    scheduleId?: SortOrder
-  }
-
-  export type PromotionScheduleMaxOrderByAggregateInput = {
-    id?: SortOrder
-    promotionId?: SortOrder
-    scheduleId?: SortOrder
-  }
-
-  export type PromotionScheduleMinOrderByAggregateInput = {
-    id?: SortOrder
-    promotionId?: SortOrder
-    scheduleId?: SortOrder
   }
 
   export type EnumEmailTemplateFilter<$PrismaModel = never> = {
@@ -126956,12 +124641,6 @@ export namespace Prisma {
     none?: EstablishmentAvailabilityWhereInput
   }
 
-  export type EstablishmentScheduleListRelationFilter = {
-    every?: EstablishmentScheduleWhereInput
-    some?: EstablishmentScheduleWhereInput
-    none?: EstablishmentScheduleWhereInput
-  }
-
   export type EstablishmentIntegrationsNullableScalarRelationFilter = {
     is?: EstablishmentIntegrationsWhereInput | null
     isNot?: EstablishmentIntegrationsWhereInput | null
@@ -127115,10 +124794,6 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type EstablishmentScheduleOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type InvoiceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -127219,6 +124894,7 @@ export namespace Prisma {
     logoImageId?: SortOrder
     bannerImageId?: SortOrder
     activeThemeId?: SortOrder
+    scheduleId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -127255,6 +124931,7 @@ export namespace Prisma {
     logoImageId?: SortOrder
     bannerImageId?: SortOrder
     activeThemeId?: SortOrder
+    scheduleId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -127291,6 +124968,7 @@ export namespace Prisma {
     logoImageId?: SortOrder
     bannerImageId?: SortOrder
     activeThemeId?: SortOrder
+    scheduleId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -127334,24 +125012,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumCurrencyFilter<$PrismaModel>
     _max?: NestedEnumCurrencyFilter<$PrismaModel>
-  }
-
-  export type EstablishmentScheduleCountOrderByAggregateInput = {
-    id?: SortOrder
-    establishmentId?: SortOrder
-    scheduleId?: SortOrder
-  }
-
-  export type EstablishmentScheduleMaxOrderByAggregateInput = {
-    id?: SortOrder
-    establishmentId?: SortOrder
-    scheduleId?: SortOrder
-  }
-
-  export type EstablishmentScheduleMinOrderByAggregateInput = {
-    id?: SortOrder
-    establishmentId?: SortOrder
-    scheduleId?: SortOrder
   }
 
   export type EstablishmentBookingSettingsCountOrderByAggregateInput = {
@@ -128756,20 +126416,10 @@ export namespace Prisma {
     not?: NestedEnumMenuTypeFilter<$PrismaModel> | $Enums.MenuType
   }
 
-  export type MenuScheduleListRelationFilter = {
-    every?: MenuScheduleWhereInput
-    some?: MenuScheduleWhereInput
-    none?: MenuScheduleWhereInput
-  }
-
   export type MenuTranslationListRelationFilter = {
     every?: MenuTranslationWhereInput
     some?: MenuTranslationWhereInput
     none?: MenuTranslationWhereInput
-  }
-
-  export type MenuScheduleOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type MenuTranslationOrderByRelationAggregateInput = {
@@ -128783,6 +126433,7 @@ export namespace Prisma {
     isHighlighted?: SortOrder
     color?: SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     maxItemsPerOrder?: SortOrder
@@ -128803,6 +126454,7 @@ export namespace Prisma {
     isHighlighted?: SortOrder
     color?: SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     maxItemsPerOrder?: SortOrder
@@ -128817,6 +126469,7 @@ export namespace Prisma {
     isHighlighted?: SortOrder
     color?: SortOrder
     establishmentId?: SortOrder
+    scheduleId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     maxItemsPerOrder?: SortOrder
@@ -128843,24 +126496,6 @@ export namespace Prisma {
   export type MenuScalarRelationFilter = {
     is?: MenuWhereInput
     isNot?: MenuWhereInput
-  }
-
-  export type MenuScheduleCountOrderByAggregateInput = {
-    id?: SortOrder
-    menuId?: SortOrder
-    scheduleId?: SortOrder
-  }
-
-  export type MenuScheduleMaxOrderByAggregateInput = {
-    id?: SortOrder
-    menuId?: SortOrder
-    scheduleId?: SortOrder
-  }
-
-  export type MenuScheduleMinOrderByAggregateInput = {
-    id?: SortOrder
-    menuId?: SortOrder
-    scheduleId?: SortOrder
   }
 
   export type MenuTranslationMenuIdLocaleCompoundUniqueInput = {
@@ -129346,13 +126981,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type EnumDayOfWeekFilter<$PrismaModel = never> = {
-    equals?: $Enums.DayOfWeek | EnumDayOfWeekFieldRefInput<$PrismaModel>
-    in?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
-    not?: NestedEnumDayOfWeekFilter<$PrismaModel> | $Enums.DayOfWeek
-  }
-
   export type EnumScheduleTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ScheduleType | EnumScheduleTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ScheduleType[] | ListEnumScheduleTypeFieldRefInput<$PrismaModel>
@@ -129360,11 +126988,19 @@ export namespace Prisma {
     not?: NestedEnumScheduleTypeFilter<$PrismaModel> | $Enums.ScheduleType
   }
 
+  export type ScheduleDayListRelationFilter = {
+    every?: ScheduleDayWhereInput
+    some?: ScheduleDayWhereInput
+    none?: ScheduleDayWhereInput
+  }
+
+  export type ScheduleDayOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ScheduleCountOrderByAggregateInput = {
     id?: SortOrder
-    openTime?: SortOrder
-    closeTime?: SortOrder
-    dayOfWeek?: SortOrder
+    name?: SortOrder
     type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -129372,9 +127008,7 @@ export namespace Prisma {
 
   export type ScheduleMaxOrderByAggregateInput = {
     id?: SortOrder
-    openTime?: SortOrder
-    closeTime?: SortOrder
-    dayOfWeek?: SortOrder
+    name?: SortOrder
     type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -129382,10 +127016,72 @@ export namespace Prisma {
 
   export type ScheduleMinOrderByAggregateInput = {
     id?: SortOrder
-    openTime?: SortOrder
-    closeTime?: SortOrder
-    dayOfWeek?: SortOrder
+    name?: SortOrder
     type?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumScheduleTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ScheduleType | EnumScheduleTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ScheduleType[] | ListEnumScheduleTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ScheduleType[] | ListEnumScheduleTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumScheduleTypeWithAggregatesFilter<$PrismaModel> | $Enums.ScheduleType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumScheduleTypeFilter<$PrismaModel>
+    _max?: NestedEnumScheduleTypeFilter<$PrismaModel>
+  }
+
+  export type EnumDayOfWeekFilter<$PrismaModel = never> = {
+    equals?: $Enums.DayOfWeek | EnumDayOfWeekFieldRefInput<$PrismaModel>
+    in?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    not?: NestedEnumDayOfWeekFilter<$PrismaModel> | $Enums.DayOfWeek
+  }
+
+  export type ScheduleScalarRelationFilter = {
+    is?: ScheduleWhereInput
+    isNot?: ScheduleWhereInput
+  }
+
+  export type TimeIntervalListRelationFilter = {
+    every?: TimeIntervalWhereInput
+    some?: TimeIntervalWhereInput
+    none?: TimeIntervalWhereInput
+  }
+
+  export type TimeIntervalOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ScheduleDayScheduleIdDayOfWeekCompoundUniqueInput = {
+    scheduleId: string
+    dayOfWeek: $Enums.DayOfWeek
+  }
+
+  export type ScheduleDayCountOrderByAggregateInput = {
+    id?: SortOrder
+    scheduleId?: SortOrder
+    dayOfWeek?: SortOrder
+    isOpen?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ScheduleDayMaxOrderByAggregateInput = {
+    id?: SortOrder
+    scheduleId?: SortOrder
+    dayOfWeek?: SortOrder
+    isOpen?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ScheduleDayMinOrderByAggregateInput = {
+    id?: SortOrder
+    scheduleId?: SortOrder
+    dayOfWeek?: SortOrder
+    isOpen?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -129400,14 +127096,36 @@ export namespace Prisma {
     _max?: NestedEnumDayOfWeekFilter<$PrismaModel>
   }
 
-  export type EnumScheduleTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ScheduleType | EnumScheduleTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.ScheduleType[] | ListEnumScheduleTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ScheduleType[] | ListEnumScheduleTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumScheduleTypeWithAggregatesFilter<$PrismaModel> | $Enums.ScheduleType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumScheduleTypeFilter<$PrismaModel>
-    _max?: NestedEnumScheduleTypeFilter<$PrismaModel>
+  export type ScheduleDayScalarRelationFilter = {
+    is?: ScheduleDayWhereInput
+    isNot?: ScheduleDayWhereInput
+  }
+
+  export type TimeIntervalCountOrderByAggregateInput = {
+    id?: SortOrder
+    scheduleDayId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TimeIntervalMaxOrderByAggregateInput = {
+    id?: SortOrder
+    scheduleDayId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TimeIntervalMinOrderByAggregateInput = {
+    id?: SortOrder
+    scheduleDayId?: SortOrder
+    startTime?: SortOrder
+    endTime?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StockLocationListRelationFilter = {
@@ -131660,6 +129378,12 @@ export namespace Prisma {
     connect?: EstablishmentWhereUniqueInput
   }
 
+  export type ScheduleCreateNestedOneWithoutDiscountsInput = {
+    create?: XOR<ScheduleCreateWithoutDiscountsInput, ScheduleUncheckedCreateWithoutDiscountsInput>
+    connectOrCreate?: ScheduleCreateOrConnectWithoutDiscountsInput
+    connect?: ScheduleWhereUniqueInput
+  }
+
   export type DiscountTargetCreateNestedManyWithoutDiscountInput = {
     create?: XOR<DiscountTargetCreateWithoutDiscountInput, DiscountTargetUncheckedCreateWithoutDiscountInput> | DiscountTargetCreateWithoutDiscountInput[] | DiscountTargetUncheckedCreateWithoutDiscountInput[]
     connectOrCreate?: DiscountTargetCreateOrConnectWithoutDiscountInput | DiscountTargetCreateOrConnectWithoutDiscountInput[]
@@ -131667,25 +129391,11 @@ export namespace Prisma {
     connect?: DiscountTargetWhereUniqueInput | DiscountTargetWhereUniqueInput[]
   }
 
-  export type DiscountScheduleCreateNestedManyWithoutDiscountInput = {
-    create?: XOR<DiscountScheduleCreateWithoutDiscountInput, DiscountScheduleUncheckedCreateWithoutDiscountInput> | DiscountScheduleCreateWithoutDiscountInput[] | DiscountScheduleUncheckedCreateWithoutDiscountInput[]
-    connectOrCreate?: DiscountScheduleCreateOrConnectWithoutDiscountInput | DiscountScheduleCreateOrConnectWithoutDiscountInput[]
-    createMany?: DiscountScheduleCreateManyDiscountInputEnvelope
-    connect?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-  }
-
   export type DiscountTargetUncheckedCreateNestedManyWithoutDiscountInput = {
     create?: XOR<DiscountTargetCreateWithoutDiscountInput, DiscountTargetUncheckedCreateWithoutDiscountInput> | DiscountTargetCreateWithoutDiscountInput[] | DiscountTargetUncheckedCreateWithoutDiscountInput[]
     connectOrCreate?: DiscountTargetCreateOrConnectWithoutDiscountInput | DiscountTargetCreateOrConnectWithoutDiscountInput[]
     createMany?: DiscountTargetCreateManyDiscountInputEnvelope
     connect?: DiscountTargetWhereUniqueInput | DiscountTargetWhereUniqueInput[]
-  }
-
-  export type DiscountScheduleUncheckedCreateNestedManyWithoutDiscountInput = {
-    create?: XOR<DiscountScheduleCreateWithoutDiscountInput, DiscountScheduleUncheckedCreateWithoutDiscountInput> | DiscountScheduleCreateWithoutDiscountInput[] | DiscountScheduleUncheckedCreateWithoutDiscountInput[]
-    connectOrCreate?: DiscountScheduleCreateOrConnectWithoutDiscountInput | DiscountScheduleCreateOrConnectWithoutDiscountInput[]
-    createMany?: DiscountScheduleCreateManyDiscountInputEnvelope
-    connect?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
   }
 
   export type EnumDiscountTypeFieldUpdateOperationsInput = {
@@ -131708,6 +129418,16 @@ export namespace Prisma {
     update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutDiscountsInput, EstablishmentUpdateWithoutDiscountsInput>, EstablishmentUncheckedUpdateWithoutDiscountsInput>
   }
 
+  export type ScheduleUpdateOneWithoutDiscountsNestedInput = {
+    create?: XOR<ScheduleCreateWithoutDiscountsInput, ScheduleUncheckedCreateWithoutDiscountsInput>
+    connectOrCreate?: ScheduleCreateOrConnectWithoutDiscountsInput
+    upsert?: ScheduleUpsertWithoutDiscountsInput
+    disconnect?: ScheduleWhereInput | boolean
+    delete?: ScheduleWhereInput | boolean
+    connect?: ScheduleWhereUniqueInput
+    update?: XOR<XOR<ScheduleUpdateToOneWithWhereWithoutDiscountsInput, ScheduleUpdateWithoutDiscountsInput>, ScheduleUncheckedUpdateWithoutDiscountsInput>
+  }
+
   export type DiscountTargetUpdateManyWithoutDiscountNestedInput = {
     create?: XOR<DiscountTargetCreateWithoutDiscountInput, DiscountTargetUncheckedCreateWithoutDiscountInput> | DiscountTargetCreateWithoutDiscountInput[] | DiscountTargetUncheckedCreateWithoutDiscountInput[]
     connectOrCreate?: DiscountTargetCreateOrConnectWithoutDiscountInput | DiscountTargetCreateOrConnectWithoutDiscountInput[]
@@ -131722,20 +129442,6 @@ export namespace Prisma {
     deleteMany?: DiscountTargetScalarWhereInput | DiscountTargetScalarWhereInput[]
   }
 
-  export type DiscountScheduleUpdateManyWithoutDiscountNestedInput = {
-    create?: XOR<DiscountScheduleCreateWithoutDiscountInput, DiscountScheduleUncheckedCreateWithoutDiscountInput> | DiscountScheduleCreateWithoutDiscountInput[] | DiscountScheduleUncheckedCreateWithoutDiscountInput[]
-    connectOrCreate?: DiscountScheduleCreateOrConnectWithoutDiscountInput | DiscountScheduleCreateOrConnectWithoutDiscountInput[]
-    upsert?: DiscountScheduleUpsertWithWhereUniqueWithoutDiscountInput | DiscountScheduleUpsertWithWhereUniqueWithoutDiscountInput[]
-    createMany?: DiscountScheduleCreateManyDiscountInputEnvelope
-    set?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    disconnect?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    delete?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    connect?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    update?: DiscountScheduleUpdateWithWhereUniqueWithoutDiscountInput | DiscountScheduleUpdateWithWhereUniqueWithoutDiscountInput[]
-    updateMany?: DiscountScheduleUpdateManyWithWhereWithoutDiscountInput | DiscountScheduleUpdateManyWithWhereWithoutDiscountInput[]
-    deleteMany?: DiscountScheduleScalarWhereInput | DiscountScheduleScalarWhereInput[]
-  }
-
   export type DiscountTargetUncheckedUpdateManyWithoutDiscountNestedInput = {
     create?: XOR<DiscountTargetCreateWithoutDiscountInput, DiscountTargetUncheckedCreateWithoutDiscountInput> | DiscountTargetCreateWithoutDiscountInput[] | DiscountTargetUncheckedCreateWithoutDiscountInput[]
     connectOrCreate?: DiscountTargetCreateOrConnectWithoutDiscountInput | DiscountTargetCreateOrConnectWithoutDiscountInput[]
@@ -131748,20 +129454,6 @@ export namespace Prisma {
     update?: DiscountTargetUpdateWithWhereUniqueWithoutDiscountInput | DiscountTargetUpdateWithWhereUniqueWithoutDiscountInput[]
     updateMany?: DiscountTargetUpdateManyWithWhereWithoutDiscountInput | DiscountTargetUpdateManyWithWhereWithoutDiscountInput[]
     deleteMany?: DiscountTargetScalarWhereInput | DiscountTargetScalarWhereInput[]
-  }
-
-  export type DiscountScheduleUncheckedUpdateManyWithoutDiscountNestedInput = {
-    create?: XOR<DiscountScheduleCreateWithoutDiscountInput, DiscountScheduleUncheckedCreateWithoutDiscountInput> | DiscountScheduleCreateWithoutDiscountInput[] | DiscountScheduleUncheckedCreateWithoutDiscountInput[]
-    connectOrCreate?: DiscountScheduleCreateOrConnectWithoutDiscountInput | DiscountScheduleCreateOrConnectWithoutDiscountInput[]
-    upsert?: DiscountScheduleUpsertWithWhereUniqueWithoutDiscountInput | DiscountScheduleUpsertWithWhereUniqueWithoutDiscountInput[]
-    createMany?: DiscountScheduleCreateManyDiscountInputEnvelope
-    set?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    disconnect?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    delete?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    connect?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    update?: DiscountScheduleUpdateWithWhereUniqueWithoutDiscountInput | DiscountScheduleUpdateWithWhereUniqueWithoutDiscountInput[]
-    updateMany?: DiscountScheduleUpdateManyWithWhereWithoutDiscountInput | DiscountScheduleUpdateManyWithWhereWithoutDiscountInput[]
-    deleteMany?: DiscountScheduleScalarWhereInput | DiscountScheduleScalarWhereInput[]
   }
 
   export type DiscountCreateNestedOneWithoutTargetsInput = {
@@ -131794,38 +129486,16 @@ export namespace Prisma {
     update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutDiscountsInput, ItemUpdateWithoutDiscountsInput>, ItemUncheckedUpdateWithoutDiscountsInput>
   }
 
-  export type DiscountCreateNestedOneWithoutSchedulesInput = {
-    create?: XOR<DiscountCreateWithoutSchedulesInput, DiscountUncheckedCreateWithoutSchedulesInput>
-    connectOrCreate?: DiscountCreateOrConnectWithoutSchedulesInput
-    connect?: DiscountWhereUniqueInput
-  }
-
-  export type ScheduleCreateNestedOneWithoutDiscountScheduleInput = {
-    create?: XOR<ScheduleCreateWithoutDiscountScheduleInput, ScheduleUncheckedCreateWithoutDiscountScheduleInput>
-    connectOrCreate?: ScheduleCreateOrConnectWithoutDiscountScheduleInput
-    connect?: ScheduleWhereUniqueInput
-  }
-
-  export type DiscountUpdateOneRequiredWithoutSchedulesNestedInput = {
-    create?: XOR<DiscountCreateWithoutSchedulesInput, DiscountUncheckedCreateWithoutSchedulesInput>
-    connectOrCreate?: DiscountCreateOrConnectWithoutSchedulesInput
-    upsert?: DiscountUpsertWithoutSchedulesInput
-    connect?: DiscountWhereUniqueInput
-    update?: XOR<XOR<DiscountUpdateToOneWithWhereWithoutSchedulesInput, DiscountUpdateWithoutSchedulesInput>, DiscountUncheckedUpdateWithoutSchedulesInput>
-  }
-
-  export type ScheduleUpdateOneRequiredWithoutDiscountScheduleNestedInput = {
-    create?: XOR<ScheduleCreateWithoutDiscountScheduleInput, ScheduleUncheckedCreateWithoutDiscountScheduleInput>
-    connectOrCreate?: ScheduleCreateOrConnectWithoutDiscountScheduleInput
-    upsert?: ScheduleUpsertWithoutDiscountScheduleInput
-    connect?: ScheduleWhereUniqueInput
-    update?: XOR<XOR<ScheduleUpdateToOneWithWhereWithoutDiscountScheduleInput, ScheduleUpdateWithoutDiscountScheduleInput>, ScheduleUncheckedUpdateWithoutDiscountScheduleInput>
-  }
-
   export type EstablishmentCreateNestedOneWithoutPromotionsInput = {
     create?: XOR<EstablishmentCreateWithoutPromotionsInput, EstablishmentUncheckedCreateWithoutPromotionsInput>
     connectOrCreate?: EstablishmentCreateOrConnectWithoutPromotionsInput
     connect?: EstablishmentWhereUniqueInput
+  }
+
+  export type ScheduleCreateNestedOneWithoutPromotionsInput = {
+    create?: XOR<ScheduleCreateWithoutPromotionsInput, ScheduleUncheckedCreateWithoutPromotionsInput>
+    connectOrCreate?: ScheduleCreateOrConnectWithoutPromotionsInput
+    connect?: ScheduleWhereUniqueInput
   }
 
   export type BuyXGetYRuleCreateNestedOneWithoutPromotionInput = {
@@ -131834,24 +129504,10 @@ export namespace Prisma {
     connect?: BuyXGetYRuleWhereUniqueInput
   }
 
-  export type PromotionScheduleCreateNestedManyWithoutPromotionInput = {
-    create?: XOR<PromotionScheduleCreateWithoutPromotionInput, PromotionScheduleUncheckedCreateWithoutPromotionInput> | PromotionScheduleCreateWithoutPromotionInput[] | PromotionScheduleUncheckedCreateWithoutPromotionInput[]
-    connectOrCreate?: PromotionScheduleCreateOrConnectWithoutPromotionInput | PromotionScheduleCreateOrConnectWithoutPromotionInput[]
-    createMany?: PromotionScheduleCreateManyPromotionInputEnvelope
-    connect?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-  }
-
   export type BuyXGetYRuleUncheckedCreateNestedOneWithoutPromotionInput = {
     create?: XOR<BuyXGetYRuleCreateWithoutPromotionInput, BuyXGetYRuleUncheckedCreateWithoutPromotionInput>
     connectOrCreate?: BuyXGetYRuleCreateOrConnectWithoutPromotionInput
     connect?: BuyXGetYRuleWhereUniqueInput
-  }
-
-  export type PromotionScheduleUncheckedCreateNestedManyWithoutPromotionInput = {
-    create?: XOR<PromotionScheduleCreateWithoutPromotionInput, PromotionScheduleUncheckedCreateWithoutPromotionInput> | PromotionScheduleCreateWithoutPromotionInput[] | PromotionScheduleUncheckedCreateWithoutPromotionInput[]
-    connectOrCreate?: PromotionScheduleCreateOrConnectWithoutPromotionInput | PromotionScheduleCreateOrConnectWithoutPromotionInput[]
-    createMany?: PromotionScheduleCreateManyPromotionInputEnvelope
-    connect?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
   }
 
   export type EnumPromotionTypeFieldUpdateOperationsInput = {
@@ -131866,6 +129522,16 @@ export namespace Prisma {
     update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutPromotionsInput, EstablishmentUpdateWithoutPromotionsInput>, EstablishmentUncheckedUpdateWithoutPromotionsInput>
   }
 
+  export type ScheduleUpdateOneWithoutPromotionsNestedInput = {
+    create?: XOR<ScheduleCreateWithoutPromotionsInput, ScheduleUncheckedCreateWithoutPromotionsInput>
+    connectOrCreate?: ScheduleCreateOrConnectWithoutPromotionsInput
+    upsert?: ScheduleUpsertWithoutPromotionsInput
+    disconnect?: ScheduleWhereInput | boolean
+    delete?: ScheduleWhereInput | boolean
+    connect?: ScheduleWhereUniqueInput
+    update?: XOR<XOR<ScheduleUpdateToOneWithWhereWithoutPromotionsInput, ScheduleUpdateWithoutPromotionsInput>, ScheduleUncheckedUpdateWithoutPromotionsInput>
+  }
+
   export type BuyXGetYRuleUpdateOneWithoutPromotionNestedInput = {
     create?: XOR<BuyXGetYRuleCreateWithoutPromotionInput, BuyXGetYRuleUncheckedCreateWithoutPromotionInput>
     connectOrCreate?: BuyXGetYRuleCreateOrConnectWithoutPromotionInput
@@ -131876,20 +129542,6 @@ export namespace Prisma {
     update?: XOR<XOR<BuyXGetYRuleUpdateToOneWithWhereWithoutPromotionInput, BuyXGetYRuleUpdateWithoutPromotionInput>, BuyXGetYRuleUncheckedUpdateWithoutPromotionInput>
   }
 
-  export type PromotionScheduleUpdateManyWithoutPromotionNestedInput = {
-    create?: XOR<PromotionScheduleCreateWithoutPromotionInput, PromotionScheduleUncheckedCreateWithoutPromotionInput> | PromotionScheduleCreateWithoutPromotionInput[] | PromotionScheduleUncheckedCreateWithoutPromotionInput[]
-    connectOrCreate?: PromotionScheduleCreateOrConnectWithoutPromotionInput | PromotionScheduleCreateOrConnectWithoutPromotionInput[]
-    upsert?: PromotionScheduleUpsertWithWhereUniqueWithoutPromotionInput | PromotionScheduleUpsertWithWhereUniqueWithoutPromotionInput[]
-    createMany?: PromotionScheduleCreateManyPromotionInputEnvelope
-    set?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    disconnect?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    delete?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    connect?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    update?: PromotionScheduleUpdateWithWhereUniqueWithoutPromotionInput | PromotionScheduleUpdateWithWhereUniqueWithoutPromotionInput[]
-    updateMany?: PromotionScheduleUpdateManyWithWhereWithoutPromotionInput | PromotionScheduleUpdateManyWithWhereWithoutPromotionInput[]
-    deleteMany?: PromotionScheduleScalarWhereInput | PromotionScheduleScalarWhereInput[]
-  }
-
   export type BuyXGetYRuleUncheckedUpdateOneWithoutPromotionNestedInput = {
     create?: XOR<BuyXGetYRuleCreateWithoutPromotionInput, BuyXGetYRuleUncheckedCreateWithoutPromotionInput>
     connectOrCreate?: BuyXGetYRuleCreateOrConnectWithoutPromotionInput
@@ -131898,20 +129550,6 @@ export namespace Prisma {
     delete?: BuyXGetYRuleWhereInput | boolean
     connect?: BuyXGetYRuleWhereUniqueInput
     update?: XOR<XOR<BuyXGetYRuleUpdateToOneWithWhereWithoutPromotionInput, BuyXGetYRuleUpdateWithoutPromotionInput>, BuyXGetYRuleUncheckedUpdateWithoutPromotionInput>
-  }
-
-  export type PromotionScheduleUncheckedUpdateManyWithoutPromotionNestedInput = {
-    create?: XOR<PromotionScheduleCreateWithoutPromotionInput, PromotionScheduleUncheckedCreateWithoutPromotionInput> | PromotionScheduleCreateWithoutPromotionInput[] | PromotionScheduleUncheckedCreateWithoutPromotionInput[]
-    connectOrCreate?: PromotionScheduleCreateOrConnectWithoutPromotionInput | PromotionScheduleCreateOrConnectWithoutPromotionInput[]
-    upsert?: PromotionScheduleUpsertWithWhereUniqueWithoutPromotionInput | PromotionScheduleUpsertWithWhereUniqueWithoutPromotionInput[]
-    createMany?: PromotionScheduleCreateManyPromotionInputEnvelope
-    set?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    disconnect?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    delete?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    connect?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    update?: PromotionScheduleUpdateWithWhereUniqueWithoutPromotionInput | PromotionScheduleUpdateWithWhereUniqueWithoutPromotionInput[]
-    updateMany?: PromotionScheduleUpdateManyWithWhereWithoutPromotionInput | PromotionScheduleUpdateManyWithWhereWithoutPromotionInput[]
-    deleteMany?: PromotionScheduleScalarWhereInput | PromotionScheduleScalarWhereInput[]
   }
 
   export type PromotionCreateNestedOneWithoutBuyXGetYRuleInput = {
@@ -131954,34 +129592,6 @@ export namespace Prisma {
     upsert?: ItemUpsertWithoutRewardItemRulesInput
     connect?: ItemWhereUniqueInput
     update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutRewardItemRulesInput, ItemUpdateWithoutRewardItemRulesInput>, ItemUncheckedUpdateWithoutRewardItemRulesInput>
-  }
-
-  export type PromotionCreateNestedOneWithoutSchedulesInput = {
-    create?: XOR<PromotionCreateWithoutSchedulesInput, PromotionUncheckedCreateWithoutSchedulesInput>
-    connectOrCreate?: PromotionCreateOrConnectWithoutSchedulesInput
-    connect?: PromotionWhereUniqueInput
-  }
-
-  export type ScheduleCreateNestedOneWithoutPromotionScheduleInput = {
-    create?: XOR<ScheduleCreateWithoutPromotionScheduleInput, ScheduleUncheckedCreateWithoutPromotionScheduleInput>
-    connectOrCreate?: ScheduleCreateOrConnectWithoutPromotionScheduleInput
-    connect?: ScheduleWhereUniqueInput
-  }
-
-  export type PromotionUpdateOneRequiredWithoutSchedulesNestedInput = {
-    create?: XOR<PromotionCreateWithoutSchedulesInput, PromotionUncheckedCreateWithoutSchedulesInput>
-    connectOrCreate?: PromotionCreateOrConnectWithoutSchedulesInput
-    upsert?: PromotionUpsertWithoutSchedulesInput
-    connect?: PromotionWhereUniqueInput
-    update?: XOR<XOR<PromotionUpdateToOneWithWhereWithoutSchedulesInput, PromotionUpdateWithoutSchedulesInput>, PromotionUncheckedUpdateWithoutSchedulesInput>
-  }
-
-  export type ScheduleUpdateOneRequiredWithoutPromotionScheduleNestedInput = {
-    create?: XOR<ScheduleCreateWithoutPromotionScheduleInput, ScheduleUncheckedCreateWithoutPromotionScheduleInput>
-    connectOrCreate?: ScheduleCreateOrConnectWithoutPromotionScheduleInput
-    upsert?: ScheduleUpsertWithoutPromotionScheduleInput
-    connect?: ScheduleWhereUniqueInput
-    update?: XOR<XOR<ScheduleUpdateToOneWithWhereWithoutPromotionScheduleInput, ScheduleUpdateWithoutPromotionScheduleInput>, ScheduleUncheckedUpdateWithoutPromotionScheduleInput>
   }
 
   export type EmailEventCreateNestedManyWithoutEmailLogInput = {
@@ -132104,6 +129714,12 @@ export namespace Prisma {
     set: $Enums.EstablishmentLanguage[]
   }
 
+  export type ScheduleCreateNestedOneWithoutEstablishmentInput = {
+    create?: XOR<ScheduleCreateWithoutEstablishmentInput, ScheduleUncheckedCreateWithoutEstablishmentInput>
+    connectOrCreate?: ScheduleCreateOrConnectWithoutEstablishmentInput
+    connect?: ScheduleWhereUniqueInput
+  }
+
   export type UserCreateNestedOneWithoutEstablishmentsInput = {
     create?: XOR<UserCreateWithoutEstablishmentsInput, UserUncheckedCreateWithoutEstablishmentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutEstablishmentsInput
@@ -132208,13 +129824,6 @@ export namespace Prisma {
     connectOrCreate?: EstablishmentAvailabilityCreateOrConnectWithoutEstablishmentInput | EstablishmentAvailabilityCreateOrConnectWithoutEstablishmentInput[]
     createMany?: EstablishmentAvailabilityCreateManyEstablishmentInputEnvelope
     connect?: EstablishmentAvailabilityWhereUniqueInput | EstablishmentAvailabilityWhereUniqueInput[]
-  }
-
-  export type EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput = {
-    create?: XOR<EstablishmentScheduleCreateWithoutEstablishmentInput, EstablishmentScheduleUncheckedCreateWithoutEstablishmentInput> | EstablishmentScheduleCreateWithoutEstablishmentInput[] | EstablishmentScheduleUncheckedCreateWithoutEstablishmentInput[]
-    connectOrCreate?: EstablishmentScheduleCreateOrConnectWithoutEstablishmentInput | EstablishmentScheduleCreateOrConnectWithoutEstablishmentInput[]
-    createMany?: EstablishmentScheduleCreateManyEstablishmentInputEnvelope
-    connect?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
   }
 
   export type EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput = {
@@ -132436,13 +130045,6 @@ export namespace Prisma {
     connect?: EstablishmentAvailabilityWhereUniqueInput | EstablishmentAvailabilityWhereUniqueInput[]
   }
 
-  export type EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput = {
-    create?: XOR<EstablishmentScheduleCreateWithoutEstablishmentInput, EstablishmentScheduleUncheckedCreateWithoutEstablishmentInput> | EstablishmentScheduleCreateWithoutEstablishmentInput[] | EstablishmentScheduleUncheckedCreateWithoutEstablishmentInput[]
-    connectOrCreate?: EstablishmentScheduleCreateOrConnectWithoutEstablishmentInput | EstablishmentScheduleCreateOrConnectWithoutEstablishmentInput[]
-    createMany?: EstablishmentScheduleCreateManyEstablishmentInputEnvelope
-    connect?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-  }
-
   export type EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput = {
     create?: XOR<EstablishmentIntegrationsCreateWithoutEstablishmentInput, EstablishmentIntegrationsUncheckedCreateWithoutEstablishmentInput>
     connectOrCreate?: EstablishmentIntegrationsCreateOrConnectWithoutEstablishmentInput
@@ -132599,6 +130201,16 @@ export namespace Prisma {
 
   export type EnumCurrencyFieldUpdateOperationsInput = {
     set?: $Enums.Currency
+  }
+
+  export type ScheduleUpdateOneWithoutEstablishmentNestedInput = {
+    create?: XOR<ScheduleCreateWithoutEstablishmentInput, ScheduleUncheckedCreateWithoutEstablishmentInput>
+    connectOrCreate?: ScheduleCreateOrConnectWithoutEstablishmentInput
+    upsert?: ScheduleUpsertWithoutEstablishmentInput
+    disconnect?: ScheduleWhereInput | boolean
+    delete?: ScheduleWhereInput | boolean
+    connect?: ScheduleWhereUniqueInput
+    update?: XOR<XOR<ScheduleUpdateToOneWithWhereWithoutEstablishmentInput, ScheduleUpdateWithoutEstablishmentInput>, ScheduleUncheckedUpdateWithoutEstablishmentInput>
   }
 
   export type UserUpdateOneRequiredWithoutEstablishmentsNestedInput = {
@@ -132797,20 +130409,6 @@ export namespace Prisma {
     update?: EstablishmentAvailabilityUpdateWithWhereUniqueWithoutEstablishmentInput | EstablishmentAvailabilityUpdateWithWhereUniqueWithoutEstablishmentInput[]
     updateMany?: EstablishmentAvailabilityUpdateManyWithWhereWithoutEstablishmentInput | EstablishmentAvailabilityUpdateManyWithWhereWithoutEstablishmentInput[]
     deleteMany?: EstablishmentAvailabilityScalarWhereInput | EstablishmentAvailabilityScalarWhereInput[]
-  }
-
-  export type EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput = {
-    create?: XOR<EstablishmentScheduleCreateWithoutEstablishmentInput, EstablishmentScheduleUncheckedCreateWithoutEstablishmentInput> | EstablishmentScheduleCreateWithoutEstablishmentInput[] | EstablishmentScheduleUncheckedCreateWithoutEstablishmentInput[]
-    connectOrCreate?: EstablishmentScheduleCreateOrConnectWithoutEstablishmentInput | EstablishmentScheduleCreateOrConnectWithoutEstablishmentInput[]
-    upsert?: EstablishmentScheduleUpsertWithWhereUniqueWithoutEstablishmentInput | EstablishmentScheduleUpsertWithWhereUniqueWithoutEstablishmentInput[]
-    createMany?: EstablishmentScheduleCreateManyEstablishmentInputEnvelope
-    set?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    disconnect?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    delete?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    connect?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    update?: EstablishmentScheduleUpdateWithWhereUniqueWithoutEstablishmentInput | EstablishmentScheduleUpdateWithWhereUniqueWithoutEstablishmentInput[]
-    updateMany?: EstablishmentScheduleUpdateManyWithWhereWithoutEstablishmentInput | EstablishmentScheduleUpdateManyWithWhereWithoutEstablishmentInput[]
-    deleteMany?: EstablishmentScheduleScalarWhereInput | EstablishmentScheduleScalarWhereInput[]
   }
 
   export type EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput = {
@@ -133241,20 +130839,6 @@ export namespace Prisma {
     deleteMany?: EstablishmentAvailabilityScalarWhereInput | EstablishmentAvailabilityScalarWhereInput[]
   }
 
-  export type EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput = {
-    create?: XOR<EstablishmentScheduleCreateWithoutEstablishmentInput, EstablishmentScheduleUncheckedCreateWithoutEstablishmentInput> | EstablishmentScheduleCreateWithoutEstablishmentInput[] | EstablishmentScheduleUncheckedCreateWithoutEstablishmentInput[]
-    connectOrCreate?: EstablishmentScheduleCreateOrConnectWithoutEstablishmentInput | EstablishmentScheduleCreateOrConnectWithoutEstablishmentInput[]
-    upsert?: EstablishmentScheduleUpsertWithWhereUniqueWithoutEstablishmentInput | EstablishmentScheduleUpsertWithWhereUniqueWithoutEstablishmentInput[]
-    createMany?: EstablishmentScheduleCreateManyEstablishmentInputEnvelope
-    set?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    disconnect?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    delete?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    connect?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    update?: EstablishmentScheduleUpdateWithWhereUniqueWithoutEstablishmentInput | EstablishmentScheduleUpdateWithWhereUniqueWithoutEstablishmentInput[]
-    updateMany?: EstablishmentScheduleUpdateManyWithWhereWithoutEstablishmentInput | EstablishmentScheduleUpdateManyWithWhereWithoutEstablishmentInput[]
-    deleteMany?: EstablishmentScheduleScalarWhereInput | EstablishmentScheduleScalarWhereInput[]
-  }
-
   export type EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput = {
     create?: XOR<EstablishmentIntegrationsCreateWithoutEstablishmentInput, EstablishmentIntegrationsUncheckedCreateWithoutEstablishmentInput>
     connectOrCreate?: EstablishmentIntegrationsCreateOrConnectWithoutEstablishmentInput
@@ -133521,34 +131105,6 @@ export namespace Prisma {
     update?: StockWarehouseUpdateWithWhereUniqueWithoutEstablishmentInput | StockWarehouseUpdateWithWhereUniqueWithoutEstablishmentInput[]
     updateMany?: StockWarehouseUpdateManyWithWhereWithoutEstablishmentInput | StockWarehouseUpdateManyWithWhereWithoutEstablishmentInput[]
     deleteMany?: StockWarehouseScalarWhereInput | StockWarehouseScalarWhereInput[]
-  }
-
-  export type EstablishmentCreateNestedOneWithoutEstablishmentScheduleInput = {
-    create?: XOR<EstablishmentCreateWithoutEstablishmentScheduleInput, EstablishmentUncheckedCreateWithoutEstablishmentScheduleInput>
-    connectOrCreate?: EstablishmentCreateOrConnectWithoutEstablishmentScheduleInput
-    connect?: EstablishmentWhereUniqueInput
-  }
-
-  export type ScheduleCreateNestedOneWithoutEstablishmentScheduleInput = {
-    create?: XOR<ScheduleCreateWithoutEstablishmentScheduleInput, ScheduleUncheckedCreateWithoutEstablishmentScheduleInput>
-    connectOrCreate?: ScheduleCreateOrConnectWithoutEstablishmentScheduleInput
-    connect?: ScheduleWhereUniqueInput
-  }
-
-  export type EstablishmentUpdateOneRequiredWithoutEstablishmentScheduleNestedInput = {
-    create?: XOR<EstablishmentCreateWithoutEstablishmentScheduleInput, EstablishmentUncheckedCreateWithoutEstablishmentScheduleInput>
-    connectOrCreate?: EstablishmentCreateOrConnectWithoutEstablishmentScheduleInput
-    upsert?: EstablishmentUpsertWithoutEstablishmentScheduleInput
-    connect?: EstablishmentWhereUniqueInput
-    update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutEstablishmentScheduleInput, EstablishmentUpdateWithoutEstablishmentScheduleInput>, EstablishmentUncheckedUpdateWithoutEstablishmentScheduleInput>
-  }
-
-  export type ScheduleUpdateOneRequiredWithoutEstablishmentScheduleNestedInput = {
-    create?: XOR<ScheduleCreateWithoutEstablishmentScheduleInput, ScheduleUncheckedCreateWithoutEstablishmentScheduleInput>
-    connectOrCreate?: ScheduleCreateOrConnectWithoutEstablishmentScheduleInput
-    upsert?: ScheduleUpsertWithoutEstablishmentScheduleInput
-    connect?: ScheduleWhereUniqueInput
-    update?: XOR<XOR<ScheduleUpdateToOneWithWhereWithoutEstablishmentScheduleInput, ScheduleUpdateWithoutEstablishmentScheduleInput>, ScheduleUncheckedUpdateWithoutEstablishmentScheduleInput>
   }
 
   export type EstablishmentCreateNestedOneWithoutEstablishmentBookingSettingsInput = {
@@ -135417,18 +132973,17 @@ export namespace Prisma {
     connect?: EstablishmentWhereUniqueInput
   }
 
+  export type ScheduleCreateNestedOneWithoutMenusInput = {
+    create?: XOR<ScheduleCreateWithoutMenusInput, ScheduleUncheckedCreateWithoutMenusInput>
+    connectOrCreate?: ScheduleCreateOrConnectWithoutMenusInput
+    connect?: ScheduleWhereUniqueInput
+  }
+
   export type MenuCategoryCreateNestedManyWithoutMenuInput = {
     create?: XOR<MenuCategoryCreateWithoutMenuInput, MenuCategoryUncheckedCreateWithoutMenuInput> | MenuCategoryCreateWithoutMenuInput[] | MenuCategoryUncheckedCreateWithoutMenuInput[]
     connectOrCreate?: MenuCategoryCreateOrConnectWithoutMenuInput | MenuCategoryCreateOrConnectWithoutMenuInput[]
     createMany?: MenuCategoryCreateManyMenuInputEnvelope
     connect?: MenuCategoryWhereUniqueInput | MenuCategoryWhereUniqueInput[]
-  }
-
-  export type MenuScheduleCreateNestedManyWithoutMenuInput = {
-    create?: XOR<MenuScheduleCreateWithoutMenuInput, MenuScheduleUncheckedCreateWithoutMenuInput> | MenuScheduleCreateWithoutMenuInput[] | MenuScheduleUncheckedCreateWithoutMenuInput[]
-    connectOrCreate?: MenuScheduleCreateOrConnectWithoutMenuInput | MenuScheduleCreateOrConnectWithoutMenuInput[]
-    createMany?: MenuScheduleCreateManyMenuInputEnvelope
-    connect?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
   }
 
   export type MenuTranslationCreateNestedManyWithoutMenuInput = {
@@ -135443,13 +132998,6 @@ export namespace Prisma {
     connectOrCreate?: MenuCategoryCreateOrConnectWithoutMenuInput | MenuCategoryCreateOrConnectWithoutMenuInput[]
     createMany?: MenuCategoryCreateManyMenuInputEnvelope
     connect?: MenuCategoryWhereUniqueInput | MenuCategoryWhereUniqueInput[]
-  }
-
-  export type MenuScheduleUncheckedCreateNestedManyWithoutMenuInput = {
-    create?: XOR<MenuScheduleCreateWithoutMenuInput, MenuScheduleUncheckedCreateWithoutMenuInput> | MenuScheduleCreateWithoutMenuInput[] | MenuScheduleUncheckedCreateWithoutMenuInput[]
-    connectOrCreate?: MenuScheduleCreateOrConnectWithoutMenuInput | MenuScheduleCreateOrConnectWithoutMenuInput[]
-    createMany?: MenuScheduleCreateManyMenuInputEnvelope
-    connect?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
   }
 
   export type MenuTranslationUncheckedCreateNestedManyWithoutMenuInput = {
@@ -135471,6 +133019,16 @@ export namespace Prisma {
     update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutMenusInput, EstablishmentUpdateWithoutMenusInput>, EstablishmentUncheckedUpdateWithoutMenusInput>
   }
 
+  export type ScheduleUpdateOneWithoutMenusNestedInput = {
+    create?: XOR<ScheduleCreateWithoutMenusInput, ScheduleUncheckedCreateWithoutMenusInput>
+    connectOrCreate?: ScheduleCreateOrConnectWithoutMenusInput
+    upsert?: ScheduleUpsertWithoutMenusInput
+    disconnect?: ScheduleWhereInput | boolean
+    delete?: ScheduleWhereInput | boolean
+    connect?: ScheduleWhereUniqueInput
+    update?: XOR<XOR<ScheduleUpdateToOneWithWhereWithoutMenusInput, ScheduleUpdateWithoutMenusInput>, ScheduleUncheckedUpdateWithoutMenusInput>
+  }
+
   export type MenuCategoryUpdateManyWithoutMenuNestedInput = {
     create?: XOR<MenuCategoryCreateWithoutMenuInput, MenuCategoryUncheckedCreateWithoutMenuInput> | MenuCategoryCreateWithoutMenuInput[] | MenuCategoryUncheckedCreateWithoutMenuInput[]
     connectOrCreate?: MenuCategoryCreateOrConnectWithoutMenuInput | MenuCategoryCreateOrConnectWithoutMenuInput[]
@@ -135483,20 +133041,6 @@ export namespace Prisma {
     update?: MenuCategoryUpdateWithWhereUniqueWithoutMenuInput | MenuCategoryUpdateWithWhereUniqueWithoutMenuInput[]
     updateMany?: MenuCategoryUpdateManyWithWhereWithoutMenuInput | MenuCategoryUpdateManyWithWhereWithoutMenuInput[]
     deleteMany?: MenuCategoryScalarWhereInput | MenuCategoryScalarWhereInput[]
-  }
-
-  export type MenuScheduleUpdateManyWithoutMenuNestedInput = {
-    create?: XOR<MenuScheduleCreateWithoutMenuInput, MenuScheduleUncheckedCreateWithoutMenuInput> | MenuScheduleCreateWithoutMenuInput[] | MenuScheduleUncheckedCreateWithoutMenuInput[]
-    connectOrCreate?: MenuScheduleCreateOrConnectWithoutMenuInput | MenuScheduleCreateOrConnectWithoutMenuInput[]
-    upsert?: MenuScheduleUpsertWithWhereUniqueWithoutMenuInput | MenuScheduleUpsertWithWhereUniqueWithoutMenuInput[]
-    createMany?: MenuScheduleCreateManyMenuInputEnvelope
-    set?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    disconnect?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    delete?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    connect?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    update?: MenuScheduleUpdateWithWhereUniqueWithoutMenuInput | MenuScheduleUpdateWithWhereUniqueWithoutMenuInput[]
-    updateMany?: MenuScheduleUpdateManyWithWhereWithoutMenuInput | MenuScheduleUpdateManyWithWhereWithoutMenuInput[]
-    deleteMany?: MenuScheduleScalarWhereInput | MenuScheduleScalarWhereInput[]
   }
 
   export type MenuTranslationUpdateManyWithoutMenuNestedInput = {
@@ -135527,20 +133071,6 @@ export namespace Prisma {
     deleteMany?: MenuCategoryScalarWhereInput | MenuCategoryScalarWhereInput[]
   }
 
-  export type MenuScheduleUncheckedUpdateManyWithoutMenuNestedInput = {
-    create?: XOR<MenuScheduleCreateWithoutMenuInput, MenuScheduleUncheckedCreateWithoutMenuInput> | MenuScheduleCreateWithoutMenuInput[] | MenuScheduleUncheckedCreateWithoutMenuInput[]
-    connectOrCreate?: MenuScheduleCreateOrConnectWithoutMenuInput | MenuScheduleCreateOrConnectWithoutMenuInput[]
-    upsert?: MenuScheduleUpsertWithWhereUniqueWithoutMenuInput | MenuScheduleUpsertWithWhereUniqueWithoutMenuInput[]
-    createMany?: MenuScheduleCreateManyMenuInputEnvelope
-    set?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    disconnect?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    delete?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    connect?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    update?: MenuScheduleUpdateWithWhereUniqueWithoutMenuInput | MenuScheduleUpdateWithWhereUniqueWithoutMenuInput[]
-    updateMany?: MenuScheduleUpdateManyWithWhereWithoutMenuInput | MenuScheduleUpdateManyWithWhereWithoutMenuInput[]
-    deleteMany?: MenuScheduleScalarWhereInput | MenuScheduleScalarWhereInput[]
-  }
-
   export type MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput = {
     create?: XOR<MenuTranslationCreateWithoutMenuInput, MenuTranslationUncheckedCreateWithoutMenuInput> | MenuTranslationCreateWithoutMenuInput[] | MenuTranslationUncheckedCreateWithoutMenuInput[]
     connectOrCreate?: MenuTranslationCreateOrConnectWithoutMenuInput | MenuTranslationCreateOrConnectWithoutMenuInput[]
@@ -135553,34 +133083,6 @@ export namespace Prisma {
     update?: MenuTranslationUpdateWithWhereUniqueWithoutMenuInput | MenuTranslationUpdateWithWhereUniqueWithoutMenuInput[]
     updateMany?: MenuTranslationUpdateManyWithWhereWithoutMenuInput | MenuTranslationUpdateManyWithWhereWithoutMenuInput[]
     deleteMany?: MenuTranslationScalarWhereInput | MenuTranslationScalarWhereInput[]
-  }
-
-  export type MenuCreateNestedOneWithoutMenuScheduleInput = {
-    create?: XOR<MenuCreateWithoutMenuScheduleInput, MenuUncheckedCreateWithoutMenuScheduleInput>
-    connectOrCreate?: MenuCreateOrConnectWithoutMenuScheduleInput
-    connect?: MenuWhereUniqueInput
-  }
-
-  export type ScheduleCreateNestedOneWithoutMenuScheduleInput = {
-    create?: XOR<ScheduleCreateWithoutMenuScheduleInput, ScheduleUncheckedCreateWithoutMenuScheduleInput>
-    connectOrCreate?: ScheduleCreateOrConnectWithoutMenuScheduleInput
-    connect?: ScheduleWhereUniqueInput
-  }
-
-  export type MenuUpdateOneRequiredWithoutMenuScheduleNestedInput = {
-    create?: XOR<MenuCreateWithoutMenuScheduleInput, MenuUncheckedCreateWithoutMenuScheduleInput>
-    connectOrCreate?: MenuCreateOrConnectWithoutMenuScheduleInput
-    upsert?: MenuUpsertWithoutMenuScheduleInput
-    connect?: MenuWhereUniqueInput
-    update?: XOR<XOR<MenuUpdateToOneWithWhereWithoutMenuScheduleInput, MenuUpdateWithoutMenuScheduleInput>, MenuUncheckedUpdateWithoutMenuScheduleInput>
-  }
-
-  export type ScheduleUpdateOneRequiredWithoutMenuScheduleNestedInput = {
-    create?: XOR<ScheduleCreateWithoutMenuScheduleInput, ScheduleUncheckedCreateWithoutMenuScheduleInput>
-    connectOrCreate?: ScheduleCreateOrConnectWithoutMenuScheduleInput
-    upsert?: ScheduleUpsertWithoutMenuScheduleInput
-    connect?: ScheduleWhereUniqueInput
-    update?: XOR<XOR<ScheduleUpdateToOneWithWhereWithoutMenuScheduleInput, ScheduleUpdateWithoutMenuScheduleInput>, ScheduleUncheckedUpdateWithoutMenuScheduleInput>
   }
 
   export type MenuCreateNestedOneWithoutTranslationsInput = {
@@ -135979,180 +133481,282 @@ export namespace Prisma {
     update?: XOR<XOR<DeviceUpdateToOneWithWhereWithoutPrintersInput, DeviceUpdateWithoutPrintersInput>, DeviceUncheckedUpdateWithoutPrintersInput>
   }
 
-  export type EstablishmentScheduleCreateNestedManyWithoutScheduleInput = {
-    create?: XOR<EstablishmentScheduleCreateWithoutScheduleInput, EstablishmentScheduleUncheckedCreateWithoutScheduleInput> | EstablishmentScheduleCreateWithoutScheduleInput[] | EstablishmentScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: EstablishmentScheduleCreateOrConnectWithoutScheduleInput | EstablishmentScheduleCreateOrConnectWithoutScheduleInput[]
-    createMany?: EstablishmentScheduleCreateManyScheduleInputEnvelope
-    connect?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
+  export type ScheduleDayCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<ScheduleDayCreateWithoutScheduleInput, ScheduleDayUncheckedCreateWithoutScheduleInput> | ScheduleDayCreateWithoutScheduleInput[] | ScheduleDayUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ScheduleDayCreateOrConnectWithoutScheduleInput | ScheduleDayCreateOrConnectWithoutScheduleInput[]
+    createMany?: ScheduleDayCreateManyScheduleInputEnvelope
+    connect?: ScheduleDayWhereUniqueInput | ScheduleDayWhereUniqueInput[]
   }
 
-  export type MenuScheduleCreateNestedManyWithoutScheduleInput = {
-    create?: XOR<MenuScheduleCreateWithoutScheduleInput, MenuScheduleUncheckedCreateWithoutScheduleInput> | MenuScheduleCreateWithoutScheduleInput[] | MenuScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: MenuScheduleCreateOrConnectWithoutScheduleInput | MenuScheduleCreateOrConnectWithoutScheduleInput[]
-    createMany?: MenuScheduleCreateManyScheduleInputEnvelope
-    connect?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
+  export type EstablishmentCreateNestedOneWithoutScheduleInput = {
+    create?: XOR<EstablishmentCreateWithoutScheduleInput, EstablishmentUncheckedCreateWithoutScheduleInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutScheduleInput
+    connect?: EstablishmentWhereUniqueInput
   }
 
-  export type DiscountScheduleCreateNestedManyWithoutScheduleInput = {
-    create?: XOR<DiscountScheduleCreateWithoutScheduleInput, DiscountScheduleUncheckedCreateWithoutScheduleInput> | DiscountScheduleCreateWithoutScheduleInput[] | DiscountScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: DiscountScheduleCreateOrConnectWithoutScheduleInput | DiscountScheduleCreateOrConnectWithoutScheduleInput[]
-    createMany?: DiscountScheduleCreateManyScheduleInputEnvelope
-    connect?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
+  export type MenuCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<MenuCreateWithoutScheduleInput, MenuUncheckedCreateWithoutScheduleInput> | MenuCreateWithoutScheduleInput[] | MenuUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: MenuCreateOrConnectWithoutScheduleInput | MenuCreateOrConnectWithoutScheduleInput[]
+    createMany?: MenuCreateManyScheduleInputEnvelope
+    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
   }
 
-  export type PromotionScheduleCreateNestedManyWithoutScheduleInput = {
-    create?: XOR<PromotionScheduleCreateWithoutScheduleInput, PromotionScheduleUncheckedCreateWithoutScheduleInput> | PromotionScheduleCreateWithoutScheduleInput[] | PromotionScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: PromotionScheduleCreateOrConnectWithoutScheduleInput | PromotionScheduleCreateOrConnectWithoutScheduleInput[]
-    createMany?: PromotionScheduleCreateManyScheduleInputEnvelope
-    connect?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
+  export type DiscountCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<DiscountCreateWithoutScheduleInput, DiscountUncheckedCreateWithoutScheduleInput> | DiscountCreateWithoutScheduleInput[] | DiscountUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: DiscountCreateOrConnectWithoutScheduleInput | DiscountCreateOrConnectWithoutScheduleInput[]
+    createMany?: DiscountCreateManyScheduleInputEnvelope
+    connect?: DiscountWhereUniqueInput | DiscountWhereUniqueInput[]
   }
 
-  export type EstablishmentScheduleUncheckedCreateNestedManyWithoutScheduleInput = {
-    create?: XOR<EstablishmentScheduleCreateWithoutScheduleInput, EstablishmentScheduleUncheckedCreateWithoutScheduleInput> | EstablishmentScheduleCreateWithoutScheduleInput[] | EstablishmentScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: EstablishmentScheduleCreateOrConnectWithoutScheduleInput | EstablishmentScheduleCreateOrConnectWithoutScheduleInput[]
-    createMany?: EstablishmentScheduleCreateManyScheduleInputEnvelope
-    connect?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
+  export type PromotionCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<PromotionCreateWithoutScheduleInput, PromotionUncheckedCreateWithoutScheduleInput> | PromotionCreateWithoutScheduleInput[] | PromotionUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: PromotionCreateOrConnectWithoutScheduleInput | PromotionCreateOrConnectWithoutScheduleInput[]
+    createMany?: PromotionCreateManyScheduleInputEnvelope
+    connect?: PromotionWhereUniqueInput | PromotionWhereUniqueInput[]
   }
 
-  export type MenuScheduleUncheckedCreateNestedManyWithoutScheduleInput = {
-    create?: XOR<MenuScheduleCreateWithoutScheduleInput, MenuScheduleUncheckedCreateWithoutScheduleInput> | MenuScheduleCreateWithoutScheduleInput[] | MenuScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: MenuScheduleCreateOrConnectWithoutScheduleInput | MenuScheduleCreateOrConnectWithoutScheduleInput[]
-    createMany?: MenuScheduleCreateManyScheduleInputEnvelope
-    connect?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
+  export type ScheduleDayUncheckedCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<ScheduleDayCreateWithoutScheduleInput, ScheduleDayUncheckedCreateWithoutScheduleInput> | ScheduleDayCreateWithoutScheduleInput[] | ScheduleDayUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ScheduleDayCreateOrConnectWithoutScheduleInput | ScheduleDayCreateOrConnectWithoutScheduleInput[]
+    createMany?: ScheduleDayCreateManyScheduleInputEnvelope
+    connect?: ScheduleDayWhereUniqueInput | ScheduleDayWhereUniqueInput[]
   }
 
-  export type DiscountScheduleUncheckedCreateNestedManyWithoutScheduleInput = {
-    create?: XOR<DiscountScheduleCreateWithoutScheduleInput, DiscountScheduleUncheckedCreateWithoutScheduleInput> | DiscountScheduleCreateWithoutScheduleInput[] | DiscountScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: DiscountScheduleCreateOrConnectWithoutScheduleInput | DiscountScheduleCreateOrConnectWithoutScheduleInput[]
-    createMany?: DiscountScheduleCreateManyScheduleInputEnvelope
-    connect?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
+  export type EstablishmentUncheckedCreateNestedOneWithoutScheduleInput = {
+    create?: XOR<EstablishmentCreateWithoutScheduleInput, EstablishmentUncheckedCreateWithoutScheduleInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutScheduleInput
+    connect?: EstablishmentWhereUniqueInput
   }
 
-  export type PromotionScheduleUncheckedCreateNestedManyWithoutScheduleInput = {
-    create?: XOR<PromotionScheduleCreateWithoutScheduleInput, PromotionScheduleUncheckedCreateWithoutScheduleInput> | PromotionScheduleCreateWithoutScheduleInput[] | PromotionScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: PromotionScheduleCreateOrConnectWithoutScheduleInput | PromotionScheduleCreateOrConnectWithoutScheduleInput[]
-    createMany?: PromotionScheduleCreateManyScheduleInputEnvelope
-    connect?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
+  export type MenuUncheckedCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<MenuCreateWithoutScheduleInput, MenuUncheckedCreateWithoutScheduleInput> | MenuCreateWithoutScheduleInput[] | MenuUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: MenuCreateOrConnectWithoutScheduleInput | MenuCreateOrConnectWithoutScheduleInput[]
+    createMany?: MenuCreateManyScheduleInputEnvelope
+    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
   }
 
-  export type EnumDayOfWeekFieldUpdateOperationsInput = {
-    set?: $Enums.DayOfWeek
+  export type DiscountUncheckedCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<DiscountCreateWithoutScheduleInput, DiscountUncheckedCreateWithoutScheduleInput> | DiscountCreateWithoutScheduleInput[] | DiscountUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: DiscountCreateOrConnectWithoutScheduleInput | DiscountCreateOrConnectWithoutScheduleInput[]
+    createMany?: DiscountCreateManyScheduleInputEnvelope
+    connect?: DiscountWhereUniqueInput | DiscountWhereUniqueInput[]
+  }
+
+  export type PromotionUncheckedCreateNestedManyWithoutScheduleInput = {
+    create?: XOR<PromotionCreateWithoutScheduleInput, PromotionUncheckedCreateWithoutScheduleInput> | PromotionCreateWithoutScheduleInput[] | PromotionUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: PromotionCreateOrConnectWithoutScheduleInput | PromotionCreateOrConnectWithoutScheduleInput[]
+    createMany?: PromotionCreateManyScheduleInputEnvelope
+    connect?: PromotionWhereUniqueInput | PromotionWhereUniqueInput[]
   }
 
   export type EnumScheduleTypeFieldUpdateOperationsInput = {
     set?: $Enums.ScheduleType
   }
 
-  export type EstablishmentScheduleUpdateManyWithoutScheduleNestedInput = {
-    create?: XOR<EstablishmentScheduleCreateWithoutScheduleInput, EstablishmentScheduleUncheckedCreateWithoutScheduleInput> | EstablishmentScheduleCreateWithoutScheduleInput[] | EstablishmentScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: EstablishmentScheduleCreateOrConnectWithoutScheduleInput | EstablishmentScheduleCreateOrConnectWithoutScheduleInput[]
-    upsert?: EstablishmentScheduleUpsertWithWhereUniqueWithoutScheduleInput | EstablishmentScheduleUpsertWithWhereUniqueWithoutScheduleInput[]
-    createMany?: EstablishmentScheduleCreateManyScheduleInputEnvelope
-    set?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    disconnect?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    delete?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    connect?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    update?: EstablishmentScheduleUpdateWithWhereUniqueWithoutScheduleInput | EstablishmentScheduleUpdateWithWhereUniqueWithoutScheduleInput[]
-    updateMany?: EstablishmentScheduleUpdateManyWithWhereWithoutScheduleInput | EstablishmentScheduleUpdateManyWithWhereWithoutScheduleInput[]
-    deleteMany?: EstablishmentScheduleScalarWhereInput | EstablishmentScheduleScalarWhereInput[]
+  export type ScheduleDayUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<ScheduleDayCreateWithoutScheduleInput, ScheduleDayUncheckedCreateWithoutScheduleInput> | ScheduleDayCreateWithoutScheduleInput[] | ScheduleDayUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ScheduleDayCreateOrConnectWithoutScheduleInput | ScheduleDayCreateOrConnectWithoutScheduleInput[]
+    upsert?: ScheduleDayUpsertWithWhereUniqueWithoutScheduleInput | ScheduleDayUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: ScheduleDayCreateManyScheduleInputEnvelope
+    set?: ScheduleDayWhereUniqueInput | ScheduleDayWhereUniqueInput[]
+    disconnect?: ScheduleDayWhereUniqueInput | ScheduleDayWhereUniqueInput[]
+    delete?: ScheduleDayWhereUniqueInput | ScheduleDayWhereUniqueInput[]
+    connect?: ScheduleDayWhereUniqueInput | ScheduleDayWhereUniqueInput[]
+    update?: ScheduleDayUpdateWithWhereUniqueWithoutScheduleInput | ScheduleDayUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: ScheduleDayUpdateManyWithWhereWithoutScheduleInput | ScheduleDayUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: ScheduleDayScalarWhereInput | ScheduleDayScalarWhereInput[]
   }
 
-  export type MenuScheduleUpdateManyWithoutScheduleNestedInput = {
-    create?: XOR<MenuScheduleCreateWithoutScheduleInput, MenuScheduleUncheckedCreateWithoutScheduleInput> | MenuScheduleCreateWithoutScheduleInput[] | MenuScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: MenuScheduleCreateOrConnectWithoutScheduleInput | MenuScheduleCreateOrConnectWithoutScheduleInput[]
-    upsert?: MenuScheduleUpsertWithWhereUniqueWithoutScheduleInput | MenuScheduleUpsertWithWhereUniqueWithoutScheduleInput[]
-    createMany?: MenuScheduleCreateManyScheduleInputEnvelope
-    set?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    disconnect?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    delete?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    connect?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    update?: MenuScheduleUpdateWithWhereUniqueWithoutScheduleInput | MenuScheduleUpdateWithWhereUniqueWithoutScheduleInput[]
-    updateMany?: MenuScheduleUpdateManyWithWhereWithoutScheduleInput | MenuScheduleUpdateManyWithWhereWithoutScheduleInput[]
-    deleteMany?: MenuScheduleScalarWhereInput | MenuScheduleScalarWhereInput[]
+  export type EstablishmentUpdateOneWithoutScheduleNestedInput = {
+    create?: XOR<EstablishmentCreateWithoutScheduleInput, EstablishmentUncheckedCreateWithoutScheduleInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutScheduleInput
+    upsert?: EstablishmentUpsertWithoutScheduleInput
+    disconnect?: EstablishmentWhereInput | boolean
+    delete?: EstablishmentWhereInput | boolean
+    connect?: EstablishmentWhereUniqueInput
+    update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutScheduleInput, EstablishmentUpdateWithoutScheduleInput>, EstablishmentUncheckedUpdateWithoutScheduleInput>
   }
 
-  export type DiscountScheduleUpdateManyWithoutScheduleNestedInput = {
-    create?: XOR<DiscountScheduleCreateWithoutScheduleInput, DiscountScheduleUncheckedCreateWithoutScheduleInput> | DiscountScheduleCreateWithoutScheduleInput[] | DiscountScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: DiscountScheduleCreateOrConnectWithoutScheduleInput | DiscountScheduleCreateOrConnectWithoutScheduleInput[]
-    upsert?: DiscountScheduleUpsertWithWhereUniqueWithoutScheduleInput | DiscountScheduleUpsertWithWhereUniqueWithoutScheduleInput[]
-    createMany?: DiscountScheduleCreateManyScheduleInputEnvelope
-    set?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    disconnect?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    delete?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    connect?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    update?: DiscountScheduleUpdateWithWhereUniqueWithoutScheduleInput | DiscountScheduleUpdateWithWhereUniqueWithoutScheduleInput[]
-    updateMany?: DiscountScheduleUpdateManyWithWhereWithoutScheduleInput | DiscountScheduleUpdateManyWithWhereWithoutScheduleInput[]
-    deleteMany?: DiscountScheduleScalarWhereInput | DiscountScheduleScalarWhereInput[]
+  export type MenuUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<MenuCreateWithoutScheduleInput, MenuUncheckedCreateWithoutScheduleInput> | MenuCreateWithoutScheduleInput[] | MenuUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: MenuCreateOrConnectWithoutScheduleInput | MenuCreateOrConnectWithoutScheduleInput[]
+    upsert?: MenuUpsertWithWhereUniqueWithoutScheduleInput | MenuUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: MenuCreateManyScheduleInputEnvelope
+    set?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    disconnect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    delete?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    update?: MenuUpdateWithWhereUniqueWithoutScheduleInput | MenuUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: MenuUpdateManyWithWhereWithoutScheduleInput | MenuUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: MenuScalarWhereInput | MenuScalarWhereInput[]
   }
 
-  export type PromotionScheduleUpdateManyWithoutScheduleNestedInput = {
-    create?: XOR<PromotionScheduleCreateWithoutScheduleInput, PromotionScheduleUncheckedCreateWithoutScheduleInput> | PromotionScheduleCreateWithoutScheduleInput[] | PromotionScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: PromotionScheduleCreateOrConnectWithoutScheduleInput | PromotionScheduleCreateOrConnectWithoutScheduleInput[]
-    upsert?: PromotionScheduleUpsertWithWhereUniqueWithoutScheduleInput | PromotionScheduleUpsertWithWhereUniqueWithoutScheduleInput[]
-    createMany?: PromotionScheduleCreateManyScheduleInputEnvelope
-    set?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    disconnect?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    delete?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    connect?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    update?: PromotionScheduleUpdateWithWhereUniqueWithoutScheduleInput | PromotionScheduleUpdateWithWhereUniqueWithoutScheduleInput[]
-    updateMany?: PromotionScheduleUpdateManyWithWhereWithoutScheduleInput | PromotionScheduleUpdateManyWithWhereWithoutScheduleInput[]
-    deleteMany?: PromotionScheduleScalarWhereInput | PromotionScheduleScalarWhereInput[]
+  export type DiscountUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<DiscountCreateWithoutScheduleInput, DiscountUncheckedCreateWithoutScheduleInput> | DiscountCreateWithoutScheduleInput[] | DiscountUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: DiscountCreateOrConnectWithoutScheduleInput | DiscountCreateOrConnectWithoutScheduleInput[]
+    upsert?: DiscountUpsertWithWhereUniqueWithoutScheduleInput | DiscountUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: DiscountCreateManyScheduleInputEnvelope
+    set?: DiscountWhereUniqueInput | DiscountWhereUniqueInput[]
+    disconnect?: DiscountWhereUniqueInput | DiscountWhereUniqueInput[]
+    delete?: DiscountWhereUniqueInput | DiscountWhereUniqueInput[]
+    connect?: DiscountWhereUniqueInput | DiscountWhereUniqueInput[]
+    update?: DiscountUpdateWithWhereUniqueWithoutScheduleInput | DiscountUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: DiscountUpdateManyWithWhereWithoutScheduleInput | DiscountUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: DiscountScalarWhereInput | DiscountScalarWhereInput[]
   }
 
-  export type EstablishmentScheduleUncheckedUpdateManyWithoutScheduleNestedInput = {
-    create?: XOR<EstablishmentScheduleCreateWithoutScheduleInput, EstablishmentScheduleUncheckedCreateWithoutScheduleInput> | EstablishmentScheduleCreateWithoutScheduleInput[] | EstablishmentScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: EstablishmentScheduleCreateOrConnectWithoutScheduleInput | EstablishmentScheduleCreateOrConnectWithoutScheduleInput[]
-    upsert?: EstablishmentScheduleUpsertWithWhereUniqueWithoutScheduleInput | EstablishmentScheduleUpsertWithWhereUniqueWithoutScheduleInput[]
-    createMany?: EstablishmentScheduleCreateManyScheduleInputEnvelope
-    set?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    disconnect?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    delete?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    connect?: EstablishmentScheduleWhereUniqueInput | EstablishmentScheduleWhereUniqueInput[]
-    update?: EstablishmentScheduleUpdateWithWhereUniqueWithoutScheduleInput | EstablishmentScheduleUpdateWithWhereUniqueWithoutScheduleInput[]
-    updateMany?: EstablishmentScheduleUpdateManyWithWhereWithoutScheduleInput | EstablishmentScheduleUpdateManyWithWhereWithoutScheduleInput[]
-    deleteMany?: EstablishmentScheduleScalarWhereInput | EstablishmentScheduleScalarWhereInput[]
+  export type PromotionUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<PromotionCreateWithoutScheduleInput, PromotionUncheckedCreateWithoutScheduleInput> | PromotionCreateWithoutScheduleInput[] | PromotionUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: PromotionCreateOrConnectWithoutScheduleInput | PromotionCreateOrConnectWithoutScheduleInput[]
+    upsert?: PromotionUpsertWithWhereUniqueWithoutScheduleInput | PromotionUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: PromotionCreateManyScheduleInputEnvelope
+    set?: PromotionWhereUniqueInput | PromotionWhereUniqueInput[]
+    disconnect?: PromotionWhereUniqueInput | PromotionWhereUniqueInput[]
+    delete?: PromotionWhereUniqueInput | PromotionWhereUniqueInput[]
+    connect?: PromotionWhereUniqueInput | PromotionWhereUniqueInput[]
+    update?: PromotionUpdateWithWhereUniqueWithoutScheduleInput | PromotionUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: PromotionUpdateManyWithWhereWithoutScheduleInput | PromotionUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: PromotionScalarWhereInput | PromotionScalarWhereInput[]
   }
 
-  export type MenuScheduleUncheckedUpdateManyWithoutScheduleNestedInput = {
-    create?: XOR<MenuScheduleCreateWithoutScheduleInput, MenuScheduleUncheckedCreateWithoutScheduleInput> | MenuScheduleCreateWithoutScheduleInput[] | MenuScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: MenuScheduleCreateOrConnectWithoutScheduleInput | MenuScheduleCreateOrConnectWithoutScheduleInput[]
-    upsert?: MenuScheduleUpsertWithWhereUniqueWithoutScheduleInput | MenuScheduleUpsertWithWhereUniqueWithoutScheduleInput[]
-    createMany?: MenuScheduleCreateManyScheduleInputEnvelope
-    set?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    disconnect?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    delete?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    connect?: MenuScheduleWhereUniqueInput | MenuScheduleWhereUniqueInput[]
-    update?: MenuScheduleUpdateWithWhereUniqueWithoutScheduleInput | MenuScheduleUpdateWithWhereUniqueWithoutScheduleInput[]
-    updateMany?: MenuScheduleUpdateManyWithWhereWithoutScheduleInput | MenuScheduleUpdateManyWithWhereWithoutScheduleInput[]
-    deleteMany?: MenuScheduleScalarWhereInput | MenuScheduleScalarWhereInput[]
+  export type ScheduleDayUncheckedUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<ScheduleDayCreateWithoutScheduleInput, ScheduleDayUncheckedCreateWithoutScheduleInput> | ScheduleDayCreateWithoutScheduleInput[] | ScheduleDayUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: ScheduleDayCreateOrConnectWithoutScheduleInput | ScheduleDayCreateOrConnectWithoutScheduleInput[]
+    upsert?: ScheduleDayUpsertWithWhereUniqueWithoutScheduleInput | ScheduleDayUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: ScheduleDayCreateManyScheduleInputEnvelope
+    set?: ScheduleDayWhereUniqueInput | ScheduleDayWhereUniqueInput[]
+    disconnect?: ScheduleDayWhereUniqueInput | ScheduleDayWhereUniqueInput[]
+    delete?: ScheduleDayWhereUniqueInput | ScheduleDayWhereUniqueInput[]
+    connect?: ScheduleDayWhereUniqueInput | ScheduleDayWhereUniqueInput[]
+    update?: ScheduleDayUpdateWithWhereUniqueWithoutScheduleInput | ScheduleDayUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: ScheduleDayUpdateManyWithWhereWithoutScheduleInput | ScheduleDayUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: ScheduleDayScalarWhereInput | ScheduleDayScalarWhereInput[]
   }
 
-  export type DiscountScheduleUncheckedUpdateManyWithoutScheduleNestedInput = {
-    create?: XOR<DiscountScheduleCreateWithoutScheduleInput, DiscountScheduleUncheckedCreateWithoutScheduleInput> | DiscountScheduleCreateWithoutScheduleInput[] | DiscountScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: DiscountScheduleCreateOrConnectWithoutScheduleInput | DiscountScheduleCreateOrConnectWithoutScheduleInput[]
-    upsert?: DiscountScheduleUpsertWithWhereUniqueWithoutScheduleInput | DiscountScheduleUpsertWithWhereUniqueWithoutScheduleInput[]
-    createMany?: DiscountScheduleCreateManyScheduleInputEnvelope
-    set?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    disconnect?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    delete?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    connect?: DiscountScheduleWhereUniqueInput | DiscountScheduleWhereUniqueInput[]
-    update?: DiscountScheduleUpdateWithWhereUniqueWithoutScheduleInput | DiscountScheduleUpdateWithWhereUniqueWithoutScheduleInput[]
-    updateMany?: DiscountScheduleUpdateManyWithWhereWithoutScheduleInput | DiscountScheduleUpdateManyWithWhereWithoutScheduleInput[]
-    deleteMany?: DiscountScheduleScalarWhereInput | DiscountScheduleScalarWhereInput[]
+  export type EstablishmentUncheckedUpdateOneWithoutScheduleNestedInput = {
+    create?: XOR<EstablishmentCreateWithoutScheduleInput, EstablishmentUncheckedCreateWithoutScheduleInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutScheduleInput
+    upsert?: EstablishmentUpsertWithoutScheduleInput
+    disconnect?: EstablishmentWhereInput | boolean
+    delete?: EstablishmentWhereInput | boolean
+    connect?: EstablishmentWhereUniqueInput
+    update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutScheduleInput, EstablishmentUpdateWithoutScheduleInput>, EstablishmentUncheckedUpdateWithoutScheduleInput>
   }
 
-  export type PromotionScheduleUncheckedUpdateManyWithoutScheduleNestedInput = {
-    create?: XOR<PromotionScheduleCreateWithoutScheduleInput, PromotionScheduleUncheckedCreateWithoutScheduleInput> | PromotionScheduleCreateWithoutScheduleInput[] | PromotionScheduleUncheckedCreateWithoutScheduleInput[]
-    connectOrCreate?: PromotionScheduleCreateOrConnectWithoutScheduleInput | PromotionScheduleCreateOrConnectWithoutScheduleInput[]
-    upsert?: PromotionScheduleUpsertWithWhereUniqueWithoutScheduleInput | PromotionScheduleUpsertWithWhereUniqueWithoutScheduleInput[]
-    createMany?: PromotionScheduleCreateManyScheduleInputEnvelope
-    set?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    disconnect?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    delete?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    connect?: PromotionScheduleWhereUniqueInput | PromotionScheduleWhereUniqueInput[]
-    update?: PromotionScheduleUpdateWithWhereUniqueWithoutScheduleInput | PromotionScheduleUpdateWithWhereUniqueWithoutScheduleInput[]
-    updateMany?: PromotionScheduleUpdateManyWithWhereWithoutScheduleInput | PromotionScheduleUpdateManyWithWhereWithoutScheduleInput[]
-    deleteMany?: PromotionScheduleScalarWhereInput | PromotionScheduleScalarWhereInput[]
+  export type MenuUncheckedUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<MenuCreateWithoutScheduleInput, MenuUncheckedCreateWithoutScheduleInput> | MenuCreateWithoutScheduleInput[] | MenuUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: MenuCreateOrConnectWithoutScheduleInput | MenuCreateOrConnectWithoutScheduleInput[]
+    upsert?: MenuUpsertWithWhereUniqueWithoutScheduleInput | MenuUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: MenuCreateManyScheduleInputEnvelope
+    set?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    disconnect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    delete?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    update?: MenuUpdateWithWhereUniqueWithoutScheduleInput | MenuUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: MenuUpdateManyWithWhereWithoutScheduleInput | MenuUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: MenuScalarWhereInput | MenuScalarWhereInput[]
+  }
+
+  export type DiscountUncheckedUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<DiscountCreateWithoutScheduleInput, DiscountUncheckedCreateWithoutScheduleInput> | DiscountCreateWithoutScheduleInput[] | DiscountUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: DiscountCreateOrConnectWithoutScheduleInput | DiscountCreateOrConnectWithoutScheduleInput[]
+    upsert?: DiscountUpsertWithWhereUniqueWithoutScheduleInput | DiscountUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: DiscountCreateManyScheduleInputEnvelope
+    set?: DiscountWhereUniqueInput | DiscountWhereUniqueInput[]
+    disconnect?: DiscountWhereUniqueInput | DiscountWhereUniqueInput[]
+    delete?: DiscountWhereUniqueInput | DiscountWhereUniqueInput[]
+    connect?: DiscountWhereUniqueInput | DiscountWhereUniqueInput[]
+    update?: DiscountUpdateWithWhereUniqueWithoutScheduleInput | DiscountUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: DiscountUpdateManyWithWhereWithoutScheduleInput | DiscountUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: DiscountScalarWhereInput | DiscountScalarWhereInput[]
+  }
+
+  export type PromotionUncheckedUpdateManyWithoutScheduleNestedInput = {
+    create?: XOR<PromotionCreateWithoutScheduleInput, PromotionUncheckedCreateWithoutScheduleInput> | PromotionCreateWithoutScheduleInput[] | PromotionUncheckedCreateWithoutScheduleInput[]
+    connectOrCreate?: PromotionCreateOrConnectWithoutScheduleInput | PromotionCreateOrConnectWithoutScheduleInput[]
+    upsert?: PromotionUpsertWithWhereUniqueWithoutScheduleInput | PromotionUpsertWithWhereUniqueWithoutScheduleInput[]
+    createMany?: PromotionCreateManyScheduleInputEnvelope
+    set?: PromotionWhereUniqueInput | PromotionWhereUniqueInput[]
+    disconnect?: PromotionWhereUniqueInput | PromotionWhereUniqueInput[]
+    delete?: PromotionWhereUniqueInput | PromotionWhereUniqueInput[]
+    connect?: PromotionWhereUniqueInput | PromotionWhereUniqueInput[]
+    update?: PromotionUpdateWithWhereUniqueWithoutScheduleInput | PromotionUpdateWithWhereUniqueWithoutScheduleInput[]
+    updateMany?: PromotionUpdateManyWithWhereWithoutScheduleInput | PromotionUpdateManyWithWhereWithoutScheduleInput[]
+    deleteMany?: PromotionScalarWhereInput | PromotionScalarWhereInput[]
+  }
+
+  export type ScheduleCreateNestedOneWithoutDaysInput = {
+    create?: XOR<ScheduleCreateWithoutDaysInput, ScheduleUncheckedCreateWithoutDaysInput>
+    connectOrCreate?: ScheduleCreateOrConnectWithoutDaysInput
+    connect?: ScheduleWhereUniqueInput
+  }
+
+  export type TimeIntervalCreateNestedManyWithoutScheduleDayInput = {
+    create?: XOR<TimeIntervalCreateWithoutScheduleDayInput, TimeIntervalUncheckedCreateWithoutScheduleDayInput> | TimeIntervalCreateWithoutScheduleDayInput[] | TimeIntervalUncheckedCreateWithoutScheduleDayInput[]
+    connectOrCreate?: TimeIntervalCreateOrConnectWithoutScheduleDayInput | TimeIntervalCreateOrConnectWithoutScheduleDayInput[]
+    createMany?: TimeIntervalCreateManyScheduleDayInputEnvelope
+    connect?: TimeIntervalWhereUniqueInput | TimeIntervalWhereUniqueInput[]
+  }
+
+  export type TimeIntervalUncheckedCreateNestedManyWithoutScheduleDayInput = {
+    create?: XOR<TimeIntervalCreateWithoutScheduleDayInput, TimeIntervalUncheckedCreateWithoutScheduleDayInput> | TimeIntervalCreateWithoutScheduleDayInput[] | TimeIntervalUncheckedCreateWithoutScheduleDayInput[]
+    connectOrCreate?: TimeIntervalCreateOrConnectWithoutScheduleDayInput | TimeIntervalCreateOrConnectWithoutScheduleDayInput[]
+    createMany?: TimeIntervalCreateManyScheduleDayInputEnvelope
+    connect?: TimeIntervalWhereUniqueInput | TimeIntervalWhereUniqueInput[]
+  }
+
+  export type EnumDayOfWeekFieldUpdateOperationsInput = {
+    set?: $Enums.DayOfWeek
+  }
+
+  export type ScheduleUpdateOneRequiredWithoutDaysNestedInput = {
+    create?: XOR<ScheduleCreateWithoutDaysInput, ScheduleUncheckedCreateWithoutDaysInput>
+    connectOrCreate?: ScheduleCreateOrConnectWithoutDaysInput
+    upsert?: ScheduleUpsertWithoutDaysInput
+    connect?: ScheduleWhereUniqueInput
+    update?: XOR<XOR<ScheduleUpdateToOneWithWhereWithoutDaysInput, ScheduleUpdateWithoutDaysInput>, ScheduleUncheckedUpdateWithoutDaysInput>
+  }
+
+  export type TimeIntervalUpdateManyWithoutScheduleDayNestedInput = {
+    create?: XOR<TimeIntervalCreateWithoutScheduleDayInput, TimeIntervalUncheckedCreateWithoutScheduleDayInput> | TimeIntervalCreateWithoutScheduleDayInput[] | TimeIntervalUncheckedCreateWithoutScheduleDayInput[]
+    connectOrCreate?: TimeIntervalCreateOrConnectWithoutScheduleDayInput | TimeIntervalCreateOrConnectWithoutScheduleDayInput[]
+    upsert?: TimeIntervalUpsertWithWhereUniqueWithoutScheduleDayInput | TimeIntervalUpsertWithWhereUniqueWithoutScheduleDayInput[]
+    createMany?: TimeIntervalCreateManyScheduleDayInputEnvelope
+    set?: TimeIntervalWhereUniqueInput | TimeIntervalWhereUniqueInput[]
+    disconnect?: TimeIntervalWhereUniqueInput | TimeIntervalWhereUniqueInput[]
+    delete?: TimeIntervalWhereUniqueInput | TimeIntervalWhereUniqueInput[]
+    connect?: TimeIntervalWhereUniqueInput | TimeIntervalWhereUniqueInput[]
+    update?: TimeIntervalUpdateWithWhereUniqueWithoutScheduleDayInput | TimeIntervalUpdateWithWhereUniqueWithoutScheduleDayInput[]
+    updateMany?: TimeIntervalUpdateManyWithWhereWithoutScheduleDayInput | TimeIntervalUpdateManyWithWhereWithoutScheduleDayInput[]
+    deleteMany?: TimeIntervalScalarWhereInput | TimeIntervalScalarWhereInput[]
+  }
+
+  export type TimeIntervalUncheckedUpdateManyWithoutScheduleDayNestedInput = {
+    create?: XOR<TimeIntervalCreateWithoutScheduleDayInput, TimeIntervalUncheckedCreateWithoutScheduleDayInput> | TimeIntervalCreateWithoutScheduleDayInput[] | TimeIntervalUncheckedCreateWithoutScheduleDayInput[]
+    connectOrCreate?: TimeIntervalCreateOrConnectWithoutScheduleDayInput | TimeIntervalCreateOrConnectWithoutScheduleDayInput[]
+    upsert?: TimeIntervalUpsertWithWhereUniqueWithoutScheduleDayInput | TimeIntervalUpsertWithWhereUniqueWithoutScheduleDayInput[]
+    createMany?: TimeIntervalCreateManyScheduleDayInputEnvelope
+    set?: TimeIntervalWhereUniqueInput | TimeIntervalWhereUniqueInput[]
+    disconnect?: TimeIntervalWhereUniqueInput | TimeIntervalWhereUniqueInput[]
+    delete?: TimeIntervalWhereUniqueInput | TimeIntervalWhereUniqueInput[]
+    connect?: TimeIntervalWhereUniqueInput | TimeIntervalWhereUniqueInput[]
+    update?: TimeIntervalUpdateWithWhereUniqueWithoutScheduleDayInput | TimeIntervalUpdateWithWhereUniqueWithoutScheduleDayInput[]
+    updateMany?: TimeIntervalUpdateManyWithWhereWithoutScheduleDayInput | TimeIntervalUpdateManyWithWhereWithoutScheduleDayInput[]
+    deleteMany?: TimeIntervalScalarWhereInput | TimeIntervalScalarWhereInput[]
+  }
+
+  export type ScheduleDayCreateNestedOneWithoutIntervalsInput = {
+    create?: XOR<ScheduleDayCreateWithoutIntervalsInput, ScheduleDayUncheckedCreateWithoutIntervalsInput>
+    connectOrCreate?: ScheduleDayCreateOrConnectWithoutIntervalsInput
+    connect?: ScheduleDayWhereUniqueInput
+  }
+
+  export type ScheduleDayUpdateOneRequiredWithoutIntervalsNestedInput = {
+    create?: XOR<ScheduleDayCreateWithoutIntervalsInput, ScheduleDayUncheckedCreateWithoutIntervalsInput>
+    connectOrCreate?: ScheduleDayCreateOrConnectWithoutIntervalsInput
+    upsert?: ScheduleDayUpsertWithoutIntervalsInput
+    connect?: ScheduleDayWhereUniqueInput
+    update?: XOR<XOR<ScheduleDayUpdateToOneWithWhereWithoutIntervalsInput, ScheduleDayUpdateWithoutIntervalsInput>, ScheduleDayUncheckedUpdateWithoutIntervalsInput>
   }
 
   export type EstablishmentCreateNestedOneWithoutStockWarehousesInput = {
@@ -138884,28 +136488,11 @@ export namespace Prisma {
     _max?: NestedEnumMenuTypeFilter<$PrismaModel>
   }
 
-  export type NestedEnumDayOfWeekFilter<$PrismaModel = never> = {
-    equals?: $Enums.DayOfWeek | EnumDayOfWeekFieldRefInput<$PrismaModel>
-    in?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
-    not?: NestedEnumDayOfWeekFilter<$PrismaModel> | $Enums.DayOfWeek
-  }
-
   export type NestedEnumScheduleTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ScheduleType | EnumScheduleTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ScheduleType[] | ListEnumScheduleTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.ScheduleType[] | ListEnumScheduleTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumScheduleTypeFilter<$PrismaModel> | $Enums.ScheduleType
-  }
-
-  export type NestedEnumDayOfWeekWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.DayOfWeek | EnumDayOfWeekFieldRefInput<$PrismaModel>
-    in?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
-    notIn?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
-    not?: NestedEnumDayOfWeekWithAggregatesFilter<$PrismaModel> | $Enums.DayOfWeek
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumDayOfWeekFilter<$PrismaModel>
-    _max?: NestedEnumDayOfWeekFilter<$PrismaModel>
   }
 
   export type NestedEnumScheduleTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -138916,6 +136503,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumScheduleTypeFilter<$PrismaModel>
     _max?: NestedEnumScheduleTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumDayOfWeekFilter<$PrismaModel = never> = {
+    equals?: $Enums.DayOfWeek | EnumDayOfWeekFieldRefInput<$PrismaModel>
+    in?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    not?: NestedEnumDayOfWeekFilter<$PrismaModel> | $Enums.DayOfWeek
+  }
+
+  export type NestedEnumDayOfWeekWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DayOfWeek | EnumDayOfWeekFieldRefInput<$PrismaModel>
+    in?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DayOfWeek[] | ListEnumDayOfWeekFieldRefInput<$PrismaModel>
+    not?: NestedEnumDayOfWeekWithAggregatesFilter<$PrismaModel> | $Enums.DayOfWeek
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDayOfWeekFilter<$PrismaModel>
+    _max?: NestedEnumDayOfWeekFilter<$PrismaModel>
   }
 
   export type NestedEnumStockUnitFilter<$PrismaModel = never> = {
@@ -139257,6 +136861,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -139273,7 +136878,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -139327,6 +136931,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -139342,7 +136947,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -139411,6 +137015,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -139427,7 +137032,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -139481,6 +137085,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -139496,7 +137101,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -139549,6 +137153,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -139564,7 +137169,6 @@ export namespace Prisma {
     bookings?: BookingCreateNestedManyWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -139619,6 +137223,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -139633,7 +137238,6 @@ export namespace Prisma {
     bookings?: BookingUncheckedCreateNestedManyWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -139703,6 +137307,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -139718,7 +137323,6 @@ export namespace Prisma {
     bookings?: BookingUpdateManyWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -139773,6 +137377,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -139787,7 +137392,6 @@ export namespace Prisma {
     bookings?: BookingUncheckedUpdateManyWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -139871,6 +137475,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -139886,7 +137491,6 @@ export namespace Prisma {
     bookings?: BookingCreateNestedManyWithoutEstablishmentInput
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -139941,6 +137545,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -139955,7 +137560,6 @@ export namespace Prisma {
     bookings?: BookingUncheckedCreateNestedManyWithoutEstablishmentInput
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -140054,6 +137658,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -140069,7 +137674,6 @@ export namespace Prisma {
     bookings?: BookingUpdateManyWithoutEstablishmentNestedInput
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -140124,6 +137728,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -140138,7 +137743,6 @@ export namespace Prisma {
     bookings?: BookingUncheckedUpdateManyWithoutEstablishmentNestedInput
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -140343,6 +137947,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -140358,7 +137963,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -140413,6 +138017,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -140427,7 +138032,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -140581,6 +138185,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -140596,7 +138201,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -140651,6 +138255,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -140665,7 +138270,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -140918,6 +138522,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -140934,7 +138539,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -140988,6 +138592,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -141003,7 +138608,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -141030,6 +138634,35 @@ export namespace Prisma {
     create: XOR<EstablishmentCreateWithoutDiscountsInput, EstablishmentUncheckedCreateWithoutDiscountsInput>
   }
 
+  export type ScheduleCreateWithoutDiscountsInput = {
+    id?: string
+    name: string
+    type: $Enums.ScheduleType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    days?: ScheduleDayCreateNestedManyWithoutScheduleInput
+    establishment?: EstablishmentCreateNestedOneWithoutScheduleInput
+    menus?: MenuCreateNestedManyWithoutScheduleInput
+    promotions?: PromotionCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleUncheckedCreateWithoutDiscountsInput = {
+    id?: string
+    name: string
+    type: $Enums.ScheduleType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    days?: ScheduleDayUncheckedCreateNestedManyWithoutScheduleInput
+    establishment?: EstablishmentUncheckedCreateNestedOneWithoutScheduleInput
+    menus?: MenuUncheckedCreateNestedManyWithoutScheduleInput
+    promotions?: PromotionUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleCreateOrConnectWithoutDiscountsInput = {
+    where: ScheduleWhereUniqueInput
+    create: XOR<ScheduleCreateWithoutDiscountsInput, ScheduleUncheckedCreateWithoutDiscountsInput>
+  }
+
   export type DiscountTargetCreateWithoutDiscountInput = {
     id?: string
     posCategoryId?: string | null
@@ -141049,26 +138682,6 @@ export namespace Prisma {
 
   export type DiscountTargetCreateManyDiscountInputEnvelope = {
     data: DiscountTargetCreateManyDiscountInput | DiscountTargetCreateManyDiscountInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type DiscountScheduleCreateWithoutDiscountInput = {
-    id?: string
-    schedule: ScheduleCreateNestedOneWithoutDiscountScheduleInput
-  }
-
-  export type DiscountScheduleUncheckedCreateWithoutDiscountInput = {
-    id?: string
-    scheduleId: string
-  }
-
-  export type DiscountScheduleCreateOrConnectWithoutDiscountInput = {
-    where: DiscountScheduleWhereUniqueInput
-    create: XOR<DiscountScheduleCreateWithoutDiscountInput, DiscountScheduleUncheckedCreateWithoutDiscountInput>
-  }
-
-  export type DiscountScheduleCreateManyDiscountInputEnvelope = {
-    data: DiscountScheduleCreateManyDiscountInput | DiscountScheduleCreateManyDiscountInput[]
     skipDuplicates?: boolean
   }
 
@@ -141114,6 +138727,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -141130,7 +138744,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -141184,6 +138797,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -141199,7 +138813,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -141219,6 +138832,41 @@ export namespace Prisma {
     stockAlerts?: StockAlertUncheckedUpdateManyWithoutEstablishmentNestedInput
     stockInventoryCounts?: StockInventoryCountUncheckedUpdateManyWithoutEstablishmentNestedInput
     stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type ScheduleUpsertWithoutDiscountsInput = {
+    update: XOR<ScheduleUpdateWithoutDiscountsInput, ScheduleUncheckedUpdateWithoutDiscountsInput>
+    create: XOR<ScheduleCreateWithoutDiscountsInput, ScheduleUncheckedCreateWithoutDiscountsInput>
+    where?: ScheduleWhereInput
+  }
+
+  export type ScheduleUpdateToOneWithWhereWithoutDiscountsInput = {
+    where?: ScheduleWhereInput
+    data: XOR<ScheduleUpdateWithoutDiscountsInput, ScheduleUncheckedUpdateWithoutDiscountsInput>
+  }
+
+  export type ScheduleUpdateWithoutDiscountsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: ScheduleDayUpdateManyWithoutScheduleNestedInput
+    establishment?: EstablishmentUpdateOneWithoutScheduleNestedInput
+    menus?: MenuUpdateManyWithoutScheduleNestedInput
+    promotions?: PromotionUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateWithoutDiscountsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: ScheduleDayUncheckedUpdateManyWithoutScheduleNestedInput
+    establishment?: EstablishmentUncheckedUpdateOneWithoutScheduleNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutScheduleNestedInput
+    promotions?: PromotionUncheckedUpdateManyWithoutScheduleNestedInput
   }
 
   export type DiscountTargetUpsertWithWhereUniqueWithoutDiscountInput = {
@@ -141247,31 +138895,6 @@ export namespace Prisma {
     posCategoryId?: StringNullableFilter<"DiscountTarget"> | string | null
   }
 
-  export type DiscountScheduleUpsertWithWhereUniqueWithoutDiscountInput = {
-    where: DiscountScheduleWhereUniqueInput
-    update: XOR<DiscountScheduleUpdateWithoutDiscountInput, DiscountScheduleUncheckedUpdateWithoutDiscountInput>
-    create: XOR<DiscountScheduleCreateWithoutDiscountInput, DiscountScheduleUncheckedCreateWithoutDiscountInput>
-  }
-
-  export type DiscountScheduleUpdateWithWhereUniqueWithoutDiscountInput = {
-    where: DiscountScheduleWhereUniqueInput
-    data: XOR<DiscountScheduleUpdateWithoutDiscountInput, DiscountScheduleUncheckedUpdateWithoutDiscountInput>
-  }
-
-  export type DiscountScheduleUpdateManyWithWhereWithoutDiscountInput = {
-    where: DiscountScheduleScalarWhereInput
-    data: XOR<DiscountScheduleUpdateManyMutationInput, DiscountScheduleUncheckedUpdateManyWithoutDiscountInput>
-  }
-
-  export type DiscountScheduleScalarWhereInput = {
-    AND?: DiscountScheduleScalarWhereInput | DiscountScheduleScalarWhereInput[]
-    OR?: DiscountScheduleScalarWhereInput[]
-    NOT?: DiscountScheduleScalarWhereInput | DiscountScheduleScalarWhereInput[]
-    id?: StringFilter<"DiscountSchedule"> | string
-    discountId?: StringFilter<"DiscountSchedule"> | string
-    scheduleId?: StringFilter<"DiscountSchedule"> | string
-  }
-
   export type DiscountCreateWithoutTargetsInput = {
     id?: string
     name: string
@@ -141285,12 +138908,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     establishment: EstablishmentCreateNestedOneWithoutDiscountsInput
-    schedules?: DiscountScheduleCreateNestedManyWithoutDiscountInput
+    schedule?: ScheduleCreateNestedOneWithoutDiscountsInput
   }
 
   export type DiscountUncheckedCreateWithoutTargetsInput = {
     id?: string
     establishmentId: string
+    scheduleId?: string | null
     name: string
     description?: string | null
     type: $Enums.DiscountType
@@ -141301,7 +138925,6 @@ export namespace Prisma {
     endsAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    schedules?: DiscountScheduleUncheckedCreateNestedManyWithoutDiscountInput
   }
 
   export type DiscountCreateOrConnectWithoutTargetsInput = {
@@ -141400,12 +139023,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     establishment?: EstablishmentUpdateOneRequiredWithoutDiscountsNestedInput
-    schedules?: DiscountScheduleUpdateManyWithoutDiscountNestedInput
+    schedule?: ScheduleUpdateOneWithoutDiscountsNestedInput
   }
 
   export type DiscountUncheckedUpdateWithoutTargetsInput = {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
@@ -141416,7 +139040,6 @@ export namespace Prisma {
     endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    schedules?: DiscountScheduleUncheckedUpdateManyWithoutDiscountNestedInput
   }
 
   export type ItemUpsertWithoutDiscountsInput = {
@@ -141492,154 +139115,6 @@ export namespace Prisma {
     attributes?: ItemAttributeUncheckedUpdateManyWithoutItemNestedInput
   }
 
-  export type DiscountCreateWithoutSchedulesInput = {
-    id?: string
-    name: string
-    description?: string | null
-    type: $Enums.DiscountType
-    value: Decimal | DecimalJsLike | number | string
-    isActive?: boolean
-    stackable?: boolean
-    startsAt?: Date | string | null
-    endsAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    establishment: EstablishmentCreateNestedOneWithoutDiscountsInput
-    targets?: DiscountTargetCreateNestedManyWithoutDiscountInput
-  }
-
-  export type DiscountUncheckedCreateWithoutSchedulesInput = {
-    id?: string
-    establishmentId: string
-    name: string
-    description?: string | null
-    type: $Enums.DiscountType
-    value: Decimal | DecimalJsLike | number | string
-    isActive?: boolean
-    stackable?: boolean
-    startsAt?: Date | string | null
-    endsAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    targets?: DiscountTargetUncheckedCreateNestedManyWithoutDiscountInput
-  }
-
-  export type DiscountCreateOrConnectWithoutSchedulesInput = {
-    where: DiscountWhereUniqueInput
-    create: XOR<DiscountCreateWithoutSchedulesInput, DiscountUncheckedCreateWithoutSchedulesInput>
-  }
-
-  export type ScheduleCreateWithoutDiscountScheduleInput = {
-    id?: string
-    openTime: string
-    closeTime: string
-    dayOfWeek: $Enums.DayOfWeek
-    type: $Enums.ScheduleType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutScheduleInput
-    menuSchedule?: MenuScheduleCreateNestedManyWithoutScheduleInput
-    promotionSchedule?: PromotionScheduleCreateNestedManyWithoutScheduleInput
-  }
-
-  export type ScheduleUncheckedCreateWithoutDiscountScheduleInput = {
-    id?: string
-    openTime: string
-    closeTime: string
-    dayOfWeek: $Enums.DayOfWeek
-    type: $Enums.ScheduleType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutScheduleInput
-    menuSchedule?: MenuScheduleUncheckedCreateNestedManyWithoutScheduleInput
-    promotionSchedule?: PromotionScheduleUncheckedCreateNestedManyWithoutScheduleInput
-  }
-
-  export type ScheduleCreateOrConnectWithoutDiscountScheduleInput = {
-    where: ScheduleWhereUniqueInput
-    create: XOR<ScheduleCreateWithoutDiscountScheduleInput, ScheduleUncheckedCreateWithoutDiscountScheduleInput>
-  }
-
-  export type DiscountUpsertWithoutSchedulesInput = {
-    update: XOR<DiscountUpdateWithoutSchedulesInput, DiscountUncheckedUpdateWithoutSchedulesInput>
-    create: XOR<DiscountCreateWithoutSchedulesInput, DiscountUncheckedCreateWithoutSchedulesInput>
-    where?: DiscountWhereInput
-  }
-
-  export type DiscountUpdateToOneWithWhereWithoutSchedulesInput = {
-    where?: DiscountWhereInput
-    data: XOR<DiscountUpdateWithoutSchedulesInput, DiscountUncheckedUpdateWithoutSchedulesInput>
-  }
-
-  export type DiscountUpdateWithoutSchedulesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
-    value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    stackable?: BoolFieldUpdateOperationsInput | boolean
-    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishment?: EstablishmentUpdateOneRequiredWithoutDiscountsNestedInput
-    targets?: DiscountTargetUpdateManyWithoutDiscountNestedInput
-  }
-
-  export type DiscountUncheckedUpdateWithoutSchedulesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
-    value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    stackable?: BoolFieldUpdateOperationsInput | boolean
-    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    targets?: DiscountTargetUncheckedUpdateManyWithoutDiscountNestedInput
-  }
-
-  export type ScheduleUpsertWithoutDiscountScheduleInput = {
-    update: XOR<ScheduleUpdateWithoutDiscountScheduleInput, ScheduleUncheckedUpdateWithoutDiscountScheduleInput>
-    create: XOR<ScheduleCreateWithoutDiscountScheduleInput, ScheduleUncheckedCreateWithoutDiscountScheduleInput>
-    where?: ScheduleWhereInput
-  }
-
-  export type ScheduleUpdateToOneWithWhereWithoutDiscountScheduleInput = {
-    where?: ScheduleWhereInput
-    data: XOR<ScheduleUpdateWithoutDiscountScheduleInput, ScheduleUncheckedUpdateWithoutDiscountScheduleInput>
-  }
-
-  export type ScheduleUpdateWithoutDiscountScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    openTime?: StringFieldUpdateOperationsInput | string
-    closeTime?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
-    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutScheduleNestedInput
-    menuSchedule?: MenuScheduleUpdateManyWithoutScheduleNestedInput
-    promotionSchedule?: PromotionScheduleUpdateManyWithoutScheduleNestedInput
-  }
-
-  export type ScheduleUncheckedUpdateWithoutDiscountScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    openTime?: StringFieldUpdateOperationsInput | string
-    closeTime?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
-    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-    menuSchedule?: MenuScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-    promotionSchedule?: PromotionScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-  }
-
   export type EstablishmentCreateWithoutPromotionsInput = {
     id?: string
     name: string
@@ -141671,6 +139146,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -141687,7 +139163,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -141741,6 +139216,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -141756,7 +139232,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -141783,6 +139258,35 @@ export namespace Prisma {
     create: XOR<EstablishmentCreateWithoutPromotionsInput, EstablishmentUncheckedCreateWithoutPromotionsInput>
   }
 
+  export type ScheduleCreateWithoutPromotionsInput = {
+    id?: string
+    name: string
+    type: $Enums.ScheduleType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    days?: ScheduleDayCreateNestedManyWithoutScheduleInput
+    establishment?: EstablishmentCreateNestedOneWithoutScheduleInput
+    menus?: MenuCreateNestedManyWithoutScheduleInput
+    discounts?: DiscountCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleUncheckedCreateWithoutPromotionsInput = {
+    id?: string
+    name: string
+    type: $Enums.ScheduleType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    days?: ScheduleDayUncheckedCreateNestedManyWithoutScheduleInput
+    establishment?: EstablishmentUncheckedCreateNestedOneWithoutScheduleInput
+    menus?: MenuUncheckedCreateNestedManyWithoutScheduleInput
+    discounts?: DiscountUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleCreateOrConnectWithoutPromotionsInput = {
+    where: ScheduleWhereUniqueInput
+    create: XOR<ScheduleCreateWithoutPromotionsInput, ScheduleUncheckedCreateWithoutPromotionsInput>
+  }
+
   export type BuyXGetYRuleCreateWithoutPromotionInput = {
     id?: string
     requiredQuantity: number
@@ -141804,26 +139308,6 @@ export namespace Prisma {
   export type BuyXGetYRuleCreateOrConnectWithoutPromotionInput = {
     where: BuyXGetYRuleWhereUniqueInput
     create: XOR<BuyXGetYRuleCreateWithoutPromotionInput, BuyXGetYRuleUncheckedCreateWithoutPromotionInput>
-  }
-
-  export type PromotionScheduleCreateWithoutPromotionInput = {
-    id?: string
-    schedule: ScheduleCreateNestedOneWithoutPromotionScheduleInput
-  }
-
-  export type PromotionScheduleUncheckedCreateWithoutPromotionInput = {
-    id?: string
-    scheduleId: string
-  }
-
-  export type PromotionScheduleCreateOrConnectWithoutPromotionInput = {
-    where: PromotionScheduleWhereUniqueInput
-    create: XOR<PromotionScheduleCreateWithoutPromotionInput, PromotionScheduleUncheckedCreateWithoutPromotionInput>
-  }
-
-  export type PromotionScheduleCreateManyPromotionInputEnvelope = {
-    data: PromotionScheduleCreateManyPromotionInput | PromotionScheduleCreateManyPromotionInput[]
-    skipDuplicates?: boolean
   }
 
   export type EstablishmentUpsertWithoutPromotionsInput = {
@@ -141868,6 +139352,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -141884,7 +139369,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -141938,6 +139422,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -141953,7 +139438,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -141973,6 +139457,41 @@ export namespace Prisma {
     stockAlerts?: StockAlertUncheckedUpdateManyWithoutEstablishmentNestedInput
     stockInventoryCounts?: StockInventoryCountUncheckedUpdateManyWithoutEstablishmentNestedInput
     stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type ScheduleUpsertWithoutPromotionsInput = {
+    update: XOR<ScheduleUpdateWithoutPromotionsInput, ScheduleUncheckedUpdateWithoutPromotionsInput>
+    create: XOR<ScheduleCreateWithoutPromotionsInput, ScheduleUncheckedCreateWithoutPromotionsInput>
+    where?: ScheduleWhereInput
+  }
+
+  export type ScheduleUpdateToOneWithWhereWithoutPromotionsInput = {
+    where?: ScheduleWhereInput
+    data: XOR<ScheduleUpdateWithoutPromotionsInput, ScheduleUncheckedUpdateWithoutPromotionsInput>
+  }
+
+  export type ScheduleUpdateWithoutPromotionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: ScheduleDayUpdateManyWithoutScheduleNestedInput
+    establishment?: EstablishmentUpdateOneWithoutScheduleNestedInput
+    menus?: MenuUpdateManyWithoutScheduleNestedInput
+    discounts?: DiscountUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateWithoutPromotionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: ScheduleDayUncheckedUpdateManyWithoutScheduleNestedInput
+    establishment?: EstablishmentUncheckedUpdateOneWithoutScheduleNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutScheduleNestedInput
+    discounts?: DiscountUncheckedUpdateManyWithoutScheduleNestedInput
   }
 
   export type BuyXGetYRuleUpsertWithoutPromotionInput = {
@@ -142004,31 +139523,6 @@ export namespace Prisma {
     applyCheapest?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type PromotionScheduleUpsertWithWhereUniqueWithoutPromotionInput = {
-    where: PromotionScheduleWhereUniqueInput
-    update: XOR<PromotionScheduleUpdateWithoutPromotionInput, PromotionScheduleUncheckedUpdateWithoutPromotionInput>
-    create: XOR<PromotionScheduleCreateWithoutPromotionInput, PromotionScheduleUncheckedCreateWithoutPromotionInput>
-  }
-
-  export type PromotionScheduleUpdateWithWhereUniqueWithoutPromotionInput = {
-    where: PromotionScheduleWhereUniqueInput
-    data: XOR<PromotionScheduleUpdateWithoutPromotionInput, PromotionScheduleUncheckedUpdateWithoutPromotionInput>
-  }
-
-  export type PromotionScheduleUpdateManyWithWhereWithoutPromotionInput = {
-    where: PromotionScheduleScalarWhereInput
-    data: XOR<PromotionScheduleUpdateManyMutationInput, PromotionScheduleUncheckedUpdateManyWithoutPromotionInput>
-  }
-
-  export type PromotionScheduleScalarWhereInput = {
-    AND?: PromotionScheduleScalarWhereInput | PromotionScheduleScalarWhereInput[]
-    OR?: PromotionScheduleScalarWhereInput[]
-    NOT?: PromotionScheduleScalarWhereInput | PromotionScheduleScalarWhereInput[]
-    id?: StringFilter<"PromotionSchedule"> | string
-    promotionId?: StringFilter<"PromotionSchedule"> | string
-    scheduleId?: StringFilter<"PromotionSchedule"> | string
-  }
-
   export type PromotionCreateWithoutBuyXGetYRuleInput = {
     id?: string
     name: string
@@ -142040,12 +139534,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     establishment: EstablishmentCreateNestedOneWithoutPromotionsInput
-    schedules?: PromotionScheduleCreateNestedManyWithoutPromotionInput
+    schedule?: ScheduleCreateNestedOneWithoutPromotionsInput
   }
 
   export type PromotionUncheckedCreateWithoutBuyXGetYRuleInput = {
     id?: string
     establishmentId: string
+    scheduleId?: string | null
     name: string
     description?: string | null
     type: $Enums.PromotionType
@@ -142054,7 +139549,6 @@ export namespace Prisma {
     endsAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    schedules?: PromotionScheduleUncheckedCreateNestedManyWithoutPromotionInput
   }
 
   export type PromotionCreateOrConnectWithoutBuyXGetYRuleInput = {
@@ -142218,12 +139712,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     establishment?: EstablishmentUpdateOneRequiredWithoutPromotionsNestedInput
-    schedules?: PromotionScheduleUpdateManyWithoutPromotionNestedInput
+    schedule?: ScheduleUpdateOneWithoutPromotionsNestedInput
   }
 
   export type PromotionUncheckedUpdateWithoutBuyXGetYRuleInput = {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumPromotionTypeFieldUpdateOperationsInput | $Enums.PromotionType
@@ -142232,7 +139727,6 @@ export namespace Prisma {
     endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    schedules?: PromotionScheduleUncheckedUpdateManyWithoutPromotionNestedInput
   }
 
   export type ItemUpsertWithoutRequiredItemRulesInput = {
@@ -142381,146 +139875,6 @@ export namespace Prisma {
     attributes?: ItemAttributeUncheckedUpdateManyWithoutItemNestedInput
   }
 
-  export type PromotionCreateWithoutSchedulesInput = {
-    id?: string
-    name: string
-    description?: string | null
-    type: $Enums.PromotionType
-    isActive?: boolean
-    startsAt?: Date | string | null
-    endsAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    establishment: EstablishmentCreateNestedOneWithoutPromotionsInput
-    buyXGetYRule?: BuyXGetYRuleCreateNestedOneWithoutPromotionInput
-  }
-
-  export type PromotionUncheckedCreateWithoutSchedulesInput = {
-    id?: string
-    establishmentId: string
-    name: string
-    description?: string | null
-    type: $Enums.PromotionType
-    isActive?: boolean
-    startsAt?: Date | string | null
-    endsAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    buyXGetYRule?: BuyXGetYRuleUncheckedCreateNestedOneWithoutPromotionInput
-  }
-
-  export type PromotionCreateOrConnectWithoutSchedulesInput = {
-    where: PromotionWhereUniqueInput
-    create: XOR<PromotionCreateWithoutSchedulesInput, PromotionUncheckedCreateWithoutSchedulesInput>
-  }
-
-  export type ScheduleCreateWithoutPromotionScheduleInput = {
-    id?: string
-    openTime: string
-    closeTime: string
-    dayOfWeek: $Enums.DayOfWeek
-    type: $Enums.ScheduleType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutScheduleInput
-    menuSchedule?: MenuScheduleCreateNestedManyWithoutScheduleInput
-    discountSchedule?: DiscountScheduleCreateNestedManyWithoutScheduleInput
-  }
-
-  export type ScheduleUncheckedCreateWithoutPromotionScheduleInput = {
-    id?: string
-    openTime: string
-    closeTime: string
-    dayOfWeek: $Enums.DayOfWeek
-    type: $Enums.ScheduleType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutScheduleInput
-    menuSchedule?: MenuScheduleUncheckedCreateNestedManyWithoutScheduleInput
-    discountSchedule?: DiscountScheduleUncheckedCreateNestedManyWithoutScheduleInput
-  }
-
-  export type ScheduleCreateOrConnectWithoutPromotionScheduleInput = {
-    where: ScheduleWhereUniqueInput
-    create: XOR<ScheduleCreateWithoutPromotionScheduleInput, ScheduleUncheckedCreateWithoutPromotionScheduleInput>
-  }
-
-  export type PromotionUpsertWithoutSchedulesInput = {
-    update: XOR<PromotionUpdateWithoutSchedulesInput, PromotionUncheckedUpdateWithoutSchedulesInput>
-    create: XOR<PromotionCreateWithoutSchedulesInput, PromotionUncheckedCreateWithoutSchedulesInput>
-    where?: PromotionWhereInput
-  }
-
-  export type PromotionUpdateToOneWithWhereWithoutSchedulesInput = {
-    where?: PromotionWhereInput
-    data: XOR<PromotionUpdateWithoutSchedulesInput, PromotionUncheckedUpdateWithoutSchedulesInput>
-  }
-
-  export type PromotionUpdateWithoutSchedulesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumPromotionTypeFieldUpdateOperationsInput | $Enums.PromotionType
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishment?: EstablishmentUpdateOneRequiredWithoutPromotionsNestedInput
-    buyXGetYRule?: BuyXGetYRuleUpdateOneWithoutPromotionNestedInput
-  }
-
-  export type PromotionUncheckedUpdateWithoutSchedulesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumPromotionTypeFieldUpdateOperationsInput | $Enums.PromotionType
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    buyXGetYRule?: BuyXGetYRuleUncheckedUpdateOneWithoutPromotionNestedInput
-  }
-
-  export type ScheduleUpsertWithoutPromotionScheduleInput = {
-    update: XOR<ScheduleUpdateWithoutPromotionScheduleInput, ScheduleUncheckedUpdateWithoutPromotionScheduleInput>
-    create: XOR<ScheduleCreateWithoutPromotionScheduleInput, ScheduleUncheckedCreateWithoutPromotionScheduleInput>
-    where?: ScheduleWhereInput
-  }
-
-  export type ScheduleUpdateToOneWithWhereWithoutPromotionScheduleInput = {
-    where?: ScheduleWhereInput
-    data: XOR<ScheduleUpdateWithoutPromotionScheduleInput, ScheduleUncheckedUpdateWithoutPromotionScheduleInput>
-  }
-
-  export type ScheduleUpdateWithoutPromotionScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    openTime?: StringFieldUpdateOperationsInput | string
-    closeTime?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
-    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutScheduleNestedInput
-    menuSchedule?: MenuScheduleUpdateManyWithoutScheduleNestedInput
-    discountSchedule?: DiscountScheduleUpdateManyWithoutScheduleNestedInput
-  }
-
-  export type ScheduleUncheckedUpdateWithoutPromotionScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    openTime?: StringFieldUpdateOperationsInput | string
-    closeTime?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
-    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-    menuSchedule?: MenuScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-    discountSchedule?: DiscountScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-  }
-
   export type EmailEventCreateWithoutEmailLogInput = {
     id?: string
     event: $Enums.EmailEventType
@@ -142576,6 +139930,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -142592,7 +139947,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -142646,6 +140000,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -142661,7 +140016,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -142757,6 +140111,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -142773,7 +140128,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -142827,6 +140181,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -142842,7 +140197,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -143035,6 +140389,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -143050,7 +140405,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -143105,6 +140459,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -143119,7 +140474,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -143189,6 +140543,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -143204,7 +140559,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -143259,6 +140613,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -143273,7 +140628,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -143294,6 +140648,35 @@ export namespace Prisma {
     stockAlerts?: StockAlertUncheckedUpdateManyWithoutEstablishmentNestedInput
     stockInventoryCounts?: StockInventoryCountUncheckedUpdateManyWithoutEstablishmentNestedInput
     stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type ScheduleCreateWithoutEstablishmentInput = {
+    id?: string
+    name: string
+    type: $Enums.ScheduleType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    days?: ScheduleDayCreateNestedManyWithoutScheduleInput
+    menus?: MenuCreateNestedManyWithoutScheduleInput
+    discounts?: DiscountCreateNestedManyWithoutScheduleInput
+    promotions?: PromotionCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleUncheckedCreateWithoutEstablishmentInput = {
+    id?: string
+    name: string
+    type: $Enums.ScheduleType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    days?: ScheduleDayUncheckedCreateNestedManyWithoutScheduleInput
+    menus?: MenuUncheckedCreateNestedManyWithoutScheduleInput
+    discounts?: DiscountUncheckedCreateNestedManyWithoutScheduleInput
+    promotions?: PromotionUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleCreateOrConnectWithoutEstablishmentInput = {
+    where: ScheduleWhereUniqueInput
+    create: XOR<ScheduleCreateWithoutEstablishmentInput, ScheduleUncheckedCreateWithoutEstablishmentInput>
   }
 
   export type UserCreateWithoutEstablishmentsInput = {
@@ -143569,8 +140952,8 @@ export namespace Prisma {
     maxItemsPerOrder?: number | null
     price?: number | null
     type?: $Enums.MenuType
+    schedule?: ScheduleCreateNestedOneWithoutMenusInput
     categories?: MenuCategoryCreateNestedManyWithoutMenuInput
-    menuSchedule?: MenuScheduleCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationCreateNestedManyWithoutMenuInput
   }
 
@@ -143580,13 +140963,13 @@ export namespace Prisma {
     isVisible?: boolean
     isHighlighted?: boolean
     color?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
     type?: $Enums.MenuType
     categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
-    menuSchedule?: MenuScheduleUncheckedCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
   }
 
@@ -143875,26 +141258,6 @@ export namespace Prisma {
 
   export type EstablishmentAvailabilityCreateManyEstablishmentInputEnvelope = {
     data: EstablishmentAvailabilityCreateManyEstablishmentInput | EstablishmentAvailabilityCreateManyEstablishmentInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type EstablishmentScheduleCreateWithoutEstablishmentInput = {
-    id?: string
-    schedule: ScheduleCreateNestedOneWithoutEstablishmentScheduleInput
-  }
-
-  export type EstablishmentScheduleUncheckedCreateWithoutEstablishmentInput = {
-    id?: string
-    scheduleId: string
-  }
-
-  export type EstablishmentScheduleCreateOrConnectWithoutEstablishmentInput = {
-    where: EstablishmentScheduleWhereUniqueInput
-    create: XOR<EstablishmentScheduleCreateWithoutEstablishmentInput, EstablishmentScheduleUncheckedCreateWithoutEstablishmentInput>
-  }
-
-  export type EstablishmentScheduleCreateManyEstablishmentInputEnvelope = {
-    data: EstablishmentScheduleCreateManyEstablishmentInput | EstablishmentScheduleCreateManyEstablishmentInput[]
     skipDuplicates?: boolean
   }
 
@@ -144257,12 +141620,13 @@ export namespace Prisma {
     endsAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutDiscountsInput
     targets?: DiscountTargetCreateNestedManyWithoutDiscountInput
-    schedules?: DiscountScheduleCreateNestedManyWithoutDiscountInput
   }
 
   export type DiscountUncheckedCreateWithoutEstablishmentInput = {
     id?: string
+    scheduleId?: string | null
     name: string
     description?: string | null
     type: $Enums.DiscountType
@@ -144274,7 +141638,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     targets?: DiscountTargetUncheckedCreateNestedManyWithoutDiscountInput
-    schedules?: DiscountScheduleUncheckedCreateNestedManyWithoutDiscountInput
   }
 
   export type DiscountCreateOrConnectWithoutEstablishmentInput = {
@@ -144297,12 +141660,13 @@ export namespace Prisma {
     endsAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutPromotionsInput
     buyXGetYRule?: BuyXGetYRuleCreateNestedOneWithoutPromotionInput
-    schedules?: PromotionScheduleCreateNestedManyWithoutPromotionInput
   }
 
   export type PromotionUncheckedCreateWithoutEstablishmentInput = {
     id?: string
+    scheduleId?: string | null
     name: string
     description?: string | null
     type: $Enums.PromotionType
@@ -144312,7 +141676,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     buyXGetYRule?: BuyXGetYRuleUncheckedCreateNestedOneWithoutPromotionInput
-    schedules?: PromotionScheduleUncheckedCreateNestedManyWithoutPromotionInput
   }
 
   export type PromotionCreateOrConnectWithoutEstablishmentInput = {
@@ -144759,6 +142122,41 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ScheduleUpsertWithoutEstablishmentInput = {
+    update: XOR<ScheduleUpdateWithoutEstablishmentInput, ScheduleUncheckedUpdateWithoutEstablishmentInput>
+    create: XOR<ScheduleCreateWithoutEstablishmentInput, ScheduleUncheckedCreateWithoutEstablishmentInput>
+    where?: ScheduleWhereInput
+  }
+
+  export type ScheduleUpdateToOneWithWhereWithoutEstablishmentInput = {
+    where?: ScheduleWhereInput
+    data: XOR<ScheduleUpdateWithoutEstablishmentInput, ScheduleUncheckedUpdateWithoutEstablishmentInput>
+  }
+
+  export type ScheduleUpdateWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: ScheduleDayUpdateManyWithoutScheduleNestedInput
+    menus?: MenuUpdateManyWithoutScheduleNestedInput
+    discounts?: DiscountUpdateManyWithoutScheduleNestedInput
+    promotions?: PromotionUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: ScheduleDayUncheckedUpdateManyWithoutScheduleNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutScheduleNestedInput
+    discounts?: DiscountUncheckedUpdateManyWithoutScheduleNestedInput
+    promotions?: PromotionUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
   export type UserUpsertWithoutEstablishmentsInput = {
     update: XOR<UserUpdateWithoutEstablishmentsInput, UserUncheckedUpdateWithoutEstablishmentsInput>
     create: XOR<UserCreateWithoutEstablishmentsInput, UserUncheckedCreateWithoutEstablishmentsInput>
@@ -145054,6 +142452,7 @@ export namespace Prisma {
     isHighlighted?: BoolFilter<"Menu"> | boolean
     color?: StringNullableFilter<"Menu"> | string | null
     establishmentId?: StringFilter<"Menu"> | string
+    scheduleId?: StringNullableFilter<"Menu"> | string | null
     createdAt?: DateTimeFilter<"Menu"> | Date | string
     updatedAt?: DateTimeFilter<"Menu"> | Date | string
     maxItemsPerOrder?: IntNullableFilter<"Menu"> | number | null
@@ -145273,31 +142672,6 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"EstablishmentAvailability"> | Date | string
     updatedAt?: DateTimeFilter<"EstablishmentAvailability"> | Date | string
     establishmentId?: StringFilter<"EstablishmentAvailability"> | string
-  }
-
-  export type EstablishmentScheduleUpsertWithWhereUniqueWithoutEstablishmentInput = {
-    where: EstablishmentScheduleWhereUniqueInput
-    update: XOR<EstablishmentScheduleUpdateWithoutEstablishmentInput, EstablishmentScheduleUncheckedUpdateWithoutEstablishmentInput>
-    create: XOR<EstablishmentScheduleCreateWithoutEstablishmentInput, EstablishmentScheduleUncheckedCreateWithoutEstablishmentInput>
-  }
-
-  export type EstablishmentScheduleUpdateWithWhereUniqueWithoutEstablishmentInput = {
-    where: EstablishmentScheduleWhereUniqueInput
-    data: XOR<EstablishmentScheduleUpdateWithoutEstablishmentInput, EstablishmentScheduleUncheckedUpdateWithoutEstablishmentInput>
-  }
-
-  export type EstablishmentScheduleUpdateManyWithWhereWithoutEstablishmentInput = {
-    where: EstablishmentScheduleScalarWhereInput
-    data: XOR<EstablishmentScheduleUpdateManyMutationInput, EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentInput>
-  }
-
-  export type EstablishmentScheduleScalarWhereInput = {
-    AND?: EstablishmentScheduleScalarWhereInput | EstablishmentScheduleScalarWhereInput[]
-    OR?: EstablishmentScheduleScalarWhereInput[]
-    NOT?: EstablishmentScheduleScalarWhereInput | EstablishmentScheduleScalarWhereInput[]
-    id?: StringFilter<"EstablishmentSchedule"> | string
-    establishmentId?: StringFilter<"EstablishmentSchedule"> | string
-    scheduleId?: StringFilter<"EstablishmentSchedule"> | string
   }
 
   export type EstablishmentIntegrationsUpsertWithoutEstablishmentInput = {
@@ -145659,6 +143033,7 @@ export namespace Prisma {
     NOT?: DiscountScalarWhereInput | DiscountScalarWhereInput[]
     id?: StringFilter<"Discount"> | string
     establishmentId?: StringFilter<"Discount"> | string
+    scheduleId?: StringNullableFilter<"Discount"> | string | null
     name?: StringFilter<"Discount"> | string
     description?: StringNullableFilter<"Discount"> | string | null
     type?: EnumDiscountTypeFilter<"Discount"> | $Enums.DiscountType
@@ -145693,6 +143068,7 @@ export namespace Prisma {
     NOT?: PromotionScalarWhereInput | PromotionScalarWhereInput[]
     id?: StringFilter<"Promotion"> | string
     establishmentId?: StringFilter<"Promotion"> | string
+    scheduleId?: StringNullableFilter<"Promotion"> | string | null
     name?: StringFilter<"Promotion"> | string
     description?: StringNullableFilter<"Promotion"> | string | null
     type?: EnumPromotionTypeFilter<"Promotion"> | $Enums.PromotionType
@@ -146037,366 +143413,6 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"StockWarehouse"> | Date | string | null
   }
 
-  export type EstablishmentCreateWithoutEstablishmentScheduleInput = {
-    id?: string
-    name: string
-    slug: string
-    type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
-    email: string
-    phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
-    countryCode: string
-    billingName: string
-    billingTaxId: string
-    stripeCustomerId: string
-    instagramUrl?: string | null
-    tiktokUrl?: string | null
-    facebookUrl?: string | null
-    googleReviewUrl?: string | null
-    tripAdvisorUrl?: string | null
-    primaryLanguage?: $Enums.EstablishmentLanguage
-    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
-    currency?: $Enums.Currency
-    timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    owner: UserCreateNestedOneWithoutEstablishmentsInput
-    activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
-    logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
-    bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
-    images?: ImageCreateNestedManyWithoutEstablishmentInput
-    themes?: ThemeCreateNestedManyWithoutEstablishmentInput
-    employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
-    serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
-    menus?: MenuCreateNestedManyWithoutEstablishmentInput
-    Item?: ItemCreateNestedManyWithoutEstablishmentInput
-    addons?: AddonCreateNestedManyWithoutEstablishmentInput
-    variantOptions?: VariantOptionCreateNestedManyWithoutEstablishmentInput
-    bookings?: BookingCreateNestedManyWithoutEstablishmentInput
-    bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
-    establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
-    establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
-    subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
-    invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
-    devices?: DeviceCreateNestedManyWithoutEstablishmentInput
-    vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
-    sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
-    emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
-    auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
-    discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
-    promotions?: PromotionCreateNestedManyWithoutEstablishmentInput
-    suppliers?: SupplierCreateNestedManyWithoutEstablishmentInput
-    stockCategories?: StockCategoryCreateNestedManyWithoutEstablishmentInput
-    stockItems?: StockItemCreateNestedManyWithoutEstablishmentInput
-    stockEntries?: StockEntryCreateNestedManyWithoutEstablishmentInput
-    stockExits?: StockExitCreateNestedManyWithoutEstablishmentInput
-    stockMovements?: StockMovementCreateNestedManyWithoutEstablishmentInput
-    stockAlerts?: StockAlertCreateNestedManyWithoutEstablishmentInput
-    stockInventoryCounts?: StockInventoryCountCreateNestedManyWithoutEstablishmentInput
-    stockWarehouses?: StockWarehouseCreateNestedManyWithoutEstablishmentInput
-  }
-
-  export type EstablishmentUncheckedCreateWithoutEstablishmentScheduleInput = {
-    id?: string
-    name: string
-    slug: string
-    type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
-    email: string
-    phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
-    countryCode: string
-    billingName: string
-    billingTaxId: string
-    stripeCustomerId: string
-    instagramUrl?: string | null
-    tiktokUrl?: string | null
-    facebookUrl?: string | null
-    googleReviewUrl?: string | null
-    tripAdvisorUrl?: string | null
-    primaryLanguage?: $Enums.EstablishmentLanguage
-    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
-    currency?: $Enums.Currency
-    timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
-    logoImageId?: string | null
-    bannerImageId?: string | null
-    activeThemeId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ownerId: string
-    images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
-    themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
-    employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
-    serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
-    menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
-    Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
-    addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
-    variantOptions?: VariantOptionUncheckedCreateNestedManyWithoutEstablishmentInput
-    bookings?: BookingUncheckedCreateNestedManyWithoutEstablishmentInput
-    bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
-    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
-    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
-    subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
-    invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
-    devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
-    vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
-    sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
-    emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
-    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
-    discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
-    promotions?: PromotionUncheckedCreateNestedManyWithoutEstablishmentInput
-    suppliers?: SupplierUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockCategories?: StockCategoryUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockItems?: StockItemUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockEntries?: StockEntryUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockExits?: StockExitUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockMovements?: StockMovementUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockAlerts?: StockAlertUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockInventoryCounts?: StockInventoryCountUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockWarehouses?: StockWarehouseUncheckedCreateNestedManyWithoutEstablishmentInput
-  }
-
-  export type EstablishmentCreateOrConnectWithoutEstablishmentScheduleInput = {
-    where: EstablishmentWhereUniqueInput
-    create: XOR<EstablishmentCreateWithoutEstablishmentScheduleInput, EstablishmentUncheckedCreateWithoutEstablishmentScheduleInput>
-  }
-
-  export type ScheduleCreateWithoutEstablishmentScheduleInput = {
-    id?: string
-    openTime: string
-    closeTime: string
-    dayOfWeek: $Enums.DayOfWeek
-    type: $Enums.ScheduleType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    menuSchedule?: MenuScheduleCreateNestedManyWithoutScheduleInput
-    discountSchedule?: DiscountScheduleCreateNestedManyWithoutScheduleInput
-    promotionSchedule?: PromotionScheduleCreateNestedManyWithoutScheduleInput
-  }
-
-  export type ScheduleUncheckedCreateWithoutEstablishmentScheduleInput = {
-    id?: string
-    openTime: string
-    closeTime: string
-    dayOfWeek: $Enums.DayOfWeek
-    type: $Enums.ScheduleType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    menuSchedule?: MenuScheduleUncheckedCreateNestedManyWithoutScheduleInput
-    discountSchedule?: DiscountScheduleUncheckedCreateNestedManyWithoutScheduleInput
-    promotionSchedule?: PromotionScheduleUncheckedCreateNestedManyWithoutScheduleInput
-  }
-
-  export type ScheduleCreateOrConnectWithoutEstablishmentScheduleInput = {
-    where: ScheduleWhereUniqueInput
-    create: XOR<ScheduleCreateWithoutEstablishmentScheduleInput, ScheduleUncheckedCreateWithoutEstablishmentScheduleInput>
-  }
-
-  export type EstablishmentUpsertWithoutEstablishmentScheduleInput = {
-    update: XOR<EstablishmentUpdateWithoutEstablishmentScheduleInput, EstablishmentUncheckedUpdateWithoutEstablishmentScheduleInput>
-    create: XOR<EstablishmentCreateWithoutEstablishmentScheduleInput, EstablishmentUncheckedCreateWithoutEstablishmentScheduleInput>
-    where?: EstablishmentWhereInput
-  }
-
-  export type EstablishmentUpdateToOneWithWhereWithoutEstablishmentScheduleInput = {
-    where?: EstablishmentWhereInput
-    data: XOR<EstablishmentUpdateWithoutEstablishmentScheduleInput, EstablishmentUncheckedUpdateWithoutEstablishmentScheduleInput>
-  }
-
-  export type EstablishmentUpdateWithoutEstablishmentScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
-    email?: StringFieldUpdateOperationsInput | string
-    phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
-    billingName?: StringFieldUpdateOperationsInput | string
-    billingTaxId?: StringFieldUpdateOperationsInput | string
-    stripeCustomerId?: StringFieldUpdateOperationsInput | string
-    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
-    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
-    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-    timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
-    activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
-    logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
-    bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
-    images?: ImageUpdateManyWithoutEstablishmentNestedInput
-    themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
-    employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
-    serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
-    menus?: MenuUpdateManyWithoutEstablishmentNestedInput
-    Item?: ItemUpdateManyWithoutEstablishmentNestedInput
-    addons?: AddonUpdateManyWithoutEstablishmentNestedInput
-    variantOptions?: VariantOptionUpdateManyWithoutEstablishmentNestedInput
-    bookings?: BookingUpdateManyWithoutEstablishmentNestedInput
-    bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
-    establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
-    establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
-    subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
-    invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
-    devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
-    vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
-    sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
-    emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
-    auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
-    discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
-    promotions?: PromotionUpdateManyWithoutEstablishmentNestedInput
-    suppliers?: SupplierUpdateManyWithoutEstablishmentNestedInput
-    stockCategories?: StockCategoryUpdateManyWithoutEstablishmentNestedInput
-    stockItems?: StockItemUpdateManyWithoutEstablishmentNestedInput
-    stockEntries?: StockEntryUpdateManyWithoutEstablishmentNestedInput
-    stockExits?: StockExitUpdateManyWithoutEstablishmentNestedInput
-    stockMovements?: StockMovementUpdateManyWithoutEstablishmentNestedInput
-    stockAlerts?: StockAlertUpdateManyWithoutEstablishmentNestedInput
-    stockInventoryCounts?: StockInventoryCountUpdateManyWithoutEstablishmentNestedInput
-    stockWarehouses?: StockWarehouseUpdateManyWithoutEstablishmentNestedInput
-  }
-
-  export type EstablishmentUncheckedUpdateWithoutEstablishmentScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
-    email?: StringFieldUpdateOperationsInput | string
-    phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
-    billingName?: StringFieldUpdateOperationsInput | string
-    billingTaxId?: StringFieldUpdateOperationsInput | string
-    stripeCustomerId?: StringFieldUpdateOperationsInput | string
-    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
-    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
-    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-    timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
-    logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
-    bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
-    activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ownerId?: StringFieldUpdateOperationsInput | string
-    images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
-    themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
-    employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
-    serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
-    menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
-    Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
-    addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
-    variantOptions?: VariantOptionUncheckedUpdateManyWithoutEstablishmentNestedInput
-    bookings?: BookingUncheckedUpdateManyWithoutEstablishmentNestedInput
-    bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
-    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
-    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
-    subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
-    invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
-    devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
-    vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
-    sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
-    emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
-    auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
-    discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
-    promotions?: PromotionUncheckedUpdateManyWithoutEstablishmentNestedInput
-    suppliers?: SupplierUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockCategories?: StockCategoryUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockItems?: StockItemUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockEntries?: StockEntryUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockExits?: StockExitUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockMovements?: StockMovementUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockAlerts?: StockAlertUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockInventoryCounts?: StockInventoryCountUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
-  }
-
-  export type ScheduleUpsertWithoutEstablishmentScheduleInput = {
-    update: XOR<ScheduleUpdateWithoutEstablishmentScheduleInput, ScheduleUncheckedUpdateWithoutEstablishmentScheduleInput>
-    create: XOR<ScheduleCreateWithoutEstablishmentScheduleInput, ScheduleUncheckedCreateWithoutEstablishmentScheduleInput>
-    where?: ScheduleWhereInput
-  }
-
-  export type ScheduleUpdateToOneWithWhereWithoutEstablishmentScheduleInput = {
-    where?: ScheduleWhereInput
-    data: XOR<ScheduleUpdateWithoutEstablishmentScheduleInput, ScheduleUncheckedUpdateWithoutEstablishmentScheduleInput>
-  }
-
-  export type ScheduleUpdateWithoutEstablishmentScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    openTime?: StringFieldUpdateOperationsInput | string
-    closeTime?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
-    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    menuSchedule?: MenuScheduleUpdateManyWithoutScheduleNestedInput
-    discountSchedule?: DiscountScheduleUpdateManyWithoutScheduleNestedInput
-    promotionSchedule?: PromotionScheduleUpdateManyWithoutScheduleNestedInput
-  }
-
-  export type ScheduleUncheckedUpdateWithoutEstablishmentScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    openTime?: StringFieldUpdateOperationsInput | string
-    closeTime?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
-    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    menuSchedule?: MenuScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-    discountSchedule?: DiscountScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-    promotionSchedule?: PromotionScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-  }
-
   export type EstablishmentCreateWithoutEstablishmentBookingSettingsInput = {
     id?: string
     name: string
@@ -146428,6 +143444,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -146443,7 +143460,6 @@ export namespace Prisma {
     bookings?: BookingCreateNestedManyWithoutEstablishmentInput
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -146498,6 +143514,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -146512,7 +143529,6 @@ export namespace Prisma {
     bookings?: BookingUncheckedCreateNestedManyWithoutEstablishmentInput
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -146582,6 +143598,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -146597,7 +143614,6 @@ export namespace Prisma {
     bookings?: BookingUpdateManyWithoutEstablishmentNestedInput
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -146652,6 +143668,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -146666,7 +143683,6 @@ export namespace Prisma {
     bookings?: BookingUncheckedUpdateManyWithoutEstablishmentNestedInput
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -146720,6 +143736,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -146735,7 +143752,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -146789,6 +143805,7 @@ export namespace Prisma {
     needSession?: boolean
     logoImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -146804,7 +143821,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -146868,6 +143884,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
@@ -146883,7 +143900,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -146937,6 +143953,7 @@ export namespace Prisma {
     needSession?: boolean
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -146952,7 +143969,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -147016,6 +144032,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -147031,7 +144048,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -147086,6 +144102,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -147100,7 +144117,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -147325,6 +144341,7 @@ export namespace Prisma {
     logoImageId?: StringNullableFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableFilter<"Establishment"> | string | null
+    scheduleId?: StringNullableFilter<"Establishment"> | string | null
     createdAt?: DateTimeFilter<"Establishment"> | Date | string
     updatedAt?: DateTimeFilter<"Establishment"> | Date | string
     ownerId?: StringFilter<"Establishment"> | string
@@ -147388,6 +144405,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -147403,7 +144421,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -147458,6 +144475,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -147472,7 +144490,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -147604,6 +144621,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -147620,7 +144638,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
@@ -147674,6 +144691,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -147689,7 +144707,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -147758,6 +144775,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -147774,7 +144792,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
@@ -147828,6 +144845,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -147843,7 +144861,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -147896,6 +144913,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -147912,7 +144930,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -147966,6 +144983,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -147981,7 +144999,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -148050,6 +145067,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -148066,7 +145084,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -148120,6 +145137,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -148135,7 +145153,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -148188,6 +145205,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -148204,7 +145222,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -148258,6 +145275,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -148273,7 +145291,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -148342,6 +145359,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -148358,7 +145376,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -148412,6 +145429,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -148427,7 +145445,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -148500,6 +145517,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -148515,7 +145533,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -148570,6 +145587,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -148584,7 +145602,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -149075,6 +146092,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -149090,7 +146108,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -149145,6 +146162,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -149159,7 +146177,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -149995,6 +147012,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -150010,7 +147028,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -150065,6 +147082,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -150079,7 +147097,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -150187,6 +147204,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -150202,7 +147220,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -150257,6 +147274,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -150271,7 +147289,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -151505,6 +148522,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -151520,7 +148538,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -151575,6 +148592,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -151589,7 +148607,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -151715,6 +148732,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -151730,7 +148748,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -151785,6 +148802,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -151799,7 +148817,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -152787,6 +149804,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -152803,7 +149821,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -152857,6 +149874,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -152872,7 +149890,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -152992,6 +150009,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -153008,7 +150026,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -153062,6 +150079,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -153077,7 +150095,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -153240,6 +150257,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -153255,7 +150273,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -153310,6 +150327,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -153324,7 +150342,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -153350,6 +150367,35 @@ export namespace Prisma {
   export type EstablishmentCreateOrConnectWithoutMenusInput = {
     where: EstablishmentWhereUniqueInput
     create: XOR<EstablishmentCreateWithoutMenusInput, EstablishmentUncheckedCreateWithoutMenusInput>
+  }
+
+  export type ScheduleCreateWithoutMenusInput = {
+    id?: string
+    name: string
+    type: $Enums.ScheduleType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    days?: ScheduleDayCreateNestedManyWithoutScheduleInput
+    establishment?: EstablishmentCreateNestedOneWithoutScheduleInput
+    discounts?: DiscountCreateNestedManyWithoutScheduleInput
+    promotions?: PromotionCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleUncheckedCreateWithoutMenusInput = {
+    id?: string
+    name: string
+    type: $Enums.ScheduleType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    days?: ScheduleDayUncheckedCreateNestedManyWithoutScheduleInput
+    establishment?: EstablishmentUncheckedCreateNestedOneWithoutScheduleInput
+    discounts?: DiscountUncheckedCreateNestedManyWithoutScheduleInput
+    promotions?: PromotionUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleCreateOrConnectWithoutMenusInput = {
+    where: ScheduleWhereUniqueInput
+    create: XOR<ScheduleCreateWithoutMenusInput, ScheduleUncheckedCreateWithoutMenusInput>
   }
 
   export type MenuCategoryCreateWithoutMenuInput = {
@@ -153381,26 +150427,6 @@ export namespace Prisma {
 
   export type MenuCategoryCreateManyMenuInputEnvelope = {
     data: MenuCategoryCreateManyMenuInput | MenuCategoryCreateManyMenuInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type MenuScheduleCreateWithoutMenuInput = {
-    id?: string
-    schedule: ScheduleCreateNestedOneWithoutMenuScheduleInput
-  }
-
-  export type MenuScheduleUncheckedCreateWithoutMenuInput = {
-    id?: string
-    scheduleId: string
-  }
-
-  export type MenuScheduleCreateOrConnectWithoutMenuInput = {
-    where: MenuScheduleWhereUniqueInput
-    create: XOR<MenuScheduleCreateWithoutMenuInput, MenuScheduleUncheckedCreateWithoutMenuInput>
-  }
-
-  export type MenuScheduleCreateManyMenuInputEnvelope = {
-    data: MenuScheduleCreateManyMenuInput | MenuScheduleCreateManyMenuInput[]
     skipDuplicates?: boolean
   }
 
@@ -153476,6 +150502,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -153491,7 +150518,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -153546,6 +150572,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -153560,7 +150587,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -153583,6 +150609,41 @@ export namespace Prisma {
     stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
   }
 
+  export type ScheduleUpsertWithoutMenusInput = {
+    update: XOR<ScheduleUpdateWithoutMenusInput, ScheduleUncheckedUpdateWithoutMenusInput>
+    create: XOR<ScheduleCreateWithoutMenusInput, ScheduleUncheckedCreateWithoutMenusInput>
+    where?: ScheduleWhereInput
+  }
+
+  export type ScheduleUpdateToOneWithWhereWithoutMenusInput = {
+    where?: ScheduleWhereInput
+    data: XOR<ScheduleUpdateWithoutMenusInput, ScheduleUncheckedUpdateWithoutMenusInput>
+  }
+
+  export type ScheduleUpdateWithoutMenusInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: ScheduleDayUpdateManyWithoutScheduleNestedInput
+    establishment?: EstablishmentUpdateOneWithoutScheduleNestedInput
+    discounts?: DiscountUpdateManyWithoutScheduleNestedInput
+    promotions?: PromotionUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateWithoutMenusInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    days?: ScheduleDayUncheckedUpdateManyWithoutScheduleNestedInput
+    establishment?: EstablishmentUncheckedUpdateOneWithoutScheduleNestedInput
+    discounts?: DiscountUncheckedUpdateManyWithoutScheduleNestedInput
+    promotions?: PromotionUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
   export type MenuCategoryUpsertWithWhereUniqueWithoutMenuInput = {
     where: MenuCategoryWhereUniqueInput
     update: XOR<MenuCategoryUpdateWithoutMenuInput, MenuCategoryUncheckedUpdateWithoutMenuInput>
@@ -153597,31 +150658,6 @@ export namespace Prisma {
   export type MenuCategoryUpdateManyWithWhereWithoutMenuInput = {
     where: MenuCategoryScalarWhereInput
     data: XOR<MenuCategoryUpdateManyMutationInput, MenuCategoryUncheckedUpdateManyWithoutMenuInput>
-  }
-
-  export type MenuScheduleUpsertWithWhereUniqueWithoutMenuInput = {
-    where: MenuScheduleWhereUniqueInput
-    update: XOR<MenuScheduleUpdateWithoutMenuInput, MenuScheduleUncheckedUpdateWithoutMenuInput>
-    create: XOR<MenuScheduleCreateWithoutMenuInput, MenuScheduleUncheckedCreateWithoutMenuInput>
-  }
-
-  export type MenuScheduleUpdateWithWhereUniqueWithoutMenuInput = {
-    where: MenuScheduleWhereUniqueInput
-    data: XOR<MenuScheduleUpdateWithoutMenuInput, MenuScheduleUncheckedUpdateWithoutMenuInput>
-  }
-
-  export type MenuScheduleUpdateManyWithWhereWithoutMenuInput = {
-    where: MenuScheduleScalarWhereInput
-    data: XOR<MenuScheduleUpdateManyMutationInput, MenuScheduleUncheckedUpdateManyWithoutMenuInput>
-  }
-
-  export type MenuScheduleScalarWhereInput = {
-    AND?: MenuScheduleScalarWhereInput | MenuScheduleScalarWhereInput[]
-    OR?: MenuScheduleScalarWhereInput[]
-    NOT?: MenuScheduleScalarWhereInput | MenuScheduleScalarWhereInput[]
-    id?: StringFilter<"MenuSchedule"> | string
-    menuId?: StringFilter<"MenuSchedule"> | string
-    scheduleId?: StringFilter<"MenuSchedule"> | string
   }
 
   export type MenuTranslationUpsertWithWhereUniqueWithoutMenuInput = {
@@ -153654,154 +150690,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"MenuTranslation"> | Date | string
   }
 
-  export type MenuCreateWithoutMenuScheduleInput = {
-    id?: string
-    position?: number
-    isVisible?: boolean
-    isHighlighted?: boolean
-    color?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    maxItemsPerOrder?: number | null
-    price?: number | null
-    type?: $Enums.MenuType
-    establishment: EstablishmentCreateNestedOneWithoutMenusInput
-    categories?: MenuCategoryCreateNestedManyWithoutMenuInput
-    translations?: MenuTranslationCreateNestedManyWithoutMenuInput
-  }
-
-  export type MenuUncheckedCreateWithoutMenuScheduleInput = {
-    id?: string
-    position?: number
-    isVisible?: boolean
-    isHighlighted?: boolean
-    color?: string | null
-    establishmentId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    maxItemsPerOrder?: number | null
-    price?: number | null
-    type?: $Enums.MenuType
-    categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
-    translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
-  }
-
-  export type MenuCreateOrConnectWithoutMenuScheduleInput = {
-    where: MenuWhereUniqueInput
-    create: XOR<MenuCreateWithoutMenuScheduleInput, MenuUncheckedCreateWithoutMenuScheduleInput>
-  }
-
-  export type ScheduleCreateWithoutMenuScheduleInput = {
-    id?: string
-    openTime: string
-    closeTime: string
-    dayOfWeek: $Enums.DayOfWeek
-    type: $Enums.ScheduleType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutScheduleInput
-    discountSchedule?: DiscountScheduleCreateNestedManyWithoutScheduleInput
-    promotionSchedule?: PromotionScheduleCreateNestedManyWithoutScheduleInput
-  }
-
-  export type ScheduleUncheckedCreateWithoutMenuScheduleInput = {
-    id?: string
-    openTime: string
-    closeTime: string
-    dayOfWeek: $Enums.DayOfWeek
-    type: $Enums.ScheduleType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutScheduleInput
-    discountSchedule?: DiscountScheduleUncheckedCreateNestedManyWithoutScheduleInput
-    promotionSchedule?: PromotionScheduleUncheckedCreateNestedManyWithoutScheduleInput
-  }
-
-  export type ScheduleCreateOrConnectWithoutMenuScheduleInput = {
-    where: ScheduleWhereUniqueInput
-    create: XOR<ScheduleCreateWithoutMenuScheduleInput, ScheduleUncheckedCreateWithoutMenuScheduleInput>
-  }
-
-  export type MenuUpsertWithoutMenuScheduleInput = {
-    update: XOR<MenuUpdateWithoutMenuScheduleInput, MenuUncheckedUpdateWithoutMenuScheduleInput>
-    create: XOR<MenuCreateWithoutMenuScheduleInput, MenuUncheckedCreateWithoutMenuScheduleInput>
-    where?: MenuWhereInput
-  }
-
-  export type MenuUpdateToOneWithWhereWithoutMenuScheduleInput = {
-    where?: MenuWhereInput
-    data: XOR<MenuUpdateWithoutMenuScheduleInput, MenuUncheckedUpdateWithoutMenuScheduleInput>
-  }
-
-  export type MenuUpdateWithoutMenuScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    position?: IntFieldUpdateOperationsInput | number
-    isVisible?: BoolFieldUpdateOperationsInput | boolean
-    isHighlighted?: BoolFieldUpdateOperationsInput | boolean
-    color?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
-    establishment?: EstablishmentUpdateOneRequiredWithoutMenusNestedInput
-    categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
-    translations?: MenuTranslationUpdateManyWithoutMenuNestedInput
-  }
-
-  export type MenuUncheckedUpdateWithoutMenuScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    position?: IntFieldUpdateOperationsInput | number
-    isVisible?: BoolFieldUpdateOperationsInput | boolean
-    isHighlighted?: BoolFieldUpdateOperationsInput | boolean
-    color?: NullableStringFieldUpdateOperationsInput | string | null
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
-    categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
-    translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
-  }
-
-  export type ScheduleUpsertWithoutMenuScheduleInput = {
-    update: XOR<ScheduleUpdateWithoutMenuScheduleInput, ScheduleUncheckedUpdateWithoutMenuScheduleInput>
-    create: XOR<ScheduleCreateWithoutMenuScheduleInput, ScheduleUncheckedCreateWithoutMenuScheduleInput>
-    where?: ScheduleWhereInput
-  }
-
-  export type ScheduleUpdateToOneWithWhereWithoutMenuScheduleInput = {
-    where?: ScheduleWhereInput
-    data: XOR<ScheduleUpdateWithoutMenuScheduleInput, ScheduleUncheckedUpdateWithoutMenuScheduleInput>
-  }
-
-  export type ScheduleUpdateWithoutMenuScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    openTime?: StringFieldUpdateOperationsInput | string
-    closeTime?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
-    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutScheduleNestedInput
-    discountSchedule?: DiscountScheduleUpdateManyWithoutScheduleNestedInput
-    promotionSchedule?: PromotionScheduleUpdateManyWithoutScheduleNestedInput
-  }
-
-  export type ScheduleUncheckedUpdateWithoutMenuScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    openTime?: StringFieldUpdateOperationsInput | string
-    closeTime?: StringFieldUpdateOperationsInput | string
-    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
-    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-    discountSchedule?: DiscountScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-    promotionSchedule?: PromotionScheduleUncheckedUpdateManyWithoutScheduleNestedInput
-  }
-
   export type MenuCreateWithoutTranslationsInput = {
     id?: string
     position?: number
@@ -153814,8 +150702,8 @@ export namespace Prisma {
     price?: number | null
     type?: $Enums.MenuType
     establishment: EstablishmentCreateNestedOneWithoutMenusInput
+    schedule?: ScheduleCreateNestedOneWithoutMenusInput
     categories?: MenuCategoryCreateNestedManyWithoutMenuInput
-    menuSchedule?: MenuScheduleCreateNestedManyWithoutMenuInput
   }
 
   export type MenuUncheckedCreateWithoutTranslationsInput = {
@@ -153825,13 +150713,13 @@ export namespace Prisma {
     isHighlighted?: boolean
     color?: string | null
     establishmentId: string
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
     type?: $Enums.MenuType
     categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
-    menuSchedule?: MenuScheduleUncheckedCreateNestedManyWithoutMenuInput
   }
 
   export type MenuCreateOrConnectWithoutTranslationsInput = {
@@ -153862,8 +150750,8 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     establishment?: EstablishmentUpdateOneRequiredWithoutMenusNestedInput
+    schedule?: ScheduleUpdateOneWithoutMenusNestedInput
     categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
-    menuSchedule?: MenuScheduleUpdateManyWithoutMenuNestedInput
   }
 
   export type MenuUncheckedUpdateWithoutTranslationsInput = {
@@ -153873,13 +150761,13 @@ export namespace Prisma {
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     establishmentId?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
-    menuSchedule?: MenuScheduleUncheckedUpdateManyWithoutMenuNestedInput
   }
 
   export type ImageCreateWithoutMenuCategoryInput = {
@@ -153931,7 +150819,7 @@ export namespace Prisma {
     price?: number | null
     type?: $Enums.MenuType
     establishment: EstablishmentCreateNestedOneWithoutMenusInput
-    menuSchedule?: MenuScheduleCreateNestedManyWithoutMenuInput
+    schedule?: ScheduleCreateNestedOneWithoutMenusInput
     translations?: MenuTranslationCreateNestedManyWithoutMenuInput
   }
 
@@ -153942,12 +150830,12 @@ export namespace Prisma {
     isHighlighted?: boolean
     color?: string | null
     establishmentId: string
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
     type?: $Enums.MenuType
-    menuSchedule?: MenuScheduleUncheckedCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
   }
 
@@ -154078,7 +150966,7 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     establishment?: EstablishmentUpdateOneRequiredWithoutMenusNestedInput
-    menuSchedule?: MenuScheduleUpdateManyWithoutMenuNestedInput
+    schedule?: ScheduleUpdateOneWithoutMenusNestedInput
     translations?: MenuTranslationUpdateManyWithoutMenuNestedInput
   }
 
@@ -154089,12 +150977,12 @@ export namespace Prisma {
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     establishmentId?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
-    menuSchedule?: MenuScheduleUncheckedUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
   }
 
@@ -154748,6 +151636,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -154764,7 +151653,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -154818,6 +151706,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -154833,7 +151722,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -154932,6 +151820,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -154948,7 +151837,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -155002,6 +151890,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -155017,7 +151906,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -155133,151 +152021,35 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EstablishmentScheduleCreateWithoutScheduleInput = {
+  export type ScheduleDayCreateWithoutScheduleInput = {
     id?: string
-    establishment: EstablishmentCreateNestedOneWithoutEstablishmentScheduleInput
+    dayOfWeek: $Enums.DayOfWeek
+    isOpen?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intervals?: TimeIntervalCreateNestedManyWithoutScheduleDayInput
   }
 
-  export type EstablishmentScheduleUncheckedCreateWithoutScheduleInput = {
+  export type ScheduleDayUncheckedCreateWithoutScheduleInput = {
     id?: string
-    establishmentId: string
+    dayOfWeek: $Enums.DayOfWeek
+    isOpen?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intervals?: TimeIntervalUncheckedCreateNestedManyWithoutScheduleDayInput
   }
 
-  export type EstablishmentScheduleCreateOrConnectWithoutScheduleInput = {
-    where: EstablishmentScheduleWhereUniqueInput
-    create: XOR<EstablishmentScheduleCreateWithoutScheduleInput, EstablishmentScheduleUncheckedCreateWithoutScheduleInput>
+  export type ScheduleDayCreateOrConnectWithoutScheduleInput = {
+    where: ScheduleDayWhereUniqueInput
+    create: XOR<ScheduleDayCreateWithoutScheduleInput, ScheduleDayUncheckedCreateWithoutScheduleInput>
   }
 
-  export type EstablishmentScheduleCreateManyScheduleInputEnvelope = {
-    data: EstablishmentScheduleCreateManyScheduleInput | EstablishmentScheduleCreateManyScheduleInput[]
+  export type ScheduleDayCreateManyScheduleInputEnvelope = {
+    data: ScheduleDayCreateManyScheduleInput | ScheduleDayCreateManyScheduleInput[]
     skipDuplicates?: boolean
   }
 
-  export type MenuScheduleCreateWithoutScheduleInput = {
-    id?: string
-    menu: MenuCreateNestedOneWithoutMenuScheduleInput
-  }
-
-  export type MenuScheduleUncheckedCreateWithoutScheduleInput = {
-    id?: string
-    menuId: string
-  }
-
-  export type MenuScheduleCreateOrConnectWithoutScheduleInput = {
-    where: MenuScheduleWhereUniqueInput
-    create: XOR<MenuScheduleCreateWithoutScheduleInput, MenuScheduleUncheckedCreateWithoutScheduleInput>
-  }
-
-  export type MenuScheduleCreateManyScheduleInputEnvelope = {
-    data: MenuScheduleCreateManyScheduleInput | MenuScheduleCreateManyScheduleInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type DiscountScheduleCreateWithoutScheduleInput = {
-    id?: string
-    discount: DiscountCreateNestedOneWithoutSchedulesInput
-  }
-
-  export type DiscountScheduleUncheckedCreateWithoutScheduleInput = {
-    id?: string
-    discountId: string
-  }
-
-  export type DiscountScheduleCreateOrConnectWithoutScheduleInput = {
-    where: DiscountScheduleWhereUniqueInput
-    create: XOR<DiscountScheduleCreateWithoutScheduleInput, DiscountScheduleUncheckedCreateWithoutScheduleInput>
-  }
-
-  export type DiscountScheduleCreateManyScheduleInputEnvelope = {
-    data: DiscountScheduleCreateManyScheduleInput | DiscountScheduleCreateManyScheduleInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PromotionScheduleCreateWithoutScheduleInput = {
-    id?: string
-    promotion: PromotionCreateNestedOneWithoutSchedulesInput
-  }
-
-  export type PromotionScheduleUncheckedCreateWithoutScheduleInput = {
-    id?: string
-    promotionId: string
-  }
-
-  export type PromotionScheduleCreateOrConnectWithoutScheduleInput = {
-    where: PromotionScheduleWhereUniqueInput
-    create: XOR<PromotionScheduleCreateWithoutScheduleInput, PromotionScheduleUncheckedCreateWithoutScheduleInput>
-  }
-
-  export type PromotionScheduleCreateManyScheduleInputEnvelope = {
-    data: PromotionScheduleCreateManyScheduleInput | PromotionScheduleCreateManyScheduleInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type EstablishmentScheduleUpsertWithWhereUniqueWithoutScheduleInput = {
-    where: EstablishmentScheduleWhereUniqueInput
-    update: XOR<EstablishmentScheduleUpdateWithoutScheduleInput, EstablishmentScheduleUncheckedUpdateWithoutScheduleInput>
-    create: XOR<EstablishmentScheduleCreateWithoutScheduleInput, EstablishmentScheduleUncheckedCreateWithoutScheduleInput>
-  }
-
-  export type EstablishmentScheduleUpdateWithWhereUniqueWithoutScheduleInput = {
-    where: EstablishmentScheduleWhereUniqueInput
-    data: XOR<EstablishmentScheduleUpdateWithoutScheduleInput, EstablishmentScheduleUncheckedUpdateWithoutScheduleInput>
-  }
-
-  export type EstablishmentScheduleUpdateManyWithWhereWithoutScheduleInput = {
-    where: EstablishmentScheduleScalarWhereInput
-    data: XOR<EstablishmentScheduleUpdateManyMutationInput, EstablishmentScheduleUncheckedUpdateManyWithoutScheduleInput>
-  }
-
-  export type MenuScheduleUpsertWithWhereUniqueWithoutScheduleInput = {
-    where: MenuScheduleWhereUniqueInput
-    update: XOR<MenuScheduleUpdateWithoutScheduleInput, MenuScheduleUncheckedUpdateWithoutScheduleInput>
-    create: XOR<MenuScheduleCreateWithoutScheduleInput, MenuScheduleUncheckedCreateWithoutScheduleInput>
-  }
-
-  export type MenuScheduleUpdateWithWhereUniqueWithoutScheduleInput = {
-    where: MenuScheduleWhereUniqueInput
-    data: XOR<MenuScheduleUpdateWithoutScheduleInput, MenuScheduleUncheckedUpdateWithoutScheduleInput>
-  }
-
-  export type MenuScheduleUpdateManyWithWhereWithoutScheduleInput = {
-    where: MenuScheduleScalarWhereInput
-    data: XOR<MenuScheduleUpdateManyMutationInput, MenuScheduleUncheckedUpdateManyWithoutScheduleInput>
-  }
-
-  export type DiscountScheduleUpsertWithWhereUniqueWithoutScheduleInput = {
-    where: DiscountScheduleWhereUniqueInput
-    update: XOR<DiscountScheduleUpdateWithoutScheduleInput, DiscountScheduleUncheckedUpdateWithoutScheduleInput>
-    create: XOR<DiscountScheduleCreateWithoutScheduleInput, DiscountScheduleUncheckedCreateWithoutScheduleInput>
-  }
-
-  export type DiscountScheduleUpdateWithWhereUniqueWithoutScheduleInput = {
-    where: DiscountScheduleWhereUniqueInput
-    data: XOR<DiscountScheduleUpdateWithoutScheduleInput, DiscountScheduleUncheckedUpdateWithoutScheduleInput>
-  }
-
-  export type DiscountScheduleUpdateManyWithWhereWithoutScheduleInput = {
-    where: DiscountScheduleScalarWhereInput
-    data: XOR<DiscountScheduleUpdateManyMutationInput, DiscountScheduleUncheckedUpdateManyWithoutScheduleInput>
-  }
-
-  export type PromotionScheduleUpsertWithWhereUniqueWithoutScheduleInput = {
-    where: PromotionScheduleWhereUniqueInput
-    update: XOR<PromotionScheduleUpdateWithoutScheduleInput, PromotionScheduleUncheckedUpdateWithoutScheduleInput>
-    create: XOR<PromotionScheduleCreateWithoutScheduleInput, PromotionScheduleUncheckedCreateWithoutScheduleInput>
-  }
-
-  export type PromotionScheduleUpdateWithWhereUniqueWithoutScheduleInput = {
-    where: PromotionScheduleWhereUniqueInput
-    data: XOR<PromotionScheduleUpdateWithoutScheduleInput, PromotionScheduleUncheckedUpdateWithoutScheduleInput>
-  }
-
-  export type PromotionScheduleUpdateManyWithWhereWithoutScheduleInput = {
-    where: PromotionScheduleScalarWhereInput
-    data: XOR<PromotionScheduleUpdateManyMutationInput, PromotionScheduleUncheckedUpdateManyWithoutScheduleInput>
-  }
-
-  export type EstablishmentCreateWithoutStockWarehousesInput = {
+  export type EstablishmentCreateWithoutScheduleInput = {
     id?: string
     name: string
     slug: string
@@ -155324,7 +152096,667 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
+    integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
+    subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
+    invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
+    devices?: DeviceCreateNestedManyWithoutEstablishmentInput
+    vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
+    sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
+    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
+    emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
+    auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
+    discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
+    promotions?: PromotionCreateNestedManyWithoutEstablishmentInput
+    suppliers?: SupplierCreateNestedManyWithoutEstablishmentInput
+    stockCategories?: StockCategoryCreateNestedManyWithoutEstablishmentInput
+    stockItems?: StockItemCreateNestedManyWithoutEstablishmentInput
+    stockEntries?: StockEntryCreateNestedManyWithoutEstablishmentInput
+    stockExits?: StockExitCreateNestedManyWithoutEstablishmentInput
+    stockMovements?: StockMovementCreateNestedManyWithoutEstablishmentInput
+    stockAlerts?: StockAlertCreateNestedManyWithoutEstablishmentInput
+    stockInventoryCounts?: StockInventoryCountCreateNestedManyWithoutEstablishmentInput
+    stockWarehouses?: StockWarehouseCreateNestedManyWithoutEstablishmentInput
+  }
+
+  export type EstablishmentUncheckedCreateWithoutScheduleInput = {
+    id?: string
+    name: string
+    slug: string
+    type: $Enums.EstablishmentType
+    status?: $Enums.EstablishmentStatus
+    isOnline?: boolean
+    email: string
+    phoneNumber: string
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    country: string
+    countryCode: string
+    billingName: string
+    billingTaxId: string
+    stripeCustomerId: string
+    instagramUrl?: string | null
+    tiktokUrl?: string | null
+    facebookUrl?: string | null
+    googleReviewUrl?: string | null
+    tripAdvisorUrl?: string | null
+    primaryLanguage?: $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: $Enums.Currency
+    timezone?: string
+    onlyMenu?: boolean
+    needSession?: boolean
+    logoImageId?: string | null
+    bannerImageId?: string | null
+    activeThemeId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: string
+    images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
+    themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
+    serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
+    Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
+    addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
+    variantOptions?: VariantOptionUncheckedCreateNestedManyWithoutEstablishmentInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutEstablishmentInput
+    bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
+    integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
+    devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
+    vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
+    sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
+    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
+    emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
+    discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
+    promotions?: PromotionUncheckedCreateNestedManyWithoutEstablishmentInput
+    suppliers?: SupplierUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockCategories?: StockCategoryUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockItems?: StockItemUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockEntries?: StockEntryUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockExits?: StockExitUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockMovements?: StockMovementUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockAlerts?: StockAlertUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockInventoryCounts?: StockInventoryCountUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockWarehouses?: StockWarehouseUncheckedCreateNestedManyWithoutEstablishmentInput
+  }
+
+  export type EstablishmentCreateOrConnectWithoutScheduleInput = {
+    where: EstablishmentWhereUniqueInput
+    create: XOR<EstablishmentCreateWithoutScheduleInput, EstablishmentUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type MenuCreateWithoutScheduleInput = {
+    id?: string
+    position?: number
+    isVisible?: boolean
+    isHighlighted?: boolean
+    color?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    maxItemsPerOrder?: number | null
+    price?: number | null
+    type?: $Enums.MenuType
+    establishment: EstablishmentCreateNestedOneWithoutMenusInput
+    categories?: MenuCategoryCreateNestedManyWithoutMenuInput
+    translations?: MenuTranslationCreateNestedManyWithoutMenuInput
+  }
+
+  export type MenuUncheckedCreateWithoutScheduleInput = {
+    id?: string
+    position?: number
+    isVisible?: boolean
+    isHighlighted?: boolean
+    color?: string | null
+    establishmentId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    maxItemsPerOrder?: number | null
+    price?: number | null
+    type?: $Enums.MenuType
+    categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
+    translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
+  }
+
+  export type MenuCreateOrConnectWithoutScheduleInput = {
+    where: MenuWhereUniqueInput
+    create: XOR<MenuCreateWithoutScheduleInput, MenuUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type MenuCreateManyScheduleInputEnvelope = {
+    data: MenuCreateManyScheduleInput | MenuCreateManyScheduleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DiscountCreateWithoutScheduleInput = {
+    id?: string
+    name: string
+    description?: string | null
+    type: $Enums.DiscountType
+    value: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    stackable?: boolean
+    startsAt?: Date | string | null
+    endsAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    establishment: EstablishmentCreateNestedOneWithoutDiscountsInput
+    targets?: DiscountTargetCreateNestedManyWithoutDiscountInput
+  }
+
+  export type DiscountUncheckedCreateWithoutScheduleInput = {
+    id?: string
+    establishmentId: string
+    name: string
+    description?: string | null
+    type: $Enums.DiscountType
+    value: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    stackable?: boolean
+    startsAt?: Date | string | null
+    endsAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    targets?: DiscountTargetUncheckedCreateNestedManyWithoutDiscountInput
+  }
+
+  export type DiscountCreateOrConnectWithoutScheduleInput = {
+    where: DiscountWhereUniqueInput
+    create: XOR<DiscountCreateWithoutScheduleInput, DiscountUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type DiscountCreateManyScheduleInputEnvelope = {
+    data: DiscountCreateManyScheduleInput | DiscountCreateManyScheduleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PromotionCreateWithoutScheduleInput = {
+    id?: string
+    name: string
+    description?: string | null
+    type: $Enums.PromotionType
+    isActive?: boolean
+    startsAt?: Date | string | null
+    endsAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    establishment: EstablishmentCreateNestedOneWithoutPromotionsInput
+    buyXGetYRule?: BuyXGetYRuleCreateNestedOneWithoutPromotionInput
+  }
+
+  export type PromotionUncheckedCreateWithoutScheduleInput = {
+    id?: string
+    establishmentId: string
+    name: string
+    description?: string | null
+    type: $Enums.PromotionType
+    isActive?: boolean
+    startsAt?: Date | string | null
+    endsAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    buyXGetYRule?: BuyXGetYRuleUncheckedCreateNestedOneWithoutPromotionInput
+  }
+
+  export type PromotionCreateOrConnectWithoutScheduleInput = {
+    where: PromotionWhereUniqueInput
+    create: XOR<PromotionCreateWithoutScheduleInput, PromotionUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type PromotionCreateManyScheduleInputEnvelope = {
+    data: PromotionCreateManyScheduleInput | PromotionCreateManyScheduleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ScheduleDayUpsertWithWhereUniqueWithoutScheduleInput = {
+    where: ScheduleDayWhereUniqueInput
+    update: XOR<ScheduleDayUpdateWithoutScheduleInput, ScheduleDayUncheckedUpdateWithoutScheduleInput>
+    create: XOR<ScheduleDayCreateWithoutScheduleInput, ScheduleDayUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type ScheduleDayUpdateWithWhereUniqueWithoutScheduleInput = {
+    where: ScheduleDayWhereUniqueInput
+    data: XOR<ScheduleDayUpdateWithoutScheduleInput, ScheduleDayUncheckedUpdateWithoutScheduleInput>
+  }
+
+  export type ScheduleDayUpdateManyWithWhereWithoutScheduleInput = {
+    where: ScheduleDayScalarWhereInput
+    data: XOR<ScheduleDayUpdateManyMutationInput, ScheduleDayUncheckedUpdateManyWithoutScheduleInput>
+  }
+
+  export type ScheduleDayScalarWhereInput = {
+    AND?: ScheduleDayScalarWhereInput | ScheduleDayScalarWhereInput[]
+    OR?: ScheduleDayScalarWhereInput[]
+    NOT?: ScheduleDayScalarWhereInput | ScheduleDayScalarWhereInput[]
+    id?: StringFilter<"ScheduleDay"> | string
+    scheduleId?: StringFilter<"ScheduleDay"> | string
+    dayOfWeek?: EnumDayOfWeekFilter<"ScheduleDay"> | $Enums.DayOfWeek
+    isOpen?: BoolFilter<"ScheduleDay"> | boolean
+    createdAt?: DateTimeFilter<"ScheduleDay"> | Date | string
+    updatedAt?: DateTimeFilter<"ScheduleDay"> | Date | string
+  }
+
+  export type EstablishmentUpsertWithoutScheduleInput = {
+    update: XOR<EstablishmentUpdateWithoutScheduleInput, EstablishmentUncheckedUpdateWithoutScheduleInput>
+    create: XOR<EstablishmentCreateWithoutScheduleInput, EstablishmentUncheckedCreateWithoutScheduleInput>
+    where?: EstablishmentWhereInput
+  }
+
+  export type EstablishmentUpdateToOneWithWhereWithoutScheduleInput = {
+    where?: EstablishmentWhereInput
+    data: XOR<EstablishmentUpdateWithoutScheduleInput, EstablishmentUncheckedUpdateWithoutScheduleInput>
+  }
+
+  export type EstablishmentUpdateWithoutScheduleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
+    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    billingName?: StringFieldUpdateOperationsInput | string
+    billingTaxId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    timezone?: StringFieldUpdateOperationsInput | string
+    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
+    needSession?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
+    activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
+    logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
+    bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    images?: ImageUpdateManyWithoutEstablishmentNestedInput
+    themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
+    employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
+    serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    menus?: MenuUpdateManyWithoutEstablishmentNestedInput
+    Item?: ItemUpdateManyWithoutEstablishmentNestedInput
+    addons?: AddonUpdateManyWithoutEstablishmentNestedInput
+    variantOptions?: VariantOptionUpdateManyWithoutEstablishmentNestedInput
+    bookings?: BookingUpdateManyWithoutEstablishmentNestedInput
+    bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
+    integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
+    subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
+    invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
+    devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
+    vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
+    sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
+    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
+    emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
+    discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
+    promotions?: PromotionUpdateManyWithoutEstablishmentNestedInput
+    suppliers?: SupplierUpdateManyWithoutEstablishmentNestedInput
+    stockCategories?: StockCategoryUpdateManyWithoutEstablishmentNestedInput
+    stockItems?: StockItemUpdateManyWithoutEstablishmentNestedInput
+    stockEntries?: StockEntryUpdateManyWithoutEstablishmentNestedInput
+    stockExits?: StockExitUpdateManyWithoutEstablishmentNestedInput
+    stockMovements?: StockMovementUpdateManyWithoutEstablishmentNestedInput
+    stockAlerts?: StockAlertUpdateManyWithoutEstablishmentNestedInput
+    stockInventoryCounts?: StockInventoryCountUpdateManyWithoutEstablishmentNestedInput
+    stockWarehouses?: StockWarehouseUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type EstablishmentUncheckedUpdateWithoutScheduleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
+    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    billingName?: StringFieldUpdateOperationsInput | string
+    billingTaxId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    timezone?: StringFieldUpdateOperationsInput | string
+    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
+    needSession?: BoolFieldUpdateOperationsInput | boolean
+    logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
+    themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
+    Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
+    addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
+    variantOptions?: VariantOptionUncheckedUpdateManyWithoutEstablishmentNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutEstablishmentNestedInput
+    bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
+    integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
+    devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
+    vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
+    sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
+    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
+    emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
+    discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
+    promotions?: PromotionUncheckedUpdateManyWithoutEstablishmentNestedInput
+    suppliers?: SupplierUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockCategories?: StockCategoryUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockItems?: StockItemUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockEntries?: StockEntryUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockExits?: StockExitUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockMovements?: StockMovementUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockAlerts?: StockAlertUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockInventoryCounts?: StockInventoryCountUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type MenuUpsertWithWhereUniqueWithoutScheduleInput = {
+    where: MenuWhereUniqueInput
+    update: XOR<MenuUpdateWithoutScheduleInput, MenuUncheckedUpdateWithoutScheduleInput>
+    create: XOR<MenuCreateWithoutScheduleInput, MenuUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type MenuUpdateWithWhereUniqueWithoutScheduleInput = {
+    where: MenuWhereUniqueInput
+    data: XOR<MenuUpdateWithoutScheduleInput, MenuUncheckedUpdateWithoutScheduleInput>
+  }
+
+  export type MenuUpdateManyWithWhereWithoutScheduleInput = {
+    where: MenuScalarWhereInput
+    data: XOR<MenuUpdateManyMutationInput, MenuUncheckedUpdateManyWithoutScheduleInput>
+  }
+
+  export type DiscountUpsertWithWhereUniqueWithoutScheduleInput = {
+    where: DiscountWhereUniqueInput
+    update: XOR<DiscountUpdateWithoutScheduleInput, DiscountUncheckedUpdateWithoutScheduleInput>
+    create: XOR<DiscountCreateWithoutScheduleInput, DiscountUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type DiscountUpdateWithWhereUniqueWithoutScheduleInput = {
+    where: DiscountWhereUniqueInput
+    data: XOR<DiscountUpdateWithoutScheduleInput, DiscountUncheckedUpdateWithoutScheduleInput>
+  }
+
+  export type DiscountUpdateManyWithWhereWithoutScheduleInput = {
+    where: DiscountScalarWhereInput
+    data: XOR<DiscountUpdateManyMutationInput, DiscountUncheckedUpdateManyWithoutScheduleInput>
+  }
+
+  export type PromotionUpsertWithWhereUniqueWithoutScheduleInput = {
+    where: PromotionWhereUniqueInput
+    update: XOR<PromotionUpdateWithoutScheduleInput, PromotionUncheckedUpdateWithoutScheduleInput>
+    create: XOR<PromotionCreateWithoutScheduleInput, PromotionUncheckedCreateWithoutScheduleInput>
+  }
+
+  export type PromotionUpdateWithWhereUniqueWithoutScheduleInput = {
+    where: PromotionWhereUniqueInput
+    data: XOR<PromotionUpdateWithoutScheduleInput, PromotionUncheckedUpdateWithoutScheduleInput>
+  }
+
+  export type PromotionUpdateManyWithWhereWithoutScheduleInput = {
+    where: PromotionScalarWhereInput
+    data: XOR<PromotionUpdateManyMutationInput, PromotionUncheckedUpdateManyWithoutScheduleInput>
+  }
+
+  export type ScheduleCreateWithoutDaysInput = {
+    id?: string
+    name: string
+    type: $Enums.ScheduleType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    establishment?: EstablishmentCreateNestedOneWithoutScheduleInput
+    menus?: MenuCreateNestedManyWithoutScheduleInput
+    discounts?: DiscountCreateNestedManyWithoutScheduleInput
+    promotions?: PromotionCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleUncheckedCreateWithoutDaysInput = {
+    id?: string
+    name: string
+    type: $Enums.ScheduleType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    establishment?: EstablishmentUncheckedCreateNestedOneWithoutScheduleInput
+    menus?: MenuUncheckedCreateNestedManyWithoutScheduleInput
+    discounts?: DiscountUncheckedCreateNestedManyWithoutScheduleInput
+    promotions?: PromotionUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleCreateOrConnectWithoutDaysInput = {
+    where: ScheduleWhereUniqueInput
+    create: XOR<ScheduleCreateWithoutDaysInput, ScheduleUncheckedCreateWithoutDaysInput>
+  }
+
+  export type TimeIntervalCreateWithoutScheduleDayInput = {
+    id?: string
+    startTime: string
+    endTime: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TimeIntervalUncheckedCreateWithoutScheduleDayInput = {
+    id?: string
+    startTime: string
+    endTime: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TimeIntervalCreateOrConnectWithoutScheduleDayInput = {
+    where: TimeIntervalWhereUniqueInput
+    create: XOR<TimeIntervalCreateWithoutScheduleDayInput, TimeIntervalUncheckedCreateWithoutScheduleDayInput>
+  }
+
+  export type TimeIntervalCreateManyScheduleDayInputEnvelope = {
+    data: TimeIntervalCreateManyScheduleDayInput | TimeIntervalCreateManyScheduleDayInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ScheduleUpsertWithoutDaysInput = {
+    update: XOR<ScheduleUpdateWithoutDaysInput, ScheduleUncheckedUpdateWithoutDaysInput>
+    create: XOR<ScheduleCreateWithoutDaysInput, ScheduleUncheckedCreateWithoutDaysInput>
+    where?: ScheduleWhereInput
+  }
+
+  export type ScheduleUpdateToOneWithWhereWithoutDaysInput = {
+    where?: ScheduleWhereInput
+    data: XOR<ScheduleUpdateWithoutDaysInput, ScheduleUncheckedUpdateWithoutDaysInput>
+  }
+
+  export type ScheduleUpdateWithoutDaysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    establishment?: EstablishmentUpdateOneWithoutScheduleNestedInput
+    menus?: MenuUpdateManyWithoutScheduleNestedInput
+    discounts?: DiscountUpdateManyWithoutScheduleNestedInput
+    promotions?: PromotionUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateWithoutDaysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumScheduleTypeFieldUpdateOperationsInput | $Enums.ScheduleType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    establishment?: EstablishmentUncheckedUpdateOneWithoutScheduleNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutScheduleNestedInput
+    discounts?: DiscountUncheckedUpdateManyWithoutScheduleNestedInput
+    promotions?: PromotionUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type TimeIntervalUpsertWithWhereUniqueWithoutScheduleDayInput = {
+    where: TimeIntervalWhereUniqueInput
+    update: XOR<TimeIntervalUpdateWithoutScheduleDayInput, TimeIntervalUncheckedUpdateWithoutScheduleDayInput>
+    create: XOR<TimeIntervalCreateWithoutScheduleDayInput, TimeIntervalUncheckedCreateWithoutScheduleDayInput>
+  }
+
+  export type TimeIntervalUpdateWithWhereUniqueWithoutScheduleDayInput = {
+    where: TimeIntervalWhereUniqueInput
+    data: XOR<TimeIntervalUpdateWithoutScheduleDayInput, TimeIntervalUncheckedUpdateWithoutScheduleDayInput>
+  }
+
+  export type TimeIntervalUpdateManyWithWhereWithoutScheduleDayInput = {
+    where: TimeIntervalScalarWhereInput
+    data: XOR<TimeIntervalUpdateManyMutationInput, TimeIntervalUncheckedUpdateManyWithoutScheduleDayInput>
+  }
+
+  export type TimeIntervalScalarWhereInput = {
+    AND?: TimeIntervalScalarWhereInput | TimeIntervalScalarWhereInput[]
+    OR?: TimeIntervalScalarWhereInput[]
+    NOT?: TimeIntervalScalarWhereInput | TimeIntervalScalarWhereInput[]
+    id?: StringFilter<"TimeInterval"> | string
+    scheduleDayId?: StringFilter<"TimeInterval"> | string
+    startTime?: StringFilter<"TimeInterval"> | string
+    endTime?: StringFilter<"TimeInterval"> | string
+    createdAt?: DateTimeFilter<"TimeInterval"> | Date | string
+    updatedAt?: DateTimeFilter<"TimeInterval"> | Date | string
+  }
+
+  export type ScheduleDayCreateWithoutIntervalsInput = {
+    id?: string
+    dayOfWeek: $Enums.DayOfWeek
+    isOpen?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedule: ScheduleCreateNestedOneWithoutDaysInput
+  }
+
+  export type ScheduleDayUncheckedCreateWithoutIntervalsInput = {
+    id?: string
+    scheduleId: string
+    dayOfWeek: $Enums.DayOfWeek
+    isOpen?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ScheduleDayCreateOrConnectWithoutIntervalsInput = {
+    where: ScheduleDayWhereUniqueInput
+    create: XOR<ScheduleDayCreateWithoutIntervalsInput, ScheduleDayUncheckedCreateWithoutIntervalsInput>
+  }
+
+  export type ScheduleDayUpsertWithoutIntervalsInput = {
+    update: XOR<ScheduleDayUpdateWithoutIntervalsInput, ScheduleDayUncheckedUpdateWithoutIntervalsInput>
+    create: XOR<ScheduleDayCreateWithoutIntervalsInput, ScheduleDayUncheckedCreateWithoutIntervalsInput>
+    where?: ScheduleDayWhereInput
+  }
+
+  export type ScheduleDayUpdateToOneWithWhereWithoutIntervalsInput = {
+    where?: ScheduleDayWhereInput
+    data: XOR<ScheduleDayUpdateWithoutIntervalsInput, ScheduleDayUncheckedUpdateWithoutIntervalsInput>
+  }
+
+  export type ScheduleDayUpdateWithoutIntervalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    isOpen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneRequiredWithoutDaysNestedInput
+  }
+
+  export type ScheduleDayUncheckedUpdateWithoutIntervalsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    scheduleId?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    isOpen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EstablishmentCreateWithoutStockWarehousesInput = {
+    id?: string
+    name: string
+    slug: string
+    type: $Enums.EstablishmentType
+    status?: $Enums.EstablishmentStatus
+    isOnline?: boolean
+    email: string
+    phoneNumber: string
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    country: string
+    countryCode: string
+    billingName: string
+    billingTaxId: string
+    stripeCustomerId: string
+    instagramUrl?: string | null
+    tiktokUrl?: string | null
+    facebookUrl?: string | null
+    googleReviewUrl?: string | null
+    tripAdvisorUrl?: string | null
+    primaryLanguage?: $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: $Enums.Currency
+    timezone?: string
+    onlyMenu?: boolean
+    needSession?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
+    owner: UserCreateNestedOneWithoutEstablishmentsInput
+    activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
+    logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
+    bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    images?: ImageCreateNestedManyWithoutEstablishmentInput
+    themes?: ThemeCreateNestedManyWithoutEstablishmentInput
+    employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
+    serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    menus?: MenuCreateNestedManyWithoutEstablishmentInput
+    Item?: ItemCreateNestedManyWithoutEstablishmentInput
+    addons?: AddonCreateNestedManyWithoutEstablishmentInput
+    variantOptions?: VariantOptionCreateNestedManyWithoutEstablishmentInput
+    bookings?: BookingCreateNestedManyWithoutEstablishmentInput
+    bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
+    establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -155378,6 +152810,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -155393,7 +152826,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -155588,6 +153020,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -155604,7 +153037,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -155658,6 +153090,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -155673,7 +153106,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -156031,6 +153463,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -156047,7 +153480,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -156101,6 +153533,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -156116,7 +153549,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -156271,6 +153703,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -156287,7 +153720,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -156341,6 +153773,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -156356,7 +153789,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -156455,6 +153887,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -156471,7 +153904,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -156525,6 +153957,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -156540,7 +153973,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -156758,6 +154190,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -156774,7 +154207,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -156828,6 +154260,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -156843,7 +154276,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -156963,6 +154395,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -156979,7 +154412,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -157033,6 +154465,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -157048,7 +154481,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -157478,6 +154910,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -157494,7 +154927,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -157548,6 +154980,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -157563,7 +154996,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -158524,6 +155956,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -158540,7 +155973,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -158594,6 +156026,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -158609,7 +156042,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -158817,6 +156249,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -158833,7 +156266,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -158887,6 +156319,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -158902,7 +156335,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -159410,6 +156842,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -159426,7 +156859,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -159480,6 +156912,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -159495,7 +156928,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -159640,6 +157072,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -159656,7 +157089,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -159710,6 +157142,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -159725,7 +157158,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -160154,6 +157586,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -160170,7 +157603,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -160224,6 +157656,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -160239,7 +157672,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -160481,6 +157913,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -160497,7 +157930,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -160551,6 +157983,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -160566,7 +157999,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -160810,6 +158242,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -160826,7 +158259,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -160880,6 +158312,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -160895,7 +158328,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -161045,6 +158477,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -161061,7 +158494,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -161115,6 +158547,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -161130,7 +158563,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -161270,6 +158702,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -161286,7 +158719,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -161340,6 +158772,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -161355,7 +158788,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -161458,6 +158890,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -161474,7 +158907,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -161528,6 +158960,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -161543,7 +158976,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -161848,6 +159280,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -161864,7 +159297,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
@@ -161918,6 +159350,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -161933,7 +159366,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -162027,6 +159459,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -162043,7 +159476,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
@@ -162097,6 +159529,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -162112,7 +159545,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -162586,6 +160018,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -162602,7 +160035,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
@@ -162656,6 +160088,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -162671,7 +160104,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -162740,6 +160172,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -162756,7 +160189,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
@@ -162810,6 +160242,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -162825,7 +160258,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -162966,6 +160398,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
@@ -162981,7 +160414,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -163035,6 +160467,7 @@ export namespace Prisma {
     needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -163050,7 +160483,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -163142,6 +160574,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -163157,7 +160590,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -163212,6 +160644,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -163226,7 +160659,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -163340,6 +160772,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -163355,7 +160788,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -163410,6 +160842,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -163424,7 +160857,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -163532,6 +160964,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
@@ -163547,7 +160980,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -163602,6 +161034,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -163616,7 +161049,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -163766,6 +161198,7 @@ export namespace Prisma {
     needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -163781,7 +161214,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
@@ -163836,6 +161268,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -163850,7 +161283,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedCreateNestedManyWithoutEstablishmentInput
     integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -163962,6 +161394,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -163977,7 +161410,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -164032,6 +161464,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -164046,7 +161479,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -164299,11 +161731,6 @@ export namespace Prisma {
     posCategoryId?: string | null
   }
 
-  export type DiscountScheduleCreateManyDiscountInput = {
-    id?: string
-    scheduleId: string
-  }
-
   export type DiscountTargetUpdateWithoutDiscountInput = {
     id?: StringFieldUpdateOperationsInput | string
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -164320,41 +161747,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     itemId?: NullableStringFieldUpdateOperationsInput | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type DiscountScheduleUpdateWithoutDiscountInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    schedule?: ScheduleUpdateOneRequiredWithoutDiscountScheduleNestedInput
-  }
-
-  export type DiscountScheduleUncheckedUpdateWithoutDiscountInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type DiscountScheduleUncheckedUpdateManyWithoutDiscountInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PromotionScheduleCreateManyPromotionInput = {
-    id?: string
-    scheduleId: string
-  }
-
-  export type PromotionScheduleUpdateWithoutPromotionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    schedule?: ScheduleUpdateOneRequiredWithoutPromotionScheduleNestedInput
-  }
-
-  export type PromotionScheduleUncheckedUpdateWithoutPromotionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PromotionScheduleUncheckedUpdateManyWithoutPromotionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmailEventCreateManyEmailLogInput = {
@@ -164432,6 +161824,7 @@ export namespace Prisma {
     isVisible?: boolean
     isHighlighted?: boolean
     color?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
@@ -164502,11 +161895,6 @@ export namespace Prisma {
     closureReason?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-  }
-
-  export type EstablishmentScheduleCreateManyEstablishmentInput = {
-    id?: string
-    scheduleId: string
   }
 
   export type InvoiceCreateManyEstablishmentInput = {
@@ -164595,6 +161983,7 @@ export namespace Prisma {
 
   export type DiscountCreateManyEstablishmentInput = {
     id?: string
+    scheduleId?: string | null
     name: string
     description?: string | null
     type: $Enums.DiscountType
@@ -164609,6 +161998,7 @@ export namespace Prisma {
 
   export type PromotionCreateManyEstablishmentInput = {
     id?: string
+    scheduleId?: string | null
     name: string
     description?: string | null
     type: $Enums.PromotionType
@@ -164923,8 +162313,8 @@ export namespace Prisma {
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
+    schedule?: ScheduleUpdateOneWithoutMenusNestedInput
     categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
-    menuSchedule?: MenuScheduleUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUpdateManyWithoutMenuNestedInput
   }
 
@@ -164934,13 +162324,13 @@ export namespace Prisma {
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
-    menuSchedule?: MenuScheduleUncheckedUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
   }
 
@@ -164950,6 +162340,7 @@ export namespace Prisma {
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
@@ -165186,21 +162577,6 @@ export namespace Prisma {
     closureReason?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EstablishmentScheduleUpdateWithoutEstablishmentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    schedule?: ScheduleUpdateOneRequiredWithoutEstablishmentScheduleNestedInput
-  }
-
-  export type EstablishmentScheduleUncheckedUpdateWithoutEstablishmentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
   }
 
   export type InvoiceUpdateWithoutEstablishmentInput = {
@@ -165471,12 +162847,13 @@ export namespace Prisma {
     endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutDiscountsNestedInput
     targets?: DiscountTargetUpdateManyWithoutDiscountNestedInput
-    schedules?: DiscountScheduleUpdateManyWithoutDiscountNestedInput
   }
 
   export type DiscountUncheckedUpdateWithoutEstablishmentInput = {
     id?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
@@ -165488,11 +162865,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     targets?: DiscountTargetUncheckedUpdateManyWithoutDiscountNestedInput
-    schedules?: DiscountScheduleUncheckedUpdateManyWithoutDiscountNestedInput
   }
 
   export type DiscountUncheckedUpdateManyWithoutEstablishmentInput = {
     id?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
@@ -165515,12 +162892,13 @@ export namespace Prisma {
     endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutPromotionsNestedInput
     buyXGetYRule?: BuyXGetYRuleUpdateOneWithoutPromotionNestedInput
-    schedules?: PromotionScheduleUpdateManyWithoutPromotionNestedInput
   }
 
   export type PromotionUncheckedUpdateWithoutEstablishmentInput = {
     id?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumPromotionTypeFieldUpdateOperationsInput | $Enums.PromotionType
@@ -165530,11 +162908,11 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     buyXGetYRule?: BuyXGetYRuleUncheckedUpdateOneWithoutPromotionNestedInput
-    schedules?: PromotionScheduleUncheckedUpdateManyWithoutPromotionNestedInput
   }
 
   export type PromotionUncheckedUpdateManyWithoutEstablishmentInput = {
     id?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumPromotionTypeFieldUpdateOperationsInput | $Enums.PromotionType
@@ -166074,6 +163452,7 @@ export namespace Prisma {
     needSession?: boolean
     logoImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -166110,6 +163489,7 @@ export namespace Prisma {
     needSession?: boolean
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -166187,6 +163567,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -166202,7 +163583,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -166256,6 +163636,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -166271,7 +163652,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -166325,6 +163705,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -166361,6 +163742,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
@@ -166376,7 +163758,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -166430,6 +163811,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -166445,7 +163827,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -166499,6 +163880,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -167504,11 +164886,6 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type MenuScheduleCreateManyMenuInput = {
-    id?: string
-    scheduleId: string
-  }
-
   export type MenuTranslationCreateManyMenuInput = {
     id?: string
     locale: string
@@ -167548,21 +164925,6 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MenuScheduleUpdateWithoutMenuInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    schedule?: ScheduleUpdateOneRequiredWithoutMenuScheduleNestedInput
-  }
-
-  export type MenuScheduleUncheckedUpdateWithoutMenuInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MenuScheduleUncheckedUpdateManyWithoutMenuInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    scheduleId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MenuTranslationUpdateWithoutMenuInput = {
@@ -167879,84 +165241,246 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EstablishmentScheduleCreateManyScheduleInput = {
+  export type ScheduleDayCreateManyScheduleInput = {
+    id?: string
+    dayOfWeek: $Enums.DayOfWeek
+    isOpen?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MenuCreateManyScheduleInput = {
+    id?: string
+    position?: number
+    isVisible?: boolean
+    isHighlighted?: boolean
+    color?: string | null
+    establishmentId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    maxItemsPerOrder?: number | null
+    price?: number | null
+    type?: $Enums.MenuType
+  }
+
+  export type DiscountCreateManyScheduleInput = {
     id?: string
     establishmentId: string
+    name: string
+    description?: string | null
+    type: $Enums.DiscountType
+    value: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    stackable?: boolean
+    startsAt?: Date | string | null
+    endsAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type MenuScheduleCreateManyScheduleInput = {
+  export type PromotionCreateManyScheduleInput = {
     id?: string
-    menuId: string
+    establishmentId: string
+    name: string
+    description?: string | null
+    type: $Enums.PromotionType
+    isActive?: boolean
+    startsAt?: Date | string | null
+    endsAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type DiscountScheduleCreateManyScheduleInput = {
-    id?: string
-    discountId: string
-  }
-
-  export type PromotionScheduleCreateManyScheduleInput = {
-    id?: string
-    promotionId: string
-  }
-
-  export type EstablishmentScheduleUpdateWithoutScheduleInput = {
+  export type ScheduleDayUpdateWithoutScheduleInput = {
     id?: StringFieldUpdateOperationsInput | string
-    establishment?: EstablishmentUpdateOneRequiredWithoutEstablishmentScheduleNestedInput
+    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    isOpen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intervals?: TimeIntervalUpdateManyWithoutScheduleDayNestedInput
   }
 
-  export type EstablishmentScheduleUncheckedUpdateWithoutScheduleInput = {
+  export type ScheduleDayUncheckedUpdateWithoutScheduleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    isOpen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intervals?: TimeIntervalUncheckedUpdateManyWithoutScheduleDayNestedInput
+  }
+
+  export type ScheduleDayUncheckedUpdateManyWithoutScheduleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dayOfWeek?: EnumDayOfWeekFieldUpdateOperationsInput | $Enums.DayOfWeek
+    isOpen?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MenuUpdateWithoutScheduleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    isVisible?: BoolFieldUpdateOperationsInput | boolean
+    isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
+    establishment?: EstablishmentUpdateOneRequiredWithoutMenusNestedInput
+    categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
+    translations?: MenuTranslationUpdateManyWithoutMenuNestedInput
+  }
+
+  export type MenuUncheckedUpdateWithoutScheduleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    isVisible?: BoolFieldUpdateOperationsInput | boolean
+    isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
+    categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
+    translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
+  }
+
+  export type MenuUncheckedUpdateManyWithoutScheduleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    isVisible?: BoolFieldUpdateOperationsInput | boolean
+    isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
+  }
+
+  export type DiscountUpdateWithoutScheduleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    stackable?: BoolFieldUpdateOperationsInput | boolean
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    establishment?: EstablishmentUpdateOneRequiredWithoutDiscountsNestedInput
+    targets?: DiscountTargetUpdateManyWithoutDiscountNestedInput
+  }
+
+  export type DiscountUncheckedUpdateWithoutScheduleInput = {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    stackable?: BoolFieldUpdateOperationsInput | boolean
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    targets?: DiscountTargetUncheckedUpdateManyWithoutDiscountNestedInput
   }
 
-  export type EstablishmentScheduleUncheckedUpdateManyWithoutScheduleInput = {
+  export type DiscountUncheckedUpdateManyWithoutScheduleInput = {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumDiscountTypeFieldUpdateOperationsInput | $Enums.DiscountType
+    value?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    stackable?: BoolFieldUpdateOperationsInput | boolean
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type MenuScheduleUpdateWithoutScheduleInput = {
+  export type PromotionUpdateWithoutScheduleInput = {
     id?: StringFieldUpdateOperationsInput | string
-    menu?: MenuUpdateOneRequiredWithoutMenuScheduleNestedInput
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPromotionTypeFieldUpdateOperationsInput | $Enums.PromotionType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    establishment?: EstablishmentUpdateOneRequiredWithoutPromotionsNestedInput
+    buyXGetYRule?: BuyXGetYRuleUpdateOneWithoutPromotionNestedInput
   }
 
-  export type MenuScheduleUncheckedUpdateWithoutScheduleInput = {
+  export type PromotionUncheckedUpdateWithoutScheduleInput = {
     id?: StringFieldUpdateOperationsInput | string
-    menuId?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPromotionTypeFieldUpdateOperationsInput | $Enums.PromotionType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    buyXGetYRule?: BuyXGetYRuleUncheckedUpdateOneWithoutPromotionNestedInput
   }
 
-  export type MenuScheduleUncheckedUpdateManyWithoutScheduleInput = {
+  export type PromotionUncheckedUpdateManyWithoutScheduleInput = {
     id?: StringFieldUpdateOperationsInput | string
-    menuId?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPromotionTypeFieldUpdateOperationsInput | $Enums.PromotionType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    startsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endsAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DiscountScheduleUpdateWithoutScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    discount?: DiscountUpdateOneRequiredWithoutSchedulesNestedInput
+  export type TimeIntervalCreateManyScheduleDayInput = {
+    id?: string
+    startTime: string
+    endTime: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type DiscountScheduleUncheckedUpdateWithoutScheduleInput = {
+  export type TimeIntervalUpdateWithoutScheduleDayInput = {
     id?: StringFieldUpdateOperationsInput | string
-    discountId?: StringFieldUpdateOperationsInput | string
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type DiscountScheduleUncheckedUpdateManyWithoutScheduleInput = {
+  export type TimeIntervalUncheckedUpdateWithoutScheduleDayInput = {
     id?: StringFieldUpdateOperationsInput | string
-    discountId?: StringFieldUpdateOperationsInput | string
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PromotionScheduleUpdateWithoutScheduleInput = {
+  export type TimeIntervalUncheckedUpdateManyWithoutScheduleDayInput = {
     id?: StringFieldUpdateOperationsInput | string
-    promotion?: PromotionUpdateOneRequiredWithoutSchedulesNestedInput
-  }
-
-  export type PromotionScheduleUncheckedUpdateWithoutScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    promotionId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PromotionScheduleUncheckedUpdateManyWithoutScheduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    promotionId?: StringFieldUpdateOperationsInput | string
+    startTime?: StringFieldUpdateOperationsInput | string
+    endTime?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StockLocationCreateManyWarehouseInput = {
@@ -169774,6 +167298,7 @@ export namespace Prisma {
     needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
@@ -169818,6 +167343,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
@@ -169833,7 +167359,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -169887,6 +167412,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -169902,7 +167428,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -169956,6 +167481,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
@@ -170040,6 +167566,7 @@ export namespace Prisma {
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
+    scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -170140,6 +167667,7 @@ export namespace Prisma {
     needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
@@ -170155,7 +167683,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
@@ -170210,6 +167737,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -170224,7 +167752,6 @@ export namespace Prisma {
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    establishmentSchedule?: EstablishmentScheduleUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -170279,6 +167806,7 @@ export namespace Prisma {
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
