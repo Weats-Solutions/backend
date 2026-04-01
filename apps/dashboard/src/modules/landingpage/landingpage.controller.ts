@@ -18,8 +18,8 @@ export class LandingpageController {
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.LANDINGPAGE_GET_MENU_CONTENT)
-    getMenuContent(@Payload() payload: { establishmentSlug: string; menuId: string; lang: EstablishmentLanguage }) {
-        return this.landingpageService.getMenuContent(payload.establishmentSlug, payload.menuId, payload.lang);
+    getMenuContent(@Payload() payload: { establishmentSlug: string; menuId: string; lang: EstablishmentLanguage; targetId?: string }) {
+        return this.landingpageService.getMenuContent(payload.establishmentSlug, payload.menuId, payload.lang, payload.targetId);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.LANDINGPAGE_GET_THEME)

@@ -2,29 +2,32 @@ import { Type } from 'class-transformer';
 import {
     IsArray,
     IsBoolean,
+    IsEmpty,
     IsEnum,
     IsNotEmpty,
     IsOptional,
     IsString,
+    ValidateIf,
     ValidateNested,
 } from 'class-validator';
-import { DayOfWeek } from '@weats/database';
+import { DayOfWeek, ScheduleType } from '@weats/database';
 import {
     IsValidTime,
     NoOverlappingIntervals,
     AllDaysPresent,
     ScheduleDaysConsistent,
+    SCHEDULE_VALIDATION_GROUPS,
 } from '@weats/common';
 
 export class TimeIntervalDto {
     @IsString()
     @IsNotEmpty()
-    @IsValidTime()
+    @IsValidTime({ always: true })
     startTime: string; // Format: "HH:mm"
 
     @IsString()
     @IsNotEmpty()
-    @IsValidTime()
+    @IsValidTime({ always: true })
     endTime: string; // Format: "HH:mm"
 }
 
@@ -36,22 +39,23 @@ export class ScheduleDayDto {
     @IsOptional()
     isOpen?: boolean;
 
-    @IsArray()
-    @NoOverlappingIntervals()
+    @IsArray({ always: true })
+    @NoOverlappingIntervals({ always: true })
     @Type(() => TimeIntervalDto)
-    @ValidateNested({ each: true })
+    @ValidateNested({ each: true, always: true })
     intervals: TimeIntervalDto[];
 }
 
 export class CreateScheduleDto {
-    @IsString()
-    @IsNotEmpty()
-    name: string; // e.g., "Almoço", "Jantar", "Café da manhã"
+    @IsString({ groups: [SCHEDULE_VALIDATION_GROUPS.MENU] })
+    @IsNotEmpty({ groups: [SCHEDULE_VALIDATION_GROUPS.MENU] })
+    @IsOptional({ groups: [SCHEDULE_VALIDATION_GROUPS.ESTABLISHMENT] })
+    name?: string;
 
-    @IsArray()
-    @AllDaysPresent()
-    @ScheduleDaysConsistent()
+    @IsArray({ always: true })
+    @AllDaysPresent({ always: true })
+    @ScheduleDaysConsistent({ always: true })
     @Type(() => ScheduleDayDto)
-    @ValidateNested({ each: true })
+    @ValidateNested({ each: true, always: true })
     days: ScheduleDayDto[];
 }

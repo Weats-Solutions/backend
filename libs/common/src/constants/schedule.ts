@@ -6,3 +6,8 @@ export const DEFAULT_SCHEDULE_NAMES = {
   DE: 'Allgemeiner Zeitplan',
   IT: 'Orario Generale',
 } as const;
+
+export const SCHEDULE_VALIDATION_GROUPS = {
+  MENU: 'menu',
+  ESTABLISHMENT: 'establishment',
+};

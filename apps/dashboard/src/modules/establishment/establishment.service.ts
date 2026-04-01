@@ -6,11 +6,12 @@ import type { Queue } from 'bull';
 import { User, Establishment } from '@weats/types';
 import { RESPONSE_CODES, ERRORS, FeatureUsageService, normalizeSchedule, DEFAULT_SCHEDULE_NAMES } from '@weats/common';
 import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto, UpdateEstablishmentScheduleDto } from '@weats/contracts/dashboard/dtos/establishment';
-import { CorePrismaService, EstablishmentLanguage } from '@weats/database';
+import { CorePrismaService, EstablishmentLanguage, ScheduleType } from '@weats/database';
 import { EstablishmentStatus } from '@weats/database';
 import { ulid } from 'ulid';
 import { ClerkService, StripeService } from '@weats/integrations';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
+import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
 
 export type NormalizedFeature =
   | { type: "BOOLEAN"; enabled: boolean }
@@ -341,29 +342,48 @@ export class EstablishmentService {
     return result;
   }
 
-  async updateSchedule(establishment: Establishment, updateEstablishmentScheduleDto: UpdateEstablishmentScheduleDto) {
-    const schedule = await this.prisma.schedule.findUnique({
-      where: { id: updateEstablishmentScheduleDto.scheduleId },
+  async upsertEstablishmentSchedule(establishment: Establishment, scheduleDto: CreateScheduleDto) {
+    const establishmentWithSchedule = await this.prisma.establishment.findUnique({
+      where: { id: establishment.id },
+      select: { scheduleId: true },
     });
 
-    if (!schedule) {
-      throw new RpcException({
-        status: 400,
-        message: ERRORS.SCHEDULE_NOT_FOUND,
-        code: ERRORS.SCHEDULE_NOT_FOUND,
-      });
-    }
+    if (!establishmentWithSchedule) throw new RpcException({
+      status: 400,
+      message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+      code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+    });
 
-    const result = await this.prisma.$transaction(async (prisma) => {
-      const updatedSchedule = await prisma.schedule.update({
-        where: { id: schedule.id },
+    // Se tem schedule → atualizar, senão → criar
+    if (establishmentWithSchedule.scheduleId) {
+      return this.prisma.schedule.update({
+        where: { id: establishmentWithSchedule.scheduleId },
         data: {
           name: DEFAULT_SCHEDULE_NAMES[establishment.primaryLanguage as keyof typeof DEFAULT_SCHEDULE_NAMES] || DEFAULT_SCHEDULE_NAMES.PT,
           days: {
             deleteMany: {},
-            create: updateEstablishmentScheduleDto.schedule.days.map((day) => ({
+            create: scheduleDto.days.map((day) => ({
               dayOfWeek: day.dayOfWeek,
-              isOpen: day.isOpen,
+              isOpen: day.isOpen ?? true,
+              intervals: {
+                create: day.intervals.map((interval) => ({
+                  startTime: interval.startTime,
+                  endTime: interval.endTime,
+                })),
+              },
+            })),
+          },
+        },
+      });
+    } else {
+      const newSchedule = await this.prisma.schedule.create({
+        data: {
+          name: DEFAULT_SCHEDULE_NAMES[establishment.primaryLanguage as keyof typeof DEFAULT_SCHEDULE_NAMES] || DEFAULT_SCHEDULE_NAMES.PT,
+          type: ScheduleType.ESTABLISHMENT,
+          days: {
+            create: scheduleDto.days.map((day) => ({
+              dayOfWeek: day.dayOfWeek,
+              isOpen: day.isOpen ?? true,
               intervals: {
                 create: day.intervals.map((interval) => ({
                   startTime: interval.startTime,
@@ -375,13 +395,13 @@ export class EstablishmentService {
         },
       });
 
-      return {
-        message: RESPONSE_CODES.ESTABLISHMENT.UPDATED,
-        updatedSchedule,
-      };
-    });
+      await this.prisma.establishment.update({
+        where: { id: establishment.id },
+        data: { scheduleId: newSchedule.id },
+      });
 
-    return result;
+      return newSchedule;
+    }
   }
 
   async updateLanguages(establishment: Establishment, updateEstablishmentLanguagesDto: UpdateEstablishmentLanguagesDto) {

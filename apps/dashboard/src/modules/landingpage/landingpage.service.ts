@@ -149,8 +149,9 @@ export class LandingpageService {
     }
 
 
-    async getMenuContent(establishmentSlug: string, menuId: string, lang: EstablishmentLanguage) {
+    async getMenuContent(establishmentSlug: string, menuId: string, lang: EstablishmentLanguage, targetId?: string) {
         try {
+
             // Ownership check: ensure the menu belongs to this establishment
             const menu = await this.prisma.menu.findFirst({
                 where: {
@@ -159,6 +160,25 @@ export class LandingpageService {
                 },
                 select: { id: true },
             });
+
+            const establishment = await this.prisma.establishment.findUnique({
+                where: { slug: establishmentSlug },
+            });
+
+            if (!establishment) {
+                throw new RpcException({
+                    status: 404,
+                    message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+                    code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+                });
+            }
+
+            if (
+                !Object.values(establishment.availableLanguages)
+                    .includes(lang as EstablishmentLanguage)
+            ) {
+                lang = establishment.primaryLanguage;
+            }
 
             if (!menu) {
                 throw new RpcException({ status: 404, message: ERRORS.ESTABLISHMENT_NOT_FOUND, code: ERRORS.ESTABLISHMENT_NOT_FOUND });

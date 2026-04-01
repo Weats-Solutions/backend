@@ -5,6 +5,7 @@ import { EstablishmentService } from './establishment.service';
 import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto, UpdateEstablishmentScheduleDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { User, Establishment } from '@weats/types';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
+import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
 
 @Controller()
 export class EstablishmentController {
@@ -53,8 +54,8 @@ export class EstablishmentController {
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SCHEDULE)
-    updateSchedule(@Payload() payload: { establishment: Establishment; updateEstablishmentScheduleDto: UpdateEstablishmentScheduleDto }) {
-        return this.establishmentService.updateSchedule(payload.establishment, payload.updateEstablishmentScheduleDto);
+    updateSchedule(@Payload() payload: { establishment: Establishment; updateEstablishmentScheduleDto: CreateScheduleDto }) {
+        return this.establishmentService.upsertEstablishmentSchedule(payload.establishment, payload.updateEstablishmentScheduleDto);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_LANGUAGES)

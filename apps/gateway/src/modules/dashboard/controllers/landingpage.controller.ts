@@ -66,7 +66,8 @@ export class LandingpageController {
     @Param('establishmentSlug') establishmentSlug: string,
     @Param('menuId') menuId: string,
     @Query('lang', ToUpperCasePipe) lang: EstablishmentLanguage,
+    @Query('targetId') targetId?: string,
   ) {
-    return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_MENU_CONTENT, { establishmentSlug, menuId, lang });
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_MENU_CONTENT, { establishmentSlug, menuId, lang, targetId });
   }
 }

@@ -130,7 +130,7 @@ export class MenuService {
                 if (schedule) {
                     const createdSchedule = await prisma.schedule.create({
                         data: {
-                            name: schedule.name,
+                            name: schedule.name || '',
                             type: ScheduleType.MENU,
                             days: {
                                 create: schedule.days.map((day) => ({
@@ -444,6 +444,7 @@ export class MenuService {
                                                             },
                                                         },
                                                     },
+                                                    nutritionInfo: true,
                                                     // --- Variant groups ("Choose size") ---
                                                     itemVariantGroups: {
                                                         orderBy: { position: 'asc' },

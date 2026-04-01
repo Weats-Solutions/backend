@@ -10,6 +10,8 @@ import {
   Post,
   Put,
   UseGuards,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import {
   ClerkGuard,
@@ -22,13 +24,15 @@ import {
   FeatureLimitGuard,
   RequiresFeature,
   FeatureUsageService,
+  SCHEDULE_VALIDATION_GROUPS,
 } from '@weats/common';
 import type { Establishment, User } from '@weats/types';
-import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
+import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto, UpdateEstablishmentScheduleDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { ClientProxy } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { ClerkService } from '@weats/integrations';
+import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
 
 @Controller('establishments')
 export class EstablishmentController {
@@ -112,6 +116,17 @@ export class EstablishmentController {
       });
     }
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SCHEDULE_BY_ID, { id: establishment.id });
+  }
+
+  @UsePipes(new ValidationPipe({ groups: [SCHEDULE_VALIDATION_GROUPS.ESTABLISHMENT] }))
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Post(':id/schedule')
+  updateEstablishmentSchedule(
+    @CurrentEstablishment() establishment: Establishment,
+    @Body() updateEstablishmentScheduleDto: CreateScheduleDto,
+  ) {
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SCHEDULE, { establishment, updateEstablishmentScheduleDto });
   }
 
 

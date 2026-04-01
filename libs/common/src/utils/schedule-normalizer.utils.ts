@@ -4,7 +4,7 @@ import type { Schedule, ScheduleDay, TimeInterval } from '@weats/database';
  * Represents a normalized day schedule for API responses
  */
 export interface NormalizedDaySchedule {
-    day: string; // e.g., "MONDAY"
+    dayOfWeek: string; // e.g., "MONDAY"
     isOpen: boolean;
     intervals: Array<{
         id: string;
@@ -41,7 +41,7 @@ export function normalizeSchedule(
     return {
         id: schedule.id,
         days: schedule.days.map((day) => ({
-            day: day.dayOfWeek,
+            dayOfWeek: day.dayOfWeek,
             isOpen: day.isOpen,
             intervals: day.intervals.map((interval) => ({
                 id: interval.id,
