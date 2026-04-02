@@ -114,7 +114,7 @@ export class MenuService {
     async createMenu(createMenuDto: CreateMenuDto, establishmentId: string) {
         try {
             const { translations, schedule } = createMenuDto;
-
+            console.log(createMenuDto)
             const menuCount = await this.prisma.menu.count({
                 where: { establishmentId },
             });

@@ -30,8 +30,9 @@ export interface IScheduleDay {
  * Converts time string "HH:mm" to minutes since midnight.
  * Throws if format is invalid.
  */
-function timeToMinutes(time: string): number {
+function timeToMinutes(time: string, isEnd = false): number {
     const [h, m] = time.split(':').map(Number);
+    if (isEnd && h === 0 && m === 0) return 1440;
     return h * 60 + m;
 }
 
@@ -98,9 +99,10 @@ export class NoOverlappingIntervalsConstraint implements ValidatorConstraintInte
             }
 
             const start = timeToMinutes(interval.startTime);
-            const end = timeToMinutes(interval.endTime);
+            const end = timeToMinutes(interval.endTime, true);
 
             // Block midnight-spanning intervals (e.g., 22:00–02:00) and start == end
+            // Note: start < end is now true for 00:00-00:00 Because end becomes 1440
             if (start >= end) {
                 return false;
             }
@@ -185,8 +187,8 @@ export function AllDaysPresent(validationOptions?: ValidationOptions) {
 /**
  * Validates consistency of schedule days:
  * - No duplicate days
- * - If isOpen=true, intervals.length > 0
- * - If isOpen=false, intervals.length === 0
+ * - If isOpen=false, intervals should be empty (we clear them)
+ * Note: Open days without intervals are allowed (menu just won't be visible)
  */
 @ValidatorConstraint({ name: 'scheduleDaysConsistent', async: false })
 export class ScheduleDaysConsistentConstraint implements ValidatorConstraintInterface {
@@ -202,24 +204,15 @@ export class ScheduleDaysConsistentConstraint implements ValidatorConstraintInte
             }
             seenDays.add(day.dayOfWeek);
 
-            // Check isOpen consistency with intervals
-            const hasIntervals = Array.isArray(day.intervals) && day.intervals.length > 0;
-            const isOpen = day.isOpen !== false; // Default to true if not specified
-
-            // If open, must have intervals; if closed, must not have intervals
-            if (isOpen && !hasIntervals) {
-                return false;
-            }
-            if (!isOpen && hasIntervals) {
-                return false;
-            }
+            // Note: We no longer enforce that open days must have intervals
+            // A menu without any intervals simply won't be visible to customers
         }
 
         return true;
     }
 
     defaultMessage(): string {
-        return 'Schedule days consistency error: no duplicate days, open days must have intervals, closed days must not have intervals';
+        return 'Schedule days consistency error: no duplicate days allowed';
     }
 }
 
