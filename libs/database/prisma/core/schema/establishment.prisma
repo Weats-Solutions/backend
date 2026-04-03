@@ -28,6 +28,7 @@ model Establishment {
   facebookUrl     String?
   googleReviewUrl String?
   tripAdvisorUrl  String?
+  websiteUrl      String?
 
   // ─── Configurações ─────────────────────────────────────────────────────────
   primaryLanguage    EstablishmentLanguage   @default(PT)
@@ -43,7 +44,7 @@ model Establishment {
   activeThemeId String?
 
   // ─── Schedule ───────────────────────────────────────────────────────────────
-  scheduleId String? @unique
+  scheduleId String?   @unique
   schedule   Schedule? @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
 
   // ─── Sistema ───────────────────────────────────────────────────────────────

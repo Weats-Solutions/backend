@@ -329,6 +329,7 @@ exports.Prisma.EstablishmentScalarFieldEnum = {
   facebookUrl: 'facebookUrl',
   googleReviewUrl: 'googleReviewUrl',
   tripAdvisorUrl: 'tripAdvisorUrl',
+  websiteUrl: 'websiteUrl',
   primaryLanguage: 'primaryLanguage',
   availableLanguages: 'availableLanguages',
   currency: 'currency',

@@ -26082,6 +26082,7 @@ export namespace Prisma {
     facebookUrl: string | null
     googleReviewUrl: string | null
     tripAdvisorUrl: string | null
+    websiteUrl: string | null
     primaryLanguage: $Enums.EstablishmentLanguage | null
     currency: $Enums.Currency | null
     timezone: string | null
@@ -26119,6 +26120,7 @@ export namespace Prisma {
     facebookUrl: string | null
     googleReviewUrl: string | null
     tripAdvisorUrl: string | null
+    websiteUrl: string | null
     primaryLanguage: $Enums.EstablishmentLanguage | null
     currency: $Enums.Currency | null
     timezone: string | null
@@ -26156,6 +26158,7 @@ export namespace Prisma {
     facebookUrl: number
     googleReviewUrl: number
     tripAdvisorUrl: number
+    websiteUrl: number
     primaryLanguage: number
     availableLanguages: number
     currency: number
@@ -26196,6 +26199,7 @@ export namespace Prisma {
     facebookUrl?: true
     googleReviewUrl?: true
     tripAdvisorUrl?: true
+    websiteUrl?: true
     primaryLanguage?: true
     currency?: true
     timezone?: true
@@ -26233,6 +26237,7 @@ export namespace Prisma {
     facebookUrl?: true
     googleReviewUrl?: true
     tripAdvisorUrl?: true
+    websiteUrl?: true
     primaryLanguage?: true
     currency?: true
     timezone?: true
@@ -26270,6 +26275,7 @@ export namespace Prisma {
     facebookUrl?: true
     googleReviewUrl?: true
     tripAdvisorUrl?: true
+    websiteUrl?: true
     primaryLanguage?: true
     availableLanguages?: true
     currency?: true
@@ -26381,6 +26387,7 @@ export namespace Prisma {
     facebookUrl: string | null
     googleReviewUrl: string | null
     tripAdvisorUrl: string | null
+    websiteUrl: string | null
     primaryLanguage: $Enums.EstablishmentLanguage
     availableLanguages: $Enums.EstablishmentLanguage[]
     currency: $Enums.Currency
@@ -26436,6 +26443,7 @@ export namespace Prisma {
     facebookUrl?: boolean
     googleReviewUrl?: boolean
     tripAdvisorUrl?: boolean
+    websiteUrl?: boolean
     primaryLanguage?: boolean
     availableLanguages?: boolean
     currency?: boolean
@@ -26512,6 +26520,7 @@ export namespace Prisma {
     facebookUrl?: boolean
     googleReviewUrl?: boolean
     tripAdvisorUrl?: boolean
+    websiteUrl?: boolean
     primaryLanguage?: boolean
     availableLanguages?: boolean
     currency?: boolean
@@ -26555,6 +26564,7 @@ export namespace Prisma {
     facebookUrl?: boolean
     googleReviewUrl?: boolean
     tripAdvisorUrl?: boolean
+    websiteUrl?: boolean
     primaryLanguage?: boolean
     availableLanguages?: boolean
     currency?: boolean
@@ -26598,6 +26608,7 @@ export namespace Prisma {
     facebookUrl?: boolean
     googleReviewUrl?: boolean
     tripAdvisorUrl?: boolean
+    websiteUrl?: boolean
     primaryLanguage?: boolean
     availableLanguages?: boolean
     currency?: boolean
@@ -26613,7 +26624,7 @@ export namespace Prisma {
     ownerId?: boolean
   }
 
-  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "countryCode" | "billingName" | "billingTaxId" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "onlyMenu" | "needSession" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
+  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "countryCode" | "billingName" | "billingTaxId" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "onlyMenu" | "needSession" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
   export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
@@ -26733,6 +26744,7 @@ export namespace Prisma {
       facebookUrl: string | null
       googleReviewUrl: string | null
       tripAdvisorUrl: string | null
+      websiteUrl: string | null
       primaryLanguage: $Enums.EstablishmentLanguage
       availableLanguages: $Enums.EstablishmentLanguage[]
       currency: $Enums.Currency
@@ -27228,6 +27240,7 @@ export namespace Prisma {
     readonly facebookUrl: FieldRef<"Establishment", 'String'>
     readonly googleReviewUrl: FieldRef<"Establishment", 'String'>
     readonly tripAdvisorUrl: FieldRef<"Establishment", 'String'>
+    readonly websiteUrl: FieldRef<"Establishment", 'String'>
     readonly primaryLanguage: FieldRef<"Establishment", 'EstablishmentLanguage'>
     readonly availableLanguages: FieldRef<"Establishment", 'EstablishmentLanguage[]'>
     readonly currency: FieldRef<"Establishment", 'Currency'>
@@ -107091,6 +107104,7 @@ export namespace Prisma {
     facebookUrl: 'facebookUrl',
     googleReviewUrl: 'googleReviewUrl',
     tripAdvisorUrl: 'tripAdvisorUrl',
+    websiteUrl: 'websiteUrl',
     primaryLanguage: 'primaryLanguage',
     availableLanguages: 'availableLanguages',
     currency: 'currency',
@@ -110070,6 +110084,7 @@ export namespace Prisma {
     facebookUrl?: StringNullableFilter<"Establishment"> | string | null
     googleReviewUrl?: StringNullableFilter<"Establishment"> | string | null
     tripAdvisorUrl?: StringNullableFilter<"Establishment"> | string | null
+    websiteUrl?: StringNullableFilter<"Establishment"> | string | null
     primaryLanguage?: EnumEstablishmentLanguageFilter<"Establishment"> | $Enums.EstablishmentLanguage
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
     currency?: EnumCurrencyFilter<"Establishment"> | $Enums.Currency
@@ -110145,6 +110160,7 @@ export namespace Prisma {
     facebookUrl?: SortOrderInput | SortOrder
     googleReviewUrl?: SortOrderInput | SortOrder
     tripAdvisorUrl?: SortOrderInput | SortOrder
+    websiteUrl?: SortOrderInput | SortOrder
     primaryLanguage?: SortOrder
     availableLanguages?: SortOrder
     currency?: SortOrder
@@ -110224,6 +110240,7 @@ export namespace Prisma {
     facebookUrl?: StringNullableFilter<"Establishment"> | string | null
     googleReviewUrl?: StringNullableFilter<"Establishment"> | string | null
     tripAdvisorUrl?: StringNullableFilter<"Establishment"> | string | null
+    websiteUrl?: StringNullableFilter<"Establishment"> | string | null
     primaryLanguage?: EnumEstablishmentLanguageFilter<"Establishment"> | $Enums.EstablishmentLanguage
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
     currency?: EnumCurrencyFilter<"Establishment"> | $Enums.Currency
@@ -110298,6 +110315,7 @@ export namespace Prisma {
     facebookUrl?: SortOrderInput | SortOrder
     googleReviewUrl?: SortOrderInput | SortOrder
     tripAdvisorUrl?: SortOrderInput | SortOrder
+    websiteUrl?: SortOrderInput | SortOrder
     primaryLanguage?: SortOrder
     availableLanguages?: SortOrder
     currency?: SortOrder
@@ -110342,6 +110360,7 @@ export namespace Prisma {
     facebookUrl?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     googleReviewUrl?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     tripAdvisorUrl?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    websiteUrl?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     primaryLanguage?: EnumEstablishmentLanguageWithAggregatesFilter<"Establishment"> | $Enums.EstablishmentLanguage
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
     currency?: EnumCurrencyWithAggregatesFilter<"Establishment"> | $Enums.Currency
@@ -117110,6 +117129,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -117180,6 +117200,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -117250,6 +117271,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -117320,6 +117342,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -117390,6 +117413,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -117428,6 +117452,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -117461,6 +117486,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -124911,6 +124937,7 @@ export namespace Prisma {
     facebookUrl?: SortOrder
     googleReviewUrl?: SortOrder
     tripAdvisorUrl?: SortOrder
+    websiteUrl?: SortOrder
     primaryLanguage?: SortOrder
     availableLanguages?: SortOrder
     currency?: SortOrder
@@ -124949,6 +124976,7 @@ export namespace Prisma {
     facebookUrl?: SortOrder
     googleReviewUrl?: SortOrder
     tripAdvisorUrl?: SortOrder
+    websiteUrl?: SortOrder
     primaryLanguage?: SortOrder
     currency?: SortOrder
     timezone?: SortOrder
@@ -124986,6 +125014,7 @@ export namespace Prisma {
     facebookUrl?: SortOrder
     googleReviewUrl?: SortOrder
     tripAdvisorUrl?: SortOrder
+    websiteUrl?: SortOrder
     primaryLanguage?: SortOrder
     currency?: SortOrder
     timezone?: SortOrder
@@ -136882,6 +136911,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -136951,6 +136981,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -137036,6 +137067,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -137105,6 +137137,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -137174,6 +137207,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -137243,6 +137277,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -137328,6 +137363,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -137397,6 +137433,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -137496,6 +137533,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -137565,6 +137603,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -137679,6 +137718,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -137748,6 +137788,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -137968,6 +138009,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -138037,6 +138079,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -138206,6 +138249,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -138275,6 +138319,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -138543,6 +138588,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -138612,6 +138658,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -138748,6 +138795,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -138817,6 +138865,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -139167,6 +139216,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -139236,6 +139286,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -139373,6 +139424,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -139442,6 +139494,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -139951,6 +140004,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -140020,6 +140074,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -140132,6 +140187,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -140201,6 +140257,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -140410,6 +140467,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -140479,6 +140537,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -140564,6 +140623,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -140633,6 +140693,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -143465,6 +143526,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -143534,6 +143596,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -143619,6 +143682,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -143688,6 +143752,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -143757,6 +143822,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -143826,6 +143892,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -143905,6 +143972,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -143974,6 +144042,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -144053,6 +144122,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -144122,6 +144192,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -144361,6 +144432,7 @@ export namespace Prisma {
     facebookUrl?: StringNullableFilter<"Establishment"> | string | null
     googleReviewUrl?: StringNullableFilter<"Establishment"> | string | null
     tripAdvisorUrl?: StringNullableFilter<"Establishment"> | string | null
+    websiteUrl?: StringNullableFilter<"Establishment"> | string | null
     primaryLanguage?: EnumEstablishmentLanguageFilter<"Establishment"> | $Enums.EstablishmentLanguage
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
     currency?: EnumCurrencyFilter<"Establishment"> | $Enums.Currency
@@ -144426,6 +144498,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -144495,6 +144568,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -144642,6 +144716,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -144711,6 +144786,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -144796,6 +144872,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -144865,6 +144942,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -144934,6 +145012,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -145003,6 +145082,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -145088,6 +145168,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -145157,6 +145238,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -145226,6 +145308,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -145295,6 +145378,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -145380,6 +145464,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -145449,6 +145534,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -145538,6 +145624,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -145607,6 +145694,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -146115,6 +146203,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -146184,6 +146273,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -147036,6 +147126,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -147105,6 +147196,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -147228,6 +147320,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -147297,6 +147390,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -148546,6 +148640,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -148615,6 +148710,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -148756,6 +148852,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -148825,6 +148922,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -149828,6 +149926,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -149897,6 +149996,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -150033,6 +150133,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -150102,6 +150203,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -150281,6 +150383,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -150350,6 +150453,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -150526,6 +150630,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -150595,6 +150700,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -151660,6 +151766,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -151729,6 +151836,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -151844,6 +151952,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -151913,6 +152022,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -152104,6 +152214,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -152173,6 +152284,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -152408,6 +152520,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -152477,6 +152590,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -152764,6 +152878,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -152833,6 +152948,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -153044,6 +153160,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -153113,6 +153230,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -153487,6 +153605,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -153556,6 +153675,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -153727,6 +153847,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -153796,6 +153917,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -153911,6 +154033,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -153980,6 +154103,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -154214,6 +154338,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -154283,6 +154408,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -154419,6 +154545,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -154488,6 +154615,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -154934,6 +155062,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -155003,6 +155132,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -155980,6 +156110,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -156049,6 +156180,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -156273,6 +156405,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -156342,6 +156475,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -156866,6 +157000,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -156935,6 +157070,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -157096,6 +157232,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -157165,6 +157302,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -157610,6 +157748,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -157679,6 +157818,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -157937,6 +158077,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -158006,6 +158147,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -158266,6 +158408,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -158335,6 +158478,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -158501,6 +158645,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -158570,6 +158715,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -158726,6 +158872,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -158795,6 +158942,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -158914,6 +159062,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -158983,6 +159132,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -159304,6 +159454,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -159373,6 +159524,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -159483,6 +159635,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -159552,6 +159705,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -160042,6 +160196,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -160111,6 +160266,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -160196,6 +160352,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -160265,6 +160422,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -160422,6 +160580,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -160491,6 +160650,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -160598,6 +160758,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -160667,6 +160828,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -160796,6 +160958,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -160865,6 +161028,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -160988,6 +161152,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -161057,6 +161222,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -161222,6 +161388,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -161291,6 +161458,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -161418,6 +161586,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -161487,6 +161656,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -163476,6 +163646,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -163513,6 +163684,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -163591,6 +163763,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -163660,6 +163833,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -163729,6 +163903,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -163766,6 +163941,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -163835,6 +164011,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -163904,6 +164081,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -167326,6 +167504,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -167371,6 +167550,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -167440,6 +167620,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -167509,6 +167690,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -167593,6 +167775,7 @@ export namespace Prisma {
     facebookUrl?: string | null
     googleReviewUrl?: string | null
     tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
@@ -167695,6 +167878,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -167764,6 +167948,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
@@ -167833,6 +168018,7 @@ export namespace Prisma {
     facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
     googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
