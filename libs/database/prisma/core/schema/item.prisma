@@ -75,12 +75,13 @@ model VariantNutrionalInfo {
 }
 
 model ItemTranslation {
-  id          String  @id @default(ulid())
-  locale      String
-  name        String
-  description String?
-  itemId      String
-  item        Item    @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  id               String  @id @default(ulid())
+  locale           String
+  name             String
+  shortDescription String?
+  description      String?
+  itemId           String
+  item             Item    @relation(fields: [itemId], references: [id], onDelete: Cascade)
 
   @@unique([itemId, locale])
 }

@@ -27,37 +27,29 @@ class AllergenDto {
 
 
 export class NutrionalInfoDto {
-  @IsOptional()
   @IsNumber()
-  energyKcal?: number;
+  energyKcal: number;
 
-  @IsOptional()
   @IsNumber()
-  fat?: number;
+  fat: number;
 
-  @IsOptional()
   @IsNumber()
-  saturatedFat?: number;
+  saturatedFat: number;
 
-  @IsOptional()
   @IsNumber()
-  carbohydrates?: number;
+  carbohydrates: number;
 
-  @IsOptional()
   @IsNumber()
-  sugars?: number;
+  sugars: number;
 
-  @IsOptional()
   @IsNumber()
-  fiber?: number;
+  fiber: number;
 
-  @IsOptional()
   @IsNumber()
-  protein?: number;
+  protein: number;
 
-  @IsOptional()
   @IsNumber()
-  salt?: number;
+  salt: number;
 }
 
 class CreateItemVariantDto {
@@ -134,6 +126,10 @@ export class CreateItemVariantGroupDto {
 class ItemTranslationsDto {
   @IsString()
   name: string;
+
+  @IsOptional()
+  @IsString()
+  shortDescription?: string;
 
   @IsOptional()
   @IsString()
