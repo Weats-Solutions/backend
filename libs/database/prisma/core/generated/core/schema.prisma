@@ -164,7 +164,7 @@ enum BookingSource {
 model Discount {
   id              String       @id @default(ulid())
   establishmentId String
-  scheduleId      String?
+  scheduleId      String?      @unique
   name            String
   description     String?
   type            DiscountType
@@ -207,7 +207,7 @@ model DiscountTarget {
 model Promotion {
   id              String        @id @default(ulid())
   establishmentId String
-  scheduleId      String?
+  scheduleId      String?       @unique
   name            String
   description     String?
   type            PromotionType
@@ -1252,7 +1252,7 @@ model Menu {
   isHighlighted    Boolean  @default(false)
   color            String?
   establishmentId  String
-  scheduleId       String?
+  scheduleId       String?  @unique
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
   maxItemsPerOrder Int?
@@ -1511,7 +1511,6 @@ model Printer {
 
 model Schedule {
   id        String       @id @default(ulid())
-  name      String // "Almoço", "Jantar", "Café da manhã", etc
   type      ScheduleType
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
@@ -1521,9 +1520,9 @@ model Schedule {
 
   // Relations to entities that use schedules
   establishment Establishment?
-  menus         Menu[]
-  discounts     Discount[]
-  promotions    Promotion[]
+  menus         Menu?
+  discounts     Discount?
+  promotions    Promotion?
 }
 
 model ScheduleDay {

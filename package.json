@@ -55,6 +55,7 @@
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.2",
     "@prisma/client-runtime-utils": "^7.4.2",
+    "@salespark/validate-vat-eu": "^1.0.5",
     "axios": "^1.13.6",
     "bull": "^4.16.5",
     "class-transformer": "^0.5.1",

@@ -1,11 +1,10 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
-import { AppConfigService } from '@weats/configs/app-config.service';
 import { InjectQueue } from '@nestjs/bull';
 import type { Queue } from 'bull';
 import { User, Establishment } from '@weats/types';
 import { RESPONSE_CODES, ERRORS, FeatureUsageService, normalizeSchedule, DEFAULT_SCHEDULE_NAMES } from '@weats/common';
-import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto, UpdateEstablishmentScheduleDto } from '@weats/contracts/dashboard/dtos/establishment';
+import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { CorePrismaService, EstablishmentLanguage, ScheduleType } from '@weats/database';
 import { EstablishmentStatus } from '@weats/database';
 import { ulid } from 'ulid';
@@ -114,6 +113,59 @@ export class EstablishmentService {
     }
 
     return establishment;
+  }
+
+  async getEstablishmentGeneralSettings(id: string) {
+    const establishment = await this.prisma.establishment.findUnique({
+      where: { id },
+      select: {
+        name: true,
+        email: true,
+        phoneNumber: true,
+        countryCode: true,
+        address: true,
+        city: true,
+        state: true,
+        zipCode: true,
+        country: true,
+        schedule: {
+          include: { days: { include: { intervals: true } } }
+        },
+      },
+    });
+
+    if (!establishment) {
+      throw new RpcException({
+        status: 404,
+        message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+        code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+      });
+    }
+
+    let schedule;
+
+    if (establishment.schedule) {
+      schedule = normalizeSchedule(establishment.schedule);
+    } else {
+      schedule = null;
+    }
+
+    return {
+      informations: {
+        name: establishment.name,
+        email: establishment.email,
+        phoneNumber: establishment.phoneNumber,
+        countryCode: establishment.countryCode,
+      },
+      location: {
+        address: establishment.address,
+        city: establishment.city,
+        state: establishment.state,
+        zipCode: establishment.zipCode,
+        country: establishment.country,
+      },
+      schedule,
+    };
   }
 
   async getEstablishmentSchedule(id: string) {
@@ -358,7 +410,6 @@ export class EstablishmentService {
       return this.prisma.schedule.update({
         where: { id: establishmentWithSchedule.scheduleId },
         data: {
-          name: DEFAULT_SCHEDULE_NAMES[establishment.primaryLanguage as keyof typeof DEFAULT_SCHEDULE_NAMES] || DEFAULT_SCHEDULE_NAMES.PT,
           days: {
             deleteMany: {},
             create: scheduleDto.days.map((day) => ({
@@ -377,7 +428,6 @@ export class EstablishmentService {
     } else {
       const newSchedule = await this.prisma.schedule.create({
         data: {
-          name: DEFAULT_SCHEDULE_NAMES[establishment.primaryLanguage as keyof typeof DEFAULT_SCHEDULE_NAMES] || DEFAULT_SCHEDULE_NAMES.PT,
           type: ScheduleType.ESTABLISHMENT,
           days: {
             create: scheduleDto.days.map((day) => ({

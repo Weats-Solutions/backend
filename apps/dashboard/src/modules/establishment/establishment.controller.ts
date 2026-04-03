@@ -23,6 +23,12 @@ export class EstablishmentController {
         return this.establishmentService.getEstablishmentInfo(payload.id);
     }
 
+     
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_GENERAL)
+    getEstablishmentGeneralSettings(@Payload() payload: { id: string }) {
+        return this.establishmentService.getEstablishmentGeneralSettings(payload.id);
+    }
+
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SCHEDULE_BY_ID)
     getEstablishmentSchedule(@Payload() payload: { id: string }) {
         return this.establishmentService.getEstablishmentSchedule(payload.id);

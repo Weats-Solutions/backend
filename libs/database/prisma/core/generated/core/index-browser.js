@@ -737,7 +737,6 @@ exports.Prisma.PrinterScalarFieldEnum = {
 
 exports.Prisma.ScheduleScalarFieldEnum = {
   id: 'id',
-  name: 'name',
   type: 'type',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

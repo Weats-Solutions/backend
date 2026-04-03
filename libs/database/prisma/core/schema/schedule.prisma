@@ -1,49 +1,48 @@
 model Schedule {
-  id        String   @id @default(ulid())
-  name      String   // "Almoço", "Jantar", "Café da manhã", etc
+  id        String       @id @default(ulid())
   type      ScheduleType
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
 
   // Days of the schedule (one per day of week)
   days ScheduleDay[]
 
   // Relations to entities that use schedules
   establishment Establishment?
-  menus         Menu[]
-  discounts     Discount[]
-  promotions    Promotion[]
+  menus         Menu?
+  discounts     Discount?
+  promotions    Promotion?
 }
 
 model ScheduleDay {
-  id        String   @id @default(ulid())
+  id         String   @id @default(ulid())
   scheduleId String
-  schedule  Schedule @relation(fields: [scheduleId], onDelete: Cascade, references: [id])
-  
+  schedule   Schedule @relation(fields: [scheduleId], onDelete: Cascade, references: [id])
+
   dayOfWeek DayOfWeek
   isOpen    Boolean   @default(true)
-  
+
   // Time intervals for this day (e.g., 09:00-12:00, 14:00-18:00)
   intervals TimeInterval[]
-  
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
+
   // Ensure each schedule has only one entry per day
   @@unique([scheduleId, dayOfWeek])
   @@index([scheduleId])
 }
 
 model TimeInterval {
-  id           String   @id @default(ulid())
+  id            String      @id @default(ulid())
   scheduleDayId String
-  scheduleDay  ScheduleDay @relation(fields: [scheduleDayId], onDelete: Cascade, references: [id])
-  
+  scheduleDay   ScheduleDay @relation(fields: [scheduleDayId], onDelete: Cascade, references: [id])
+
   startTime String // Format: "HH:mm"
   endTime   String // Format: "HH:mm"
-  
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
+
   @@index([scheduleDayId])
 }

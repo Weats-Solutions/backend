@@ -33,6 +33,7 @@ import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { ClerkService } from '@weats/integrations';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
+import { UpdateEstablishmentGeneralSettingsDto } from '@weats/contracts';
 
 @Controller('establishments')
 export class EstablishmentController {
@@ -101,6 +102,177 @@ export class EstablishmentController {
     }
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_BY_ID, { id });
   }
+
+  //Settings
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Get(':id/settings/general')
+  getEstablishmentGeneralSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_GENERAL, { id });
+  }
+
+  /*
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Get(':id/settings/branding')
+  getEstablishmentBrandingSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_BRANDING, { id });
+  }
+
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Get(':id/settings/billing')
+  getEstablishmentBillingSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_BILLING, { id });
+  }
+
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Get(':id/settings/digital')
+  getEstablishmentDigitalSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_DIGITAL_MENU, { id });
+  }
+  
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Get(':id/settings/system')
+  getEstablishmentSystemSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_SYSTEM, { id });
+  }
+    */
+
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Patch(':id/settings/general')
+  updateEstablishmentGeneralSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+    @Body() updateEstablishmentGeneralSettingsDto: UpdateEstablishmentGeneralSettingsDto,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_GENERAL, { id, updateEstablishmentGeneralSettingsDto });
+  }
+
+  /*
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Patch(':id/settings/branding')
+  updateEstablishmentBrandingSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+    @Body() updateEstablishmentBrandingSettingsDto: UpdateEstablishmentBrandingSettingsDto,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_BRANDING, { id, updateEstablishmentBrandingSettingsDto });
+  }
+
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Patch(':id/settings/billing')
+  updateEstablishmentBillingSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+    @Body() updateEstablishmentBillingSettingsDto: UpdateEstablishmentBillingSettingsDto,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_BILLING, { id, updateEstablishmentBillingSettingsDto });
+  }
+
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Patch(':id/settings/digital')
+  updateEstablishmentDigitalSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+    @Body() updateEstablishmentDigitalSettingsDto: UpdateEstablishmentDigitalSettingsDto,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_DIGITAL_MENU, { id, updateEstablishmentDigitalSettingsDto });
+  }
+
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Patch(':id/settings/system')
+  updateEstablishmentSystemSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+    @Body() updateEstablishmentSystemSettingsDto: UpdateEstablishmentSystemSettingsDto,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_SYSTEM, { id, updateEstablishmentSystemSettingsDto });
+  }
+
+  */
 
   @Roles()
   @UseGuards(ClerkGuard, EstablishmentStaffGuard)

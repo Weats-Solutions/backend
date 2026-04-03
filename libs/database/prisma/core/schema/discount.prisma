@@ -4,7 +4,7 @@
 model Discount {
     id              String       @id @default(ulid())
     establishmentId String
-    scheduleId      String?
+    scheduleId      String?      @unique
     name            String
     description     String?
     type            DiscountType
@@ -16,8 +16,8 @@ model Discount {
     createdAt       DateTime     @default(now())
     updatedAt       DateTime     @updatedAt
 
-    establishment Establishment      @relation(fields: [establishmentId], references: [id])
-    schedule      Schedule?          @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
+    establishment Establishment    @relation(fields: [establishmentId], references: [id])
+    schedule      Schedule?        @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
     targets       DiscountTarget[]
 
     @@index([establishmentId, isActive])
@@ -47,7 +47,7 @@ model DiscountTarget {
 model Promotion {
     id              String        @id @default(ulid())
     establishmentId String
-    scheduleId      String?
+    scheduleId      String?       @unique
     name            String
     description     String?
     type            PromotionType
@@ -57,8 +57,8 @@ model Promotion {
     createdAt       DateTime      @default(now())
     updatedAt       DateTime      @updatedAt
 
-    establishment Establishment  @relation(fields: [establishmentId], references: [id])
-    schedule      Schedule?      @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
+    establishment Establishment @relation(fields: [establishmentId], references: [id])
+    schedule      Schedule?     @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
     buyXGetYRule  BuyXGetYRule?
 
     @@index([establishmentId, isActive])

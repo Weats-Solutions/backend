@@ -7,7 +7,6 @@ export interface NormalizedDaySchedule {
     dayOfWeek: string; // e.g., "MONDAY"
     isOpen: boolean;
     intervals: Array<{
-        id: string;
         startTime: string;
         endTime: string;
     }>;
@@ -17,7 +16,6 @@ export interface NormalizedDaySchedule {
  * Represents a fully normalized schedule for API responses
  */
 export interface NormalizedSchedule {
-    id: string;
     days: NormalizedDaySchedule[];
 }
 
@@ -39,12 +37,10 @@ export function normalizeSchedule(
     }
 
     return {
-        id: schedule.id,
         days: schedule.days.map((day) => ({
             dayOfWeek: day.dayOfWeek,
             isOpen: day.isOpen,
             intervals: day.intervals.map((interval) => ({
-                id: interval.id,
                 startTime: interval.startTime,
                 endTime: interval.endTime,
             })),

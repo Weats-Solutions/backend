@@ -130,7 +130,6 @@ export class MenuService {
                 if (schedule) {
                     const createdSchedule = await prisma.schedule.create({
                         data: {
-                            name: schedule.name || '',
                             type: ScheduleType.MENU,
                             days: {
                                 create: schedule.days.map((day) => ({
@@ -259,7 +258,6 @@ export class MenuService {
                     },
                     schedule: {
                         update: {
-                            name: schedule.name,
                             type: ScheduleType.MENU,
                             days: {
                                 deleteMany: {},
