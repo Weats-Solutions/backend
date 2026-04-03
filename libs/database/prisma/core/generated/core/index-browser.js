@@ -465,6 +465,7 @@ exports.Prisma.ItemTranslationScalarFieldEnum = {
   id: 'id',
   locale: 'locale',
   name: 'name',
+  shortDescription: 'shortDescription',
   description: 'description',
   itemId: 'itemId'
 };
@@ -1411,13 +1412,13 @@ exports.ScheduleType = exports.$Enums.ScheduleType = {
 };
 
 exports.DayOfWeek = exports.$Enums.DayOfWeek = {
-  SUNDAY: 'SUNDAY',
   MONDAY: 'MONDAY',
   TUESDAY: 'TUESDAY',
   WEDNESDAY: 'WEDNESDAY',
   THURSDAY: 'THURSDAY',
   FRIDAY: 'FRIDAY',
-  SATURDAY: 'SATURDAY'
+  SATURDAY: 'SATURDAY',
+  SUNDAY: 'SUNDAY'
 };
 
 exports.StockUnit = exports.$Enums.StockUnit = {

@@ -668,13 +668,13 @@ export type FeatureType = (typeof FeatureType)[keyof typeof FeatureType]
 
 
 export const DayOfWeek: {
-  SUNDAY: 'SUNDAY',
   MONDAY: 'MONDAY',
   TUESDAY: 'TUESDAY',
   WEDNESDAY: 'WEDNESDAY',
   THURSDAY: 'THURSDAY',
   FRIDAY: 'FRIDAY',
-  SATURDAY: 'SATURDAY'
+  SATURDAY: 'SATURDAY',
+  SUNDAY: 'SUNDAY'
 };
 
 export type DayOfWeek = (typeof DayOfWeek)[keyof typeof DayOfWeek]
@@ -38415,6 +38415,7 @@ export namespace Prisma {
     id: string | null
     locale: string | null
     name: string | null
+    shortDescription: string | null
     description: string | null
     itemId: string | null
   }
@@ -38423,6 +38424,7 @@ export namespace Prisma {
     id: string | null
     locale: string | null
     name: string | null
+    shortDescription: string | null
     description: string | null
     itemId: string | null
   }
@@ -38431,6 +38433,7 @@ export namespace Prisma {
     id: number
     locale: number
     name: number
+    shortDescription: number
     description: number
     itemId: number
     _all: number
@@ -38441,6 +38444,7 @@ export namespace Prisma {
     id?: true
     locale?: true
     name?: true
+    shortDescription?: true
     description?: true
     itemId?: true
   }
@@ -38449,6 +38453,7 @@ export namespace Prisma {
     id?: true
     locale?: true
     name?: true
+    shortDescription?: true
     description?: true
     itemId?: true
   }
@@ -38457,6 +38462,7 @@ export namespace Prisma {
     id?: true
     locale?: true
     name?: true
+    shortDescription?: true
     description?: true
     itemId?: true
     _all?: true
@@ -38538,6 +38544,7 @@ export namespace Prisma {
     id: string
     locale: string
     name: string
+    shortDescription: string | null
     description: string | null
     itemId: string
     _count: ItemTranslationCountAggregateOutputType | null
@@ -38563,6 +38570,7 @@ export namespace Prisma {
     id?: boolean
     locale?: boolean
     name?: boolean
+    shortDescription?: boolean
     description?: boolean
     itemId?: boolean
     item?: boolean | ItemDefaultArgs<ExtArgs>
@@ -38572,6 +38580,7 @@ export namespace Prisma {
     id?: boolean
     locale?: boolean
     name?: boolean
+    shortDescription?: boolean
     description?: boolean
     itemId?: boolean
     item?: boolean | ItemDefaultArgs<ExtArgs>
@@ -38581,6 +38590,7 @@ export namespace Prisma {
     id?: boolean
     locale?: boolean
     name?: boolean
+    shortDescription?: boolean
     description?: boolean
     itemId?: boolean
     item?: boolean | ItemDefaultArgs<ExtArgs>
@@ -38590,11 +38600,12 @@ export namespace Prisma {
     id?: boolean
     locale?: boolean
     name?: boolean
+    shortDescription?: boolean
     description?: boolean
     itemId?: boolean
   }
 
-  export type ItemTranslationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "locale" | "name" | "description" | "itemId", ExtArgs["result"]["itemTranslation"]>
+  export type ItemTranslationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "locale" | "name" | "shortDescription" | "description" | "itemId", ExtArgs["result"]["itemTranslation"]>
   export type ItemTranslationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     item?: boolean | ItemDefaultArgs<ExtArgs>
   }
@@ -38614,6 +38625,7 @@ export namespace Prisma {
       id: string
       locale: string
       name: string
+      shortDescription: string | null
       description: string | null
       itemId: string
     }, ExtArgs["result"]["itemTranslation"]>
@@ -39043,6 +39055,7 @@ export namespace Prisma {
     readonly id: FieldRef<"ItemTranslation", 'String'>
     readonly locale: FieldRef<"ItemTranslation", 'String'>
     readonly name: FieldRef<"ItemTranslation", 'String'>
+    readonly shortDescription: FieldRef<"ItemTranslation", 'String'>
     readonly description: FieldRef<"ItemTranslation", 'String'>
     readonly itemId: FieldRef<"ItemTranslation", 'String'>
   }
@@ -107241,6 +107254,7 @@ export namespace Prisma {
     id: 'id',
     locale: 'locale',
     name: 'name',
+    shortDescription: 'shortDescription',
     description: 'description',
     itemId: 'itemId'
   };
@@ -111126,6 +111140,7 @@ export namespace Prisma {
     id?: StringFilter<"ItemTranslation"> | string
     locale?: StringFilter<"ItemTranslation"> | string
     name?: StringFilter<"ItemTranslation"> | string
+    shortDescription?: StringNullableFilter<"ItemTranslation"> | string | null
     description?: StringNullableFilter<"ItemTranslation"> | string | null
     itemId?: StringFilter<"ItemTranslation"> | string
     item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
@@ -111135,6 +111150,7 @@ export namespace Prisma {
     id?: SortOrder
     locale?: SortOrder
     name?: SortOrder
+    shortDescription?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     itemId?: SortOrder
     item?: ItemOrderByWithRelationInput
@@ -111148,6 +111164,7 @@ export namespace Prisma {
     NOT?: ItemTranslationWhereInput | ItemTranslationWhereInput[]
     locale?: StringFilter<"ItemTranslation"> | string
     name?: StringFilter<"ItemTranslation"> | string
+    shortDescription?: StringNullableFilter<"ItemTranslation"> | string | null
     description?: StringNullableFilter<"ItemTranslation"> | string | null
     itemId?: StringFilter<"ItemTranslation"> | string
     item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
@@ -111157,6 +111174,7 @@ export namespace Prisma {
     id?: SortOrder
     locale?: SortOrder
     name?: SortOrder
+    shortDescription?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     itemId?: SortOrder
     _count?: ItemTranslationCountOrderByAggregateInput
@@ -111171,6 +111189,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"ItemTranslation"> | string
     locale?: StringWithAggregatesFilter<"ItemTranslation"> | string
     name?: StringWithAggregatesFilter<"ItemTranslation"> | string
+    shortDescription?: StringNullableWithAggregatesFilter<"ItemTranslation"> | string | null
     description?: StringNullableWithAggregatesFilter<"ItemTranslation"> | string | null
     itemId?: StringWithAggregatesFilter<"ItemTranslation"> | string
   }
@@ -118337,6 +118356,7 @@ export namespace Prisma {
     id?: string
     locale: string
     name: string
+    shortDescription?: string | null
     description?: string | null
     item: ItemCreateNestedOneWithoutTranslationsInput
   }
@@ -118345,6 +118365,7 @@ export namespace Prisma {
     id?: string
     locale: string
     name: string
+    shortDescription?: string | null
     description?: string | null
     itemId: string
   }
@@ -118353,6 +118374,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     locale?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     item?: ItemUpdateOneRequiredWithoutTranslationsNestedInput
   }
@@ -118361,6 +118383,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     locale?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     itemId?: StringFieldUpdateOperationsInput | string
   }
@@ -118369,6 +118392,7 @@ export namespace Prisma {
     id?: string
     locale: string
     name: string
+    shortDescription?: string | null
     description?: string | null
     itemId: string
   }
@@ -118377,6 +118401,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     locale?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -118384,6 +118409,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     locale?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     itemId?: StringFieldUpdateOperationsInput | string
   }
@@ -125713,6 +125739,7 @@ export namespace Prisma {
     id?: SortOrder
     locale?: SortOrder
     name?: SortOrder
+    shortDescription?: SortOrder
     description?: SortOrder
     itemId?: SortOrder
   }
@@ -125721,6 +125748,7 @@ export namespace Prisma {
     id?: SortOrder
     locale?: SortOrder
     name?: SortOrder
+    shortDescription?: SortOrder
     description?: SortOrder
     itemId?: SortOrder
   }
@@ -125729,6 +125757,7 @@ export namespace Prisma {
     id?: SortOrder
     locale?: SortOrder
     name?: SortOrder
+    shortDescription?: SortOrder
     description?: SortOrder
     itemId?: SortOrder
   }
@@ -145778,6 +145807,7 @@ export namespace Prisma {
     id?: string
     locale: string
     name: string
+    shortDescription?: string | null
     description?: string | null
   }
 
@@ -145785,6 +145815,7 @@ export namespace Prisma {
     id?: string
     locale: string
     name: string
+    shortDescription?: string | null
     description?: string | null
   }
 
@@ -146379,6 +146410,7 @@ export namespace Prisma {
     id?: StringFilter<"ItemTranslation"> | string
     locale?: StringFilter<"ItemTranslation"> | string
     name?: StringFilter<"ItemTranslation"> | string
+    shortDescription?: StringNullableFilter<"ItemTranslation"> | string | null
     description?: StringNullableFilter<"ItemTranslation"> | string | null
     itemId?: StringFilter<"ItemTranslation"> | string
   }
@@ -164074,6 +164106,7 @@ export namespace Prisma {
     id?: string
     locale: string
     name: string
+    shortDescription?: string | null
     description?: string | null
   }
 
@@ -164223,6 +164256,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     locale?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -164230,6 +164264,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     locale?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -164237,6 +164272,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     locale?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    shortDescription?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
