@@ -26067,13 +26067,13 @@ export namespace Prisma {
     status: $Enums.EstablishmentStatus | null
     isOnline: boolean | null
     email: string | null
+    countryCode: string | null
     phoneNumber: string | null
     address: string | null
     city: string | null
     state: string | null
     zipCode: string | null
     country: string | null
-    countryCode: string | null
     billingName: string | null
     billingTaxId: string | null
     stripeCustomerId: string | null
@@ -26086,8 +26086,6 @@ export namespace Prisma {
     primaryLanguage: $Enums.EstablishmentLanguage | null
     currency: $Enums.Currency | null
     timezone: string | null
-    onlyMenu: boolean | null
-    needSession: boolean | null
     logoImageId: string | null
     bannerImageId: string | null
     activeThemeId: string | null
@@ -26105,13 +26103,13 @@ export namespace Prisma {
     status: $Enums.EstablishmentStatus | null
     isOnline: boolean | null
     email: string | null
+    countryCode: string | null
     phoneNumber: string | null
     address: string | null
     city: string | null
     state: string | null
     zipCode: string | null
     country: string | null
-    countryCode: string | null
     billingName: string | null
     billingTaxId: string | null
     stripeCustomerId: string | null
@@ -26124,8 +26122,6 @@ export namespace Prisma {
     primaryLanguage: $Enums.EstablishmentLanguage | null
     currency: $Enums.Currency | null
     timezone: string | null
-    onlyMenu: boolean | null
-    needSession: boolean | null
     logoImageId: string | null
     bannerImageId: string | null
     activeThemeId: string | null
@@ -26143,13 +26139,13 @@ export namespace Prisma {
     status: number
     isOnline: number
     email: number
+    countryCode: number
     phoneNumber: number
     address: number
     city: number
     state: number
     zipCode: number
     country: number
-    countryCode: number
     billingName: number
     billingTaxId: number
     stripeCustomerId: number
@@ -26163,8 +26159,6 @@ export namespace Prisma {
     availableLanguages: number
     currency: number
     timezone: number
-    onlyMenu: number
-    needSession: number
     logoImageId: number
     bannerImageId: number
     activeThemeId: number
@@ -26184,13 +26178,13 @@ export namespace Prisma {
     status?: true
     isOnline?: true
     email?: true
+    countryCode?: true
     phoneNumber?: true
     address?: true
     city?: true
     state?: true
     zipCode?: true
     country?: true
-    countryCode?: true
     billingName?: true
     billingTaxId?: true
     stripeCustomerId?: true
@@ -26203,8 +26197,6 @@ export namespace Prisma {
     primaryLanguage?: true
     currency?: true
     timezone?: true
-    onlyMenu?: true
-    needSession?: true
     logoImageId?: true
     bannerImageId?: true
     activeThemeId?: true
@@ -26222,13 +26214,13 @@ export namespace Prisma {
     status?: true
     isOnline?: true
     email?: true
+    countryCode?: true
     phoneNumber?: true
     address?: true
     city?: true
     state?: true
     zipCode?: true
     country?: true
-    countryCode?: true
     billingName?: true
     billingTaxId?: true
     stripeCustomerId?: true
@@ -26241,8 +26233,6 @@ export namespace Prisma {
     primaryLanguage?: true
     currency?: true
     timezone?: true
-    onlyMenu?: true
-    needSession?: true
     logoImageId?: true
     bannerImageId?: true
     activeThemeId?: true
@@ -26260,13 +26250,13 @@ export namespace Prisma {
     status?: true
     isOnline?: true
     email?: true
+    countryCode?: true
     phoneNumber?: true
     address?: true
     city?: true
     state?: true
     zipCode?: true
     country?: true
-    countryCode?: true
     billingName?: true
     billingTaxId?: true
     stripeCustomerId?: true
@@ -26280,8 +26270,6 @@ export namespace Prisma {
     availableLanguages?: true
     currency?: true
     timezone?: true
-    onlyMenu?: true
-    needSession?: true
     logoImageId?: true
     bannerImageId?: true
     activeThemeId?: true
@@ -26372,13 +26360,13 @@ export namespace Prisma {
     status: $Enums.EstablishmentStatus
     isOnline: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -26392,8 +26380,6 @@ export namespace Prisma {
     availableLanguages: $Enums.EstablishmentLanguage[]
     currency: $Enums.Currency
     timezone: string
-    onlyMenu: boolean
-    needSession: boolean
     logoImageId: string | null
     bannerImageId: string | null
     activeThemeId: string | null
@@ -26428,13 +26414,13 @@ export namespace Prisma {
     status?: boolean
     isOnline?: boolean
     email?: boolean
+    countryCode?: boolean
     phoneNumber?: boolean
     address?: boolean
     city?: boolean
     state?: boolean
     zipCode?: boolean
     country?: boolean
-    countryCode?: boolean
     billingName?: boolean
     billingTaxId?: boolean
     stripeCustomerId?: boolean
@@ -26448,8 +26434,6 @@ export namespace Prisma {
     availableLanguages?: boolean
     currency?: boolean
     timezone?: boolean
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
@@ -26505,13 +26489,13 @@ export namespace Prisma {
     status?: boolean
     isOnline?: boolean
     email?: boolean
+    countryCode?: boolean
     phoneNumber?: boolean
     address?: boolean
     city?: boolean
     state?: boolean
     zipCode?: boolean
     country?: boolean
-    countryCode?: boolean
     billingName?: boolean
     billingTaxId?: boolean
     stripeCustomerId?: boolean
@@ -26525,8 +26509,6 @@ export namespace Prisma {
     availableLanguages?: boolean
     currency?: boolean
     timezone?: boolean
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
@@ -26549,13 +26531,13 @@ export namespace Prisma {
     status?: boolean
     isOnline?: boolean
     email?: boolean
+    countryCode?: boolean
     phoneNumber?: boolean
     address?: boolean
     city?: boolean
     state?: boolean
     zipCode?: boolean
     country?: boolean
-    countryCode?: boolean
     billingName?: boolean
     billingTaxId?: boolean
     stripeCustomerId?: boolean
@@ -26569,8 +26551,6 @@ export namespace Prisma {
     availableLanguages?: boolean
     currency?: boolean
     timezone?: boolean
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
@@ -26593,13 +26573,13 @@ export namespace Prisma {
     status?: boolean
     isOnline?: boolean
     email?: boolean
+    countryCode?: boolean
     phoneNumber?: boolean
     address?: boolean
     city?: boolean
     state?: boolean
     zipCode?: boolean
     country?: boolean
-    countryCode?: boolean
     billingName?: boolean
     billingTaxId?: boolean
     stripeCustomerId?: boolean
@@ -26613,8 +26593,6 @@ export namespace Prisma {
     availableLanguages?: boolean
     currency?: boolean
     timezone?: boolean
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
@@ -26624,7 +26602,7 @@ export namespace Prisma {
     ownerId?: boolean
   }
 
-  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "countryCode" | "billingName" | "billingTaxId" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "onlyMenu" | "needSession" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
+  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
   export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
@@ -26729,13 +26707,13 @@ export namespace Prisma {
       status: $Enums.EstablishmentStatus
       isOnline: boolean
       email: string
+      countryCode: string
       phoneNumber: string
       address: string
       city: string
       state: string
       zipCode: string
       country: string
-      countryCode: string
       billingName: string
       billingTaxId: string
       stripeCustomerId: string
@@ -26749,8 +26727,6 @@ export namespace Prisma {
       availableLanguages: $Enums.EstablishmentLanguage[]
       currency: $Enums.Currency
       timezone: string
-      onlyMenu: boolean
-      needSession: boolean
       logoImageId: string | null
       bannerImageId: string | null
       activeThemeId: string | null
@@ -27225,13 +27201,13 @@ export namespace Prisma {
     readonly status: FieldRef<"Establishment", 'EstablishmentStatus'>
     readonly isOnline: FieldRef<"Establishment", 'Boolean'>
     readonly email: FieldRef<"Establishment", 'String'>
+    readonly countryCode: FieldRef<"Establishment", 'String'>
     readonly phoneNumber: FieldRef<"Establishment", 'String'>
     readonly address: FieldRef<"Establishment", 'String'>
     readonly city: FieldRef<"Establishment", 'String'>
     readonly state: FieldRef<"Establishment", 'String'>
     readonly zipCode: FieldRef<"Establishment", 'String'>
     readonly country: FieldRef<"Establishment", 'String'>
-    readonly countryCode: FieldRef<"Establishment", 'String'>
     readonly billingName: FieldRef<"Establishment", 'String'>
     readonly billingTaxId: FieldRef<"Establishment", 'String'>
     readonly stripeCustomerId: FieldRef<"Establishment", 'String'>
@@ -27245,8 +27221,6 @@ export namespace Prisma {
     readonly availableLanguages: FieldRef<"Establishment", 'EstablishmentLanguage[]'>
     readonly currency: FieldRef<"Establishment", 'Currency'>
     readonly timezone: FieldRef<"Establishment", 'String'>
-    readonly onlyMenu: FieldRef<"Establishment", 'Boolean'>
-    readonly needSession: FieldRef<"Establishment", 'Boolean'>
     readonly logoImageId: FieldRef<"Establishment", 'String'>
     readonly bannerImageId: FieldRef<"Establishment", 'String'>
     readonly activeThemeId: FieldRef<"Establishment", 'String'>
@@ -107089,13 +107063,13 @@ export namespace Prisma {
     status: 'status',
     isOnline: 'isOnline',
     email: 'email',
+    countryCode: 'countryCode',
     phoneNumber: 'phoneNumber',
     address: 'address',
     city: 'city',
     state: 'state',
     zipCode: 'zipCode',
     country: 'country',
-    countryCode: 'countryCode',
     billingName: 'billingName',
     billingTaxId: 'billingTaxId',
     stripeCustomerId: 'stripeCustomerId',
@@ -107109,8 +107083,6 @@ export namespace Prisma {
     availableLanguages: 'availableLanguages',
     currency: 'currency',
     timezone: 'timezone',
-    onlyMenu: 'onlyMenu',
-    needSession: 'needSession',
     logoImageId: 'logoImageId',
     bannerImageId: 'bannerImageId',
     activeThemeId: 'activeThemeId',
@@ -110069,13 +110041,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFilter<"Establishment"> | $Enums.EstablishmentStatus
     isOnline?: BoolFilter<"Establishment"> | boolean
     email?: StringFilter<"Establishment"> | string
+    countryCode?: StringFilter<"Establishment"> | string
     phoneNumber?: StringFilter<"Establishment"> | string
     address?: StringFilter<"Establishment"> | string
     city?: StringFilter<"Establishment"> | string
     state?: StringFilter<"Establishment"> | string
     zipCode?: StringFilter<"Establishment"> | string
     country?: StringFilter<"Establishment"> | string
-    countryCode?: StringFilter<"Establishment"> | string
     billingName?: StringFilter<"Establishment"> | string
     billingTaxId?: StringFilter<"Establishment"> | string
     stripeCustomerId?: StringFilter<"Establishment"> | string
@@ -110089,8 +110061,6 @@ export namespace Prisma {
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
     currency?: EnumCurrencyFilter<"Establishment"> | $Enums.Currency
     timezone?: StringFilter<"Establishment"> | string
-    onlyMenu?: BoolFilter<"Establishment"> | boolean
-    needSession?: BoolFilter<"Establishment"> | boolean
     logoImageId?: StringNullableFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableFilter<"Establishment"> | string | null
@@ -110145,13 +110115,13 @@ export namespace Prisma {
     status?: SortOrder
     isOnline?: SortOrder
     email?: SortOrder
+    countryCode?: SortOrder
     phoneNumber?: SortOrder
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zipCode?: SortOrder
     country?: SortOrder
-    countryCode?: SortOrder
     billingName?: SortOrder
     billingTaxId?: SortOrder
     stripeCustomerId?: SortOrder
@@ -110165,8 +110135,6 @@ export namespace Prisma {
     availableLanguages?: SortOrder
     currency?: SortOrder
     timezone?: SortOrder
-    onlyMenu?: SortOrder
-    needSession?: SortOrder
     logoImageId?: SortOrderInput | SortOrder
     bannerImageId?: SortOrderInput | SortOrder
     activeThemeId?: SortOrderInput | SortOrder
@@ -110226,13 +110194,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFilter<"Establishment"> | $Enums.EstablishmentStatus
     isOnline?: BoolFilter<"Establishment"> | boolean
     email?: StringFilter<"Establishment"> | string
+    countryCode?: StringFilter<"Establishment"> | string
     phoneNumber?: StringFilter<"Establishment"> | string
     address?: StringFilter<"Establishment"> | string
     city?: StringFilter<"Establishment"> | string
     state?: StringFilter<"Establishment"> | string
     zipCode?: StringFilter<"Establishment"> | string
     country?: StringFilter<"Establishment"> | string
-    countryCode?: StringFilter<"Establishment"> | string
     billingName?: StringFilter<"Establishment"> | string
     billingTaxId?: StringFilter<"Establishment"> | string
     instagramUrl?: StringNullableFilter<"Establishment"> | string | null
@@ -110245,8 +110213,6 @@ export namespace Prisma {
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
     currency?: EnumCurrencyFilter<"Establishment"> | $Enums.Currency
     timezone?: StringFilter<"Establishment"> | string
-    onlyMenu?: BoolFilter<"Establishment"> | boolean
-    needSession?: BoolFilter<"Establishment"> | boolean
     logoImageId?: StringNullableFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableFilter<"Establishment"> | string | null
@@ -110300,13 +110266,13 @@ export namespace Prisma {
     status?: SortOrder
     isOnline?: SortOrder
     email?: SortOrder
+    countryCode?: SortOrder
     phoneNumber?: SortOrder
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zipCode?: SortOrder
     country?: SortOrder
-    countryCode?: SortOrder
     billingName?: SortOrder
     billingTaxId?: SortOrder
     stripeCustomerId?: SortOrder
@@ -110320,8 +110286,6 @@ export namespace Prisma {
     availableLanguages?: SortOrder
     currency?: SortOrder
     timezone?: SortOrder
-    onlyMenu?: SortOrder
-    needSession?: SortOrder
     logoImageId?: SortOrderInput | SortOrder
     bannerImageId?: SortOrderInput | SortOrder
     activeThemeId?: SortOrderInput | SortOrder
@@ -110345,13 +110309,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusWithAggregatesFilter<"Establishment"> | $Enums.EstablishmentStatus
     isOnline?: BoolWithAggregatesFilter<"Establishment"> | boolean
     email?: StringWithAggregatesFilter<"Establishment"> | string
+    countryCode?: StringWithAggregatesFilter<"Establishment"> | string
     phoneNumber?: StringWithAggregatesFilter<"Establishment"> | string
     address?: StringWithAggregatesFilter<"Establishment"> | string
     city?: StringWithAggregatesFilter<"Establishment"> | string
     state?: StringWithAggregatesFilter<"Establishment"> | string
     zipCode?: StringWithAggregatesFilter<"Establishment"> | string
     country?: StringWithAggregatesFilter<"Establishment"> | string
-    countryCode?: StringWithAggregatesFilter<"Establishment"> | string
     billingName?: StringWithAggregatesFilter<"Establishment"> | string
     billingTaxId?: StringWithAggregatesFilter<"Establishment"> | string
     stripeCustomerId?: StringWithAggregatesFilter<"Establishment"> | string
@@ -110365,8 +110329,6 @@ export namespace Prisma {
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
     currency?: EnumCurrencyWithAggregatesFilter<"Establishment"> | $Enums.Currency
     timezone?: StringWithAggregatesFilter<"Establishment"> | string
-    onlyMenu?: BoolWithAggregatesFilter<"Establishment"> | boolean
-    needSession?: BoolWithAggregatesFilter<"Establishment"> | boolean
     logoImageId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
@@ -117114,13 +117076,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -117134,8 +117096,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -117185,13 +117145,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -117205,8 +117165,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -117256,13 +117214,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -117276,8 +117234,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -117327,13 +117283,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -117347,8 +117303,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -117398,13 +117352,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -117418,8 +117372,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -117437,13 +117389,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -117457,8 +117409,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -117471,13 +117421,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -117491,8 +117441,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -124922,13 +124870,13 @@ export namespace Prisma {
     status?: SortOrder
     isOnline?: SortOrder
     email?: SortOrder
+    countryCode?: SortOrder
     phoneNumber?: SortOrder
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zipCode?: SortOrder
     country?: SortOrder
-    countryCode?: SortOrder
     billingName?: SortOrder
     billingTaxId?: SortOrder
     stripeCustomerId?: SortOrder
@@ -124942,8 +124890,6 @@ export namespace Prisma {
     availableLanguages?: SortOrder
     currency?: SortOrder
     timezone?: SortOrder
-    onlyMenu?: SortOrder
-    needSession?: SortOrder
     logoImageId?: SortOrder
     bannerImageId?: SortOrder
     activeThemeId?: SortOrder
@@ -124961,13 +124907,13 @@ export namespace Prisma {
     status?: SortOrder
     isOnline?: SortOrder
     email?: SortOrder
+    countryCode?: SortOrder
     phoneNumber?: SortOrder
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zipCode?: SortOrder
     country?: SortOrder
-    countryCode?: SortOrder
     billingName?: SortOrder
     billingTaxId?: SortOrder
     stripeCustomerId?: SortOrder
@@ -124980,8 +124926,6 @@ export namespace Prisma {
     primaryLanguage?: SortOrder
     currency?: SortOrder
     timezone?: SortOrder
-    onlyMenu?: SortOrder
-    needSession?: SortOrder
     logoImageId?: SortOrder
     bannerImageId?: SortOrder
     activeThemeId?: SortOrder
@@ -124999,13 +124943,13 @@ export namespace Prisma {
     status?: SortOrder
     isOnline?: SortOrder
     email?: SortOrder
+    countryCode?: SortOrder
     phoneNumber?: SortOrder
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
     zipCode?: SortOrder
     country?: SortOrder
-    countryCode?: SortOrder
     billingName?: SortOrder
     billingTaxId?: SortOrder
     stripeCustomerId?: SortOrder
@@ -125018,8 +124962,6 @@ export namespace Prisma {
     primaryLanguage?: SortOrder
     currency?: SortOrder
     timezone?: SortOrder
-    onlyMenu?: SortOrder
-    needSession?: SortOrder
     logoImageId?: SortOrder
     bannerImageId?: SortOrder
     activeThemeId?: SortOrder
@@ -136896,13 +136838,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -136916,8 +136858,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -136966,13 +136906,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -136986,8 +136926,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -137052,13 +136990,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -137072,8 +137010,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -137122,13 +137058,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -137142,8 +137078,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -137192,13 +137126,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -137212,8 +137146,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -137262,13 +137194,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -137282,8 +137214,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -137348,13 +137278,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -137368,8 +137298,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -137418,13 +137346,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -137438,8 +137366,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -137518,13 +137444,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -137538,8 +137464,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -137588,13 +137512,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -137608,8 +137532,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -137703,13 +137625,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -137723,8 +137645,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -137773,13 +137693,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -137793,8 +137713,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -137994,13 +137912,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -138014,8 +137932,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -138064,13 +137980,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -138084,8 +138000,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -138234,13 +138148,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -138254,8 +138168,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -138304,13 +138216,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -138324,8 +138236,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -138573,13 +138483,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -138593,8 +138503,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -138643,13 +138551,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -138663,8 +138571,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -138780,13 +138686,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -138800,8 +138706,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -138850,13 +138754,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -138870,8 +138774,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -139201,13 +139103,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -139221,8 +139123,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -139271,13 +139171,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -139291,8 +139191,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -139409,13 +139307,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -139429,8 +139327,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -139479,13 +139375,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -139499,8 +139395,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -139989,13 +139883,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -140009,8 +139903,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -140059,13 +139951,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -140079,8 +139971,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -140172,13 +140062,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -140192,8 +140082,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -140242,13 +140130,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -140262,8 +140150,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -140452,13 +140338,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -140472,8 +140358,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -140522,13 +140406,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -140542,8 +140426,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -140608,13 +140490,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -140628,8 +140510,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -140678,13 +140558,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -140698,8 +140578,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -143511,13 +143389,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -143531,8 +143409,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -143581,13 +143457,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -143601,8 +143477,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -143667,13 +143541,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -143687,8 +143561,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -143737,13 +143609,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -143757,8 +143629,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -143807,13 +143677,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -143827,8 +143697,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -143877,13 +143745,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -143897,8 +143765,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     activeThemeId?: string | null
     scheduleId?: string | null
@@ -143957,13 +143823,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -143977,8 +143843,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -144027,13 +143891,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -144047,8 +143911,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     bannerImageId?: string | null
     activeThemeId?: string | null
     scheduleId?: string | null
@@ -144107,13 +143969,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -144127,8 +143989,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -144177,13 +144037,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -144197,8 +144057,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -144417,13 +144275,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFilter<"Establishment"> | $Enums.EstablishmentStatus
     isOnline?: BoolFilter<"Establishment"> | boolean
     email?: StringFilter<"Establishment"> | string
+    countryCode?: StringFilter<"Establishment"> | string
     phoneNumber?: StringFilter<"Establishment"> | string
     address?: StringFilter<"Establishment"> | string
     city?: StringFilter<"Establishment"> | string
     state?: StringFilter<"Establishment"> | string
     zipCode?: StringFilter<"Establishment"> | string
     country?: StringFilter<"Establishment"> | string
-    countryCode?: StringFilter<"Establishment"> | string
     billingName?: StringFilter<"Establishment"> | string
     billingTaxId?: StringFilter<"Establishment"> | string
     stripeCustomerId?: StringFilter<"Establishment"> | string
@@ -144437,8 +144295,6 @@ export namespace Prisma {
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
     currency?: EnumCurrencyFilter<"Establishment"> | $Enums.Currency
     timezone?: StringFilter<"Establishment"> | string
-    onlyMenu?: BoolFilter<"Establishment"> | boolean
-    needSession?: BoolFilter<"Establishment"> | boolean
     logoImageId?: StringNullableFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableFilter<"Establishment"> | string | null
@@ -144483,13 +144339,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -144503,8 +144359,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -144553,13 +144407,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -144573,8 +144427,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -144701,13 +144553,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -144721,8 +144573,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -144771,13 +144621,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -144791,8 +144641,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -144857,13 +144705,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -144877,8 +144725,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -144927,13 +144773,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -144947,8 +144793,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -144997,13 +144841,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -145017,8 +144861,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -145067,13 +144909,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -145087,8 +144929,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -145153,13 +144993,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -145173,8 +145013,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -145223,13 +145061,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -145243,8 +145081,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -145293,13 +145129,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -145313,8 +145149,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -145363,13 +145197,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -145383,8 +145217,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -145449,13 +145281,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -145469,8 +145301,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -145519,13 +145349,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -145539,8 +145369,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -145609,13 +145437,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -145629,8 +145457,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -145679,13 +145505,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -145699,8 +145525,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -146188,13 +146012,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -146208,8 +146032,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -146258,13 +146080,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -146278,8 +146100,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -147111,13 +146931,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -147131,8 +146951,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -147181,13 +146999,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -147201,8 +147019,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -147305,13 +147121,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -147325,8 +147141,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -147375,13 +147189,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -147395,8 +147209,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -148625,13 +148437,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -148645,8 +148457,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -148695,13 +148505,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -148715,8 +148525,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -148837,13 +148645,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -148857,8 +148665,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -148907,13 +148713,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -148927,8 +148733,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -149911,13 +149715,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -149931,8 +149735,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -149981,13 +149783,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -150001,8 +149803,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -150118,13 +149918,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -150138,8 +149938,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -150188,13 +149986,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -150208,8 +150006,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -150368,13 +150164,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -150388,8 +150184,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -150438,13 +150232,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -150458,8 +150252,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -150615,13 +150407,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -150635,8 +150427,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -150685,13 +150475,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -150705,8 +150495,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -151751,13 +151539,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -151771,8 +151559,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -151821,13 +151607,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -151841,8 +151627,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -151937,13 +151721,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -151957,8 +151741,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -152007,13 +151789,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -152027,8 +151809,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -152199,13 +151979,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -152219,8 +151999,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     owner: UserCreateNestedOneWithoutEstablishmentsInput
@@ -152269,13 +152047,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -152289,8 +152067,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -152505,13 +152281,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -152525,8 +152301,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
@@ -152575,13 +152349,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -152595,8 +152369,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -152863,13 +152635,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -152883,8 +152655,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -152933,13 +152703,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -152953,8 +152723,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -153145,13 +152913,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -153165,8 +152933,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -153215,13 +152981,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -153235,8 +153001,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -153590,13 +153354,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -153610,8 +153374,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -153660,13 +153422,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -153680,8 +153442,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -153832,13 +153592,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -153852,8 +153612,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -153902,13 +153660,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -153922,8 +153680,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -154018,13 +153774,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -154038,8 +153794,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -154088,13 +153842,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -154108,8 +153862,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -154323,13 +154075,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -154343,8 +154095,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -154393,13 +154143,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -154413,8 +154163,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -154530,13 +154278,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -154550,8 +154298,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -154600,13 +154346,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -154620,8 +154366,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -155047,13 +154791,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -155067,8 +154811,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -155117,13 +154859,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -155137,8 +154879,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -156095,13 +155835,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -156115,8 +155855,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -156165,13 +155903,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -156185,8 +155923,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -156390,13 +156126,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -156410,8 +156146,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -156460,13 +156194,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -156480,8 +156214,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -156985,13 +156717,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -157005,8 +156737,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -157055,13 +156785,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -157075,8 +156805,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -157217,13 +156945,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -157237,8 +156965,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -157287,13 +157013,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -157307,8 +157033,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -157733,13 +157457,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -157753,8 +157477,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -157803,13 +157525,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -157823,8 +157545,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -158062,13 +157782,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -158082,8 +157802,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -158132,13 +157850,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -158152,8 +157870,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -158393,13 +158109,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -158413,8 +158129,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -158463,13 +158177,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -158483,8 +158197,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -158630,13 +158342,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -158650,8 +158362,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -158700,13 +158410,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -158720,8 +158430,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -158857,13 +158565,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -158877,8 +158585,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -158927,13 +158633,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -158947,8 +158653,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -159047,13 +158751,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -159067,8 +158771,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -159117,13 +158819,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -159137,8 +158839,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -159439,13 +159139,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -159459,8 +159159,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -159509,13 +159207,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -159529,8 +159227,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -159620,13 +159316,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -159640,8 +159336,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -159690,13 +159384,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -159710,8 +159404,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -160181,13 +159873,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -160201,8 +159893,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -160251,13 +159941,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -160271,8 +159961,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -160337,13 +160025,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -160357,8 +160045,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -160407,13 +160093,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -160427,8 +160113,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -160565,13 +160249,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -160585,8 +160269,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -160635,13 +160317,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -160655,8 +160337,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     scheduleId?: string | null
@@ -160743,13 +160423,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -160763,8 +160443,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -160813,13 +160491,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -160833,8 +160511,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -160943,13 +160619,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -160963,8 +160639,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -161013,13 +160687,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -161033,8 +160707,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -161137,13 +160809,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -161157,8 +160829,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -161207,13 +160877,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -161227,8 +160897,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -161373,13 +161041,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -161393,8 +161061,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -161443,13 +161109,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -161463,8 +161129,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -161571,13 +161235,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -161591,8 +161255,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -161641,13 +161303,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -161661,8 +161323,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -163631,13 +163291,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -163651,8 +163311,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     activeThemeId?: string | null
     scheduleId?: string | null
@@ -163669,13 +163327,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -163689,8 +163347,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     bannerImageId?: string | null
     activeThemeId?: string | null
     scheduleId?: string | null
@@ -163748,13 +163404,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -163768,8 +163424,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -163818,13 +163472,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -163838,8 +163492,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -163888,13 +163540,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -163908,8 +163560,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -163926,13 +163576,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -163946,8 +163596,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -163996,13 +163644,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -164016,8 +163664,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -164066,13 +163712,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -164086,8 +163732,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -167489,13 +167133,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -167509,8 +167153,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     scheduleId?: string | null
@@ -167535,13 +167177,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -167555,8 +167197,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -167605,13 +167245,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -167625,8 +167265,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -167675,13 +167313,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -167695,8 +167333,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -167760,13 +167396,13 @@ export namespace Prisma {
     status?: $Enums.EstablishmentStatus
     isOnline?: boolean
     email: string
+    countryCode: string
     phoneNumber: string
     address: string
     city: string
     state: string
     zipCode: string
     country: string
-    countryCode: string
     billingName: string
     billingTaxId: string
     stripeCustomerId: string
@@ -167780,8 +167416,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
-    onlyMenu?: boolean
-    needSession?: boolean
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -167863,13 +167497,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -167883,8 +167517,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -167933,13 +167565,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -167953,8 +167585,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -168003,13 +167633,13 @@ export namespace Prisma {
     status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
     zipCode?: StringFieldUpdateOperationsInput | string
     country?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
@@ -168023,8 +167653,6 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
-    onlyMenu?: BoolFieldUpdateOperationsInput | boolean
-    needSession?: BoolFieldUpdateOperationsInput | boolean
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null

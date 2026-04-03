@@ -39,13 +39,8 @@ export class UserService {
                 countryCode: true,
                 phoneNumber: true,
 
-
-
                 primaryLanguage: true,
                 availableLanguages: true,
-                onlyMenu: true,
-                needSession: true,
-
 
                 instagramUrl: true,
                 tiktokUrl: true,

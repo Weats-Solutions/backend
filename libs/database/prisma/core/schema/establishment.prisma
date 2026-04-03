@@ -9,13 +9,13 @@ model Establishment {
 
   // ─── Contactos & Localização ────────────────────────────────────────────────
   email       String
+  countryCode String
   phoneNumber String
   address     String
   city        String
   state       String
   zipCode     String
   country     String
-  countryCode String
 
   // ─── Detalhes & Faturação ──────────────────────────────────────────────────
   billingName      String
@@ -35,8 +35,6 @@ model Establishment {
   availableLanguages EstablishmentLanguage[] @default([PT])
   currency           Currency                @default(EUR)
   timezone           String                  @default("Europe/Lisbon")
-  onlyMenu           Boolean                 @default(false)
-  needSession        Boolean                 @default(true)
 
   // ─── Branding & Visuals ────────────────────────────────────────────────────
   logoImageId   String?
