@@ -46,6 +46,7 @@ export class EstablishmentService {
         id: true,
         name: true,
         type: true,
+        slug: true,
         isOnline: true,
         address: true,
         city: true,
