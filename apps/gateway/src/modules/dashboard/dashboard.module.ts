@@ -20,6 +20,7 @@ import { VariantOptionsController } from './controllers/variant-options.controll
 import { MenuCategoryController } from './controllers/menu/category.controller';
 import { MenuSubcategoryController } from './controllers/menu/subcategory.controller';
 import { ExpenseController } from './controllers/expense.controller';
+import { StatsController } from './controllers/stats.controller';
 
 @Module({
   imports: [ConfigsModule, IntegrationsModule, DatabaseModule, EncryptionModule, FeatureUsageModule],
@@ -47,6 +48,7 @@ import { ExpenseController } from './controllers/expense.controller';
     ItemController,
     EupagoIntegrationController,
     ExpenseController,
+    StatsController,
   ],
 })
 export class DashboardModule { }

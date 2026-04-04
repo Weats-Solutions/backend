@@ -12,6 +12,7 @@ import { EupagoModule } from './modules/integrations/eupago/eupago.module';
 import { MenuModule } from './modules/menu/menu.module';
 import { ItemModule } from './modules/item/item.module';
 import { ExpenseModule } from './modules/expense/expense.module';
+import { StatsModule } from './modules/stats/stats.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { ExpenseModule } from './modules/expense/expense.module';
     MenuModule,
     ItemModule,
     ExpenseModule,
+    StatsModule,
   ],
   controllers: [DashboardController],
   providers: [DashboardService],
