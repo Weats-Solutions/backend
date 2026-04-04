@@ -8,6 +8,7 @@ import { Establishment } from '@weats/types';
 import { FeatureUsageService } from '@weats/common/feature/feature-usage.service';
 import { MENU_COLOR_PALETTE, normalizeSchedule } from '@weats/common';
 import { CorePrismaService, EstablishmentLanguage, ScheduleType } from '@weats/database';
+import axios from 'axios';
 
 @Injectable()
 export class MenuService {
@@ -297,6 +298,15 @@ export class MenuService {
             );
 
             await this.prisma.$transaction(updates);
+
+            //Clean Next.JS cache to reflect changes immediately on the frontend
+            await axios.post(`${process.env.NEXT_PUBLIC_MENU_URL}/api/clear-cache`, {
+                slug: establishment.slug,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${process.env.MENU_CACHE_TOKEN}`,
+                },
+            });
 
             return { success: true };
         } catch (error) {
