@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { CorePrismaService } from "@weats/database";
 import { Establishment } from "@weats/types";
 import { CreateCategoryDto } from "@weats/contracts";
+import { clearMenuCacheAsync } from '@weats/common';
 
 @Injectable()
 export class MenuCategoryService {
@@ -13,6 +14,10 @@ export class MenuCategoryService {
         createCategoryDto: CreateCategoryDto,
     ) {
         try {
+            const menu = await this.prisma.menu.findUnique({
+                where: { id: menuId },
+                select: { establishment: { select: { slug: true } } },
+            });
             const categoryCount = await this.prisma.menuCategory.count({
                 where: { menuId },
             })
@@ -43,7 +48,7 @@ export class MenuCategoryService {
                 imageId: newCategory.image?.id,
                 imageUrl: newCategory.image?.url,
             };
-
+            clearMenuCacheAsync(menu?.establishment?.slug);
             return response;
         } catch (error) {
             console.error('Error creating menu category:', error);
@@ -171,6 +176,7 @@ export class MenuCategoryService {
                 imageId: updatedCategory.image?.id,
                 imageUrl: updatedCategory.image?.url,
             };
+            clearMenuCacheAsync(establishment.slug);
             return response;
         } catch (error) {
             console.error('Error updating menu category:', error);
@@ -272,7 +278,7 @@ export class MenuCategoryService {
             await this.prisma.menuCategory.delete({
                 where: { id: categoryId },
             });
-
+            clearMenuCacheAsync(establishment.slug);
             return { success: true, message: 'Category deleted successfully' };
         } catch (error) {
             console.error('Error deleting menu category:', error);

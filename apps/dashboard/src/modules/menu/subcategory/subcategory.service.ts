@@ -1,10 +1,29 @@
 import { CorePrismaService } from "@weats/database";
 import { Injectable } from "@nestjs/common";
 import { CreateCategoryDto } from "@weats/contracts";
+import { clearMenuCacheAsync } from '@weats/common';
 
 @Injectable()
 export class MenuSubcategoryService {
     constructor(private readonly prisma: CorePrismaService) { }
+
+    private async getEstablishmentSlugByCategoryId(categoryId: string) {
+        const category = await this.prisma.menuCategory.findUnique({
+            where: { id: categoryId },
+            select: { menu: { select: { establishment: { select: { slug: true } } } } },
+        });
+        return category?.menu?.establishment?.slug;
+    }
+
+    private async getEstablishmentSlugBySubcategoryId(subcategoryId: string) {
+        const subcategory = await this.prisma.menuSubcategory.findUnique({
+            where: { id: subcategoryId },
+            select: {
+                category: { select: { menu: { select: { establishment: { select: { slug: true } } } } } },
+            },
+        });
+        return subcategory?.category?.menu?.establishment?.slug;
+    }
 
 
     async listSubcategories(menuId: string, categoryId: string) {
@@ -64,6 +83,7 @@ export class MenuSubcategoryService {
         createSubcategoryDto: CreateCategoryDto,
     ) {
         try {
+            const slug = await this.getEstablishmentSlugByCategoryId(categoryId);
             const subcategoryCount = await this.prisma.menuSubcategory.count({
                 where: { categoryId },
             })
@@ -84,6 +104,7 @@ export class MenuSubcategoryService {
                 },
             });
 
+            clearMenuCacheAsync(slug);
             return newSubcategory;
         } catch (error) {
             console.error('Error creating subcategory:', error);
@@ -96,6 +117,7 @@ export class MenuSubcategoryService {
         updateSubcategoryDto: any,
     ) {
         try {
+            const slug = await this.getEstablishmentSlugBySubcategoryId(subcategoryId);
             const { translations, isVisible, position } = updateSubcategoryDto;
 
             await this.prisma.menuSubcategory.update({
@@ -127,6 +149,7 @@ export class MenuSubcategoryService {
                 }
             }
 
+            clearMenuCacheAsync(slug);
             return { success: true };
         } catch (error) {
             console.error('Error updating subcategory:', error);
@@ -136,9 +159,11 @@ export class MenuSubcategoryService {
 
     async deleteSubcategory(subcategoryId: string) {
         try {
+            const slug = await this.getEstablishmentSlugBySubcategoryId(subcategoryId);
             await this.prisma.menuSubcategory.delete({
                 where: { id: subcategoryId },
             });
+            clearMenuCacheAsync(slug);
             return { success: true };
         } catch (error) {
             console.error('Error deleting subcategory:', error);
@@ -147,6 +172,7 @@ export class MenuSubcategoryService {
     }
 
     async linkItemToSubcategory(subcategoryId: string, itemId: string) {
+        const slug = await this.getEstablishmentSlugBySubcategoryId(subcategoryId);
         // 1️⃣ valida existência
         const [subcategory, item] = await Promise.all([
             this.prisma.menuSubcategory.findUnique({ where: { id: subcategoryId } }),
@@ -168,6 +194,7 @@ export class MenuSubcategoryService {
             create: { itemId, subcategoryId, position: itemsCount + 1, isVisible: true },
         });
 
+        clearMenuCacheAsync(slug);
         return { success: true };
     }
 

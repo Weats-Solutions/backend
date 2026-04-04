@@ -6,9 +6,8 @@ import {
 import { CreateMenuDto, UpdateMenuPositionsDto, UpdateMenuDto } from '@weats/contracts';
 import { Establishment } from '@weats/types';
 import { FeatureUsageService } from '@weats/common/feature/feature-usage.service';
-import { MENU_COLOR_PALETTE, normalizeSchedule } from '@weats/common';
+import { MENU_COLOR_PALETTE, clearMenuCacheAsync, normalizeSchedule } from '@weats/common';
 import { CorePrismaService, EstablishmentLanguage, ScheduleType } from '@weats/database';
-import axios from 'axios';
 
 @Injectable()
 export class MenuService {
@@ -116,6 +115,10 @@ export class MenuService {
         try {
             const { translations, schedule } = createMenuDto;
             console.log(createMenuDto)
+            const establishment = await this.prisma.establishment.findUnique({
+                where: { id: establishmentId },
+                select: { slug: true },
+            });
             const menuCount = await this.prisma.menu.count({
                 where: { establishmentId },
             });
@@ -126,7 +129,7 @@ export class MenuService {
                 Math.floor(Math.random() * MENU_COLOR_PALETTE.length)
                 ];
 
-            return await this.prisma.$transaction(async (prisma) => {
+            const menu = await this.prisma.$transaction(async (prisma) => {
                 let scheduleId: string | undefined;
                 if (schedule) {
                     const createdSchedule = await prisma.schedule.create({
@@ -171,6 +174,8 @@ export class MenuService {
 
                 return { ...menu, schedule: menu.schedule ? normalizeSchedule(menu.schedule) : null };
             });
+            clearMenuCacheAsync(establishment?.slug);
+            return menu;
         } catch (error) {
             console.error('Error creating menu:', error);
             throw error;
@@ -211,6 +216,7 @@ export class MenuService {
                 },
             });
 
+            clearMenuCacheAsync(establishment.slug);
             return {
                 id: menu.id,
                 isVisible: menu.isVisible,
@@ -278,6 +284,7 @@ export class MenuService {
                 },
             });
 
+            clearMenuCacheAsync(establishment.slug);
             return this.getMenuDetails(menuId, establishment);
         } catch (error) {
             console.error('Error updating menu details:', error);
@@ -299,14 +306,8 @@ export class MenuService {
 
             await this.prisma.$transaction(updates);
 
-            //Clean Next.JS cache to reflect changes immediately on the frontend
-            await axios.post(`${process.env.NEXT_PUBLIC_MENU_URL}/api/clear-cache`, {
-                slug: establishment.slug,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${process.env.MENU_CACHE_TOKEN}`,
-                },
-            });
+            // Clean Next.JS cache to reflect changes immediately on the frontend
+            clearMenuCacheAsync(establishment.slug);
 
             return { success: true };
         } catch (error) {
@@ -317,7 +318,7 @@ export class MenuService {
 
     async deleteMenu(menuId: string) {
         try {
-            return await this.prisma.$transaction(async (tx) => {
+            const result = await this.prisma.$transaction(async (tx) => {
                 // 1. Get menu info to know position and establishment
                 const menu = await tx.menu.findUnique({
                     where: { id: menuId },
@@ -352,8 +353,14 @@ export class MenuService {
                     orderBy: { position: 'asc' },
                 });
 
-                return { success: true, remainingMenus };
+                return { success: true, remainingMenus, establishmentId: menu.establishmentId };
             });
+            const establishment = await this.prisma.establishment.findUnique({
+                where: { id: result.establishmentId },
+                select: { slug: true },
+            });
+            clearMenuCacheAsync(establishment?.slug);
+            return { success: result.success, remainingMenus: result.remainingMenus };
         } catch (error) {
             console.error('Error deleting menu:', error);
             if (error instanceof NotFoundException) throw error;

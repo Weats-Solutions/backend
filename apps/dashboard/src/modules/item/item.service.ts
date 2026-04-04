@@ -11,6 +11,7 @@ import type {
     PaginatedItemsResponse,
 } from '@weats/types';
 import { BulkDeleteDto, BulkStatusDto } from '@weats/contracts';
+import { clearMenuCacheAsync } from '@weats/common';
 
 // ─── Prisma Include Configs ─────────────────────────────────────
 
@@ -90,6 +91,14 @@ type ItemWithListIncludes = Prisma.ItemGetPayload<{ include: typeof ITEM_LIST_IN
 @Injectable()
 export class ItemService {
     constructor(private readonly prisma: CorePrismaService) { }
+
+    private async getEstablishmentSlug(establishmentId: string) {
+        const establishment = await this.prisma.establishment.findUnique({
+            where: { id: establishmentId },
+            select: { slug: true },
+        });
+        return establishment?.slug;
+    }
 
     // ═══════════════════════════════════════════
     // PRIVATE BUILDERS (DTO → Prisma data)
@@ -343,7 +352,8 @@ export class ItemService {
     // ═══════════════════════════════════════════
 
     async createItem(establishmentId: string, dto: CreateItemDto) {
-        return this.prisma.$transaction(async tx => {
+        const slug = await this.getEstablishmentSlug(establishmentId);
+        const item = await this.prisma.$transaction(async tx => {
             const hasVariants = (dto.variantGroups?.length ?? 0) > 0;
 
             // 1. Create base item
@@ -395,9 +405,12 @@ export class ItemService {
 
             return item;
         });
+        clearMenuCacheAsync(slug);
+        return item;
     }
 
     async updateItem(id: string, establishmentId: string, dto: UpdateItemDto) {
+        const slug = await this.getEstablishmentSlug(establishmentId);
         const existing = await this.prisma.item.findUnique({
             where: { id, establishmentId },
         });
@@ -407,7 +420,7 @@ export class ItemService {
             );
         }
 
-        return this.prisma.$transaction(async tx => {
+        const item = await this.prisma.$transaction(async tx => {
             // 1. Delete existing related data (cascade-safe order)
             await tx.itemTranslation.deleteMany({ where: { itemId: id } });
             await tx.itemAllergen.deleteMany({ where: { itemId: id } });
@@ -505,6 +518,8 @@ export class ItemService {
 
             return item;
         });
+        clearMenuCacheAsync(slug);
+        return item;
     }
 
     async getItemById(id: string): Promise<ItemDetailResponse> {
@@ -613,6 +628,7 @@ export class ItemService {
     // ═══════════════════════════════════════════
 
     async deleteItem(itemId: string, establishmentId: string): Promise<void> {
+        const slug = await this.getEstablishmentSlug(establishmentId);
         const item = await this.prisma.item.findFirst({
             where: { id: itemId, establishmentId, deletedAt: null },
         });
@@ -621,6 +637,7 @@ export class ItemService {
             where: { id: itemId },
             data: { deletedAt: new Date() },
         });
+        clearMenuCacheAsync(slug);
     }
 
     async duplicateItem(itemId: string, establishment: Establishment): Promise<ItemListResponse> {
@@ -740,6 +757,7 @@ export class ItemService {
         const primaryTr =
             source.translations.find(t => t.locale === establishment.primaryLanguage) || source.translations[0];
 
+        clearMenuCacheAsync(establishment.slug);
         return {
             id: newItem.id,
             name: primaryTr ? `${primaryTr.name} (Cópia)` : 'Sem nome',
@@ -791,18 +809,22 @@ export class ItemService {
     }
 
     async bulkUpdateStatus(bulkStatusDto: BulkStatusDto, establishmentId: string) {
+        const slug = await this.getEstablishmentSlug(establishmentId);
         const result = await this.prisma.item.updateMany({
             where: { id: { in: bulkStatusDto.ids }, establishmentId, deletedAt: null },
             data: { status: bulkStatusDto.status },
         });
+        clearMenuCacheAsync(slug);
         return { updated: result.count };
     }
 
     async bulkDelete(bulkDeleteDto: BulkDeleteDto, establishmentId: string) {
+        const slug = await this.getEstablishmentSlug(establishmentId);
         const result = await this.prisma.item.updateMany({
             where: { id: { in: bulkDeleteDto.ids }, establishmentId, deletedAt: null },
             data: { deletedAt: new Date() },
         });
+        clearMenuCacheAsync(slug);
         return { deleted: result.count };
     }
 }
