@@ -693,6 +693,7 @@ model Establishment {
   bannerImage Image? @relation("BannerImage", fields: [bannerImageId], references: [id])
 
   // ─── Relações: Módulos & Features ──────────────────────────────────────────
+  expenses       Expense[]
   images         Image[]
   themes         Theme[]
   employees      Employee[]
@@ -757,6 +758,35 @@ model EstablishmentBookingSettings {
   primaryColor      String        @default("#f97316")
   updatedAt         DateTime      @updatedAt
   establishment     Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}
+
+model Expense {
+  id            String  @id @default(cuid())
+  issuerTaxId   String
+  customerTaxId String?
+  country       String?
+
+  documentType  String
+  status        String
+  documentDate  DateTime
+  invoiceNumber String
+
+  totalAmount Float
+  taxableBase Float
+  taxAmount   Float
+
+  atcud        String?
+  controlCode  String?
+  documentHash String?
+  certificate  String?
+
+  establishmentId String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  rawData Json?
+
+  establishment Establishment? @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
 }
 
 model Image {

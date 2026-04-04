@@ -93,6 +93,11 @@ export type Establishment = $Result.DefaultSelection<Prisma.$EstablishmentPayloa
  */
 export type EstablishmentBookingSettings = $Result.DefaultSelection<Prisma.$EstablishmentBookingSettingsPayload>
 /**
+ * Model Expense
+ * 
+ */
+export type Expense = $Result.DefaultSelection<Prisma.$ExpensePayload>
+/**
  * Model Image
  * 
  */
@@ -1431,6 +1436,16 @@ export class PrismaClient<
   get establishmentBookingSettings(): Prisma.EstablishmentBookingSettingsDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.expense`: Exposes CRUD operations for the **Expense** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Expenses
+    * const expenses = await prisma.expense.findMany()
+    * ```
+    */
+  get expense(): Prisma.ExpenseDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.image`: Exposes CRUD operations for the **Image** model.
     * Example usage:
     * ```ts
@@ -2538,6 +2553,7 @@ export namespace Prisma {
     Employee: 'Employee',
     Establishment: 'Establishment',
     EstablishmentBookingSettings: 'EstablishmentBookingSettings',
+    Expense: 'Expense',
     Image: 'Image',
     EstablishmentIntegrations: 'EstablishmentIntegrations',
     SumupReader: 'SumupReader',
@@ -2619,7 +2635,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "promotion" | "buyXGetYRule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "establishmentBookingSettings" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "landingPage" | "landingPageTranslation" | "menu" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "schedule" | "scheduleDay" | "timeInterval" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
+      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "promotion" | "buyXGetYRule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "establishmentBookingSettings" | "expense" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "landingPage" | "landingPageTranslation" | "menu" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "schedule" | "scheduleDay" | "timeInterval" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3730,6 +3746,80 @@ export namespace Prisma {
           count: {
             args: Prisma.EstablishmentBookingSettingsCountArgs<ExtArgs>
             result: $Utils.Optional<EstablishmentBookingSettingsCountAggregateOutputType> | number
+          }
+        }
+      }
+      Expense: {
+        payload: Prisma.$ExpensePayload<ExtArgs>
+        fields: Prisma.ExpenseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ExpenseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ExpenseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>
+          }
+          findFirst: {
+            args: Prisma.ExpenseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ExpenseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>
+          }
+          findMany: {
+            args: Prisma.ExpenseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>[]
+          }
+          create: {
+            args: Prisma.ExpenseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>
+          }
+          createMany: {
+            args: Prisma.ExpenseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ExpenseCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>[]
+          }
+          delete: {
+            args: Prisma.ExpenseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>
+          }
+          update: {
+            args: Prisma.ExpenseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>
+          }
+          deleteMany: {
+            args: Prisma.ExpenseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ExpenseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ExpenseUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>[]
+          }
+          upsert: {
+            args: Prisma.ExpenseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExpensePayload>
+          }
+          aggregate: {
+            args: Prisma.ExpenseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateExpense>
+          }
+          groupBy: {
+            args: Prisma.ExpenseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ExpenseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ExpenseCountArgs<ExtArgs>
+            result: $Utils.Optional<ExpenseCountAggregateOutputType> | number
           }
         }
       }
@@ -8740,6 +8830,7 @@ export namespace Prisma {
     employee?: EmployeeOmit
     establishment?: EstablishmentOmit
     establishmentBookingSettings?: EstablishmentBookingSettingsOmit
+    expense?: ExpenseOmit
     image?: ImageOmit
     establishmentIntegrations?: EstablishmentIntegrationsOmit
     sumupReader?: SumupReaderOmit
@@ -9041,6 +9132,7 @@ export namespace Prisma {
    */
 
   export type EstablishmentCountOutputType = {
+    expenses: number
     images: number
     themes: number
     employees: number
@@ -9071,6 +9163,7 @@ export namespace Prisma {
   }
 
   export type EstablishmentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    expenses?: boolean | EstablishmentCountOutputTypeCountExpensesArgs
     images?: boolean | EstablishmentCountOutputTypeCountImagesArgs
     themes?: boolean | EstablishmentCountOutputTypeCountThemesArgs
     employees?: boolean | EstablishmentCountOutputTypeCountEmployeesArgs
@@ -9109,6 +9202,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the EstablishmentCountOutputType
      */
     select?: EstablishmentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EstablishmentCountOutputType without action
+   */
+  export type EstablishmentCountOutputTypeCountExpensesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseWhereInput
   }
 
   /**
@@ -26419,6 +26519,7 @@ export namespace Prisma {
     activeTheme?: boolean | Establishment$activeThemeArgs<ExtArgs>
     logoImage?: boolean | Establishment$logoImageArgs<ExtArgs>
     bannerImage?: boolean | Establishment$bannerImageArgs<ExtArgs>
+    expenses?: boolean | Establishment$expensesArgs<ExtArgs>
     images?: boolean | Establishment$imagesArgs<ExtArgs>
     themes?: boolean | Establishment$themesArgs<ExtArgs>
     employees?: boolean | Establishment$employeesArgs<ExtArgs>
@@ -26582,6 +26683,7 @@ export namespace Prisma {
     activeTheme?: boolean | Establishment$activeThemeArgs<ExtArgs>
     logoImage?: boolean | Establishment$logoImageArgs<ExtArgs>
     bannerImage?: boolean | Establishment$bannerImageArgs<ExtArgs>
+    expenses?: boolean | Establishment$expensesArgs<ExtArgs>
     images?: boolean | Establishment$imagesArgs<ExtArgs>
     themes?: boolean | Establishment$themesArgs<ExtArgs>
     employees?: boolean | Establishment$employeesArgs<ExtArgs>
@@ -26639,6 +26741,7 @@ export namespace Prisma {
       activeTheme: Prisma.$ThemePayload<ExtArgs> | null
       logoImage: Prisma.$ImagePayload<ExtArgs> | null
       bannerImage: Prisma.$ImagePayload<ExtArgs> | null
+      expenses: Prisma.$ExpensePayload<ExtArgs>[]
       images: Prisma.$ImagePayload<ExtArgs>[]
       themes: Prisma.$ThemePayload<ExtArgs>[]
       employees: Prisma.$EmployeePayload<ExtArgs>[]
@@ -27106,6 +27209,7 @@ export namespace Prisma {
     activeTheme<T extends Establishment$activeThemeArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$activeThemeArgs<ExtArgs>>): Prisma__ThemeClient<$Result.GetResult<Prisma.$ThemePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     logoImage<T extends Establishment$logoImageArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$logoImageArgs<ExtArgs>>): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     bannerImage<T extends Establishment$bannerImageArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$bannerImageArgs<ExtArgs>>): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    expenses<T extends Establishment$expensesArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     images<T extends Establishment$imagesArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     themes<T extends Establishment$themesArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$themesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ThemePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     employees<T extends Establishment$employeesArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -27670,6 +27774,30 @@ export namespace Prisma {
      */
     include?: ImageInclude<ExtArgs> | null
     where?: ImageWhereInput
+  }
+
+  /**
+   * Establishment.expenses
+   */
+  export type Establishment$expensesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Expense
+     */
+    omit?: ExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    where?: ExpenseWhereInput
+    orderBy?: ExpenseOrderByWithRelationInput | ExpenseOrderByWithRelationInput[]
+    cursor?: ExpenseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExpenseScalarFieldEnum | ExpenseScalarFieldEnum[]
   }
 
   /**
@@ -29554,6 +29682,1303 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EstablishmentBookingSettingsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Expense
+   */
+
+  export type AggregateExpense = {
+    _count: ExpenseCountAggregateOutputType | null
+    _avg: ExpenseAvgAggregateOutputType | null
+    _sum: ExpenseSumAggregateOutputType | null
+    _min: ExpenseMinAggregateOutputType | null
+    _max: ExpenseMaxAggregateOutputType | null
+  }
+
+  export type ExpenseAvgAggregateOutputType = {
+    totalAmount: number | null
+    taxableBase: number | null
+    taxAmount: number | null
+  }
+
+  export type ExpenseSumAggregateOutputType = {
+    totalAmount: number | null
+    taxableBase: number | null
+    taxAmount: number | null
+  }
+
+  export type ExpenseMinAggregateOutputType = {
+    id: string | null
+    issuerTaxId: string | null
+    customerTaxId: string | null
+    country: string | null
+    documentType: string | null
+    status: string | null
+    documentDate: Date | null
+    invoiceNumber: string | null
+    totalAmount: number | null
+    taxableBase: number | null
+    taxAmount: number | null
+    atcud: string | null
+    controlCode: string | null
+    documentHash: string | null
+    certificate: string | null
+    establishmentId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ExpenseMaxAggregateOutputType = {
+    id: string | null
+    issuerTaxId: string | null
+    customerTaxId: string | null
+    country: string | null
+    documentType: string | null
+    status: string | null
+    documentDate: Date | null
+    invoiceNumber: string | null
+    totalAmount: number | null
+    taxableBase: number | null
+    taxAmount: number | null
+    atcud: string | null
+    controlCode: string | null
+    documentHash: string | null
+    certificate: string | null
+    establishmentId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ExpenseCountAggregateOutputType = {
+    id: number
+    issuerTaxId: number
+    customerTaxId: number
+    country: number
+    documentType: number
+    status: number
+    documentDate: number
+    invoiceNumber: number
+    totalAmount: number
+    taxableBase: number
+    taxAmount: number
+    atcud: number
+    controlCode: number
+    documentHash: number
+    certificate: number
+    establishmentId: number
+    createdAt: number
+    updatedAt: number
+    rawData: number
+    _all: number
+  }
+
+
+  export type ExpenseAvgAggregateInputType = {
+    totalAmount?: true
+    taxableBase?: true
+    taxAmount?: true
+  }
+
+  export type ExpenseSumAggregateInputType = {
+    totalAmount?: true
+    taxableBase?: true
+    taxAmount?: true
+  }
+
+  export type ExpenseMinAggregateInputType = {
+    id?: true
+    issuerTaxId?: true
+    customerTaxId?: true
+    country?: true
+    documentType?: true
+    status?: true
+    documentDate?: true
+    invoiceNumber?: true
+    totalAmount?: true
+    taxableBase?: true
+    taxAmount?: true
+    atcud?: true
+    controlCode?: true
+    documentHash?: true
+    certificate?: true
+    establishmentId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ExpenseMaxAggregateInputType = {
+    id?: true
+    issuerTaxId?: true
+    customerTaxId?: true
+    country?: true
+    documentType?: true
+    status?: true
+    documentDate?: true
+    invoiceNumber?: true
+    totalAmount?: true
+    taxableBase?: true
+    taxAmount?: true
+    atcud?: true
+    controlCode?: true
+    documentHash?: true
+    certificate?: true
+    establishmentId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ExpenseCountAggregateInputType = {
+    id?: true
+    issuerTaxId?: true
+    customerTaxId?: true
+    country?: true
+    documentType?: true
+    status?: true
+    documentDate?: true
+    invoiceNumber?: true
+    totalAmount?: true
+    taxableBase?: true
+    taxAmount?: true
+    atcud?: true
+    controlCode?: true
+    documentHash?: true
+    certificate?: true
+    establishmentId?: true
+    createdAt?: true
+    updatedAt?: true
+    rawData?: true
+    _all?: true
+  }
+
+  export type ExpenseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Expense to aggregate.
+     */
+    where?: ExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Expenses to fetch.
+     */
+    orderBy?: ExpenseOrderByWithRelationInput | ExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Expenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Expenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Expenses
+    **/
+    _count?: true | ExpenseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ExpenseAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ExpenseSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExpenseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExpenseMaxAggregateInputType
+  }
+
+  export type GetExpenseAggregateType<T extends ExpenseAggregateArgs> = {
+        [P in keyof T & keyof AggregateExpense]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExpense[P]>
+      : GetScalarType<T[P], AggregateExpense[P]>
+  }
+
+
+
+
+  export type ExpenseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExpenseWhereInput
+    orderBy?: ExpenseOrderByWithAggregationInput | ExpenseOrderByWithAggregationInput[]
+    by: ExpenseScalarFieldEnum[] | ExpenseScalarFieldEnum
+    having?: ExpenseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExpenseCountAggregateInputType | true
+    _avg?: ExpenseAvgAggregateInputType
+    _sum?: ExpenseSumAggregateInputType
+    _min?: ExpenseMinAggregateInputType
+    _max?: ExpenseMaxAggregateInputType
+  }
+
+  export type ExpenseGroupByOutputType = {
+    id: string
+    issuerTaxId: string
+    customerTaxId: string | null
+    country: string | null
+    documentType: string
+    status: string
+    documentDate: Date
+    invoiceNumber: string
+    totalAmount: number
+    taxableBase: number
+    taxAmount: number
+    atcud: string | null
+    controlCode: string | null
+    documentHash: string | null
+    certificate: string | null
+    establishmentId: string
+    createdAt: Date
+    updatedAt: Date
+    rawData: JsonValue | null
+    _count: ExpenseCountAggregateOutputType | null
+    _avg: ExpenseAvgAggregateOutputType | null
+    _sum: ExpenseSumAggregateOutputType | null
+    _min: ExpenseMinAggregateOutputType | null
+    _max: ExpenseMaxAggregateOutputType | null
+  }
+
+  type GetExpenseGroupByPayload<T extends ExpenseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ExpenseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExpenseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExpenseGroupByOutputType[P]>
+            : GetScalarType<T[P], ExpenseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExpenseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    issuerTaxId?: boolean
+    customerTaxId?: boolean
+    country?: boolean
+    documentType?: boolean
+    status?: boolean
+    documentDate?: boolean
+    invoiceNumber?: boolean
+    totalAmount?: boolean
+    taxableBase?: boolean
+    taxAmount?: boolean
+    atcud?: boolean
+    controlCode?: boolean
+    documentHash?: boolean
+    certificate?: boolean
+    establishmentId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    rawData?: boolean
+    establishment?: boolean | Expense$establishmentArgs<ExtArgs>
+  }, ExtArgs["result"]["expense"]>
+
+  export type ExpenseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    issuerTaxId?: boolean
+    customerTaxId?: boolean
+    country?: boolean
+    documentType?: boolean
+    status?: boolean
+    documentDate?: boolean
+    invoiceNumber?: boolean
+    totalAmount?: boolean
+    taxableBase?: boolean
+    taxAmount?: boolean
+    atcud?: boolean
+    controlCode?: boolean
+    documentHash?: boolean
+    certificate?: boolean
+    establishmentId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    rawData?: boolean
+    establishment?: boolean | Expense$establishmentArgs<ExtArgs>
+  }, ExtArgs["result"]["expense"]>
+
+  export type ExpenseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    issuerTaxId?: boolean
+    customerTaxId?: boolean
+    country?: boolean
+    documentType?: boolean
+    status?: boolean
+    documentDate?: boolean
+    invoiceNumber?: boolean
+    totalAmount?: boolean
+    taxableBase?: boolean
+    taxAmount?: boolean
+    atcud?: boolean
+    controlCode?: boolean
+    documentHash?: boolean
+    certificate?: boolean
+    establishmentId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    rawData?: boolean
+    establishment?: boolean | Expense$establishmentArgs<ExtArgs>
+  }, ExtArgs["result"]["expense"]>
+
+  export type ExpenseSelectScalar = {
+    id?: boolean
+    issuerTaxId?: boolean
+    customerTaxId?: boolean
+    country?: boolean
+    documentType?: boolean
+    status?: boolean
+    documentDate?: boolean
+    invoiceNumber?: boolean
+    totalAmount?: boolean
+    taxableBase?: boolean
+    taxAmount?: boolean
+    atcud?: boolean
+    controlCode?: boolean
+    documentHash?: boolean
+    certificate?: boolean
+    establishmentId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    rawData?: boolean
+  }
+
+  export type ExpenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "issuerTaxId" | "customerTaxId" | "country" | "documentType" | "status" | "documentDate" | "invoiceNumber" | "totalAmount" | "taxableBase" | "taxAmount" | "atcud" | "controlCode" | "documentHash" | "certificate" | "establishmentId" | "createdAt" | "updatedAt" | "rawData", ExtArgs["result"]["expense"]>
+  export type ExpenseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    establishment?: boolean | Expense$establishmentArgs<ExtArgs>
+  }
+  export type ExpenseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    establishment?: boolean | Expense$establishmentArgs<ExtArgs>
+  }
+  export type ExpenseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    establishment?: boolean | Expense$establishmentArgs<ExtArgs>
+  }
+
+  export type $ExpensePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Expense"
+    objects: {
+      establishment: Prisma.$EstablishmentPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      issuerTaxId: string
+      customerTaxId: string | null
+      country: string | null
+      documentType: string
+      status: string
+      documentDate: Date
+      invoiceNumber: string
+      totalAmount: number
+      taxableBase: number
+      taxAmount: number
+      atcud: string | null
+      controlCode: string | null
+      documentHash: string | null
+      certificate: string | null
+      establishmentId: string
+      createdAt: Date
+      updatedAt: Date
+      rawData: Prisma.JsonValue | null
+    }, ExtArgs["result"]["expense"]>
+    composites: {}
+  }
+
+  type ExpenseGetPayload<S extends boolean | null | undefined | ExpenseDefaultArgs> = $Result.GetResult<Prisma.$ExpensePayload, S>
+
+  type ExpenseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ExpenseFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ExpenseCountAggregateInputType | true
+    }
+
+  export interface ExpenseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Expense'], meta: { name: 'Expense' } }
+    /**
+     * Find zero or one Expense that matches the filter.
+     * @param {ExpenseFindUniqueArgs} args - Arguments to find a Expense
+     * @example
+     * // Get one Expense
+     * const expense = await prisma.expense.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ExpenseFindUniqueArgs>(args: SelectSubset<T, ExpenseFindUniqueArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Expense that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ExpenseFindUniqueOrThrowArgs} args - Arguments to find a Expense
+     * @example
+     * // Get one Expense
+     * const expense = await prisma.expense.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ExpenseFindUniqueOrThrowArgs>(args: SelectSubset<T, ExpenseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Expense that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseFindFirstArgs} args - Arguments to find a Expense
+     * @example
+     * // Get one Expense
+     * const expense = await prisma.expense.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ExpenseFindFirstArgs>(args?: SelectSubset<T, ExpenseFindFirstArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Expense that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseFindFirstOrThrowArgs} args - Arguments to find a Expense
+     * @example
+     * // Get one Expense
+     * const expense = await prisma.expense.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ExpenseFindFirstOrThrowArgs>(args?: SelectSubset<T, ExpenseFindFirstOrThrowArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Expenses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Expenses
+     * const expenses = await prisma.expense.findMany()
+     * 
+     * // Get first 10 Expenses
+     * const expenses = await prisma.expense.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const expenseWithIdOnly = await prisma.expense.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ExpenseFindManyArgs>(args?: SelectSubset<T, ExpenseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Expense.
+     * @param {ExpenseCreateArgs} args - Arguments to create a Expense.
+     * @example
+     * // Create one Expense
+     * const Expense = await prisma.expense.create({
+     *   data: {
+     *     // ... data to create a Expense
+     *   }
+     * })
+     * 
+     */
+    create<T extends ExpenseCreateArgs>(args: SelectSubset<T, ExpenseCreateArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Expenses.
+     * @param {ExpenseCreateManyArgs} args - Arguments to create many Expenses.
+     * @example
+     * // Create many Expenses
+     * const expense = await prisma.expense.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ExpenseCreateManyArgs>(args?: SelectSubset<T, ExpenseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Expenses and returns the data saved in the database.
+     * @param {ExpenseCreateManyAndReturnArgs} args - Arguments to create many Expenses.
+     * @example
+     * // Create many Expenses
+     * const expense = await prisma.expense.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Expenses and only return the `id`
+     * const expenseWithIdOnly = await prisma.expense.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ExpenseCreateManyAndReturnArgs>(args?: SelectSubset<T, ExpenseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Expense.
+     * @param {ExpenseDeleteArgs} args - Arguments to delete one Expense.
+     * @example
+     * // Delete one Expense
+     * const Expense = await prisma.expense.delete({
+     *   where: {
+     *     // ... filter to delete one Expense
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ExpenseDeleteArgs>(args: SelectSubset<T, ExpenseDeleteArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Expense.
+     * @param {ExpenseUpdateArgs} args - Arguments to update one Expense.
+     * @example
+     * // Update one Expense
+     * const expense = await prisma.expense.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ExpenseUpdateArgs>(args: SelectSubset<T, ExpenseUpdateArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Expenses.
+     * @param {ExpenseDeleteManyArgs} args - Arguments to filter Expenses to delete.
+     * @example
+     * // Delete a few Expenses
+     * const { count } = await prisma.expense.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ExpenseDeleteManyArgs>(args?: SelectSubset<T, ExpenseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Expenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Expenses
+     * const expense = await prisma.expense.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ExpenseUpdateManyArgs>(args: SelectSubset<T, ExpenseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Expenses and returns the data updated in the database.
+     * @param {ExpenseUpdateManyAndReturnArgs} args - Arguments to update many Expenses.
+     * @example
+     * // Update many Expenses
+     * const expense = await prisma.expense.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Expenses and only return the `id`
+     * const expenseWithIdOnly = await prisma.expense.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ExpenseUpdateManyAndReturnArgs>(args: SelectSubset<T, ExpenseUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Expense.
+     * @param {ExpenseUpsertArgs} args - Arguments to update or create a Expense.
+     * @example
+     * // Update or create a Expense
+     * const expense = await prisma.expense.upsert({
+     *   create: {
+     *     // ... data to create a Expense
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Expense we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ExpenseUpsertArgs>(args: SelectSubset<T, ExpenseUpsertArgs<ExtArgs>>): Prisma__ExpenseClient<$Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Expenses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseCountArgs} args - Arguments to filter Expenses to count.
+     * @example
+     * // Count the number of Expenses
+     * const count = await prisma.expense.count({
+     *   where: {
+     *     // ... the filter for the Expenses we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExpenseCountArgs>(
+      args?: Subset<T, ExpenseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExpenseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Expense.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExpenseAggregateArgs>(args: Subset<T, ExpenseAggregateArgs>): Prisma.PrismaPromise<GetExpenseAggregateType<T>>
+
+    /**
+     * Group by Expense.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExpenseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExpenseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExpenseGroupByArgs['orderBy'] }
+        : { orderBy?: ExpenseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExpenseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExpenseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Expense model
+   */
+  readonly fields: ExpenseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Expense.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ExpenseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    establishment<T extends Expense$establishmentArgs<ExtArgs> = {}>(args?: Subset<T, Expense$establishmentArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Expense model
+   */
+  interface ExpenseFieldRefs {
+    readonly id: FieldRef<"Expense", 'String'>
+    readonly issuerTaxId: FieldRef<"Expense", 'String'>
+    readonly customerTaxId: FieldRef<"Expense", 'String'>
+    readonly country: FieldRef<"Expense", 'String'>
+    readonly documentType: FieldRef<"Expense", 'String'>
+    readonly status: FieldRef<"Expense", 'String'>
+    readonly documentDate: FieldRef<"Expense", 'DateTime'>
+    readonly invoiceNumber: FieldRef<"Expense", 'String'>
+    readonly totalAmount: FieldRef<"Expense", 'Float'>
+    readonly taxableBase: FieldRef<"Expense", 'Float'>
+    readonly taxAmount: FieldRef<"Expense", 'Float'>
+    readonly atcud: FieldRef<"Expense", 'String'>
+    readonly controlCode: FieldRef<"Expense", 'String'>
+    readonly documentHash: FieldRef<"Expense", 'String'>
+    readonly certificate: FieldRef<"Expense", 'String'>
+    readonly establishmentId: FieldRef<"Expense", 'String'>
+    readonly createdAt: FieldRef<"Expense", 'DateTime'>
+    readonly updatedAt: FieldRef<"Expense", 'DateTime'>
+    readonly rawData: FieldRef<"Expense", 'Json'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Expense findUnique
+   */
+  export type ExpenseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Expense
+     */
+    omit?: ExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which Expense to fetch.
+     */
+    where: ExpenseWhereUniqueInput
+  }
+
+  /**
+   * Expense findUniqueOrThrow
+   */
+  export type ExpenseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Expense
+     */
+    omit?: ExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which Expense to fetch.
+     */
+    where: ExpenseWhereUniqueInput
+  }
+
+  /**
+   * Expense findFirst
+   */
+  export type ExpenseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Expense
+     */
+    omit?: ExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which Expense to fetch.
+     */
+    where?: ExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Expenses to fetch.
+     */
+    orderBy?: ExpenseOrderByWithRelationInput | ExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Expenses.
+     */
+    cursor?: ExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Expenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Expenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Expenses.
+     */
+    distinct?: ExpenseScalarFieldEnum | ExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * Expense findFirstOrThrow
+   */
+  export type ExpenseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Expense
+     */
+    omit?: ExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which Expense to fetch.
+     */
+    where?: ExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Expenses to fetch.
+     */
+    orderBy?: ExpenseOrderByWithRelationInput | ExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Expenses.
+     */
+    cursor?: ExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Expenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Expenses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Expenses.
+     */
+    distinct?: ExpenseScalarFieldEnum | ExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * Expense findMany
+   */
+  export type ExpenseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Expense
+     */
+    omit?: ExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * Filter, which Expenses to fetch.
+     */
+    where?: ExpenseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Expenses to fetch.
+     */
+    orderBy?: ExpenseOrderByWithRelationInput | ExpenseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Expenses.
+     */
+    cursor?: ExpenseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Expenses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Expenses.
+     */
+    skip?: number
+    distinct?: ExpenseScalarFieldEnum | ExpenseScalarFieldEnum[]
+  }
+
+  /**
+   * Expense create
+   */
+  export type ExpenseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Expense
+     */
+    omit?: ExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Expense.
+     */
+    data: XOR<ExpenseCreateInput, ExpenseUncheckedCreateInput>
+  }
+
+  /**
+   * Expense createMany
+   */
+  export type ExpenseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Expenses.
+     */
+    data: ExpenseCreateManyInput | ExpenseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Expense createManyAndReturn
+   */
+  export type ExpenseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Expense
+     */
+    omit?: ExpenseOmit<ExtArgs> | null
+    /**
+     * The data used to create many Expenses.
+     */
+    data: ExpenseCreateManyInput | ExpenseCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Expense update
+   */
+  export type ExpenseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Expense
+     */
+    omit?: ExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Expense.
+     */
+    data: XOR<ExpenseUpdateInput, ExpenseUncheckedUpdateInput>
+    /**
+     * Choose, which Expense to update.
+     */
+    where: ExpenseWhereUniqueInput
+  }
+
+  /**
+   * Expense updateMany
+   */
+  export type ExpenseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Expenses.
+     */
+    data: XOR<ExpenseUpdateManyMutationInput, ExpenseUncheckedUpdateManyInput>
+    /**
+     * Filter which Expenses to update
+     */
+    where?: ExpenseWhereInput
+    /**
+     * Limit how many Expenses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Expense updateManyAndReturn
+   */
+  export type ExpenseUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Expense
+     */
+    omit?: ExpenseOmit<ExtArgs> | null
+    /**
+     * The data used to update Expenses.
+     */
+    data: XOR<ExpenseUpdateManyMutationInput, ExpenseUncheckedUpdateManyInput>
+    /**
+     * Filter which Expenses to update
+     */
+    where?: ExpenseWhereInput
+    /**
+     * Limit how many Expenses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Expense upsert
+   */
+  export type ExpenseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Expense
+     */
+    omit?: ExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Expense to update in case it exists.
+     */
+    where: ExpenseWhereUniqueInput
+    /**
+     * In case the Expense found by the `where` argument doesn't exist, create a new Expense with this data.
+     */
+    create: XOR<ExpenseCreateInput, ExpenseUncheckedCreateInput>
+    /**
+     * In case the Expense was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExpenseUpdateInput, ExpenseUncheckedUpdateInput>
+  }
+
+  /**
+   * Expense delete
+   */
+  export type ExpenseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Expense
+     */
+    omit?: ExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
+    /**
+     * Filter which Expense to delete.
+     */
+    where: ExpenseWhereUniqueInput
+  }
+
+  /**
+   * Expense deleteMany
+   */
+  export type ExpenseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Expenses to delete
+     */
+    where?: ExpenseWhereInput
+    /**
+     * Limit how many Expenses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Expense.establishment
+   */
+  export type Expense$establishmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Establishment
+     */
+    select?: EstablishmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Establishment
+     */
+    omit?: EstablishmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentInclude<ExtArgs> | null
+    where?: EstablishmentWhereInput
+  }
+
+  /**
+   * Expense without action
+   */
+  export type ExpenseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Expense
+     */
+    select?: ExpenseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Expense
+     */
+    omit?: ExpenseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExpenseInclude<ExtArgs> | null
   }
 
 
@@ -107056,6 +108481,31 @@ export namespace Prisma {
   export type EstablishmentBookingSettingsScalarFieldEnum = (typeof EstablishmentBookingSettingsScalarFieldEnum)[keyof typeof EstablishmentBookingSettingsScalarFieldEnum]
 
 
+  export const ExpenseScalarFieldEnum: {
+    id: 'id',
+    issuerTaxId: 'issuerTaxId',
+    customerTaxId: 'customerTaxId',
+    country: 'country',
+    documentType: 'documentType',
+    status: 'status',
+    documentDate: 'documentDate',
+    invoiceNumber: 'invoiceNumber',
+    totalAmount: 'totalAmount',
+    taxableBase: 'taxableBase',
+    taxAmount: 'taxAmount',
+    atcud: 'atcud',
+    controlCode: 'controlCode',
+    documentHash: 'documentHash',
+    certificate: 'certificate',
+    establishmentId: 'establishmentId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    rawData: 'rawData'
+  };
+
+  export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
+
+
   export const ImageScalarFieldEnum: {
     id: 'id',
     cloudflareImageId: 'cloudflareImageId',
@@ -110017,6 +111467,7 @@ export namespace Prisma {
     activeTheme?: XOR<ThemeNullableScalarRelationFilter, ThemeWhereInput> | null
     logoImage?: XOR<ImageNullableScalarRelationFilter, ImageWhereInput> | null
     bannerImage?: XOR<ImageNullableScalarRelationFilter, ImageWhereInput> | null
+    expenses?: ExpenseListRelationFilter
     images?: ImageListRelationFilter
     themes?: ThemeListRelationFilter
     employees?: EmployeeListRelationFilter
@@ -110091,6 +111542,7 @@ export namespace Prisma {
     activeTheme?: ThemeOrderByWithRelationInput
     logoImage?: ImageOrderByWithRelationInput
     bannerImage?: ImageOrderByWithRelationInput
+    expenses?: ExpenseOrderByRelationAggregateInput
     images?: ImageOrderByRelationAggregateInput
     themes?: ThemeOrderByRelationAggregateInput
     employees?: EmployeeOrderByRelationAggregateInput
@@ -110168,6 +111620,7 @@ export namespace Prisma {
     activeTheme?: XOR<ThemeNullableScalarRelationFilter, ThemeWhereInput> | null
     logoImage?: XOR<ImageNullableScalarRelationFilter, ImageWhereInput> | null
     bannerImage?: XOR<ImageNullableScalarRelationFilter, ImageWhereInput> | null
+    expenses?: ExpenseListRelationFilter
     images?: ImageListRelationFilter
     themes?: ThemeListRelationFilter
     employees?: EmployeeListRelationFilter
@@ -110360,6 +111813,133 @@ export namespace Prisma {
     notificationPhone?: StringNullableWithAggregatesFilter<"EstablishmentBookingSettings"> | string | null
     primaryColor?: StringWithAggregatesFilter<"EstablishmentBookingSettings"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"EstablishmentBookingSettings"> | Date | string
+  }
+
+  export type ExpenseWhereInput = {
+    AND?: ExpenseWhereInput | ExpenseWhereInput[]
+    OR?: ExpenseWhereInput[]
+    NOT?: ExpenseWhereInput | ExpenseWhereInput[]
+    id?: StringFilter<"Expense"> | string
+    issuerTaxId?: StringFilter<"Expense"> | string
+    customerTaxId?: StringNullableFilter<"Expense"> | string | null
+    country?: StringNullableFilter<"Expense"> | string | null
+    documentType?: StringFilter<"Expense"> | string
+    status?: StringFilter<"Expense"> | string
+    documentDate?: DateTimeFilter<"Expense"> | Date | string
+    invoiceNumber?: StringFilter<"Expense"> | string
+    totalAmount?: FloatFilter<"Expense"> | number
+    taxableBase?: FloatFilter<"Expense"> | number
+    taxAmount?: FloatFilter<"Expense"> | number
+    atcud?: StringNullableFilter<"Expense"> | string | null
+    controlCode?: StringNullableFilter<"Expense"> | string | null
+    documentHash?: StringNullableFilter<"Expense"> | string | null
+    certificate?: StringNullableFilter<"Expense"> | string | null
+    establishmentId?: StringFilter<"Expense"> | string
+    createdAt?: DateTimeFilter<"Expense"> | Date | string
+    updatedAt?: DateTimeFilter<"Expense"> | Date | string
+    rawData?: JsonNullableFilter<"Expense">
+    establishment?: XOR<EstablishmentNullableScalarRelationFilter, EstablishmentWhereInput> | null
+  }
+
+  export type ExpenseOrderByWithRelationInput = {
+    id?: SortOrder
+    issuerTaxId?: SortOrder
+    customerTaxId?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    documentType?: SortOrder
+    status?: SortOrder
+    documentDate?: SortOrder
+    invoiceNumber?: SortOrder
+    totalAmount?: SortOrder
+    taxableBase?: SortOrder
+    taxAmount?: SortOrder
+    atcud?: SortOrderInput | SortOrder
+    controlCode?: SortOrderInput | SortOrder
+    documentHash?: SortOrderInput | SortOrder
+    certificate?: SortOrderInput | SortOrder
+    establishmentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    rawData?: SortOrderInput | SortOrder
+    establishment?: EstablishmentOrderByWithRelationInput
+  }
+
+  export type ExpenseWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ExpenseWhereInput | ExpenseWhereInput[]
+    OR?: ExpenseWhereInput[]
+    NOT?: ExpenseWhereInput | ExpenseWhereInput[]
+    issuerTaxId?: StringFilter<"Expense"> | string
+    customerTaxId?: StringNullableFilter<"Expense"> | string | null
+    country?: StringNullableFilter<"Expense"> | string | null
+    documentType?: StringFilter<"Expense"> | string
+    status?: StringFilter<"Expense"> | string
+    documentDate?: DateTimeFilter<"Expense"> | Date | string
+    invoiceNumber?: StringFilter<"Expense"> | string
+    totalAmount?: FloatFilter<"Expense"> | number
+    taxableBase?: FloatFilter<"Expense"> | number
+    taxAmount?: FloatFilter<"Expense"> | number
+    atcud?: StringNullableFilter<"Expense"> | string | null
+    controlCode?: StringNullableFilter<"Expense"> | string | null
+    documentHash?: StringNullableFilter<"Expense"> | string | null
+    certificate?: StringNullableFilter<"Expense"> | string | null
+    establishmentId?: StringFilter<"Expense"> | string
+    createdAt?: DateTimeFilter<"Expense"> | Date | string
+    updatedAt?: DateTimeFilter<"Expense"> | Date | string
+    rawData?: JsonNullableFilter<"Expense">
+    establishment?: XOR<EstablishmentNullableScalarRelationFilter, EstablishmentWhereInput> | null
+  }, "id">
+
+  export type ExpenseOrderByWithAggregationInput = {
+    id?: SortOrder
+    issuerTaxId?: SortOrder
+    customerTaxId?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    documentType?: SortOrder
+    status?: SortOrder
+    documentDate?: SortOrder
+    invoiceNumber?: SortOrder
+    totalAmount?: SortOrder
+    taxableBase?: SortOrder
+    taxAmount?: SortOrder
+    atcud?: SortOrderInput | SortOrder
+    controlCode?: SortOrderInput | SortOrder
+    documentHash?: SortOrderInput | SortOrder
+    certificate?: SortOrderInput | SortOrder
+    establishmentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    rawData?: SortOrderInput | SortOrder
+    _count?: ExpenseCountOrderByAggregateInput
+    _avg?: ExpenseAvgOrderByAggregateInput
+    _max?: ExpenseMaxOrderByAggregateInput
+    _min?: ExpenseMinOrderByAggregateInput
+    _sum?: ExpenseSumOrderByAggregateInput
+  }
+
+  export type ExpenseScalarWhereWithAggregatesInput = {
+    AND?: ExpenseScalarWhereWithAggregatesInput | ExpenseScalarWhereWithAggregatesInput[]
+    OR?: ExpenseScalarWhereWithAggregatesInput[]
+    NOT?: ExpenseScalarWhereWithAggregatesInput | ExpenseScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Expense"> | string
+    issuerTaxId?: StringWithAggregatesFilter<"Expense"> | string
+    customerTaxId?: StringNullableWithAggregatesFilter<"Expense"> | string | null
+    country?: StringNullableWithAggregatesFilter<"Expense"> | string | null
+    documentType?: StringWithAggregatesFilter<"Expense"> | string
+    status?: StringWithAggregatesFilter<"Expense"> | string
+    documentDate?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
+    invoiceNumber?: StringWithAggregatesFilter<"Expense"> | string
+    totalAmount?: FloatWithAggregatesFilter<"Expense"> | number
+    taxableBase?: FloatWithAggregatesFilter<"Expense"> | number
+    taxAmount?: FloatWithAggregatesFilter<"Expense"> | number
+    atcud?: StringNullableWithAggregatesFilter<"Expense"> | string | null
+    controlCode?: StringNullableWithAggregatesFilter<"Expense"> | string | null
+    documentHash?: StringNullableWithAggregatesFilter<"Expense"> | string | null
+    certificate?: StringNullableWithAggregatesFilter<"Expense"> | string | null
+    establishmentId?: StringWithAggregatesFilter<"Expense"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Expense"> | Date | string
+    rawData?: JsonNullableWithAggregatesFilter<"Expense">
   }
 
   export type ImageWhereInput = {
@@ -117042,6 +118622,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -117111,6 +118692,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -117180,6 +118762,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -117249,6 +118832,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -117477,6 +119061,159 @@ export namespace Prisma {
     notificationPhone?: NullableStringFieldUpdateOperationsInput | string | null
     primaryColor?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExpenseCreateInput = {
+    id?: string
+    issuerTaxId: string
+    customerTaxId?: string | null
+    country?: string | null
+    documentType: string
+    status: string
+    documentDate: Date | string
+    invoiceNumber: string
+    totalAmount: number
+    taxableBase: number
+    taxAmount: number
+    atcud?: string | null
+    controlCode?: string | null
+    documentHash?: string | null
+    certificate?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rawData?: NullableJsonNullValueInput | InputJsonValue
+    establishment?: EstablishmentCreateNestedOneWithoutExpensesInput
+  }
+
+  export type ExpenseUncheckedCreateInput = {
+    id?: string
+    issuerTaxId: string
+    customerTaxId?: string | null
+    country?: string | null
+    documentType: string
+    status: string
+    documentDate: Date | string
+    invoiceNumber: string
+    totalAmount: number
+    taxableBase: number
+    taxAmount: number
+    atcud?: string | null
+    controlCode?: string | null
+    documentHash?: string | null
+    certificate?: string | null
+    establishmentId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rawData?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type ExpenseUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    issuerTaxId?: StringFieldUpdateOperationsInput | string
+    customerTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    documentType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    documentDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    taxableBase?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    atcud?: NullableStringFieldUpdateOperationsInput | string | null
+    controlCode?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawData?: NullableJsonNullValueInput | InputJsonValue
+    establishment?: EstablishmentUpdateOneWithoutExpensesNestedInput
+  }
+
+  export type ExpenseUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    issuerTaxId?: StringFieldUpdateOperationsInput | string
+    customerTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    documentType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    documentDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    taxableBase?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    atcud?: NullableStringFieldUpdateOperationsInput | string | null
+    controlCode?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate?: NullableStringFieldUpdateOperationsInput | string | null
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawData?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type ExpenseCreateManyInput = {
+    id?: string
+    issuerTaxId: string
+    customerTaxId?: string | null
+    country?: string | null
+    documentType: string
+    status: string
+    documentDate: Date | string
+    invoiceNumber: string
+    totalAmount: number
+    taxableBase: number
+    taxAmount: number
+    atcud?: string | null
+    controlCode?: string | null
+    documentHash?: string | null
+    certificate?: string | null
+    establishmentId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rawData?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type ExpenseUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    issuerTaxId?: StringFieldUpdateOperationsInput | string
+    customerTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    documentType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    documentDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    taxableBase?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    atcud?: NullableStringFieldUpdateOperationsInput | string | null
+    controlCode?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawData?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type ExpenseUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    issuerTaxId?: StringFieldUpdateOperationsInput | string
+    customerTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    documentType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    documentDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    taxableBase?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    atcud?: NullableStringFieldUpdateOperationsInput | string | null
+    controlCode?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate?: NullableStringFieldUpdateOperationsInput | string | null
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawData?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ImageCreateInput = {
@@ -124509,6 +126246,12 @@ export namespace Prisma {
     isNot?: ImageWhereInput | null
   }
 
+  export type ExpenseListRelationFilter = {
+    every?: ExpenseWhereInput
+    some?: ExpenseWhereInput
+    none?: ExpenseWhereInput
+  }
+
   export type ImageListRelationFilter = {
     every?: ImageWhereInput
     some?: ImageWhereInput
@@ -124688,6 +126431,10 @@ export namespace Prisma {
     every?: StockWarehouseWhereInput
     some?: StockWarehouseWhereInput
     none?: StockWarehouseWhereInput
+  }
+
+  export type ExpenseOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ImageOrderByRelationAggregateInput = {
@@ -124993,6 +126740,103 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type EstablishmentNullableScalarRelationFilter = {
+    is?: EstablishmentWhereInput | null
+    isNot?: EstablishmentWhereInput | null
+  }
+
+  export type ExpenseCountOrderByAggregateInput = {
+    id?: SortOrder
+    issuerTaxId?: SortOrder
+    customerTaxId?: SortOrder
+    country?: SortOrder
+    documentType?: SortOrder
+    status?: SortOrder
+    documentDate?: SortOrder
+    invoiceNumber?: SortOrder
+    totalAmount?: SortOrder
+    taxableBase?: SortOrder
+    taxAmount?: SortOrder
+    atcud?: SortOrder
+    controlCode?: SortOrder
+    documentHash?: SortOrder
+    certificate?: SortOrder
+    establishmentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    rawData?: SortOrder
+  }
+
+  export type ExpenseAvgOrderByAggregateInput = {
+    totalAmount?: SortOrder
+    taxableBase?: SortOrder
+    taxAmount?: SortOrder
+  }
+
+  export type ExpenseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    issuerTaxId?: SortOrder
+    customerTaxId?: SortOrder
+    country?: SortOrder
+    documentType?: SortOrder
+    status?: SortOrder
+    documentDate?: SortOrder
+    invoiceNumber?: SortOrder
+    totalAmount?: SortOrder
+    taxableBase?: SortOrder
+    taxAmount?: SortOrder
+    atcud?: SortOrder
+    controlCode?: SortOrder
+    documentHash?: SortOrder
+    certificate?: SortOrder
+    establishmentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExpenseMinOrderByAggregateInput = {
+    id?: SortOrder
+    issuerTaxId?: SortOrder
+    customerTaxId?: SortOrder
+    country?: SortOrder
+    documentType?: SortOrder
+    status?: SortOrder
+    documentDate?: SortOrder
+    invoiceNumber?: SortOrder
+    totalAmount?: SortOrder
+    taxableBase?: SortOrder
+    taxAmount?: SortOrder
+    atcud?: SortOrder
+    controlCode?: SortOrder
+    documentHash?: SortOrder
+    certificate?: SortOrder
+    establishmentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExpenseSumOrderByAggregateInput = {
+    totalAmount?: SortOrder
+    taxableBase?: SortOrder
+    taxAmount?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type EstablishmentListRelationFilter = {
     every?: EstablishmentWhereInput
     some?: EstablishmentWhereInput
@@ -125063,22 +126907,6 @@ export namespace Prisma {
 
   export type ImageSumOrderByAggregateInput = {
     fileSize?: SortOrder
-  }
-
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type EstablishmentIntegrationsCountOrderByAggregateInput = {
@@ -125670,11 +127498,6 @@ export namespace Prisma {
     in?: $Enums.VariantType[] | ListEnumVariantTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.VariantType[] | ListEnumVariantTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumVariantTypeFilter<$PrismaModel> | $Enums.VariantType
-  }
-
-  export type EstablishmentNullableScalarRelationFilter = {
-    is?: EstablishmentWhereInput | null
-    isNot?: EstablishmentWhereInput | null
   }
 
   export type VariantOptionTranslationListRelationFilter = {
@@ -129688,6 +131511,13 @@ export namespace Prisma {
     connect?: ImageWhereUniqueInput
   }
 
+  export type ExpenseCreateNestedManyWithoutEstablishmentInput = {
+    create?: XOR<ExpenseCreateWithoutEstablishmentInput, ExpenseUncheckedCreateWithoutEstablishmentInput> | ExpenseCreateWithoutEstablishmentInput[] | ExpenseUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: ExpenseCreateOrConnectWithoutEstablishmentInput | ExpenseCreateOrConnectWithoutEstablishmentInput[]
+    createMany?: ExpenseCreateManyEstablishmentInputEnvelope
+    connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+  }
+
   export type ImageCreateNestedManyWithoutEstablishmentInput = {
     create?: XOR<ImageCreateWithoutEstablishmentInput, ImageUncheckedCreateWithoutEstablishmentInput> | ImageCreateWithoutEstablishmentInput[] | ImageUncheckedCreateWithoutEstablishmentInput[]
     connectOrCreate?: ImageCreateOrConnectWithoutEstablishmentInput | ImageCreateOrConnectWithoutEstablishmentInput[]
@@ -129905,6 +131735,13 @@ export namespace Prisma {
     connectOrCreate?: StockWarehouseCreateOrConnectWithoutEstablishmentInput | StockWarehouseCreateOrConnectWithoutEstablishmentInput[]
     createMany?: StockWarehouseCreateManyEstablishmentInputEnvelope
     connect?: StockWarehouseWhereUniqueInput | StockWarehouseWhereUniqueInput[]
+  }
+
+  export type ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput = {
+    create?: XOR<ExpenseCreateWithoutEstablishmentInput, ExpenseUncheckedCreateWithoutEstablishmentInput> | ExpenseCreateWithoutEstablishmentInput[] | ExpenseUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: ExpenseCreateOrConnectWithoutEstablishmentInput | ExpenseCreateOrConnectWithoutEstablishmentInput[]
+    createMany?: ExpenseCreateManyEstablishmentInputEnvelope
+    connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
   }
 
   export type ImageUncheckedCreateNestedManyWithoutEstablishmentInput = {
@@ -130193,6 +132030,20 @@ export namespace Prisma {
     delete?: ImageWhereInput | boolean
     connect?: ImageWhereUniqueInput
     update?: XOR<XOR<ImageUpdateToOneWithWhereWithoutBannerUsedInBrandsInput, ImageUpdateWithoutBannerUsedInBrandsInput>, ImageUncheckedUpdateWithoutBannerUsedInBrandsInput>
+  }
+
+  export type ExpenseUpdateManyWithoutEstablishmentNestedInput = {
+    create?: XOR<ExpenseCreateWithoutEstablishmentInput, ExpenseUncheckedCreateWithoutEstablishmentInput> | ExpenseCreateWithoutEstablishmentInput[] | ExpenseUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: ExpenseCreateOrConnectWithoutEstablishmentInput | ExpenseCreateOrConnectWithoutEstablishmentInput[]
+    upsert?: ExpenseUpsertWithWhereUniqueWithoutEstablishmentInput | ExpenseUpsertWithWhereUniqueWithoutEstablishmentInput[]
+    createMany?: ExpenseCreateManyEstablishmentInputEnvelope
+    set?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    disconnect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    delete?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    update?: ExpenseUpdateWithWhereUniqueWithoutEstablishmentInput | ExpenseUpdateWithWhereUniqueWithoutEstablishmentInput[]
+    updateMany?: ExpenseUpdateManyWithWhereWithoutEstablishmentInput | ExpenseUpdateManyWithWhereWithoutEstablishmentInput[]
+    deleteMany?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
   }
 
   export type ImageUpdateManyWithoutEstablishmentNestedInput = {
@@ -130621,6 +132472,20 @@ export namespace Prisma {
     update?: StockWarehouseUpdateWithWhereUniqueWithoutEstablishmentInput | StockWarehouseUpdateWithWhereUniqueWithoutEstablishmentInput[]
     updateMany?: StockWarehouseUpdateManyWithWhereWithoutEstablishmentInput | StockWarehouseUpdateManyWithWhereWithoutEstablishmentInput[]
     deleteMany?: StockWarehouseScalarWhereInput | StockWarehouseScalarWhereInput[]
+  }
+
+  export type ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput = {
+    create?: XOR<ExpenseCreateWithoutEstablishmentInput, ExpenseUncheckedCreateWithoutEstablishmentInput> | ExpenseCreateWithoutEstablishmentInput[] | ExpenseUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: ExpenseCreateOrConnectWithoutEstablishmentInput | ExpenseCreateOrConnectWithoutEstablishmentInput[]
+    upsert?: ExpenseUpsertWithWhereUniqueWithoutEstablishmentInput | ExpenseUpsertWithWhereUniqueWithoutEstablishmentInput[]
+    createMany?: ExpenseCreateManyEstablishmentInputEnvelope
+    set?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    disconnect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    delete?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    connect?: ExpenseWhereUniqueInput | ExpenseWhereUniqueInput[]
+    update?: ExpenseUpdateWithWhereUniqueWithoutEstablishmentInput | ExpenseUpdateWithWhereUniqueWithoutEstablishmentInput[]
+    updateMany?: ExpenseUpdateManyWithWhereWithoutEstablishmentInput | ExpenseUpdateManyWithWhereWithoutEstablishmentInput[]
+    deleteMany?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
   }
 
   export type ImageUncheckedUpdateManyWithoutEstablishmentNestedInput = {
@@ -131065,6 +132930,30 @@ export namespace Prisma {
     update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutEstablishmentBookingSettingsInput, EstablishmentUpdateWithoutEstablishmentBookingSettingsInput>, EstablishmentUncheckedUpdateWithoutEstablishmentBookingSettingsInput>
   }
 
+  export type EstablishmentCreateNestedOneWithoutExpensesInput = {
+    create?: XOR<EstablishmentCreateWithoutExpensesInput, EstablishmentUncheckedCreateWithoutExpensesInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutExpensesInput
+    connect?: EstablishmentWhereUniqueInput
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EstablishmentUpdateOneWithoutExpensesNestedInput = {
+    create?: XOR<EstablishmentCreateWithoutExpensesInput, EstablishmentUncheckedCreateWithoutExpensesInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutExpensesInput
+    upsert?: EstablishmentUpsertWithoutExpensesInput
+    disconnect?: EstablishmentWhereInput | boolean
+    delete?: EstablishmentWhereInput | boolean
+    connect?: EstablishmentWhereUniqueInput
+    update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutExpensesInput, EstablishmentUpdateWithoutExpensesInput>, EstablishmentUncheckedUpdateWithoutExpensesInput>
+  }
+
   export type EstablishmentCreateNestedManyWithoutBannerImageInput = {
     create?: XOR<EstablishmentCreateWithoutBannerImageInput, EstablishmentUncheckedCreateWithoutBannerImageInput> | EstablishmentCreateWithoutBannerImageInput[] | EstablishmentUncheckedCreateWithoutBannerImageInput[]
     connectOrCreate?: EstablishmentCreateOrConnectWithoutBannerImageInput | EstablishmentCreateOrConnectWithoutBannerImageInput[]
@@ -131139,14 +133028,6 @@ export namespace Prisma {
     connectOrCreate?: MenuCategoryCreateOrConnectWithoutImageInput | MenuCategoryCreateOrConnectWithoutImageInput[]
     createMany?: MenuCategoryCreateManyImageInputEnvelope
     connect?: MenuCategoryWhereUniqueInput | MenuCategoryWhereUniqueInput[]
-  }
-
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type EstablishmentUpdateManyWithoutBannerImageNestedInput = {
@@ -136779,6 +138660,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -136847,6 +138729,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -136931,6 +138814,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -136999,6 +138883,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -137067,6 +138952,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -137135,6 +139021,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -137219,6 +139106,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -137287,6 +139175,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -137385,6 +139274,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -137453,6 +139343,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -137566,6 +139457,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -137634,6 +139526,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -137853,6 +139746,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -137921,6 +139815,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -138089,6 +139984,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -138157,6 +140053,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -138424,6 +140321,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -138492,6 +140390,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -138625,6 +140524,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -138693,6 +140593,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -139040,6 +140941,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -139108,6 +141010,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -139242,6 +141145,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -139310,6 +141214,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -139816,6 +141721,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -139884,6 +141790,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -139995,6 +141902,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -140063,6 +141971,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -140271,6 +142180,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
@@ -140339,6 +142249,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -140423,6 +142334,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
@@ -140491,6 +142403,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -140673,6 +142586,58 @@ export namespace Prisma {
   export type ImageCreateOrConnectWithoutBannerUsedInBrandsInput = {
     where: ImageWhereUniqueInput
     create: XOR<ImageCreateWithoutBannerUsedInBrandsInput, ImageUncheckedCreateWithoutBannerUsedInBrandsInput>
+  }
+
+  export type ExpenseCreateWithoutEstablishmentInput = {
+    id?: string
+    issuerTaxId: string
+    customerTaxId?: string | null
+    country?: string | null
+    documentType: string
+    status: string
+    documentDate: Date | string
+    invoiceNumber: string
+    totalAmount: number
+    taxableBase: number
+    taxAmount: number
+    atcud?: string | null
+    controlCode?: string | null
+    documentHash?: string | null
+    certificate?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rawData?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type ExpenseUncheckedCreateWithoutEstablishmentInput = {
+    id?: string
+    issuerTaxId: string
+    customerTaxId?: string | null
+    country?: string | null
+    documentType: string
+    status: string
+    documentDate: Date | string
+    invoiceNumber: string
+    totalAmount: number
+    taxableBase: number
+    taxAmount: number
+    atcud?: string | null
+    controlCode?: string | null
+    documentHash?: string | null
+    certificate?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rawData?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type ExpenseCreateOrConnectWithoutEstablishmentInput = {
+    where: ExpenseWhereUniqueInput
+    create: XOR<ExpenseCreateWithoutEstablishmentInput, ExpenseUncheckedCreateWithoutEstablishmentInput>
+  }
+
+  export type ExpenseCreateManyEstablishmentInputEnvelope = {
+    data: ExpenseCreateManyEstablishmentInput | ExpenseCreateManyEstablishmentInput[]
+    skipDuplicates?: boolean
   }
 
   export type ImageCreateWithoutEstablishmentInput = {
@@ -142175,6 +144140,47 @@ export namespace Prisma {
     menuCategory?: MenuCategoryUncheckedUpdateManyWithoutImageNestedInput
   }
 
+  export type ExpenseUpsertWithWhereUniqueWithoutEstablishmentInput = {
+    where: ExpenseWhereUniqueInput
+    update: XOR<ExpenseUpdateWithoutEstablishmentInput, ExpenseUncheckedUpdateWithoutEstablishmentInput>
+    create: XOR<ExpenseCreateWithoutEstablishmentInput, ExpenseUncheckedCreateWithoutEstablishmentInput>
+  }
+
+  export type ExpenseUpdateWithWhereUniqueWithoutEstablishmentInput = {
+    where: ExpenseWhereUniqueInput
+    data: XOR<ExpenseUpdateWithoutEstablishmentInput, ExpenseUncheckedUpdateWithoutEstablishmentInput>
+  }
+
+  export type ExpenseUpdateManyWithWhereWithoutEstablishmentInput = {
+    where: ExpenseScalarWhereInput
+    data: XOR<ExpenseUpdateManyMutationInput, ExpenseUncheckedUpdateManyWithoutEstablishmentInput>
+  }
+
+  export type ExpenseScalarWhereInput = {
+    AND?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
+    OR?: ExpenseScalarWhereInput[]
+    NOT?: ExpenseScalarWhereInput | ExpenseScalarWhereInput[]
+    id?: StringFilter<"Expense"> | string
+    issuerTaxId?: StringFilter<"Expense"> | string
+    customerTaxId?: StringNullableFilter<"Expense"> | string | null
+    country?: StringNullableFilter<"Expense"> | string | null
+    documentType?: StringFilter<"Expense"> | string
+    status?: StringFilter<"Expense"> | string
+    documentDate?: DateTimeFilter<"Expense"> | Date | string
+    invoiceNumber?: StringFilter<"Expense"> | string
+    totalAmount?: FloatFilter<"Expense"> | number
+    taxableBase?: FloatFilter<"Expense"> | number
+    taxAmount?: FloatFilter<"Expense"> | number
+    atcud?: StringNullableFilter<"Expense"> | string | null
+    controlCode?: StringNullableFilter<"Expense"> | string | null
+    documentHash?: StringNullableFilter<"Expense"> | string | null
+    certificate?: StringNullableFilter<"Expense"> | string | null
+    establishmentId?: StringFilter<"Expense"> | string
+    createdAt?: DateTimeFilter<"Expense"> | Date | string
+    updatedAt?: DateTimeFilter<"Expense"> | Date | string
+    rawData?: JsonNullableFilter<"Expense">
+  }
+
   export type ImageUpsertWithWhereUniqueWithoutEstablishmentInput = {
     where: ImageWhereUniqueInput
     update: XOR<ImageUpdateWithoutEstablishmentInput, ImageUncheckedUpdateWithoutEstablishmentInput>
@@ -143318,6 +145324,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -143386,6 +145393,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -143470,6 +145478,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -143538,6 +145547,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -143548,6 +145558,298 @@ export namespace Prisma {
     variantOptions?: VariantOptionUncheckedUpdateManyWithoutEstablishmentNestedInput
     bookings?: BookingUncheckedUpdateManyWithoutEstablishmentNestedInput
     bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
+    integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
+    devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
+    vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
+    sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
+    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
+    emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
+    discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
+    promotions?: PromotionUncheckedUpdateManyWithoutEstablishmentNestedInput
+    suppliers?: SupplierUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockCategories?: StockCategoryUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockItems?: StockItemUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockEntries?: StockEntryUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockExits?: StockExitUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockMovements?: StockMovementUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockAlerts?: StockAlertUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockInventoryCounts?: StockInventoryCountUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type EstablishmentCreateWithoutExpensesInput = {
+    id?: string
+    name: string
+    slug: string
+    type: $Enums.EstablishmentType
+    status?: $Enums.EstablishmentStatus
+    isOnline?: boolean
+    email: string
+    countryCode: string
+    phoneNumber: string
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    country: string
+    billingName: string
+    billingTaxId: string
+    stripeCustomerId: string
+    instagramUrl?: string | null
+    tiktokUrl?: string | null
+    facebookUrl?: string | null
+    googleReviewUrl?: string | null
+    tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
+    primaryLanguage?: $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: $Enums.Currency
+    timezone?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
+    owner: UserCreateNestedOneWithoutEstablishmentsInput
+    activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
+    logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
+    bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    images?: ImageCreateNestedManyWithoutEstablishmentInput
+    themes?: ThemeCreateNestedManyWithoutEstablishmentInput
+    employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
+    serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    menus?: MenuCreateNestedManyWithoutEstablishmentInput
+    Item?: ItemCreateNestedManyWithoutEstablishmentInput
+    addons?: AddonCreateNestedManyWithoutEstablishmentInput
+    variantOptions?: VariantOptionCreateNestedManyWithoutEstablishmentInput
+    bookings?: BookingCreateNestedManyWithoutEstablishmentInput
+    bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
+    establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
+    integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
+    subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
+    invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
+    devices?: DeviceCreateNestedManyWithoutEstablishmentInput
+    vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
+    sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
+    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
+    emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
+    auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
+    discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
+    promotions?: PromotionCreateNestedManyWithoutEstablishmentInput
+    suppliers?: SupplierCreateNestedManyWithoutEstablishmentInput
+    stockCategories?: StockCategoryCreateNestedManyWithoutEstablishmentInput
+    stockItems?: StockItemCreateNestedManyWithoutEstablishmentInput
+    stockEntries?: StockEntryCreateNestedManyWithoutEstablishmentInput
+    stockExits?: StockExitCreateNestedManyWithoutEstablishmentInput
+    stockMovements?: StockMovementCreateNestedManyWithoutEstablishmentInput
+    stockAlerts?: StockAlertCreateNestedManyWithoutEstablishmentInput
+    stockInventoryCounts?: StockInventoryCountCreateNestedManyWithoutEstablishmentInput
+    stockWarehouses?: StockWarehouseCreateNestedManyWithoutEstablishmentInput
+  }
+
+  export type EstablishmentUncheckedCreateWithoutExpensesInput = {
+    id?: string
+    name: string
+    slug: string
+    type: $Enums.EstablishmentType
+    status?: $Enums.EstablishmentStatus
+    isOnline?: boolean
+    email: string
+    countryCode: string
+    phoneNumber: string
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    country: string
+    billingName: string
+    billingTaxId: string
+    stripeCustomerId: string
+    instagramUrl?: string | null
+    tiktokUrl?: string | null
+    facebookUrl?: string | null
+    googleReviewUrl?: string | null
+    tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
+    primaryLanguage?: $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: $Enums.Currency
+    timezone?: string
+    logoImageId?: string | null
+    bannerImageId?: string | null
+    activeThemeId?: string | null
+    scheduleId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: string
+    images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
+    themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
+    serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
+    Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
+    addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
+    variantOptions?: VariantOptionUncheckedCreateNestedManyWithoutEstablishmentInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutEstablishmentInput
+    bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
+    integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
+    devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
+    vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
+    sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
+    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
+    emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
+    discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
+    promotions?: PromotionUncheckedCreateNestedManyWithoutEstablishmentInput
+    suppliers?: SupplierUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockCategories?: StockCategoryUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockItems?: StockItemUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockEntries?: StockEntryUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockExits?: StockExitUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockMovements?: StockMovementUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockAlerts?: StockAlertUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockInventoryCounts?: StockInventoryCountUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockWarehouses?: StockWarehouseUncheckedCreateNestedManyWithoutEstablishmentInput
+  }
+
+  export type EstablishmentCreateOrConnectWithoutExpensesInput = {
+    where: EstablishmentWhereUniqueInput
+    create: XOR<EstablishmentCreateWithoutExpensesInput, EstablishmentUncheckedCreateWithoutExpensesInput>
+  }
+
+  export type EstablishmentUpsertWithoutExpensesInput = {
+    update: XOR<EstablishmentUpdateWithoutExpensesInput, EstablishmentUncheckedUpdateWithoutExpensesInput>
+    create: XOR<EstablishmentCreateWithoutExpensesInput, EstablishmentUncheckedCreateWithoutExpensesInput>
+    where?: EstablishmentWhereInput
+  }
+
+  export type EstablishmentUpdateToOneWithWhereWithoutExpensesInput = {
+    where?: EstablishmentWhereInput
+    data: XOR<EstablishmentUpdateWithoutExpensesInput, EstablishmentUncheckedUpdateWithoutExpensesInput>
+  }
+
+  export type EstablishmentUpdateWithoutExpensesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
+    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    billingName?: StringFieldUpdateOperationsInput | string
+    billingTaxId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    timezone?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
+    owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
+    activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
+    logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
+    bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    images?: ImageUpdateManyWithoutEstablishmentNestedInput
+    themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
+    employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
+    serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    menus?: MenuUpdateManyWithoutEstablishmentNestedInput
+    Item?: ItemUpdateManyWithoutEstablishmentNestedInput
+    addons?: AddonUpdateManyWithoutEstablishmentNestedInput
+    variantOptions?: VariantOptionUpdateManyWithoutEstablishmentNestedInput
+    bookings?: BookingUpdateManyWithoutEstablishmentNestedInput
+    bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
+    integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
+    subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
+    invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
+    devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
+    vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
+    sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
+    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
+    emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
+    discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
+    promotions?: PromotionUpdateManyWithoutEstablishmentNestedInput
+    suppliers?: SupplierUpdateManyWithoutEstablishmentNestedInput
+    stockCategories?: StockCategoryUpdateManyWithoutEstablishmentNestedInput
+    stockItems?: StockItemUpdateManyWithoutEstablishmentNestedInput
+    stockEntries?: StockEntryUpdateManyWithoutEstablishmentNestedInput
+    stockExits?: StockExitUpdateManyWithoutEstablishmentNestedInput
+    stockMovements?: StockMovementUpdateManyWithoutEstablishmentNestedInput
+    stockAlerts?: StockAlertUpdateManyWithoutEstablishmentNestedInput
+    stockInventoryCounts?: StockInventoryCountUpdateManyWithoutEstablishmentNestedInput
+    stockWarehouses?: StockWarehouseUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type EstablishmentUncheckedUpdateWithoutExpensesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
+    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    billingName?: StringFieldUpdateOperationsInput | string
+    billingTaxId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    timezone?: StringFieldUpdateOperationsInput | string
+    logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
+    themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
+    Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
+    addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
+    variantOptions?: VariantOptionUncheckedUpdateManyWithoutEstablishmentNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutEstablishmentNestedInput
+    bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
     establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
     integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
@@ -143605,6 +145907,7 @@ export namespace Prisma {
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -143673,6 +145976,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -143751,6 +146055,7 @@ export namespace Prisma {
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -143819,6 +146124,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -143898,6 +146204,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
@@ -143966,6 +146273,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -144268,6 +146576,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
@@ -144336,6 +146645,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -144482,6 +146792,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -144550,6 +146861,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -144634,6 +146946,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -144702,6 +147015,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -144770,6 +147084,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -144838,6 +147153,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -144922,6 +147238,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -144990,6 +147307,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -145058,6 +147376,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -145126,6 +147445,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -145210,6 +147530,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -145278,6 +147599,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -145366,6 +147688,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -145434,6 +147757,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -145941,6 +148265,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -146009,6 +148334,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -146860,6 +149186,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -146928,6 +149255,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -147050,6 +149378,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -147118,6 +149447,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -148366,6 +150696,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -148434,6 +150765,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -148574,6 +150906,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -148642,6 +150975,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -149644,6 +151978,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -149712,6 +152047,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -149847,6 +152183,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -149915,6 +152252,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -150093,6 +152431,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -150161,6 +152500,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -150334,6 +152674,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -150402,6 +152743,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -151464,6 +153806,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -151532,6 +153875,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -151646,6 +153990,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -151714,6 +154059,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -151903,6 +154249,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -151971,6 +154318,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -152190,6 +154538,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -152258,6 +154607,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -152618,6 +154968,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -152686,6 +155037,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -152896,6 +155248,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -152964,6 +155317,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -153337,6 +155691,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -153405,6 +155760,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -153575,6 +155931,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -153643,6 +156000,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -153757,6 +156115,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -153825,6 +156184,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -154058,6 +156418,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -154126,6 +156487,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -154261,6 +156623,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -154329,6 +156692,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -154774,6 +157138,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -154842,6 +157207,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -155818,6 +158184,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -155886,6 +158253,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -156109,6 +158477,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -156177,6 +158546,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -156700,6 +159070,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -156768,6 +159139,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -156928,6 +159300,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -156996,6 +159369,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -157440,6 +159814,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -157508,6 +159883,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -157765,6 +160141,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -157833,6 +160210,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -158092,6 +160470,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -158160,6 +160539,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -158325,6 +160705,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -158393,6 +160774,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -158548,6 +160930,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -158616,6 +160999,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -158734,6 +161118,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -158802,6 +161187,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -159122,6 +161508,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -159190,6 +161577,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -159299,6 +161687,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -159367,6 +161756,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -159856,6 +162246,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -159924,6 +162315,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -160008,6 +162400,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -160076,6 +162469,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -160231,6 +162625,7 @@ export namespace Prisma {
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -160299,6 +162694,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -160406,6 +162802,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
@@ -160474,6 +162871,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -160602,6 +163000,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
@@ -160670,6 +163069,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -160791,6 +163191,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -160859,6 +163260,7 @@ export namespace Prisma {
     scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -161024,6 +163426,7 @@ export namespace Prisma {
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
@@ -161092,6 +163495,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -161218,6 +163622,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -161286,6 +163691,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -161593,6 +163999,27 @@ export namespace Prisma {
     event?: EnumEmailEventTypeFieldUpdateOperationsInput | $Enums.EmailEventType
     occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     payload?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type ExpenseCreateManyEstablishmentInput = {
+    id?: string
+    issuerTaxId: string
+    customerTaxId?: string | null
+    country?: string | null
+    documentType: string
+    status: string
+    documentDate: Date | string
+    invoiceNumber: string
+    totalAmount: number
+    taxableBase: number
+    taxAmount: number
+    atcud?: string | null
+    controlCode?: string | null
+    documentHash?: string | null
+    certificate?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rawData?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ImageCreateManyEstablishmentInput = {
@@ -161979,6 +164406,69 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+  }
+
+  export type ExpenseUpdateWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    issuerTaxId?: StringFieldUpdateOperationsInput | string
+    customerTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    documentType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    documentDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    taxableBase?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    atcud?: NullableStringFieldUpdateOperationsInput | string | null
+    controlCode?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawData?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type ExpenseUncheckedUpdateWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    issuerTaxId?: StringFieldUpdateOperationsInput | string
+    customerTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    documentType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    documentDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    taxableBase?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    atcud?: NullableStringFieldUpdateOperationsInput | string | null
+    controlCode?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawData?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type ExpenseUncheckedUpdateManyWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    issuerTaxId?: StringFieldUpdateOperationsInput | string
+    customerTaxId?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    documentType?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    documentDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    taxableBase?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    atcud?: NullableStringFieldUpdateOperationsInput | string | null
+    controlCode?: NullableStringFieldUpdateOperationsInput | string | null
+    documentHash?: NullableStringFieldUpdateOperationsInput | string | null
+    certificate?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rawData?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type ImageUpdateWithoutEstablishmentInput = {
@@ -163386,6 +165876,7 @@ export namespace Prisma {
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -163454,6 +165945,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -163558,6 +166050,7 @@ export namespace Prisma {
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -163626,6 +166119,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -166983,6 +169477,7 @@ export namespace Prisma {
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -167051,6 +169546,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -167303,6 +169799,7 @@ export namespace Prisma {
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
@@ -167371,6 +169868,7 @@ export namespace Prisma {
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput

@@ -11,6 +11,7 @@ import { ConfigModule } from '@nestjs/config';
 import { EupagoModule } from './modules/integrations/eupago/eupago.module';
 import { MenuModule } from './modules/menu/menu.module';
 import { ItemModule } from './modules/item/item.module';
+import { ExpenseModule } from './modules/expense/expense.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ItemModule } from './modules/item/item.module';
     EupagoModule,
     MenuModule,
     ItemModule,
+    ExpenseModule,
   ],
   controllers: [DashboardController],
   providers: [DashboardService],

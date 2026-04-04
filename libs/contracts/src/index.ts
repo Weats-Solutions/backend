@@ -32,3 +32,4 @@ export * from './dashboard/dtos/menu/create/create-menu.dto';
 export * from './dashboard/dtos/menu/create/create-subcategory.dto';
 export * from './dashboard/dtos/menu/update/update-menu-positions.dto';
 export * from './dashboard/dtos/menu/update/update-menu.dto';
+export * from './dashboard/dtos/expense/create-expense.dto';

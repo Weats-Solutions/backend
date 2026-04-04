@@ -54,6 +54,10 @@ export const DASHBOARD_PATTERNS = {
   ITEM_GET_ALLERGENS: 'dashboard.item.get_allergens',
   ITEM_GET_TAXES: 'dashboard.item.get_taxes',
 
+  EXPENSE_CREATE: 'dashboard.expense.create',
+  EXPENSE_GET_BY_ESTABLISHMENT: 'dashboard.expense.get_by_establishment',
+  EXPENSE_DELETE: 'dashboard.expense.delete',
+
   ADDON_CREATE: 'dashboard.addon.create',
   ADDON_EDIT: 'dashboard.addon.edit',
   ADDON_GET_BY_ESTABLISHMENT: 'dashboard.addon.get_by_establishment',

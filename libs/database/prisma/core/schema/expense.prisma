@@ -1,0 +1,28 @@
+model Expense {
+    id            String  @id @default(cuid())
+    issuerTaxId   String
+    customerTaxId String?
+    country       String?
+
+    documentType  String
+    status        String
+    documentDate  DateTime
+    invoiceNumber String
+
+    totalAmount Float
+    taxableBase Float
+    taxAmount   Float
+
+    atcud        String?
+    controlCode  String?
+    documentHash String?
+    certificate  String?
+
+    establishmentId String
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+
+    rawData Json?
+
+    establishment Establishment? @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}

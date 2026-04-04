@@ -356,6 +356,28 @@ exports.Prisma.EstablishmentBookingSettingsScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ExpenseScalarFieldEnum = {
+  id: 'id',
+  issuerTaxId: 'issuerTaxId',
+  customerTaxId: 'customerTaxId',
+  country: 'country',
+  documentType: 'documentType',
+  status: 'status',
+  documentDate: 'documentDate',
+  invoiceNumber: 'invoiceNumber',
+  totalAmount: 'totalAmount',
+  taxableBase: 'taxableBase',
+  taxAmount: 'taxAmount',
+  atcud: 'atcud',
+  controlCode: 'controlCode',
+  documentHash: 'documentHash',
+  certificate: 'certificate',
+  establishmentId: 'establishmentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  rawData: 'rawData'
+};
+
 exports.Prisma.ImageScalarFieldEnum = {
   id: 'id',
   cloudflareImageId: 'cloudflareImageId',
@@ -1591,6 +1613,7 @@ exports.Prisma.ModelName = {
   Employee: 'Employee',
   Establishment: 'Establishment',
   EstablishmentBookingSettings: 'EstablishmentBookingSettings',
+  Expense: 'Expense',
   Image: 'Image',
   EstablishmentIntegrations: 'EstablishmentIntegrations',
   SumupReader: 'SumupReader',

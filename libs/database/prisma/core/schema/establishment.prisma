@@ -57,6 +57,7 @@ model Establishment {
   bannerImage Image? @relation("BannerImage", fields: [bannerImageId], references: [id])
 
   // ─── Relações: Módulos & Features ──────────────────────────────────────────
+  expenses       Expense[]
   images         Image[]
   themes         Theme[]
   employees      Employee[]
