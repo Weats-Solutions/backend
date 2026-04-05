@@ -681,6 +681,8 @@ model Establishment {
   scheduleId String?   @unique
   schedule   Schedule? @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
 
+  metadata EstablishmentMetadata?
+
   // ─── Sistema ───────────────────────────────────────────────────────────────
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -744,6 +746,26 @@ enum Currency {
   EUR
   USD
   GBP
+}
+
+model EstablishmentMetadata {
+  id String @id @default(ulid())
+
+  name        String?
+  shortName   String?
+  description String?
+  ogImage     String?
+
+  faviconIco              String?
+  favicon32x32Png         String?
+  appleTouchIconPng       String?
+  androidChrome192x192Png String?
+  androidChrome512x512Png String?
+
+  establishmentId String        @unique
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
 }
 
 model EstablishmentBookingSettings {

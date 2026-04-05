@@ -159,6 +159,19 @@ export class LandingpageService {
                     },
                     logoImage: true,
                     bannerImage: true,
+                    metadata: {
+                        select: {
+                            name: true,
+                            shortName: true,
+                            description: true,
+                            ogImage: true,
+                            faviconIco: true,
+                            favicon32x32Png: true,
+                            appleTouchIconPng: true,
+                            androidChrome192x192Png: true,
+                            androidChrome512x512Png: true,
+                        }
+                    },
                 },
             });
 
@@ -175,6 +188,7 @@ export class LandingpageService {
                 themeConfig: establishment.activeTheme?.config,
                 logo: establishment.logoImage?.url || null,
                 banner: establishment.bannerImage?.url || null,
+                metadata: establishment.metadata,
             };
 
         } catch (error) {
@@ -212,6 +226,14 @@ export class LandingpageService {
                 currency: establishment.currency,
                 timezone: establishment.timezone,
                 schedule: normalizeSchedule(establishment.schedule ?? undefined),
+                socials: {
+                    tiktokUrl: establishment.tiktokUrl,
+                    instagramUrl: establishment.instagramUrl,
+                    facebookUrl: establishment.facebookUrl,
+                    tripAdvisorUrl: establishment.tripAdvisorUrl,
+                    googleReviewUrl: establishment.googleReviewUrl,
+                    websiteUrl: establishment.websiteUrl,
+                },
                 takeway: true,
                 reservations: true,
             };

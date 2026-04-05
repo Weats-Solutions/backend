@@ -2,7 +2,7 @@ import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { EstablishmentService } from './establishment.service';
-import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto, UpdateEstablishmentScheduleDto } from '@weats/contracts/dashboard/dtos/establishment';
+import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { User, Establishment } from '@weats/types';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
@@ -28,6 +28,11 @@ export class EstablishmentController {
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_GENERAL)
     getEstablishmentGeneralSettings(@Payload() payload: { id: string }) {
         return this.establishmentService.getEstablishmentGeneralSettings(payload.id);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_BRANDING)
+    getEstablishmentBrandingSettings(@Payload() payload: { id: string }) {
+        return this.establishmentService.getEstablishmentBrandingSettings(payload.id);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SCHEDULE_BY_ID)

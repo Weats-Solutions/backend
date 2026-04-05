@@ -169,6 +169,49 @@ export class EstablishmentService {
     };
   }
 
+  async getEstablishmentBrandingSettings(id: string) {
+    const establishment = await this.prisma.establishment.findUnique({
+      where: { id },
+      select: {
+        tiktokUrl: true,
+        instagramUrl: true,
+        facebookUrl: true,
+        tripAdvisorUrl: true,
+        googleReviewUrl: true,
+        websiteUrl: true,
+        logoImage: {
+          select: { id: true, url: true },
+        },
+        bannerImage: {
+          select: { id: true, url: true },
+        },
+      },
+    });
+
+    if (!establishment) {
+      throw new RpcException({
+        status: 404,
+        message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+        code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+      });
+    }
+
+    return {
+      branding: {
+        logoImage: establishment.logoImage,
+        bannerImage: establishment.bannerImage,
+      },
+      socials: {
+        tiktokUrl: establishment.tiktokUrl,
+        instagramUrl: establishment.instagramUrl,
+        facebookUrl: establishment.facebookUrl,
+        tripAdvisorUrl: establishment.tripAdvisorUrl,
+        googleReviewUrl: establishment.googleReviewUrl,
+      },
+
+    };
+  }
+
   async getEstablishmentSchedule(id: string) {
     const establishment = await this.prisma.establishment.findUniqueOrThrow({
       where: { id },

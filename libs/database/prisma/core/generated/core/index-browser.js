@@ -343,6 +343,22 @@ exports.Prisma.EstablishmentScalarFieldEnum = {
   ownerId: 'ownerId'
 };
 
+exports.Prisma.EstablishmentMetadataScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  shortName: 'shortName',
+  description: 'description',
+  ogImage: 'ogImage',
+  faviconIco: 'faviconIco',
+  favicon32x32Png: 'favicon32x32Png',
+  appleTouchIconPng: 'appleTouchIconPng',
+  androidChrome192x192Png: 'androidChrome192x192Png',
+  androidChrome512x512Png: 'androidChrome512x512Png',
+  establishmentId: 'establishmentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.EstablishmentBookingSettingsScalarFieldEnum = {
   id: 'id',
   enabled: 'enabled',
@@ -1612,6 +1628,7 @@ exports.Prisma.ModelName = {
   EmailEvent: 'EmailEvent',
   Employee: 'Employee',
   Establishment: 'Establishment',
+  EstablishmentMetadata: 'EstablishmentMetadata',
   EstablishmentBookingSettings: 'EstablishmentBookingSettings',
   Expense: 'Expense',
   Image: 'Image',
