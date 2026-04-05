@@ -60,13 +60,13 @@ export class EstablishmentOpenGuard implements CanActivate {
 
         if (!establishment.schedule) {
             throw new ForbiddenException({
-                message: ERRORS.ESTABLISHMENT_CLOSED,
-                code: ERRORS.ESTABLISHMENT_CLOSED,
+                message: "teste",
+                code: "teste",
             });
         }
 
         if (!isScheduleOpenNow(establishment.schedule, establishment.timezone)) {
-            this.logger.debug(`Establishment ${establishmentSlug} is currently closed`);
+            this.logger.log(`Establishment ${establishmentSlug} is currently closed`);
             throw new ForbiddenException({
                 message: ERRORS.ESTABLISHMENT_CLOSED,
                 code: ERRORS.ESTABLISHMENT_CLOSED,

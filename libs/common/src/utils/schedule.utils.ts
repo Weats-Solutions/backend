@@ -61,7 +61,7 @@ export function isScheduleOpenNow(
     tz: string,
 ): boolean {
     if (!schedule?.days || schedule.days.length === 0) return false;
-
+    console.log(tz)
     const now = dayjs().tz(tz);
     const todayDayOfWeek = DAY_INDEX_MAP[(now.day() + 6) % 7];
     const currentMinutes = now.hour() * 60 + now.minute();
