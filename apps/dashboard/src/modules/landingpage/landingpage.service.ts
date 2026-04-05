@@ -2,10 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CorePrismaService, Schedule } from '@weats/database';
 import { EstablishmentLanguage } from '@weats/database';
 import { RpcException } from '@nestjs/microservices';
-import { ERRORS, normalizeSchedule } from '@weats/common';
+import { ERRORS, normalizeSchedule, clearMenuCacheAsync } from '@weats/common';
 import { UpdateThemeSettingsDto } from '@weats/contracts/dashboard/dtos/theme/update-theme-settings.dto';
-import { HttpService } from '@nestjs/axios';
-import { firstValueFrom } from 'rxjs';
 import { Establishment, EupagoMultibancoResponse } from '@weats/types';
 import { AppConfigService } from '@weats/configs/app-config.service';
 import { MenuService } from '../menu/menu.service';
@@ -21,7 +19,6 @@ dayjs.extend(timezone);
 export class LandingpageService {
     constructor(
         private readonly prisma: CorePrismaService,
-        private readonly http: HttpService,
         private readonly appConfigService: AppConfigService,
         private readonly menuService: MenuService,
         //@Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
@@ -386,29 +383,12 @@ export class LandingpageService {
     async updateTheme(payload: { updateThemeSettingsDto: UpdateThemeSettingsDto, establishment: Establishment }) {
         try {
             const { updateThemeSettingsDto, establishment } = payload;
-            const { name, config } = updateThemeSettingsDto;
-
-            const existingEstablishment = await this.prisma.establishment.findUnique({
-                where: { id: establishment.id },
-                select: {
-                    activeTheme: {
-                        select: {
-                            id: true,
-                        }
-                    },
-                },
-            });
+            const { name, config, themeId } = updateThemeSettingsDto;
 
             let theme;
 
-            if (existingEstablishment?.activeTheme) {
-                // Update existing theme
-                theme = await this.prisma.theme.update({
-                    where: { id: existingEstablishment.activeTheme.id },
-                    data: { name, config },
-                });
-            } else {
-                // Create new theme and set it as the active theme
+            if (themeId) {
+                // Create new theme (themeId is provided when creating new)
                 theme = await this.prisma.theme.create({
                     data: {
                         name,
@@ -423,19 +403,119 @@ export class LandingpageService {
                     where: { id: establishment.id },
                     data: { activeThemeId: theme.id },
                 });
+            } else {
+                // Update existing theme
+                const existingEstablishment = await this.prisma.establishment.findUnique({
+                    where: { id: establishment.id },
+                    select: {
+                        activeTheme: {
+                            select: {
+                                id: true,
+                            }
+                        },
+                    },
+                });
+
+                if (existingEstablishment?.activeTheme) {
+                    theme = await this.prisma.theme.update({
+                        where: { id: existingEstablishment.activeTheme.id },
+                        data: { name, config },
+                    });
+                } else {
+                    // Fallback: create new theme if no active theme exists
+                    theme = await this.prisma.theme.create({
+                        data: {
+                            name,
+                            config,
+                            establishment: {
+                                connect: { id: establishment.id },
+                            },
+                        },
+                    });
+
+                    await this.prisma.establishment.update({
+                        where: { id: establishment.id },
+                        data: { activeThemeId: theme.id },
+                    });
+                }
             }
 
-            const { data } = await firstValueFrom(
-                this.http.post(
-                    "https://menu.weats.pro/api/clear-cache",
-                    {
-                        slug: establishment.slug,
-                    }
-                ),
-            );
+            // Clear menu cache using the shared utility function
+            clearMenuCacheAsync(establishment.slug);
 
             return theme;
         } catch (error) {
+            console.log(error);
+            throw new RpcException({
+                status: 400,
+                message: ERRORS.BAD_REQUEST,
+                code: ERRORS.BAD_REQUEST,
+            });
+        }
+    }
+
+    async getAvailableThemes(payload: { establishmentId: string }) {
+        try {
+            const themes = await this.prisma.theme.findMany({
+                where: {
+                    OR: [
+                        { isDefault: true },
+                        { establishmentId: payload.establishmentId }
+                    ]
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    config: true,
+                    isDefault: true,
+                    establishmentId: true,
+                }
+            });
+
+            return themes;
+        } catch (error) {
+            console.log(error);
+            throw new RpcException({
+                status: 400,
+                message: ERRORS.BAD_REQUEST,
+                code: ERRORS.BAD_REQUEST,
+            });
+        }
+    }
+
+    async setActiveTheme(payload: { establishmentId: string; themeId: string }) {
+        try {
+            const { establishmentId, themeId } = payload;
+
+            // Verify theme exists
+            const theme = await this.prisma.theme.findUnique({
+                where: { id: themeId },
+                select: { id: true, name: true, config: true }
+            });
+
+            if (!theme) {
+                throw new RpcException({
+                    status: 404,
+                    message: ERRORS.NOT_FOUND,
+                    code: ERRORS.NOT_FOUND,
+                });
+            }
+
+            // Update establishment's active theme
+            const establishment = await this.prisma.establishment.update({
+                where: { id: establishmentId },
+                data: {
+                    activeThemeId: themeId,
+                },
+                select: { slug: true }
+            });
+
+            // Clear menu cache
+            clearMenuCacheAsync(establishment.slug);
+
+            return theme;
+        } catch (error) {
+            if (error instanceof RpcException) throw error;
             console.log(error);
             throw new RpcException({
                 status: 400,

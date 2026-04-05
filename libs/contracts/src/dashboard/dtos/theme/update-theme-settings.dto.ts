@@ -1,4 +1,4 @@
-import { IsObject, IsString } from "class-validator";
+import { IsObject, IsString, IsOptional } from "class-validator";
 
 export class UpdateThemeSettingsDto {
     @IsString()
@@ -6,4 +6,8 @@ export class UpdateThemeSettingsDto {
 
     @IsObject()
     config: Record<string, any>
+
+    @IsOptional()
+    @IsString()
+    themeId?: string
 }

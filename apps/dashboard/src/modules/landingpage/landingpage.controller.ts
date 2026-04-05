@@ -46,4 +46,14 @@ export class LandingpageController {
     updateTheme(@Payload() payload: { updateThemeSettingsDto: UpdateThemeSettingsDto, establishment: Establishment }) {
         return this.landingpageService.updateTheme(payload);
     }
+
+    @MessagePattern(DASHBOARD_PATTERNS.THEME_GET_AVAILABLE)
+    getAvailableThemes(@Payload() payload: { establishmentId: string }) {
+        return this.landingpageService.getAvailableThemes(payload);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.THEME_SET_ACTIVE)
+    setActiveTheme(@Payload() payload: { establishmentId: string; themeId: string }) {
+        return this.landingpageService.setActiveTheme(payload);
+    }
 }
