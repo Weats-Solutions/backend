@@ -136,6 +136,7 @@ export class LandingpageService {
             };
 
         } catch (error) {
+            if (error instanceof RpcException) throw error;
             console.log(error);
             throw new RpcException({
                 status: 400,
@@ -202,6 +203,7 @@ export class LandingpageService {
             };
 
         } catch (error) {
+            if (error instanceof RpcException) throw error;
             console.log(error);
             throw new RpcException({
                 status: 400,
@@ -249,6 +251,7 @@ export class LandingpageService {
             };
 
         } catch (error) {
+            if (error instanceof RpcException) throw error;
             console.log(error);
             throw new RpcException({
                 status: 400,
@@ -358,6 +361,7 @@ export class LandingpageService {
             };
 
         } catch (error) {
+            if (error instanceof RpcException) throw error;
             console.log(error);
             throw new RpcException({
                 status: 400,
@@ -426,6 +430,7 @@ export class LandingpageService {
 
             return establishment?.activeTheme ?? null;
         } catch (error) {
+            if (error instanceof RpcException) throw error;
             console.log(error);
             throw new RpcException({
                 status: 400,
@@ -500,6 +505,7 @@ export class LandingpageService {
 
             return theme;
         } catch (error) {
+            if (error instanceof RpcException) throw error;
             console.log(error);
             throw new RpcException({
                 status: 400,
@@ -529,6 +535,7 @@ export class LandingpageService {
 
             return themes;
         } catch (error) {
+            if (error instanceof RpcException) throw error;
             console.log(error);
             throw new RpcException({
                 status: 400,

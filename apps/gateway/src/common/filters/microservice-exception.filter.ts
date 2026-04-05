@@ -61,10 +61,12 @@ export class MicroserviceExceptionFilter implements ExceptionFilter {
       typeof exception === 'object' &&
       exception !== null &&
       !(exception instanceof Error) &&
-      ('status' in exception || 'statusCode' in exception || 'response' in exception)
+      ('status' in exception || 'statusCode' in exception || 'response' in exception || 'error' in exception)
     ) {
-      const payload = exception.response || exception.error || exception;
-      status = exception.status || exception.statusCode || payload.status || HttpStatus.BAD_REQUEST;
+      console.log('[MicroserviceExceptionFilter] Raw exception:', JSON.stringify(exception, null, 2));
+      const payload = exception.error || exception.response || exception;
+      
+      status = payload.status || payload.statusCode || exception.status || exception.statusCode || HttpStatus.BAD_REQUEST;
       message = payload.message || exception.message || 'Erro no microserviço';
       code = payload.code || exception.code;
       errorName = 'MicroserviceError';
