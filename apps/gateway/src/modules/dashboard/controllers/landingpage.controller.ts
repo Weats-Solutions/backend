@@ -67,6 +67,7 @@ export class LandingpageController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.THEME_SET_ACTIVE, { establishmentId: establishment.id, themeId: body.themeId });
   }
 
+  /*
   @Get('/:establishmentSlug')
   async getLandingpage(
     @Param('establishmentSlug') establishmentSlug: string,
@@ -75,6 +76,7 @@ export class LandingpageController {
   ) {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_BY_SLUG, { establishmentSlug, lang, targetId });
   }
+    */
 
   @Get('/:establishmentSlug/theme')
   async getLandingpageTheme(
