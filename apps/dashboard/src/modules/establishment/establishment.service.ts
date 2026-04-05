@@ -11,7 +11,7 @@ import { ulid } from 'ulid';
 import { ClerkService, StripeService } from '@weats/integrations';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
-import { EstablishmentBrandingDto, EstablishmentInformationsDto, EstablishmentLocationDto, EstablishmentSocialMediaDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentGeneralSettingsDto } from '@weats/contracts';
+import { EstablishmentBrandingDto, EstablishmentInformationsDto, EstablishmentLanguageDto, EstablishmentLocationDto, EstablishmentPreferencesDto, EstablishmentSocialMediaDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
 import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 
 export type NormalizedFeature =
@@ -212,6 +212,19 @@ export class EstablishmentService {
         googleReviewUrl: establishment.googleReviewUrl,
       },
 
+    };
+  }
+
+  async getEstablishmentSystemSettings(establishment: Establishment) {
+    return {
+      preferences: {
+        currency: establishment.currency,
+        timezone: establishment.timezone,
+      },
+      languages: {
+        primaryLanguage: establishment.primaryLanguage,
+        availableLanguages: establishment.availableLanguages,
+      }
     };
   }
 
@@ -444,7 +457,6 @@ export class EstablishmentService {
     try {
       let result;
 
-      // 1. Executa a atualização baseada na secção
       switch (dto.section) {
         case 'informations':
           result = await this.updateInformations(establishment.id, dto.informations);
@@ -466,9 +478,7 @@ export class EstablishmentService {
           });
       }
 
-      // 2. Limpa a cache (centralizado, já que todos usam 'settings')
-      // Usamos await para garantir que a cache é limpa antes de confirmar o sucesso
-      await this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
+      this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
 
       return result;
 
@@ -520,12 +530,12 @@ export class EstablishmentService {
       switch (dto.section) {
         case 'branding':
           result = await this.updateBranding(establishment.id, dto.branding);
-          await this.menuUtilsService.clearMenuCacheAsync('theme', establishment.slug);
+          this.menuUtilsService.clearMenuCacheAsync('theme', establishment.slug);
           break;
 
         case 'socials':
           result = await this.updateSocials(establishment.id, dto.socials);
-          await this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
+          this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
           break;
 
         default:
@@ -574,6 +584,83 @@ export class EstablishmentService {
         tripAdvisorUrl: data.tripAdvisorUrl,
         googleReviewUrl: data.googleReviewUrl,
         websiteUrl: data.websiteUrl
+      }
+    })
+  }
+
+  async updateEstablishmentSystemSettings(establishment: Establishment, dto: UpdateEstablishmentSystemSettingsDto) {
+    try {
+      let result;
+
+      switch (dto.section) {
+        case 'preferences':
+          result = await this.updatePreferences(establishment.id, dto.preferences);
+          break;
+
+        case 'languages':
+          result = await this.updateLanguages(establishment, dto.languages);
+          break;
+
+        default:
+          throw new RpcException({
+            status: 400,
+            message: 'Invalid section provided',
+            code: ERRORS.BAD_REQUEST,
+          });
+      }
+
+      this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
+
+      return result;
+
+    } catch (error) {
+      // Se já for uma RpcException, apenas a relança
+      if (error instanceof RpcException) throw error;
+
+      // Log do erro real para debug interno
+      console.error(`[SystemSettings] Update failed:`, error);
+
+      // Erro genérico para o cliente
+      throw new RpcException({
+        status: 400,
+        message: ERRORS.BAD_REQUEST,
+        code: ERRORS.BAD_REQUEST,
+      });
+    }
+  }
+
+  private async updatePreferences(id: string, data: EstablishmentPreferencesDto) {
+    return this.prisma.establishment.update({
+      where: { id },
+      data: {
+        currency: data.currency,
+        timezone: data.timezone,
+      }
+    })
+  }
+
+  private async updateLanguages(establishment: Establishment, data: EstablishmentLanguageDto) {
+    const { limit } = await this.featureUsageService.getUsageAndLimit("languages", establishment.id)
+    if (limit !== null && data.availableLanguages.length > limit) {
+      throw new RpcException({
+        status: 400,
+        message: ERRORS.FEATURE_LIMIT_REACHED,
+        code: ERRORS.FEATURE_LIMIT_REACHED,
+      });
+    }
+
+    if (!data.availableLanguages.includes(establishment.primaryLanguage as EstablishmentLanguage)) {
+      throw new RpcException({
+        status: 400,
+        message: ERRORS.BAD_REQUEST,
+        code: ERRORS.BAD_REQUEST,
+      });
+    }
+
+    return this.prisma.establishment.update({
+      where: { id: establishment.id },
+      data: {
+        availableLanguages: data.availableLanguages,
       }
     })
   }
@@ -698,6 +785,7 @@ export class EstablishmentService {
     }
   }
 
+  /*
   async updateLanguages(establishment: Establishment, updateEstablishmentLanguagesDto: UpdateEstablishmentLanguagesDto) {
     const { limit } = await this.featureUsageService.getUsageAndLimit("languages", establishment.id)
     if (limit !== null && updateEstablishmentLanguagesDto.availableLanguages.length > limit) {
@@ -728,6 +816,8 @@ export class EstablishmentService {
       updatedEstablishment,
     };
   }
+    */
+
   /*
     async updateBranding(establishmentId: string, updateEstablishmentBrandingDto: UpdateEstablishmentBrandingDto) {
   

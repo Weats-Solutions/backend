@@ -6,7 +6,7 @@ import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/
 import { User, Establishment } from '@weats/types';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
-import { UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentBrandingSettingsDto } from '@weats/contracts';
+import { UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
 
 @Controller()
 export class EstablishmentController {
@@ -33,6 +33,11 @@ export class EstablishmentController {
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_BRANDING)
     getEstablishmentBrandingSettings(@Payload() payload: { id: string }) {
         return this.establishmentService.getEstablishmentBrandingSettings(payload.id);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_SYSTEM)
+    getEstablishmentSystemSettings(@Payload() payload: { establishment: Establishment }) {
+        return this.establishmentService.getEstablishmentSystemSettings(payload.establishment);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SCHEDULE_BY_ID)
@@ -75,15 +80,22 @@ export class EstablishmentController {
         return this.establishmentService.updateEstablishmentBrandingSettings(payload.establishment, payload.updateEstablishmentBrandingSettingsDto);
     }
 
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_SYSTEM)
+    updateEstablishmentSystemSettings(@Payload() payload: { establishment: Establishment; updateEstablishmentSystemSettingsDto: UpdateEstablishmentSystemSettingsDto }) {
+        return this.establishmentService.updateEstablishmentSystemSettings(payload.establishment, payload.updateEstablishmentSystemSettingsDto);
+    }
+
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SCHEDULE)
     updateSchedule(@Payload() payload: { establishment: Establishment; updateEstablishmentScheduleDto: CreateScheduleDto }) {
         return this.establishmentService.upsertEstablishmentSchedule(payload.establishment, payload.updateEstablishmentScheduleDto);
     }
 
+    /*
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_LANGUAGES)
     updateLanguages(@Payload() payload: { establishment: Establishment; updateEstablishmentLanguagesDto: UpdateEstablishmentLanguagesDto }) {
         return this.establishmentService.updateLanguages(payload.establishment, payload.updateEstablishmentLanguagesDto);
     }
+    */
 
     /*
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_BRANDING)

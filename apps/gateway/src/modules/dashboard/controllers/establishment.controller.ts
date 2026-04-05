@@ -33,7 +33,7 @@ import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { ClerkService } from '@weats/integrations';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
-import { UpdateEstablishmentGeneralSettingsDto } from '@weats/contracts';
+import { UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
 import { UpdateEstablishmentBrandingSettingsDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-branding-settings.dto';
 
 @Controller('establishments')
@@ -137,6 +137,23 @@ export class EstablishmentController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_BRANDING, { id });
   }
 
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Get(':id/settings/system')
+  getEstablishmentSystemSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_SYSTEM, { establishment });
+  }
+
+
   /*
   @Roles()
   @UseGuards(ClerkGuard, EstablishmentStaffGuard)
@@ -235,6 +252,23 @@ export class EstablishmentController {
       });
     }
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_BRANDING, { establishment, updateEstablishmentBrandingSettingsDto });
+  }
+
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Patch(':id/settings/system')
+  updateEstablishmentSystemSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+    @Body() updateEstablishmentSystemSettingsDto: UpdateEstablishmentSystemSettingsDto,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_SYSTEM, { establishment, updateEstablishmentSystemSettingsDto });
   }
 
 
