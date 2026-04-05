@@ -61,12 +61,12 @@ export class MicroserviceExceptionFilter implements ExceptionFilter {
       typeof exception === 'object' &&
       exception !== null &&
       !(exception instanceof Error) &&
-      ('status' in exception || 'statusCode' in exception) &&
-      'message' in exception
+      ('status' in exception || 'statusCode' in exception || 'response' in exception)
     ) {
-      status = exception.status || exception.statusCode || HttpStatus.BAD_REQUEST;
-      message = exception.message || 'Erro no microserviço';
-      code = exception.code;
+      const payload = exception.response || exception.error || exception;
+      status = exception.status || exception.statusCode || payload.status || HttpStatus.BAD_REQUEST;
+      message = payload.message || exception.message || 'Erro no microserviço';
+      code = payload.code || exception.code;
       errorName = 'MicroserviceError';
     }
     // Tratar erros HTTP normais (caso já tenham status)

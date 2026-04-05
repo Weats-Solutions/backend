@@ -272,7 +272,15 @@ export class LandingpageService {
                     },
                     logoImage: true,
                     bannerImage: true,
-                    schedule: true,
+                    schedule: {
+                        include: {
+                            days: {
+                                include: {
+                                    intervals: true
+                                }
+                            }
+                        }
+                    },
                 },
             });
 
@@ -299,6 +307,8 @@ export class LandingpageService {
                         code: "teste",
                     });
                 }
+                console.log(establishment.schedule)
+                console.log(establishment.timezone)
 
                 if (!isScheduleOpenNow(
                     establishment.schedule,
