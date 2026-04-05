@@ -2,10 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CorePrismaService, Schedule } from '@weats/database';
 import { EstablishmentLanguage } from '@weats/database';
 import { RpcException } from '@nestjs/microservices';
-import { ERRORS } from '@weats/common';
+import { ERRORS, clearMenuCacheAsync } from '@weats/common';
 import { UpdateThemeSettingsDto } from '@weats/contracts/dashboard/dtos/theme/update-theme-settings.dto';
-import { HttpService } from '@nestjs/axios';
-import { firstValueFrom } from 'rxjs';
 import { Establishment, EupagoMultibancoResponse } from '@weats/types';
 import { AppConfigService } from '@weats/configs/app-config.service';
 import { MenuService } from '../menu/menu.service';
@@ -21,7 +19,6 @@ dayjs.extend(timezone);
 export class LandingpageService {
     constructor(
         private readonly prisma: CorePrismaService,
-        private readonly http: HttpService,
         private readonly appConfigService: AppConfigService,
         private readonly menuService: MenuService,
         //@Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
@@ -258,14 +255,8 @@ export class LandingpageService {
                 });
             }
 
-            const { data } = await firstValueFrom(
-                this.http.post(
-                    "https://menu.weats.pro/api/clear-cache",
-                    {
-                        slug: establishment.slug,
-                    }
-                ),
-            );
+            // Clear menu cache using the shared utility function
+            clearMenuCacheAsync(establishment.slug);
 
             return theme;
         } catch (error) {
