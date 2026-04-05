@@ -6,6 +6,7 @@ import {
     ValidationArguments,
 } from 'class-validator';
 import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js';
+import { ERRORS } from '../errors';
 
 /**
  * Validator for phone numbers using libphonenumber-js.
@@ -15,45 +16,33 @@ import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js';
 export class IsValidPhoneNumberConstraint implements ValidatorConstraintInterface {
     validate(value: string, args: ValidationArguments): boolean {
         const [propertyName] = args.constraints;
-        const countryCode = (args.object as any)[propertyName];
+        const countryCodeRaw = (args.object as any)[propertyName];
 
-        // If countryCode is not present, we can't validate the phone number properly.
-        // Usually, another validator (@IsNotEmpty or @IsValidCountryCode) should handle this.
-        if (!countryCode || typeof countryCode !== 'string') {
+        if (!countryCodeRaw || typeof countryCodeRaw !== 'string') {
             return false;
         }
 
-        // Phone number should be digits only
+        // 🔹 Normaliza o countryCode removendo o "+" se vier do frontend
+        const countryCode = countryCodeRaw.replace(/^\+/, '');
+
+        // Phone number deve ser digits only
         if (!/^\d+$/.test(value)) {
             return false;
         }
 
-        // Construct E.164 format: +{countryCode}{phoneNumber}
+        // Construir E.164: +{countryCode}{phoneNumber}
         const e164 = `+${countryCode}${value}`;
 
-        // Validate using libphonenumber-js
         return isValidPhoneNumber(e164);
     }
 
     defaultMessage(args: ValidationArguments): string {
-        const [propertyName] = args.constraints;
-        const countryCode = (args.object as any)[propertyName];
-        return `customerPhone: Número de telefone inválido para o país ${countryCode || 'desconhecido'}`;
+        return ERRORS.INVALID_PHONE_NUMBER;
     }
 }
 
 /**
  * Decorator to validate a phone number for a specific country code.
- * Must be used with @IsString() and @IsNotEmpty() before it.
- *
- * Example:
- *   @IsString()
- *   @IsNotEmpty()
- *   @IsValidPhoneNumber('countryCode')
- *   customerPhone: string;
- *
- * @param propertyNameOfCountryCode The property name that holds the country code (e.g., 'countryCode')
- * @param validationOptions Optional validation options
  */
 export function IsValidPhoneNumber(
     propertyNameOfCountryCode: string,
@@ -72,20 +61,23 @@ export function IsValidPhoneNumber(
 
 /**
  * Validator for ISO country codes using libphonenumber-js.
- * Checks that a country code is valid (can parse a phone number with it).
  */
 @ValidatorConstraint({ name: 'isValidCountryCode', async: false })
 export class IsValidCountryCodeConstraint implements ValidatorConstraintInterface {
     validate(value: string): boolean {
-        // Country code should be 1-3 digits
-        if (!/^\d{1,3}$/.test(value)) {
+        if (!value || typeof value !== 'string') {
             return false;
         }
 
-        // Try to find a country that uses this calling code
-        // We use a simple heuristic: try to parse a dummy phone number
+        // 🔹 Normaliza o countryCode removendo "+" ou "00"
+        const cleaned = value.replace(/^\+/, '').replace(/^00/, '');
+
+        if (!/^\d{1,3}$/.test(cleaned)) {
+            return false;
+        }
+
         try {
-            const result = parsePhoneNumber(`+${value}1234567`);
+            const result = parsePhoneNumber(`+${cleaned}1234567`);
             return result !== undefined;
         } catch {
             return false;
@@ -93,21 +85,12 @@ export class IsValidCountryCodeConstraint implements ValidatorConstraintInterfac
     }
 
     defaultMessage(): string {
-        return 'countryCode: Indicativo de país inválido';
+        return ERRORS.INVALID_PHONE_NUMBER;
     }
 }
 
 /**
  * Decorator to validate a country code (calling code).
- * Must be used with @IsString() and @IsNotEmpty() before it.
- *
- * Example:
- *   @IsString()
- *   @IsNotEmpty()
- *   @IsValidCountryCode()
- *   countryCode: string;
- *
- * @param validationOptions Optional validation options
  */
 export function IsValidCountryCode(validationOptions?: ValidationOptions) {
     return function (target: Object, propertyName: string) {

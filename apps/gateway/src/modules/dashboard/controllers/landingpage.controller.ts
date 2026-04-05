@@ -56,18 +56,40 @@ export class LandingpageController {
     @Query('lang', ToUpperCasePipe) lang: EstablishmentLanguage,
     @Query('targetId') targetId?: string,
   ) {
-    console.log(targetId);
     return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_BY_SLUG, { establishmentSlug, lang, targetId });
   }
 
+  @Get('/:establishmentSlug/theme')
+  async getLandingpageTheme(
+    @Param('establishmentSlug') establishmentSlug: string,
+  ) {
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_CATALOG_THEME, { establishmentSlug });
+  }
+
+  @Get('/:establishmentSlug/settings')
+  async getLandingpageSettings(
+    @Param('establishmentSlug') establishmentSlug: string,
+  ) {
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_CATALOG_ESTABLISHMENT_SETTINGS, { establishmentSlug });
+  }
+
+  @Get('/:establishmentSlug/menus')
+  async getLandingpageMenus(
+    @Param('establishmentSlug') establishmentSlug: string,
+    @Query('lang', ToUpperCasePipe) lang: EstablishmentLanguage,
+    @Query('targetId') targetId?: string,
+  ) {
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_CATALOG_MENU_LIST, { establishmentSlug, lang, targetId });
+  }
+
   //@UseGuards(EstablishmentOpenGuard, MenuOpenGuard)
-  @Get('/:establishmentSlug/menu/:menuId')
+  @Get('/:establishmentSlug/menus/:menuId')
   async getMenuContent(
     @Param('establishmentSlug') establishmentSlug: string,
     @Param('menuId') menuId: string,
     @Query('lang', ToUpperCasePipe) lang: EstablishmentLanguage,
     @Query('targetId') targetId?: string,
   ) {
-    return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_MENU_CONTENT, { establishmentSlug, menuId, lang, targetId });
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.LANDINGPAGE_GET_CATALOG_MENU_CONTENT, { establishmentSlug, menuId, lang, targetId });
   }
 }

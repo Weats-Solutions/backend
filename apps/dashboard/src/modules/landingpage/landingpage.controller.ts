@@ -17,7 +17,22 @@ export class LandingpageController {
         return this.landingpageService.getLandingpage(payload.establishmentSlug, payload.lang, payload.targetId);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.LANDINGPAGE_GET_MENU_CONTENT)
+    @MessagePattern(DASHBOARD_PATTERNS.LANDINGPAGE_GET_CATALOG_THEME)
+    getLandingpageTheme(@Payload() payload: { establishmentSlug: string }) {
+        return this.landingpageService.getLandingpageTheme(payload.establishmentSlug);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.LANDINGPAGE_GET_CATALOG_ESTABLISHMENT_SETTINGS)
+    getEstablishmentSettings(@Payload() payload: { establishmentSlug: string }) {
+        return this.landingpageService.getEstablishmentSettings(payload.establishmentSlug);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.LANDINGPAGE_GET_CATALOG_MENU_LIST)
+    getMenuList(@Payload() payload: { establishmentSlug: string; lang: EstablishmentLanguage; targetId?: string }) {
+        return this.landingpageService.getMenuList(payload.establishmentSlug, payload.lang, payload.targetId);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.LANDINGPAGE_GET_CATALOG_MENU_CONTENT)
     getMenuContent(@Payload() payload: { establishmentSlug: string; menuId: string; lang: EstablishmentLanguage; targetId?: string }) {
         return this.landingpageService.getMenuContent(payload.establishmentSlug, payload.menuId, payload.lang, payload.targetId);
     }

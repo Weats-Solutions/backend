@@ -6,6 +6,7 @@ import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto, UpdateEstablis
 import { User, Establishment } from '@weats/types';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
+import { UpdateEstablishmentGeneralSettingsDto } from '@weats/contracts';
 
 @Controller()
 export class EstablishmentController {
@@ -23,7 +24,7 @@ export class EstablishmentController {
         return this.establishmentService.getEstablishmentInfo(payload.id);
     }
 
-     
+
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_GENERAL)
     getEstablishmentGeneralSettings(@Payload() payload: { id: string }) {
         return this.establishmentService.getEstablishmentGeneralSettings(payload.id);
@@ -57,6 +58,11 @@ export class EstablishmentController {
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE)
     updateEstablishment(@Payload() payload: { id: string; updateEstablishmentDto: CreateEstablishmentDto; user: User }) {
         return this.establishmentService.updateEstablishment(payload.id, payload.updateEstablishmentDto, payload.user);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_GENERAL)
+    updateEstablishmentGeneralSettings(@Payload() payload: { id: string; updateEstablishmentGeneralSettingsDto: UpdateEstablishmentGeneralSettingsDto }) {
+        return this.establishmentService.updateEstablishmentGeneralSettings(payload.id, payload.updateEstablishmentGeneralSettingsDto);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SCHEDULE)

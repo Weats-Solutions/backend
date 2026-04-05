@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { MicroserviceExceptionFilter } from './common/filters/microservice-exception.filter';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
-import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
+import { BadRequestException, Logger, ValidationError, ValidationPipe, VersioningType } from '@nestjs/common';
 import * as express from 'express';
 import { AppConfigService, getCorsOptions } from '@weats/configs';
 import cookieParser from 'cookie-parser';
@@ -56,6 +56,18 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
+      exceptionFactory: (errors) => {
+        const firstError = getFirstConstraint(errors);
+
+        return new BadRequestException({
+          errorType: "BadRequestException",
+          message: firstError || "VALIDATION_ERROR",
+          code: firstError || "VALIDATION_ERROR",
+          statusCode: 400,
+          success: false,
+          timestamp: new Date().toISOString(),
+        });
+      },
     }),
   );
 
@@ -102,3 +114,21 @@ async function bootstrap() {
   });
 }
 bootstrap();
+
+function getFirstConstraint(errors: ValidationError[]): string | null {
+  for (const error of errors) {
+    // 1. erro direto
+    if (error.constraints) {
+      return Object.values(error.constraints)[0];
+    }
+
+    // 2. erro nested
+    if (error.children?.length) {
+      const childError = getFirstConstraint(error.children);
+      if (childError) return childError;
+    }
+  }
+
+  return null;
+}
+

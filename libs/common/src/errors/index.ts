@@ -65,7 +65,9 @@ export type ErrorCode =
   | 'THEME_NOT_FOUND'
   | 'ESTABLISHMENT_CLOSED'
   | 'MENU_CLOSED'
-  | 'SCHEDULE_NOT_FOUND';
+  | 'SCHEDULE_NOT_FOUND'
+  | 'MENU_NOT_FOUND'
+  | 'INVALID_PHONE_NUMBER';
 
 export const ERRORS: Record<ErrorCode, ErrorCode> = {
   CLERK_AUTH_FAILED: 'CLERK_AUTH_FAILED',
@@ -139,6 +141,9 @@ export const ERRORS: Record<ErrorCode, ErrorCode> = {
   MENU_CLOSED: 'MENU_CLOSED',
 
   SCHEDULE_NOT_FOUND: 'SCHEDULE_NOT_FOUND',
+  MENU_NOT_FOUND: 'MENU_NOT_FOUND',
+
+  INVALID_PHONE_NUMBER: 'INVALID_PHONE_NUMBER',
 };
 
 export const availableErrors = Object.keys(ERRORS) as ErrorCode[];

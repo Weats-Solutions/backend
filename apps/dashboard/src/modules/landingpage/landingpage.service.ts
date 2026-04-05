@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CorePrismaService, Schedule } from '@weats/database';
 import { EstablishmentLanguage } from '@weats/database';
 import { RpcException } from '@nestjs/microservices';
-import { ERRORS } from '@weats/common';
+import { ERRORS, normalizeSchedule } from '@weats/common';
 import { UpdateThemeSettingsDto } from '@weats/contracts/dashboard/dtos/theme/update-theme-settings.dto';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
@@ -135,6 +135,173 @@ export class LandingpageService {
                 primaryLanguage: establishment.primaryLanguage,
                 availableLocales: establishment.availableLanguages,
                 isOpen: true,
+                menus: visibleAndOpenMenus || [],
+            };
+
+        } catch (error) {
+            console.log(error);
+            throw new RpcException({
+                status: 400,
+                message: ERRORS.BAD_REQUEST,
+                code: ERRORS.BAD_REQUEST,
+            });
+        }
+    }
+
+    async getLandingpageTheme(establishmentSlug: string) {
+        try {
+            const establishment = await this.prisma.establishment.findUnique({
+                where: { slug: establishmentSlug },
+                include: {
+                    activeTheme: {
+                        select: {
+                            id: true,
+                            name: true,
+                            config: true,
+                        }
+                    },
+                    logoImage: true,
+                    bannerImage: true,
+                },
+            });
+
+            if (!establishment) {
+                throw new RpcException({
+                    status: 404,
+                    message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+                    code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+                });
+            }
+
+            return {
+                themeName: establishment.activeTheme?.name,
+                themeConfig: establishment.activeTheme?.config,
+                logo: establishment.logoImage?.url || null,
+                banner: establishment.bannerImage?.url || null,
+            };
+
+        } catch (error) {
+            console.log(error);
+            throw new RpcException({
+                status: 400,
+                message: ERRORS.BAD_REQUEST,
+                code: ERRORS.BAD_REQUEST,
+            });
+        }
+    }
+
+    async getEstablishmentSettings(establishmentSlug: string) {
+        try {
+            const establishment = await this.prisma.establishment.findUnique({
+                where: { slug: establishmentSlug },
+                include: {
+                    schedule: { include: { days: { include: { intervals: true } } } }
+                }
+            });
+
+            if (!establishment) {
+                throw new RpcException({
+                    status: 404,
+                    message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+                    code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+                });
+            }
+
+            return {
+                id: establishment.id,
+                name: establishment.name,
+                primaryLanguage: establishment.primaryLanguage,
+                availableLocales: establishment.availableLanguages,
+                currency: establishment.currency,
+                timezone: establishment.timezone,
+                schedule: normalizeSchedule(establishment.schedule ?? undefined),
+                takeway: true,
+                reservations: true,
+            };
+
+        } catch (error) {
+            console.log(error);
+            throw new RpcException({
+                status: 400,
+                message: ERRORS.BAD_REQUEST,
+                code: ERRORS.BAD_REQUEST,
+            });
+        }
+    }
+
+    async getMenuList(establishmentSlug: string, lang: string, targetId?: string) {
+        try {
+            const establishment = await this.prisma.establishment.findUnique({
+                where: { slug: establishmentSlug },
+                include: {
+                    activeTheme: {
+                        select: {
+                            id: true,
+                            name: true,
+                            config: true,
+                        }
+                    },
+                    logoImage: true,
+                    bannerImage: true,
+                    schedule: true,
+                },
+            });
+
+            if (!establishment) {
+                throw new RpcException({
+                    status: 404,
+                    message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+                    code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+                });
+            }
+
+            if (
+                !Object.values(establishment.availableLanguages)
+                    .includes(lang as EstablishmentLanguage)
+            ) {
+                lang = establishment.primaryLanguage;
+            }
+
+            if (targetId) {
+                if (!establishment.schedule || !isScheduleOpenNow(
+                    establishment.schedule,
+                    establishment.timezone
+                )) {
+                    throw new RpcException({
+                        status: 400,
+                        message: ERRORS.ESTABLISHMENT_CLOSED,
+                        code: ERRORS.ESTABLISHMENT_CLOSED,
+                    });
+                }
+            }
+
+            const menus = await this.prisma.menu.findMany({
+                where: {
+                    establishmentId: establishment.id,
+                    isVisible: true,
+                },
+                select: {
+                    id: true,
+                    isHighlighted: true,
+                    isVisible: true,
+                    schedule: {
+                        include: { days: { include: { intervals: true } } }
+                    },
+                    translations: {
+                        where: { locale: lang },
+                    },
+                },
+            });
+
+            // 🔥 NOVA REGRA: só filtra horários dos menus se houver targetId
+            const visibleAndOpenMenus = targetId
+                ? menus.filter((menu) => {
+                    if (!menu.schedule) return false;
+                    return isScheduleOpenNow(menu.schedule, establishment.timezone);
+                })
+                : menus;
+
+            return {
                 menus: visibleAndOpenMenus || [],
             };
 

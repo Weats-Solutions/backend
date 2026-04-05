@@ -11,6 +11,7 @@ import { ulid } from 'ulid';
 import { ClerkService, StripeService } from '@weats/integrations';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
+import { EstablishmentInformationsDto, EstablishmentLocationDto, UpdateEstablishmentGeneralSettingsDto } from '@weats/contracts';
 
 export type NormalizedFeature =
   | { type: "BOOLEAN"; enabled: boolean }
@@ -253,12 +254,7 @@ export class EstablishmentService {
     createEstablishmentDto: CreateEstablishmentDto,
     user: User,
   ) {
-    const countryCode = (
-      createEstablishmentDto.countryCode || 'PT'
-    ).toUpperCase();
-    const phonePrefixes: Record<string, string> = { PT: '+351', ES: '+34' };
-    const phonePrefix = phonePrefixes[countryCode] || '+351';
-
+    console.log(createEstablishmentDto.countryCode)
     const cleanPhone =
       createEstablishmentDto.phoneNumber.replace(/\D/g, '');
     const cleanTaxId =
@@ -269,16 +265,18 @@ export class EstablishmentService {
     const customer = await this.stripe.createCustomer({
       name: createEstablishmentDto.name,
       email: createEstablishmentDto.email,
-      phone: phonePrefix + cleanPhone,
+      phone: createEstablishmentDto.countryCode + cleanPhone,
       address: {
         line1: createEstablishmentDto.address,
         city: createEstablishmentDto.city,
         state: createEstablishmentDto.state,
         postal_code: createEstablishmentDto.zipCode,
-        country: countryCode,
+        country: createEstablishmentDto.country,
       },
+
+      //todo add tax_country
       tax_id_data: cleanTaxId
-        ? [{ type: 'eu_vat', value: countryCode + cleanTaxId }]
+        ? [{ type: 'eu_vat', value: "PT" + cleanTaxId }]
         : [],
       metadata: {
         business_name: createEstablishmentDto.billingName,
@@ -391,6 +389,121 @@ export class EstablishmentService {
     });
 
     return result;
+  }
+
+  async updateEstablishmentGeneralSettings(id: string, updateEstablishmentGeneralSettingsDto: UpdateEstablishmentGeneralSettingsDto) {
+    try {
+      switch (updateEstablishmentGeneralSettingsDto.section) {
+        case 'informations':
+          return this.updateInformations(id, updateEstablishmentGeneralSettingsDto.informations);
+
+        case 'location':
+          return this.updateLocation(id, updateEstablishmentGeneralSettingsDto.location);
+
+        case 'schedule':
+          return this.updateSchedule(id, updateEstablishmentGeneralSettingsDto.schedule);
+
+        default:
+          throw new RpcException({
+            status: 400,
+            message: ERRORS.BAD_REQUEST,
+            code: ERRORS.BAD_REQUEST,
+          });
+      }
+    } catch (error) {
+      console.error(error)
+      throw new RpcException({
+        status: 400,
+        message: ERRORS.BAD_REQUEST,
+        code: ERRORS.BAD_REQUEST,
+      });
+    }
+
+  }
+
+  private async updateInformations(id: string, data: EstablishmentInformationsDto) {
+    return this.prisma.establishment.update({
+      where: { id },
+      data: {
+        name: data.name,
+        email: data.email,
+        countryCode: data.countryCode,
+        phoneNumber: data.phoneNumber
+      }
+    })
+  }
+
+  private async updateLocation(id: string, data: EstablishmentLocationDto) {
+    return this.prisma.establishment.update({
+      where: { id },
+      data: {
+        address: data.address,
+        city: data.city,
+        state: data.state,
+        zipCode: data.zipCode,
+        country: data.country
+      }
+    })
+  }
+
+  private async updateSchedule(id: string, data: CreateScheduleDto) {
+    const establishmentWithSchedule = await this.prisma.establishment.findUnique({
+      where: { id },
+      select: { scheduleId: true },
+    });
+
+    if (!establishmentWithSchedule) throw new RpcException({
+      status: 400,
+      message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+      code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+    });
+
+    // Se tem schedule → atualizar, senão → criar
+    if (establishmentWithSchedule.scheduleId) {
+      return this.prisma.schedule.update({
+        where: { id: establishmentWithSchedule.scheduleId },
+        data: {
+          days: {
+            deleteMany: {},
+            create: data.days.map((day) => ({
+              dayOfWeek: day.dayOfWeek,
+              isOpen: day.isOpen ?? true,
+              intervals: {
+                create: day.intervals.map((interval) => ({
+                  startTime: interval.startTime,
+                  endTime: interval.endTime,
+                })),
+              },
+            })),
+          },
+        },
+      });
+    } else {
+      const newSchedule = await this.prisma.schedule.create({
+        data: {
+          type: ScheduleType.ESTABLISHMENT,
+          days: {
+            create: data.days.map((day) => ({
+              dayOfWeek: day.dayOfWeek,
+              isOpen: day.isOpen ?? true,
+              intervals: {
+                create: day.intervals.map((interval) => ({
+                  startTime: interval.startTime,
+                  endTime: interval.endTime,
+                })),
+              },
+            })),
+          },
+        },
+      });
+
+      await this.prisma.establishment.update({
+        where: { id },
+        data: { scheduleId: newSchedule.id },
+      });
+
+      return newSchedule;
+    }
   }
 
   async upsertEstablishmentSchedule(establishment: Establishment, scheduleDto: CreateScheduleDto) {

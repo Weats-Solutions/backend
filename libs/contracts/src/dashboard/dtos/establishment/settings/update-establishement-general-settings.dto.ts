@@ -1,9 +1,9 @@
-import { IsEmail, IsIn, IsNotEmpty, IsString, Length, ValidateNested } from "class-validator";
+import { IsEmail, IsIn, IsNotEmpty, IsString, Length, ValidateIf, ValidateNested } from "class-validator";
 import { IsValidCountryCode, IsValidPhoneNumber } from "@weats/common/validators";
 import { Type } from "class-transformer";
 import { CreateScheduleDto } from "@weats/contracts";
 
-class EstablishmentInformationsDto {
+export class EstablishmentInformationsDto {
     @Length(2, 50)
     @IsString()
     @IsNotEmpty()
@@ -25,7 +25,7 @@ class EstablishmentInformationsDto {
     countryCode: string;
 }
 
-class EstablishmentLocationDto {
+export class EstablishmentLocationDto {
     @Length(3, 100)
     @IsString()
     @IsNotEmpty()
@@ -59,17 +59,21 @@ export class UpdateEstablishmentGeneralSettingsDto {
     @IsIn(['informations', 'location', 'schedule'])
     section: string;
 
+    @ValidateIf(o => o.section === 'informations')
     @Type(() => EstablishmentInformationsDto)
     @ValidateNested()
     @IsNotEmpty()
     informations: EstablishmentInformationsDto;
 
+    @ValidateIf(o => o.section === 'location')
     @Type(() => EstablishmentLocationDto)
     @ValidateNested()
     @IsNotEmpty()
     location: EstablishmentLocationDto;
 
+    @ValidateIf(o => o.section === 'schedule')
     @Type(() => CreateScheduleDto)
     @ValidateNested()
+    @IsNotEmpty()
     schedule: CreateScheduleDto;
 }

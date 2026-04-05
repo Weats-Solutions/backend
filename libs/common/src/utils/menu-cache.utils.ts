@@ -13,7 +13,7 @@ export const clearMenuCacheAsync = (slug?: string | null) => {
 
     void axios
         .post(
-            `${menuUrl}/api/clear-cache`,
+            `${menuUrl}/api/clear-cache`    ,
             { slug },
             {
                 headers: {

@@ -6,8 +6,9 @@ import {
 import { CreateMenuDto, UpdateMenuPositionsDto, UpdateMenuDto } from '@weats/contracts';
 import { Establishment } from '@weats/types';
 import { FeatureUsageService } from '@weats/common/feature/feature-usage.service';
-import { MENU_COLOR_PALETTE, clearMenuCacheAsync, normalizeSchedule } from '@weats/common';
+import { ERRORS, MENU_COLOR_PALETTE, clearMenuCacheAsync, normalizeSchedule } from '@weats/common';
 import { CorePrismaService, EstablishmentLanguage, ScheduleType } from '@weats/database';
+import { RpcException } from '@nestjs/microservices';
 
 @Injectable()
 export class MenuService {
@@ -578,7 +579,11 @@ export class MenuService {
             });
 
             if (!menu) {
-                throw new NotFoundException('Menu not found');
+                throw new RpcException({
+                    status: 404,
+                    message: ERRORS.MENU_NOT_FOUND,
+                    code: ERRORS.MENU_NOT_FOUND,
+                });
             }
 
             return menu;

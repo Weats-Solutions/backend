@@ -9,6 +9,14 @@ export class AppConfigService {
     return this.configService.getOrThrow<string>('APP_URL');
   }
 
+  getMenuUrl(): string {
+    return this.configService.getOrThrow<string>('MENU_URL')
+  }
+
+  getMenuCacheToken(): string {
+    return this.configService.getOrThrow<string>('MENU_CACHE_TOKEN')
+  }
+
   getApiPort(): string {
     return this.configService.getOrThrow<string>('API_PORT');
   }

@@ -28,7 +28,7 @@ class EnvironmentVariables {
   API_PORT: number;
 
   @IsString()
-  NEXT_PUBLIC_MENU_URL: string;
+  MENU_URL: string;
 
   @IsString()
   MENU_CACHE_TOKEN: string;

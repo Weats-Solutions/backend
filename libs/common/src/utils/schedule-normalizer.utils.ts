@@ -28,12 +28,12 @@ export interface NormalizedSchedule {
  * @throws Error if schedule is null or malformed
  */
 export function normalizeSchedule(
-    schedule: Schedule & {
+    schedule?: Schedule & {
         days?: (ScheduleDay & { intervals: TimeInterval[] })[];
     },
-): NormalizedSchedule {
+): NormalizedSchedule | null {
     if (!schedule || !schedule.days) {
-        throw new Error('Schedule must include days with intervals');
+        return null;
     }
 
     return {
@@ -54,11 +54,11 @@ export function normalizeSchedule(
  * @returns Array of normalized schedules
  */
 export function normalizeSchedules(
-    schedules: Array<
+    schedules?: Array<
         Schedule & {
             days?: (ScheduleDay & { intervals: TimeInterval[] })[];
         }
     >,
 ): NormalizedSchedule[] {
-    return schedules.map(normalizeSchedule);
+    return schedules?.map(normalizeSchedule).filter((schedule) => schedule !== null) as NormalizedSchedule[];
 }
