@@ -292,10 +292,22 @@ export class LandingpageService {
             }
 
             if (targetId) {
-                if (!establishment.schedule || !isScheduleOpenNow(
+                if (!establishment.schedule) {
+                    throw new RpcException({
+                        status: 400,
+                        message: "teste",
+                        code: "teste",
+                    });
+                }
+
+                if (!isScheduleOpenNow(
                     establishment.schedule,
                     establishment.timezone
                 )) {
+                    console.log("Establishment is closed" + isScheduleOpenNow(
+                        establishment.schedule,
+                        establishment.timezone
+                    ));
                     throw new RpcException({
                         status: 400,
                         message: ERRORS.ESTABLISHMENT_CLOSED,

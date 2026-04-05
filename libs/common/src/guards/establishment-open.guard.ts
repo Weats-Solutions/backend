@@ -10,6 +10,7 @@ import { CorePrismaService } from '@weats/database';
 import { CustomRequest } from '@weats/types';
 import { isScheduleOpenNow } from '@weats/common/utils/schedule.utils';
 import { ERRORS } from '../errors';
+import { RpcException } from '@nestjs/microservices';
 
 /**
  * HTTP Guard — for use in the Gateway on public catalog & order routes.
@@ -59,7 +60,7 @@ export class EstablishmentOpenGuard implements CanActivate {
 
 
         if (!establishment.schedule) {
-            throw new ForbiddenException({
+            throw new RpcException({
                 message: "teste",
                 code: "teste",
             });
@@ -67,7 +68,7 @@ export class EstablishmentOpenGuard implements CanActivate {
 
         if (!isScheduleOpenNow(establishment.schedule, establishment.timezone)) {
             this.logger.log(`Establishment ${establishmentSlug} is currently closed`);
-            throw new ForbiddenException({
+            throw new RpcException({
                 message: ERRORS.ESTABLISHMENT_CLOSED,
                 code: ERRORS.ESTABLISHMENT_CLOSED,
             });
