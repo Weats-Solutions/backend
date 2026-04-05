@@ -6,7 +6,7 @@ import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/
 import { User, Establishment } from '@weats/types';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
-import { UpdateEstablishmentGeneralSettingsDto } from '@weats/contracts';
+import { UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentBrandingSettingsDto } from '@weats/contracts';
 
 @Controller()
 export class EstablishmentController {
@@ -66,8 +66,13 @@ export class EstablishmentController {
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_GENERAL)
-    updateEstablishmentGeneralSettings(@Payload() payload: { id: string; updateEstablishmentGeneralSettingsDto: UpdateEstablishmentGeneralSettingsDto }) {
-        return this.establishmentService.updateEstablishmentGeneralSettings(payload.id, payload.updateEstablishmentGeneralSettingsDto);
+    updateEstablishmentGeneralSettings(@Payload() payload: { establishment: Establishment; updateEstablishmentGeneralSettingsDto: UpdateEstablishmentGeneralSettingsDto }) {
+        return this.establishmentService.updateEstablishmentGeneralSettings(payload.establishment, payload.updateEstablishmentGeneralSettingsDto);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_BRANDING)
+    updateEstablishmentBrandingSettings(@Payload() payload: { establishment: Establishment; updateEstablishmentBrandingSettingsDto: UpdateEstablishmentBrandingSettingsDto }) {
+        return this.establishmentService.updateEstablishmentBrandingSettings(payload.establishment, payload.updateEstablishmentBrandingSettingsDto);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SCHEDULE)
@@ -80,8 +85,10 @@ export class EstablishmentController {
         return this.establishmentService.updateLanguages(payload.establishment, payload.updateEstablishmentLanguagesDto);
     }
 
+    /*
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_BRANDING)
     updateBranding(@Payload() payload: { establishmentId: string; updateEstablishmentBrandingDto: UpdateEstablishmentBrandingDto }) {
         return this.establishmentService.updateBranding(payload.establishmentId, payload.updateEstablishmentBrandingDto);
     }
+    */
 }

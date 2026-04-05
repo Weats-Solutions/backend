@@ -11,7 +11,8 @@ import { ulid } from 'ulid';
 import { ClerkService, StripeService } from '@weats/integrations';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
-import { EstablishmentInformationsDto, EstablishmentLocationDto, UpdateEstablishmentGeneralSettingsDto } from '@weats/contracts';
+import { EstablishmentBrandingDto, EstablishmentInformationsDto, EstablishmentLocationDto, EstablishmentSocialMediaDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentGeneralSettingsDto } from '@weats/contracts';
+import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 
 export type NormalizedFeature =
   | { type: "BOOLEAN"; enabled: boolean }
@@ -35,6 +36,7 @@ export class EstablishmentService {
     @Inject('APP_URL') private readonly appUrl: string,
     private readonly clerkService: ClerkService,
     private readonly featureUsageService: FeatureUsageService,
+    private readonly menuUtilsService: MenuUtilsService,
   ) { }
 
   // ─── Queries ────────────────────────────────────────────────────────
@@ -202,6 +204,7 @@ export class EstablishmentService {
         bannerImage: establishment.bannerImage,
       },
       socials: {
+        websiteUrl: establishment.websiteUrl,
         tiktokUrl: establishment.tiktokUrl,
         instagramUrl: establishment.instagramUrl,
         facebookUrl: establishment.facebookUrl,
@@ -434,36 +437,53 @@ export class EstablishmentService {
     return result;
   }
 
-  async updateEstablishmentGeneralSettings(id: string, updateEstablishmentGeneralSettingsDto: UpdateEstablishmentGeneralSettingsDto) {
+  async updateEstablishmentGeneralSettings(
+    establishment: Establishment,
+    dto: UpdateEstablishmentGeneralSettingsDto
+  ) {
     try {
-      switch (updateEstablishmentGeneralSettingsDto.section) {
+      let result;
+
+      // 1. Executa a atualização baseada na secção
+      switch (dto.section) {
         case 'informations':
-          return this.updateInformations(id, updateEstablishmentGeneralSettingsDto.informations);
+          result = await this.updateInformations(establishment.id, dto.informations);
+          break;
 
         case 'location':
-          return this.updateLocation(id, updateEstablishmentGeneralSettingsDto.location);
+          result = await this.updateLocation(establishment.id, dto.location);
+          break;
 
         case 'schedule':
-          return this.updateSchedule(id, updateEstablishmentGeneralSettingsDto.schedule);
+          result = await this.updateSchedule(establishment.id, dto.schedule);
+          break;
 
         default:
           throw new RpcException({
             status: 400,
-            message: ERRORS.BAD_REQUEST,
+            message: 'Invalid general settings section',
             code: ERRORS.BAD_REQUEST,
           });
       }
+
+      // 2. Limpa a cache (centralizado, já que todos usam 'settings')
+      // Usamos await para garantir que a cache é limpa antes de confirmar o sucesso
+      await this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
+
+      return result;
+
     } catch (error) {
-      console.error(error)
+      if (error instanceof RpcException) throw error;
+
+      console.error(`[GeneralSettings] Update failed for section ${dto.section}:`, error);
+
       throw new RpcException({
         status: 400,
         message: ERRORS.BAD_REQUEST,
         code: ERRORS.BAD_REQUEST,
       });
     }
-
   }
-
   private async updateInformations(id: string, data: EstablishmentInformationsDto) {
     return this.prisma.establishment.update({
       where: { id },
@@ -485,6 +505,75 @@ export class EstablishmentService {
         state: data.state,
         zipCode: data.zipCode,
         country: data.country
+      }
+    })
+  }
+
+  async updateEstablishmentBrandingSettings(
+    establishment: Establishment,
+    dto: UpdateEstablishmentBrandingSettingsDto
+  ) {
+    try {
+      let result;
+
+      // 1. Executa a atualização baseada na secção
+      switch (dto.section) {
+        case 'branding':
+          result = await this.updateBranding(establishment.id, dto.branding);
+          await this.menuUtilsService.clearMenuCacheAsync('theme', establishment.slug);
+          break;
+
+        case 'socials':
+          result = await this.updateSocials(establishment.id, dto.socials);
+          await this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
+          break;
+
+        default:
+          throw new RpcException({
+            status: 400,
+            message: 'Invalid section provided',
+            code: ERRORS.BAD_REQUEST,
+          });
+      }
+
+      return result;
+
+    } catch (error) {
+      // Se já for uma RpcException, apenas a relança
+      if (error instanceof RpcException) throw error;
+
+      // Log do erro real para debug interno
+      console.error(`[BrandingSettings] Update failed:`, error);
+
+      // Erro genérico para o cliente
+      throw new RpcException({
+        status: 400,
+        message: ERRORS.BAD_REQUEST,
+        code: ERRORS.BAD_REQUEST,
+      });
+    }
+  }
+
+  private async updateBranding(id: string, data: EstablishmentBrandingDto) {
+    return this.prisma.establishment.update({
+      where: { id },
+      data: {
+        logoImageId: data.logoImage?.id ?? null,
+        bannerImageId: data.bannerImage?.id ?? null,
+      }
+    })
+  }
+
+  private async updateSocials(id: string, data: EstablishmentSocialMediaDto) {
+    return this.prisma.establishment.update({
+      where: { id },
+      data: {
+        instagramUrl: data.instagramUrl,
+        tiktokUrl: data.tiktokUrl,
+        facebookUrl: data.facebookUrl,
+        tripAdvisorUrl: data.tripAdvisorUrl,
+        googleReviewUrl: data.googleReviewUrl,
+        websiteUrl: data.websiteUrl
       }
     })
   }
@@ -639,39 +728,40 @@ export class EstablishmentService {
       updatedEstablishment,
     };
   }
-
-  async updateBranding(establishmentId: string, updateEstablishmentBrandingDto: UpdateEstablishmentBrandingDto) {
-
-    const updatedEstablishment = await this.prisma.establishment.update({
-      where: { id: establishmentId },
-      data: {
-        logoImageId: updateEstablishmentBrandingDto.logoImage?.id ?? null,
-        bannerImageId: updateEstablishmentBrandingDto.bannerImage?.id ?? null,
-      },
-      select: {
-        logoImage: {
-          select: {
-            id: true,
-            url: true,
+  /*
+    async updateBranding(establishmentId: string, updateEstablishmentBrandingDto: UpdateEstablishmentBrandingDto) {
+  
+      const updatedEstablishment = await this.prisma.establishment.update({
+        where: { id: establishmentId },
+        data: {
+          logoImageId: updateEstablishmentBrandingDto.logoImage?.id ?? null,
+          bannerImageId: updateEstablishmentBrandingDto.bannerImage?.id ?? null,
+        },
+        select: {
+          logoImage: {
+            select: {
+              id: true,
+              url: true,
+            },
+          },
+          bannerImage: {
+            select: {
+              id: true,
+              url: true,
+            },
           },
         },
-        bannerImage: {
-          select: {
-            id: true,
-            url: true,
-          },
-        },
-      },
-    });
-
-    console.log("LOGO IMAGE", updateEstablishmentBrandingDto.logoImage?.id)
-    console.log("BANNER IMAGE", updateEstablishmentBrandingDto.bannerImage?.id)
-
-    return {
-      message: RESPONSE_CODES.ESTABLISHMENT.UPDATED,
-
-    };
-  }
+      });
+  
+      console.log("LOGO IMAGE", updateEstablishmentBrandingDto.logoImage?.id)
+      console.log("BANNER IMAGE", updateEstablishmentBrandingDto.bannerImage?.id)
+  
+      return {
+        message: RESPONSE_CODES.ESTABLISHMENT.UPDATED,
+  
+      };
+    }
+      */
 
   // ─── Stripe / Subscriptions ─────────────────────────────────────────
 

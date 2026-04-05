@@ -1,6 +1,6 @@
 import { IsIn, IsNotEmpty, IsString, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
-import { Currency } from "@weats/common/types";
+import { Currency } from "@weats/database";
 
 class EstablishmentPreferencesDto {
     @IsEnum(Currency)

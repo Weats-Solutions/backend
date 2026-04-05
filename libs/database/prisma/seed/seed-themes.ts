@@ -12,10 +12,16 @@ async function main() {
       name: 'Weats Default',
       isDefault: true,
       config: {
+        modal: {
+          backgroundColor: "#F5F5F5",
+          titleColor: "#171717",
+          descriptionColor: "#A3A3A3",
+        },
         geral: {
           geralBackgroundColor: "#FCFCFC",
           geralTitleColor: "#1d1b1b",
           borderRadius: "12px",
+          fontFamily: 'Poppins',
         },
         card: {
           backgroundColor: "#FFFFFF",
@@ -35,10 +41,16 @@ async function main() {
       name: 'Dark Mode Night',
       isDefault: false,
       config: {
+        modal: {
+          backgroundColor: "#F5F5F5",
+          titleColor: "#171717",
+          descriptionColor: "#A3A3A3",
+        },
         geral: {
           geralBackgroundColor: "#0F172A",
           geralTitleColor: "#F8FAFC",
           borderRadius: "8px",
+          fontFamily: 'Poppins',
         },
         card: {
           backgroundColor: "#1E293B",
@@ -58,10 +70,16 @@ async function main() {
       name: 'Classic Gold',
       isDefault: false,
       config: {
+        modal: {
+          backgroundColor: "#F5F5F5",
+          titleColor: "#171717",
+          descriptionColor: "#A3A3A3",
+        },
         geral: {
           geralBackgroundColor: "#FDFBF7",
           geralTitleColor: "#433422",
           borderRadius: "4px",
+          fontFamily: 'Poppins',
         },
         card: {
           backgroundColor: "#FFFFFF",

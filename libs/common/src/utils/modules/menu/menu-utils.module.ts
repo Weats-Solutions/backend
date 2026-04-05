@@ -2,10 +2,11 @@
 import { HttpModule } from "@nestjs/axios";
 import { Module } from "@nestjs/common";
 import { MenuUtilsService } from "./menu-utils.service";
-import { AppConfigService } from "@weats/configs";
+import { AppConfigService, ConfigsModule } from "@weats/configs";
 
 @Module({
     imports: [
+        ConfigsModule,
         HttpModule.register({
             timeout: 10000,
             maxRedirects: 5,

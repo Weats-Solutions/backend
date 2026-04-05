@@ -1,21 +1,28 @@
-import { IsIn, IsNotEmpty, IsString, IsOptional, IsUrl } from "class-validator";
+import { IsIn, IsNotEmpty, IsString, IsOptional, IsUrl, ValidateIf, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
 
-class EstablishmentBrandingDto {
+class ImageObjectSchema {
     @IsString()
-    @IsOptional()
-    logoImageId?: string;
+    id: string;
 
     @IsString()
-    @IsOptional()
-    bannerImageId?: string;
-
-    @IsString()
-    @IsOptional()
-    activeThemeId?: string;
+    url: string;
 }
 
-class EstablishmentSocialMediaDto {
+export class EstablishmentBrandingDto {
+    @Type(() => ImageObjectSchema)
+    @ValidateNested()
+    @IsOptional()
+    logoImage?: ImageObjectSchema;
+
+
+    @Type(() => ImageObjectSchema)
+    @ValidateNested()
+    @IsOptional()
+    bannerImage?: ImageObjectSchema;
+}
+
+export class EstablishmentSocialMediaDto {
     @IsUrl()
     @IsOptional()
     instagramUrl?: string;
@@ -42,17 +49,18 @@ class EstablishmentSocialMediaDto {
 }
 
 export class UpdateEstablishmentBrandingSettingsDto {
-
     @IsString()
     @IsNotEmpty()
-    @IsIn(['branding', 'socialMedia'])
+    @IsIn(['branding', 'socials'])
     section: string;
 
+    @ValidateIf(o => o.section === 'branding')
     @Type(() => EstablishmentBrandingDto)
-    @IsOptional()
-    branding?: EstablishmentBrandingDto;
+    @IsNotEmpty()
+    branding: EstablishmentBrandingDto;
 
+    @ValidateIf(o => o.section === 'socials')
     @Type(() => EstablishmentSocialMediaDto)
-    @IsOptional()
-    socialMedia?: EstablishmentSocialMediaDto;
+    @IsNotEmpty()
+    socials: EstablishmentSocialMediaDto;
 }

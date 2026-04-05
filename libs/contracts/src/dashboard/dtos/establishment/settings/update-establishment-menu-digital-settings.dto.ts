@@ -1,6 +1,6 @@
 import { IsIn, IsNotEmpty, IsString, IsEnum, Length, IsUrl } from "class-validator";
 import { Type } from "class-transformer";
-import { EstablishmentLanguage } from "@weats/common/types";
+import { EstablishmentLanguage } from "@weats/database";
 
 class EstablishmentLanguagesDto {
     @IsEnum(EstablishmentLanguage)

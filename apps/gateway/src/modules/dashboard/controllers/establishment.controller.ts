@@ -34,6 +34,7 @@ import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/
 import { ClerkService } from '@weats/integrations';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
 import { UpdateEstablishmentGeneralSettingsDto } from '@weats/contracts';
+import { UpdateEstablishmentBrandingSettingsDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-branding-settings.dto';
 
 @Controller('establishments')
 export class EstablishmentController {
@@ -216,8 +217,26 @@ export class EstablishmentController {
         code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
       });
     }
-    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_GENERAL, { id, updateEstablishmentGeneralSettingsDto });
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_GENERAL, { establishment, updateEstablishmentGeneralSettingsDto });
   }
+
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Patch(':id/settings/branding')
+  updateEstablishmentBrandingSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+    @Body() updateEstablishmentBrandingSettingsDto: UpdateEstablishmentBrandingSettingsDto,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_BRANDING, { establishment, updateEstablishmentBrandingSettingsDto });
+  }
+
 
   /*
   @Roles()
