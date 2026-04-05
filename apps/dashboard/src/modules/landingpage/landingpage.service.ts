@@ -281,6 +281,7 @@ export class LandingpageService {
                     id: true,
                     isHighlighted: true,
                     isVisible: true,
+                    position: true,
                     schedule: {
                         include: { days: { include: { intervals: true } } }
                     },
