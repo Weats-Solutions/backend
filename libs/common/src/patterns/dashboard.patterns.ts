@@ -100,4 +100,6 @@ export const DASHBOARD_PATTERNS = {
   LANDINGPAGE_GET_MENU_CONTENT: 'dashboard.landingpage.get_menu_content',
   LANDINGPAGE_GET_SUBCATEGORY_ITEMS: 'dashboard.landingpage.get_subcategory_items',
   THEME_UPDATE: 'dashboard.theme.update',
+  THEME_GET_AVAILABLE: 'dashboard.theme.get_available',
+  THEME_SET_ACTIVE: 'dashboard.theme.set_active',
 };

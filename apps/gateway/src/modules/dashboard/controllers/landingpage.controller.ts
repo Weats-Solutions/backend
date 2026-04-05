@@ -42,12 +42,29 @@ export class LandingpageController {
   }
 
   @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Get('themes/available')
+  async getAvailableThemes(
+    @CurrentEstablishment() establishment: Establishment,
+  ) {
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.THEME_GET_AVAILABLE, { establishmentId: establishment.id });
+  }
+
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
   @Post('theme')
   async updateThemeSettings(
     @Body() updateThemeSettingsDto: UpdateThemeSettingsDto,
     @CurrentEstablishment() establishment: Establishment,
   ) {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.THEME_UPDATE, { updateThemeSettingsDto, establishment });
+  }
+
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Post('theme/set-active')
+  async setActiveTheme(
+    @Body() body: { themeId: string },
+    @CurrentEstablishment() establishment: Establishment,
+  ) {
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.THEME_SET_ACTIVE, { establishmentId: establishment.id, themeId: body.themeId });
   }
 
   @Get('/:establishmentSlug')
