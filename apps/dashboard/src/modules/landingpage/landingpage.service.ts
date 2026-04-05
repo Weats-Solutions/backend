@@ -188,7 +188,17 @@ export class LandingpageService {
                 themeConfig: establishment.activeTheme?.config,
                 logo: establishment.logoImage?.url || null,
                 banner: establishment.bannerImage?.url || null,
-                metadata: establishment.metadata,
+                metadata: {
+                    name: establishment.metadata?.name,
+                    shortName: establishment.metadata?.shortName,
+                    description: establishment.metadata?.description,
+                    ogImage: establishment.metadata?.ogImage,
+                    faviconIco: establishment.metadata?.faviconIco,
+                    favicon32x32Png: establishment.metadata?.favicon32x32Png,
+                    appleTouchIconPng: establishment.metadata?.appleTouchIconPng,
+                    androidChrome192x192Png: establishment.metadata?.androidChrome192x192Png,
+                    androidChrome512x512Png: establishment.metadata?.androidChrome512x512Png,
+                },
             };
 
         } catch (error) {
