@@ -196,6 +196,7 @@ export class ItemService {
             translations: item.translations.map(t => ({
                 locale: t.locale,
                 name: t.name,
+                shortDescription: t.shortDescription ?? undefined,
                 description: t.description ?? undefined,
             })),
             image: item.image ? { url: item.image.url } : null,
@@ -294,6 +295,7 @@ export class ItemService {
         return {
             id: item.id,
             name: primaryTr?.name || 'Sem nome',
+            shortDescription: primaryTr?.shortDescription ?? undefined,
             description: primaryTr?.description ?? undefined,
             basePrice: item.basePrice ? Number(item.basePrice) : null,
             sku: item.sku,
@@ -564,6 +566,8 @@ export class ItemService {
             ...(search && {
                 OR: [
                     { translations: { some: { name: { contains: search, mode: 'insensitive' } } } },
+                    { translations: { some: { shortDescription: { contains: search, mode: 'insensitive' } } } },
+                    { translations: { some: { description: { contains: search, mode: 'insensitive' } } } },
                     { sku: { contains: search, mode: 'insensitive' } },
                 ],
             }),

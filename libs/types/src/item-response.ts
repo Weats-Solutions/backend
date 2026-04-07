@@ -128,6 +128,7 @@ export interface ItemListModifierGroup {
 export interface ItemListResponse {
     id: string;
     name: string;
+    shortDescription?: string;
     description?: string;
     basePrice: number | null;
     sku: string | null;
