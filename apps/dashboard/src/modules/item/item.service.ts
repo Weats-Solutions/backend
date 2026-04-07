@@ -373,6 +373,7 @@ export class ItemService {
                         create: dto.translations.map(t => ({
                             locale: t.locale,
                             name: t.name,
+                            shortDescription: t.shortDescription,
                             description: t.description,
                         })),
                     },
@@ -485,6 +486,7 @@ export class ItemService {
                             create: dto.translations.map(t => ({
                                 locale: t.locale,
                                 name: t.name,
+                                shortDescription: t.shortDescription,
                                 description: t.description,
                             })),
                         }
