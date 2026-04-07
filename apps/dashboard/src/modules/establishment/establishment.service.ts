@@ -227,6 +227,14 @@ export class EstablishmentService {
     };
   }
 
+  async getEstablishmentDigitalSettings(establishment: Establishment) {
+    return {
+      domain: {
+        slug: establishment.slug,
+      },
+    };
+  }
+
   async getEstablishmentSchedule(id: string) {
     const establishment = await this.prisma.establishment.findUniqueOrThrow({
       where: { id },
@@ -802,6 +810,13 @@ export class EstablishmentService {
   }
 
   async verifyDomain(slug: string) {
+    if (slug.length < 2 || slug.length > 50) {
+      return {
+        domain: slug,
+        isAvailable: false,
+      };
+    }
+
     if (RESERVED_DOMAINS.includes(slug.toLowerCase())) {
       return {
         domain: slug,

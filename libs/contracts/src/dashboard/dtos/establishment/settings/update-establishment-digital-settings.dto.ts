@@ -2,8 +2,8 @@ import { IsIn, IsNotEmpty, IsString, Length, Matches, ValidateIf } from "class-v
 import { Type } from "class-transformer";
 
 export class EstablishmentDomainDto {
-    @Length(3, 50)
-    @Matches(/^[a-z0-9-]+$/)
+    @Length(2, 50)
+    @Matches(/^[a-z0-9]+$/)
     @IsString()
     @IsNotEmpty()
     slug: string;

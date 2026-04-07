@@ -423,6 +423,8 @@ export class ItemService {
             );
         }
 
+        console.log(dto.translations?.map(t => t.shortDescription))
+
         const item = await this.prisma.$transaction(async tx => {
             // 1. Delete existing related data (cascade-safe order)
             await tx.itemTranslation.deleteMany({ where: { itemId: id } });

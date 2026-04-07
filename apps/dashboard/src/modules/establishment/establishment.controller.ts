@@ -40,6 +40,11 @@ export class EstablishmentController {
         return this.establishmentService.getEstablishmentSystemSettings(payload.establishment);
     }
 
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_DIGITAL)
+    getEstablishmentDigitalSettings(@Payload() payload: { establishment: Establishment }) {
+        return this.establishmentService.getEstablishmentDigitalSettings(payload.establishment);
+    }
+
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SCHEDULE_BY_ID)
     getEstablishmentSchedule(@Payload() payload: { id: string }) {
         return this.establishmentService.getEstablishmentSchedule(payload.id);
