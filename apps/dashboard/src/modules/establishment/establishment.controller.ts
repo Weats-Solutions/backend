@@ -6,7 +6,7 @@ import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/
 import { User, Establishment } from '@weats/types';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
-import { UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
+import { UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentSystemSettingsDto, UpdateEstablishmentDigitalSettingsDto } from '@weats/contracts';
 
 @Controller()
 export class EstablishmentController {
@@ -83,6 +83,16 @@ export class EstablishmentController {
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_SYSTEM)
     updateEstablishmentSystemSettings(@Payload() payload: { establishment: Establishment; updateEstablishmentSystemSettingsDto: UpdateEstablishmentSystemSettingsDto }) {
         return this.establishmentService.updateEstablishmentSystemSettings(payload.establishment, payload.updateEstablishmentSystemSettingsDto);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_VERIFY_DOMAIN)
+    verifyDomain(@Payload() payload: { slug: string }) {
+        return this.establishmentService.verifyDomain(payload.slug);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_DIGITAL)
+    updateEstablishmentDigitalSettings(@Payload() payload: { establishment: Establishment; updateEstablishmentDigitalSettingsDto: UpdateEstablishmentDigitalSettingsDto }) {
+        return this.establishmentService.updateEstablishmentDigitalSettings(payload.establishment, payload.updateEstablishmentDigitalSettingsDto);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SCHEDULE)

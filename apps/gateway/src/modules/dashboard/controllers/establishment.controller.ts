@@ -11,7 +11,7 @@ import {
   Put,
   UseGuards,
   UsePipes,
-  ValidationPipe,
+  ValidationPipe, Query
 } from '@nestjs/common';
 import {
   ClerkGuard,
@@ -20,20 +20,17 @@ import {
   CurrentEstablishment,
   EstablishmentStaffGuard,
   DASHBOARD_SERVICE,
-  ERRORS,
-  FeatureLimitGuard,
-  RequiresFeature,
-  FeatureUsageService,
-  SCHEDULE_VALIDATION_GROUPS,
+  ERRORS, FeatureUsageService,
+  SCHEDULE_VALIDATION_GROUPS
 } from '@weats/common';
 import type { Establishment, User } from '@weats/types';
-import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto, UpdateEstablishmentScheduleDto } from '@weats/contracts/dashboard/dtos/establishment';
+import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { ClientProxy } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { ClerkService } from '@weats/integrations';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
-import { UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
+import { UpdateEstablishmentDigitalSettingsDto, UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
 import { UpdateEstablishmentBrandingSettingsDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-branding-settings.dto';
 
 @Controller('establishments')
@@ -48,6 +45,21 @@ export class EstablishmentController {
   test() {
     return this.clerkService.getUsers();
   }
+
+  @Get('verify-domain')
+  @UseGuards(ClerkGuard)
+  verifyDomain(
+    @Query('slug') slug: string,
+  ) {
+    if (!slug) {
+      throw new BadRequestException({
+        message: ERRORS.BAD_REQUEST,
+        code: ERRORS.BAD_REQUEST,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_VERIFY_DOMAIN, { slug });
+  }
+
 
   @UseGuards(ClerkGuard)
   @Post()
@@ -270,6 +282,24 @@ export class EstablishmentController {
     }
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_SYSTEM, { establishment, updateEstablishmentSystemSettingsDto });
   }
+
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Patch(':id/settings/digital')
+  updateEstablishmentDigitalSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+    @Body() updateEstablishmentDigitalSettingsDto: UpdateEstablishmentDigitalSettingsDto,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_DIGITAL, { establishment, updateEstablishmentDigitalSettingsDto });
+  }
+
 
 
   /*

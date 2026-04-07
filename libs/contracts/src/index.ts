@@ -23,7 +23,7 @@ export * from './dashboard/dtos/image/upload-urls.dto';
 export * from './dashboard/dtos/establishment/settings/update-establishement-general-settings.dto';
 export * from './dashboard/dtos/establishment/settings/update-establishment-billing-settings.dto';
 export * from './dashboard/dtos/establishment/settings/update-establishment-branding-settings.dto';
-export * from './dashboard/dtos/establishment/settings/update-establishment-menu-digital-settings.dto';
+export * from './dashboard/dtos/establishment/settings/update-establishment-digital-settings.dto';
 export * from './dashboard/dtos/establishment/settings/update-establishment-system-settings.dto';
 export * from './dashboard/dtos/item/variant-groups/create-variant-group.dto';
 export * from './dashboard/dtos/item/variant-groups/update-variant-group.dto';

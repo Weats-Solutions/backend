@@ -445,6 +445,7 @@ export class MenuService {
                                                         where: { locale: lang },
                                                         select: {
                                                             name: true,
+                                                            shortDescription: true,
                                                             description: true,
                                                         },
                                                     },

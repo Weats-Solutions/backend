@@ -3,15 +3,14 @@ import { RpcException } from '@nestjs/microservices';
 import { InjectQueue } from '@nestjs/bull';
 import type { Queue } from 'bull';
 import { User, Establishment } from '@weats/types';
-import { RESPONSE_CODES, ERRORS, FeatureUsageService, normalizeSchedule, DEFAULT_SCHEDULE_NAMES } from '@weats/common';
+import { RESPONSE_CODES, ERRORS, FeatureUsageService, normalizeSchedule, DEFAULT_SCHEDULE_NAMES, RESERVED_DOMAINS } from '@weats/common';
 import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { CorePrismaService, EstablishmentLanguage, ScheduleType } from '@weats/database';
 import { EstablishmentStatus } from '@weats/database';
 import { ulid } from 'ulid';
 import { ClerkService, StripeService } from '@weats/integrations';
-import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
-import { EstablishmentBrandingDto, EstablishmentInformationsDto, EstablishmentLanguageDto, EstablishmentLocationDto, EstablishmentPreferencesDto, EstablishmentSocialMediaDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
+import { EstablishmentBrandingDto, EstablishmentDomainDto, EstablishmentInformationsDto, EstablishmentLanguageDto, EstablishmentLocationDto, EstablishmentPreferencesDto, EstablishmentSocialMediaDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentDigitalSettingsDto, UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
 import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 
 export type NormalizedFeature =
@@ -785,6 +784,48 @@ export class EstablishmentService {
     }
   }
 
+  async updateEstablishmentDigitalSettings(establishment: Establishment, updateEstablishmentDigitalSettingsDto: UpdateEstablishmentDigitalSettingsDto) {
+    if (updateEstablishmentDigitalSettingsDto.section === 'domain') {
+      return this.updateDomain(establishment, updateEstablishmentDigitalSettingsDto.domain);
+    }
+  }
+
+  async updateDomain(establishment: Establishment, domainDto: EstablishmentDomainDto) {
+    await this.verifyDomain(domainDto.slug);
+
+    return this.prisma.establishment.update({
+      where: { id: establishment.id },
+      data: {
+        slug: domainDto.slug,
+      },
+    });
+  }
+
+  async verifyDomain(slug: string) {
+    if (RESERVED_DOMAINS.includes(slug.toLowerCase())) {
+      return {
+        domain: slug,
+        isAvailable: false,
+      };
+    }
+
+    const establishment = await this.prisma.establishment.findUnique({
+      where: { slug },
+    });
+
+    if (establishment) {
+      return {
+        domain: slug,
+        isAvailable: false,
+      };
+    }
+
+    return {
+      domain: slug,
+      isAvailable: true,
+    };
+  }
+
   /*
   async updateLanguages(establishment: Establishment, updateEstablishmentLanguagesDto: UpdateEstablishmentLanguagesDto) {
     const { limit } = await this.featureUsageService.getUsageAndLimit("languages", establishment.id)
@@ -998,23 +1039,43 @@ export class EstablishmentService {
 
   private generateSlug(name: string): string {
     return name
+      .normalize('NFD')                 // Decompõe caracteres acentuados (ex: á -> a + ´)
+      .replace(/[\u0300-\u036f]/g, '') // Remove os acentos
       .toLowerCase()
       .trim()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-+|-+$/g, '');
+      .replace(/[^a-z0-9\s-]/g, '')    // Remove caracteres especiais que sobraram
+      .replace(/\s+/g, '-')            // Espaços para hífens
+      .replace(/-+/g, '-')             // Remove hífens duplicados
+      .replace(/^-+|-+$/g, '');        // Remove hífens no início e fim
   }
 
   private async generateUniqueSlug(name: string): Promise<string> {
-    let slug = this.generateSlug(name);
-    let exists = await this.prisma.establishment.findUnique({ where: { slug } });
+    let baseSlug = this.generateSlug(name);
 
-    while (exists) {
-      slug = this.generateSlug(name) + '-' + ulid().slice(-4);
-      exists = await this.prisma.establishment.findUnique({ where: { slug } });
+    // Tratamento de domínios reservados logo no início
+    if (RESERVED_DOMAINS.includes(baseSlug)) {
+      baseSlug = `${baseSlug}-${ulid().slice(-4)}`;
     }
 
-    return slug;
+    let currentSlug = baseSlug;
+    let isUnique = false;
+    let attempts = 0;
+
+    while (!isUnique && attempts < 5) {
+      const exists = await this.prisma.establishment.findUnique({
+        where: { slug: currentSlug },
+        select: { id: true } // Seleciona apenas o ID para ser mais rápido
+      });
+
+      if (!exists) {
+        isUnique = true;
+      } else {
+        // Gera um novo sufixo a cada tentativa falhada
+        currentSlug = `${baseSlug}-${ulid().slice(-4)}`;
+        attempts++;
+      }
+    }
+
+    return currentSlug;
   }
 }
