@@ -11,6 +11,7 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import { isScheduleOpenNow } from '@weats/common/utils/schedule.utils';
+import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -21,6 +22,7 @@ export class LandingpageService {
         private readonly prisma: CorePrismaService,
         private readonly appConfigService: AppConfigService,
         private readonly menuService: MenuService,
+        private readonly menuUtilsService: MenuUtilsService,
         //@Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     ) { }
 
@@ -446,9 +448,10 @@ export class LandingpageService {
             const { name, config, themeId } = updateThemeSettingsDto;
 
             let theme;
+            let shouldClearCache = false;
 
             if (themeId) {
-                // Create new theme (themeId is provided when creating new)
+                // Criar novo tema
                 theme = await this.prisma.theme.create({
                     data: {
                         name,
@@ -459,37 +462,35 @@ export class LandingpageService {
                     },
                 });
 
+                // Ao criar e definir como ativo, a cache deve ser limpa
                 await this.prisma.establishment.update({
                     where: { id: establishment.id },
                     data: { activeThemeId: theme.id },
                 });
+
+                shouldClearCache = true;
             } else {
-                // Update existing theme
+                // Atualizar tema existente
                 const existingEstablishment = await this.prisma.establishment.findUnique({
                     where: { id: establishment.id },
-                    select: {
-                        activeTheme: {
-                            select: {
-                                id: true,
-                            }
-                        },
-                    },
+                    select: { activeThemeId: true }, // Buscar o ID ativo diretamente
                 });
 
-                if (existingEstablishment?.activeTheme) {
+                if (existingEstablishment?.activeThemeId) {
                     theme = await this.prisma.theme.update({
-                        where: { id: existingEstablishment.activeTheme.id },
+                        where: { id: existingEstablishment.activeThemeId },
                         data: { name, config },
                     });
+
+                    // Se atualizámos o tema que está ativo, marcamos para limpar cache
+                    shouldClearCache = true;
                 } else {
-                    // Fallback: create new theme if no active theme exists
+                    // Fallback: criar novo se não existir ativo
                     theme = await this.prisma.theme.create({
                         data: {
                             name,
                             config,
-                            establishment: {
-                                connect: { id: establishment.id },
-                            },
+                            establishment: { connect: { id: establishment.id } },
                         },
                     });
 
@@ -497,20 +498,23 @@ export class LandingpageService {
                         where: { id: establishment.id },
                         data: { activeThemeId: theme.id },
                     });
+
+                    shouldClearCache = true;
                 }
             }
 
-            // Clear menu cache using the shared utility function
-            clearMenuCacheAsync(establishment.slug);
+            // Só limpa a cache se o tema afetado for o tema ativo do estabelecimento
+            if (shouldClearCache) {
+                this.menuUtilsService.clearMenuCacheAsync('theme', establishment.slug);
+            }
 
             return theme;
         } catch (error) {
             if (error instanceof RpcException) throw error;
-            console.log(error);
+            console.error(error);
             throw new RpcException({
                 status: 400,
-                message: ERRORS.BAD_REQUEST,
-                code: ERRORS.BAD_REQUEST,
+                message: 'Erro ao atualizar o tema.',
             });
         }
     }
@@ -573,8 +577,7 @@ export class LandingpageService {
             });
 
             // Clear menu cache
-            clearMenuCacheAsync(establishment.slug);
-
+            this.menuUtilsService.clearMenuCacheAsync('theme', establishment.slug);
             return theme;
         } catch (error) {
             if (error instanceof RpcException) throw error;

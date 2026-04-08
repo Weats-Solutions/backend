@@ -4,7 +4,7 @@ import type { RedisServiceType } from '@weats/common';
 
 @Injectable()
 export class RedisConfigService {
-  constructor(private configService: ConfigService) {}
+  constructor(private configService: ConfigService) { }
 
   getRedisHost(): string {
     return this.configService.getOrThrow<string>('REDIS_HOST');
@@ -40,6 +40,7 @@ export class RedisConfigService {
   private getDatabaseForService(serviceType: RedisServiceType): number {
     const dbMap: Record<RedisServiceType, number> = {
       images: Number(this.configService.getOrThrow<string>('REDIS_IMAGE_DB')),
+      jobs: Number(this.configService.getOrThrow<string>('REDIS_JOB_DB')),
       webhooks: Number(this.configService.getOrThrow<string>('REDIS_WEBHOOK_DB')),
       emails: Number(this.configService.getOrThrow<string>('REDIS_EMAIL_DB')),
       cache: Number(this.configService.getOrThrow<string>('REDIS_CACHE_DB')),

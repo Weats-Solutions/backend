@@ -16,8 +16,8 @@ export class ItemController {
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ITEM_UPDATE)
-    async updateItem(@Payload() payload: { id: string, establishmentId: string, updateItemDto: UpdateItemDto }) {
-        return this.itemService.updateItem(payload.id, payload.establishmentId, payload.updateItemDto);
+    async updateItem(@Payload() payload: { id: string, establishment: Establishment, updateItemDto: UpdateItemDto }) {
+        return this.itemService.updateItem(payload.id, payload.establishment, payload.updateItemDto);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ITEM_GET_ALL)

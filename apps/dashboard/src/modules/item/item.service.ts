@@ -12,6 +12,8 @@ import type {
 } from '@weats/types';
 import { BulkDeleteDto, BulkStatusDto } from '@weats/contracts';
 import { clearMenuCacheAsync } from '@weats/common';
+import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
+
 
 // ─── Prisma Include Configs ─────────────────────────────────────
 
@@ -90,7 +92,10 @@ type ItemWithListIncludes = Prisma.ItemGetPayload<{ include: typeof ITEM_LIST_IN
 
 @Injectable()
 export class ItemService {
-    constructor(private readonly prisma: CorePrismaService) { }
+    constructor(
+        private readonly prisma: CorePrismaService,
+        private readonly menuUtilsService: MenuUtilsService
+    ) { }
 
     private async getEstablishmentSlug(establishmentId: string) {
         const establishment = await this.prisma.establishment.findUnique({
@@ -412,11 +417,53 @@ export class ItemService {
         return item;
     }
 
-    async updateItem(id: string, establishmentId: string, dto: UpdateItemDto) {
-        const slug = await this.getEstablishmentSlug(establishmentId);
+    async updateItem(id: string, establishment: Establishment, dto: UpdateItemDto) {
         const existing = await this.prisma.item.findUnique({
-            where: { id, establishmentId },
+            where: { id, establishmentId: establishment.id },
+            include: {
+                // 1. Menus onde o item aparece diretamente
+                menuItemPositions: {
+                    select: {
+                        subcategory: {
+                            select: {
+                                category: { select: { menuId: true } }
+                            }
+                        }
+                    }
+                },
+                // 2. Menus onde este item é um modificador de outros itens
+                itemModifierOptions: {
+                    select: {
+                        group: {
+                            select: {
+                                item: { // Este é o Item Pai
+                                    select: {
+                                        menuItemPositions: {
+                                            select: {
+                                                subcategory: {
+                                                    select: {
+                                                        category: { select: { menuId: true } }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         });
+
+        let menuId;
+
+        if (existing?.menuItemPositions && existing.menuItemPositions.length > 0) {
+            menuId = existing.menuItemPositions[0]?.subcategory?.category?.menuId;
+        } else if (existing?.itemModifierOptions && existing.itemModifierOptions.length > 0) {
+            menuId = existing.itemModifierOptions[0]?.group?.item?.menuItemPositions?.[0]?.subcategory?.category?.menuId;
+        }
+
         if (!existing) {
             throw new NotFoundException(
                 'Item not found or does not belong to this establishment',
@@ -524,7 +571,7 @@ export class ItemService {
 
             return item;
         });
-        clearMenuCacheAsync(slug);
+        this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug, menuId);
         return item;
     }
 

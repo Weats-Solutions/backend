@@ -2,9 +2,11 @@ import { Module } from "@nestjs/common";
 import { CloudflareService } from "./cloudflare.service";
 import { CloudflareConfigService, ConfigsModule } from "@weats/configs";
 import { HttpModule } from "@nestjs/axios";
+import { DatabaseModule } from "@weats/database";
 
 @Module({
-    imports: [HttpModule, ConfigsModule],
+    imports: [HttpModule, ConfigsModule, DatabaseModule,
+    ],
     providers: [CloudflareService,
         {
             provide: 'ACCOUNT_ID',

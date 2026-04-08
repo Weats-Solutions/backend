@@ -305,6 +305,7 @@ enum SpiceLevel {
   LOW
   MEDIUM
   HIGH
+  EXTRA_HOT
 }
 
 model ItemAttribute {

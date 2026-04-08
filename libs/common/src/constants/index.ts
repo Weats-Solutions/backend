@@ -1,3 +1,4 @@
+export * from './cloudflare';
 export * from './decorators';
 export * from './establishment';
 export * from './eupago';
