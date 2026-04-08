@@ -25,7 +25,7 @@ export class ItemController {
         @CurrentEstablishment() establishment: Establishment,
         @Body() updateItemDto: UpdateItemDto,
     ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.ITEM_UPDATE, { id, establishmentId: establishment.id, updateItemDto });
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.ITEM_UPDATE, { id, establishment, updateItemDto });
     }
 
     @Get('establishment')
