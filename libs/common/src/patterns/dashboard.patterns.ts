@@ -10,6 +10,7 @@ export const DASHBOARD_PATTERNS = {
   ESTABLISHMENT_GET_SETTINGS_SYSTEM: 'dashboard.establishment.get_settings_system',
   ESTABLISHMENT_UPDATE_SETTINGS_GENERAL: 'dashboard.establishment.update_settings_general',
   ESTABLISHMENT_UPDATE_SETTINGS_BRANDING: 'dashboard.establishment.update_settings_branding',
+  ESTABLISHMENT_PROCESS_FAVICON: 'dashboard.establishment.process_favicon',
   ESTABLISHMENT_UPDATE_SETTINGS_BILLING: 'dashboard.establishment.update_settings_billing',
   ESTABLISHMENT_UPDATE_SETTINGS_DIGITAL: 'dashboard.establishment.update_settings_digital',
   ESTABLISHMENT_UPDATE_SETTINGS_SYSTEM: 'dashboard.establishment.update_settings_system',

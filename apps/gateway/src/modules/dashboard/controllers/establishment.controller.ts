@@ -32,6 +32,7 @@ import { ClerkService } from '@weats/integrations';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
 import { UpdateEstablishmentDigitalSettingsDto, UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
 import { UpdateEstablishmentBrandingSettingsDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-branding-settings.dto';
+import { UpdateEstablishmentFaviconDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-favicon';
 
 @Controller('establishments')
 export class EstablishmentController {
@@ -287,7 +288,8 @@ export class EstablishmentController {
   @Get(':id/settings/favicon/process')
   processEstablishmentFavicon(
     @CurrentEstablishment() establishment: Establishment,
-    @Body() 
+    @Param('id') id: string,
+    @Body() updateEstablishmentFaviconDto: UpdateEstablishmentFaviconDto,
   ) {
     if (establishment.id !== id) {
       throw new ForbiddenException({
@@ -295,7 +297,7 @@ export class EstablishmentController {
         code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
       });
     }
-    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_BRANDING, { id });
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_PROCESS_FAVICON, { establishment, updateEstablishmentFaviconDto });
   }
 
   @Roles()
