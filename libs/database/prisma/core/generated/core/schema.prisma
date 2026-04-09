@@ -681,7 +681,9 @@ model Establishment {
   scheduleId String?   @unique
   schedule   Schedule? @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
 
+  // ─── Branding & SEO ────────────────────────────────────────────────────────
   metadata EstablishmentMetadata?
+  favicons FaviconAsset[]
 
   // ─── Sistema ───────────────────────────────────────────────────────────────
   createdAt DateTime @default(now())
@@ -748,26 +750,6 @@ enum Currency {
   GBP
 }
 
-model EstablishmentMetadata {
-  id String @id @default(ulid())
-
-  name        String?
-  shortName   String?
-  description String?
-  ogImage     String?
-
-  faviconIco              String?
-  favicon32x32Png         String?
-  appleTouchIconPng       String?
-  androidChrome192x192Png String?
-  androidChrome512x512Png String?
-
-  establishmentId String        @unique
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-}
-
 model EstablishmentBookingSettings {
   id                String        @id @default(ulid())
   enabled           Boolean       @default(false)
@@ -780,6 +762,37 @@ model EstablishmentBookingSettings {
   primaryColor      String        @default("#f97316")
   updatedAt         DateTime      @updatedAt
   establishment     Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}
+
+model EstablishmentMetadata {
+  id String @id @default(ulid())
+
+  // SEO & Web Presence
+  title       String? // Título
+  shortName   String?
+  description String?
+
+  // Imagem de partilha (Open Graph)
+  ogImageId String? @unique
+  ogImage   Image?  @relation("OGImage", fields: [ogImageId], references: [id])
+
+  establishmentId String        @unique
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+
+  updatedAt DateTime @updatedAt
+}
+
+model FaviconAsset {
+  id              String @id @default(ulid())
+  establishmentId String
+  imageId         String @unique // Um asset de favicon aponta para uma imagem única
+  role            String // Ex: 'favicon-32x32.png'
+
+  establishment Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  image         Image         @relation("FaviconAsset", fields: [imageId], references: [id], onDelete: Cascade)
+
+  @@unique([establishmentId, role]) // Um asset de favicon aponta para uma imagem única
+  @@index([establishmentId])
 }
 
 model Expense {
@@ -812,21 +825,23 @@ model Expense {
 }
 
 model Image {
-  id                 String          @id @default(ulid())
-  cloudflareImageId  String          @unique
-  fileName           String
-  url                String
-  fileSize           Float
-  metadata           Json?
-  establishmentId    String
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-  bannerUsedInBrands Establishment[] @relation("BannerImage")
-  logoUsedInBrands   Establishment[] @relation("LogoImage")
-  establishment      Establishment   @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-  item               Item[]          @relation("ImageItem")
-  itemVariants       ItemVariant[]   @relation("ItemVariantImage")
-  menuCategory       MenuCategory[]  @relation("ImageMenuCategory")
+  id                      String                 @id @default(ulid())
+  cloudflareImageId       String                 @unique
+  fileName                String
+  url                     String
+  fileSize                Float
+  metadata                Json?
+  establishmentId         String
+  createdAt               DateTime               @default(now())
+  updatedAt               DateTime               @updatedAt
+  bannerUsedInBrands      Establishment[]        @relation("BannerImage")
+  logoUsedInBrands        Establishment[]        @relation("LogoImage")
+  establishment           Establishment          @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  item                    Item[]                 @relation("ImageItem")
+  itemVariants            ItemVariant[]          @relation("ItemVariantImage")
+  menuCategory            MenuCategory[]         @relation("ImageMenuCategory")
+  establishmentMetadataOg EstablishmentMetadata? @relation("OGImage")
+  faviconAssets           FaviconAsset[]         @relation("FaviconAsset")
 
   @@index([establishmentId])
 }
@@ -1227,6 +1242,7 @@ enum SpiceLevel {
   LOW
   MEDIUM
   HIGH
+  EXTRA_HOT
 }
 
 model ItemAttribute {

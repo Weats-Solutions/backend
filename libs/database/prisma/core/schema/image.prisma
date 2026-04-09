@@ -1,19 +1,21 @@
 model Image {
-  id                 String          @id @default(ulid())
-  cloudflareImageId  String          @unique
-  fileName           String
-  url                String
-  fileSize           Float
-  metadata           Json?
-  establishmentId    String
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-  bannerUsedInBrands Establishment[] @relation("BannerImage")
-  logoUsedInBrands   Establishment[] @relation("LogoImage")
-  establishment      Establishment   @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
-  item               Item[]          @relation("ImageItem")
-  itemVariants       ItemVariant[]   @relation("ItemVariantImage")
-  menuCategory       MenuCategory[]  @relation("ImageMenuCategory")
+  id                      String                 @id @default(ulid())
+  cloudflareImageId       String                 @unique
+  fileName                String
+  url                     String
+  fileSize                Float
+  metadata                Json?
+  establishmentId         String
+  createdAt               DateTime               @default(now())
+  updatedAt               DateTime               @updatedAt
+  bannerUsedInBrands      Establishment[]        @relation("BannerImage")
+  logoUsedInBrands        Establishment[]        @relation("LogoImage")
+  establishment           Establishment          @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  item                    Item[]                 @relation("ImageItem")
+  itemVariants            ItemVariant[]          @relation("ItemVariantImage")
+  menuCategory            MenuCategory[]         @relation("ImageMenuCategory")
+  establishmentMetadataOg EstablishmentMetadata? @relation("OGImage")
+  faviconAssets           FaviconAsset[]         @relation("FaviconAsset")
 
   @@index([establishmentId])
 }

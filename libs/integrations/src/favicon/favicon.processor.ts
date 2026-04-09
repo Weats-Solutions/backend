@@ -1,55 +1,81 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
 import { FaviconService } from './favicon.service';
+import { CorePrismaService } from '@weats/database';
+import { CloudflareService } from '../cloudflare/cloudflare.service';
 
 @Processor('jobs')
 export class FaviconProcessor {
-    constructor(private readonly faviconService: FaviconService) { }
+    constructor(private readonly faviconService: FaviconService, private readonly corePrismaService: CorePrismaService, private readonly cloudflareService: CloudflareService) { }
 
     @Process('generate-favicons')
     async handleGenerateFavicons(job: Job<{ source: string, establishmentId: string }>) {
         const { source, establishmentId } = job.data;
         const buffer = Buffer.from(source, 'base64');
 
+        // 1. Gerar as imagens na memória
         const response = await this.faviconService.generateRawFavicons(buffer);
-
-        const wanted = [
-            'favicon-16x16.png',
-            'favicon-32x32.png',
-            'apple-touch-icon.png',
-            'android-chrome-192x192.png',
-            'android-chrome-512x512.png',
-        ];
-
-        const icons: Record<string, string> = {};
+        const wanted = ['favicon-16x16.png', 'favicon-32x32.png', 'apple-touch-icon.png', 'android-chrome-192x192.png', 'android-chrome-512x512.png'];
         const imagesToUpload = response.images.filter(img => wanted.includes(img.name));
 
+        const newImageIds: { role: string, id: string, cloudflareId: string }[] = [];
+
+        // 2. Upload para Cloudflare (fora da transação de BD)
         for (let i = 0; i < imagesToUpload.length; i++) {
             const img = imagesToUpload[i];
+            const uploaded = await this.faviconService.uploadToCloudflare(img.contents, img.name, establishmentId);
 
-            // Aqui chamamos o service que por sua vez chama o seu uploadImage
-            const uploadedImage = await this.faviconService.uploadToCloudflare(
-                img.contents,
-                img.name,
-                establishmentId
-            );
+            newImageIds.push({
+                role: img.name,
+                id: uploaded.id,
+                cloudflareId: uploaded.cloudflareImageId
+            });
 
-            // Guardamos a URL que veio da base de dados/Cloudflare
-            icons[img.name] = uploadedImage.url;
-
-            await job.progress(Math.floor(((i + 1) / imagesToUpload.length) * 100));
+            await job.progress(Math.floor(((i + 1) / imagesToUpload.length) * 80)); // 80% do progresso é upload
         }
 
-        return {
-            establishmentId,
-            icons,
-            html: {
-                favicon32: icons['favicon-32x32.png'],
-                favicon16: icons['favicon-16x16.png'],
-                appleTouch: icons['apple-touch-icon.png'],
-                android192: icons['android-chrome-192x192.png'],
-                android512: icons['android-chrome-512x512.png'],
-            },
-        };
+        // 3. TRANSACTION: Troca atómica na Base de Dados
+        try {
+            await this.corePrismaService.$transaction(async (tx) => {
+                // A. Buscar assets antigos para saber o que apagar depois
+                const oldAssets = await tx.faviconAsset.findMany({
+                    where: { establishmentId },
+                    include: { image: true }
+                });
+
+                // B. Remover os vínculos antigos
+                await tx.faviconAsset.deleteMany({
+                    where: { establishmentId }
+                });
+
+                // C. Criar os novos vínculos
+                await tx.faviconAsset.createMany({
+                    data: newImageIds.map(img => ({
+                        establishmentId,
+                        role: img.role,
+                        imageId: img.id
+                    }))
+                });
+
+                // Retornamos os IDs antigos para limpar a Cloudflare depois do commit
+                return oldAssets.map(a => a.image.cloudflareImageId);
+            }).then(async (oldCloudflareIds) => {
+                // 4. Limpeza (Cleanup): Apagar imagens órfãs da Cloudflare
+                // Fazemos isto DEPOIS da transação ter sucesso
+                for (const cfId of oldCloudflareIds) {
+                    await this.cloudflareService.deleteImageFromCloudflareOnly(cfId);
+                }
+            });
+
+            await job.progress(100);
+            return { success: true };
+
+        } catch (error) {
+            // Se a transação falhar, devemos idealmente apagar as imagens que acabámos de subir para a Cloudflare
+            for (const img of newImageIds) {
+                await this.cloudflareService.deleteImageFromCloudflareOnly(img.cloudflareId);
+            }
+            throw new Error('Falha ao atualizar favicons na base de dados');
+        }
     }
 }

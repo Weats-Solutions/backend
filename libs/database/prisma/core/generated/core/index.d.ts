@@ -88,15 +88,20 @@ export type Employee = $Result.DefaultSelection<Prisma.$EmployeePayload>
  */
 export type Establishment = $Result.DefaultSelection<Prisma.$EstablishmentPayload>
 /**
+ * Model EstablishmentBookingSettings
+ * 
+ */
+export type EstablishmentBookingSettings = $Result.DefaultSelection<Prisma.$EstablishmentBookingSettingsPayload>
+/**
  * Model EstablishmentMetadata
  * 
  */
 export type EstablishmentMetadata = $Result.DefaultSelection<Prisma.$EstablishmentMetadataPayload>
 /**
- * Model EstablishmentBookingSettings
+ * Model FaviconAsset
  * 
  */
-export type EstablishmentBookingSettings = $Result.DefaultSelection<Prisma.$EstablishmentBookingSettingsPayload>
+export type FaviconAsset = $Result.DefaultSelection<Prisma.$FaviconAssetPayload>
 /**
  * Model Expense
  * 
@@ -956,7 +961,8 @@ export type ModifierDisplayMode = (typeof ModifierDisplayMode)[keyof typeof Modi
 export const SpiceLevel: {
   LOW: 'LOW',
   MEDIUM: 'MEDIUM',
-  HIGH: 'HIGH'
+  HIGH: 'HIGH',
+  EXTRA_HOT: 'EXTRA_HOT'
 };
 
 export type SpiceLevel = (typeof SpiceLevel)[keyof typeof SpiceLevel]
@@ -1431,6 +1437,16 @@ export class PrismaClient<
   get establishment(): Prisma.EstablishmentDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.establishmentBookingSettings`: Exposes CRUD operations for the **EstablishmentBookingSettings** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EstablishmentBookingSettings
+    * const establishmentBookingSettings = await prisma.establishmentBookingSettings.findMany()
+    * ```
+    */
+  get establishmentBookingSettings(): Prisma.EstablishmentBookingSettingsDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.establishmentMetadata`: Exposes CRUD operations for the **EstablishmentMetadata** model.
     * Example usage:
     * ```ts
@@ -1441,14 +1457,14 @@ export class PrismaClient<
   get establishmentMetadata(): Prisma.EstablishmentMetadataDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.establishmentBookingSettings`: Exposes CRUD operations for the **EstablishmentBookingSettings** model.
+   * `prisma.faviconAsset`: Exposes CRUD operations for the **FaviconAsset** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more EstablishmentBookingSettings
-    * const establishmentBookingSettings = await prisma.establishmentBookingSettings.findMany()
+    * // Fetch zero or more FaviconAssets
+    * const faviconAssets = await prisma.faviconAsset.findMany()
     * ```
     */
-  get establishmentBookingSettings(): Prisma.EstablishmentBookingSettingsDelegate<ExtArgs, ClientOptions>;
+  get faviconAsset(): Prisma.FaviconAssetDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.expense`: Exposes CRUD operations for the **Expense** model.
@@ -2567,8 +2583,9 @@ export namespace Prisma {
     EmailEvent: 'EmailEvent',
     Employee: 'Employee',
     Establishment: 'Establishment',
-    EstablishmentMetadata: 'EstablishmentMetadata',
     EstablishmentBookingSettings: 'EstablishmentBookingSettings',
+    EstablishmentMetadata: 'EstablishmentMetadata',
+    FaviconAsset: 'FaviconAsset',
     Expense: 'Expense',
     Image: 'Image',
     EstablishmentIntegrations: 'EstablishmentIntegrations',
@@ -2651,7 +2668,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "promotion" | "buyXGetYRule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "establishmentMetadata" | "establishmentBookingSettings" | "expense" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "landingPage" | "landingPageTranslation" | "menu" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "schedule" | "scheduleDay" | "timeInterval" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
+      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "promotion" | "buyXGetYRule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "establishmentBookingSettings" | "establishmentMetadata" | "faviconAsset" | "expense" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "landingPage" | "landingPageTranslation" | "menu" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "schedule" | "scheduleDay" | "timeInterval" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3691,6 +3708,80 @@ export namespace Prisma {
           }
         }
       }
+      EstablishmentBookingSettings: {
+        payload: Prisma.$EstablishmentBookingSettingsPayload<ExtArgs>
+        fields: Prisma.EstablishmentBookingSettingsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EstablishmentBookingSettingsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EstablishmentBookingSettingsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>
+          }
+          findFirst: {
+            args: Prisma.EstablishmentBookingSettingsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EstablishmentBookingSettingsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>
+          }
+          findMany: {
+            args: Prisma.EstablishmentBookingSettingsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>[]
+          }
+          create: {
+            args: Prisma.EstablishmentBookingSettingsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>
+          }
+          createMany: {
+            args: Prisma.EstablishmentBookingSettingsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EstablishmentBookingSettingsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>[]
+          }
+          delete: {
+            args: Prisma.EstablishmentBookingSettingsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>
+          }
+          update: {
+            args: Prisma.EstablishmentBookingSettingsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>
+          }
+          deleteMany: {
+            args: Prisma.EstablishmentBookingSettingsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EstablishmentBookingSettingsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EstablishmentBookingSettingsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>[]
+          }
+          upsert: {
+            args: Prisma.EstablishmentBookingSettingsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>
+          }
+          aggregate: {
+            args: Prisma.EstablishmentBookingSettingsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEstablishmentBookingSettings>
+          }
+          groupBy: {
+            args: Prisma.EstablishmentBookingSettingsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EstablishmentBookingSettingsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EstablishmentBookingSettingsCountArgs<ExtArgs>
+            result: $Utils.Optional<EstablishmentBookingSettingsCountAggregateOutputType> | number
+          }
+        }
+      }
       EstablishmentMetadata: {
         payload: Prisma.$EstablishmentMetadataPayload<ExtArgs>
         fields: Prisma.EstablishmentMetadataFieldRefs
@@ -3765,77 +3856,77 @@ export namespace Prisma {
           }
         }
       }
-      EstablishmentBookingSettings: {
-        payload: Prisma.$EstablishmentBookingSettingsPayload<ExtArgs>
-        fields: Prisma.EstablishmentBookingSettingsFieldRefs
+      FaviconAsset: {
+        payload: Prisma.$FaviconAssetPayload<ExtArgs>
+        fields: Prisma.FaviconAssetFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.EstablishmentBookingSettingsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload> | null
+            args: Prisma.FaviconAssetFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FaviconAssetPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.EstablishmentBookingSettingsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>
+            args: Prisma.FaviconAssetFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FaviconAssetPayload>
           }
           findFirst: {
-            args: Prisma.EstablishmentBookingSettingsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload> | null
+            args: Prisma.FaviconAssetFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FaviconAssetPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.EstablishmentBookingSettingsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>
+            args: Prisma.FaviconAssetFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FaviconAssetPayload>
           }
           findMany: {
-            args: Prisma.EstablishmentBookingSettingsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>[]
+            args: Prisma.FaviconAssetFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FaviconAssetPayload>[]
           }
           create: {
-            args: Prisma.EstablishmentBookingSettingsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>
+            args: Prisma.FaviconAssetCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FaviconAssetPayload>
           }
           createMany: {
-            args: Prisma.EstablishmentBookingSettingsCreateManyArgs<ExtArgs>
+            args: Prisma.FaviconAssetCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.EstablishmentBookingSettingsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>[]
+            args: Prisma.FaviconAssetCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FaviconAssetPayload>[]
           }
           delete: {
-            args: Prisma.EstablishmentBookingSettingsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>
+            args: Prisma.FaviconAssetDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FaviconAssetPayload>
           }
           update: {
-            args: Prisma.EstablishmentBookingSettingsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>
+            args: Prisma.FaviconAssetUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FaviconAssetPayload>
           }
           deleteMany: {
-            args: Prisma.EstablishmentBookingSettingsDeleteManyArgs<ExtArgs>
+            args: Prisma.FaviconAssetDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.EstablishmentBookingSettingsUpdateManyArgs<ExtArgs>
+            args: Prisma.FaviconAssetUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.EstablishmentBookingSettingsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>[]
+            args: Prisma.FaviconAssetUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FaviconAssetPayload>[]
           }
           upsert: {
-            args: Prisma.EstablishmentBookingSettingsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EstablishmentBookingSettingsPayload>
+            args: Prisma.FaviconAssetUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FaviconAssetPayload>
           }
           aggregate: {
-            args: Prisma.EstablishmentBookingSettingsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateEstablishmentBookingSettings>
+            args: Prisma.FaviconAssetAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFaviconAsset>
           }
           groupBy: {
-            args: Prisma.EstablishmentBookingSettingsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<EstablishmentBookingSettingsGroupByOutputType>[]
+            args: Prisma.FaviconAssetGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FaviconAssetGroupByOutputType>[]
           }
           count: {
-            args: Prisma.EstablishmentBookingSettingsCountArgs<ExtArgs>
-            result: $Utils.Optional<EstablishmentBookingSettingsCountAggregateOutputType> | number
+            args: Prisma.FaviconAssetCountArgs<ExtArgs>
+            result: $Utils.Optional<FaviconAssetCountAggregateOutputType> | number
           }
         }
       }
@@ -8919,8 +9010,9 @@ export namespace Prisma {
     emailEvent?: EmailEventOmit
     employee?: EmployeeOmit
     establishment?: EstablishmentOmit
-    establishmentMetadata?: EstablishmentMetadataOmit
     establishmentBookingSettings?: EstablishmentBookingSettingsOmit
+    establishmentMetadata?: EstablishmentMetadataOmit
+    faviconAsset?: FaviconAssetOmit
     expense?: ExpenseOmit
     image?: ImageOmit
     establishmentIntegrations?: EstablishmentIntegrationsOmit
@@ -9223,6 +9315,7 @@ export namespace Prisma {
    */
 
   export type EstablishmentCountOutputType = {
+    favicons: number
     expenses: number
     images: number
     themes: number
@@ -9254,6 +9347,7 @@ export namespace Prisma {
   }
 
   export type EstablishmentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    favicons?: boolean | EstablishmentCountOutputTypeCountFaviconsArgs
     expenses?: boolean | EstablishmentCountOutputTypeCountExpensesArgs
     images?: boolean | EstablishmentCountOutputTypeCountImagesArgs
     themes?: boolean | EstablishmentCountOutputTypeCountThemesArgs
@@ -9293,6 +9387,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the EstablishmentCountOutputType
      */
     select?: EstablishmentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EstablishmentCountOutputType without action
+   */
+  export type EstablishmentCountOutputTypeCountFaviconsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FaviconAssetWhereInput
   }
 
   /**
@@ -9502,6 +9603,7 @@ export namespace Prisma {
     item: number
     itemVariants: number
     menuCategory: number
+    faviconAssets: number
   }
 
   export type ImageCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9510,6 +9612,7 @@ export namespace Prisma {
     item?: boolean | ImageCountOutputTypeCountItemArgs
     itemVariants?: boolean | ImageCountOutputTypeCountItemVariantsArgs
     menuCategory?: boolean | ImageCountOutputTypeCountMenuCategoryArgs
+    faviconAssets?: boolean | ImageCountOutputTypeCountFaviconAssetsArgs
   }
 
   // Custom InputTypes
@@ -9556,6 +9659,13 @@ export namespace Prisma {
    */
   export type ImageCountOutputTypeCountMenuCategoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MenuCategoryWhereInput
+  }
+
+  /**
+   * ImageCountOutputType without action
+   */
+  export type ImageCountOutputTypeCountFaviconAssetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FaviconAssetWhereInput
   }
 
 
@@ -26607,6 +26717,7 @@ export namespace Prisma {
     ownerId?: boolean
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     metadata?: boolean | Establishment$metadataArgs<ExtArgs>
+    favicons?: boolean | Establishment$faviconsArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
     activeTheme?: boolean | Establishment$activeThemeArgs<ExtArgs>
     logoImage?: boolean | Establishment$logoImageArgs<ExtArgs>
@@ -26772,6 +26883,7 @@ export namespace Prisma {
   export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     metadata?: boolean | Establishment$metadataArgs<ExtArgs>
+    favicons?: boolean | Establishment$faviconsArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
     activeTheme?: boolean | Establishment$activeThemeArgs<ExtArgs>
     logoImage?: boolean | Establishment$logoImageArgs<ExtArgs>
@@ -26831,6 +26943,7 @@ export namespace Prisma {
     objects: {
       schedule: Prisma.$SchedulePayload<ExtArgs> | null
       metadata: Prisma.$EstablishmentMetadataPayload<ExtArgs> | null
+      favicons: Prisma.$FaviconAssetPayload<ExtArgs>[]
       owner: Prisma.$UserPayload<ExtArgs>
       activeTheme: Prisma.$ThemePayload<ExtArgs> | null
       logoImage: Prisma.$ImagePayload<ExtArgs> | null
@@ -27300,6 +27413,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     schedule<T extends Establishment$scheduleArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$scheduleArgs<ExtArgs>>): Prisma__ScheduleClient<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     metadata<T extends Establishment$metadataArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$metadataArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    favicons<T extends Establishment$faviconsArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$faviconsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     owner<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     activeTheme<T extends Establishment$activeThemeArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$activeThemeArgs<ExtArgs>>): Prisma__ThemeClient<$Result.GetResult<Prisma.$ThemePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     logoImage<T extends Establishment$logoImageArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$logoImageArgs<ExtArgs>>): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -27831,6 +27945,30 @@ export namespace Prisma {
      */
     include?: EstablishmentMetadataInclude<ExtArgs> | null
     where?: EstablishmentMetadataWhereInput
+  }
+
+  /**
+   * Establishment.favicons
+   */
+  export type Establishment$faviconsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetInclude<ExtArgs> | null
+    where?: FaviconAssetWhereInput
+    orderBy?: FaviconAssetOrderByWithRelationInput | FaviconAssetOrderByWithRelationInput[]
+    cursor?: FaviconAssetWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FaviconAssetScalarFieldEnum | FaviconAssetScalarFieldEnum[]
   }
 
   /**
@@ -28673,1168 +28811,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EstablishmentInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model EstablishmentMetadata
-   */
-
-  export type AggregateEstablishmentMetadata = {
-    _count: EstablishmentMetadataCountAggregateOutputType | null
-    _min: EstablishmentMetadataMinAggregateOutputType | null
-    _max: EstablishmentMetadataMaxAggregateOutputType | null
-  }
-
-  export type EstablishmentMetadataMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    shortName: string | null
-    description: string | null
-    ogImage: string | null
-    faviconIco: string | null
-    favicon32x32Png: string | null
-    appleTouchIconPng: string | null
-    androidChrome192x192Png: string | null
-    androidChrome512x512Png: string | null
-    establishmentId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type EstablishmentMetadataMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    shortName: string | null
-    description: string | null
-    ogImage: string | null
-    faviconIco: string | null
-    favicon32x32Png: string | null
-    appleTouchIconPng: string | null
-    androidChrome192x192Png: string | null
-    androidChrome512x512Png: string | null
-    establishmentId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type EstablishmentMetadataCountAggregateOutputType = {
-    id: number
-    name: number
-    shortName: number
-    description: number
-    ogImage: number
-    faviconIco: number
-    favicon32x32Png: number
-    appleTouchIconPng: number
-    androidChrome192x192Png: number
-    androidChrome512x512Png: number
-    establishmentId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type EstablishmentMetadataMinAggregateInputType = {
-    id?: true
-    name?: true
-    shortName?: true
-    description?: true
-    ogImage?: true
-    faviconIco?: true
-    favicon32x32Png?: true
-    appleTouchIconPng?: true
-    androidChrome192x192Png?: true
-    androidChrome512x512Png?: true
-    establishmentId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type EstablishmentMetadataMaxAggregateInputType = {
-    id?: true
-    name?: true
-    shortName?: true
-    description?: true
-    ogImage?: true
-    faviconIco?: true
-    favicon32x32Png?: true
-    appleTouchIconPng?: true
-    androidChrome192x192Png?: true
-    androidChrome512x512Png?: true
-    establishmentId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type EstablishmentMetadataCountAggregateInputType = {
-    id?: true
-    name?: true
-    shortName?: true
-    description?: true
-    ogImage?: true
-    faviconIco?: true
-    favicon32x32Png?: true
-    appleTouchIconPng?: true
-    androidChrome192x192Png?: true
-    androidChrome512x512Png?: true
-    establishmentId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type EstablishmentMetadataAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which EstablishmentMetadata to aggregate.
-     */
-    where?: EstablishmentMetadataWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EstablishmentMetadata to fetch.
-     */
-    orderBy?: EstablishmentMetadataOrderByWithRelationInput | EstablishmentMetadataOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: EstablishmentMetadataWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EstablishmentMetadata from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EstablishmentMetadata.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned EstablishmentMetadata
-    **/
-    _count?: true | EstablishmentMetadataCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: EstablishmentMetadataMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: EstablishmentMetadataMaxAggregateInputType
-  }
-
-  export type GetEstablishmentMetadataAggregateType<T extends EstablishmentMetadataAggregateArgs> = {
-        [P in keyof T & keyof AggregateEstablishmentMetadata]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateEstablishmentMetadata[P]>
-      : GetScalarType<T[P], AggregateEstablishmentMetadata[P]>
-  }
-
-
-
-
-  export type EstablishmentMetadataGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EstablishmentMetadataWhereInput
-    orderBy?: EstablishmentMetadataOrderByWithAggregationInput | EstablishmentMetadataOrderByWithAggregationInput[]
-    by: EstablishmentMetadataScalarFieldEnum[] | EstablishmentMetadataScalarFieldEnum
-    having?: EstablishmentMetadataScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: EstablishmentMetadataCountAggregateInputType | true
-    _min?: EstablishmentMetadataMinAggregateInputType
-    _max?: EstablishmentMetadataMaxAggregateInputType
-  }
-
-  export type EstablishmentMetadataGroupByOutputType = {
-    id: string
-    name: string | null
-    shortName: string | null
-    description: string | null
-    ogImage: string | null
-    faviconIco: string | null
-    favicon32x32Png: string | null
-    appleTouchIconPng: string | null
-    androidChrome192x192Png: string | null
-    androidChrome512x512Png: string | null
-    establishmentId: string
-    createdAt: Date
-    updatedAt: Date
-    _count: EstablishmentMetadataCountAggregateOutputType | null
-    _min: EstablishmentMetadataMinAggregateOutputType | null
-    _max: EstablishmentMetadataMaxAggregateOutputType | null
-  }
-
-  type GetEstablishmentMetadataGroupByPayload<T extends EstablishmentMetadataGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<EstablishmentMetadataGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof EstablishmentMetadataGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], EstablishmentMetadataGroupByOutputType[P]>
-            : GetScalarType<T[P], EstablishmentMetadataGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type EstablishmentMetadataSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    shortName?: boolean
-    description?: boolean
-    ogImage?: boolean
-    faviconIco?: boolean
-    favicon32x32Png?: boolean
-    appleTouchIconPng?: boolean
-    androidChrome192x192Png?: boolean
-    androidChrome512x512Png?: boolean
-    establishmentId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["establishmentMetadata"]>
-
-  export type EstablishmentMetadataSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    shortName?: boolean
-    description?: boolean
-    ogImage?: boolean
-    faviconIco?: boolean
-    favicon32x32Png?: boolean
-    appleTouchIconPng?: boolean
-    androidChrome192x192Png?: boolean
-    androidChrome512x512Png?: boolean
-    establishmentId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["establishmentMetadata"]>
-
-  export type EstablishmentMetadataSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    shortName?: boolean
-    description?: boolean
-    ogImage?: boolean
-    faviconIco?: boolean
-    favicon32x32Png?: boolean
-    appleTouchIconPng?: boolean
-    androidChrome192x192Png?: boolean
-    androidChrome512x512Png?: boolean
-    establishmentId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["establishmentMetadata"]>
-
-  export type EstablishmentMetadataSelectScalar = {
-    id?: boolean
-    name?: boolean
-    shortName?: boolean
-    description?: boolean
-    ogImage?: boolean
-    faviconIco?: boolean
-    favicon32x32Png?: boolean
-    appleTouchIconPng?: boolean
-    androidChrome192x192Png?: boolean
-    androidChrome512x512Png?: boolean
-    establishmentId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type EstablishmentMetadataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "shortName" | "description" | "ogImage" | "faviconIco" | "favicon32x32Png" | "appleTouchIconPng" | "androidChrome192x192Png" | "androidChrome512x512Png" | "establishmentId" | "createdAt" | "updatedAt", ExtArgs["result"]["establishmentMetadata"]>
-  export type EstablishmentMetadataInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-  }
-  export type EstablishmentMetadataIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-  }
-  export type EstablishmentMetadataIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-  }
-
-  export type $EstablishmentMetadataPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "EstablishmentMetadata"
-    objects: {
-      establishment: Prisma.$EstablishmentPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string | null
-      shortName: string | null
-      description: string | null
-      ogImage: string | null
-      faviconIco: string | null
-      favicon32x32Png: string | null
-      appleTouchIconPng: string | null
-      androidChrome192x192Png: string | null
-      androidChrome512x512Png: string | null
-      establishmentId: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["establishmentMetadata"]>
-    composites: {}
-  }
-
-  type EstablishmentMetadataGetPayload<S extends boolean | null | undefined | EstablishmentMetadataDefaultArgs> = $Result.GetResult<Prisma.$EstablishmentMetadataPayload, S>
-
-  type EstablishmentMetadataCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EstablishmentMetadataFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: EstablishmentMetadataCountAggregateInputType | true
-    }
-
-  export interface EstablishmentMetadataDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EstablishmentMetadata'], meta: { name: 'EstablishmentMetadata' } }
-    /**
-     * Find zero or one EstablishmentMetadata that matches the filter.
-     * @param {EstablishmentMetadataFindUniqueArgs} args - Arguments to find a EstablishmentMetadata
-     * @example
-     * // Get one EstablishmentMetadata
-     * const establishmentMetadata = await prisma.establishmentMetadata.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends EstablishmentMetadataFindUniqueArgs>(args: SelectSubset<T, EstablishmentMetadataFindUniqueArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one EstablishmentMetadata that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {EstablishmentMetadataFindUniqueOrThrowArgs} args - Arguments to find a EstablishmentMetadata
-     * @example
-     * // Get one EstablishmentMetadata
-     * const establishmentMetadata = await prisma.establishmentMetadata.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends EstablishmentMetadataFindUniqueOrThrowArgs>(args: SelectSubset<T, EstablishmentMetadataFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first EstablishmentMetadata that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentMetadataFindFirstArgs} args - Arguments to find a EstablishmentMetadata
-     * @example
-     * // Get one EstablishmentMetadata
-     * const establishmentMetadata = await prisma.establishmentMetadata.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends EstablishmentMetadataFindFirstArgs>(args?: SelectSubset<T, EstablishmentMetadataFindFirstArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first EstablishmentMetadata that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentMetadataFindFirstOrThrowArgs} args - Arguments to find a EstablishmentMetadata
-     * @example
-     * // Get one EstablishmentMetadata
-     * const establishmentMetadata = await prisma.establishmentMetadata.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends EstablishmentMetadataFindFirstOrThrowArgs>(args?: SelectSubset<T, EstablishmentMetadataFindFirstOrThrowArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more EstablishmentMetadata that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentMetadataFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all EstablishmentMetadata
-     * const establishmentMetadata = await prisma.establishmentMetadata.findMany()
-     * 
-     * // Get first 10 EstablishmentMetadata
-     * const establishmentMetadata = await prisma.establishmentMetadata.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const establishmentMetadataWithIdOnly = await prisma.establishmentMetadata.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends EstablishmentMetadataFindManyArgs>(args?: SelectSubset<T, EstablishmentMetadataFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a EstablishmentMetadata.
-     * @param {EstablishmentMetadataCreateArgs} args - Arguments to create a EstablishmentMetadata.
-     * @example
-     * // Create one EstablishmentMetadata
-     * const EstablishmentMetadata = await prisma.establishmentMetadata.create({
-     *   data: {
-     *     // ... data to create a EstablishmentMetadata
-     *   }
-     * })
-     * 
-     */
-    create<T extends EstablishmentMetadataCreateArgs>(args: SelectSubset<T, EstablishmentMetadataCreateArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many EstablishmentMetadata.
-     * @param {EstablishmentMetadataCreateManyArgs} args - Arguments to create many EstablishmentMetadata.
-     * @example
-     * // Create many EstablishmentMetadata
-     * const establishmentMetadata = await prisma.establishmentMetadata.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends EstablishmentMetadataCreateManyArgs>(args?: SelectSubset<T, EstablishmentMetadataCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many EstablishmentMetadata and returns the data saved in the database.
-     * @param {EstablishmentMetadataCreateManyAndReturnArgs} args - Arguments to create many EstablishmentMetadata.
-     * @example
-     * // Create many EstablishmentMetadata
-     * const establishmentMetadata = await prisma.establishmentMetadata.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many EstablishmentMetadata and only return the `id`
-     * const establishmentMetadataWithIdOnly = await prisma.establishmentMetadata.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends EstablishmentMetadataCreateManyAndReturnArgs>(args?: SelectSubset<T, EstablishmentMetadataCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a EstablishmentMetadata.
-     * @param {EstablishmentMetadataDeleteArgs} args - Arguments to delete one EstablishmentMetadata.
-     * @example
-     * // Delete one EstablishmentMetadata
-     * const EstablishmentMetadata = await prisma.establishmentMetadata.delete({
-     *   where: {
-     *     // ... filter to delete one EstablishmentMetadata
-     *   }
-     * })
-     * 
-     */
-    delete<T extends EstablishmentMetadataDeleteArgs>(args: SelectSubset<T, EstablishmentMetadataDeleteArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one EstablishmentMetadata.
-     * @param {EstablishmentMetadataUpdateArgs} args - Arguments to update one EstablishmentMetadata.
-     * @example
-     * // Update one EstablishmentMetadata
-     * const establishmentMetadata = await prisma.establishmentMetadata.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends EstablishmentMetadataUpdateArgs>(args: SelectSubset<T, EstablishmentMetadataUpdateArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more EstablishmentMetadata.
-     * @param {EstablishmentMetadataDeleteManyArgs} args - Arguments to filter EstablishmentMetadata to delete.
-     * @example
-     * // Delete a few EstablishmentMetadata
-     * const { count } = await prisma.establishmentMetadata.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends EstablishmentMetadataDeleteManyArgs>(args?: SelectSubset<T, EstablishmentMetadataDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more EstablishmentMetadata.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentMetadataUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many EstablishmentMetadata
-     * const establishmentMetadata = await prisma.establishmentMetadata.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends EstablishmentMetadataUpdateManyArgs>(args: SelectSubset<T, EstablishmentMetadataUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more EstablishmentMetadata and returns the data updated in the database.
-     * @param {EstablishmentMetadataUpdateManyAndReturnArgs} args - Arguments to update many EstablishmentMetadata.
-     * @example
-     * // Update many EstablishmentMetadata
-     * const establishmentMetadata = await prisma.establishmentMetadata.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more EstablishmentMetadata and only return the `id`
-     * const establishmentMetadataWithIdOnly = await prisma.establishmentMetadata.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends EstablishmentMetadataUpdateManyAndReturnArgs>(args: SelectSubset<T, EstablishmentMetadataUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one EstablishmentMetadata.
-     * @param {EstablishmentMetadataUpsertArgs} args - Arguments to update or create a EstablishmentMetadata.
-     * @example
-     * // Update or create a EstablishmentMetadata
-     * const establishmentMetadata = await prisma.establishmentMetadata.upsert({
-     *   create: {
-     *     // ... data to create a EstablishmentMetadata
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the EstablishmentMetadata we want to update
-     *   }
-     * })
-     */
-    upsert<T extends EstablishmentMetadataUpsertArgs>(args: SelectSubset<T, EstablishmentMetadataUpsertArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of EstablishmentMetadata.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentMetadataCountArgs} args - Arguments to filter EstablishmentMetadata to count.
-     * @example
-     * // Count the number of EstablishmentMetadata
-     * const count = await prisma.establishmentMetadata.count({
-     *   where: {
-     *     // ... the filter for the EstablishmentMetadata we want to count
-     *   }
-     * })
-    **/
-    count<T extends EstablishmentMetadataCountArgs>(
-      args?: Subset<T, EstablishmentMetadataCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], EstablishmentMetadataCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a EstablishmentMetadata.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentMetadataAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends EstablishmentMetadataAggregateArgs>(args: Subset<T, EstablishmentMetadataAggregateArgs>): Prisma.PrismaPromise<GetEstablishmentMetadataAggregateType<T>>
-
-    /**
-     * Group by EstablishmentMetadata.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EstablishmentMetadataGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends EstablishmentMetadataGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EstablishmentMetadataGroupByArgs['orderBy'] }
-        : { orderBy?: EstablishmentMetadataGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, EstablishmentMetadataGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEstablishmentMetadataGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the EstablishmentMetadata model
-   */
-  readonly fields: EstablishmentMetadataFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for EstablishmentMetadata.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__EstablishmentMetadataClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    establishment<T extends EstablishmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EstablishmentDefaultArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the EstablishmentMetadata model
-   */
-  interface EstablishmentMetadataFieldRefs {
-    readonly id: FieldRef<"EstablishmentMetadata", 'String'>
-    readonly name: FieldRef<"EstablishmentMetadata", 'String'>
-    readonly shortName: FieldRef<"EstablishmentMetadata", 'String'>
-    readonly description: FieldRef<"EstablishmentMetadata", 'String'>
-    readonly ogImage: FieldRef<"EstablishmentMetadata", 'String'>
-    readonly faviconIco: FieldRef<"EstablishmentMetadata", 'String'>
-    readonly favicon32x32Png: FieldRef<"EstablishmentMetadata", 'String'>
-    readonly appleTouchIconPng: FieldRef<"EstablishmentMetadata", 'String'>
-    readonly androidChrome192x192Png: FieldRef<"EstablishmentMetadata", 'String'>
-    readonly androidChrome512x512Png: FieldRef<"EstablishmentMetadata", 'String'>
-    readonly establishmentId: FieldRef<"EstablishmentMetadata", 'String'>
-    readonly createdAt: FieldRef<"EstablishmentMetadata", 'DateTime'>
-    readonly updatedAt: FieldRef<"EstablishmentMetadata", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * EstablishmentMetadata findUnique
-   */
-  export type EstablishmentMetadataFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentMetadata
-     */
-    select?: EstablishmentMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentMetadata
-     */
-    omit?: EstablishmentMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentMetadataInclude<ExtArgs> | null
-    /**
-     * Filter, which EstablishmentMetadata to fetch.
-     */
-    where: EstablishmentMetadataWhereUniqueInput
-  }
-
-  /**
-   * EstablishmentMetadata findUniqueOrThrow
-   */
-  export type EstablishmentMetadataFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentMetadata
-     */
-    select?: EstablishmentMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentMetadata
-     */
-    omit?: EstablishmentMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentMetadataInclude<ExtArgs> | null
-    /**
-     * Filter, which EstablishmentMetadata to fetch.
-     */
-    where: EstablishmentMetadataWhereUniqueInput
-  }
-
-  /**
-   * EstablishmentMetadata findFirst
-   */
-  export type EstablishmentMetadataFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentMetadata
-     */
-    select?: EstablishmentMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentMetadata
-     */
-    omit?: EstablishmentMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentMetadataInclude<ExtArgs> | null
-    /**
-     * Filter, which EstablishmentMetadata to fetch.
-     */
-    where?: EstablishmentMetadataWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EstablishmentMetadata to fetch.
-     */
-    orderBy?: EstablishmentMetadataOrderByWithRelationInput | EstablishmentMetadataOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for EstablishmentMetadata.
-     */
-    cursor?: EstablishmentMetadataWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EstablishmentMetadata from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EstablishmentMetadata.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of EstablishmentMetadata.
-     */
-    distinct?: EstablishmentMetadataScalarFieldEnum | EstablishmentMetadataScalarFieldEnum[]
-  }
-
-  /**
-   * EstablishmentMetadata findFirstOrThrow
-   */
-  export type EstablishmentMetadataFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentMetadata
-     */
-    select?: EstablishmentMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentMetadata
-     */
-    omit?: EstablishmentMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentMetadataInclude<ExtArgs> | null
-    /**
-     * Filter, which EstablishmentMetadata to fetch.
-     */
-    where?: EstablishmentMetadataWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EstablishmentMetadata to fetch.
-     */
-    orderBy?: EstablishmentMetadataOrderByWithRelationInput | EstablishmentMetadataOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for EstablishmentMetadata.
-     */
-    cursor?: EstablishmentMetadataWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EstablishmentMetadata from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EstablishmentMetadata.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of EstablishmentMetadata.
-     */
-    distinct?: EstablishmentMetadataScalarFieldEnum | EstablishmentMetadataScalarFieldEnum[]
-  }
-
-  /**
-   * EstablishmentMetadata findMany
-   */
-  export type EstablishmentMetadataFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentMetadata
-     */
-    select?: EstablishmentMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentMetadata
-     */
-    omit?: EstablishmentMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentMetadataInclude<ExtArgs> | null
-    /**
-     * Filter, which EstablishmentMetadata to fetch.
-     */
-    where?: EstablishmentMetadataWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of EstablishmentMetadata to fetch.
-     */
-    orderBy?: EstablishmentMetadataOrderByWithRelationInput | EstablishmentMetadataOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing EstablishmentMetadata.
-     */
-    cursor?: EstablishmentMetadataWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` EstablishmentMetadata from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` EstablishmentMetadata.
-     */
-    skip?: number
-    distinct?: EstablishmentMetadataScalarFieldEnum | EstablishmentMetadataScalarFieldEnum[]
-  }
-
-  /**
-   * EstablishmentMetadata create
-   */
-  export type EstablishmentMetadataCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentMetadata
-     */
-    select?: EstablishmentMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentMetadata
-     */
-    omit?: EstablishmentMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentMetadataInclude<ExtArgs> | null
-    /**
-     * The data needed to create a EstablishmentMetadata.
-     */
-    data: XOR<EstablishmentMetadataCreateInput, EstablishmentMetadataUncheckedCreateInput>
-  }
-
-  /**
-   * EstablishmentMetadata createMany
-   */
-  export type EstablishmentMetadataCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many EstablishmentMetadata.
-     */
-    data: EstablishmentMetadataCreateManyInput | EstablishmentMetadataCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * EstablishmentMetadata createManyAndReturn
-   */
-  export type EstablishmentMetadataCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentMetadata
-     */
-    select?: EstablishmentMetadataSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentMetadata
-     */
-    omit?: EstablishmentMetadataOmit<ExtArgs> | null
-    /**
-     * The data used to create many EstablishmentMetadata.
-     */
-    data: EstablishmentMetadataCreateManyInput | EstablishmentMetadataCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentMetadataIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * EstablishmentMetadata update
-   */
-  export type EstablishmentMetadataUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentMetadata
-     */
-    select?: EstablishmentMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentMetadata
-     */
-    omit?: EstablishmentMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentMetadataInclude<ExtArgs> | null
-    /**
-     * The data needed to update a EstablishmentMetadata.
-     */
-    data: XOR<EstablishmentMetadataUpdateInput, EstablishmentMetadataUncheckedUpdateInput>
-    /**
-     * Choose, which EstablishmentMetadata to update.
-     */
-    where: EstablishmentMetadataWhereUniqueInput
-  }
-
-  /**
-   * EstablishmentMetadata updateMany
-   */
-  export type EstablishmentMetadataUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update EstablishmentMetadata.
-     */
-    data: XOR<EstablishmentMetadataUpdateManyMutationInput, EstablishmentMetadataUncheckedUpdateManyInput>
-    /**
-     * Filter which EstablishmentMetadata to update
-     */
-    where?: EstablishmentMetadataWhereInput
-    /**
-     * Limit how many EstablishmentMetadata to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * EstablishmentMetadata updateManyAndReturn
-   */
-  export type EstablishmentMetadataUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentMetadata
-     */
-    select?: EstablishmentMetadataSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentMetadata
-     */
-    omit?: EstablishmentMetadataOmit<ExtArgs> | null
-    /**
-     * The data used to update EstablishmentMetadata.
-     */
-    data: XOR<EstablishmentMetadataUpdateManyMutationInput, EstablishmentMetadataUncheckedUpdateManyInput>
-    /**
-     * Filter which EstablishmentMetadata to update
-     */
-    where?: EstablishmentMetadataWhereInput
-    /**
-     * Limit how many EstablishmentMetadata to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentMetadataIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * EstablishmentMetadata upsert
-   */
-  export type EstablishmentMetadataUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentMetadata
-     */
-    select?: EstablishmentMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentMetadata
-     */
-    omit?: EstablishmentMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentMetadataInclude<ExtArgs> | null
-    /**
-     * The filter to search for the EstablishmentMetadata to update in case it exists.
-     */
-    where: EstablishmentMetadataWhereUniqueInput
-    /**
-     * In case the EstablishmentMetadata found by the `where` argument doesn't exist, create a new EstablishmentMetadata with this data.
-     */
-    create: XOR<EstablishmentMetadataCreateInput, EstablishmentMetadataUncheckedCreateInput>
-    /**
-     * In case the EstablishmentMetadata was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<EstablishmentMetadataUpdateInput, EstablishmentMetadataUncheckedUpdateInput>
-  }
-
-  /**
-   * EstablishmentMetadata delete
-   */
-  export type EstablishmentMetadataDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentMetadata
-     */
-    select?: EstablishmentMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentMetadata
-     */
-    omit?: EstablishmentMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentMetadataInclude<ExtArgs> | null
-    /**
-     * Filter which EstablishmentMetadata to delete.
-     */
-    where: EstablishmentMetadataWhereUniqueInput
-  }
-
-  /**
-   * EstablishmentMetadata deleteMany
-   */
-  export type EstablishmentMetadataDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which EstablishmentMetadata to delete
-     */
-    where?: EstablishmentMetadataWhereInput
-    /**
-     * Limit how many EstablishmentMetadata to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * EstablishmentMetadata without action
-   */
-  export type EstablishmentMetadataDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EstablishmentMetadata
-     */
-    select?: EstablishmentMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EstablishmentMetadata
-     */
-    omit?: EstablishmentMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EstablishmentMetadataInclude<ExtArgs> | null
   }
 
 
@@ -30958,6 +29934,2170 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EstablishmentBookingSettingsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EstablishmentMetadata
+   */
+
+  export type AggregateEstablishmentMetadata = {
+    _count: EstablishmentMetadataCountAggregateOutputType | null
+    _min: EstablishmentMetadataMinAggregateOutputType | null
+    _max: EstablishmentMetadataMaxAggregateOutputType | null
+  }
+
+  export type EstablishmentMetadataMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    shortName: string | null
+    description: string | null
+    ogImageId: string | null
+    establishmentId: string | null
+    updatedAt: Date | null
+  }
+
+  export type EstablishmentMetadataMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    shortName: string | null
+    description: string | null
+    ogImageId: string | null
+    establishmentId: string | null
+    updatedAt: Date | null
+  }
+
+  export type EstablishmentMetadataCountAggregateOutputType = {
+    id: number
+    title: number
+    shortName: number
+    description: number
+    ogImageId: number
+    establishmentId: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EstablishmentMetadataMinAggregateInputType = {
+    id?: true
+    title?: true
+    shortName?: true
+    description?: true
+    ogImageId?: true
+    establishmentId?: true
+    updatedAt?: true
+  }
+
+  export type EstablishmentMetadataMaxAggregateInputType = {
+    id?: true
+    title?: true
+    shortName?: true
+    description?: true
+    ogImageId?: true
+    establishmentId?: true
+    updatedAt?: true
+  }
+
+  export type EstablishmentMetadataCountAggregateInputType = {
+    id?: true
+    title?: true
+    shortName?: true
+    description?: true
+    ogImageId?: true
+    establishmentId?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EstablishmentMetadataAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EstablishmentMetadata to aggregate.
+     */
+    where?: EstablishmentMetadataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EstablishmentMetadata to fetch.
+     */
+    orderBy?: EstablishmentMetadataOrderByWithRelationInput | EstablishmentMetadataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EstablishmentMetadataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EstablishmentMetadata from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EstablishmentMetadata.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EstablishmentMetadata
+    **/
+    _count?: true | EstablishmentMetadataCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EstablishmentMetadataMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EstablishmentMetadataMaxAggregateInputType
+  }
+
+  export type GetEstablishmentMetadataAggregateType<T extends EstablishmentMetadataAggregateArgs> = {
+        [P in keyof T & keyof AggregateEstablishmentMetadata]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEstablishmentMetadata[P]>
+      : GetScalarType<T[P], AggregateEstablishmentMetadata[P]>
+  }
+
+
+
+
+  export type EstablishmentMetadataGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EstablishmentMetadataWhereInput
+    orderBy?: EstablishmentMetadataOrderByWithAggregationInput | EstablishmentMetadataOrderByWithAggregationInput[]
+    by: EstablishmentMetadataScalarFieldEnum[] | EstablishmentMetadataScalarFieldEnum
+    having?: EstablishmentMetadataScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EstablishmentMetadataCountAggregateInputType | true
+    _min?: EstablishmentMetadataMinAggregateInputType
+    _max?: EstablishmentMetadataMaxAggregateInputType
+  }
+
+  export type EstablishmentMetadataGroupByOutputType = {
+    id: string
+    title: string | null
+    shortName: string | null
+    description: string | null
+    ogImageId: string | null
+    establishmentId: string
+    updatedAt: Date
+    _count: EstablishmentMetadataCountAggregateOutputType | null
+    _min: EstablishmentMetadataMinAggregateOutputType | null
+    _max: EstablishmentMetadataMaxAggregateOutputType | null
+  }
+
+  type GetEstablishmentMetadataGroupByPayload<T extends EstablishmentMetadataGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EstablishmentMetadataGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EstablishmentMetadataGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EstablishmentMetadataGroupByOutputType[P]>
+            : GetScalarType<T[P], EstablishmentMetadataGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EstablishmentMetadataSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    shortName?: boolean
+    description?: boolean
+    ogImageId?: boolean
+    establishmentId?: boolean
+    updatedAt?: boolean
+    ogImage?: boolean | EstablishmentMetadata$ogImageArgs<ExtArgs>
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["establishmentMetadata"]>
+
+  export type EstablishmentMetadataSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    shortName?: boolean
+    description?: boolean
+    ogImageId?: boolean
+    establishmentId?: boolean
+    updatedAt?: boolean
+    ogImage?: boolean | EstablishmentMetadata$ogImageArgs<ExtArgs>
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["establishmentMetadata"]>
+
+  export type EstablishmentMetadataSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    shortName?: boolean
+    description?: boolean
+    ogImageId?: boolean
+    establishmentId?: boolean
+    updatedAt?: boolean
+    ogImage?: boolean | EstablishmentMetadata$ogImageArgs<ExtArgs>
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["establishmentMetadata"]>
+
+  export type EstablishmentMetadataSelectScalar = {
+    id?: boolean
+    title?: boolean
+    shortName?: boolean
+    description?: boolean
+    ogImageId?: boolean
+    establishmentId?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EstablishmentMetadataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "shortName" | "description" | "ogImageId" | "establishmentId" | "updatedAt", ExtArgs["result"]["establishmentMetadata"]>
+  export type EstablishmentMetadataInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ogImage?: boolean | EstablishmentMetadata$ogImageArgs<ExtArgs>
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+  }
+  export type EstablishmentMetadataIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ogImage?: boolean | EstablishmentMetadata$ogImageArgs<ExtArgs>
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+  }
+  export type EstablishmentMetadataIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ogImage?: boolean | EstablishmentMetadata$ogImageArgs<ExtArgs>
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+  }
+
+  export type $EstablishmentMetadataPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EstablishmentMetadata"
+    objects: {
+      ogImage: Prisma.$ImagePayload<ExtArgs> | null
+      establishment: Prisma.$EstablishmentPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string | null
+      shortName: string | null
+      description: string | null
+      ogImageId: string | null
+      establishmentId: string
+      updatedAt: Date
+    }, ExtArgs["result"]["establishmentMetadata"]>
+    composites: {}
+  }
+
+  type EstablishmentMetadataGetPayload<S extends boolean | null | undefined | EstablishmentMetadataDefaultArgs> = $Result.GetResult<Prisma.$EstablishmentMetadataPayload, S>
+
+  type EstablishmentMetadataCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EstablishmentMetadataFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EstablishmentMetadataCountAggregateInputType | true
+    }
+
+  export interface EstablishmentMetadataDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EstablishmentMetadata'], meta: { name: 'EstablishmentMetadata' } }
+    /**
+     * Find zero or one EstablishmentMetadata that matches the filter.
+     * @param {EstablishmentMetadataFindUniqueArgs} args - Arguments to find a EstablishmentMetadata
+     * @example
+     * // Get one EstablishmentMetadata
+     * const establishmentMetadata = await prisma.establishmentMetadata.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EstablishmentMetadataFindUniqueArgs>(args: SelectSubset<T, EstablishmentMetadataFindUniqueArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EstablishmentMetadata that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EstablishmentMetadataFindUniqueOrThrowArgs} args - Arguments to find a EstablishmentMetadata
+     * @example
+     * // Get one EstablishmentMetadata
+     * const establishmentMetadata = await prisma.establishmentMetadata.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EstablishmentMetadataFindUniqueOrThrowArgs>(args: SelectSubset<T, EstablishmentMetadataFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EstablishmentMetadata that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentMetadataFindFirstArgs} args - Arguments to find a EstablishmentMetadata
+     * @example
+     * // Get one EstablishmentMetadata
+     * const establishmentMetadata = await prisma.establishmentMetadata.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EstablishmentMetadataFindFirstArgs>(args?: SelectSubset<T, EstablishmentMetadataFindFirstArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EstablishmentMetadata that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentMetadataFindFirstOrThrowArgs} args - Arguments to find a EstablishmentMetadata
+     * @example
+     * // Get one EstablishmentMetadata
+     * const establishmentMetadata = await prisma.establishmentMetadata.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EstablishmentMetadataFindFirstOrThrowArgs>(args?: SelectSubset<T, EstablishmentMetadataFindFirstOrThrowArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EstablishmentMetadata that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentMetadataFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EstablishmentMetadata
+     * const establishmentMetadata = await prisma.establishmentMetadata.findMany()
+     * 
+     * // Get first 10 EstablishmentMetadata
+     * const establishmentMetadata = await prisma.establishmentMetadata.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const establishmentMetadataWithIdOnly = await prisma.establishmentMetadata.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EstablishmentMetadataFindManyArgs>(args?: SelectSubset<T, EstablishmentMetadataFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EstablishmentMetadata.
+     * @param {EstablishmentMetadataCreateArgs} args - Arguments to create a EstablishmentMetadata.
+     * @example
+     * // Create one EstablishmentMetadata
+     * const EstablishmentMetadata = await prisma.establishmentMetadata.create({
+     *   data: {
+     *     // ... data to create a EstablishmentMetadata
+     *   }
+     * })
+     * 
+     */
+    create<T extends EstablishmentMetadataCreateArgs>(args: SelectSubset<T, EstablishmentMetadataCreateArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EstablishmentMetadata.
+     * @param {EstablishmentMetadataCreateManyArgs} args - Arguments to create many EstablishmentMetadata.
+     * @example
+     * // Create many EstablishmentMetadata
+     * const establishmentMetadata = await prisma.establishmentMetadata.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EstablishmentMetadataCreateManyArgs>(args?: SelectSubset<T, EstablishmentMetadataCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EstablishmentMetadata and returns the data saved in the database.
+     * @param {EstablishmentMetadataCreateManyAndReturnArgs} args - Arguments to create many EstablishmentMetadata.
+     * @example
+     * // Create many EstablishmentMetadata
+     * const establishmentMetadata = await prisma.establishmentMetadata.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EstablishmentMetadata and only return the `id`
+     * const establishmentMetadataWithIdOnly = await prisma.establishmentMetadata.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EstablishmentMetadataCreateManyAndReturnArgs>(args?: SelectSubset<T, EstablishmentMetadataCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EstablishmentMetadata.
+     * @param {EstablishmentMetadataDeleteArgs} args - Arguments to delete one EstablishmentMetadata.
+     * @example
+     * // Delete one EstablishmentMetadata
+     * const EstablishmentMetadata = await prisma.establishmentMetadata.delete({
+     *   where: {
+     *     // ... filter to delete one EstablishmentMetadata
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EstablishmentMetadataDeleteArgs>(args: SelectSubset<T, EstablishmentMetadataDeleteArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EstablishmentMetadata.
+     * @param {EstablishmentMetadataUpdateArgs} args - Arguments to update one EstablishmentMetadata.
+     * @example
+     * // Update one EstablishmentMetadata
+     * const establishmentMetadata = await prisma.establishmentMetadata.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EstablishmentMetadataUpdateArgs>(args: SelectSubset<T, EstablishmentMetadataUpdateArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EstablishmentMetadata.
+     * @param {EstablishmentMetadataDeleteManyArgs} args - Arguments to filter EstablishmentMetadata to delete.
+     * @example
+     * // Delete a few EstablishmentMetadata
+     * const { count } = await prisma.establishmentMetadata.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EstablishmentMetadataDeleteManyArgs>(args?: SelectSubset<T, EstablishmentMetadataDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EstablishmentMetadata.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentMetadataUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EstablishmentMetadata
+     * const establishmentMetadata = await prisma.establishmentMetadata.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EstablishmentMetadataUpdateManyArgs>(args: SelectSubset<T, EstablishmentMetadataUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EstablishmentMetadata and returns the data updated in the database.
+     * @param {EstablishmentMetadataUpdateManyAndReturnArgs} args - Arguments to update many EstablishmentMetadata.
+     * @example
+     * // Update many EstablishmentMetadata
+     * const establishmentMetadata = await prisma.establishmentMetadata.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EstablishmentMetadata and only return the `id`
+     * const establishmentMetadataWithIdOnly = await prisma.establishmentMetadata.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EstablishmentMetadataUpdateManyAndReturnArgs>(args: SelectSubset<T, EstablishmentMetadataUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EstablishmentMetadata.
+     * @param {EstablishmentMetadataUpsertArgs} args - Arguments to update or create a EstablishmentMetadata.
+     * @example
+     * // Update or create a EstablishmentMetadata
+     * const establishmentMetadata = await prisma.establishmentMetadata.upsert({
+     *   create: {
+     *     // ... data to create a EstablishmentMetadata
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EstablishmentMetadata we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EstablishmentMetadataUpsertArgs>(args: SelectSubset<T, EstablishmentMetadataUpsertArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EstablishmentMetadata.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentMetadataCountArgs} args - Arguments to filter EstablishmentMetadata to count.
+     * @example
+     * // Count the number of EstablishmentMetadata
+     * const count = await prisma.establishmentMetadata.count({
+     *   where: {
+     *     // ... the filter for the EstablishmentMetadata we want to count
+     *   }
+     * })
+    **/
+    count<T extends EstablishmentMetadataCountArgs>(
+      args?: Subset<T, EstablishmentMetadataCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EstablishmentMetadataCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EstablishmentMetadata.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentMetadataAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EstablishmentMetadataAggregateArgs>(args: Subset<T, EstablishmentMetadataAggregateArgs>): Prisma.PrismaPromise<GetEstablishmentMetadataAggregateType<T>>
+
+    /**
+     * Group by EstablishmentMetadata.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstablishmentMetadataGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EstablishmentMetadataGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EstablishmentMetadataGroupByArgs['orderBy'] }
+        : { orderBy?: EstablishmentMetadataGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EstablishmentMetadataGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEstablishmentMetadataGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EstablishmentMetadata model
+   */
+  readonly fields: EstablishmentMetadataFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EstablishmentMetadata.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EstablishmentMetadataClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    ogImage<T extends EstablishmentMetadata$ogImageArgs<ExtArgs> = {}>(args?: Subset<T, EstablishmentMetadata$ogImageArgs<ExtArgs>>): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    establishment<T extends EstablishmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EstablishmentDefaultArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EstablishmentMetadata model
+   */
+  interface EstablishmentMetadataFieldRefs {
+    readonly id: FieldRef<"EstablishmentMetadata", 'String'>
+    readonly title: FieldRef<"EstablishmentMetadata", 'String'>
+    readonly shortName: FieldRef<"EstablishmentMetadata", 'String'>
+    readonly description: FieldRef<"EstablishmentMetadata", 'String'>
+    readonly ogImageId: FieldRef<"EstablishmentMetadata", 'String'>
+    readonly establishmentId: FieldRef<"EstablishmentMetadata", 'String'>
+    readonly updatedAt: FieldRef<"EstablishmentMetadata", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EstablishmentMetadata findUnique
+   */
+  export type EstablishmentMetadataFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EstablishmentMetadata
+     */
+    select?: EstablishmentMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EstablishmentMetadata
+     */
+    omit?: EstablishmentMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentMetadataInclude<ExtArgs> | null
+    /**
+     * Filter, which EstablishmentMetadata to fetch.
+     */
+    where: EstablishmentMetadataWhereUniqueInput
+  }
+
+  /**
+   * EstablishmentMetadata findUniqueOrThrow
+   */
+  export type EstablishmentMetadataFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EstablishmentMetadata
+     */
+    select?: EstablishmentMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EstablishmentMetadata
+     */
+    omit?: EstablishmentMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentMetadataInclude<ExtArgs> | null
+    /**
+     * Filter, which EstablishmentMetadata to fetch.
+     */
+    where: EstablishmentMetadataWhereUniqueInput
+  }
+
+  /**
+   * EstablishmentMetadata findFirst
+   */
+  export type EstablishmentMetadataFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EstablishmentMetadata
+     */
+    select?: EstablishmentMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EstablishmentMetadata
+     */
+    omit?: EstablishmentMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentMetadataInclude<ExtArgs> | null
+    /**
+     * Filter, which EstablishmentMetadata to fetch.
+     */
+    where?: EstablishmentMetadataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EstablishmentMetadata to fetch.
+     */
+    orderBy?: EstablishmentMetadataOrderByWithRelationInput | EstablishmentMetadataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EstablishmentMetadata.
+     */
+    cursor?: EstablishmentMetadataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EstablishmentMetadata from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EstablishmentMetadata.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EstablishmentMetadata.
+     */
+    distinct?: EstablishmentMetadataScalarFieldEnum | EstablishmentMetadataScalarFieldEnum[]
+  }
+
+  /**
+   * EstablishmentMetadata findFirstOrThrow
+   */
+  export type EstablishmentMetadataFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EstablishmentMetadata
+     */
+    select?: EstablishmentMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EstablishmentMetadata
+     */
+    omit?: EstablishmentMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentMetadataInclude<ExtArgs> | null
+    /**
+     * Filter, which EstablishmentMetadata to fetch.
+     */
+    where?: EstablishmentMetadataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EstablishmentMetadata to fetch.
+     */
+    orderBy?: EstablishmentMetadataOrderByWithRelationInput | EstablishmentMetadataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EstablishmentMetadata.
+     */
+    cursor?: EstablishmentMetadataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EstablishmentMetadata from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EstablishmentMetadata.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EstablishmentMetadata.
+     */
+    distinct?: EstablishmentMetadataScalarFieldEnum | EstablishmentMetadataScalarFieldEnum[]
+  }
+
+  /**
+   * EstablishmentMetadata findMany
+   */
+  export type EstablishmentMetadataFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EstablishmentMetadata
+     */
+    select?: EstablishmentMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EstablishmentMetadata
+     */
+    omit?: EstablishmentMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentMetadataInclude<ExtArgs> | null
+    /**
+     * Filter, which EstablishmentMetadata to fetch.
+     */
+    where?: EstablishmentMetadataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EstablishmentMetadata to fetch.
+     */
+    orderBy?: EstablishmentMetadataOrderByWithRelationInput | EstablishmentMetadataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EstablishmentMetadata.
+     */
+    cursor?: EstablishmentMetadataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EstablishmentMetadata from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EstablishmentMetadata.
+     */
+    skip?: number
+    distinct?: EstablishmentMetadataScalarFieldEnum | EstablishmentMetadataScalarFieldEnum[]
+  }
+
+  /**
+   * EstablishmentMetadata create
+   */
+  export type EstablishmentMetadataCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EstablishmentMetadata
+     */
+    select?: EstablishmentMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EstablishmentMetadata
+     */
+    omit?: EstablishmentMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentMetadataInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EstablishmentMetadata.
+     */
+    data: XOR<EstablishmentMetadataCreateInput, EstablishmentMetadataUncheckedCreateInput>
+  }
+
+  /**
+   * EstablishmentMetadata createMany
+   */
+  export type EstablishmentMetadataCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EstablishmentMetadata.
+     */
+    data: EstablishmentMetadataCreateManyInput | EstablishmentMetadataCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EstablishmentMetadata createManyAndReturn
+   */
+  export type EstablishmentMetadataCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EstablishmentMetadata
+     */
+    select?: EstablishmentMetadataSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EstablishmentMetadata
+     */
+    omit?: EstablishmentMetadataOmit<ExtArgs> | null
+    /**
+     * The data used to create many EstablishmentMetadata.
+     */
+    data: EstablishmentMetadataCreateManyInput | EstablishmentMetadataCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentMetadataIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EstablishmentMetadata update
+   */
+  export type EstablishmentMetadataUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EstablishmentMetadata
+     */
+    select?: EstablishmentMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EstablishmentMetadata
+     */
+    omit?: EstablishmentMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentMetadataInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EstablishmentMetadata.
+     */
+    data: XOR<EstablishmentMetadataUpdateInput, EstablishmentMetadataUncheckedUpdateInput>
+    /**
+     * Choose, which EstablishmentMetadata to update.
+     */
+    where: EstablishmentMetadataWhereUniqueInput
+  }
+
+  /**
+   * EstablishmentMetadata updateMany
+   */
+  export type EstablishmentMetadataUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EstablishmentMetadata.
+     */
+    data: XOR<EstablishmentMetadataUpdateManyMutationInput, EstablishmentMetadataUncheckedUpdateManyInput>
+    /**
+     * Filter which EstablishmentMetadata to update
+     */
+    where?: EstablishmentMetadataWhereInput
+    /**
+     * Limit how many EstablishmentMetadata to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EstablishmentMetadata updateManyAndReturn
+   */
+  export type EstablishmentMetadataUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EstablishmentMetadata
+     */
+    select?: EstablishmentMetadataSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EstablishmentMetadata
+     */
+    omit?: EstablishmentMetadataOmit<ExtArgs> | null
+    /**
+     * The data used to update EstablishmentMetadata.
+     */
+    data: XOR<EstablishmentMetadataUpdateManyMutationInput, EstablishmentMetadataUncheckedUpdateManyInput>
+    /**
+     * Filter which EstablishmentMetadata to update
+     */
+    where?: EstablishmentMetadataWhereInput
+    /**
+     * Limit how many EstablishmentMetadata to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentMetadataIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EstablishmentMetadata upsert
+   */
+  export type EstablishmentMetadataUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EstablishmentMetadata
+     */
+    select?: EstablishmentMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EstablishmentMetadata
+     */
+    omit?: EstablishmentMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentMetadataInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EstablishmentMetadata to update in case it exists.
+     */
+    where: EstablishmentMetadataWhereUniqueInput
+    /**
+     * In case the EstablishmentMetadata found by the `where` argument doesn't exist, create a new EstablishmentMetadata with this data.
+     */
+    create: XOR<EstablishmentMetadataCreateInput, EstablishmentMetadataUncheckedCreateInput>
+    /**
+     * In case the EstablishmentMetadata was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EstablishmentMetadataUpdateInput, EstablishmentMetadataUncheckedUpdateInput>
+  }
+
+  /**
+   * EstablishmentMetadata delete
+   */
+  export type EstablishmentMetadataDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EstablishmentMetadata
+     */
+    select?: EstablishmentMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EstablishmentMetadata
+     */
+    omit?: EstablishmentMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentMetadataInclude<ExtArgs> | null
+    /**
+     * Filter which EstablishmentMetadata to delete.
+     */
+    where: EstablishmentMetadataWhereUniqueInput
+  }
+
+  /**
+   * EstablishmentMetadata deleteMany
+   */
+  export type EstablishmentMetadataDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EstablishmentMetadata to delete
+     */
+    where?: EstablishmentMetadataWhereInput
+    /**
+     * Limit how many EstablishmentMetadata to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EstablishmentMetadata.ogImage
+   */
+  export type EstablishmentMetadata$ogImageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Image
+     */
+    select?: ImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Image
+     */
+    omit?: ImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageInclude<ExtArgs> | null
+    where?: ImageWhereInput
+  }
+
+  /**
+   * EstablishmentMetadata without action
+   */
+  export type EstablishmentMetadataDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EstablishmentMetadata
+     */
+    select?: EstablishmentMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EstablishmentMetadata
+     */
+    omit?: EstablishmentMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentMetadataInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FaviconAsset
+   */
+
+  export type AggregateFaviconAsset = {
+    _count: FaviconAssetCountAggregateOutputType | null
+    _min: FaviconAssetMinAggregateOutputType | null
+    _max: FaviconAssetMaxAggregateOutputType | null
+  }
+
+  export type FaviconAssetMinAggregateOutputType = {
+    id: string | null
+    establishmentId: string | null
+    imageId: string | null
+    role: string | null
+  }
+
+  export type FaviconAssetMaxAggregateOutputType = {
+    id: string | null
+    establishmentId: string | null
+    imageId: string | null
+    role: string | null
+  }
+
+  export type FaviconAssetCountAggregateOutputType = {
+    id: number
+    establishmentId: number
+    imageId: number
+    role: number
+    _all: number
+  }
+
+
+  export type FaviconAssetMinAggregateInputType = {
+    id?: true
+    establishmentId?: true
+    imageId?: true
+    role?: true
+  }
+
+  export type FaviconAssetMaxAggregateInputType = {
+    id?: true
+    establishmentId?: true
+    imageId?: true
+    role?: true
+  }
+
+  export type FaviconAssetCountAggregateInputType = {
+    id?: true
+    establishmentId?: true
+    imageId?: true
+    role?: true
+    _all?: true
+  }
+
+  export type FaviconAssetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FaviconAsset to aggregate.
+     */
+    where?: FaviconAssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FaviconAssets to fetch.
+     */
+    orderBy?: FaviconAssetOrderByWithRelationInput | FaviconAssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FaviconAssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FaviconAssets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FaviconAssets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FaviconAssets
+    **/
+    _count?: true | FaviconAssetCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FaviconAssetMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FaviconAssetMaxAggregateInputType
+  }
+
+  export type GetFaviconAssetAggregateType<T extends FaviconAssetAggregateArgs> = {
+        [P in keyof T & keyof AggregateFaviconAsset]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFaviconAsset[P]>
+      : GetScalarType<T[P], AggregateFaviconAsset[P]>
+  }
+
+
+
+
+  export type FaviconAssetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FaviconAssetWhereInput
+    orderBy?: FaviconAssetOrderByWithAggregationInput | FaviconAssetOrderByWithAggregationInput[]
+    by: FaviconAssetScalarFieldEnum[] | FaviconAssetScalarFieldEnum
+    having?: FaviconAssetScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FaviconAssetCountAggregateInputType | true
+    _min?: FaviconAssetMinAggregateInputType
+    _max?: FaviconAssetMaxAggregateInputType
+  }
+
+  export type FaviconAssetGroupByOutputType = {
+    id: string
+    establishmentId: string
+    imageId: string
+    role: string
+    _count: FaviconAssetCountAggregateOutputType | null
+    _min: FaviconAssetMinAggregateOutputType | null
+    _max: FaviconAssetMaxAggregateOutputType | null
+  }
+
+  type GetFaviconAssetGroupByPayload<T extends FaviconAssetGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FaviconAssetGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FaviconAssetGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FaviconAssetGroupByOutputType[P]>
+            : GetScalarType<T[P], FaviconAssetGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FaviconAssetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    establishmentId?: boolean
+    imageId?: boolean
+    role?: boolean
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    image?: boolean | ImageDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["faviconAsset"]>
+
+  export type FaviconAssetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    establishmentId?: boolean
+    imageId?: boolean
+    role?: boolean
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    image?: boolean | ImageDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["faviconAsset"]>
+
+  export type FaviconAssetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    establishmentId?: boolean
+    imageId?: boolean
+    role?: boolean
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    image?: boolean | ImageDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["faviconAsset"]>
+
+  export type FaviconAssetSelectScalar = {
+    id?: boolean
+    establishmentId?: boolean
+    imageId?: boolean
+    role?: boolean
+  }
+
+  export type FaviconAssetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "imageId" | "role", ExtArgs["result"]["faviconAsset"]>
+  export type FaviconAssetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    image?: boolean | ImageDefaultArgs<ExtArgs>
+  }
+  export type FaviconAssetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    image?: boolean | ImageDefaultArgs<ExtArgs>
+  }
+  export type FaviconAssetIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    image?: boolean | ImageDefaultArgs<ExtArgs>
+  }
+
+  export type $FaviconAssetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FaviconAsset"
+    objects: {
+      establishment: Prisma.$EstablishmentPayload<ExtArgs>
+      image: Prisma.$ImagePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      establishmentId: string
+      imageId: string
+      role: string
+    }, ExtArgs["result"]["faviconAsset"]>
+    composites: {}
+  }
+
+  type FaviconAssetGetPayload<S extends boolean | null | undefined | FaviconAssetDefaultArgs> = $Result.GetResult<Prisma.$FaviconAssetPayload, S>
+
+  type FaviconAssetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FaviconAssetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FaviconAssetCountAggregateInputType | true
+    }
+
+  export interface FaviconAssetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FaviconAsset'], meta: { name: 'FaviconAsset' } }
+    /**
+     * Find zero or one FaviconAsset that matches the filter.
+     * @param {FaviconAssetFindUniqueArgs} args - Arguments to find a FaviconAsset
+     * @example
+     * // Get one FaviconAsset
+     * const faviconAsset = await prisma.faviconAsset.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FaviconAssetFindUniqueArgs>(args: SelectSubset<T, FaviconAssetFindUniqueArgs<ExtArgs>>): Prisma__FaviconAssetClient<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FaviconAsset that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FaviconAssetFindUniqueOrThrowArgs} args - Arguments to find a FaviconAsset
+     * @example
+     * // Get one FaviconAsset
+     * const faviconAsset = await prisma.faviconAsset.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FaviconAssetFindUniqueOrThrowArgs>(args: SelectSubset<T, FaviconAssetFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FaviconAssetClient<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FaviconAsset that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FaviconAssetFindFirstArgs} args - Arguments to find a FaviconAsset
+     * @example
+     * // Get one FaviconAsset
+     * const faviconAsset = await prisma.faviconAsset.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FaviconAssetFindFirstArgs>(args?: SelectSubset<T, FaviconAssetFindFirstArgs<ExtArgs>>): Prisma__FaviconAssetClient<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FaviconAsset that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FaviconAssetFindFirstOrThrowArgs} args - Arguments to find a FaviconAsset
+     * @example
+     * // Get one FaviconAsset
+     * const faviconAsset = await prisma.faviconAsset.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FaviconAssetFindFirstOrThrowArgs>(args?: SelectSubset<T, FaviconAssetFindFirstOrThrowArgs<ExtArgs>>): Prisma__FaviconAssetClient<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FaviconAssets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FaviconAssetFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FaviconAssets
+     * const faviconAssets = await prisma.faviconAsset.findMany()
+     * 
+     * // Get first 10 FaviconAssets
+     * const faviconAssets = await prisma.faviconAsset.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const faviconAssetWithIdOnly = await prisma.faviconAsset.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FaviconAssetFindManyArgs>(args?: SelectSubset<T, FaviconAssetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FaviconAsset.
+     * @param {FaviconAssetCreateArgs} args - Arguments to create a FaviconAsset.
+     * @example
+     * // Create one FaviconAsset
+     * const FaviconAsset = await prisma.faviconAsset.create({
+     *   data: {
+     *     // ... data to create a FaviconAsset
+     *   }
+     * })
+     * 
+     */
+    create<T extends FaviconAssetCreateArgs>(args: SelectSubset<T, FaviconAssetCreateArgs<ExtArgs>>): Prisma__FaviconAssetClient<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FaviconAssets.
+     * @param {FaviconAssetCreateManyArgs} args - Arguments to create many FaviconAssets.
+     * @example
+     * // Create many FaviconAssets
+     * const faviconAsset = await prisma.faviconAsset.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FaviconAssetCreateManyArgs>(args?: SelectSubset<T, FaviconAssetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FaviconAssets and returns the data saved in the database.
+     * @param {FaviconAssetCreateManyAndReturnArgs} args - Arguments to create many FaviconAssets.
+     * @example
+     * // Create many FaviconAssets
+     * const faviconAsset = await prisma.faviconAsset.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FaviconAssets and only return the `id`
+     * const faviconAssetWithIdOnly = await prisma.faviconAsset.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FaviconAssetCreateManyAndReturnArgs>(args?: SelectSubset<T, FaviconAssetCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FaviconAsset.
+     * @param {FaviconAssetDeleteArgs} args - Arguments to delete one FaviconAsset.
+     * @example
+     * // Delete one FaviconAsset
+     * const FaviconAsset = await prisma.faviconAsset.delete({
+     *   where: {
+     *     // ... filter to delete one FaviconAsset
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FaviconAssetDeleteArgs>(args: SelectSubset<T, FaviconAssetDeleteArgs<ExtArgs>>): Prisma__FaviconAssetClient<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FaviconAsset.
+     * @param {FaviconAssetUpdateArgs} args - Arguments to update one FaviconAsset.
+     * @example
+     * // Update one FaviconAsset
+     * const faviconAsset = await prisma.faviconAsset.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FaviconAssetUpdateArgs>(args: SelectSubset<T, FaviconAssetUpdateArgs<ExtArgs>>): Prisma__FaviconAssetClient<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FaviconAssets.
+     * @param {FaviconAssetDeleteManyArgs} args - Arguments to filter FaviconAssets to delete.
+     * @example
+     * // Delete a few FaviconAssets
+     * const { count } = await prisma.faviconAsset.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FaviconAssetDeleteManyArgs>(args?: SelectSubset<T, FaviconAssetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FaviconAssets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FaviconAssetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FaviconAssets
+     * const faviconAsset = await prisma.faviconAsset.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FaviconAssetUpdateManyArgs>(args: SelectSubset<T, FaviconAssetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FaviconAssets and returns the data updated in the database.
+     * @param {FaviconAssetUpdateManyAndReturnArgs} args - Arguments to update many FaviconAssets.
+     * @example
+     * // Update many FaviconAssets
+     * const faviconAsset = await prisma.faviconAsset.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FaviconAssets and only return the `id`
+     * const faviconAssetWithIdOnly = await prisma.faviconAsset.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FaviconAssetUpdateManyAndReturnArgs>(args: SelectSubset<T, FaviconAssetUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FaviconAsset.
+     * @param {FaviconAssetUpsertArgs} args - Arguments to update or create a FaviconAsset.
+     * @example
+     * // Update or create a FaviconAsset
+     * const faviconAsset = await prisma.faviconAsset.upsert({
+     *   create: {
+     *     // ... data to create a FaviconAsset
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FaviconAsset we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FaviconAssetUpsertArgs>(args: SelectSubset<T, FaviconAssetUpsertArgs<ExtArgs>>): Prisma__FaviconAssetClient<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FaviconAssets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FaviconAssetCountArgs} args - Arguments to filter FaviconAssets to count.
+     * @example
+     * // Count the number of FaviconAssets
+     * const count = await prisma.faviconAsset.count({
+     *   where: {
+     *     // ... the filter for the FaviconAssets we want to count
+     *   }
+     * })
+    **/
+    count<T extends FaviconAssetCountArgs>(
+      args?: Subset<T, FaviconAssetCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FaviconAssetCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FaviconAsset.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FaviconAssetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FaviconAssetAggregateArgs>(args: Subset<T, FaviconAssetAggregateArgs>): Prisma.PrismaPromise<GetFaviconAssetAggregateType<T>>
+
+    /**
+     * Group by FaviconAsset.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FaviconAssetGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FaviconAssetGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FaviconAssetGroupByArgs['orderBy'] }
+        : { orderBy?: FaviconAssetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FaviconAssetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFaviconAssetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FaviconAsset model
+   */
+  readonly fields: FaviconAssetFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FaviconAsset.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FaviconAssetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    establishment<T extends EstablishmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EstablishmentDefaultArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    image<T extends ImageDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ImageDefaultArgs<ExtArgs>>): Prisma__ImageClient<$Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FaviconAsset model
+   */
+  interface FaviconAssetFieldRefs {
+    readonly id: FieldRef<"FaviconAsset", 'String'>
+    readonly establishmentId: FieldRef<"FaviconAsset", 'String'>
+    readonly imageId: FieldRef<"FaviconAsset", 'String'>
+    readonly role: FieldRef<"FaviconAsset", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FaviconAsset findUnique
+   */
+  export type FaviconAssetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which FaviconAsset to fetch.
+     */
+    where: FaviconAssetWhereUniqueInput
+  }
+
+  /**
+   * FaviconAsset findUniqueOrThrow
+   */
+  export type FaviconAssetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which FaviconAsset to fetch.
+     */
+    where: FaviconAssetWhereUniqueInput
+  }
+
+  /**
+   * FaviconAsset findFirst
+   */
+  export type FaviconAssetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which FaviconAsset to fetch.
+     */
+    where?: FaviconAssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FaviconAssets to fetch.
+     */
+    orderBy?: FaviconAssetOrderByWithRelationInput | FaviconAssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FaviconAssets.
+     */
+    cursor?: FaviconAssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FaviconAssets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FaviconAssets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FaviconAssets.
+     */
+    distinct?: FaviconAssetScalarFieldEnum | FaviconAssetScalarFieldEnum[]
+  }
+
+  /**
+   * FaviconAsset findFirstOrThrow
+   */
+  export type FaviconAssetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which FaviconAsset to fetch.
+     */
+    where?: FaviconAssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FaviconAssets to fetch.
+     */
+    orderBy?: FaviconAssetOrderByWithRelationInput | FaviconAssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FaviconAssets.
+     */
+    cursor?: FaviconAssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FaviconAssets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FaviconAssets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FaviconAssets.
+     */
+    distinct?: FaviconAssetScalarFieldEnum | FaviconAssetScalarFieldEnum[]
+  }
+
+  /**
+   * FaviconAsset findMany
+   */
+  export type FaviconAssetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which FaviconAssets to fetch.
+     */
+    where?: FaviconAssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FaviconAssets to fetch.
+     */
+    orderBy?: FaviconAssetOrderByWithRelationInput | FaviconAssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FaviconAssets.
+     */
+    cursor?: FaviconAssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FaviconAssets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FaviconAssets.
+     */
+    skip?: number
+    distinct?: FaviconAssetScalarFieldEnum | FaviconAssetScalarFieldEnum[]
+  }
+
+  /**
+   * FaviconAsset create
+   */
+  export type FaviconAssetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FaviconAsset.
+     */
+    data: XOR<FaviconAssetCreateInput, FaviconAssetUncheckedCreateInput>
+  }
+
+  /**
+   * FaviconAsset createMany
+   */
+  export type FaviconAssetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FaviconAssets.
+     */
+    data: FaviconAssetCreateManyInput | FaviconAssetCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FaviconAsset createManyAndReturn
+   */
+  export type FaviconAssetCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * The data used to create many FaviconAssets.
+     */
+    data: FaviconAssetCreateManyInput | FaviconAssetCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FaviconAsset update
+   */
+  export type FaviconAssetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FaviconAsset.
+     */
+    data: XOR<FaviconAssetUpdateInput, FaviconAssetUncheckedUpdateInput>
+    /**
+     * Choose, which FaviconAsset to update.
+     */
+    where: FaviconAssetWhereUniqueInput
+  }
+
+  /**
+   * FaviconAsset updateMany
+   */
+  export type FaviconAssetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FaviconAssets.
+     */
+    data: XOR<FaviconAssetUpdateManyMutationInput, FaviconAssetUncheckedUpdateManyInput>
+    /**
+     * Filter which FaviconAssets to update
+     */
+    where?: FaviconAssetWhereInput
+    /**
+     * Limit how many FaviconAssets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FaviconAsset updateManyAndReturn
+   */
+  export type FaviconAssetUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * The data used to update FaviconAssets.
+     */
+    data: XOR<FaviconAssetUpdateManyMutationInput, FaviconAssetUncheckedUpdateManyInput>
+    /**
+     * Filter which FaviconAssets to update
+     */
+    where?: FaviconAssetWhereInput
+    /**
+     * Limit how many FaviconAssets to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FaviconAsset upsert
+   */
+  export type FaviconAssetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FaviconAsset to update in case it exists.
+     */
+    where: FaviconAssetWhereUniqueInput
+    /**
+     * In case the FaviconAsset found by the `where` argument doesn't exist, create a new FaviconAsset with this data.
+     */
+    create: XOR<FaviconAssetCreateInput, FaviconAssetUncheckedCreateInput>
+    /**
+     * In case the FaviconAsset was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FaviconAssetUpdateInput, FaviconAssetUncheckedUpdateInput>
+  }
+
+  /**
+   * FaviconAsset delete
+   */
+  export type FaviconAssetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetInclude<ExtArgs> | null
+    /**
+     * Filter which FaviconAsset to delete.
+     */
+    where: FaviconAssetWhereUniqueInput
+  }
+
+  /**
+   * FaviconAsset deleteMany
+   */
+  export type FaviconAssetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FaviconAssets to delete
+     */
+    where?: FaviconAssetWhereInput
+    /**
+     * Limit how many FaviconAssets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FaviconAsset without action
+   */
+  export type FaviconAssetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetInclude<ExtArgs> | null
   }
 
 
@@ -32490,6 +33630,8 @@ export namespace Prisma {
     item?: boolean | Image$itemArgs<ExtArgs>
     itemVariants?: boolean | Image$itemVariantsArgs<ExtArgs>
     menuCategory?: boolean | Image$menuCategoryArgs<ExtArgs>
+    establishmentMetadataOg?: boolean | Image$establishmentMetadataOgArgs<ExtArgs>
+    faviconAssets?: boolean | Image$faviconAssetsArgs<ExtArgs>
     _count?: boolean | ImageCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["image"]>
 
@@ -32539,6 +33681,8 @@ export namespace Prisma {
     item?: boolean | Image$itemArgs<ExtArgs>
     itemVariants?: boolean | Image$itemVariantsArgs<ExtArgs>
     menuCategory?: boolean | Image$menuCategoryArgs<ExtArgs>
+    establishmentMetadataOg?: boolean | Image$establishmentMetadataOgArgs<ExtArgs>
+    faviconAssets?: boolean | Image$faviconAssetsArgs<ExtArgs>
     _count?: boolean | ImageCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ImageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -32557,6 +33701,8 @@ export namespace Prisma {
       item: Prisma.$ItemPayload<ExtArgs>[]
       itemVariants: Prisma.$ItemVariantPayload<ExtArgs>[]
       menuCategory: Prisma.$MenuCategoryPayload<ExtArgs>[]
+      establishmentMetadataOg: Prisma.$EstablishmentMetadataPayload<ExtArgs> | null
+      faviconAssets: Prisma.$FaviconAssetPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -32968,6 +34114,8 @@ export namespace Prisma {
     item<T extends Image$itemArgs<ExtArgs> = {}>(args?: Subset<T, Image$itemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     itemVariants<T extends Image$itemVariantsArgs<ExtArgs> = {}>(args?: Subset<T, Image$itemVariantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemVariantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     menuCategory<T extends Image$menuCategoryArgs<ExtArgs> = {}>(args?: Subset<T, Image$menuCategoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    establishmentMetadataOg<T extends Image$establishmentMetadataOgArgs<ExtArgs> = {}>(args?: Subset<T, Image$establishmentMetadataOgArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    faviconAssets<T extends Image$faviconAssetsArgs<ExtArgs> = {}>(args?: Subset<T, Image$faviconAssetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -33519,6 +34667,49 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MenuCategoryScalarFieldEnum | MenuCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Image.establishmentMetadataOg
+   */
+  export type Image$establishmentMetadataOgArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EstablishmentMetadata
+     */
+    select?: EstablishmentMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EstablishmentMetadata
+     */
+    omit?: EstablishmentMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstablishmentMetadataInclude<ExtArgs> | null
+    where?: EstablishmentMetadataWhereInput
+  }
+
+  /**
+   * Image.faviconAssets
+   */
+  export type Image$faviconAssetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FaviconAsset
+     */
+    select?: FaviconAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FaviconAsset
+     */
+    omit?: FaviconAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FaviconAssetInclude<ExtArgs> | null
+    where?: FaviconAssetWhereInput
+    orderBy?: FaviconAssetOrderByWithRelationInput | FaviconAssetOrderByWithRelationInput[]
+    cursor?: FaviconAssetWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FaviconAssetScalarFieldEnum | FaviconAssetScalarFieldEnum[]
   }
 
   /**
@@ -109741,25 +110932,6 @@ export namespace Prisma {
   export type EstablishmentScalarFieldEnum = (typeof EstablishmentScalarFieldEnum)[keyof typeof EstablishmentScalarFieldEnum]
 
 
-  export const EstablishmentMetadataScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    shortName: 'shortName',
-    description: 'description',
-    ogImage: 'ogImage',
-    faviconIco: 'faviconIco',
-    favicon32x32Png: 'favicon32x32Png',
-    appleTouchIconPng: 'appleTouchIconPng',
-    androidChrome192x192Png: 'androidChrome192x192Png',
-    androidChrome512x512Png: 'androidChrome512x512Png',
-    establishmentId: 'establishmentId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type EstablishmentMetadataScalarFieldEnum = (typeof EstablishmentMetadataScalarFieldEnum)[keyof typeof EstablishmentMetadataScalarFieldEnum]
-
-
   export const EstablishmentBookingSettingsScalarFieldEnum: {
     id: 'id',
     enabled: 'enabled',
@@ -109774,6 +110946,29 @@ export namespace Prisma {
   };
 
   export type EstablishmentBookingSettingsScalarFieldEnum = (typeof EstablishmentBookingSettingsScalarFieldEnum)[keyof typeof EstablishmentBookingSettingsScalarFieldEnum]
+
+
+  export const EstablishmentMetadataScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    shortName: 'shortName',
+    description: 'description',
+    ogImageId: 'ogImageId',
+    establishmentId: 'establishmentId',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EstablishmentMetadataScalarFieldEnum = (typeof EstablishmentMetadataScalarFieldEnum)[keyof typeof EstablishmentMetadataScalarFieldEnum]
+
+
+  export const FaviconAssetScalarFieldEnum: {
+    id: 'id',
+    establishmentId: 'establishmentId',
+    imageId: 'imageId',
+    role: 'role'
+  };
+
+  export type FaviconAssetScalarFieldEnum = (typeof FaviconAssetScalarFieldEnum)[keyof typeof FaviconAssetScalarFieldEnum]
 
 
   export const ExpenseScalarFieldEnum: {
@@ -112759,6 +113954,7 @@ export namespace Prisma {
     ownerId?: StringFilter<"Establishment"> | string
     schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     metadata?: XOR<EstablishmentMetadataNullableScalarRelationFilter, EstablishmentMetadataWhereInput> | null
+    favicons?: FaviconAssetListRelationFilter
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
     activeTheme?: XOR<ThemeNullableScalarRelationFilter, ThemeWhereInput> | null
     logoImage?: XOR<ImageNullableScalarRelationFilter, ImageWhereInput> | null
@@ -112835,6 +114031,7 @@ export namespace Prisma {
     ownerId?: SortOrder
     schedule?: ScheduleOrderByWithRelationInput
     metadata?: EstablishmentMetadataOrderByWithRelationInput
+    favicons?: FaviconAssetOrderByRelationAggregateInput
     owner?: UserOrderByWithRelationInput
     activeTheme?: ThemeOrderByWithRelationInput
     logoImage?: ImageOrderByWithRelationInput
@@ -112914,6 +114111,7 @@ export namespace Prisma {
     ownerId?: StringFilter<"Establishment"> | string
     schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     metadata?: XOR<EstablishmentMetadataNullableScalarRelationFilter, EstablishmentMetadataWhereInput> | null
+    favicons?: FaviconAssetListRelationFilter
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
     activeTheme?: XOR<ThemeNullableScalarRelationFilter, ThemeWhereInput> | null
     logoImage?: XOR<ImageNullableScalarRelationFilter, ImageWhereInput> | null
@@ -113033,101 +114231,6 @@ export namespace Prisma {
     ownerId?: StringWithAggregatesFilter<"Establishment"> | string
   }
 
-  export type EstablishmentMetadataWhereInput = {
-    AND?: EstablishmentMetadataWhereInput | EstablishmentMetadataWhereInput[]
-    OR?: EstablishmentMetadataWhereInput[]
-    NOT?: EstablishmentMetadataWhereInput | EstablishmentMetadataWhereInput[]
-    id?: StringFilter<"EstablishmentMetadata"> | string
-    name?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    shortName?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    description?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    ogImage?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    faviconIco?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    favicon32x32Png?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    appleTouchIconPng?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    androidChrome192x192Png?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    androidChrome512x512Png?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    establishmentId?: StringFilter<"EstablishmentMetadata"> | string
-    createdAt?: DateTimeFilter<"EstablishmentMetadata"> | Date | string
-    updatedAt?: DateTimeFilter<"EstablishmentMetadata"> | Date | string
-    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
-  }
-
-  export type EstablishmentMetadataOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrderInput | SortOrder
-    shortName?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
-    ogImage?: SortOrderInput | SortOrder
-    faviconIco?: SortOrderInput | SortOrder
-    favicon32x32Png?: SortOrderInput | SortOrder
-    appleTouchIconPng?: SortOrderInput | SortOrder
-    androidChrome192x192Png?: SortOrderInput | SortOrder
-    androidChrome512x512Png?: SortOrderInput | SortOrder
-    establishmentId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    establishment?: EstablishmentOrderByWithRelationInput
-  }
-
-  export type EstablishmentMetadataWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    establishmentId?: string
-    AND?: EstablishmentMetadataWhereInput | EstablishmentMetadataWhereInput[]
-    OR?: EstablishmentMetadataWhereInput[]
-    NOT?: EstablishmentMetadataWhereInput | EstablishmentMetadataWhereInput[]
-    name?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    shortName?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    description?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    ogImage?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    faviconIco?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    favicon32x32Png?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    appleTouchIconPng?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    androidChrome192x192Png?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    androidChrome512x512Png?: StringNullableFilter<"EstablishmentMetadata"> | string | null
-    createdAt?: DateTimeFilter<"EstablishmentMetadata"> | Date | string
-    updatedAt?: DateTimeFilter<"EstablishmentMetadata"> | Date | string
-    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
-  }, "id" | "establishmentId">
-
-  export type EstablishmentMetadataOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrderInput | SortOrder
-    shortName?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
-    ogImage?: SortOrderInput | SortOrder
-    faviconIco?: SortOrderInput | SortOrder
-    favicon32x32Png?: SortOrderInput | SortOrder
-    appleTouchIconPng?: SortOrderInput | SortOrder
-    androidChrome192x192Png?: SortOrderInput | SortOrder
-    androidChrome512x512Png?: SortOrderInput | SortOrder
-    establishmentId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: EstablishmentMetadataCountOrderByAggregateInput
-    _max?: EstablishmentMetadataMaxOrderByAggregateInput
-    _min?: EstablishmentMetadataMinOrderByAggregateInput
-  }
-
-  export type EstablishmentMetadataScalarWhereWithAggregatesInput = {
-    AND?: EstablishmentMetadataScalarWhereWithAggregatesInput | EstablishmentMetadataScalarWhereWithAggregatesInput[]
-    OR?: EstablishmentMetadataScalarWhereWithAggregatesInput[]
-    NOT?: EstablishmentMetadataScalarWhereWithAggregatesInput | EstablishmentMetadataScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"EstablishmentMetadata"> | string
-    name?: StringNullableWithAggregatesFilter<"EstablishmentMetadata"> | string | null
-    shortName?: StringNullableWithAggregatesFilter<"EstablishmentMetadata"> | string | null
-    description?: StringNullableWithAggregatesFilter<"EstablishmentMetadata"> | string | null
-    ogImage?: StringNullableWithAggregatesFilter<"EstablishmentMetadata"> | string | null
-    faviconIco?: StringNullableWithAggregatesFilter<"EstablishmentMetadata"> | string | null
-    favicon32x32Png?: StringNullableWithAggregatesFilter<"EstablishmentMetadata"> | string | null
-    appleTouchIconPng?: StringNullableWithAggregatesFilter<"EstablishmentMetadata"> | string | null
-    androidChrome192x192Png?: StringNullableWithAggregatesFilter<"EstablishmentMetadata"> | string | null
-    androidChrome512x512Png?: StringNullableWithAggregatesFilter<"EstablishmentMetadata"> | string | null
-    establishmentId?: StringWithAggregatesFilter<"EstablishmentMetadata"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"EstablishmentMetadata"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"EstablishmentMetadata"> | Date | string
-  }
-
   export type EstablishmentBookingSettingsWhereInput = {
     AND?: EstablishmentBookingSettingsWhereInput | EstablishmentBookingSettingsWhereInput[]
     OR?: EstablishmentBookingSettingsWhereInput[]
@@ -113206,6 +114309,128 @@ export namespace Prisma {
     notificationPhone?: StringNullableWithAggregatesFilter<"EstablishmentBookingSettings"> | string | null
     primaryColor?: StringWithAggregatesFilter<"EstablishmentBookingSettings"> | string
     updatedAt?: DateTimeWithAggregatesFilter<"EstablishmentBookingSettings"> | Date | string
+  }
+
+  export type EstablishmentMetadataWhereInput = {
+    AND?: EstablishmentMetadataWhereInput | EstablishmentMetadataWhereInput[]
+    OR?: EstablishmentMetadataWhereInput[]
+    NOT?: EstablishmentMetadataWhereInput | EstablishmentMetadataWhereInput[]
+    id?: StringFilter<"EstablishmentMetadata"> | string
+    title?: StringNullableFilter<"EstablishmentMetadata"> | string | null
+    shortName?: StringNullableFilter<"EstablishmentMetadata"> | string | null
+    description?: StringNullableFilter<"EstablishmentMetadata"> | string | null
+    ogImageId?: StringNullableFilter<"EstablishmentMetadata"> | string | null
+    establishmentId?: StringFilter<"EstablishmentMetadata"> | string
+    updatedAt?: DateTimeFilter<"EstablishmentMetadata"> | Date | string
+    ogImage?: XOR<ImageNullableScalarRelationFilter, ImageWhereInput> | null
+    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+  }
+
+  export type EstablishmentMetadataOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrderInput | SortOrder
+    shortName?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    ogImageId?: SortOrderInput | SortOrder
+    establishmentId?: SortOrder
+    updatedAt?: SortOrder
+    ogImage?: ImageOrderByWithRelationInput
+    establishment?: EstablishmentOrderByWithRelationInput
+  }
+
+  export type EstablishmentMetadataWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    ogImageId?: string
+    establishmentId?: string
+    AND?: EstablishmentMetadataWhereInput | EstablishmentMetadataWhereInput[]
+    OR?: EstablishmentMetadataWhereInput[]
+    NOT?: EstablishmentMetadataWhereInput | EstablishmentMetadataWhereInput[]
+    title?: StringNullableFilter<"EstablishmentMetadata"> | string | null
+    shortName?: StringNullableFilter<"EstablishmentMetadata"> | string | null
+    description?: StringNullableFilter<"EstablishmentMetadata"> | string | null
+    updatedAt?: DateTimeFilter<"EstablishmentMetadata"> | Date | string
+    ogImage?: XOR<ImageNullableScalarRelationFilter, ImageWhereInput> | null
+    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+  }, "id" | "ogImageId" | "establishmentId">
+
+  export type EstablishmentMetadataOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrderInput | SortOrder
+    shortName?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    ogImageId?: SortOrderInput | SortOrder
+    establishmentId?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EstablishmentMetadataCountOrderByAggregateInput
+    _max?: EstablishmentMetadataMaxOrderByAggregateInput
+    _min?: EstablishmentMetadataMinOrderByAggregateInput
+  }
+
+  export type EstablishmentMetadataScalarWhereWithAggregatesInput = {
+    AND?: EstablishmentMetadataScalarWhereWithAggregatesInput | EstablishmentMetadataScalarWhereWithAggregatesInput[]
+    OR?: EstablishmentMetadataScalarWhereWithAggregatesInput[]
+    NOT?: EstablishmentMetadataScalarWhereWithAggregatesInput | EstablishmentMetadataScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EstablishmentMetadata"> | string
+    title?: StringNullableWithAggregatesFilter<"EstablishmentMetadata"> | string | null
+    shortName?: StringNullableWithAggregatesFilter<"EstablishmentMetadata"> | string | null
+    description?: StringNullableWithAggregatesFilter<"EstablishmentMetadata"> | string | null
+    ogImageId?: StringNullableWithAggregatesFilter<"EstablishmentMetadata"> | string | null
+    establishmentId?: StringWithAggregatesFilter<"EstablishmentMetadata"> | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EstablishmentMetadata"> | Date | string
+  }
+
+  export type FaviconAssetWhereInput = {
+    AND?: FaviconAssetWhereInput | FaviconAssetWhereInput[]
+    OR?: FaviconAssetWhereInput[]
+    NOT?: FaviconAssetWhereInput | FaviconAssetWhereInput[]
+    id?: StringFilter<"FaviconAsset"> | string
+    establishmentId?: StringFilter<"FaviconAsset"> | string
+    imageId?: StringFilter<"FaviconAsset"> | string
+    role?: StringFilter<"FaviconAsset"> | string
+    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+    image?: XOR<ImageScalarRelationFilter, ImageWhereInput>
+  }
+
+  export type FaviconAssetOrderByWithRelationInput = {
+    id?: SortOrder
+    establishmentId?: SortOrder
+    imageId?: SortOrder
+    role?: SortOrder
+    establishment?: EstablishmentOrderByWithRelationInput
+    image?: ImageOrderByWithRelationInput
+  }
+
+  export type FaviconAssetWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    imageId?: string
+    establishmentId_role?: FaviconAssetEstablishmentIdRoleCompoundUniqueInput
+    AND?: FaviconAssetWhereInput | FaviconAssetWhereInput[]
+    OR?: FaviconAssetWhereInput[]
+    NOT?: FaviconAssetWhereInput | FaviconAssetWhereInput[]
+    establishmentId?: StringFilter<"FaviconAsset"> | string
+    role?: StringFilter<"FaviconAsset"> | string
+    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+    image?: XOR<ImageScalarRelationFilter, ImageWhereInput>
+  }, "id" | "imageId" | "establishmentId_role">
+
+  export type FaviconAssetOrderByWithAggregationInput = {
+    id?: SortOrder
+    establishmentId?: SortOrder
+    imageId?: SortOrder
+    role?: SortOrder
+    _count?: FaviconAssetCountOrderByAggregateInput
+    _max?: FaviconAssetMaxOrderByAggregateInput
+    _min?: FaviconAssetMinOrderByAggregateInput
+  }
+
+  export type FaviconAssetScalarWhereWithAggregatesInput = {
+    AND?: FaviconAssetScalarWhereWithAggregatesInput | FaviconAssetScalarWhereWithAggregatesInput[]
+    OR?: FaviconAssetScalarWhereWithAggregatesInput[]
+    NOT?: FaviconAssetScalarWhereWithAggregatesInput | FaviconAssetScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FaviconAsset"> | string
+    establishmentId?: StringWithAggregatesFilter<"FaviconAsset"> | string
+    imageId?: StringWithAggregatesFilter<"FaviconAsset"> | string
+    role?: StringWithAggregatesFilter<"FaviconAsset"> | string
   }
 
   export type ExpenseWhereInput = {
@@ -113354,6 +114579,8 @@ export namespace Prisma {
     item?: ItemListRelationFilter
     itemVariants?: ItemVariantListRelationFilter
     menuCategory?: MenuCategoryListRelationFilter
+    establishmentMetadataOg?: XOR<EstablishmentMetadataNullableScalarRelationFilter, EstablishmentMetadataWhereInput> | null
+    faviconAssets?: FaviconAssetListRelationFilter
   }
 
   export type ImageOrderByWithRelationInput = {
@@ -113372,6 +114599,8 @@ export namespace Prisma {
     item?: ItemOrderByRelationAggregateInput
     itemVariants?: ItemVariantOrderByRelationAggregateInput
     menuCategory?: MenuCategoryOrderByRelationAggregateInput
+    establishmentMetadataOg?: EstablishmentMetadataOrderByWithRelationInput
+    faviconAssets?: FaviconAssetOrderByRelationAggregateInput
   }
 
   export type ImageWhereUniqueInput = Prisma.AtLeast<{
@@ -113393,6 +114622,8 @@ export namespace Prisma {
     item?: ItemListRelationFilter
     itemVariants?: ItemVariantListRelationFilter
     menuCategory?: MenuCategoryListRelationFilter
+    establishmentMetadataOg?: XOR<EstablishmentMetadataNullableScalarRelationFilter, EstablishmentMetadataWhereInput> | null
+    faviconAssets?: FaviconAssetListRelationFilter
   }, "id" | "cloudflareImageId">
 
   export type ImageOrderByWithAggregationInput = {
@@ -120012,6 +121243,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -120087,6 +121319,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -120154,6 +121387,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -120229,6 +121463,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -120370,117 +121605,6 @@ export namespace Prisma {
     ownerId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type EstablishmentMetadataCreateInput = {
-    id?: string
-    name?: string | null
-    shortName?: string | null
-    description?: string | null
-    ogImage?: string | null
-    faviconIco?: string | null
-    favicon32x32Png?: string | null
-    appleTouchIconPng?: string | null
-    androidChrome192x192Png?: string | null
-    androidChrome512x512Png?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    establishment: EstablishmentCreateNestedOneWithoutMetadataInput
-  }
-
-  export type EstablishmentMetadataUncheckedCreateInput = {
-    id?: string
-    name?: string | null
-    shortName?: string | null
-    description?: string | null
-    ogImage?: string | null
-    faviconIco?: string | null
-    favicon32x32Png?: string | null
-    appleTouchIconPng?: string | null
-    androidChrome192x192Png?: string | null
-    androidChrome512x512Png?: string | null
-    establishmentId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type EstablishmentMetadataUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    shortName?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
-    faviconIco?: NullableStringFieldUpdateOperationsInput | string | null
-    favicon32x32Png?: NullableStringFieldUpdateOperationsInput | string | null
-    appleTouchIconPng?: NullableStringFieldUpdateOperationsInput | string | null
-    androidChrome192x192Png?: NullableStringFieldUpdateOperationsInput | string | null
-    androidChrome512x512Png?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishment?: EstablishmentUpdateOneRequiredWithoutMetadataNestedInput
-  }
-
-  export type EstablishmentMetadataUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    shortName?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
-    faviconIco?: NullableStringFieldUpdateOperationsInput | string | null
-    favicon32x32Png?: NullableStringFieldUpdateOperationsInput | string | null
-    appleTouchIconPng?: NullableStringFieldUpdateOperationsInput | string | null
-    androidChrome192x192Png?: NullableStringFieldUpdateOperationsInput | string | null
-    androidChrome512x512Png?: NullableStringFieldUpdateOperationsInput | string | null
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EstablishmentMetadataCreateManyInput = {
-    id?: string
-    name?: string | null
-    shortName?: string | null
-    description?: string | null
-    ogImage?: string | null
-    faviconIco?: string | null
-    favicon32x32Png?: string | null
-    appleTouchIconPng?: string | null
-    androidChrome192x192Png?: string | null
-    androidChrome512x512Png?: string | null
-    establishmentId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type EstablishmentMetadataUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    shortName?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
-    faviconIco?: NullableStringFieldUpdateOperationsInput | string | null
-    favicon32x32Png?: NullableStringFieldUpdateOperationsInput | string | null
-    appleTouchIconPng?: NullableStringFieldUpdateOperationsInput | string | null
-    androidChrome192x192Png?: NullableStringFieldUpdateOperationsInput | string | null
-    androidChrome512x512Png?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EstablishmentMetadataUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    shortName?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
-    faviconIco?: NullableStringFieldUpdateOperationsInput | string | null
-    favicon32x32Png?: NullableStringFieldUpdateOperationsInput | string | null
-    appleTouchIconPng?: NullableStringFieldUpdateOperationsInput | string | null
-    androidChrome192x192Png?: NullableStringFieldUpdateOperationsInput | string | null
-    androidChrome512x512Png?: NullableStringFieldUpdateOperationsInput | string | null
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type EstablishmentBookingSettingsCreateInput = {
     id?: string
     enabled?: boolean
@@ -120569,6 +121693,121 @@ export namespace Prisma {
     notificationPhone?: NullableStringFieldUpdateOperationsInput | string | null
     primaryColor?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EstablishmentMetadataCreateInput = {
+    id?: string
+    title?: string | null
+    shortName?: string | null
+    description?: string | null
+    updatedAt?: Date | string
+    ogImage?: ImageCreateNestedOneWithoutEstablishmentMetadataOgInput
+    establishment: EstablishmentCreateNestedOneWithoutMetadataInput
+  }
+
+  export type EstablishmentMetadataUncheckedCreateInput = {
+    id?: string
+    title?: string | null
+    shortName?: string | null
+    description?: string | null
+    ogImageId?: string | null
+    establishmentId: string
+    updatedAt?: Date | string
+  }
+
+  export type EstablishmentMetadataUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    shortName?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ogImage?: ImageUpdateOneWithoutEstablishmentMetadataOgNestedInput
+    establishment?: EstablishmentUpdateOneRequiredWithoutMetadataNestedInput
+  }
+
+  export type EstablishmentMetadataUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    shortName?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ogImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EstablishmentMetadataCreateManyInput = {
+    id?: string
+    title?: string | null
+    shortName?: string | null
+    description?: string | null
+    ogImageId?: string | null
+    establishmentId: string
+    updatedAt?: Date | string
+  }
+
+  export type EstablishmentMetadataUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    shortName?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EstablishmentMetadataUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    shortName?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ogImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FaviconAssetCreateInput = {
+    id?: string
+    role: string
+    establishment: EstablishmentCreateNestedOneWithoutFaviconsInput
+    image: ImageCreateNestedOneWithoutFaviconAssetsInput
+  }
+
+  export type FaviconAssetUncheckedCreateInput = {
+    id?: string
+    establishmentId: string
+    imageId: string
+    role: string
+  }
+
+  export type FaviconAssetUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    establishment?: EstablishmentUpdateOneRequiredWithoutFaviconsNestedInput
+    image?: ImageUpdateOneRequiredWithoutFaviconAssetsNestedInput
+  }
+
+  export type FaviconAssetUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    imageId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type FaviconAssetCreateManyInput = {
+    id?: string
+    establishmentId: string
+    imageId: string
+    role: string
+  }
+
+  export type FaviconAssetUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type FaviconAssetUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    imageId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type ExpenseCreateInput = {
@@ -120739,6 +121978,8 @@ export namespace Prisma {
     item?: ItemCreateNestedManyWithoutImageInput
     itemVariants?: ItemVariantCreateNestedManyWithoutImageInput
     menuCategory?: MenuCategoryCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetCreateNestedManyWithoutImageInput
   }
 
   export type ImageUncheckedCreateInput = {
@@ -120756,6 +121997,8 @@ export namespace Prisma {
     item?: ItemUncheckedCreateNestedManyWithoutImageInput
     itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutImageInput
     menuCategory?: MenuCategoryUncheckedCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetUncheckedCreateNestedManyWithoutImageInput
   }
 
   export type ImageUpdateInput = {
@@ -120773,6 +122016,8 @@ export namespace Prisma {
     item?: ItemUpdateManyWithoutImageNestedInput
     itemVariants?: ItemVariantUpdateManyWithoutImageNestedInput
     menuCategory?: MenuCategoryUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUpdateManyWithoutImageNestedInput
   }
 
   export type ImageUncheckedUpdateInput = {
@@ -120790,6 +122035,8 @@ export namespace Prisma {
     item?: ItemUncheckedUpdateManyWithoutImageNestedInput
     itemVariants?: ItemVariantUncheckedUpdateManyWithoutImageNestedInput
     menuCategory?: MenuCategoryUncheckedUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUncheckedUpdateManyWithoutImageNestedInput
   }
 
   export type ImageCreateManyInput = {
@@ -127744,6 +128991,12 @@ export namespace Prisma {
     isNot?: EstablishmentMetadataWhereInput | null
   }
 
+  export type FaviconAssetListRelationFilter = {
+    every?: FaviconAssetWhereInput
+    some?: FaviconAssetWhereInput
+    none?: FaviconAssetWhereInput
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -127944,6 +129197,10 @@ export namespace Prisma {
     every?: StockWarehouseWhereInput
     some?: StockWarehouseWhereInput
     none?: StockWarehouseWhereInput
+  }
+
+  export type FaviconAssetOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ExpenseOrderByRelationAggregateInput = {
@@ -128203,54 +129460,6 @@ export namespace Prisma {
     _max?: NestedEnumCurrencyFilter<$PrismaModel>
   }
 
-  export type EstablishmentMetadataCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    shortName?: SortOrder
-    description?: SortOrder
-    ogImage?: SortOrder
-    faviconIco?: SortOrder
-    favicon32x32Png?: SortOrder
-    appleTouchIconPng?: SortOrder
-    androidChrome192x192Png?: SortOrder
-    androidChrome512x512Png?: SortOrder
-    establishmentId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type EstablishmentMetadataMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    shortName?: SortOrder
-    description?: SortOrder
-    ogImage?: SortOrder
-    faviconIco?: SortOrder
-    favicon32x32Png?: SortOrder
-    appleTouchIconPng?: SortOrder
-    androidChrome192x192Png?: SortOrder
-    androidChrome512x512Png?: SortOrder
-    establishmentId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type EstablishmentMetadataMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    shortName?: SortOrder
-    description?: SortOrder
-    ogImage?: SortOrder
-    faviconIco?: SortOrder
-    favicon32x32Png?: SortOrder
-    appleTouchIconPng?: SortOrder
-    androidChrome192x192Png?: SortOrder
-    androidChrome512x512Png?: SortOrder
-    establishmentId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
   export type EstablishmentBookingSettingsCountOrderByAggregateInput = {
     id?: SortOrder
     enabled?: SortOrder
@@ -128288,6 +129497,67 @@ export namespace Prisma {
     notificationPhone?: SortOrder
     primaryColor?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EstablishmentMetadataCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    shortName?: SortOrder
+    description?: SortOrder
+    ogImageId?: SortOrder
+    establishmentId?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EstablishmentMetadataMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    shortName?: SortOrder
+    description?: SortOrder
+    ogImageId?: SortOrder
+    establishmentId?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EstablishmentMetadataMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    shortName?: SortOrder
+    description?: SortOrder
+    ogImageId?: SortOrder
+    establishmentId?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ImageScalarRelationFilter = {
+    is?: ImageWhereInput
+    isNot?: ImageWhereInput
+  }
+
+  export type FaviconAssetEstablishmentIdRoleCompoundUniqueInput = {
+    establishmentId: string
+    role: string
+  }
+
+  export type FaviconAssetCountOrderByAggregateInput = {
+    id?: SortOrder
+    establishmentId?: SortOrder
+    imageId?: SortOrder
+    role?: SortOrder
+  }
+
+  export type FaviconAssetMaxOrderByAggregateInput = {
+    id?: SortOrder
+    establishmentId?: SortOrder
+    imageId?: SortOrder
+    role?: SortOrder
+  }
+
+  export type FaviconAssetMinOrderByAggregateInput = {
+    id?: SortOrder
+    establishmentId?: SortOrder
+    imageId?: SortOrder
+    role?: SortOrder
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -133054,6 +134324,13 @@ export namespace Prisma {
     connect?: EstablishmentMetadataWhereUniqueInput
   }
 
+  export type FaviconAssetCreateNestedManyWithoutEstablishmentInput = {
+    create?: XOR<FaviconAssetCreateWithoutEstablishmentInput, FaviconAssetUncheckedCreateWithoutEstablishmentInput> | FaviconAssetCreateWithoutEstablishmentInput[] | FaviconAssetUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: FaviconAssetCreateOrConnectWithoutEstablishmentInput | FaviconAssetCreateOrConnectWithoutEstablishmentInput[]
+    createMany?: FaviconAssetCreateManyEstablishmentInputEnvelope
+    connect?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+  }
+
   export type UserCreateNestedOneWithoutEstablishmentsInput = {
     create?: XOR<UserCreateWithoutEstablishmentsInput, UserUncheckedCreateWithoutEstablishmentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutEstablishmentsInput
@@ -133308,6 +134585,13 @@ export namespace Prisma {
     create?: XOR<EstablishmentMetadataCreateWithoutEstablishmentInput, EstablishmentMetadataUncheckedCreateWithoutEstablishmentInput>
     connectOrCreate?: EstablishmentMetadataCreateOrConnectWithoutEstablishmentInput
     connect?: EstablishmentMetadataWhereUniqueInput
+  }
+
+  export type FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput = {
+    create?: XOR<FaviconAssetCreateWithoutEstablishmentInput, FaviconAssetUncheckedCreateWithoutEstablishmentInput> | FaviconAssetCreateWithoutEstablishmentInput[] | FaviconAssetUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: FaviconAssetCreateOrConnectWithoutEstablishmentInput | FaviconAssetCreateOrConnectWithoutEstablishmentInput[]
+    createMany?: FaviconAssetCreateManyEstablishmentInputEnvelope
+    connect?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
   }
 
   export type ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput = {
@@ -133575,6 +134859,20 @@ export namespace Prisma {
     delete?: EstablishmentMetadataWhereInput | boolean
     connect?: EstablishmentMetadataWhereUniqueInput
     update?: XOR<XOR<EstablishmentMetadataUpdateToOneWithWhereWithoutEstablishmentInput, EstablishmentMetadataUpdateWithoutEstablishmentInput>, EstablishmentMetadataUncheckedUpdateWithoutEstablishmentInput>
+  }
+
+  export type FaviconAssetUpdateManyWithoutEstablishmentNestedInput = {
+    create?: XOR<FaviconAssetCreateWithoutEstablishmentInput, FaviconAssetUncheckedCreateWithoutEstablishmentInput> | FaviconAssetCreateWithoutEstablishmentInput[] | FaviconAssetUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: FaviconAssetCreateOrConnectWithoutEstablishmentInput | FaviconAssetCreateOrConnectWithoutEstablishmentInput[]
+    upsert?: FaviconAssetUpsertWithWhereUniqueWithoutEstablishmentInput | FaviconAssetUpsertWithWhereUniqueWithoutEstablishmentInput[]
+    createMany?: FaviconAssetCreateManyEstablishmentInputEnvelope
+    set?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    disconnect?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    delete?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    connect?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    update?: FaviconAssetUpdateWithWhereUniqueWithoutEstablishmentInput | FaviconAssetUpdateWithWhereUniqueWithoutEstablishmentInput[]
+    updateMany?: FaviconAssetUpdateManyWithWhereWithoutEstablishmentInput | FaviconAssetUpdateManyWithWhereWithoutEstablishmentInput[]
+    deleteMany?: FaviconAssetScalarWhereInput | FaviconAssetScalarWhereInput[]
   }
 
   export type UserUpdateOneRequiredWithoutEstablishmentsNestedInput = {
@@ -134067,6 +135365,20 @@ export namespace Prisma {
     update?: XOR<XOR<EstablishmentMetadataUpdateToOneWithWhereWithoutEstablishmentInput, EstablishmentMetadataUpdateWithoutEstablishmentInput>, EstablishmentMetadataUncheckedUpdateWithoutEstablishmentInput>
   }
 
+  export type FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput = {
+    create?: XOR<FaviconAssetCreateWithoutEstablishmentInput, FaviconAssetUncheckedCreateWithoutEstablishmentInput> | FaviconAssetCreateWithoutEstablishmentInput[] | FaviconAssetUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: FaviconAssetCreateOrConnectWithoutEstablishmentInput | FaviconAssetCreateOrConnectWithoutEstablishmentInput[]
+    upsert?: FaviconAssetUpsertWithWhereUniqueWithoutEstablishmentInput | FaviconAssetUpsertWithWhereUniqueWithoutEstablishmentInput[]
+    createMany?: FaviconAssetCreateManyEstablishmentInputEnvelope
+    set?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    disconnect?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    delete?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    connect?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    update?: FaviconAssetUpdateWithWhereUniqueWithoutEstablishmentInput | FaviconAssetUpdateWithWhereUniqueWithoutEstablishmentInput[]
+    updateMany?: FaviconAssetUpdateManyWithWhereWithoutEstablishmentInput | FaviconAssetUpdateManyWithWhereWithoutEstablishmentInput[]
+    deleteMany?: FaviconAssetScalarWhereInput | FaviconAssetScalarWhereInput[]
+  }
+
   export type ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput = {
     create?: XOR<ExpenseCreateWithoutEstablishmentInput, ExpenseUncheckedCreateWithoutEstablishmentInput> | ExpenseCreateWithoutEstablishmentInput[] | ExpenseUncheckedCreateWithoutEstablishmentInput[]
     connectOrCreate?: ExpenseCreateOrConnectWithoutEstablishmentInput | ExpenseCreateOrConnectWithoutEstablishmentInput[]
@@ -134509,20 +135821,6 @@ export namespace Prisma {
     deleteMany?: StockWarehouseScalarWhereInput | StockWarehouseScalarWhereInput[]
   }
 
-  export type EstablishmentCreateNestedOneWithoutMetadataInput = {
-    create?: XOR<EstablishmentCreateWithoutMetadataInput, EstablishmentUncheckedCreateWithoutMetadataInput>
-    connectOrCreate?: EstablishmentCreateOrConnectWithoutMetadataInput
-    connect?: EstablishmentWhereUniqueInput
-  }
-
-  export type EstablishmentUpdateOneRequiredWithoutMetadataNestedInput = {
-    create?: XOR<EstablishmentCreateWithoutMetadataInput, EstablishmentUncheckedCreateWithoutMetadataInput>
-    connectOrCreate?: EstablishmentCreateOrConnectWithoutMetadataInput
-    upsert?: EstablishmentUpsertWithoutMetadataInput
-    connect?: EstablishmentWhereUniqueInput
-    update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutMetadataInput, EstablishmentUpdateWithoutMetadataInput>, EstablishmentUncheckedUpdateWithoutMetadataInput>
-  }
-
   export type EstablishmentCreateNestedOneWithoutEstablishmentBookingSettingsInput = {
     create?: XOR<EstablishmentCreateWithoutEstablishmentBookingSettingsInput, EstablishmentUncheckedCreateWithoutEstablishmentBookingSettingsInput>
     connectOrCreate?: EstablishmentCreateOrConnectWithoutEstablishmentBookingSettingsInput
@@ -134535,6 +135833,64 @@ export namespace Prisma {
     upsert?: EstablishmentUpsertWithoutEstablishmentBookingSettingsInput
     connect?: EstablishmentWhereUniqueInput
     update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutEstablishmentBookingSettingsInput, EstablishmentUpdateWithoutEstablishmentBookingSettingsInput>, EstablishmentUncheckedUpdateWithoutEstablishmentBookingSettingsInput>
+  }
+
+  export type ImageCreateNestedOneWithoutEstablishmentMetadataOgInput = {
+    create?: XOR<ImageCreateWithoutEstablishmentMetadataOgInput, ImageUncheckedCreateWithoutEstablishmentMetadataOgInput>
+    connectOrCreate?: ImageCreateOrConnectWithoutEstablishmentMetadataOgInput
+    connect?: ImageWhereUniqueInput
+  }
+
+  export type EstablishmentCreateNestedOneWithoutMetadataInput = {
+    create?: XOR<EstablishmentCreateWithoutMetadataInput, EstablishmentUncheckedCreateWithoutMetadataInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutMetadataInput
+    connect?: EstablishmentWhereUniqueInput
+  }
+
+  export type ImageUpdateOneWithoutEstablishmentMetadataOgNestedInput = {
+    create?: XOR<ImageCreateWithoutEstablishmentMetadataOgInput, ImageUncheckedCreateWithoutEstablishmentMetadataOgInput>
+    connectOrCreate?: ImageCreateOrConnectWithoutEstablishmentMetadataOgInput
+    upsert?: ImageUpsertWithoutEstablishmentMetadataOgInput
+    disconnect?: ImageWhereInput | boolean
+    delete?: ImageWhereInput | boolean
+    connect?: ImageWhereUniqueInput
+    update?: XOR<XOR<ImageUpdateToOneWithWhereWithoutEstablishmentMetadataOgInput, ImageUpdateWithoutEstablishmentMetadataOgInput>, ImageUncheckedUpdateWithoutEstablishmentMetadataOgInput>
+  }
+
+  export type EstablishmentUpdateOneRequiredWithoutMetadataNestedInput = {
+    create?: XOR<EstablishmentCreateWithoutMetadataInput, EstablishmentUncheckedCreateWithoutMetadataInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutMetadataInput
+    upsert?: EstablishmentUpsertWithoutMetadataInput
+    connect?: EstablishmentWhereUniqueInput
+    update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutMetadataInput, EstablishmentUpdateWithoutMetadataInput>, EstablishmentUncheckedUpdateWithoutMetadataInput>
+  }
+
+  export type EstablishmentCreateNestedOneWithoutFaviconsInput = {
+    create?: XOR<EstablishmentCreateWithoutFaviconsInput, EstablishmentUncheckedCreateWithoutFaviconsInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutFaviconsInput
+    connect?: EstablishmentWhereUniqueInput
+  }
+
+  export type ImageCreateNestedOneWithoutFaviconAssetsInput = {
+    create?: XOR<ImageCreateWithoutFaviconAssetsInput, ImageUncheckedCreateWithoutFaviconAssetsInput>
+    connectOrCreate?: ImageCreateOrConnectWithoutFaviconAssetsInput
+    connect?: ImageWhereUniqueInput
+  }
+
+  export type EstablishmentUpdateOneRequiredWithoutFaviconsNestedInput = {
+    create?: XOR<EstablishmentCreateWithoutFaviconsInput, EstablishmentUncheckedCreateWithoutFaviconsInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutFaviconsInput
+    upsert?: EstablishmentUpsertWithoutFaviconsInput
+    connect?: EstablishmentWhereUniqueInput
+    update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutFaviconsInput, EstablishmentUpdateWithoutFaviconsInput>, EstablishmentUncheckedUpdateWithoutFaviconsInput>
+  }
+
+  export type ImageUpdateOneRequiredWithoutFaviconAssetsNestedInput = {
+    create?: XOR<ImageCreateWithoutFaviconAssetsInput, ImageUncheckedCreateWithoutFaviconAssetsInput>
+    connectOrCreate?: ImageCreateOrConnectWithoutFaviconAssetsInput
+    upsert?: ImageUpsertWithoutFaviconAssetsInput
+    connect?: ImageWhereUniqueInput
+    update?: XOR<XOR<ImageUpdateToOneWithWhereWithoutFaviconAssetsInput, ImageUpdateWithoutFaviconAssetsInput>, ImageUncheckedUpdateWithoutFaviconAssetsInput>
   }
 
   export type EstablishmentCreateNestedOneWithoutExpensesInput = {
@@ -134602,6 +135958,19 @@ export namespace Prisma {
     connect?: MenuCategoryWhereUniqueInput | MenuCategoryWhereUniqueInput[]
   }
 
+  export type EstablishmentMetadataCreateNestedOneWithoutOgImageInput = {
+    create?: XOR<EstablishmentMetadataCreateWithoutOgImageInput, EstablishmentMetadataUncheckedCreateWithoutOgImageInput>
+    connectOrCreate?: EstablishmentMetadataCreateOrConnectWithoutOgImageInput
+    connect?: EstablishmentMetadataWhereUniqueInput
+  }
+
+  export type FaviconAssetCreateNestedManyWithoutImageInput = {
+    create?: XOR<FaviconAssetCreateWithoutImageInput, FaviconAssetUncheckedCreateWithoutImageInput> | FaviconAssetCreateWithoutImageInput[] | FaviconAssetUncheckedCreateWithoutImageInput[]
+    connectOrCreate?: FaviconAssetCreateOrConnectWithoutImageInput | FaviconAssetCreateOrConnectWithoutImageInput[]
+    createMany?: FaviconAssetCreateManyImageInputEnvelope
+    connect?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+  }
+
   export type EstablishmentUncheckedCreateNestedManyWithoutBannerImageInput = {
     create?: XOR<EstablishmentCreateWithoutBannerImageInput, EstablishmentUncheckedCreateWithoutBannerImageInput> | EstablishmentCreateWithoutBannerImageInput[] | EstablishmentUncheckedCreateWithoutBannerImageInput[]
     connectOrCreate?: EstablishmentCreateOrConnectWithoutBannerImageInput | EstablishmentCreateOrConnectWithoutBannerImageInput[]
@@ -134635,6 +136004,19 @@ export namespace Prisma {
     connectOrCreate?: MenuCategoryCreateOrConnectWithoutImageInput | MenuCategoryCreateOrConnectWithoutImageInput[]
     createMany?: MenuCategoryCreateManyImageInputEnvelope
     connect?: MenuCategoryWhereUniqueInput | MenuCategoryWhereUniqueInput[]
+  }
+
+  export type EstablishmentMetadataUncheckedCreateNestedOneWithoutOgImageInput = {
+    create?: XOR<EstablishmentMetadataCreateWithoutOgImageInput, EstablishmentMetadataUncheckedCreateWithoutOgImageInput>
+    connectOrCreate?: EstablishmentMetadataCreateOrConnectWithoutOgImageInput
+    connect?: EstablishmentMetadataWhereUniqueInput
+  }
+
+  export type FaviconAssetUncheckedCreateNestedManyWithoutImageInput = {
+    create?: XOR<FaviconAssetCreateWithoutImageInput, FaviconAssetUncheckedCreateWithoutImageInput> | FaviconAssetCreateWithoutImageInput[] | FaviconAssetUncheckedCreateWithoutImageInput[]
+    connectOrCreate?: FaviconAssetCreateOrConnectWithoutImageInput | FaviconAssetCreateOrConnectWithoutImageInput[]
+    createMany?: FaviconAssetCreateManyImageInputEnvelope
+    connect?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
   }
 
   export type EstablishmentUpdateManyWithoutBannerImageNestedInput = {
@@ -134715,6 +136097,30 @@ export namespace Prisma {
     deleteMany?: MenuCategoryScalarWhereInput | MenuCategoryScalarWhereInput[]
   }
 
+  export type EstablishmentMetadataUpdateOneWithoutOgImageNestedInput = {
+    create?: XOR<EstablishmentMetadataCreateWithoutOgImageInput, EstablishmentMetadataUncheckedCreateWithoutOgImageInput>
+    connectOrCreate?: EstablishmentMetadataCreateOrConnectWithoutOgImageInput
+    upsert?: EstablishmentMetadataUpsertWithoutOgImageInput
+    disconnect?: EstablishmentMetadataWhereInput | boolean
+    delete?: EstablishmentMetadataWhereInput | boolean
+    connect?: EstablishmentMetadataWhereUniqueInput
+    update?: XOR<XOR<EstablishmentMetadataUpdateToOneWithWhereWithoutOgImageInput, EstablishmentMetadataUpdateWithoutOgImageInput>, EstablishmentMetadataUncheckedUpdateWithoutOgImageInput>
+  }
+
+  export type FaviconAssetUpdateManyWithoutImageNestedInput = {
+    create?: XOR<FaviconAssetCreateWithoutImageInput, FaviconAssetUncheckedCreateWithoutImageInput> | FaviconAssetCreateWithoutImageInput[] | FaviconAssetUncheckedCreateWithoutImageInput[]
+    connectOrCreate?: FaviconAssetCreateOrConnectWithoutImageInput | FaviconAssetCreateOrConnectWithoutImageInput[]
+    upsert?: FaviconAssetUpsertWithWhereUniqueWithoutImageInput | FaviconAssetUpsertWithWhereUniqueWithoutImageInput[]
+    createMany?: FaviconAssetCreateManyImageInputEnvelope
+    set?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    disconnect?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    delete?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    connect?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    update?: FaviconAssetUpdateWithWhereUniqueWithoutImageInput | FaviconAssetUpdateWithWhereUniqueWithoutImageInput[]
+    updateMany?: FaviconAssetUpdateManyWithWhereWithoutImageInput | FaviconAssetUpdateManyWithWhereWithoutImageInput[]
+    deleteMany?: FaviconAssetScalarWhereInput | FaviconAssetScalarWhereInput[]
+  }
+
   export type EstablishmentUncheckedUpdateManyWithoutBannerImageNestedInput = {
     create?: XOR<EstablishmentCreateWithoutBannerImageInput, EstablishmentUncheckedCreateWithoutBannerImageInput> | EstablishmentCreateWithoutBannerImageInput[] | EstablishmentUncheckedCreateWithoutBannerImageInput[]
     connectOrCreate?: EstablishmentCreateOrConnectWithoutBannerImageInput | EstablishmentCreateOrConnectWithoutBannerImageInput[]
@@ -134783,6 +136189,30 @@ export namespace Prisma {
     update?: MenuCategoryUpdateWithWhereUniqueWithoutImageInput | MenuCategoryUpdateWithWhereUniqueWithoutImageInput[]
     updateMany?: MenuCategoryUpdateManyWithWhereWithoutImageInput | MenuCategoryUpdateManyWithWhereWithoutImageInput[]
     deleteMany?: MenuCategoryScalarWhereInput | MenuCategoryScalarWhereInput[]
+  }
+
+  export type EstablishmentMetadataUncheckedUpdateOneWithoutOgImageNestedInput = {
+    create?: XOR<EstablishmentMetadataCreateWithoutOgImageInput, EstablishmentMetadataUncheckedCreateWithoutOgImageInput>
+    connectOrCreate?: EstablishmentMetadataCreateOrConnectWithoutOgImageInput
+    upsert?: EstablishmentMetadataUpsertWithoutOgImageInput
+    disconnect?: EstablishmentMetadataWhereInput | boolean
+    delete?: EstablishmentMetadataWhereInput | boolean
+    connect?: EstablishmentMetadataWhereUniqueInput
+    update?: XOR<XOR<EstablishmentMetadataUpdateToOneWithWhereWithoutOgImageInput, EstablishmentMetadataUpdateWithoutOgImageInput>, EstablishmentMetadataUncheckedUpdateWithoutOgImageInput>
+  }
+
+  export type FaviconAssetUncheckedUpdateManyWithoutImageNestedInput = {
+    create?: XOR<FaviconAssetCreateWithoutImageInput, FaviconAssetUncheckedCreateWithoutImageInput> | FaviconAssetCreateWithoutImageInput[] | FaviconAssetUncheckedCreateWithoutImageInput[]
+    connectOrCreate?: FaviconAssetCreateOrConnectWithoutImageInput | FaviconAssetCreateOrConnectWithoutImageInput[]
+    upsert?: FaviconAssetUpsertWithWhereUniqueWithoutImageInput | FaviconAssetUpsertWithWhereUniqueWithoutImageInput[]
+    createMany?: FaviconAssetCreateManyImageInputEnvelope
+    set?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    disconnect?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    delete?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    connect?: FaviconAssetWhereUniqueInput | FaviconAssetWhereUniqueInput[]
+    update?: FaviconAssetUpdateWithWhereUniqueWithoutImageInput | FaviconAssetUpdateWithWhereUniqueWithoutImageInput[]
+    updateMany?: FaviconAssetUpdateManyWithWhereWithoutImageInput | FaviconAssetUpdateManyWithWhereWithoutImageInput[]
+    deleteMany?: FaviconAssetScalarWhereInput | FaviconAssetScalarWhereInput[]
   }
 
   export type EstablishmentCreateNestedOneWithoutIntegrationsInput = {
@@ -140264,6 +141694,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -140338,6 +141769,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -140420,6 +141852,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -140494,6 +141927,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -140560,6 +141994,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -140634,6 +142069,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -140716,6 +142152,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -140790,6 +142227,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -140886,6 +142324,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -140960,6 +142399,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -141071,6 +142511,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -141145,6 +142586,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -141362,6 +142804,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -141436,6 +142879,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -141602,6 +143046,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -141676,6 +143121,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -141941,6 +143387,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -142015,6 +143462,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -142146,6 +143594,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -142220,6 +143669,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -142565,6 +144015,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -142639,6 +144090,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -142771,6 +144223,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -142845,6 +144298,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -143349,6 +144803,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -143423,6 +144878,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -143532,6 +144988,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -143606,6 +145063,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -143812,6 +145270,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -143886,6 +145345,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -143968,6 +145428,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -144042,6 +145503,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -144105,37 +145567,47 @@ export namespace Prisma {
 
   export type EstablishmentMetadataCreateWithoutEstablishmentInput = {
     id?: string
-    name?: string | null
+    title?: string | null
     shortName?: string | null
     description?: string | null
-    ogImage?: string | null
-    faviconIco?: string | null
-    favicon32x32Png?: string | null
-    appleTouchIconPng?: string | null
-    androidChrome192x192Png?: string | null
-    androidChrome512x512Png?: string | null
-    createdAt?: Date | string
     updatedAt?: Date | string
+    ogImage?: ImageCreateNestedOneWithoutEstablishmentMetadataOgInput
   }
 
   export type EstablishmentMetadataUncheckedCreateWithoutEstablishmentInput = {
     id?: string
-    name?: string | null
+    title?: string | null
     shortName?: string | null
     description?: string | null
-    ogImage?: string | null
-    faviconIco?: string | null
-    favicon32x32Png?: string | null
-    appleTouchIconPng?: string | null
-    androidChrome192x192Png?: string | null
-    androidChrome512x512Png?: string | null
-    createdAt?: Date | string
+    ogImageId?: string | null
     updatedAt?: Date | string
   }
 
   export type EstablishmentMetadataCreateOrConnectWithoutEstablishmentInput = {
     where: EstablishmentMetadataWhereUniqueInput
     create: XOR<EstablishmentMetadataCreateWithoutEstablishmentInput, EstablishmentMetadataUncheckedCreateWithoutEstablishmentInput>
+  }
+
+  export type FaviconAssetCreateWithoutEstablishmentInput = {
+    id?: string
+    role: string
+    image: ImageCreateNestedOneWithoutFaviconAssetsInput
+  }
+
+  export type FaviconAssetUncheckedCreateWithoutEstablishmentInput = {
+    id?: string
+    imageId: string
+    role: string
+  }
+
+  export type FaviconAssetCreateOrConnectWithoutEstablishmentInput = {
+    where: FaviconAssetWhereUniqueInput
+    create: XOR<FaviconAssetCreateWithoutEstablishmentInput, FaviconAssetUncheckedCreateWithoutEstablishmentInput>
+  }
+
+  export type FaviconAssetCreateManyEstablishmentInputEnvelope = {
+    data: FaviconAssetCreateManyEstablishmentInput | FaviconAssetCreateManyEstablishmentInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserCreateWithoutEstablishmentsInput = {
@@ -144202,6 +145674,8 @@ export namespace Prisma {
     item?: ItemCreateNestedManyWithoutImageInput
     itemVariants?: ItemVariantCreateNestedManyWithoutImageInput
     menuCategory?: MenuCategoryCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetCreateNestedManyWithoutImageInput
   }
 
   export type ImageUncheckedCreateWithoutLogoUsedInBrandsInput = {
@@ -144218,6 +145692,8 @@ export namespace Prisma {
     item?: ItemUncheckedCreateNestedManyWithoutImageInput
     itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutImageInput
     menuCategory?: MenuCategoryUncheckedCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetUncheckedCreateNestedManyWithoutImageInput
   }
 
   export type ImageCreateOrConnectWithoutLogoUsedInBrandsInput = {
@@ -144239,6 +145715,8 @@ export namespace Prisma {
     item?: ItemCreateNestedManyWithoutImageInput
     itemVariants?: ItemVariantCreateNestedManyWithoutImageInput
     menuCategory?: MenuCategoryCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetCreateNestedManyWithoutImageInput
   }
 
   export type ImageUncheckedCreateWithoutBannerUsedInBrandsInput = {
@@ -144255,6 +145733,8 @@ export namespace Prisma {
     item?: ItemUncheckedCreateNestedManyWithoutImageInput
     itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutImageInput
     menuCategory?: MenuCategoryUncheckedCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetUncheckedCreateNestedManyWithoutImageInput
   }
 
   export type ImageCreateOrConnectWithoutBannerUsedInBrandsInput = {
@@ -144328,6 +145808,8 @@ export namespace Prisma {
     item?: ItemCreateNestedManyWithoutImageInput
     itemVariants?: ItemVariantCreateNestedManyWithoutImageInput
     menuCategory?: MenuCategoryCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetCreateNestedManyWithoutImageInput
   }
 
   export type ImageUncheckedCreateWithoutEstablishmentInput = {
@@ -144344,6 +145826,8 @@ export namespace Prisma {
     item?: ItemUncheckedCreateNestedManyWithoutImageInput
     itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutImageInput
     menuCategory?: MenuCategoryUncheckedCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetUncheckedCreateNestedManyWithoutImageInput
   }
 
   export type ImageCreateOrConnectWithoutEstablishmentInput = {
@@ -145679,32 +147163,46 @@ export namespace Prisma {
 
   export type EstablishmentMetadataUpdateWithoutEstablishmentInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     shortName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
-    faviconIco?: NullableStringFieldUpdateOperationsInput | string | null
-    favicon32x32Png?: NullableStringFieldUpdateOperationsInput | string | null
-    appleTouchIconPng?: NullableStringFieldUpdateOperationsInput | string | null
-    androidChrome192x192Png?: NullableStringFieldUpdateOperationsInput | string | null
-    androidChrome512x512Png?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ogImage?: ImageUpdateOneWithoutEstablishmentMetadataOgNestedInput
   }
 
   export type EstablishmentMetadataUncheckedUpdateWithoutEstablishmentInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: NullableStringFieldUpdateOperationsInput | string | null
     shortName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    ogImage?: NullableStringFieldUpdateOperationsInput | string | null
-    faviconIco?: NullableStringFieldUpdateOperationsInput | string | null
-    favicon32x32Png?: NullableStringFieldUpdateOperationsInput | string | null
-    appleTouchIconPng?: NullableStringFieldUpdateOperationsInput | string | null
-    androidChrome192x192Png?: NullableStringFieldUpdateOperationsInput | string | null
-    androidChrome512x512Png?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ogImageId?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FaviconAssetUpsertWithWhereUniqueWithoutEstablishmentInput = {
+    where: FaviconAssetWhereUniqueInput
+    update: XOR<FaviconAssetUpdateWithoutEstablishmentInput, FaviconAssetUncheckedUpdateWithoutEstablishmentInput>
+    create: XOR<FaviconAssetCreateWithoutEstablishmentInput, FaviconAssetUncheckedCreateWithoutEstablishmentInput>
+  }
+
+  export type FaviconAssetUpdateWithWhereUniqueWithoutEstablishmentInput = {
+    where: FaviconAssetWhereUniqueInput
+    data: XOR<FaviconAssetUpdateWithoutEstablishmentInput, FaviconAssetUncheckedUpdateWithoutEstablishmentInput>
+  }
+
+  export type FaviconAssetUpdateManyWithWhereWithoutEstablishmentInput = {
+    where: FaviconAssetScalarWhereInput
+    data: XOR<FaviconAssetUpdateManyMutationInput, FaviconAssetUncheckedUpdateManyWithoutEstablishmentInput>
+  }
+
+  export type FaviconAssetScalarWhereInput = {
+    AND?: FaviconAssetScalarWhereInput | FaviconAssetScalarWhereInput[]
+    OR?: FaviconAssetScalarWhereInput[]
+    NOT?: FaviconAssetScalarWhereInput | FaviconAssetScalarWhereInput[]
+    id?: StringFilter<"FaviconAsset"> | string
+    establishmentId?: StringFilter<"FaviconAsset"> | string
+    imageId?: StringFilter<"FaviconAsset"> | string
+    role?: StringFilter<"FaviconAsset"> | string
   }
 
   export type UserUpsertWithoutEstablishmentsInput = {
@@ -145794,6 +147292,8 @@ export namespace Prisma {
     item?: ItemUpdateManyWithoutImageNestedInput
     itemVariants?: ItemVariantUpdateManyWithoutImageNestedInput
     menuCategory?: MenuCategoryUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUpdateManyWithoutImageNestedInput
   }
 
   export type ImageUncheckedUpdateWithoutLogoUsedInBrandsInput = {
@@ -145810,6 +147310,8 @@ export namespace Prisma {
     item?: ItemUncheckedUpdateManyWithoutImageNestedInput
     itemVariants?: ItemVariantUncheckedUpdateManyWithoutImageNestedInput
     menuCategory?: MenuCategoryUncheckedUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUncheckedUpdateManyWithoutImageNestedInput
   }
 
   export type ImageUpsertWithoutBannerUsedInBrandsInput = {
@@ -145837,6 +147339,8 @@ export namespace Prisma {
     item?: ItemUpdateManyWithoutImageNestedInput
     itemVariants?: ItemVariantUpdateManyWithoutImageNestedInput
     menuCategory?: MenuCategoryUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUpdateManyWithoutImageNestedInput
   }
 
   export type ImageUncheckedUpdateWithoutBannerUsedInBrandsInput = {
@@ -145853,6 +147357,8 @@ export namespace Prisma {
     item?: ItemUncheckedUpdateManyWithoutImageNestedInput
     itemVariants?: ItemVariantUncheckedUpdateManyWithoutImageNestedInput
     menuCategory?: MenuCategoryUncheckedUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUncheckedUpdateManyWithoutImageNestedInput
   }
 
   export type ExpenseUpsertWithWhereUniqueWithoutEstablishmentInput = {
@@ -147004,302 +148510,6 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"StockWarehouse"> | Date | string | null
   }
 
-  export type EstablishmentCreateWithoutMetadataInput = {
-    id?: string
-    name: string
-    slug: string
-    type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
-    email: string
-    countryCode: string
-    phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
-    billingName: string
-    billingTaxId: string
-    stripeCustomerId: string
-    instagramUrl?: string | null
-    tiktokUrl?: string | null
-    facebookUrl?: string | null
-    googleReviewUrl?: string | null
-    tripAdvisorUrl?: string | null
-    websiteUrl?: string | null
-    primaryLanguage?: $Enums.EstablishmentLanguage
-    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
-    currency?: $Enums.Currency
-    timezone?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
-    owner: UserCreateNestedOneWithoutEstablishmentsInput
-    activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
-    logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
-    bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
-    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
-    images?: ImageCreateNestedManyWithoutEstablishmentInput
-    themes?: ThemeCreateNestedManyWithoutEstablishmentInput
-    employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
-    serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
-    menus?: MenuCreateNestedManyWithoutEstablishmentInput
-    Item?: ItemCreateNestedManyWithoutEstablishmentInput
-    addons?: AddonCreateNestedManyWithoutEstablishmentInput
-    variantOptions?: VariantOptionCreateNestedManyWithoutEstablishmentInput
-    bookings?: BookingCreateNestedManyWithoutEstablishmentInput
-    bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
-    establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
-    establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
-    subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
-    invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
-    devices?: DeviceCreateNestedManyWithoutEstablishmentInput
-    vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
-    sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
-    emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
-    auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
-    discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
-    promotions?: PromotionCreateNestedManyWithoutEstablishmentInput
-    suppliers?: SupplierCreateNestedManyWithoutEstablishmentInput
-    stockCategories?: StockCategoryCreateNestedManyWithoutEstablishmentInput
-    stockItems?: StockItemCreateNestedManyWithoutEstablishmentInput
-    stockEntries?: StockEntryCreateNestedManyWithoutEstablishmentInput
-    stockExits?: StockExitCreateNestedManyWithoutEstablishmentInput
-    stockMovements?: StockMovementCreateNestedManyWithoutEstablishmentInput
-    stockAlerts?: StockAlertCreateNestedManyWithoutEstablishmentInput
-    stockInventoryCounts?: StockInventoryCountCreateNestedManyWithoutEstablishmentInput
-    stockWarehouses?: StockWarehouseCreateNestedManyWithoutEstablishmentInput
-  }
-
-  export type EstablishmentUncheckedCreateWithoutMetadataInput = {
-    id?: string
-    name: string
-    slug: string
-    type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
-    email: string
-    countryCode: string
-    phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
-    billingName: string
-    billingTaxId: string
-    stripeCustomerId: string
-    instagramUrl?: string | null
-    tiktokUrl?: string | null
-    facebookUrl?: string | null
-    googleReviewUrl?: string | null
-    tripAdvisorUrl?: string | null
-    websiteUrl?: string | null
-    primaryLanguage?: $Enums.EstablishmentLanguage
-    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
-    currency?: $Enums.Currency
-    timezone?: string
-    logoImageId?: string | null
-    bannerImageId?: string | null
-    activeThemeId?: string | null
-    scheduleId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ownerId: string
-    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
-    images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
-    themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
-    employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
-    serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
-    menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
-    Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
-    addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
-    variantOptions?: VariantOptionUncheckedCreateNestedManyWithoutEstablishmentInput
-    bookings?: BookingUncheckedCreateNestedManyWithoutEstablishmentInput
-    bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
-    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
-    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
-    subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
-    invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
-    devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
-    vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
-    sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
-    emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
-    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
-    discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
-    promotions?: PromotionUncheckedCreateNestedManyWithoutEstablishmentInput
-    suppliers?: SupplierUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockCategories?: StockCategoryUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockItems?: StockItemUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockEntries?: StockEntryUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockExits?: StockExitUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockMovements?: StockMovementUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockAlerts?: StockAlertUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockInventoryCounts?: StockInventoryCountUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockWarehouses?: StockWarehouseUncheckedCreateNestedManyWithoutEstablishmentInput
-  }
-
-  export type EstablishmentCreateOrConnectWithoutMetadataInput = {
-    where: EstablishmentWhereUniqueInput
-    create: XOR<EstablishmentCreateWithoutMetadataInput, EstablishmentUncheckedCreateWithoutMetadataInput>
-  }
-
-  export type EstablishmentUpsertWithoutMetadataInput = {
-    update: XOR<EstablishmentUpdateWithoutMetadataInput, EstablishmentUncheckedUpdateWithoutMetadataInput>
-    create: XOR<EstablishmentCreateWithoutMetadataInput, EstablishmentUncheckedCreateWithoutMetadataInput>
-    where?: EstablishmentWhereInput
-  }
-
-  export type EstablishmentUpdateToOneWithWhereWithoutMetadataInput = {
-    where?: EstablishmentWhereInput
-    data: XOR<EstablishmentUpdateWithoutMetadataInput, EstablishmentUncheckedUpdateWithoutMetadataInput>
-  }
-
-  export type EstablishmentUpdateWithoutMetadataInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
-    email?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
-    phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    billingName?: StringFieldUpdateOperationsInput | string
-    billingTaxId?: StringFieldUpdateOperationsInput | string
-    stripeCustomerId?: StringFieldUpdateOperationsInput | string
-    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
-    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
-    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-    timezone?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
-    owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
-    activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
-    logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
-    bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
-    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
-    images?: ImageUpdateManyWithoutEstablishmentNestedInput
-    themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
-    employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
-    serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
-    menus?: MenuUpdateManyWithoutEstablishmentNestedInput
-    Item?: ItemUpdateManyWithoutEstablishmentNestedInput
-    addons?: AddonUpdateManyWithoutEstablishmentNestedInput
-    variantOptions?: VariantOptionUpdateManyWithoutEstablishmentNestedInput
-    bookings?: BookingUpdateManyWithoutEstablishmentNestedInput
-    bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
-    establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
-    establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
-    subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
-    invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
-    devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
-    vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
-    sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
-    emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
-    auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
-    discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
-    promotions?: PromotionUpdateManyWithoutEstablishmentNestedInput
-    suppliers?: SupplierUpdateManyWithoutEstablishmentNestedInput
-    stockCategories?: StockCategoryUpdateManyWithoutEstablishmentNestedInput
-    stockItems?: StockItemUpdateManyWithoutEstablishmentNestedInput
-    stockEntries?: StockEntryUpdateManyWithoutEstablishmentNestedInput
-    stockExits?: StockExitUpdateManyWithoutEstablishmentNestedInput
-    stockMovements?: StockMovementUpdateManyWithoutEstablishmentNestedInput
-    stockAlerts?: StockAlertUpdateManyWithoutEstablishmentNestedInput
-    stockInventoryCounts?: StockInventoryCountUpdateManyWithoutEstablishmentNestedInput
-    stockWarehouses?: StockWarehouseUpdateManyWithoutEstablishmentNestedInput
-  }
-
-  export type EstablishmentUncheckedUpdateWithoutMetadataInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
-    email?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
-    phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    billingName?: StringFieldUpdateOperationsInput | string
-    billingTaxId?: StringFieldUpdateOperationsInput | string
-    stripeCustomerId?: StringFieldUpdateOperationsInput | string
-    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
-    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
-    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-    timezone?: StringFieldUpdateOperationsInput | string
-    logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
-    bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
-    activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
-    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ownerId?: StringFieldUpdateOperationsInput | string
-    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
-    images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
-    themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
-    employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
-    serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
-    menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
-    Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
-    addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
-    variantOptions?: VariantOptionUncheckedUpdateManyWithoutEstablishmentNestedInput
-    bookings?: BookingUncheckedUpdateManyWithoutEstablishmentNestedInput
-    bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
-    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
-    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
-    subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
-    invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
-    devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
-    vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
-    sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
-    emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
-    auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
-    discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
-    promotions?: PromotionUncheckedUpdateManyWithoutEstablishmentNestedInput
-    suppliers?: SupplierUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockCategories?: StockCategoryUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockItems?: StockItemUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockEntries?: StockEntryUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockExits?: StockExitUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockMovements?: StockMovementUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockAlerts?: StockAlertUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockInventoryCounts?: StockInventoryCountUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
-  }
-
   export type EstablishmentCreateWithoutEstablishmentBookingSettingsInput = {
     id?: string
     name: string
@@ -147332,6 +148542,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -147406,6 +148617,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -147488,6 +148700,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -147562,6 +148775,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -147596,6 +148810,782 @@ export namespace Prisma {
     stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
   }
 
+  export type ImageCreateWithoutEstablishmentMetadataOgInput = {
+    id?: string
+    cloudflareImageId: string
+    fileName: string
+    url: string
+    fileSize: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bannerUsedInBrands?: EstablishmentCreateNestedManyWithoutBannerImageInput
+    logoUsedInBrands?: EstablishmentCreateNestedManyWithoutLogoImageInput
+    establishment: EstablishmentCreateNestedOneWithoutImagesInput
+    item?: ItemCreateNestedManyWithoutImageInput
+    itemVariants?: ItemVariantCreateNestedManyWithoutImageInput
+    menuCategory?: MenuCategoryCreateNestedManyWithoutImageInput
+    faviconAssets?: FaviconAssetCreateNestedManyWithoutImageInput
+  }
+
+  export type ImageUncheckedCreateWithoutEstablishmentMetadataOgInput = {
+    id?: string
+    cloudflareImageId: string
+    fileName: string
+    url: string
+    fileSize: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    establishmentId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bannerUsedInBrands?: EstablishmentUncheckedCreateNestedManyWithoutBannerImageInput
+    logoUsedInBrands?: EstablishmentUncheckedCreateNestedManyWithoutLogoImageInput
+    item?: ItemUncheckedCreateNestedManyWithoutImageInput
+    itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutImageInput
+    menuCategory?: MenuCategoryUncheckedCreateNestedManyWithoutImageInput
+    faviconAssets?: FaviconAssetUncheckedCreateNestedManyWithoutImageInput
+  }
+
+  export type ImageCreateOrConnectWithoutEstablishmentMetadataOgInput = {
+    where: ImageWhereUniqueInput
+    create: XOR<ImageCreateWithoutEstablishmentMetadataOgInput, ImageUncheckedCreateWithoutEstablishmentMetadataOgInput>
+  }
+
+  export type EstablishmentCreateWithoutMetadataInput = {
+    id?: string
+    name: string
+    slug: string
+    type: $Enums.EstablishmentType
+    status?: $Enums.EstablishmentStatus
+    isOnline?: boolean
+    email: string
+    countryCode: string
+    phoneNumber: string
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    country: string
+    billingName: string
+    billingTaxId: string
+    stripeCustomerId: string
+    instagramUrl?: string | null
+    tiktokUrl?: string | null
+    facebookUrl?: string | null
+    googleReviewUrl?: string | null
+    tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
+    primaryLanguage?: $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: $Enums.Currency
+    timezone?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
+    owner: UserCreateNestedOneWithoutEstablishmentsInput
+    activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
+    logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
+    bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
+    images?: ImageCreateNestedManyWithoutEstablishmentInput
+    themes?: ThemeCreateNestedManyWithoutEstablishmentInput
+    employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
+    serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    menus?: MenuCreateNestedManyWithoutEstablishmentInput
+    Item?: ItemCreateNestedManyWithoutEstablishmentInput
+    addons?: AddonCreateNestedManyWithoutEstablishmentInput
+    variantOptions?: VariantOptionCreateNestedManyWithoutEstablishmentInput
+    bookings?: BookingCreateNestedManyWithoutEstablishmentInput
+    bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
+    establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
+    integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
+    subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
+    invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
+    devices?: DeviceCreateNestedManyWithoutEstablishmentInput
+    vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
+    sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
+    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
+    emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
+    auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
+    discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
+    promotions?: PromotionCreateNestedManyWithoutEstablishmentInput
+    suppliers?: SupplierCreateNestedManyWithoutEstablishmentInput
+    stockCategories?: StockCategoryCreateNestedManyWithoutEstablishmentInput
+    stockItems?: StockItemCreateNestedManyWithoutEstablishmentInput
+    stockEntries?: StockEntryCreateNestedManyWithoutEstablishmentInput
+    stockExits?: StockExitCreateNestedManyWithoutEstablishmentInput
+    stockMovements?: StockMovementCreateNestedManyWithoutEstablishmentInput
+    stockAlerts?: StockAlertCreateNestedManyWithoutEstablishmentInput
+    stockInventoryCounts?: StockInventoryCountCreateNestedManyWithoutEstablishmentInput
+    stockWarehouses?: StockWarehouseCreateNestedManyWithoutEstablishmentInput
+  }
+
+  export type EstablishmentUncheckedCreateWithoutMetadataInput = {
+    id?: string
+    name: string
+    slug: string
+    type: $Enums.EstablishmentType
+    status?: $Enums.EstablishmentStatus
+    isOnline?: boolean
+    email: string
+    countryCode: string
+    phoneNumber: string
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    country: string
+    billingName: string
+    billingTaxId: string
+    stripeCustomerId: string
+    instagramUrl?: string | null
+    tiktokUrl?: string | null
+    facebookUrl?: string | null
+    googleReviewUrl?: string | null
+    tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
+    primaryLanguage?: $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: $Enums.Currency
+    timezone?: string
+    logoImageId?: string | null
+    bannerImageId?: string | null
+    activeThemeId?: string | null
+    scheduleId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: string
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
+    images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
+    themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
+    serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
+    Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
+    addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
+    variantOptions?: VariantOptionUncheckedCreateNestedManyWithoutEstablishmentInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutEstablishmentInput
+    bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
+    integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
+    devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
+    vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
+    sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
+    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
+    emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
+    discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
+    promotions?: PromotionUncheckedCreateNestedManyWithoutEstablishmentInput
+    suppliers?: SupplierUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockCategories?: StockCategoryUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockItems?: StockItemUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockEntries?: StockEntryUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockExits?: StockExitUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockMovements?: StockMovementUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockAlerts?: StockAlertUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockInventoryCounts?: StockInventoryCountUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockWarehouses?: StockWarehouseUncheckedCreateNestedManyWithoutEstablishmentInput
+  }
+
+  export type EstablishmentCreateOrConnectWithoutMetadataInput = {
+    where: EstablishmentWhereUniqueInput
+    create: XOR<EstablishmentCreateWithoutMetadataInput, EstablishmentUncheckedCreateWithoutMetadataInput>
+  }
+
+  export type ImageUpsertWithoutEstablishmentMetadataOgInput = {
+    update: XOR<ImageUpdateWithoutEstablishmentMetadataOgInput, ImageUncheckedUpdateWithoutEstablishmentMetadataOgInput>
+    create: XOR<ImageCreateWithoutEstablishmentMetadataOgInput, ImageUncheckedCreateWithoutEstablishmentMetadataOgInput>
+    where?: ImageWhereInput
+  }
+
+  export type ImageUpdateToOneWithWhereWithoutEstablishmentMetadataOgInput = {
+    where?: ImageWhereInput
+    data: XOR<ImageUpdateWithoutEstablishmentMetadataOgInput, ImageUncheckedUpdateWithoutEstablishmentMetadataOgInput>
+  }
+
+  export type ImageUpdateWithoutEstablishmentMetadataOgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cloudflareImageId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    fileSize?: FloatFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerUsedInBrands?: EstablishmentUpdateManyWithoutBannerImageNestedInput
+    logoUsedInBrands?: EstablishmentUpdateManyWithoutLogoImageNestedInput
+    establishment?: EstablishmentUpdateOneRequiredWithoutImagesNestedInput
+    item?: ItemUpdateManyWithoutImageNestedInput
+    itemVariants?: ItemVariantUpdateManyWithoutImageNestedInput
+    menuCategory?: MenuCategoryUpdateManyWithoutImageNestedInput
+    faviconAssets?: FaviconAssetUpdateManyWithoutImageNestedInput
+  }
+
+  export type ImageUncheckedUpdateWithoutEstablishmentMetadataOgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cloudflareImageId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    fileSize?: FloatFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerUsedInBrands?: EstablishmentUncheckedUpdateManyWithoutBannerImageNestedInput
+    logoUsedInBrands?: EstablishmentUncheckedUpdateManyWithoutLogoImageNestedInput
+    item?: ItemUncheckedUpdateManyWithoutImageNestedInput
+    itemVariants?: ItemVariantUncheckedUpdateManyWithoutImageNestedInput
+    menuCategory?: MenuCategoryUncheckedUpdateManyWithoutImageNestedInput
+    faviconAssets?: FaviconAssetUncheckedUpdateManyWithoutImageNestedInput
+  }
+
+  export type EstablishmentUpsertWithoutMetadataInput = {
+    update: XOR<EstablishmentUpdateWithoutMetadataInput, EstablishmentUncheckedUpdateWithoutMetadataInput>
+    create: XOR<EstablishmentCreateWithoutMetadataInput, EstablishmentUncheckedCreateWithoutMetadataInput>
+    where?: EstablishmentWhereInput
+  }
+
+  export type EstablishmentUpdateToOneWithWhereWithoutMetadataInput = {
+    where?: EstablishmentWhereInput
+    data: XOR<EstablishmentUpdateWithoutMetadataInput, EstablishmentUncheckedUpdateWithoutMetadataInput>
+  }
+
+  export type EstablishmentUpdateWithoutMetadataInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
+    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    billingName?: StringFieldUpdateOperationsInput | string
+    billingTaxId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    timezone?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
+    owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
+    activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
+    logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
+    bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
+    images?: ImageUpdateManyWithoutEstablishmentNestedInput
+    themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
+    employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
+    serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    menus?: MenuUpdateManyWithoutEstablishmentNestedInput
+    Item?: ItemUpdateManyWithoutEstablishmentNestedInput
+    addons?: AddonUpdateManyWithoutEstablishmentNestedInput
+    variantOptions?: VariantOptionUpdateManyWithoutEstablishmentNestedInput
+    bookings?: BookingUpdateManyWithoutEstablishmentNestedInput
+    bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
+    integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
+    subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
+    invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
+    devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
+    vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
+    sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
+    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
+    emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
+    discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
+    promotions?: PromotionUpdateManyWithoutEstablishmentNestedInput
+    suppliers?: SupplierUpdateManyWithoutEstablishmentNestedInput
+    stockCategories?: StockCategoryUpdateManyWithoutEstablishmentNestedInput
+    stockItems?: StockItemUpdateManyWithoutEstablishmentNestedInput
+    stockEntries?: StockEntryUpdateManyWithoutEstablishmentNestedInput
+    stockExits?: StockExitUpdateManyWithoutEstablishmentNestedInput
+    stockMovements?: StockMovementUpdateManyWithoutEstablishmentNestedInput
+    stockAlerts?: StockAlertUpdateManyWithoutEstablishmentNestedInput
+    stockInventoryCounts?: StockInventoryCountUpdateManyWithoutEstablishmentNestedInput
+    stockWarehouses?: StockWarehouseUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type EstablishmentUncheckedUpdateWithoutMetadataInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
+    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    billingName?: StringFieldUpdateOperationsInput | string
+    billingTaxId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    timezone?: StringFieldUpdateOperationsInput | string
+    logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
+    images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
+    themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
+    Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
+    addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
+    variantOptions?: VariantOptionUncheckedUpdateManyWithoutEstablishmentNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutEstablishmentNestedInput
+    bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
+    integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
+    devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
+    vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
+    sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
+    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
+    emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
+    discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
+    promotions?: PromotionUncheckedUpdateManyWithoutEstablishmentNestedInput
+    suppliers?: SupplierUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockCategories?: StockCategoryUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockItems?: StockItemUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockEntries?: StockEntryUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockExits?: StockExitUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockMovements?: StockMovementUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockAlerts?: StockAlertUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockInventoryCounts?: StockInventoryCountUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type EstablishmentCreateWithoutFaviconsInput = {
+    id?: string
+    name: string
+    slug: string
+    type: $Enums.EstablishmentType
+    status?: $Enums.EstablishmentStatus
+    isOnline?: boolean
+    email: string
+    countryCode: string
+    phoneNumber: string
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    country: string
+    billingName: string
+    billingTaxId: string
+    stripeCustomerId: string
+    instagramUrl?: string | null
+    tiktokUrl?: string | null
+    facebookUrl?: string | null
+    googleReviewUrl?: string | null
+    tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
+    primaryLanguage?: $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: $Enums.Currency
+    timezone?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
+    metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    owner: UserCreateNestedOneWithoutEstablishmentsInput
+    activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
+    logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
+    bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
+    images?: ImageCreateNestedManyWithoutEstablishmentInput
+    themes?: ThemeCreateNestedManyWithoutEstablishmentInput
+    employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
+    serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    menus?: MenuCreateNestedManyWithoutEstablishmentInput
+    Item?: ItemCreateNestedManyWithoutEstablishmentInput
+    addons?: AddonCreateNestedManyWithoutEstablishmentInput
+    variantOptions?: VariantOptionCreateNestedManyWithoutEstablishmentInput
+    bookings?: BookingCreateNestedManyWithoutEstablishmentInput
+    bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
+    establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
+    integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
+    subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
+    invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
+    devices?: DeviceCreateNestedManyWithoutEstablishmentInput
+    vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
+    sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
+    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
+    emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
+    auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
+    discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
+    promotions?: PromotionCreateNestedManyWithoutEstablishmentInput
+    suppliers?: SupplierCreateNestedManyWithoutEstablishmentInput
+    stockCategories?: StockCategoryCreateNestedManyWithoutEstablishmentInput
+    stockItems?: StockItemCreateNestedManyWithoutEstablishmentInput
+    stockEntries?: StockEntryCreateNestedManyWithoutEstablishmentInput
+    stockExits?: StockExitCreateNestedManyWithoutEstablishmentInput
+    stockMovements?: StockMovementCreateNestedManyWithoutEstablishmentInput
+    stockAlerts?: StockAlertCreateNestedManyWithoutEstablishmentInput
+    stockInventoryCounts?: StockInventoryCountCreateNestedManyWithoutEstablishmentInput
+    stockWarehouses?: StockWarehouseCreateNestedManyWithoutEstablishmentInput
+  }
+
+  export type EstablishmentUncheckedCreateWithoutFaviconsInput = {
+    id?: string
+    name: string
+    slug: string
+    type: $Enums.EstablishmentType
+    status?: $Enums.EstablishmentStatus
+    isOnline?: boolean
+    email: string
+    countryCode: string
+    phoneNumber: string
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    country: string
+    billingName: string
+    billingTaxId: string
+    stripeCustomerId: string
+    instagramUrl?: string | null
+    tiktokUrl?: string | null
+    facebookUrl?: string | null
+    googleReviewUrl?: string | null
+    tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
+    primaryLanguage?: $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: $Enums.Currency
+    timezone?: string
+    logoImageId?: string | null
+    bannerImageId?: string | null
+    activeThemeId?: string | null
+    scheduleId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: string
+    metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
+    images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
+    themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
+    serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
+    Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
+    addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
+    variantOptions?: VariantOptionUncheckedCreateNestedManyWithoutEstablishmentInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutEstablishmentInput
+    bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
+    integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
+    devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
+    vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
+    sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
+    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
+    emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
+    discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
+    promotions?: PromotionUncheckedCreateNestedManyWithoutEstablishmentInput
+    suppliers?: SupplierUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockCategories?: StockCategoryUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockItems?: StockItemUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockEntries?: StockEntryUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockExits?: StockExitUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockMovements?: StockMovementUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockAlerts?: StockAlertUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockInventoryCounts?: StockInventoryCountUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockWarehouses?: StockWarehouseUncheckedCreateNestedManyWithoutEstablishmentInput
+  }
+
+  export type EstablishmentCreateOrConnectWithoutFaviconsInput = {
+    where: EstablishmentWhereUniqueInput
+    create: XOR<EstablishmentCreateWithoutFaviconsInput, EstablishmentUncheckedCreateWithoutFaviconsInput>
+  }
+
+  export type ImageCreateWithoutFaviconAssetsInput = {
+    id?: string
+    cloudflareImageId: string
+    fileName: string
+    url: string
+    fileSize: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bannerUsedInBrands?: EstablishmentCreateNestedManyWithoutBannerImageInput
+    logoUsedInBrands?: EstablishmentCreateNestedManyWithoutLogoImageInput
+    establishment: EstablishmentCreateNestedOneWithoutImagesInput
+    item?: ItemCreateNestedManyWithoutImageInput
+    itemVariants?: ItemVariantCreateNestedManyWithoutImageInput
+    menuCategory?: MenuCategoryCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataCreateNestedOneWithoutOgImageInput
+  }
+
+  export type ImageUncheckedCreateWithoutFaviconAssetsInput = {
+    id?: string
+    cloudflareImageId: string
+    fileName: string
+    url: string
+    fileSize: number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    establishmentId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bannerUsedInBrands?: EstablishmentUncheckedCreateNestedManyWithoutBannerImageInput
+    logoUsedInBrands?: EstablishmentUncheckedCreateNestedManyWithoutLogoImageInput
+    item?: ItemUncheckedCreateNestedManyWithoutImageInput
+    itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutImageInput
+    menuCategory?: MenuCategoryUncheckedCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedCreateNestedOneWithoutOgImageInput
+  }
+
+  export type ImageCreateOrConnectWithoutFaviconAssetsInput = {
+    where: ImageWhereUniqueInput
+    create: XOR<ImageCreateWithoutFaviconAssetsInput, ImageUncheckedCreateWithoutFaviconAssetsInput>
+  }
+
+  export type EstablishmentUpsertWithoutFaviconsInput = {
+    update: XOR<EstablishmentUpdateWithoutFaviconsInput, EstablishmentUncheckedUpdateWithoutFaviconsInput>
+    create: XOR<EstablishmentCreateWithoutFaviconsInput, EstablishmentUncheckedCreateWithoutFaviconsInput>
+    where?: EstablishmentWhereInput
+  }
+
+  export type EstablishmentUpdateToOneWithWhereWithoutFaviconsInput = {
+    where?: EstablishmentWhereInput
+    data: XOR<EstablishmentUpdateWithoutFaviconsInput, EstablishmentUncheckedUpdateWithoutFaviconsInput>
+  }
+
+  export type EstablishmentUpdateWithoutFaviconsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
+    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    billingName?: StringFieldUpdateOperationsInput | string
+    billingTaxId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    timezone?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
+    metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
+    activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
+    logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
+    bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
+    images?: ImageUpdateManyWithoutEstablishmentNestedInput
+    themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
+    employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
+    serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    menus?: MenuUpdateManyWithoutEstablishmentNestedInput
+    Item?: ItemUpdateManyWithoutEstablishmentNestedInput
+    addons?: AddonUpdateManyWithoutEstablishmentNestedInput
+    variantOptions?: VariantOptionUpdateManyWithoutEstablishmentNestedInput
+    bookings?: BookingUpdateManyWithoutEstablishmentNestedInput
+    bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
+    integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
+    subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
+    invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
+    devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
+    vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
+    sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
+    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
+    emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
+    discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
+    promotions?: PromotionUpdateManyWithoutEstablishmentNestedInput
+    suppliers?: SupplierUpdateManyWithoutEstablishmentNestedInput
+    stockCategories?: StockCategoryUpdateManyWithoutEstablishmentNestedInput
+    stockItems?: StockItemUpdateManyWithoutEstablishmentNestedInput
+    stockEntries?: StockEntryUpdateManyWithoutEstablishmentNestedInput
+    stockExits?: StockExitUpdateManyWithoutEstablishmentNestedInput
+    stockMovements?: StockMovementUpdateManyWithoutEstablishmentNestedInput
+    stockAlerts?: StockAlertUpdateManyWithoutEstablishmentNestedInput
+    stockInventoryCounts?: StockInventoryCountUpdateManyWithoutEstablishmentNestedInput
+    stockWarehouses?: StockWarehouseUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type EstablishmentUncheckedUpdateWithoutFaviconsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
+    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    billingName?: StringFieldUpdateOperationsInput | string
+    billingTaxId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    timezone?: StringFieldUpdateOperationsInput | string
+    logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
+    images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
+    themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
+    Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
+    addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
+    variantOptions?: VariantOptionUncheckedUpdateManyWithoutEstablishmentNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutEstablishmentNestedInput
+    bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
+    integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
+    devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
+    vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
+    sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
+    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
+    emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
+    discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
+    promotions?: PromotionUncheckedUpdateManyWithoutEstablishmentNestedInput
+    suppliers?: SupplierUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockCategories?: StockCategoryUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockItems?: StockItemUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockEntries?: StockEntryUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockExits?: StockExitUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockMovements?: StockMovementUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockAlerts?: StockAlertUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockInventoryCounts?: StockInventoryCountUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type ImageUpsertWithoutFaviconAssetsInput = {
+    update: XOR<ImageUpdateWithoutFaviconAssetsInput, ImageUncheckedUpdateWithoutFaviconAssetsInput>
+    create: XOR<ImageCreateWithoutFaviconAssetsInput, ImageUncheckedCreateWithoutFaviconAssetsInput>
+    where?: ImageWhereInput
+  }
+
+  export type ImageUpdateToOneWithWhereWithoutFaviconAssetsInput = {
+    where?: ImageWhereInput
+    data: XOR<ImageUpdateWithoutFaviconAssetsInput, ImageUncheckedUpdateWithoutFaviconAssetsInput>
+  }
+
+  export type ImageUpdateWithoutFaviconAssetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cloudflareImageId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    fileSize?: FloatFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerUsedInBrands?: EstablishmentUpdateManyWithoutBannerImageNestedInput
+    logoUsedInBrands?: EstablishmentUpdateManyWithoutLogoImageNestedInput
+    establishment?: EstablishmentUpdateOneRequiredWithoutImagesNestedInput
+    item?: ItemUpdateManyWithoutImageNestedInput
+    itemVariants?: ItemVariantUpdateManyWithoutImageNestedInput
+    menuCategory?: MenuCategoryUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUpdateOneWithoutOgImageNestedInput
+  }
+
+  export type ImageUncheckedUpdateWithoutFaviconAssetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cloudflareImageId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    fileSize?: FloatFieldUpdateOperationsInput | number
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerUsedInBrands?: EstablishmentUncheckedUpdateManyWithoutBannerImageNestedInput
+    logoUsedInBrands?: EstablishmentUncheckedUpdateManyWithoutLogoImageNestedInput
+    item?: ItemUncheckedUpdateManyWithoutImageNestedInput
+    itemVariants?: ItemVariantUncheckedUpdateManyWithoutImageNestedInput
+    menuCategory?: MenuCategoryUncheckedUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedUpdateOneWithoutOgImageNestedInput
+  }
+
   export type EstablishmentCreateWithoutExpensesInput = {
     id?: string
     name: string
@@ -147628,6 +149618,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -147702,6 +149693,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -147784,6 +149776,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -147858,6 +149851,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -147924,6 +149918,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -147997,6 +149992,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -148074,6 +150070,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
@@ -148147,6 +150144,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -148224,6 +150222,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -148298,6 +150297,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -148483,6 +150483,51 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type EstablishmentMetadataCreateWithoutOgImageInput = {
+    id?: string
+    title?: string | null
+    shortName?: string | null
+    description?: string | null
+    updatedAt?: Date | string
+    establishment: EstablishmentCreateNestedOneWithoutMetadataInput
+  }
+
+  export type EstablishmentMetadataUncheckedCreateWithoutOgImageInput = {
+    id?: string
+    title?: string | null
+    shortName?: string | null
+    description?: string | null
+    establishmentId: string
+    updatedAt?: Date | string
+  }
+
+  export type EstablishmentMetadataCreateOrConnectWithoutOgImageInput = {
+    where: EstablishmentMetadataWhereUniqueInput
+    create: XOR<EstablishmentMetadataCreateWithoutOgImageInput, EstablishmentMetadataUncheckedCreateWithoutOgImageInput>
+  }
+
+  export type FaviconAssetCreateWithoutImageInput = {
+    id?: string
+    role: string
+    establishment: EstablishmentCreateNestedOneWithoutFaviconsInput
+  }
+
+  export type FaviconAssetUncheckedCreateWithoutImageInput = {
+    id?: string
+    establishmentId: string
+    role: string
+  }
+
+  export type FaviconAssetCreateOrConnectWithoutImageInput = {
+    where: FaviconAssetWhereUniqueInput
+    create: XOR<FaviconAssetCreateWithoutImageInput, FaviconAssetUncheckedCreateWithoutImageInput>
+  }
+
+  export type FaviconAssetCreateManyImageInputEnvelope = {
+    data: FaviconAssetCreateManyImageInput | FaviconAssetCreateManyImageInput[]
+    skipDuplicates?: boolean
+  }
+
   export type EstablishmentUpsertWithWhereUniqueWithoutBannerImageInput = {
     where: EstablishmentWhereUniqueInput
     update: XOR<EstablishmentUpdateWithoutBannerImageInput, EstablishmentUncheckedUpdateWithoutBannerImageInput>
@@ -148598,6 +150643,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -148672,6 +150718,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -148784,6 +150831,51 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"MenuCategory"> | Date | string
   }
 
+  export type EstablishmentMetadataUpsertWithoutOgImageInput = {
+    update: XOR<EstablishmentMetadataUpdateWithoutOgImageInput, EstablishmentMetadataUncheckedUpdateWithoutOgImageInput>
+    create: XOR<EstablishmentMetadataCreateWithoutOgImageInput, EstablishmentMetadataUncheckedCreateWithoutOgImageInput>
+    where?: EstablishmentMetadataWhereInput
+  }
+
+  export type EstablishmentMetadataUpdateToOneWithWhereWithoutOgImageInput = {
+    where?: EstablishmentMetadataWhereInput
+    data: XOR<EstablishmentMetadataUpdateWithoutOgImageInput, EstablishmentMetadataUncheckedUpdateWithoutOgImageInput>
+  }
+
+  export type EstablishmentMetadataUpdateWithoutOgImageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    shortName?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    establishment?: EstablishmentUpdateOneRequiredWithoutMetadataNestedInput
+  }
+
+  export type EstablishmentMetadataUncheckedUpdateWithoutOgImageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    shortName?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FaviconAssetUpsertWithWhereUniqueWithoutImageInput = {
+    where: FaviconAssetWhereUniqueInput
+    update: XOR<FaviconAssetUpdateWithoutImageInput, FaviconAssetUncheckedUpdateWithoutImageInput>
+    create: XOR<FaviconAssetCreateWithoutImageInput, FaviconAssetUncheckedCreateWithoutImageInput>
+  }
+
+  export type FaviconAssetUpdateWithWhereUniqueWithoutImageInput = {
+    where: FaviconAssetWhereUniqueInput
+    data: XOR<FaviconAssetUpdateWithoutImageInput, FaviconAssetUncheckedUpdateWithoutImageInput>
+  }
+
+  export type FaviconAssetUpdateManyWithWhereWithoutImageInput = {
+    where: FaviconAssetScalarWhereInput
+    data: XOR<FaviconAssetUpdateManyMutationInput, FaviconAssetUncheckedUpdateManyWithoutImageInput>
+  }
+
   export type EstablishmentCreateWithoutIntegrationsInput = {
     id?: string
     name: string
@@ -148816,6 +150908,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -148890,6 +150983,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -148972,6 +151066,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -149046,6 +151141,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -149112,6 +151208,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -149186,6 +151283,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -149268,6 +151366,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -149342,6 +151441,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -149408,6 +151508,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -149482,6 +151583,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -149564,6 +151666,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -149638,6 +151741,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -149724,6 +151828,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -149798,6 +151903,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -149851,6 +151957,8 @@ export namespace Prisma {
     establishment: EstablishmentCreateNestedOneWithoutImagesInput
     itemVariants?: ItemVariantCreateNestedManyWithoutImageInput
     menuCategory?: MenuCategoryCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetCreateNestedManyWithoutImageInput
   }
 
   export type ImageUncheckedCreateWithoutItemInput = {
@@ -149867,6 +151975,8 @@ export namespace Prisma {
     logoUsedInBrands?: EstablishmentUncheckedCreateNestedManyWithoutLogoImageInput
     itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutImageInput
     menuCategory?: MenuCategoryUncheckedCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetUncheckedCreateNestedManyWithoutImageInput
   }
 
   export type ImageCreateOrConnectWithoutItemInput = {
@@ -150303,6 +152413,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -150377,6 +152488,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -150436,6 +152548,8 @@ export namespace Prisma {
     establishment?: EstablishmentUpdateOneRequiredWithoutImagesNestedInput
     itemVariants?: ItemVariantUpdateManyWithoutImageNestedInput
     menuCategory?: MenuCategoryUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUpdateManyWithoutImageNestedInput
   }
 
   export type ImageUncheckedUpdateWithoutItemInput = {
@@ -150452,6 +152566,8 @@ export namespace Prisma {
     logoUsedInBrands?: EstablishmentUncheckedUpdateManyWithoutLogoImageNestedInput
     itemVariants?: ItemVariantUncheckedUpdateManyWithoutImageNestedInput
     menuCategory?: MenuCategoryUncheckedUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUncheckedUpdateManyWithoutImageNestedInput
   }
 
   export type POSCategoryUpsertWithoutItemsInput = {
@@ -151226,6 +153342,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -151300,6 +153417,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -151420,6 +153538,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -151494,6 +153613,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -151976,6 +154096,8 @@ export namespace Prisma {
     establishment: EstablishmentCreateNestedOneWithoutImagesInput
     item?: ItemCreateNestedManyWithoutImageInput
     menuCategory?: MenuCategoryCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetCreateNestedManyWithoutImageInput
   }
 
   export type ImageUncheckedCreateWithoutItemVariantsInput = {
@@ -151992,6 +154114,8 @@ export namespace Prisma {
     logoUsedInBrands?: EstablishmentUncheckedCreateNestedManyWithoutLogoImageInput
     item?: ItemUncheckedCreateNestedManyWithoutImageInput
     menuCategory?: MenuCategoryUncheckedCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetUncheckedCreateNestedManyWithoutImageInput
   }
 
   export type ImageCreateOrConnectWithoutItemVariantsInput = {
@@ -152213,6 +154337,8 @@ export namespace Prisma {
     establishment?: EstablishmentUpdateOneRequiredWithoutImagesNestedInput
     item?: ItemUpdateManyWithoutImageNestedInput
     menuCategory?: MenuCategoryUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUpdateManyWithoutImageNestedInput
   }
 
   export type ImageUncheckedUpdateWithoutItemVariantsInput = {
@@ -152229,6 +154355,8 @@ export namespace Prisma {
     logoUsedInBrands?: EstablishmentUncheckedUpdateManyWithoutLogoImageNestedInput
     item?: ItemUncheckedUpdateManyWithoutImageNestedInput
     menuCategory?: MenuCategoryUncheckedUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUncheckedUpdateManyWithoutImageNestedInput
   }
 
   export type ItemUpsertWithoutVariantsInput = {
@@ -152740,6 +154868,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -152814,6 +154943,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -152952,6 +155082,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -153026,6 +155157,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -154026,6 +156158,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -154100,6 +156233,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -154233,6 +156367,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -154307,6 +156442,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -154483,6 +156619,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -154557,6 +156694,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -154728,6 +156866,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -154802,6 +156941,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -155009,6 +157149,8 @@ export namespace Prisma {
     establishment: EstablishmentCreateNestedOneWithoutImagesInput
     item?: ItemCreateNestedManyWithoutImageInput
     itemVariants?: ItemVariantCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetCreateNestedManyWithoutImageInput
   }
 
   export type ImageUncheckedCreateWithoutMenuCategoryInput = {
@@ -155025,6 +157167,8 @@ export namespace Prisma {
     logoUsedInBrands?: EstablishmentUncheckedCreateNestedManyWithoutLogoImageInput
     item?: ItemUncheckedCreateNestedManyWithoutImageInput
     itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutImageInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedCreateNestedOneWithoutOgImageInput
+    faviconAssets?: FaviconAssetUncheckedCreateNestedManyWithoutImageInput
   }
 
   export type ImageCreateOrConnectWithoutMenuCategoryInput = {
@@ -155150,6 +157294,8 @@ export namespace Prisma {
     establishment?: EstablishmentUpdateOneRequiredWithoutImagesNestedInput
     item?: ItemUpdateManyWithoutImageNestedInput
     itemVariants?: ItemVariantUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUpdateManyWithoutImageNestedInput
   }
 
   export type ImageUncheckedUpdateWithoutMenuCategoryInput = {
@@ -155166,6 +157312,8 @@ export namespace Prisma {
     logoUsedInBrands?: EstablishmentUncheckedUpdateManyWithoutLogoImageNestedInput
     item?: ItemUncheckedUpdateManyWithoutImageNestedInput
     itemVariants?: ItemVariantUncheckedUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUncheckedUpdateManyWithoutImageNestedInput
   }
 
   export type MenuUpsertWithoutCategoriesInput = {
@@ -155862,6 +158010,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -155936,6 +158085,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -156048,6 +158198,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -156122,6 +158273,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -156309,6 +158461,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -156383,6 +158536,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -156600,6 +158754,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -156674,6 +158829,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -157032,6 +159188,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -157106,6 +159263,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -157314,6 +159472,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -157388,6 +159547,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -157759,6 +159919,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -157833,6 +159994,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -158001,6 +160163,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -158075,6 +160238,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -158187,6 +160351,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -158261,6 +160426,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -158492,6 +160658,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -158566,6 +160733,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -158699,6 +160867,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -158773,6 +160942,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -159216,6 +161386,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -159290,6 +161461,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -160264,6 +162436,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -160338,6 +162511,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -160559,6 +162733,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -160633,6 +162808,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -161154,6 +163330,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -161228,6 +163405,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -161386,6 +163564,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -161460,6 +163639,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -161902,6 +164082,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -161976,6 +164157,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -162231,6 +164413,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -162305,6 +164488,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -162562,6 +164746,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -162636,6 +164821,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -162799,6 +164985,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -162873,6 +165060,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -163026,6 +165214,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -163100,6 +165289,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -163216,6 +165406,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -163290,6 +165481,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -163608,6 +165800,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -163682,6 +165875,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -163789,6 +165983,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -163863,6 +166058,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -164350,6 +166546,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -164424,6 +166621,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -164506,6 +166704,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -164580,6 +166779,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -164734,6 +166934,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
@@ -164807,6 +167008,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -164912,6 +167114,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -164986,6 +167189,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -165112,6 +167316,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -165186,6 +167391,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -165306,6 +167512,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
     bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
@@ -165379,6 +167586,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -165542,6 +167750,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
     activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
     logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
@@ -165616,6 +167825,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     ownerId: string
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -165740,6 +167950,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -165814,6 +168025,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -166122,6 +168334,12 @@ export namespace Prisma {
     event?: EnumEmailEventTypeFieldUpdateOperationsInput | $Enums.EmailEventType
     occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     payload?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type FaviconAssetCreateManyEstablishmentInput = {
+    id?: string
+    imageId: string
+    role: string
   }
 
   export type ExpenseCreateManyEstablishmentInput = {
@@ -166531,6 +168749,24 @@ export namespace Prisma {
     deletedAt?: Date | string | null
   }
 
+  export type FaviconAssetUpdateWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    image?: ImageUpdateOneRequiredWithoutFaviconAssetsNestedInput
+  }
+
+  export type FaviconAssetUncheckedUpdateWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    imageId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type FaviconAssetUncheckedUpdateManyWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    imageId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+  }
+
   export type ExpenseUpdateWithoutEstablishmentInput = {
     id?: StringFieldUpdateOperationsInput | string
     issuerTaxId?: StringFieldUpdateOperationsInput | string
@@ -166608,6 +168844,8 @@ export namespace Prisma {
     item?: ItemUpdateManyWithoutImageNestedInput
     itemVariants?: ItemVariantUpdateManyWithoutImageNestedInput
     menuCategory?: MenuCategoryUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUpdateManyWithoutImageNestedInput
   }
 
   export type ImageUncheckedUpdateWithoutEstablishmentInput = {
@@ -166624,6 +168862,8 @@ export namespace Prisma {
     item?: ItemUncheckedUpdateManyWithoutImageNestedInput
     itemVariants?: ItemVariantUncheckedUpdateManyWithoutImageNestedInput
     menuCategory?: MenuCategoryUncheckedUpdateManyWithoutImageNestedInput
+    establishmentMetadataOg?: EstablishmentMetadataUncheckedUpdateOneWithoutOgImageNestedInput
+    faviconAssets?: FaviconAssetUncheckedUpdateManyWithoutImageNestedInput
   }
 
   export type ImageUncheckedUpdateManyWithoutEstablishmentInput = {
@@ -167965,6 +170205,12 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type FaviconAssetCreateManyImageInput = {
+    id?: string
+    establishmentId: string
+    role: string
+  }
+
   export type EstablishmentUpdateWithoutBannerImageInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -167997,6 +170243,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
@@ -168070,6 +170317,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -168173,6 +170421,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
@@ -168246,6 +170495,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -168472,6 +170722,24 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FaviconAssetUpdateWithoutImageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    establishment?: EstablishmentUpdateOneRequiredWithoutFaviconsNestedInput
+  }
+
+  export type FaviconAssetUncheckedUpdateWithoutImageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type FaviconAssetUncheckedUpdateManyWithoutImageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type ItemAllergenCreateManyItemInput = {
@@ -171602,6 +173870,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
@@ -171675,6 +173944,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -171926,6 +174196,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
     logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
     bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
@@ -171999,6 +174270,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput

@@ -58,24 +58,28 @@ export class CloudflareService {
     }
 
 
-    async deleteImage(cloudflareImageId: string): Promise<void> {
+    async deleteImage(cloudflareImageId: string) {
         try {
-            const response = await lastValueFrom(
+            await lastValueFrom(
                 this.httpService.delete(`${this.baseUrl}/${cloudflareImageId}`, {
-                    headers: {
-                        Authorization: `Bearer ${this.apiToken}`,
-                    },
+                    headers: { Authorization: `Bearer ${this.apiToken}` },
                 }),
             );
-
-            if (response.data.success) {
-                return;
-            }
-
-            throw new InternalServerErrorException('Falha ao deletar a imagem.');
+            await this.prismaService.image.delete({ where: { cloudflareImageId } });
         } catch (error) {
-            console.error('Erro ao fazer delete:', error.response?.data);
-            throw new InternalServerErrorException('Falha ao deletar a imagem.');
+            console.error(`Não foi possível apagar a imagem ${cloudflareImageId}`);
+        }
+    }
+
+    async deleteImageFromCloudflareOnly(cloudflareImageId: string): Promise<void> {
+        try {
+            await lastValueFrom(
+                this.httpService.delete(`${this.baseUrl}/${cloudflareImageId}`, {
+                    headers: { Authorization: `Bearer ${this.apiToken}` },
+                }),
+            );
+        } catch (error) {
+            console.error(`Não foi possível apagar a imagem ${cloudflareImageId} da Cloudflare`);
         }
     }
 

@@ -4,13 +4,13 @@ import { InjectQueue } from '@nestjs/bull';
 import type { Queue } from 'bull';
 import { User, Establishment } from '@weats/types';
 import { RESPONSE_CODES, ERRORS, FeatureUsageService, normalizeSchedule, DEFAULT_SCHEDULE_NAMES, RESERVED_DOMAINS } from '@weats/common';
-import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
+import { CreateEstablishmentDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { CorePrismaService, EstablishmentLanguage, ScheduleType } from '@weats/database';
 import { EstablishmentStatus } from '@weats/database';
 import { ulid } from 'ulid';
 import { ClerkService, StripeService } from '@weats/integrations';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
-import { EstablishmentBrandingDto, EstablishmentDomainDto, EstablishmentInformationsDto, EstablishmentLanguageDto, EstablishmentLocationDto, EstablishmentPreferencesDto, EstablishmentSocialMediaDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentDigitalSettingsDto, UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
+import { EstablishmentBrandingDto, EstablishmentDomainDto, EstablishmentInformationsDto, EstablishmentLanguageDto, EstablishmentLocationDto, EstablishmentMetadataDto, EstablishmentPreferencesDto, EstablishmentSocialMediaDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentDigitalSettingsDto, UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
 import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 
 export type NormalizedFeature =
@@ -186,6 +186,12 @@ export class EstablishmentService {
         bannerImage: {
           select: { id: true, url: true },
         },
+        metadata: {
+          select: { title: true, shortName: true, description: true, ogImage: { select: { id: true, url: true } } }
+        },
+        favicons: {
+          include: { image: { select: { id: true, url: true } } }
+        }
       },
     });
 
@@ -209,6 +215,19 @@ export class EstablishmentService {
         facebookUrl: establishment.facebookUrl,
         tripAdvisorUrl: establishment.tripAdvisorUrl,
         googleReviewUrl: establishment.googleReviewUrl,
+      },
+      metadata: {
+        title: establishment.metadata?.title || null,
+        shortName: establishment.metadata?.shortName || null,
+        description: establishment.metadata?.description || null,
+        ogImage: establishment.metadata?.ogImage,
+      },
+      favicons: {
+        faviconIco: establishment.favicons.find((favicon) => favicon.role === 'faviconIco')?.image || null,
+        favicon32x32Png: establishment.favicons.find((favicon) => favicon.role === 'favicon32x32Png')?.image || null,
+        appleTouchIconPng: establishment.favicons.find((favicon) => favicon.role === 'appleTouchIconPng')?.image || null,
+        androidChrome192x192Png: establishment.favicons.find((favicon) => favicon.role === 'androidChrome192x192Png')?.image || null,
+        androidChrome512x512Png: establishment.favicons.find((favicon) => favicon.role === 'androidChrome512x512Png')?.image || null,
       },
 
     };
@@ -544,7 +563,10 @@ export class EstablishmentService {
           result = await this.updateSocials(establishment.id, dto.socials);
           this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
           break;
-
+        case 'metadata':
+          result = await this.updateMetadata(establishment.id, dto.metadata);
+          this.menuUtilsService.clearMenuCacheAsync('theme', establishment.slug);
+          break;
         default:
           throw new RpcException({
             status: 400,
@@ -591,6 +613,25 @@ export class EstablishmentService {
         tripAdvisorUrl: data.tripAdvisorUrl,
         googleReviewUrl: data.googleReviewUrl,
         websiteUrl: data.websiteUrl
+      }
+    })
+  }
+
+  private async updateMetadata(id: string, data: EstablishmentMetadataDto) {
+    return this.prisma.establishmentMetadata.upsert({
+      where: { establishmentId: id },
+      update: {
+        title: data.title,
+        shortName: data.shortName,
+        description: data.description,
+        ogImageId: data.ogImage?.id ?? null,
+      },
+      create: {
+        establishmentId: id,
+        title: data.title,
+        shortName: data.shortName,
+        description: data.description,
+        ogImageId: data.ogImage?.id ?? null,
       }
     })
   }

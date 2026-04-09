@@ -48,10 +48,36 @@ export class EstablishmentSocialMediaDto {
     websiteUrl?: string;
 }
 
+export class EstablishmentMetadataDto {
+    @IsString()
+    @IsOptional()
+    title?: string;
+
+    @IsString()
+    @IsOptional()
+    shortName?: string;
+
+    @IsString()
+    @IsOptional()
+    description?: string;
+
+    @Type(() => ImageObjectSchema)
+    @ValidateNested()
+    @IsOptional()
+    ogImage?: ImageObjectSchema;
+}
+
+export class EstablishmentFaviconDto {
+    @Type(() => ImageObjectSchema)
+    @ValidateNested()
+    @IsOptional()
+    favicon?: ImageObjectSchema;
+}
+
 export class UpdateEstablishmentBrandingSettingsDto {
     @IsString()
     @IsNotEmpty()
-    @IsIn(['branding', 'socials'])
+    @IsIn(['branding', 'socials', 'metadata', 'favicon'])
     section: string;
 
     @ValidateIf(o => o.section === 'branding')
@@ -63,4 +89,14 @@ export class UpdateEstablishmentBrandingSettingsDto {
     @Type(() => EstablishmentSocialMediaDto)
     @IsNotEmpty()
     socials: EstablishmentSocialMediaDto;
+
+    @ValidateIf(o => o.section === 'metadata')
+    @Type(() => EstablishmentMetadataDto)
+    @IsNotEmpty()
+    metadata: EstablishmentMetadataDto;
+
+    @ValidateIf(o => o.section === 'favicon')
+    @Type(() => EstablishmentFaviconDto)
+    @IsNotEmpty()
+    favicon: EstablishmentFaviconDto;
 }

@@ -284,6 +284,22 @@ export class EstablishmentController {
 
   @Roles()
   @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Get(':id/settings/favicon/process')
+  processEstablishmentFavicon(
+    @CurrentEstablishment() establishment: Establishment,
+    @Body() 
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_BRANDING, { id });
+  }
+
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
   @Patch(':id/settings/system')
   updateEstablishmentSystemSettings(
     @CurrentEstablishment() establishment: Establishment,

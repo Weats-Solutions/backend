@@ -163,18 +163,11 @@ export class LandingpageService {
                     logoImage: true,
                     bannerImage: true,
                     metadata: {
-                        select: {
-                            name: true,
-                            shortName: true,
-                            description: true,
-                            ogImage: true,
-                            faviconIco: true,
-                            favicon32x32Png: true,
-                            appleTouchIconPng: true,
-                            androidChrome192x192Png: true,
-                            androidChrome512x512Png: true,
-                        }
+                        select: { title: true, shortName: true, description: true, ogImage: { select: { url: true } } }
                     },
+                    favicons: {
+                        include: { image: { select: { url: true } } }
+                    }
                 },
             });
 
@@ -192,15 +185,17 @@ export class LandingpageService {
                 logo: establishment.logoImage?.url || null,
                 banner: establishment.bannerImage?.url || null,
                 metadata: {
-                    name: establishment.metadata?.name,
-                    shortName: establishment.metadata?.shortName,
-                    description: establishment.metadata?.description,
-                    ogImage: establishment.metadata?.ogImage,
-                    faviconIco: establishment.metadata?.faviconIco,
-                    favicon32x32Png: establishment.metadata?.favicon32x32Png,
-                    appleTouchIconPng: establishment.metadata?.appleTouchIconPng,
-                    androidChrome192x192Png: establishment.metadata?.androidChrome192x192Png,
-                    androidChrome512x512Png: establishment.metadata?.androidChrome512x512Png,
+                    title: establishment.metadata?.title || null,
+                    shortName: establishment.metadata?.shortName || null,
+                    description: establishment.metadata?.description || null,
+                    ogImage: establishment.metadata?.ogImage?.url || null,
+                },
+                favicons: {
+                    faviconIco: establishment.favicons.find((favicon) => favicon.role === 'faviconIco')?.image?.url || null,
+                    favicon32x32Png: establishment.favicons.find((favicon) => favicon.role === 'favicon32x32Png')?.image?.url || null,
+                    appleTouchIconPng: establishment.favicons.find((favicon) => favicon.role === 'appleTouchIconPng')?.image?.url || null,
+                    androidChrome192x192Png: establishment.favicons.find((favicon) => favicon.role === 'androidChrome192x192Png')?.image?.url || null,
+                    androidChrome512x512Png: establishment.favicons.find((favicon) => favicon.role === 'androidChrome512x512Png')?.image?.url || null,
                 },
             };
 
@@ -341,6 +336,7 @@ export class LandingpageService {
                     isHighlighted: true,
                     isVisible: true,
                     position: true,
+                    type: true,
                     schedule: {
                         include: { days: { include: { intervals: true } } }
                     },

@@ -5,6 +5,10 @@ import favicons, { FaviconResponse } from 'favicons';
 import { RpcException } from '@nestjs/microservices';
 import { CloudflareService } from "@weats/integrations/cloudflare/cloudflare.service";
 import path from 'path';
+import { ERRORS } from '@weats/common';
+import { CorePrismaService } from '@weats/database';
+import { HttpService } from '@nestjs/axios';
+import { lastValueFrom } from 'rxjs';
 
 export interface FaviconResult {
     icons: Record<string, string>;
@@ -22,7 +26,78 @@ export class FaviconService {
     constructor(
         @InjectQueue('jobs') private readonly jobsQueue: Queue,
         private readonly cloudflareService: CloudflareService,
+        private readonly corePrismaService: CorePrismaService,
+        private readonly httpService: HttpService,
     ) { }
+
+    async getJobStatus(jobId: string) {
+        const job = await this.jobsQueue.getJob(jobId);
+
+        if (!job) {
+            throw new RpcException({
+                code: 404,
+                message: ERRORS.JOB_NOT_FOUND,
+            });
+        }
+
+        const state = await job.getState(); // 'completed', 'failed', 'delayed', 'active', 'waiting'
+        const progress = job.progress(); // O valor 0-100 que definimos no Processor
+        const result = job.returnvalue; // O objeto final retornado pelo Processor
+        const reason = job.failedReason; // Se falhou, diz porquê
+
+        return {
+            id: job.id,
+            state,
+            progress,
+            result: state === 'completed' ? result : null,
+            error: state === 'failed' ? reason : null,
+        };
+    }
+
+    async processFaviconFromImageId(imageId: string, establishmentId: string) {
+        // 1. Procurar a imagem na DB
+        const image = await this.corePrismaService.image.findUnique({
+            where: { id: imageId }
+        });
+
+        if (!image) throw new RpcException({
+            code: 404,
+            message: ERRORS.IMAGE_NOT_FOUND,
+        });
+
+        const downloadUrl = `${image.url}/public`;
+
+        try {
+            const response = await lastValueFrom(
+                this.httpService.get(downloadUrl, {
+                    responseType: 'arraybuffer',
+                    // Se a tua conta exigir, podes precisar do token aqui
+                    headers: {
+                        'Accept': 'image/*'
+                    }
+                })
+            );
+
+            const buffer = Buffer.from(response.data);
+
+            // 3. Enviar para a fila
+            return this.enqueueFaviconJob(buffer, establishmentId);
+
+        } catch (error) {
+            console.error('Erro ao descarregar imagem da Cloudflare:', error.message);
+            throw new RpcException({
+                code: 500,
+                message: 'Não foi possível obter a imagem original para processar os favicons.',
+            });
+        }
+    }
+    async enqueueFaviconJob(source: Buffer, establishmentId: string) {
+        const job = await this.jobsQueue.add('generate-favicons', {
+            source: source.toString('base64'),
+            establishmentId
+        });
+        return { jobId: job.id };
+    }
 
     // Gera os buffers das imagens
     async generateRawFavicons(source: Buffer | string): Promise<FaviconResponse> {
@@ -71,11 +146,5 @@ export class FaviconService {
         );
     }
 
-    async enqueueFaviconJob(source: Buffer, establishmentId: string) {
-        const job = await this.jobsQueue.add('generate-favicons', {
-            source: source.toString('base64'),
-            establishmentId
-        });
-        return { jobId: job.id };
-    }
+
 }
