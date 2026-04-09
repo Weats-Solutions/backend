@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, ForbiddenException } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { EstablishmentService } from './establishment.service';
@@ -7,11 +7,14 @@ import { User, Establishment } from '@weats/types';
 import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
 import { UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentSystemSettingsDto, UpdateEstablishmentDigitalSettingsDto } from '@weats/contracts';
+import { FaviconService } from '@weats/integrations/favicon/favicon.service';
+import { UpdateEstablishmentFaviconDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-favicon';
 
 @Controller()
 export class EstablishmentController {
     constructor(
         private readonly establishmentService: EstablishmentService,
+        private readonly faviconService: FaviconService,
     ) { }
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_CREATE)
@@ -34,6 +37,12 @@ export class EstablishmentController {
     getEstablishmentBrandingSettings(@Payload() payload: { id: string }) {
         return this.establishmentService.getEstablishmentBrandingSettings(payload.id);
     }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_FAVICON_JOB_STATUS)
+    getEstablishmentFaviconJobStatus(@Payload() payload: { jobId: string }) {
+        return this.faviconService.getJobStatus(payload.jobId);
+    }
+
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_SYSTEM)
     getEstablishmentSystemSettings(@Payload() payload: { establishment: Establishment }) {
@@ -83,6 +92,13 @@ export class EstablishmentController {
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_BRANDING)
     updateEstablishmentBrandingSettings(@Payload() payload: { establishment: Establishment; updateEstablishmentBrandingSettingsDto: UpdateEstablishmentBrandingSettingsDto }) {
         return this.establishmentService.updateEstablishmentBrandingSettings(payload.establishment, payload.updateEstablishmentBrandingSettingsDto);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_PROCESS_FAVICON)
+    processEstablishmentFavicon(
+        @Payload() payload: { establishment: Establishment; updateEstablishmentFaviconDto: UpdateEstablishmentFaviconDto },
+    ) {
+        return this.faviconService.processFaviconFromImageId(payload.updateEstablishmentFaviconDto.favicon.id, payload.establishment.id);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_SYSTEM)

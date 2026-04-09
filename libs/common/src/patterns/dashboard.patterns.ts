@@ -5,6 +5,7 @@ export const DASHBOARD_PATTERNS = {
   ESTABLISHMENT_GET_SCHEDULE_BY_ID: 'dashboard.establishment.get_schedule_by_id',
   ESTABLISHMENT_GET_SETTINGS_GENERAL: 'dashboard.establishment.get_settings_general',
   ESTABLISHMENT_GET_SETTINGS_BRANDING: 'dashboard.establishment.get_settings_branding',
+  ESTABLISHMENT_GET_FAVICON_JOB_STATUS: 'dashboard.establishment.get_favicon_job_status',
   ESTABLISHMENT_GET_SETTINGS_BILLING: 'dashboard.establishment.get_settings_billing',
   ESTABLISHMENT_GET_SETTINGS_DIGITAL: 'dashboard.establishment.get_settings_digital',
   ESTABLISHMENT_GET_SETTINGS_SYSTEM: 'dashboard.establishment.get_settings_system',

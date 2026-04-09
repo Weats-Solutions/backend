@@ -63,7 +63,7 @@ export class FaviconProcessor {
                 // 4. Limpeza (Cleanup): Apagar imagens órfãs da Cloudflare
                 // Fazemos isto DEPOIS da transação ter sucesso
                 for (const cfId of oldCloudflareIds) {
-                    await this.cloudflareService.deleteImageFromCloudflareOnly(cfId);
+                    await this.cloudflareService.deleteImage(cfId);
                 }
             });
 
@@ -73,7 +73,7 @@ export class FaviconProcessor {
         } catch (error) {
             // Se a transação falhar, devemos idealmente apagar as imagens que acabámos de subir para a Cloudflare
             for (const img of newImageIds) {
-                await this.cloudflareService.deleteImageFromCloudflareOnly(img.cloudflareId);
+                await this.cloudflareService.deleteImage(img.cloudflareId);
             }
             throw new Error('Falha ao atualizar favicons na base de dados');
         }

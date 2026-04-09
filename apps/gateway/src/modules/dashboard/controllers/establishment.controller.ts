@@ -152,6 +152,23 @@ export class EstablishmentController {
 
   @Roles()
   @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Get(':id/settings/favicon/job/:jobId')
+  getEstablishmentFaviconJobStatus(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+    @Param('jobId') jobId: string,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_FAVICON_JOB_STATUS, { jobId });
+  }
+
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
   @Get(':id/settings/system')
   getEstablishmentSystemSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -285,7 +302,7 @@ export class EstablishmentController {
 
   @Roles()
   @UseGuards(ClerkGuard, EstablishmentStaffGuard)
-  @Get(':id/settings/favicon/process')
+  @Post(':id/settings/favicon/process')
   processEstablishmentFavicon(
     @CurrentEstablishment() establishment: Establishment,
     @Param('id') id: string,
@@ -299,6 +316,8 @@ export class EstablishmentController {
     }
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_PROCESS_FAVICON, { establishment, updateEstablishmentFaviconDto });
   }
+
+
 
   @Roles()
   @UseGuards(ClerkGuard, EstablishmentStaffGuard)

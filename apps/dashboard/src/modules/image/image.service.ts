@@ -40,9 +40,22 @@ export class ImageService {
             }
         }
 
-        const whereClause = {
+        const whereClause: any = {
             establishmentId,
-            ...(search && { fileName: { contains: search, mode: 'insensitive' as const } })
+            faviconAssets: {
+                none: {}
+            },
+            fileName: {
+                notIn: [
+                    'favicon-16x16.png',
+                    'favicon-32x32.png',
+                    'apple-touch-icon.png',
+                    'android-chrome-192x192.png',
+                    'android-chrome-512x512.png',
+                    'favicon.ico'
+                ],
+                ...(search && { contains: search, mode: 'insensitive' })
+            }
         };
 
         try {

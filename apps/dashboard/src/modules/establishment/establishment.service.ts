@@ -202,7 +202,7 @@ export class EstablishmentService {
         code: ERRORS.ESTABLISHMENT_NOT_FOUND,
       });
     }
-
+    console.log(establishment.favicons)
     return {
       branding: {
         logoImage: establishment.logoImage,
@@ -223,11 +223,11 @@ export class EstablishmentService {
         ogImage: establishment.metadata?.ogImage,
       },
       favicons: {
-        faviconIco: establishment.favicons.find((favicon) => favicon.role === 'faviconIco')?.image || null,
-        favicon32x32Png: establishment.favicons.find((favicon) => favicon.role === 'favicon32x32Png')?.image || null,
-        appleTouchIconPng: establishment.favicons.find((favicon) => favicon.role === 'appleTouchIconPng')?.image || null,
-        androidChrome192x192Png: establishment.favicons.find((favicon) => favicon.role === 'androidChrome192x192Png')?.image || null,
-        androidChrome512x512Png: establishment.favicons.find((favicon) => favicon.role === 'androidChrome512x512Png')?.image || null,
+        faviconIco: establishment.favicons.find((favicon) => favicon.role === 'favicon.ico' || favicon.role === 'favicon-16x16.png')?.image.url || null,
+        favicon32x32Png: establishment.favicons.find((favicon) => favicon.role === 'favicon-32x32.png')?.image.url || null,
+        appleTouchIconPng: establishment.favicons.find((favicon) => favicon.role === 'apple-touch-icon.png')?.image.url || null,
+        androidChrome192x192Png: establishment.favicons.find((favicon) => favicon.role === 'android-chrome-192x192.png')?.image.url || null,
+        androidChrome512x512Png: establishment.favicons.find((favicon) => favicon.role === 'android-chrome-512x512.png')?.image.url || null,
       },
 
     };

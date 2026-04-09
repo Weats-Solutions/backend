@@ -7,7 +7,7 @@ import { ConfigsModule } from '@weats/configs';
 import { FaviconService } from './favicon.service';
 import { FaviconProcessor } from './favicon.processor';
 import { DatabaseModule } from '@weats/database';
-import { IntegrationsModule } from '@weats/integrations';
+import { CloudflareModule } from '../cloudflare/cloudflare.module';
 import { HttpModule } from '@nestjs/axios';
 
 @Module({
@@ -15,7 +15,7 @@ import { HttpModule } from '@nestjs/axios';
         ConfigModule,
         ConfigsModule,
         DatabaseModule,
-        IntegrationsModule,
+        CloudflareModule,
         HttpModule,
         BullModule.registerQueueAsync({
             name: 'jobs',
