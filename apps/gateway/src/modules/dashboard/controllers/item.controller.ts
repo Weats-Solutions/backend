@@ -19,7 +19,7 @@ export class ItemController {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.ITEM_CREATE, { establishmentId: establishment.id, createItemDto });
     }
 
-    @Put(':id/establishment')
+    @Put(':id')
     async updateItem(
         @Param('id') id: string,
         @CurrentEstablishment() establishment: Establishment,
@@ -51,7 +51,7 @@ export class ItemController {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.ITEM_GET_BY_ID, { id });
     }
 
-    @Delete(':id/establishment')
+    @Delete(':id')
     @HttpCode(HttpStatus.NO_CONTENT)
     async deleteItem(
         @Param('id') id: string,

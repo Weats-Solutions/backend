@@ -499,7 +499,7 @@ export class ItemService {
             const item = await tx.item.update({
                 where: { id },
                 data: {
-                    imageId: dto.imageId !== undefined ? dto.imageId : existing.imageId,
+                    imageId: dto.imageId ?? null,
                     posCategoryId:
                         dto.posCategoryId !== undefined
                             ? dto.posCategoryId
