@@ -178,7 +178,6 @@ export class LandingpageService {
                     code: ERRORS.ESTABLISHMENT_NOT_FOUND,
                 });
             }
-
             return {
                 themeName: establishment.activeTheme?.name,
                 themeConfig: establishment.activeTheme?.config,
@@ -191,11 +190,11 @@ export class LandingpageService {
                     ogImage: establishment.metadata?.ogImage?.url || null,
                 },
                 favicons: {
-                    faviconIco: establishment.favicons.find((favicon) => favicon.role === 'faviconIco')?.image?.url || null,
-                    favicon32x32Png: establishment.favicons.find((favicon) => favicon.role === 'favicon32x32Png')?.image?.url || null,
-                    appleTouchIconPng: establishment.favicons.find((favicon) => favicon.role === 'appleTouchIconPng')?.image?.url || null,
-                    androidChrome192x192Png: establishment.favicons.find((favicon) => favicon.role === 'androidChrome192x192Png')?.image?.url || null,
-                    androidChrome512x512Png: establishment.favicons.find((favicon) => favicon.role === 'androidChrome512x512Png')?.image?.url || null,
+                    favicon16x16: establishment.favicons.find((favicon) => favicon.role === 'favicon-16x16.png')?.image?.url || null,
+                    favicon32x32Png: establishment.favicons.find((favicon) => favicon.role === 'favicon-32x32.png')?.image?.url || null,
+                    appleTouchIconPng: establishment.favicons.find((favicon) => favicon.role === 'apple-touch-icon.png')?.image?.url || null,
+                    androidChrome192x192Png: establishment.favicons.find((favicon) => favicon.role === 'android-chrome-192x192.png')?.image?.url || null,
+                    androidChrome512x512Png: establishment.favicons.find((favicon) => favicon.role === 'android-chrome-512x512.png')?.image?.url || null,
                 },
             };
 
