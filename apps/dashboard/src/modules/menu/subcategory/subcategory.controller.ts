@@ -1,7 +1,7 @@
 import { Roles, ClerkGuard, EstablishmentStaffGuard } from "@weats/common";
 import { Controller, UseGuards, Param, Post, Body, Get, Patch, Delete } from "@nestjs/common";
 import { EmployeeRoles } from "@weats/database";
-import { CreateSubcategoryDto } from "@weats/contracts";
+import { CreateSubcategoryDto, UpdateSubcategoryPositionsDto } from "@weats/contracts";
 import { DASHBOARD_PATTERNS } from "@weats/common";
 import { MenuSubcategoryService } from './subcategory.service';
 import { MessagePattern, Payload } from "@nestjs/microservices";
@@ -11,6 +11,12 @@ import { MessagePattern, Payload } from "@nestjs/microservices";
 export class MenuSubcategoryController {
     constructor(private readonly subcategoryService: MenuSubcategoryService) { }
 
+    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_UPDATE_POSITIONS)
+    updateSubcategoryPositions(
+        @Payload() payload: { menuId: string, categoryId: string, updateSubcategoryPositionsDto: UpdateSubcategoryPositionsDto },
+    ) {
+        return this.subcategoryService.updateSubcategoryPositions(payload.menuId, payload.categoryId, payload.updateSubcategoryPositionsDto);
+    }
 
     @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_GET_BY_CATEGORY)
     listSubcategories(

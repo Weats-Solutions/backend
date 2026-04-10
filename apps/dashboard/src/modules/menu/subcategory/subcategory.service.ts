@@ -1,6 +1,6 @@
 import { CorePrismaService } from "@weats/database";
 import { Injectable } from "@nestjs/common";
-import { CreateCategoryDto } from "@weats/contracts";
+import { CreateCategoryDto, UpdateSubcategoryPositionsDto } from "@weats/contracts";
 import { clearMenuCacheAsync } from '@weats/common';
 
 @Injectable()
@@ -196,6 +196,34 @@ export class MenuSubcategoryService {
 
         clearMenuCacheAsync(slug);
         return { success: true };
+    }
+    async updateSubcategoryPositions(
+        menuId: string,
+        categoryId: string,
+        updateSubcategoryPositionsDto: UpdateSubcategoryPositionsDto,
+    ) {
+        try {
+            const { positions } = updateSubcategoryPositionsDto;
+            const slug = await this.getEstablishmentSlugByCategoryId(categoryId);
+
+            await this.prisma.$transaction(
+                positions.map((p) =>
+                    this.prisma.menuSubcategory.update({
+                        where: {
+                            id: p.id,
+                            categoryId: categoryId,
+                        },
+                        data: { position: p.position },
+                    }),
+                ),
+            );
+
+            clearMenuCacheAsync(slug);
+            return { success: true };
+        } catch (error) {
+            console.error('Error updating subcategory positions:', error);
+            throw error;
+        }
     }
 
 }

@@ -1,15 +1,30 @@
 import { Roles, ClerkGuard, EstablishmentStaffGuard } from "@weats/common";
 import { Controller, UseGuards, Param, Post, Body, Get, Patch, Delete } from "@nestjs/common";
 import { EmployeeRoles } from "@weats/database";
-import { CreateSubcategoryDto } from "@weats/contracts";
+import { CreateSubcategoryDto, UpdateSubcategoryPositionsDto } from "@weats/contracts";
 import { DASHBOARD_SERVICE, DASHBOARD_PATTERNS } from "@weats/common";
 import { ClientProxy } from '@nestjs/microservices';
-import { Inject } from '@nestjs/common';
+import { Inject, Put } from '@nestjs/common';
 
 
 @Controller("menus/:menuId/categories/:categoryId/subcategories")
 export class MenuSubcategoryController {
     constructor(@Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy) { }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+    @Put('/positions')
+    updateSubcategoryPositions(
+        @Param('menuId') menuId: string,
+        @Param('categoryId') categoryId: string,
+        @Body() updateSubcategoryPositionsDto: UpdateSubcategoryPositionsDto,
+    ) {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.SUBCATEGORY_UPDATE_POSITIONS, { 
+            menuId, 
+            categoryId, 
+            updateSubcategoryPositionsDto 
+        });
+    }
 
     @Roles(EmployeeRoles.MANAGER)
     @UseGuards(ClerkGuard, EstablishmentStaffGuard)

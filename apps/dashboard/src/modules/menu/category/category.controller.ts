@@ -2,7 +2,7 @@ import {
     Controller
 } from '@nestjs/common';
 import { Establishment } from '@weats/types';
-import { CreateCategoryDto } from '@weats/contracts';
+import { CreateCategoryDto, UpdateCategoryPositionsDto } from '@weats/contracts';
 import { DASHBOARD_PATTERNS } from '@weats/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { MenuCategoryService } from './category.service';
@@ -10,6 +10,13 @@ import { MenuCategoryService } from './category.service';
 @Controller()
 export class MenuCategoryController {
     constructor(private readonly categoryService: MenuCategoryService) { }
+
+    @MessagePattern(DASHBOARD_PATTERNS.CATEGORY_UPDATE_POSITIONS)
+    updateCategoryPositions(
+        @Payload() payload: { menuId: string, updateCategoryPositionsDto: UpdateCategoryPositionsDto, establishment: Establishment },
+    ) {
+        return this.categoryService.updateCategoryPositions(payload.menuId, payload.updateCategoryPositionsDto, payload.establishment);
+    }
 
     @MessagePattern(DASHBOARD_PATTERNS.CATEGORY_CREATE)
     createCategory(

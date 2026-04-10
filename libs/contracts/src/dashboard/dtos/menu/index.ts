@@ -5,4 +5,6 @@ export * from './translations/category-translation.dto';
 export * from './translations/menu-translation.dto';
 export * from './translations/subcategory-translation.dto';
 export * from './update/update-menu-positions.dto';
+export * from './update/update-category-positions.dto';
+export * from './update/update-subcategory-positions.dto';
 export * from './update/update-menu.dto';
