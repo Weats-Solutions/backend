@@ -91,6 +91,15 @@
         "tsConfigPath": "libs/integrations/tsconfig.lib.json"
       }
     },
+    "item-core": {
+      "type": "library",
+      "root": "libs/item-core",
+      "entryFile": "index",
+      "sourceRoot": "libs/item-core/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/item-core/tsconfig.lib.json"
+      }
+    },
     "translate": {
       "type": "library",
       "root": "libs/translate",

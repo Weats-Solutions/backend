@@ -42,10 +42,14 @@ export const DASHBOARD_PATTERNS = {
   SUBCATEGORY_GET_BY_CATEGORY: 'dashboard.subcategory.get_by_category',
   SUBCATEGORY_EDIT: 'dashboard.subcategory.edit',
   SUBCATEGORY_UPDATE_POSITIONS: 'dashboard.subcategory.update_positions',
+  SUBCATEGORY_GET_ITEMS: 'dashboard.subcategory.get_items',
   SUBCATEGORY_DELETE: 'dashboard.subcategory.delete',
 
   //testes
-  SUBCATEGORY_LINK_ITEM: 'dashboard.subcategory.link_item',
+  SUBCATEGORY_LINK_ITEMS: 'dashboard.subcategory.link_items',
+  SUBCATEGORY_UNLINK_ITEMS: 'dashboard.subcategory.unlink_items',
+  SUBCATEGORY_UPDATE_ITEM_POSITIONS: 'dashboard.subcategory.update_item_positions',
+  SUBCATEGORY_UPDATE_ITEMS_LINK: 'dashboard.subcategory.update_items_link',
 
 
   ITEM_CREATE: 'dashboard.item.create',

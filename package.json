@@ -128,6 +128,7 @@
       "^@weats/configs(|/.*)$": "<rootDir>/libs/configs/src/$1",
       "^@weats/encryption(|/.*)$": "<rootDir>/libs/encryption/src/$1",
       "^@weats/integrations(|/.*)$": "<rootDir>/libs/integrations/src/$1",
+      "^@weats/item-core(|/.*)$": "<rootDir>/libs/item-core/src/$1",
       "^@weats/translate(|/.*)$": "<rootDir>/libs/translate/src/$1",
       "^@weats/types(|/.*)$": "<rootDir>/libs/types/src/$1",
       "^weats/contracts(|/.*)$": "<rootDir>/libs/contracts/src/$1",

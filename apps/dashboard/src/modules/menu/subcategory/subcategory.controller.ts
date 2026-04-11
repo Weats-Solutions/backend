@@ -5,11 +5,20 @@ import { CreateSubcategoryDto, UpdateSubcategoryPositionsDto } from "@weats/cont
 import { DASHBOARD_PATTERNS } from "@weats/common";
 import { MenuSubcategoryService } from './subcategory.service';
 import { MessagePattern, Payload } from "@nestjs/microservices";
+import { Establishment } from "@weats/types";
+import { LinkItemToSubcategoryDto } from "@weats/contracts/dashboard/dtos/item/link-item-to-subcategory.dto";
 
 
 @Controller()
 export class MenuSubcategoryController {
     constructor(private readonly subcategoryService: MenuSubcategoryService) { }
+
+    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_GET_ITEMS)
+    getSubcategoryItems(
+        @Payload() payload: { establishment: Establishment, subcategoryId: string },
+    ) {
+        return this.subcategoryService.getSubcategoryItems(payload.establishment, payload.subcategoryId);
+    }
 
     @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_UPDATE_POSITIONS)
     updateSubcategoryPositions(
@@ -47,10 +56,31 @@ export class MenuSubcategoryController {
         return this.subcategoryService.deleteSubcategory(payload.subcategoryId);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_LINK_ITEM)
-    linkItemToSubcategory(
-        @Payload() payload: { subcategoryId: string, itemId: string },
+    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_LINK_ITEMS)
+    linkItemsToSubcategory(
+        @Payload() payload: { linkItemToSubcategoryDto: LinkItemToSubcategoryDto },
     ) {
-        return this.subcategoryService.linkItemToSubcategory(payload.subcategoryId, payload.itemId);
+        return this.subcategoryService.linkItemsToSubcategory(payload.linkItemToSubcategoryDto);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_UNLINK_ITEMS)
+    unlinkItemsFromSubcategory(
+        @Payload() payload: { subcategoryId: string, itemIds: string[] },
+    ) {
+        return this.subcategoryService.unlinkItemsFromSubcategory(payload.subcategoryId, payload.itemIds);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_UPDATE_ITEM_POSITIONS)
+    updateItemPositions(
+        @Payload() payload: { subcategoryId: string, positions: { id: string, position: number }[] },
+    ) {
+        return this.subcategoryService.updateItemPositions(payload.subcategoryId, payload.positions);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_UPDATE_ITEMS_LINK)
+    updateItemsLinkProperties(
+        @Payload() payload: { subcategoryId: string, itemIds: string[], data: any },
+    ) {
+        return this.subcategoryService.updateItemsLinkProperties(payload.subcategoryId, payload.itemIds, payload.data);
     }
 }

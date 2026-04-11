@@ -1,7 +1,11 @@
-import { CorePrismaService } from "@weats/database";
+import { CorePrismaService, MenuType, Prisma } from "@weats/database";
 import { Injectable } from "@nestjs/common";
 import { CreateCategoryDto, UpdateSubcategoryPositionsDto } from "@weats/contracts";
-import { clearMenuCacheAsync } from '@weats/common';
+import { clearMenuCacheAsync, ERRORS } from '@weats/common';
+import { Establishment, ITEM_DETAIL_INCLUDE } from "@weats/types";
+import { mapTranslatedItemDetailResponse } from "@weats/item-core";
+import { RpcException } from "@nestjs/microservices";
+import { LinkItemToSubcategoryDto } from "@weats/contracts/dashboard/dtos/item/link-item-to-subcategory.dto";
 
 @Injectable()
 export class MenuSubcategoryService {
@@ -171,32 +175,156 @@ export class MenuSubcategoryService {
         }
     }
 
-    async linkItemToSubcategory(subcategoryId: string, itemId: string) {
-        const slug = await this.getEstablishmentSlugBySubcategoryId(subcategoryId);
-        // 1️⃣ valida existência
-        const [subcategory, item] = await Promise.all([
-            this.prisma.menuSubcategory.findUnique({ where: { id: subcategoryId } }),
-            this.prisma.item.findUnique({ where: { id: itemId } }),
-        ]);
+    async linkItemsToSubcategory(dto: LinkItemToSubcategoryDto) {
+        const { subcategoryId, items } = dto;
 
-        if (!subcategory) throw new Error(`Subcategory ${subcategoryId} not found`);
-        if (!item) throw new Error(`Item ${itemId} not found`);
-
-        // 2️⃣ conta itens
-        const itemsCount = await this.prisma.menuItemPosition.count({
-            where: { subcategoryId },
+        // 1️⃣ Validação da Subcategoria e busca do Menu/Slug
+        const subcategory = await this.prisma.menuSubcategory.findUnique({
+            where: { id: subcategoryId },
+            include: {
+                category: {
+                    include: {
+                        menu: { include: { establishment: true } }
+                    }
+                }
+            }
         });
 
-        // 3️⃣ upsert seguro
-        await this.prisma.menuItemPosition.upsert({
-            where: { itemId_subcategoryId: { itemId, subcategoryId } },
-            update: { isVisible: true },
-            create: { itemId, subcategoryId, position: itemsCount + 1, isVisible: true },
+        if (!subcategory || !subcategory.category) {
+            throw new RpcException({ message: ERRORS.SUBCATEGORY_NOT_FOUND, code: 404 });
+        }
+
+        const menu = subcategory.category.menu;
+        const isRodizio = menu.type === MenuType.RODIZIO;
+
+        // 2️⃣ Execução em Transação Serializável para evitar conflitos de posição
+        await this.prisma.$transaction(async (tx) => {
+            // Busca a contagem atual de itens na subcategoria
+            const currentCount = await tx.menuItemPosition.count({
+                where: { subcategoryId },
+            });
+
+            // Preparamos todas as promessas de upsert
+            const upsertPromises = items.map((itemDto, index) => {
+                const finalIsIncluded = isRodizio ? (itemDto.isIncluded ?? false) : false;
+                return tx.menuItemPosition.upsert({
+                    where: {
+                        itemId_subcategoryId: {
+                            itemId: itemDto.itemId,
+                            subcategoryId
+                        }
+                    },
+                    update: {
+                        ...(itemDto.isVisible !== undefined && { isVisible: itemDto.isVisible }),
+                        ...(finalIsIncluded !== undefined && { isIncluded: finalIsIncluded }),
+                    },
+                    create: {
+                        itemId: itemDto.itemId,
+                        subcategoryId,
+                        // A posição é o total atual + a posição no array + 1
+                        position: currentCount + index + 1,
+                        isVisible: itemDto.isVisible ?? true,
+                        isIncluded: finalIsIncluded ?? false,
+                    },
+                });
+            });
+
+            await Promise.all(upsertPromises);
+        }, {
+            isolationLevel: Prisma.TransactionIsolationLevel.Serializable //ATENÇÃO Á PERFORMANCE -> COSTA 11/04/26
         });
 
-        clearMenuCacheAsync(slug);
+        // 3️⃣ Invalidação de Cache
+        clearMenuCacheAsync(menu.establishment.slug);
+
         return { success: true };
     }
+
+
+    async unlinkItemsFromSubcategory(subcategoryId: string, itemIds: string[]) {
+        const subcategory = await this.prisma.menuSubcategory.findUnique({
+            where: { id: subcategoryId },
+            include: {
+                category: {
+                    include: {
+                        menu: { include: { establishment: true } }
+                    }
+                }
+            }
+        });
+
+        if (!subcategory || !subcategory.category) {
+            throw new RpcException({ message: ERRORS.SUBCATEGORY_NOT_FOUND, code: 404 });
+        }
+
+        await this.prisma.menuItemPosition.deleteMany({
+            where: {
+                subcategoryId,
+                itemId: { in: itemIds }
+            }
+        });
+
+        clearMenuCacheAsync(subcategory.category.menu.establishment.slug);
+        return { success: true };
+    }
+
+    async updateItemPositions(subcategoryId: string, positions: { id: string; position: number }[]) {
+        const subcategory = await this.prisma.menuSubcategory.findUnique({
+            where: { id: subcategoryId },
+            include: {
+                category: {
+                    include: {
+                        menu: { include: { establishment: true } }
+                    }
+                }
+            }
+        });
+
+        if (!subcategory || !subcategory.category) {
+            throw new RpcException({ message: ERRORS.SUBCATEGORY_NOT_FOUND, code: 404 });
+        }
+
+        await this.prisma.$transaction(
+            positions.map((p) =>
+                this.prisma.menuItemPosition.update({
+                    where: { itemId_subcategoryId: { itemId: p.id, subcategoryId } },
+                    data: { position: p.position },
+                }),
+            ),
+        );
+
+        clearMenuCacheAsync(subcategory.category.menu.establishment.slug);
+        return { success: true };
+    }
+
+    async updateItemsLinkProperties(subcategoryId: string, itemIds: string[], data: { isVisible?: boolean, isIncluded?: boolean }) {
+        const subcategory = await this.prisma.menuSubcategory.findUnique({
+            where: { id: subcategoryId },
+            include: {
+                category: {
+                    include: {
+                        menu: { include: { establishment: true } }
+                    }
+                }
+            }
+        });
+
+        if (!subcategory || !subcategory.category) {
+            throw new RpcException({ message: ERRORS.SUBCATEGORY_NOT_FOUND, code: 404 });
+        }
+
+        await this.prisma.menuItemPosition.updateMany({
+            where: {
+                subcategoryId,
+                itemId: { in: itemIds }
+            },
+            data
+        });
+
+        clearMenuCacheAsync(subcategory.category.menu.establishment.slug);
+        return { success: true };
+    }
+
     async updateSubcategoryPositions(
         menuId: string,
         categoryId: string,
@@ -222,6 +350,78 @@ export class MenuSubcategoryService {
             return { success: true };
         } catch (error) {
             console.error('Error updating subcategory positions:', error);
+            throw error;
+        }
+    }
+
+    async getSubcategoryItems(establishment: Establishment, subcategoryId: string) {
+        try {
+            const subcategory = await this.prisma.menuSubcategory.findUnique({
+                where: { id: subcategoryId },
+                select: {
+                    id: true,
+                    categoryId: true,
+                    translations: true,
+                    isVisible: true,
+                    category: {
+                        select: {
+                            id: true,
+                            translations: true,
+                            menu: {
+                                select: {
+                                    id: true,
+                                    translations: true,
+                                    type: true,
+                                }
+                            }
+                        }
+                    },
+                    items: {
+                        orderBy: { position: 'asc' },
+                        select: {
+                            isVisible: true,
+                            position: true,
+                            isIncluded: true,
+                            item: {
+                                include: ITEM_DETAIL_INCLUDE
+                            }
+                        }
+                    },
+                },
+            },
+            );
+
+            if (!subcategory || !subcategory.category || !subcategory.category.menu) throw new RpcException({
+                message: ERRORS.SUBCATEGORY_NOT_FOUND, code: 404
+            })
+
+            const subTr = subcategory.translations.find(t => t.locale === establishment.primaryLanguage) || subcategory.translations[0];
+            const catTr = subcategory.category.translations.find(t => t.locale === establishment.primaryLanguage) || subcategory.category.translations[0];
+            const menuTr = subcategory.category.menu.translations.find(t => t.locale === establishment.primaryLanguage) || subcategory.category.menu.translations[0];
+
+            return {
+                id: subcategory.id,
+                name: subTr?.name || 'Sem nome',
+                description: subTr?.description,
+                isVisible: subcategory.isVisible,
+                category: {
+                    id: subcategory.category.id,
+                    name: catTr?.name || 'Sem nome',
+                },
+                menu: {
+                    id: subcategory.category.menu.id,
+                    type: subcategory.category.menu.type,
+                    name: menuTr?.name || 'Sem nome',
+                },
+                items: subcategory.items.map(itemPos => ({
+                    position: itemPos.position,
+                    isVisible: itemPos.isVisible,
+                    isIncluded: itemPos.isIncluded,
+                    ...mapTranslatedItemDetailResponse(itemPos.item, establishment.primaryLanguage),
+                }))
+            };
+        } catch (error) {
+            console.error('Error getting subcategory items:', error);
             throw error;
         }
     }
