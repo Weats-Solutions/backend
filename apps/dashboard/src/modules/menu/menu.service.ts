@@ -120,15 +120,6 @@ export class MenuService {
                 where: { id: establishmentId },
                 select: { slug: true },
             });
-            const menuCount = await this.prisma.menu.count({
-                where: { establishmentId },
-            });
-
-            // Pick a random color if not provided
-            const selectedColor =
-                MENU_COLOR_PALETTE[
-                Math.floor(Math.random() * MENU_COLOR_PALETTE.length)
-                ];
 
             const menu = await this.prisma.$transaction(async (prisma) => {
                 let scheduleId: string | undefined;
@@ -436,6 +427,8 @@ export class MenuService {
                                                     spiceLevel: true,
                                                     marketingTag: true,
                                                     isFeatured: true,
+                                                    unit: true,
+                                                    quantity: true,
                                                     // Image
                                                     image: {
                                                         select: { url: true },
