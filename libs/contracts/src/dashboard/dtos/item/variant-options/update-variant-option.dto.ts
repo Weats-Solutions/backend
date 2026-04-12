@@ -1,6 +1,6 @@
 import { IsString, IsNotEmpty, IsBoolean, IsOptional, ValidateNested, IsArray, IsNumber, IsEnum } from 'class-validator';
 import { Type } from 'class-transformer';
-import {  VariantType } from '@weats/database';
+import { UnitType, VariantType } from '@weats/database';
 import { VariantOptionTranslationDto } from './create-variant-option.dto';
 
 
@@ -22,6 +22,6 @@ export class UpdateVariantOptionDto {
     quantity?: number;
 
     @IsOptional()
-    @IsString()
-    unit?: string;
+    @IsEnum(UnitType)
+    unit?: UnitType;
 }

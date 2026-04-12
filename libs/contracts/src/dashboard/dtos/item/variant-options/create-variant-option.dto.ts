@@ -1,6 +1,6 @@
 import { IsString, IsNotEmpty, IsBoolean, IsOptional, ValidateNested, IsArray, IsNumber, IsEnum } from 'class-validator';
 import { Type } from 'class-transformer';
-import { EstablishmentLanguage, VariantType } from '@weats/database';
+import { EstablishmentLanguage, UnitType, VariantType } from '@weats/database';
 
 export class VariantOptionTranslationDto {
     @IsEnum(EstablishmentLanguage)
@@ -16,7 +16,7 @@ export class CreateVariantOptionDto {
     @ValidateNested({ each: true })
     @Type(() => VariantOptionTranslationDto)
     translations: VariantOptionTranslationDto[];
-    
+
     @IsEnum(VariantType)
     type: VariantType;
 
@@ -29,6 +29,6 @@ export class CreateVariantOptionDto {
     quantity?: number;
 
     @IsOptional()
-    @IsString()
-    unit?: string;
+    @IsEnum(UnitType)
+    unit?: UnitType;
 }

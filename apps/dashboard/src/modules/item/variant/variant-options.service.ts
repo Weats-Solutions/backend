@@ -6,6 +6,7 @@ import {
 import { CorePrismaService } from '@weats/database';
 import { Establishment } from '@weats/types';
 import { CreateVariantOptionDto, UpdateVariantOptionDto } from '@weats/contracts';
+import { RpcException } from '@nestjs/microservices';
 
 @Injectable()
 export class VariantOptionsService {
@@ -147,20 +148,18 @@ export class VariantOptionsService {
       where: { id },
     });
 
-    if (!option) throw new NotFoundException('Variant option not found');
+    if (!option) throw new RpcException({ code: 404, message: 'Variant option not found' });
 
     // Se a opção for global → bloquear (só admins da plataforma podem editar globais)
     if (option.isGlobal) {
-      throw new BadRequestException(
-        'Cannot edit global variant options',
+      throw new RpcException(
+        { code: 400, message: 'Cannot edit global variant options' },
       );
     }
 
     // Se não pertencer a este estabelecimento → bloquear
     if (option.establishmentId !== establishment.id) {
-      throw new BadRequestException(
-        'Variant option does not belong to this establishment',
-      );
+      throw new RpcException({ code: 400, message: 'Variant option does not belong to this establishment' });
     }
 
     return this.prisma.variantOption.update({
@@ -200,20 +199,18 @@ export class VariantOptionsService {
       where: { id },
     });
 
-    if (!option) throw new NotFoundException('Variant option not found');
+    if (!option) throw new RpcException({ code: 404, message: 'Variant option not found' });
 
     // Se a opção for global → bloquear
     if (option.isGlobal) {
-      throw new BadRequestException(
-        'Cannot delete global variant options',
+      throw new RpcException(
+        { code: 400, message: 'Cannot delete global variant options' },
       );
     }
 
     // Se não pertencer a este estabelecimento → bloquear
     if (option.establishmentId !== establishment.id) {
-      throw new BadRequestException(
-        'Variant option does not belong to this establishment',
-      );
+      throw new RpcException({ code: 400, message: 'Variant option does not belong to this establishment' });
     }
 
     await this.prisma.variantOption.delete({
