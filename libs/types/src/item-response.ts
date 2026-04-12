@@ -1,5 +1,5 @@
 // src/modules/item/types/item-response.types.ts
-import { ItemStatus, MarketingTag, SpiceLevel, ModifierDisplayMode, Prisma } from '@weats/database';
+import { ItemStatus, MarketingTag, SpiceLevel, ModifierDisplayMode, Prisma, UnitType } from '@weats/database';
 
 // ─── Shared Sub-types ──────────────────────────────────────────
 
@@ -159,6 +159,8 @@ export interface ItemDetailResponse {
     imageId: string | null;
     posCategoryId: string | null;
     basePrice: number | null;
+    unit: UnitType;
+    quantity: number;
     sku: string | null;
     status: ItemStatus;
     taxTableId: string;
@@ -217,6 +219,8 @@ export interface TranslatedItemDetailResponse {
     description?: string;
     image: { url: string } | null;
     basePrice: number | null;
+    unit: UnitType;
+    quantity: number;
     status: ItemStatus;
     marketingTag: MarketingTag | null;
     spiceLevel: SpiceLevel | null;
@@ -256,6 +260,8 @@ export interface ItemListResponse {
     shortDescription?: string;
     description?: string;
     basePrice: number | null;
+    unit: UnitType;
+    quantity: number;
     sku: string | null;
     status: ItemStatus;
     taxTableId: string;

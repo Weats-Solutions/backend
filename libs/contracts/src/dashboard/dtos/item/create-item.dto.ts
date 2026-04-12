@@ -11,7 +11,7 @@ import {
   Min
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { EstablishmentLanguage, ItemStatus, MarketingTag, ModifierDisplayMode, SpiceLevel } from '@weats/database';
+import { EstablishmentLanguage, ItemStatus, MarketingTag, ModifierDisplayMode, SpiceLevel, UnitType } from '@weats/database';
 
 // =======================================================
 // DTO: A Variante Final (SKU) que vai ser gerada
@@ -151,6 +151,12 @@ export class CreateItemDto {
   @IsOptional()
   @IsString()
   sku?: string; // SKU do item base (caso não tenha variantes)
+
+  @IsEnum(UnitType)
+  unit: UnitType;
+
+  @IsNumber()
+  quantity: number;
 
   @IsOptional()
   @IsNumber({ maxDecimalPlaces: 2 })

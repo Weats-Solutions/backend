@@ -2,18 +2,20 @@
 /// 1. ITEM (Produto Pai / Raiz do Catálogo)
 /// =======================================================
 model Item {
-  id                  String               @id @default(ulid())
-  imageId             String?
-  establishmentId     String
-  createdAt           DateTime             @default(now())
-  updatedAt           DateTime             @updatedAt
+  id              String    @id @default(ulid())
+  imageId         String?
+  establishmentId String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
   /// O basePrice APENAS é usado se o item NÃO tiver variantes.
-  basePrice           Decimal?             @db.Decimal(10, 2)
-  deletedAt           DateTime?
-  posCategoryId       String?
-  quantity            Float?
-  sku                 String?
-  unit                String?
+  basePrice       Decimal?  @db.Decimal(10, 2)
+  deletedAt       DateTime?
+  posCategoryId   String?
+  sku             String?
+
+  unit     UnitType @default(UNIT)
+  quantity Float    @default(1)
+
   status              ItemStatus           @default(ACTIVE)
   taxTableId          String
   allergens           ItemAllergen[]
@@ -94,7 +96,7 @@ model VariantOption {
   code            String?                    @unique
   isActive        Boolean                    @default(true)
   quantity        Float?
-  unit            String?
+  unit            UnitType?
   type            VariantType                @default(OTHER)
   itemVariants    ItemVariant[]
   establishment   Establishment?             @relation(fields: [establishmentId], references: [id])
@@ -332,6 +334,35 @@ enum MarketingTag {
   NEW
   POPULAR
   LIMITED
+}
+
+enum UnitType {
+  // --- Serving ---
+  PORTION
+  HALF
+  SLICE
+  PIECE
+  PLATE
+  BOWL
+  UNIT
+
+  // --- Drinks ---
+  GLASS
+  CUP
+  SHOT
+
+  // --- Containers ---
+  BOTTLE
+  CAN
+
+  // --- Measurements ---
+  MILLILITER
+  CENTILITER
+  LITER
+  GRAM
+  KILOGRAM
+  OUNCE
+  POUND
 }
 
 /**

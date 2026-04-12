@@ -695,25 +695,6 @@ export const DayOfWeek: {
 export type DayOfWeek = (typeof DayOfWeek)[keyof typeof DayOfWeek]
 
 
-export const UnitType: {
-  CUP: 'CUP',
-  DOSE: 'DOSE',
-  PEOPLE: 'PEOPLE',
-  PIECE: 'PIECE',
-  PORTION: 'PORTION',
-  SLICE: 'SLICE',
-  UNIT: 'UNIT',
-  GLASS: 'GLASS',
-  MILLILITRE: 'MILLILITRE',
-  CENTILITRE: 'CENTILITRE',
-  LITRE: 'LITRE',
-  GRAM: 'GRAM',
-  KILOGRAM: 'KILOGRAM'
-};
-
-export type UnitType = (typeof UnitType)[keyof typeof UnitType]
-
-
 export const BookingStatus: {
   PENDING: 'PENDING',
   CONFIRMED: 'CONFIRMED',
@@ -990,6 +971,31 @@ export const MarketingTag: {
 export type MarketingTag = (typeof MarketingTag)[keyof typeof MarketingTag]
 
 
+export const UnitType: {
+  PORTION: 'PORTION',
+  HALF: 'HALF',
+  SLICE: 'SLICE',
+  PIECE: 'PIECE',
+  PLATE: 'PLATE',
+  BOWL: 'BOWL',
+  UNIT: 'UNIT',
+  GLASS: 'GLASS',
+  CUP: 'CUP',
+  SHOT: 'SHOT',
+  BOTTLE: 'BOTTLE',
+  CAN: 'CAN',
+  MILLILITER: 'MILLILITER',
+  CENTILITER: 'CENTILITER',
+  LITER: 'LITER',
+  GRAM: 'GRAM',
+  KILOGRAM: 'KILOGRAM',
+  OUNCE: 'OUNCE',
+  POUND: 'POUND'
+};
+
+export type UnitType = (typeof UnitType)[keyof typeof UnitType]
+
+
 export const MenuType: {
   DEFAULT: 'DEFAULT',
   RODIZIO: 'RODIZIO'
@@ -1079,10 +1085,6 @@ export type DayOfWeek = $Enums.DayOfWeek
 
 export const DayOfWeek: typeof $Enums.DayOfWeek
 
-export type UnitType = $Enums.UnitType
-
-export const UnitType: typeof $Enums.UnitType
-
 export type BookingStatus = $Enums.BookingStatus
 
 export const BookingStatus: typeof $Enums.BookingStatus
@@ -1170,6 +1172,10 @@ export const AttributeType: typeof $Enums.AttributeType
 export type MarketingTag = $Enums.MarketingTag
 
 export const MarketingTag: typeof $Enums.MarketingTag
+
+export type UnitType = $Enums.UnitType
+
+export const UnitType: typeof $Enums.UnitType
 
 export type MenuType = $Enums.MenuType
 
@@ -38172,9 +38178,9 @@ export namespace Prisma {
     basePrice: Decimal | null
     deletedAt: Date | null
     posCategoryId: string | null
-    quantity: number | null
     sku: string | null
-    unit: string | null
+    unit: $Enums.UnitType | null
+    quantity: number | null
     status: $Enums.ItemStatus | null
     taxTableId: string | null
     marketingTag: $Enums.MarketingTag | null
@@ -38192,9 +38198,9 @@ export namespace Prisma {
     basePrice: Decimal | null
     deletedAt: Date | null
     posCategoryId: string | null
-    quantity: number | null
     sku: string | null
-    unit: string | null
+    unit: $Enums.UnitType | null
+    quantity: number | null
     status: $Enums.ItemStatus | null
     taxTableId: string | null
     marketingTag: $Enums.MarketingTag | null
@@ -38212,9 +38218,9 @@ export namespace Prisma {
     basePrice: number
     deletedAt: number
     posCategoryId: number
-    quantity: number
     sku: number
     unit: number
+    quantity: number
     status: number
     taxTableId: number
     marketingTag: number
@@ -38246,9 +38252,9 @@ export namespace Prisma {
     basePrice?: true
     deletedAt?: true
     posCategoryId?: true
-    quantity?: true
     sku?: true
     unit?: true
+    quantity?: true
     status?: true
     taxTableId?: true
     marketingTag?: true
@@ -38266,9 +38272,9 @@ export namespace Prisma {
     basePrice?: true
     deletedAt?: true
     posCategoryId?: true
-    quantity?: true
     sku?: true
     unit?: true
+    quantity?: true
     status?: true
     taxTableId?: true
     marketingTag?: true
@@ -38286,9 +38292,9 @@ export namespace Prisma {
     basePrice?: true
     deletedAt?: true
     posCategoryId?: true
-    quantity?: true
     sku?: true
     unit?: true
+    quantity?: true
     status?: true
     taxTableId?: true
     marketingTag?: true
@@ -38393,9 +38399,9 @@ export namespace Prisma {
     basePrice: Decimal | null
     deletedAt: Date | null
     posCategoryId: string | null
-    quantity: number | null
     sku: string | null
-    unit: string | null
+    unit: $Enums.UnitType
+    quantity: number
     status: $Enums.ItemStatus
     taxTableId: string
     marketingTag: $Enums.MarketingTag | null
@@ -38432,9 +38438,9 @@ export namespace Prisma {
     basePrice?: boolean
     deletedAt?: boolean
     posCategoryId?: boolean
-    quantity?: boolean
     sku?: boolean
     unit?: boolean
+    quantity?: boolean
     status?: boolean
     taxTableId?: boolean
     marketingTag?: boolean
@@ -38469,9 +38475,9 @@ export namespace Prisma {
     basePrice?: boolean
     deletedAt?: boolean
     posCategoryId?: boolean
-    quantity?: boolean
     sku?: boolean
     unit?: boolean
+    quantity?: boolean
     status?: boolean
     taxTableId?: boolean
     marketingTag?: boolean
@@ -38493,9 +38499,9 @@ export namespace Prisma {
     basePrice?: boolean
     deletedAt?: boolean
     posCategoryId?: boolean
-    quantity?: boolean
     sku?: boolean
     unit?: boolean
+    quantity?: boolean
     status?: boolean
     taxTableId?: boolean
     marketingTag?: boolean
@@ -38517,9 +38523,9 @@ export namespace Prisma {
     basePrice?: boolean
     deletedAt?: boolean
     posCategoryId?: boolean
-    quantity?: boolean
     sku?: boolean
     unit?: boolean
+    quantity?: boolean
     status?: boolean
     taxTableId?: boolean
     marketingTag?: boolean
@@ -38528,7 +38534,7 @@ export namespace Prisma {
     vendusProductId?: boolean
   }
 
-  export type ItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "imageId" | "establishmentId" | "createdAt" | "updatedAt" | "basePrice" | "deletedAt" | "posCategoryId" | "quantity" | "sku" | "unit" | "status" | "taxTableId" | "marketingTag" | "spiceLevel" | "isFeatured" | "vendusProductId", ExtArgs["result"]["item"]>
+  export type ItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "imageId" | "establishmentId" | "createdAt" | "updatedAt" | "basePrice" | "deletedAt" | "posCategoryId" | "sku" | "unit" | "quantity" | "status" | "taxTableId" | "marketingTag" | "spiceLevel" | "isFeatured" | "vendusProductId", ExtArgs["result"]["item"]>
   export type ItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     allergens?: boolean | Item$allergensArgs<ExtArgs>
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
@@ -38593,9 +38599,9 @@ export namespace Prisma {
       basePrice: Prisma.Decimal | null
       deletedAt: Date | null
       posCategoryId: string | null
-      quantity: number | null
       sku: string | null
-      unit: string | null
+      unit: $Enums.UnitType
+      quantity: number
       status: $Enums.ItemStatus
       taxTableId: string
       marketingTag: $Enums.MarketingTag | null
@@ -39049,9 +39055,9 @@ export namespace Prisma {
     readonly basePrice: FieldRef<"Item", 'Decimal'>
     readonly deletedAt: FieldRef<"Item", 'DateTime'>
     readonly posCategoryId: FieldRef<"Item", 'String'>
-    readonly quantity: FieldRef<"Item", 'Float'>
     readonly sku: FieldRef<"Item", 'String'>
-    readonly unit: FieldRef<"Item", 'String'>
+    readonly unit: FieldRef<"Item", 'UnitType'>
+    readonly quantity: FieldRef<"Item", 'Float'>
     readonly status: FieldRef<"Item", 'ItemStatus'>
     readonly taxTableId: FieldRef<"Item", 'String'>
     readonly marketingTag: FieldRef<"Item", 'MarketingTag'>
@@ -43351,7 +43357,7 @@ export namespace Prisma {
     code: string | null
     isActive: boolean | null
     quantity: number | null
-    unit: string | null
+    unit: $Enums.UnitType | null
     type: $Enums.VariantType | null
   }
 
@@ -43362,7 +43368,7 @@ export namespace Prisma {
     code: string | null
     isActive: boolean | null
     quantity: number | null
-    unit: string | null
+    unit: $Enums.UnitType | null
     type: $Enums.VariantType | null
   }
 
@@ -43514,7 +43520,7 @@ export namespace Prisma {
     code: string | null
     isActive: boolean
     quantity: number | null
-    unit: string | null
+    unit: $Enums.UnitType | null
     type: $Enums.VariantType
     _count: VariantOptionCountAggregateOutputType | null
     _avg: VariantOptionAvgAggregateOutputType | null
@@ -43615,7 +43621,7 @@ export namespace Prisma {
       code: string | null
       isActive: boolean
       quantity: number | null
-      unit: string | null
+      unit: $Enums.UnitType | null
       type: $Enums.VariantType
     }, ExtArgs["result"]["variantOption"]>
     composites: {}
@@ -44049,7 +44055,7 @@ export namespace Prisma {
     readonly code: FieldRef<"VariantOption", 'String'>
     readonly isActive: FieldRef<"VariantOption", 'Boolean'>
     readonly quantity: FieldRef<"VariantOption", 'Float'>
-    readonly unit: FieldRef<"VariantOption", 'String'>
+    readonly unit: FieldRef<"VariantOption", 'UnitType'>
     readonly type: FieldRef<"VariantOption", 'VariantType'>
   }
     
@@ -111071,9 +111077,9 @@ export namespace Prisma {
     basePrice: 'basePrice',
     deletedAt: 'deletedAt',
     posCategoryId: 'posCategoryId',
-    quantity: 'quantity',
     sku: 'sku',
     unit: 'unit',
+    quantity: 'quantity',
     status: 'status',
     taxTableId: 'taxTableId',
     marketingTag: 'marketingTag',
@@ -112364,6 +112370,20 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'UnitType'
+   */
+  export type EnumUnitTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UnitType'>
+    
+
+
+  /**
+   * Reference to a field of type 'UnitType[]'
+   */
+  export type ListEnumUnitTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UnitType[]'>
     
 
 
@@ -114927,9 +114947,9 @@ export namespace Prisma {
     basePrice?: DecimalNullableFilter<"Item"> | Decimal | DecimalJsLike | number | string | null
     deletedAt?: DateTimeNullableFilter<"Item"> | Date | string | null
     posCategoryId?: StringNullableFilter<"Item"> | string | null
-    quantity?: FloatNullableFilter<"Item"> | number | null
     sku?: StringNullableFilter<"Item"> | string | null
-    unit?: StringNullableFilter<"Item"> | string | null
+    unit?: EnumUnitTypeFilter<"Item"> | $Enums.UnitType
+    quantity?: FloatFilter<"Item"> | number
     status?: EnumItemStatusFilter<"Item"> | $Enums.ItemStatus
     taxTableId?: StringFilter<"Item"> | string
     marketingTag?: EnumMarketingTagNullableFilter<"Item"> | $Enums.MarketingTag | null
@@ -114963,9 +114983,9 @@ export namespace Prisma {
     basePrice?: SortOrderInput | SortOrder
     deletedAt?: SortOrderInput | SortOrder
     posCategoryId?: SortOrderInput | SortOrder
-    quantity?: SortOrderInput | SortOrder
     sku?: SortOrderInput | SortOrder
-    unit?: SortOrderInput | SortOrder
+    unit?: SortOrder
+    quantity?: SortOrder
     status?: SortOrder
     taxTableId?: SortOrder
     marketingTag?: SortOrderInput | SortOrder
@@ -115003,9 +115023,9 @@ export namespace Prisma {
     basePrice?: DecimalNullableFilter<"Item"> | Decimal | DecimalJsLike | number | string | null
     deletedAt?: DateTimeNullableFilter<"Item"> | Date | string | null
     posCategoryId?: StringNullableFilter<"Item"> | string | null
-    quantity?: FloatNullableFilter<"Item"> | number | null
     sku?: StringNullableFilter<"Item"> | string | null
-    unit?: StringNullableFilter<"Item"> | string | null
+    unit?: EnumUnitTypeFilter<"Item"> | $Enums.UnitType
+    quantity?: FloatFilter<"Item"> | number
     status?: EnumItemStatusFilter<"Item"> | $Enums.ItemStatus
     taxTableId?: StringFilter<"Item"> | string
     marketingTag?: EnumMarketingTagNullableFilter<"Item"> | $Enums.MarketingTag | null
@@ -115039,9 +115059,9 @@ export namespace Prisma {
     basePrice?: SortOrderInput | SortOrder
     deletedAt?: SortOrderInput | SortOrder
     posCategoryId?: SortOrderInput | SortOrder
-    quantity?: SortOrderInput | SortOrder
     sku?: SortOrderInput | SortOrder
-    unit?: SortOrderInput | SortOrder
+    unit?: SortOrder
+    quantity?: SortOrder
     status?: SortOrder
     taxTableId?: SortOrder
     marketingTag?: SortOrderInput | SortOrder
@@ -115067,9 +115087,9 @@ export namespace Prisma {
     basePrice?: DecimalNullableWithAggregatesFilter<"Item"> | Decimal | DecimalJsLike | number | string | null
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Item"> | Date | string | null
     posCategoryId?: StringNullableWithAggregatesFilter<"Item"> | string | null
-    quantity?: FloatNullableWithAggregatesFilter<"Item"> | number | null
     sku?: StringNullableWithAggregatesFilter<"Item"> | string | null
-    unit?: StringNullableWithAggregatesFilter<"Item"> | string | null
+    unit?: EnumUnitTypeWithAggregatesFilter<"Item"> | $Enums.UnitType
+    quantity?: FloatWithAggregatesFilter<"Item"> | number
     status?: EnumItemStatusWithAggregatesFilter<"Item"> | $Enums.ItemStatus
     taxTableId?: StringWithAggregatesFilter<"Item"> | string
     marketingTag?: EnumMarketingTagNullableWithAggregatesFilter<"Item"> | $Enums.MarketingTag | null
@@ -115333,7 +115353,7 @@ export namespace Prisma {
     code?: StringNullableFilter<"VariantOption"> | string | null
     isActive?: BoolFilter<"VariantOption"> | boolean
     quantity?: FloatNullableFilter<"VariantOption"> | number | null
-    unit?: StringNullableFilter<"VariantOption"> | string | null
+    unit?: EnumUnitTypeNullableFilter<"VariantOption"> | $Enums.UnitType | null
     type?: EnumVariantTypeFilter<"VariantOption"> | $Enums.VariantType
     itemVariants?: ItemVariantListRelationFilter
     establishment?: XOR<EstablishmentNullableScalarRelationFilter, EstablishmentWhereInput> | null
@@ -115364,7 +115384,7 @@ export namespace Prisma {
     isGlobal?: BoolFilter<"VariantOption"> | boolean
     isActive?: BoolFilter<"VariantOption"> | boolean
     quantity?: FloatNullableFilter<"VariantOption"> | number | null
-    unit?: StringNullableFilter<"VariantOption"> | string | null
+    unit?: EnumUnitTypeNullableFilter<"VariantOption"> | $Enums.UnitType | null
     type?: EnumVariantTypeFilter<"VariantOption"> | $Enums.VariantType
     itemVariants?: ItemVariantListRelationFilter
     establishment?: XOR<EstablishmentNullableScalarRelationFilter, EstablishmentWhereInput> | null
@@ -115397,7 +115417,7 @@ export namespace Prisma {
     code?: StringNullableWithAggregatesFilter<"VariantOption"> | string | null
     isActive?: BoolWithAggregatesFilter<"VariantOption"> | boolean
     quantity?: FloatNullableWithAggregatesFilter<"VariantOption"> | number | null
-    unit?: StringNullableWithAggregatesFilter<"VariantOption"> | string | null
+    unit?: EnumUnitTypeNullableWithAggregatesFilter<"VariantOption"> | $Enums.UnitType | null
     type?: EnumVariantTypeWithAggregatesFilter<"VariantOption"> | $Enums.VariantType
   }
 
@@ -122371,9 +122391,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -122406,9 +122426,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -122435,9 +122455,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -122470,9 +122490,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -122502,9 +122522,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -122519,9 +122539,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -122538,9 +122558,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -122825,7 +122845,7 @@ export namespace Prisma {
     code?: string | null
     isActive?: boolean
     quantity?: number | null
-    unit?: string | null
+    unit?: $Enums.UnitType | null
     type?: $Enums.VariantType
     itemVariants?: ItemVariantCreateNestedManyWithoutVariantOptionInput
     establishment?: EstablishmentCreateNestedOneWithoutVariantOptionsInput
@@ -122839,7 +122859,7 @@ export namespace Prisma {
     code?: string | null
     isActive?: boolean
     quantity?: number | null
-    unit?: string | null
+    unit?: $Enums.UnitType | null
     type?: $Enums.VariantType
     itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutVariantOptionInput
     translations?: VariantOptionTranslationUncheckedCreateNestedManyWithoutVariantOptionInput
@@ -122851,7 +122871,7 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
     type?: EnumVariantTypeFieldUpdateOperationsInput | $Enums.VariantType
     itemVariants?: ItemVariantUpdateManyWithoutVariantOptionNestedInput
     establishment?: EstablishmentUpdateOneWithoutVariantOptionsNestedInput
@@ -122865,7 +122885,7 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
     type?: EnumVariantTypeFieldUpdateOperationsInput | $Enums.VariantType
     itemVariants?: ItemVariantUncheckedUpdateManyWithoutVariantOptionNestedInput
     translations?: VariantOptionTranslationUncheckedUpdateManyWithoutVariantOptionNestedInput
@@ -122878,7 +122898,7 @@ export namespace Prisma {
     code?: string | null
     isActive?: boolean
     quantity?: number | null
-    unit?: string | null
+    unit?: $Enums.UnitType | null
     type?: $Enums.VariantType
   }
 
@@ -122888,7 +122908,7 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
     type?: EnumVariantTypeFieldUpdateOperationsInput | $Enums.VariantType
   }
 
@@ -122899,7 +122919,7 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
     type?: EnumVariantTypeFieldUpdateOperationsInput | $Enums.VariantType
   }
 
@@ -129887,15 +129907,11 @@ export namespace Prisma {
     not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
   }
 
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  export type EnumUnitTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.UnitType | EnumUnitTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUnitTypeFilter<$PrismaModel> | $Enums.UnitType
   }
 
   export type EnumItemStatusFilter<$PrismaModel = never> = {
@@ -130028,9 +130044,9 @@ export namespace Prisma {
     basePrice?: SortOrder
     deletedAt?: SortOrder
     posCategoryId?: SortOrder
-    quantity?: SortOrder
     sku?: SortOrder
     unit?: SortOrder
+    quantity?: SortOrder
     status?: SortOrder
     taxTableId?: SortOrder
     marketingTag?: SortOrder
@@ -130054,9 +130070,9 @@ export namespace Prisma {
     basePrice?: SortOrder
     deletedAt?: SortOrder
     posCategoryId?: SortOrder
-    quantity?: SortOrder
     sku?: SortOrder
     unit?: SortOrder
+    quantity?: SortOrder
     status?: SortOrder
     taxTableId?: SortOrder
     marketingTag?: SortOrder
@@ -130074,9 +130090,9 @@ export namespace Prisma {
     basePrice?: SortOrder
     deletedAt?: SortOrder
     posCategoryId?: SortOrder
-    quantity?: SortOrder
     sku?: SortOrder
     unit?: SortOrder
+    quantity?: SortOrder
     status?: SortOrder
     taxTableId?: SortOrder
     marketingTag?: SortOrder
@@ -130107,20 +130123,14 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
+  export type EnumUnitTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UnitType | EnumUnitTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUnitTypeWithAggregatesFilter<$PrismaModel> | $Enums.UnitType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUnitTypeFilter<$PrismaModel>
+    _max?: NestedEnumUnitTypeFilter<$PrismaModel>
   }
 
   export type EnumItemStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -130151,6 +130161,17 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumSpiceLevelNullableFilter<$PrismaModel>
     _max?: NestedEnumSpiceLevelNullableFilter<$PrismaModel>
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type ItemNutritionInfoCountOrderByAggregateInput = {
@@ -130218,6 +130239,22 @@ export namespace Prisma {
     fiber?: SortOrder
     protein?: SortOrder
     salt?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type ItemVariantNullableScalarRelationFilter = {
@@ -130324,6 +130361,13 @@ export namespace Prisma {
     itemId?: SortOrder
   }
 
+  export type EnumUnitTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.UnitType | EnumUnitTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumUnitTypeNullableFilter<$PrismaModel> | $Enums.UnitType | null
+  }
+
   export type EnumVariantTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.VariantType | EnumVariantTypeFieldRefInput<$PrismaModel>
     in?: $Enums.VariantType[] | ListEnumVariantTypeFieldRefInput<$PrismaModel>
@@ -130380,6 +130424,16 @@ export namespace Prisma {
 
   export type VariantOptionSumOrderByAggregateInput = {
     quantity?: SortOrder
+  }
+
+  export type EnumUnitTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UnitType | EnumUnitTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumUnitTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.UnitType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumUnitTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumUnitTypeNullableFilter<$PrismaModel>
   }
 
   export type EnumVariantTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -136455,12 +136509,8 @@ export namespace Prisma {
     divide?: Decimal | DecimalJsLike | number | string
   }
 
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
+  export type EnumUnitTypeFieldUpdateOperationsInput = {
+    set?: $Enums.UnitType
   }
 
   export type EnumItemStatusFieldUpdateOperationsInput = {
@@ -136845,6 +136895,14 @@ export namespace Prisma {
     connect?: ItemWhereUniqueInput
   }
 
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type ItemUpdateOneWithoutNutritionInfoNestedInput = {
     create?: XOR<ItemCreateWithoutNutritionInfoInput, ItemUncheckedCreateWithoutNutritionInfoInput>
     connectOrCreate?: ItemCreateOrConnectWithoutNutritionInfoInput
@@ -136917,6 +136975,10 @@ export namespace Prisma {
     connectOrCreate?: VariantOptionTranslationCreateOrConnectWithoutVariantOptionInput | VariantOptionTranslationCreateOrConnectWithoutVariantOptionInput[]
     createMany?: VariantOptionTranslationCreateManyVariantOptionInputEnvelope
     connect?: VariantOptionTranslationWhereUniqueInput | VariantOptionTranslationWhereUniqueInput[]
+  }
+
+  export type NullableEnumUnitTypeFieldUpdateOperationsInput = {
+    set?: $Enums.UnitType | null
   }
 
   export type EnumVariantTypeFieldUpdateOperationsInput = {
@@ -141152,6 +141214,13 @@ export namespace Prisma {
     not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
   }
 
+  export type NestedEnumUnitTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.UnitType | EnumUnitTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUnitTypeFilter<$PrismaModel> | $Enums.UnitType
+  }
+
   export type NestedEnumItemStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ItemStatus | EnumItemStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ItemStatus[] | ListEnumItemStatusFieldRefInput<$PrismaModel>
@@ -141189,20 +141258,14 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
+  export type NestedEnumUnitTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UnitType | EnumUnitTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUnitTypeWithAggregatesFilter<$PrismaModel> | $Enums.UnitType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUnitTypeFilter<$PrismaModel>
+    _max?: NestedEnumUnitTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumItemStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -141235,11 +141298,44 @@ export namespace Prisma {
     _max?: NestedEnumSpiceLevelNullableFilter<$PrismaModel>
   }
 
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumUnitTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.UnitType | EnumUnitTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumUnitTypeNullableFilter<$PrismaModel> | $Enums.UnitType | null
+  }
+
   export type NestedEnumVariantTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.VariantType | EnumVariantTypeFieldRefInput<$PrismaModel>
     in?: $Enums.VariantType[] | ListEnumVariantTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.VariantType[] | ListEnumVariantTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumVariantTypeFilter<$PrismaModel> | $Enums.VariantType
+  }
+
+  export type NestedEnumUnitTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UnitType | EnumUnitTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumUnitTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.UnitType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumUnitTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumUnitTypeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumVariantTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -143806,9 +143902,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -143840,9 +143936,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -143927,9 +144023,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -143961,9 +144057,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -144434,9 +144530,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -144468,9 +144564,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -144501,9 +144597,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -144535,9 +144631,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -144618,9 +144714,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -144652,9 +144748,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -144691,9 +144787,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -144725,9 +144821,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -145984,9 +146080,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -146017,9 +146113,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -146082,7 +146178,7 @@ export namespace Prisma {
     code?: string | null
     isActive?: boolean
     quantity?: number | null
-    unit?: string | null
+    unit?: $Enums.UnitType | null
     type?: $Enums.VariantType
     itemVariants?: ItemVariantCreateNestedManyWithoutVariantOptionInput
     translations?: VariantOptionTranslationCreateNestedManyWithoutVariantOptionInput
@@ -146094,7 +146190,7 @@ export namespace Prisma {
     code?: string | null
     isActive?: boolean
     quantity?: number | null
-    unit?: string | null
+    unit?: $Enums.UnitType | null
     type?: $Enums.VariantType
     itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutVariantOptionInput
     translations?: VariantOptionTranslationUncheckedCreateNestedManyWithoutVariantOptionInput
@@ -147585,9 +147681,9 @@ export namespace Prisma {
     basePrice?: DecimalNullableFilter<"Item"> | Decimal | DecimalJsLike | number | string | null
     deletedAt?: DateTimeNullableFilter<"Item"> | Date | string | null
     posCategoryId?: StringNullableFilter<"Item"> | string | null
-    quantity?: FloatNullableFilter<"Item"> | number | null
     sku?: StringNullableFilter<"Item"> | string | null
-    unit?: StringNullableFilter<"Item"> | string | null
+    unit?: EnumUnitTypeFilter<"Item"> | $Enums.UnitType
+    quantity?: FloatFilter<"Item"> | number
     status?: EnumItemStatusFilter<"Item"> | $Enums.ItemStatus
     taxTableId?: StringFilter<"Item"> | string
     marketingTag?: EnumMarketingTagNullableFilter<"Item"> | $Enums.MarketingTag | null
@@ -147648,7 +147744,7 @@ export namespace Prisma {
     code?: StringNullableFilter<"VariantOption"> | string | null
     isActive?: BoolFilter<"VariantOption"> | boolean
     quantity?: FloatNullableFilter<"VariantOption"> | number | null
-    unit?: StringNullableFilter<"VariantOption"> | string | null
+    unit?: EnumUnitTypeNullableFilter<"VariantOption"> | $Enums.UnitType | null
     type?: EnumVariantTypeFilter<"VariantOption"> | $Enums.VariantType
   }
 
@@ -150343,9 +150439,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -150376,9 +150472,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -152914,9 +153010,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -152948,9 +153044,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -152992,9 +153088,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -153026,9 +153122,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -153134,9 +153230,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -153168,9 +153264,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -153212,9 +153308,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -153246,9 +153342,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -153680,7 +153776,7 @@ export namespace Prisma {
     code?: string | null
     isActive?: boolean
     quantity?: number | null
-    unit?: string | null
+    unit?: $Enums.UnitType | null
     type?: $Enums.VariantType
     itemVariants?: ItemVariantCreateNestedManyWithoutVariantOptionInput
     establishment?: EstablishmentCreateNestedOneWithoutVariantOptionsInput
@@ -153693,7 +153789,7 @@ export namespace Prisma {
     code?: string | null
     isActive?: boolean
     quantity?: number | null
-    unit?: string | null
+    unit?: $Enums.UnitType | null
     type?: $Enums.VariantType
     itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutVariantOptionInput
   }
@@ -153720,7 +153816,7 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
     type?: EnumVariantTypeFieldUpdateOperationsInput | $Enums.VariantType
     itemVariants?: ItemVariantUpdateManyWithoutVariantOptionNestedInput
     establishment?: EstablishmentUpdateOneWithoutVariantOptionsNestedInput
@@ -153733,7 +153829,7 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
     type?: EnumVariantTypeFieldUpdateOperationsInput | $Enums.VariantType
     itemVariants?: ItemVariantUncheckedUpdateManyWithoutVariantOptionNestedInput
   }
@@ -153786,9 +153882,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -153820,9 +153916,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -153902,9 +153998,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -153936,9 +154032,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -154129,9 +154225,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -154163,9 +154259,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -154215,7 +154311,7 @@ export namespace Prisma {
     code?: string | null
     isActive?: boolean
     quantity?: number | null
-    unit?: string | null
+    unit?: $Enums.UnitType | null
     type?: $Enums.VariantType
     establishment?: EstablishmentCreateNestedOneWithoutVariantOptionsInput
     translations?: VariantOptionTranslationCreateNestedManyWithoutVariantOptionInput
@@ -154228,7 +154324,7 @@ export namespace Prisma {
     code?: string | null
     isActive?: boolean
     quantity?: number | null
-    unit?: string | null
+    unit?: $Enums.UnitType | null
     type?: $Enums.VariantType
     translations?: VariantOptionTranslationUncheckedCreateNestedManyWithoutVariantOptionInput
   }
@@ -154376,9 +154472,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -154410,9 +154506,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -154474,7 +154570,7 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
     type?: EnumVariantTypeFieldUpdateOperationsInput | $Enums.VariantType
     establishment?: EstablishmentUpdateOneWithoutVariantOptionsNestedInput
     translations?: VariantOptionTranslationUpdateManyWithoutVariantOptionNestedInput
@@ -154487,7 +154583,7 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
     type?: EnumVariantTypeFieldUpdateOperationsInput | $Enums.VariantType
     translations?: VariantOptionTranslationUncheckedUpdateManyWithoutVariantOptionNestedInput
   }
@@ -154537,9 +154633,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -154571,9 +154667,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -154673,9 +154769,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -154707,9 +154803,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -155377,9 +155473,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -155411,9 +155507,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -155478,9 +155574,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -155512,9 +155608,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -155747,9 +155843,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -155781,9 +155877,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -155930,9 +156026,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -155964,9 +156060,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -155992,9 +156088,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -156026,9 +156122,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -156070,9 +156166,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -156104,9 +156200,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -157700,9 +157796,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -157734,9 +157830,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -157803,9 +157899,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -157837,9 +157933,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -157896,9 +157992,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -157929,9 +158025,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -166820,9 +166916,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -166854,9 +166950,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -168426,9 +168522,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -168449,7 +168545,7 @@ export namespace Prisma {
     code?: string | null
     isActive?: boolean
     quantity?: number | null
-    unit?: string | null
+    unit?: $Enums.UnitType | null
     type?: $Enums.VariantType
   }
 
@@ -169025,9 +169121,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -169058,9 +169154,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -169089,9 +169185,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -169128,7 +169224,7 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
     type?: EnumVariantTypeFieldUpdateOperationsInput | $Enums.VariantType
     itemVariants?: ItemVariantUpdateManyWithoutVariantOptionNestedInput
     translations?: VariantOptionTranslationUpdateManyWithoutVariantOptionNestedInput
@@ -169140,7 +169236,7 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
     type?: EnumVariantTypeFieldUpdateOperationsInput | $Enums.VariantType
     itemVariants?: ItemVariantUncheckedUpdateManyWithoutVariantOptionNestedInput
     translations?: VariantOptionTranslationUncheckedUpdateManyWithoutVariantOptionNestedInput
@@ -169152,7 +169248,7 @@ export namespace Prisma {
     code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
     type?: EnumVariantTypeFieldUpdateOperationsInput | $Enums.VariantType
   }
 
@@ -170172,9 +170268,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -170573,9 +170669,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -170606,9 +170702,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -170637,9 +170733,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -171812,9 +171908,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     taxTableId: string
     marketingTag?: $Enums.MarketingTag | null
@@ -171829,9 +171925,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -171862,9 +171958,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -171893,9 +171989,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     taxTableId?: StringFieldUpdateOperationsInput | string
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
@@ -173703,9 +173799,9 @@ export namespace Prisma {
     basePrice?: Decimal | DecimalJsLike | number | string | null
     deletedAt?: Date | string | null
     posCategoryId?: string | null
-    quantity?: number | null
     sku?: string | null
-    unit?: string | null
+    unit?: $Enums.UnitType
+    quantity?: number
     status?: $Enums.ItemStatus
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
@@ -173719,9 +173815,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -173753,9 +173849,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
@@ -173784,9 +173880,9 @@ export namespace Prisma {
     basePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     posCategoryId?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
     sku?: NullableStringFieldUpdateOperationsInput | string | null
-    unit?: NullableStringFieldUpdateOperationsInput | string | null
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
+    quantity?: FloatFieldUpdateOperationsInput | number
     status?: EnumItemStatusFieldUpdateOperationsInput | $Enums.ItemStatus
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null

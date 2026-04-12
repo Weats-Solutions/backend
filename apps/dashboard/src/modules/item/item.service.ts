@@ -1,18 +1,18 @@
 // src/modules/item/item.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CorePrismaService } from '@weats/database';
-import { 
-    CreateItemDto, 
-    UpdateItemDto, 
-    GetItemsQueryDto, 
-    ItemSortBy, 
+import {
+    CreateItemDto,
+    UpdateItemDto,
+    GetItemsQueryDto,
+    ItemSortBy,
     SortOrder,
-    BulkDeleteDto, 
-    BulkStatusDto 
+    BulkDeleteDto,
+    BulkStatusDto
 } from '@weats/contracts';
-import { 
-    Establishment, 
-    ITEM_DETAIL_INCLUDE, 
+import {
+    Establishment,
+    ITEM_DETAIL_INCLUDE,
     ITEM_LIST_INCLUDE,
     ItemDetailResponse,
     ItemListResponse,
@@ -24,11 +24,11 @@ import { ItemStatus } from '@weats/database';
 import { clearMenuCacheAsync, ERRORS } from '@weats/common';
 import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 import { RpcException } from '@nestjs/microservices';
-import { 
-    buildModifierGroupData, 
-    buildVariantGroupData, 
-    mapItemDetailResponse, 
-    mapItemListResponse 
+import {
+    buildModifierGroupData,
+    buildVariantGroupData,
+    mapItemDetailResponse,
+    mapItemListResponse
 } from '@weats/item-core';
 
 @Injectable()
@@ -61,6 +61,8 @@ export class ItemService {
                     imageId: dto.imageId || null,
                     posCategoryId: dto.posCategoryId || null,
                     basePrice: hasVariants ? null : dto.basePrice,
+                    unit: dto.unit,
+                    quantity: dto.quantity,
                     sku: hasVariants ? null : (dto.sku || null),
                     taxTableId: dto.taxTableId,
                     status: dto.status,
@@ -173,12 +175,14 @@ export class ItemService {
                     imageId: dto.imageId ?? null,
                     posCategoryId: dto.posCategoryId !== undefined ? dto.posCategoryId : existing.posCategoryId,
                     basePrice: hasVariants ? null : (dto.basePrice !== undefined ? dto.basePrice : existing.basePrice),
+                    unit: dto.unit,
+                    quantity: dto.quantity,
                     sku: hasVariants ? null : (dto.sku !== undefined ? dto.sku : existing.sku),
                     taxTableId: dto.taxTableId !== undefined ? dto.taxTableId : existing.taxTableId,
                     status: dto.status !== undefined ? dto.status : existing.status,
-                    marketingTag: dto.marketingTag !== undefined ? dto.marketingTag : existing.marketingTag,
-                    spiceLevel: dto.spiceLevel !== undefined ? dto.spiceLevel : existing.spiceLevel,
-                    isFeatured: dto.isFeatured !== undefined ? dto.isFeatured : existing.isFeatured,
+                    marketingTag: dto.marketingTag !== undefined ? dto.marketingTag : null,
+                    spiceLevel: dto.spiceLevel !== undefined ? dto.spiceLevel : null,
+                    isFeatured: dto.isFeatured !== undefined ? dto.isFeatured : false,
                     translations: dto.translations
                         ? {
                             create: dto.translations.map(t => ({
@@ -391,7 +395,7 @@ export class ItemService {
         });
 
         clearMenuCacheAsync(establishment.slug);
-        
+
         // Return lean response
         const refreshed = await this.prisma.item.findUnique({
             where: { id: newItem.id },

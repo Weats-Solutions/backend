@@ -1,7 +1,7 @@
-import { 
-    ItemDetailResponse, 
-    ItemListResponse, 
-    ItemWithDetailIncludes, 
+import {
+    ItemDetailResponse,
+    ItemListResponse,
+    ItemWithDetailIncludes,
     ItemWithListIncludes,
     TranslatedItemDetailResponse,
     TranslatedItemVariantDetailResponse,
@@ -26,6 +26,8 @@ export function mapItemDetailResponse(item: ItemWithDetailIncludes): ItemDetailR
         posCategoryId: item.posCategoryId,
         basePrice: item.basePrice ? Number(item.basePrice) : null,
         sku: item.sku,
+        unit: item.unit,
+        quantity: item.quantity,
         status: item.status,
         taxTableId: item.taxTableId,
         marketingTag: item.marketingTag,
@@ -118,6 +120,7 @@ export function mapItemDetailResponse(item: ItemWithDetailIncludes): ItemDetailR
                     : null,
             })),
         })),
+
     };
 }
 
@@ -126,7 +129,7 @@ export function mapItemDetailResponse(item: ItemWithDetailIncludes): ItemDetailR
  * Used for management lists where one primary language is enough.
  */
 export function mapTranslatedItemDetailResponse(
-    item: ItemWithDetailIncludes, 
+    item: ItemWithDetailIncludes,
     primaryLanguage: string
 ): TranslatedItemDetailResponse {
     const itemTr = getTranslation(item.translations, primaryLanguage);
@@ -138,6 +141,8 @@ export function mapTranslatedItemDetailResponse(
         description: itemTr?.description ?? undefined,
         image: item.image ? { url: item.image.url } : null,
         basePrice: item.basePrice ? Number(item.basePrice) : null,
+        unit: item.unit,
+        quantity: item.quantity,
         status: item.status,
         marketingTag: item.marketingTag,
         spiceLevel: item.spiceLevel,
@@ -190,6 +195,7 @@ export function mapTranslatedItemDetailResponse(
                 }),
             };
         }),
+
     };
 }
 
@@ -207,6 +213,8 @@ export function mapItemListResponse(
         description: primaryTr?.description ?? undefined,
         basePrice: item.basePrice ? Number(item.basePrice) : null,
         sku: item.sku,
+        unit: item.unit,
+        quantity: item.quantity,
         status: item.status,
         taxTableId: item.taxTableId,
         marketingTag: item.marketingTag,
@@ -247,5 +255,6 @@ export function mapItemListResponse(
                 optionCount: mg.options.length,
             };
         }),
+
     };
 }

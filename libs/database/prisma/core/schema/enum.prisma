@@ -74,22 +74,6 @@ enum DayOfWeek {
   SUNDAY
 }
 
-enum UnitType {
-  CUP
-  DOSE
-  PEOPLE
-  PIECE
-  PORTION
-  SLICE
-  UNIT
-  GLASS
-  MILLILITRE
-  CENTILITRE
-  LITRE
-  GRAM
-  KILOGRAM
-}
-
 enum BookingStatus {
   PENDING
   CONFIRMED

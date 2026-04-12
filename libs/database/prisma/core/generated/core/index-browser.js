@@ -458,9 +458,9 @@ exports.Prisma.ItemScalarFieldEnum = {
   basePrice: 'basePrice',
   deletedAt: 'deletedAt',
   posCategoryId: 'posCategoryId',
-  quantity: 'quantity',
   sku: 'sku',
   unit: 'unit',
+  quantity: 'quantity',
   status: 'status',
   taxTableId: 'taxTableId',
   marketingTag: 'marketingTag',
@@ -1375,6 +1375,28 @@ exports.Currency = exports.$Enums.Currency = {
   EUR: 'EUR',
   USD: 'USD',
   GBP: 'GBP'
+};
+
+exports.UnitType = exports.$Enums.UnitType = {
+  PORTION: 'PORTION',
+  HALF: 'HALF',
+  SLICE: 'SLICE',
+  PIECE: 'PIECE',
+  PLATE: 'PLATE',
+  BOWL: 'BOWL',
+  UNIT: 'UNIT',
+  GLASS: 'GLASS',
+  CUP: 'CUP',
+  SHOT: 'SHOT',
+  BOTTLE: 'BOTTLE',
+  CAN: 'CAN',
+  MILLILITER: 'MILLILITER',
+  CENTILITER: 'CENTILITER',
+  LITER: 'LITER',
+  GRAM: 'GRAM',
+  KILOGRAM: 'KILOGRAM',
+  OUNCE: 'OUNCE',
+  POUND: 'POUND'
 };
 
 exports.ItemStatus = exports.$Enums.ItemStatus = {
