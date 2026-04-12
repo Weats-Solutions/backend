@@ -8,7 +8,8 @@ import {
   IsNumber,
   IsEnum,
   IsNotEmpty,
-  Min
+  Min,
+  Max
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { EstablishmentLanguage, ItemStatus, MarketingTag, ModifierDisplayMode, SpiceLevel, UnitType } from '@weats/database';
@@ -160,7 +161,8 @@ export class CreateItemDto {
 
   @IsOptional()
   @IsNumber({ maxDecimalPlaces: 2 })
-  @Min(0, { message: 'Price must be greater than or equal to 0' })
+  @Min(0, { message: 'Base price must be greater than or equal to 0' })
+  @Max(999999, { message: 'Base price must be less than or equal to 999999' })
   basePrice?: number; // Só é preenchido se variantGroups for vazio!
 
   @IsEnum(ItemStatus)
