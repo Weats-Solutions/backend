@@ -10,7 +10,7 @@ model Menu {
   updatedAt        DateTime @updatedAt
   maxItemsPerOrder Int?
   price            Float?
-  type             MenuType @default(DEFAULT)
+  type             MenuType @default(LA_CARTE)
 
   establishment Establishment     @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
   schedule      Schedule?         @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
@@ -113,6 +113,6 @@ model MenuItemPosition {
 }
 
 enum MenuType {
-  DEFAULT
+  LA_CARTE
   RODIZIO
 }

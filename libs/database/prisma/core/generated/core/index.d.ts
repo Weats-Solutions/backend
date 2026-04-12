@@ -997,7 +997,7 @@ export type UnitType = (typeof UnitType)[keyof typeof UnitType]
 
 
 export const MenuType: {
-  DEFAULT: 'DEFAULT',
+  LA_CARTE: 'LA_CARTE',
   RODIZIO: 'RODIZIO'
 };
 

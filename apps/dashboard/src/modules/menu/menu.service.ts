@@ -7,7 +7,7 @@ import { CreateMenuDto, UpdateMenuPositionsDto, UpdateMenuDto } from '@weats/con
 import { Establishment } from '@weats/types';
 import { FeatureUsageService } from '@weats/common/feature/feature-usage.service';
 import { ERRORS, MENU_COLOR_PALETTE, clearMenuCacheAsync, normalizeSchedule } from '@weats/common';
-import { CorePrismaService, EstablishmentLanguage, ScheduleType } from '@weats/database';
+import { CorePrismaService, EstablishmentLanguage, MenuType, ScheduleType } from '@weats/database';
 import { RpcException } from '@nestjs/microservices';
 
 @Injectable()
@@ -115,7 +115,6 @@ export class MenuService {
     async createMenu(createMenuDto: CreateMenuDto, establishmentId: string) {
         try {
             const { translations, schedule } = createMenuDto;
-            console.log(createMenuDto)
             const establishment = await this.prisma.establishment.findUnique({
                 where: { id: establishmentId },
                 select: { slug: true },
@@ -144,15 +143,25 @@ export class MenuService {
                 const menuCount = await prisma.menu.count({ where: { establishmentId } });
                 const selectedColor = MENU_COLOR_PALETTE[Math.floor(Math.random() * MENU_COLOR_PALETTE.length)];
 
+                const finalPrice = createMenuDto.type === MenuType.RODIZIO ? createMenuDto.price : null;
+
                 const menu = await prisma.menu.create({
                     data: {
                         establishmentId,
                         position: menuCount + 1,
-                        color: selectedColor,
+                        color: createMenuDto.color,
+                        type: createMenuDto.type,
+                        price: finalPrice,
                         translations: { create: translations },
                         ...(scheduleId && { scheduleId }),
                     },
                     select: {
+                        id: true,
+                        isVisible: true,
+                        position: true,
+                        color: true,
+                        isHighlighted: true,
+                        type: true,
                         translations: {
                             select: {
                                 locale: true,

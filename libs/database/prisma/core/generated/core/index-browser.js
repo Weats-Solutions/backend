@@ -1460,7 +1460,7 @@ exports.AttributeType = exports.$Enums.AttributeType = {
 };
 
 exports.MenuType = exports.$Enums.MenuType = {
-  DEFAULT: 'DEFAULT',
+  LA_CARTE: 'LA_CARTE',
   RODIZIO: 'RODIZIO'
 };
 

@@ -1,13 +1,14 @@
 import { Type } from 'class-transformer';
 import {
-    IsArray, IsDefined, IsEnum, IsEmpty, IsNotEmpty, IsNotEmptyObject, IsNumber, IsOptional, Max, Min, ValidateIf, ValidateNested
+    IsArray, IsDefined, IsEnum, IsEmpty, IsIn, IsNotEmptyObject, IsNumber, IsString, Max, Min, ValidateIf, ValidateNested,
+    IsNotEmpty
 } from 'class-validator';
 import { MenuTranslationDto } from '../translations/menu-translation.dto';
 import { CreateScheduleDto } from '../../schedule/create-schedule.dto';
 import { MenuType } from '@weats/database';
+import { MENU_COLOR_PALETTE } from '@weats/common';
 
 export class CreateMenuDto {
-
     @IsEnum(MenuType)
     type: MenuType;
 
@@ -19,6 +20,11 @@ export class CreateMenuDto {
     @ValidateIf(o => o.type !== MenuType.RODIZIO)
     @IsEmpty({ message: 'Price is not allowed for this menu type' })
     price?: number;
+
+    @IsString()
+    @IsNotEmpty()
+    @IsIn(MENU_COLOR_PALETTE, { message: 'Color must be one of the predefined palette colors' })
+    color: string;
 
     @IsArray()
     @Type(() => MenuTranslationDto)
