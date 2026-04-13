@@ -32,6 +32,13 @@ export class MenuController {
         return this.menuService.createMenu(payload.createMenuDto, payload.establishment.id);
     }
 
+    @MessagePattern(DASHBOARD_PATTERNS.MENU_UPDATE)
+    updateMenu(
+        @Payload() payload: { menuId: string, updateMenuDto: CreateMenuDto, establishment: Establishment },
+    ) {
+        return this.menuService.updateMenu(payload.menuId, payload.updateMenuDto, payload.establishment);
+    }
+
 
     @MessagePattern(DASHBOARD_PATTERNS.MENU_UPDATE_SETTINGS)
     updateMenuSettings(
@@ -40,18 +47,6 @@ export class MenuController {
         return this.menuService.updateMenuSettings(
             payload.menuId,
             payload.updateMenuDto,
-            payload.establishment,
-        );
-    }
-
-
-    @MessagePattern(DASHBOARD_PATTERNS.MENU_UPDATE_CONTENT)
-    updateMenuContent(
-        @Payload() payload: { menuId: string, createMenuDto: CreateMenuDto, establishment: Establishment },
-    ) {
-        return this.menuService.updateMenuContent(
-            payload.menuId,
-            payload.createMenuDto,
             payload.establishment,
         );
     }

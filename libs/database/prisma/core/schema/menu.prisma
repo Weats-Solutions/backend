@@ -10,6 +10,8 @@ model Menu {
   updatedAt        DateTime @updatedAt
   maxItemsPerOrder Int?
   price            Float?
+
+  showImages      Boolean @default(true)
   type             MenuType @default(LA_CARTE)
 
   establishment Establishment     @relation(fields: [establishmentId], references: [id], onDelete: Cascade)

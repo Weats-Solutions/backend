@@ -66,6 +66,18 @@ export class MenuController {
 
     @Roles(EmployeeRoles.MANAGER)
     @UseGuards(ClerkGuard, EstablishmentStaffGuard, ActiveSubscriptionGuard)
+    @Put('/:menuId')
+    updateMenu(
+        @Param('menuId') menuId: string,
+        @Body() updateMenuDto: CreateMenuDto,
+        @CurrentEstablishment() currentEstablishment: Establishment,
+    ) {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.MENU_UPDATE, { menuId, updateMenuDto, establishment: currentEstablishment });
+    }
+
+
+    @Roles(EmployeeRoles.MANAGER)
+    @UseGuards(ClerkGuard, EstablishmentStaffGuard, ActiveSubscriptionGuard)
     @Patch('/:menuId/settings')
     updateMenuSettings(
         @Param('menuId') menuId: string,
@@ -75,16 +87,7 @@ export class MenuController {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.MENU_UPDATE_SETTINGS, { menuId, updateMenuDto, establishment: currentEstablishment });
     }
 
-    @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard, ActiveSubscriptionGuard)
-    @Put('/:menuId/content')
-    updateMenuContent(
-        @Param('menuId') menuId: string,
-        @Body() createMenuDto: CreateMenuDto,
-        @CurrentEstablishment() currentEstablishment: Establishment,
-    ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.MENU_UPDATE_CONTENT, { menuId, createMenuDto, establishment: currentEstablishment });
-    }
+
 
     @Roles(EmployeeRoles.MANAGER)
     @UseGuards(ClerkGuard, EstablishmentStaffGuard, ActiveSubscriptionGuard)

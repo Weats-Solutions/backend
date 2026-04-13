@@ -69,6 +69,7 @@ export class ItemService {
                     marketingTag: dto.marketingTag || null,
                     spiceLevel: dto.spiceLevel || null,
                     isFeatured: dto.isFeatured ?? false,
+                    hasAlcohol: dto.hasAlcohol ?? false,
                     translations: {
                         create: dto.translations.map(t => ({
                             locale: t.locale,
@@ -183,6 +184,7 @@ export class ItemService {
                     marketingTag: dto.marketingTag !== undefined ? dto.marketingTag : null,
                     spiceLevel: dto.spiceLevel !== undefined ? dto.spiceLevel : null,
                     isFeatured: dto.isFeatured !== undefined ? dto.isFeatured : false,
+                    hasAlcohol: dto.hasAlcohol !== undefined ? dto.hasAlcohol : false,
                     translations: dto.translations
                         ? {
                             create: dto.translations.map(t => ({

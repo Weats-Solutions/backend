@@ -38186,6 +38186,7 @@ export namespace Prisma {
     marketingTag: $Enums.MarketingTag | null
     spiceLevel: $Enums.SpiceLevel | null
     isFeatured: boolean | null
+    hasAlcohol: boolean | null
     vendusProductId: number | null
   }
 
@@ -38206,6 +38207,7 @@ export namespace Prisma {
     marketingTag: $Enums.MarketingTag | null
     spiceLevel: $Enums.SpiceLevel | null
     isFeatured: boolean | null
+    hasAlcohol: boolean | null
     vendusProductId: number | null
   }
 
@@ -38226,6 +38228,7 @@ export namespace Prisma {
     marketingTag: number
     spiceLevel: number
     isFeatured: number
+    hasAlcohol: number
     vendusProductId: number
     _all: number
   }
@@ -38260,6 +38263,7 @@ export namespace Prisma {
     marketingTag?: true
     spiceLevel?: true
     isFeatured?: true
+    hasAlcohol?: true
     vendusProductId?: true
   }
 
@@ -38280,6 +38284,7 @@ export namespace Prisma {
     marketingTag?: true
     spiceLevel?: true
     isFeatured?: true
+    hasAlcohol?: true
     vendusProductId?: true
   }
 
@@ -38300,6 +38305,7 @@ export namespace Prisma {
     marketingTag?: true
     spiceLevel?: true
     isFeatured?: true
+    hasAlcohol?: true
     vendusProductId?: true
     _all?: true
   }
@@ -38407,6 +38413,7 @@ export namespace Prisma {
     marketingTag: $Enums.MarketingTag | null
     spiceLevel: $Enums.SpiceLevel | null
     isFeatured: boolean
+    hasAlcohol: boolean
     vendusProductId: number | null
     _count: ItemCountAggregateOutputType | null
     _avg: ItemAvgAggregateOutputType | null
@@ -38446,6 +38453,7 @@ export namespace Prisma {
     marketingTag?: boolean
     spiceLevel?: boolean
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: boolean
     allergens?: boolean | Item$allergensArgs<ExtArgs>
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
@@ -38483,6 +38491,7 @@ export namespace Prisma {
     marketingTag?: boolean
     spiceLevel?: boolean
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
     image?: boolean | Item$imageArgs<ExtArgs>
@@ -38507,6 +38516,7 @@ export namespace Prisma {
     marketingTag?: boolean
     spiceLevel?: boolean
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
     image?: boolean | Item$imageArgs<ExtArgs>
@@ -38531,10 +38541,11 @@ export namespace Prisma {
     marketingTag?: boolean
     spiceLevel?: boolean
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: boolean
   }
 
-  export type ItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "imageId" | "establishmentId" | "createdAt" | "updatedAt" | "basePrice" | "deletedAt" | "posCategoryId" | "sku" | "unit" | "quantity" | "status" | "taxTableId" | "marketingTag" | "spiceLevel" | "isFeatured" | "vendusProductId", ExtArgs["result"]["item"]>
+  export type ItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "imageId" | "establishmentId" | "createdAt" | "updatedAt" | "basePrice" | "deletedAt" | "posCategoryId" | "sku" | "unit" | "quantity" | "status" | "taxTableId" | "marketingTag" | "spiceLevel" | "isFeatured" | "hasAlcohol" | "vendusProductId", ExtArgs["result"]["item"]>
   export type ItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     allergens?: boolean | Item$allergensArgs<ExtArgs>
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
@@ -38607,6 +38618,7 @@ export namespace Prisma {
       marketingTag: $Enums.MarketingTag | null
       spiceLevel: $Enums.SpiceLevel | null
       isFeatured: boolean
+      hasAlcohol: boolean
       vendusProductId: number | null
     }, ExtArgs["result"]["item"]>
     composites: {}
@@ -39063,6 +39075,7 @@ export namespace Prisma {
     readonly marketingTag: FieldRef<"Item", 'MarketingTag'>
     readonly spiceLevel: FieldRef<"Item", 'SpiceLevel'>
     readonly isFeatured: FieldRef<"Item", 'Boolean'>
+    readonly hasAlcohol: FieldRef<"Item", 'Boolean'>
     readonly vendusProductId: FieldRef<"Item", 'Int'>
   }
     
@@ -61145,6 +61158,7 @@ export namespace Prisma {
     updatedAt: Date | null
     maxItemsPerOrder: number | null
     price: number | null
+    showImages: boolean | null
     type: $Enums.MenuType | null
   }
 
@@ -61160,6 +61174,7 @@ export namespace Prisma {
     updatedAt: Date | null
     maxItemsPerOrder: number | null
     price: number | null
+    showImages: boolean | null
     type: $Enums.MenuType | null
   }
 
@@ -61175,6 +61190,7 @@ export namespace Prisma {
     updatedAt: number
     maxItemsPerOrder: number
     price: number
+    showImages: number
     type: number
     _all: number
   }
@@ -61204,6 +61220,7 @@ export namespace Prisma {
     updatedAt?: true
     maxItemsPerOrder?: true
     price?: true
+    showImages?: true
     type?: true
   }
 
@@ -61219,6 +61236,7 @@ export namespace Prisma {
     updatedAt?: true
     maxItemsPerOrder?: true
     price?: true
+    showImages?: true
     type?: true
   }
 
@@ -61234,6 +61252,7 @@ export namespace Prisma {
     updatedAt?: true
     maxItemsPerOrder?: true
     price?: true
+    showImages?: true
     type?: true
     _all?: true
   }
@@ -61336,6 +61355,7 @@ export namespace Prisma {
     updatedAt: Date
     maxItemsPerOrder: number | null
     price: number | null
+    showImages: boolean
     type: $Enums.MenuType
     _count: MenuCountAggregateOutputType | null
     _avg: MenuAvgAggregateOutputType | null
@@ -61370,6 +61390,7 @@ export namespace Prisma {
     updatedAt?: boolean
     maxItemsPerOrder?: boolean
     price?: boolean
+    showImages?: boolean
     type?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
     schedule?: boolean | Menu$scheduleArgs<ExtArgs>
@@ -61390,6 +61411,7 @@ export namespace Prisma {
     updatedAt?: boolean
     maxItemsPerOrder?: boolean
     price?: boolean
+    showImages?: boolean
     type?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
     schedule?: boolean | Menu$scheduleArgs<ExtArgs>
@@ -61407,6 +61429,7 @@ export namespace Prisma {
     updatedAt?: boolean
     maxItemsPerOrder?: boolean
     price?: boolean
+    showImages?: boolean
     type?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
     schedule?: boolean | Menu$scheduleArgs<ExtArgs>
@@ -61424,10 +61447,11 @@ export namespace Prisma {
     updatedAt?: boolean
     maxItemsPerOrder?: boolean
     price?: boolean
+    showImages?: boolean
     type?: boolean
   }
 
-  export type MenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "position" | "isVisible" | "isHighlighted" | "color" | "establishmentId" | "scheduleId" | "createdAt" | "updatedAt" | "maxItemsPerOrder" | "price" | "type", ExtArgs["result"]["menu"]>
+  export type MenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "position" | "isVisible" | "isHighlighted" | "color" | "establishmentId" | "scheduleId" | "createdAt" | "updatedAt" | "maxItemsPerOrder" | "price" | "showImages" | "type", ExtArgs["result"]["menu"]>
   export type MenuInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
     schedule?: boolean | Menu$scheduleArgs<ExtArgs>
@@ -61464,6 +61488,7 @@ export namespace Prisma {
       updatedAt: Date
       maxItemsPerOrder: number | null
       price: number | null
+      showImages: boolean
       type: $Enums.MenuType
     }, ExtArgs["result"]["menu"]>
     composites: {}
@@ -61903,6 +61928,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"Menu", 'DateTime'>
     readonly maxItemsPerOrder: FieldRef<"Menu", 'Int'>
     readonly price: FieldRef<"Menu", 'Float'>
+    readonly showImages: FieldRef<"Menu", 'Boolean'>
     readonly type: FieldRef<"Menu", 'MenuType'>
   }
     
@@ -111085,6 +111111,7 @@ export namespace Prisma {
     marketingTag: 'marketingTag',
     spiceLevel: 'spiceLevel',
     isFeatured: 'isFeatured',
+    hasAlcohol: 'hasAlcohol',
     vendusProductId: 'vendusProductId'
   };
 
@@ -111332,6 +111359,7 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     maxItemsPerOrder: 'maxItemsPerOrder',
     price: 'price',
+    showImages: 'showImages',
     type: 'type'
   };
 
@@ -114955,6 +114983,7 @@ export namespace Prisma {
     marketingTag?: EnumMarketingTagNullableFilter<"Item"> | $Enums.MarketingTag | null
     spiceLevel?: EnumSpiceLevelNullableFilter<"Item"> | $Enums.SpiceLevel | null
     isFeatured?: BoolFilter<"Item"> | boolean
+    hasAlcohol?: BoolFilter<"Item"> | boolean
     vendusProductId?: IntNullableFilter<"Item"> | number | null
     allergens?: ItemAllergenListRelationFilter
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
@@ -114991,6 +115020,7 @@ export namespace Prisma {
     marketingTag?: SortOrderInput | SortOrder
     spiceLevel?: SortOrderInput | SortOrder
     isFeatured?: SortOrder
+    hasAlcohol?: SortOrder
     vendusProductId?: SortOrderInput | SortOrder
     allergens?: ItemAllergenOrderByRelationAggregateInput
     establishment?: EstablishmentOrderByWithRelationInput
@@ -115031,6 +115061,7 @@ export namespace Prisma {
     marketingTag?: EnumMarketingTagNullableFilter<"Item"> | $Enums.MarketingTag | null
     spiceLevel?: EnumSpiceLevelNullableFilter<"Item"> | $Enums.SpiceLevel | null
     isFeatured?: BoolFilter<"Item"> | boolean
+    hasAlcohol?: BoolFilter<"Item"> | boolean
     vendusProductId?: IntNullableFilter<"Item"> | number | null
     allergens?: ItemAllergenListRelationFilter
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
@@ -115067,6 +115098,7 @@ export namespace Prisma {
     marketingTag?: SortOrderInput | SortOrder
     spiceLevel?: SortOrderInput | SortOrder
     isFeatured?: SortOrder
+    hasAlcohol?: SortOrder
     vendusProductId?: SortOrderInput | SortOrder
     _count?: ItemCountOrderByAggregateInput
     _avg?: ItemAvgOrderByAggregateInput
@@ -115095,6 +115127,7 @@ export namespace Prisma {
     marketingTag?: EnumMarketingTagNullableWithAggregatesFilter<"Item"> | $Enums.MarketingTag | null
     spiceLevel?: EnumSpiceLevelNullableWithAggregatesFilter<"Item"> | $Enums.SpiceLevel | null
     isFeatured?: BoolWithAggregatesFilter<"Item"> | boolean
+    hasAlcohol?: BoolWithAggregatesFilter<"Item"> | boolean
     vendusProductId?: IntNullableWithAggregatesFilter<"Item"> | number | null
   }
 
@@ -116348,6 +116381,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Menu"> | Date | string
     maxItemsPerOrder?: IntNullableFilter<"Menu"> | number | null
     price?: FloatNullableFilter<"Menu"> | number | null
+    showImages?: BoolFilter<"Menu"> | boolean
     type?: EnumMenuTypeFilter<"Menu"> | $Enums.MenuType
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
     schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
@@ -116367,6 +116401,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     maxItemsPerOrder?: SortOrderInput | SortOrder
     price?: SortOrderInput | SortOrder
+    showImages?: SortOrder
     type?: SortOrder
     establishment?: EstablishmentOrderByWithRelationInput
     schedule?: ScheduleOrderByWithRelationInput
@@ -116389,6 +116424,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Menu"> | Date | string
     maxItemsPerOrder?: IntNullableFilter<"Menu"> | number | null
     price?: FloatNullableFilter<"Menu"> | number | null
+    showImages?: BoolFilter<"Menu"> | boolean
     type?: EnumMenuTypeFilter<"Menu"> | $Enums.MenuType
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
     schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
@@ -116408,6 +116444,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     maxItemsPerOrder?: SortOrderInput | SortOrder
     price?: SortOrderInput | SortOrder
+    showImages?: SortOrder
     type?: SortOrder
     _count?: MenuCountOrderByAggregateInput
     _avg?: MenuAvgOrderByAggregateInput
@@ -116431,6 +116468,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Menu"> | Date | string
     maxItemsPerOrder?: IntNullableWithAggregatesFilter<"Menu"> | number | null
     price?: FloatNullableWithAggregatesFilter<"Menu"> | number | null
+    showImages?: BoolWithAggregatesFilter<"Menu"> | boolean
     type?: EnumMenuTypeWithAggregatesFilter<"Menu"> | $Enums.MenuType
   }
 
@@ -122398,6 +122436,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -122434,6 +122473,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -122462,6 +122502,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -122498,6 +122539,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -122530,6 +122572,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
   }
 
@@ -122546,6 +122589,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -122566,6 +122610,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -123812,6 +123857,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
+    showImages?: boolean
     type?: $Enums.MenuType
     establishment: EstablishmentCreateNestedOneWithoutMenusInput
     schedule?: ScheduleCreateNestedOneWithoutMenusInput
@@ -123831,6 +123877,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
+    showImages?: boolean
     type?: $Enums.MenuType
     categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
@@ -123846,6 +123893,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     establishment?: EstablishmentUpdateOneRequiredWithoutMenusNestedInput
     schedule?: ScheduleUpdateOneWithoutMenusNestedInput
@@ -123865,6 +123913,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
@@ -123882,6 +123931,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
+    showImages?: boolean
     type?: $Enums.MenuType
   }
 
@@ -123895,6 +123945,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
   }
 
@@ -123910,6 +123961,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
   }
 
@@ -130052,6 +130104,7 @@ export namespace Prisma {
     marketingTag?: SortOrder
     spiceLevel?: SortOrder
     isFeatured?: SortOrder
+    hasAlcohol?: SortOrder
     vendusProductId?: SortOrder
   }
 
@@ -130078,6 +130131,7 @@ export namespace Prisma {
     marketingTag?: SortOrder
     spiceLevel?: SortOrder
     isFeatured?: SortOrder
+    hasAlcohol?: SortOrder
     vendusProductId?: SortOrder
   }
 
@@ -130098,6 +130152,7 @@ export namespace Prisma {
     marketingTag?: SortOrder
     spiceLevel?: SortOrder
     isFeatured?: SortOrder
+    hasAlcohol?: SortOrder
     vendusProductId?: SortOrder
   }
 
@@ -131078,6 +131133,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     maxItemsPerOrder?: SortOrder
     price?: SortOrder
+    showImages?: SortOrder
     type?: SortOrder
   }
 
@@ -131099,6 +131155,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     maxItemsPerOrder?: SortOrder
     price?: SortOrder
+    showImages?: SortOrder
     type?: SortOrder
   }
 
@@ -131114,6 +131171,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     maxItemsPerOrder?: SortOrder
     price?: SortOrder
+    showImages?: SortOrder
     type?: SortOrder
   }
 
@@ -143909,6 +143967,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -143944,6 +144003,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -144030,6 +144090,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -144065,6 +144126,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -144537,6 +144599,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -144572,6 +144635,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -144604,6 +144668,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -144639,6 +144704,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -144721,6 +144787,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -144756,6 +144823,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -144794,6 +144862,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -144829,6 +144898,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -146042,6 +146112,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
+    showImages?: boolean
     type?: $Enums.MenuType
     schedule?: ScheduleCreateNestedOneWithoutMenusInput
     categories?: MenuCategoryCreateNestedManyWithoutMenuInput
@@ -146059,6 +146130,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
+    showImages?: boolean
     type?: $Enums.MenuType
     categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
@@ -146087,6 +146159,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     image?: ImageCreateNestedOneWithoutItemInput
@@ -146121,6 +146194,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -147650,6 +147724,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Menu"> | Date | string
     maxItemsPerOrder?: IntNullableFilter<"Menu"> | number | null
     price?: FloatNullableFilter<"Menu"> | number | null
+    showImages?: BoolFilter<"Menu"> | boolean
     type?: EnumMenuTypeFilter<"Menu"> | $Enums.MenuType
   }
 
@@ -147689,6 +147764,7 @@ export namespace Prisma {
     marketingTag?: EnumMarketingTagNullableFilter<"Item"> | $Enums.MarketingTag | null
     spiceLevel?: EnumSpiceLevelNullableFilter<"Item"> | $Enums.SpiceLevel | null
     isFeatured?: BoolFilter<"Item"> | boolean
+    hasAlcohol?: BoolFilter<"Item"> | boolean
     vendusProductId?: IntNullableFilter<"Item"> | number | null
   }
 
@@ -150446,6 +150522,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -150480,6 +150557,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -153017,6 +153095,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -153052,6 +153131,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -153095,6 +153175,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -153130,6 +153211,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -153237,6 +153319,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -153272,6 +153355,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -153315,6 +153399,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -153350,6 +153435,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -153889,6 +153975,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -153924,6 +154011,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -154005,6 +154093,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -154040,6 +154129,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -154232,6 +154322,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -154267,6 +154358,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -154479,6 +154571,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -154514,6 +154607,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -154640,6 +154734,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -154675,6 +154770,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     itemModifierOptions?: ItemModifierOptionUncheckedCreateNestedManyWithoutProductInput
@@ -154776,6 +154872,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -154811,6 +154908,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     itemModifierOptions?: ItemModifierOptionUncheckedUpdateManyWithoutProductNestedInput
@@ -155480,6 +155578,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     establishment: EstablishmentCreateNestedOneWithoutItemInput
     image?: ImageCreateNestedOneWithoutItemInput
@@ -155515,6 +155614,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
     itemModifierOptions?: ItemModifierOptionUncheckedCreateNestedManyWithoutProductInput
@@ -155581,6 +155681,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
     image?: ImageUpdateOneWithoutItemNestedInput
@@ -155616,6 +155717,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
     itemModifierOptions?: ItemModifierOptionUncheckedUpdateManyWithoutProductNestedInput
@@ -155850,6 +155952,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -155885,6 +155988,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -156033,6 +156137,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -156068,6 +156173,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -156095,6 +156201,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -156130,6 +156237,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -156173,6 +156281,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -156208,6 +156317,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -157161,6 +157271,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
+    showImages?: boolean
     type?: $Enums.MenuType
     establishment: EstablishmentCreateNestedOneWithoutMenusInput
     schedule?: ScheduleCreateNestedOneWithoutMenusInput
@@ -157179,6 +157290,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
+    showImages?: boolean
     type?: $Enums.MenuType
     categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
   }
@@ -157209,6 +157321,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     establishment?: EstablishmentUpdateOneRequiredWithoutMenusNestedInput
     schedule?: ScheduleUpdateOneWithoutMenusNestedInput
@@ -157227,6 +157340,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
   }
@@ -157282,6 +157396,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
+    showImages?: boolean
     type?: $Enums.MenuType
     establishment: EstablishmentCreateNestedOneWithoutMenusInput
     schedule?: ScheduleCreateNestedOneWithoutMenusInput
@@ -157300,6 +157415,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
+    showImages?: boolean
     type?: $Enums.MenuType
     translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
   }
@@ -157433,6 +157549,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     establishment?: EstablishmentUpdateOneRequiredWithoutMenusNestedInput
     schedule?: ScheduleUpdateOneWithoutMenusNestedInput
@@ -157451,6 +157568,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
   }
@@ -157803,6 +157921,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -157838,6 +157957,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -157906,6 +158026,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -157941,6 +158062,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -157999,6 +158121,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -158033,6 +158156,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -158683,6 +158807,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
+    showImages?: boolean
     type?: $Enums.MenuType
     establishment: EstablishmentCreateNestedOneWithoutMenusInput
     categories?: MenuCategoryCreateNestedManyWithoutMenuInput
@@ -158700,6 +158825,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
+    showImages?: boolean
     type?: $Enums.MenuType
     categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
@@ -158982,6 +159108,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     establishment?: EstablishmentUpdateOneRequiredWithoutMenusNestedInput
     categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
@@ -158999,6 +159126,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
@@ -166923,6 +167051,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenCreateNestedManyWithoutItemInput
     establishment: EstablishmentCreateNestedOneWithoutItemInput
@@ -166957,6 +167086,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
     allergens?: ItemAllergenUncheckedCreateNestedManyWithoutItemInput
     modifierGroups?: ItemModifierGroupUncheckedCreateNestedManyWithoutItemInput
@@ -168511,6 +168641,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     maxItemsPerOrder?: number | null
     price?: number | null
+    showImages?: boolean
     type?: $Enums.MenuType
   }
 
@@ -168530,6 +168661,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
   }
 
@@ -169079,6 +169211,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     schedule?: ScheduleUpdateOneWithoutMenusNestedInput
     categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
@@ -169096,6 +169229,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
@@ -169112,6 +169246,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
     price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
   }
 
@@ -169128,6 +169263,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     image?: ImageUpdateOneWithoutItemNestedInput
@@ -169162,6 +169298,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -169193,6 +169330,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -170276,6 +170414,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
   }
 
@@ -170676,6 +170815,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -170710,6 +170850,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -170741,6 +170882,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -171916,6 +172058,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
   }
 
@@ -171932,6 +172075,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -171966,6 +172110,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -171997,6 +172142,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -173806,6 +173952,7 @@ export namespace Prisma {
     marketingTag?: $Enums.MarketingTag | null
     spiceLevel?: $Enums.SpiceLevel | null
     isFeatured?: boolean
+    hasAlcohol?: boolean
     vendusProductId?: number | null
   }
 
@@ -173822,6 +173969,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUpdateManyWithoutItemNestedInput
     establishment?: EstablishmentUpdateOneRequiredWithoutItemNestedInput
@@ -173856,6 +174004,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
     allergens?: ItemAllergenUncheckedUpdateManyWithoutItemNestedInput
     modifierGroups?: ItemModifierGroupUncheckedUpdateManyWithoutItemNestedInput
@@ -173887,6 +174036,7 @@ export namespace Prisma {
     marketingTag?: NullableEnumMarketingTagFieldUpdateOperationsInput | $Enums.MarketingTag | null
     spiceLevel?: NullableEnumSpiceLevelFieldUpdateOperationsInput | $Enums.SpiceLevel | null
     isFeatured?: BoolFieldUpdateOperationsInput | boolean
+    hasAlcohol?: BoolFieldUpdateOperationsInput | boolean
     vendusProductId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 

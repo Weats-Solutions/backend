@@ -3,11 +3,7 @@ import {
     ItemListResponse,
     ItemWithDetailIncludes,
     ItemWithListIncludes,
-    TranslatedItemDetailResponse,
-    TranslatedItemVariantDetailResponse,
-    TranslatedItemVariantGroupDetailResponse,
-    TranslatedModifierGroupDetailResponse,
-    TranslatedModifierOptionDetailResponse
+    TranslatedItemDetailResponse
 } from "@weats/types";
 
 /** Internal helper to find primary or first translation */
@@ -33,6 +29,7 @@ export function mapItemDetailResponse(item: ItemWithDetailIncludes): ItemDetailR
         marketingTag: item.marketingTag,
         spiceLevel: item.spiceLevel,
         isFeatured: item.isFeatured,
+        hasAlcohol: item.hasAlcohol,
         translations: item.translations.map(t => ({
             locale: t.locale,
             name: t.name,
@@ -146,6 +143,8 @@ export function mapTranslatedItemDetailResponse(
         status: item.status,
         marketingTag: item.marketingTag,
         spiceLevel: item.spiceLevel,
+        isFeatured: item.isFeatured,
+        hasAlcohol: item.hasAlcohol,
         itemVariantGroups: item.itemVariantGroups.map(vg => {
             const vgTr = getTranslation(vg.translations, primaryLanguage);
             return {
@@ -220,6 +219,7 @@ export function mapItemListResponse(
         marketingTag: item.marketingTag,
         spiceLevel: item.spiceLevel,
         isFeatured: item.isFeatured,
+        hasAlcohol: item.hasAlcohol,
         imageId: item.imageId,
         imageUrl: item.image?.url,
         vendusProductId: item.vendusProductId ?? null,

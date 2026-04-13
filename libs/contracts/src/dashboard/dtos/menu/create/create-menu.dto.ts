@@ -1,7 +1,8 @@
 import { Type } from 'class-transformer';
 import {
     IsArray, IsDefined, IsEnum, IsEmpty, IsIn, IsNotEmptyObject, IsNumber, IsString, Max, Min, ValidateIf, ValidateNested,
-    IsNotEmpty
+    IsNotEmpty,
+    IsBoolean
 } from 'class-validator';
 import { MenuTranslationDto } from '../translations/menu-translation.dto';
 import { CreateScheduleDto } from '../../schedule/create-schedule.dto';
@@ -21,10 +22,9 @@ export class CreateMenuDto {
     @IsEmpty({ message: 'Price is not allowed for this menu type' })
     price?: number;
 
-    @IsString()
-    @IsNotEmpty()
-    @IsIn(MENU_COLOR_PALETTE, { message: 'Color must be one of the predefined palette colors' })
-    color: string;
+
+    @IsBoolean()
+    showImages: boolean;
 
     @IsArray()
     @Type(() => MenuTranslationDto)

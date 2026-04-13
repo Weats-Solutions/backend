@@ -103,6 +103,9 @@ export class MenuService {
                 position: menu.position,
                 color: menu.color,
                 isHighlighted: menu.isHighlighted,
+                type: menu.type,
+                price: menu.price,
+                showImages: menu.showImages,
                 translations: menu.translations,
                 schedule: menu.schedule ? normalizeSchedule(menu.schedule) : null,
             };
@@ -149,9 +152,10 @@ export class MenuService {
                     data: {
                         establishmentId,
                         position: menuCount + 1,
-                        color: createMenuDto.color,
+                        color: MENU_COLOR_PALETTE[Math.floor(Math.random() * MENU_COLOR_PALETTE.length)],
                         type: createMenuDto.type,
                         price: finalPrice,
+                        showImages: createMenuDto.showImages,
                         translations: { create: translations },
                         ...(scheduleId && { scheduleId }),
                     },
@@ -179,6 +183,71 @@ export class MenuService {
             return menu;
         } catch (error) {
             console.error('Error creating menu:', error);
+            throw error;
+        }
+    }
+
+    async updateMenu(
+        menuId: string,
+        updateMenuDto: CreateMenuDto,
+        establishment: Establishment,
+    ) {
+        try {
+            const { translations, schedule } = updateMenuDto;
+            const finalPrice = updateMenuDto.type === MenuType.RODIZIO ? updateMenuDto.price : null;
+
+            await this.prisma.menu.update({
+                where: { id: menuId },
+                data: {
+                    type: updateMenuDto.type,
+                    price: finalPrice,
+                    showImages: updateMenuDto.showImages,
+                    translations: {
+                        upsert: translations.map((translation) => ({
+                            where: {
+                                menuId_locale: {
+                                    menuId,
+                                    locale: translation.locale,
+                                },
+                            },
+                            update: {
+                                name: translation.name,
+                                description: translation.description,
+                                observations: translation.observations,
+                            },
+                            create: {
+                                locale: translation.locale,
+                                name: translation.name,
+                                description: translation.description,
+                                observations: translation.observations,
+                            },
+                        })),
+                    },
+                    schedule: {
+                        update: {
+                            type: ScheduleType.MENU,
+                            days: {
+                                deleteMany: {},
+                                create: schedule.days.map((day) => ({
+                                    dayOfWeek: day.dayOfWeek,
+                                    isOpen: day.isOpen ?? true,
+                                    intervals: {
+                                        create: day.intervals,
+                                    },
+                                })),
+                            },
+                        },
+                    },
+                },
+                include: {
+                    schedule: { include: { days: { include: { intervals: true } } } },
+                },
+            });
+
+            clearMenuCacheAsync(establishment.slug);
+            return this.getMenuDetails(menuId, establishment);
+        } catch (error) {
+            console.error('Error updating menu details:', error);
             throw error;
         }
     }
@@ -233,65 +302,9 @@ export class MenuService {
         }
     }
 
-    async updateMenuContent(
-        menuId: string,
-        createMenuDto: CreateMenuDto,
-        establishment: Establishment,
-    ) {
-        try {
-            const { translations, schedule } = createMenuDto;
-            await this.prisma.menu.update({
-                where: { id: menuId },
-                data: {
-                    translations: {
-                        upsert: translations.map((translation) => ({
-                            where: {
-                                menuId_locale: {
-                                    menuId,
-                                    locale: translation.locale,
-                                },
-                            },
-                            update: {
-                                name: translation.name,
-                                description: translation.description,
-                                observations: translation.observations,
-                            },
-                            create: {
-                                locale: translation.locale,
-                                name: translation.name,
-                                description: translation.description,
-                                observations: translation.observations,
-                            },
-                        })),
-                    },
-                    schedule: {
-                        update: {
-                            type: ScheduleType.MENU,
-                            days: {
-                                deleteMany: {},
-                                create: schedule.days.map((day) => ({
-                                    dayOfWeek: day.dayOfWeek,
-                                    isOpen: day.isOpen ?? true,
-                                    intervals: {
-                                        create: day.intervals,
-                                    },
-                                })),
-                            },
-                        },
-                    },
-                },
-                include: {
-                    schedule: { include: { days: { include: { intervals: true } } } },
-                },
-            });
 
-            clearMenuCacheAsync(establishment.slug);
-            return this.getMenuDetails(menuId, establishment);
-        } catch (error) {
-            console.error('Error updating menu details:', error);
-            throw error;
-        }
-    }
+
+
 
     async updateMenuPositions(
         updateMenuPositionsDto: UpdateMenuPositionsDto,
@@ -377,13 +390,14 @@ export class MenuService {
      * Loading everything upfront avoids per-section round trips, keeping the
      * catalog fluid even when the user swipes through sections rapidly.
      */
-    async getMenuContent(menuId: string, lang: EstablishmentLanguage) {
+    async getMenuContent(menuId: string, establishmentId: string, lang: EstablishmentLanguage) {
         try {
             const menu = await this.prisma.menu.findFirst({
-                where: { id: menuId },
+                where: { id: menuId, establishmentId: establishmentId },
                 select: {
                     id: true,
                     type: true,
+                    showImages: true,
                     color: true,
                     isHighlighted: true,
                     translations: {

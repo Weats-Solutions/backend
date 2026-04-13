@@ -466,6 +466,7 @@ exports.Prisma.ItemScalarFieldEnum = {
   marketingTag: 'marketingTag',
   spiceLevel: 'spiceLevel',
   isFeatured: 'isFeatured',
+  hasAlcohol: 'hasAlcohol',
   vendusProductId: 'vendusProductId'
 };
 
@@ -653,6 +654,7 @@ exports.Prisma.MenuScalarFieldEnum = {
   updatedAt: 'updatedAt',
   maxItemsPerOrder: 'maxItemsPerOrder',
   price: 'price',
+  showImages: 'showImages',
   type: 'type'
 };
 

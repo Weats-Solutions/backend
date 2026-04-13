@@ -190,6 +190,10 @@ export class CreateItemDto {
   isFeatured?: boolean;
 
   @IsOptional()
+  @IsBoolean()
+  hasAlcohol?: boolean;
+
+  @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreateItemVariantGroupDto)

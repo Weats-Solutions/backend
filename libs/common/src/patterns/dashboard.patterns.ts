@@ -27,6 +27,7 @@ export const DASHBOARD_PATTERNS = {
   MENU_LIST: 'dashboard.menu.list',
   MENU_GET_BY_ID: 'dashboard.menu.get_by_id',
   MENU_CREATE: 'dashboard.menu.create',
+  MENU_UPDATE: 'dashboard.menu.update',
   MENU_UPDATE_SETTINGS: 'dashboard.menu.update_settings',
   MENU_UPDATE_CONTENT: 'dashboard.menu.update_content',
   MENU_UPDATE_POSITIONS: 'dashboard.menu.update_positions',

@@ -167,6 +167,7 @@ export interface ItemDetailResponse {
     marketingTag: MarketingTag | null;
     spiceLevel: SpiceLevel | null;
     isFeatured: boolean;
+    hasAlcohol: boolean;
     translations: TranslationResponse[];
     image: { url: string } | null;
     allergens: AllergenResponse[];
@@ -224,6 +225,8 @@ export interface TranslatedItemDetailResponse {
     status: ItemStatus;
     marketingTag: MarketingTag | null;
     spiceLevel: SpiceLevel | null;
+    isFeatured: boolean;
+    hasAlcohol: boolean;
     itemVariantGroups: TranslatedItemVariantGroupDetailResponse[];
     modifierGroups: TranslatedModifierGroupDetailResponse[];
 }
@@ -268,6 +271,7 @@ export interface ItemListResponse {
     marketingTag: MarketingTag | null;
     spiceLevel: SpiceLevel | null;
     isFeatured: boolean;
+    hasAlcohol: boolean;
     imageId: string | null;
     imageUrl?: string;
     vendusProductId: number | null;

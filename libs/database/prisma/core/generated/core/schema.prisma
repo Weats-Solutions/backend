@@ -957,6 +957,7 @@ model Item {
   marketingTag        MarketingTag?
   spiceLevel          SpiceLevel?
   isFeatured          Boolean              @default(false)
+  hasAlcohol          Boolean              @default(false)
   attributes          ItemAttribute[]
   vendusProductId     Int?
 
@@ -1340,7 +1341,9 @@ model Menu {
   updatedAt        DateTime @updatedAt
   maxItemsPerOrder Int?
   price            Float?
-  type             MenuType @default(LA_CARTE)
+
+  showImages Boolean  @default(true)
+  type       MenuType @default(LA_CARTE)
 
   establishment Establishment     @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
   schedule      Schedule?         @relation(fields: [scheduleId], references: [id], onDelete: SetNull)

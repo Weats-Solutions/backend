@@ -36,6 +36,7 @@ model Item {
   marketingTag        MarketingTag?
   spiceLevel          SpiceLevel?
   isFeatured          Boolean              @default(false)
+  hasAlcohol          Boolean              @default(false)
   attributes          ItemAttribute[]
   vendusProductId     Int?
 
