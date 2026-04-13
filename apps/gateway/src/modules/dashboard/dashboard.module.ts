@@ -21,6 +21,8 @@ import { MenuCategoryController } from './controllers/menu/category.controller';
 import { MenuSubcategoryController } from './controllers/menu/subcategory.controller';
 import { ExpenseController } from './controllers/expense.controller';
 import { StatsController } from './controllers/stats.controller';
+import { ZonePointController } from './controllers/zone/point.controller';
+import { ZonesController } from './controllers/zone/zone.controller';
 
 @Module({
   imports: [ConfigsModule, IntegrationsModule, DatabaseModule, EncryptionModule, FeatureUsageModule],
@@ -35,19 +37,34 @@ import { StatsController } from './controllers/stats.controller';
     },
   ],
   controllers: [
+    //Core
     EstablishmentController,
     UserController,
     PlanController,
     ImageController,
     LandingpageController,
+
+    //Menu
     MenuController,
     MenuCategoryController,
     MenuSubcategoryController,
+
+    //Zones
+    ZonesController,
+    ZonePointController,
+
+    //Items
+    ItemController,
     AddonController,
     VariantOptionsController,
-    ItemController,
+
+    //Integrations
     EupagoIntegrationController,
+
+    //Expenses
     ExpenseController,
+
+    //Stats
     StatsController,
   ],
 })

@@ -13,6 +13,7 @@ import { MenuModule } from './modules/menu/menu.module';
 import { ItemModule } from './modules/item/item.module';
 import { ExpenseModule } from './modules/expense/expense.module';
 import { StatsModule } from './modules/stats/stats.module';
+import { ZoneModule } from './modules/zone/zone.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { StatsModule } from './modules/stats/stats.module';
     ItemModule,
     ExpenseModule,
     StatsModule,
+    ZoneModule,
   ],
   controllers: [DashboardController],
   providers: [DashboardService],

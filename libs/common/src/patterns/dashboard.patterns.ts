@@ -24,6 +24,18 @@ export const DASHBOARD_PATTERNS = {
   ESTABLISHMENT_UPDATE_SCHEDULE: 'dashboard.establishment.update_schedule',
   ESTABLISHMENT_VERIFY_DOMAIN: 'dashboard.establishment.verify_domain',
 
+  ZONE_CREATE: 'dashboard.zone.create',
+  ZONE_GET_ALL: 'dashboard.zone.get_all',
+  ZONE_GET_BY_ID: 'dashboard.zone.get_by_id',
+  ZONE_UPDATE: 'dashboard.zone.update',
+  ZONE_DELETE: 'dashboard.zone.delete',
+
+  POINT_CREATE: 'dashboard.point.create',
+  POINT_GET_ALL: 'dashboard.point.get_all',
+  POINT_GET_BY_ID: 'dashboard.point.get_by_id',
+  POINT_UPDATE: 'dashboard.point.update',
+  POINT_DELETE: 'dashboard.point.delete',
+
   MENU_LIST: 'dashboard.menu.list',
   MENU_GET_BY_ID: 'dashboard.menu.get_by_id',
   MENU_CREATE: 'dashboard.menu.create',
