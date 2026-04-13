@@ -1,4 +1,4 @@
-import { ServicePointType } from '@prisma/client';
+import { ServicePointType } from '@weats/database';
 import {
   IsString,
   IsNotEmpty,
