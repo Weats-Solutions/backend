@@ -1,4 +1,4 @@
-import { ServicePointType } from "@prisma/client";
+import { ServicePointType } from "@weats/database";
 
 export class ServicePointResponseDto {
   id: string;
