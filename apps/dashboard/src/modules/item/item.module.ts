@@ -15,9 +15,9 @@ import { MenuUtilsModule } from '@weats/common/utils/modules/menu/menu-utils.mod
     ],
     controllers: [ItemController, VariantOptionsController, AddonController],
     providers: [
-        AddonService,
         ItemService,
         VariantOptionsService,
+        AddonService,
     ],
 })
 export class ItemModule { }
