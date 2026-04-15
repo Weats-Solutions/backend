@@ -19,7 +19,24 @@ services:
     dns:
       - 1.1.1.1
       - 8.8.8.8
-
+  realtime:
+    build:
+      context: .
+      dockerfile: Dockerfile.realtime
+      args:
+        CORE_DB_URL: ${CORE_DB_URL}
+        ORDERS_DB_URL: ${ORDERS_DB_URL}
+    container_name: weats-realtime
+    restart: always
+    ports:
+      - '4005:4005'
+    env_file:
+      - .env
+    networks:
+      - weats-network
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
   webhooks:
     build:
       context: .
