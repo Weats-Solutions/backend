@@ -28,7 +28,7 @@ export class MenuUtilsService {
         const url = `${this.menuUrl}/api/clear-cache/${endpoint}`;
 
         try {
-            await firstValueFrom(
+            const response = await firstValueFrom(
                 this.httpService.post(
                     url,
                     { slug },
@@ -39,6 +39,8 @@ export class MenuUtilsService {
                     },
                 ),
             );
+
+            console.log(response.data)
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
             console.warn(`[MenuUtilsService] Cache clear failed for ${type}: ${message}`);

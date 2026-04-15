@@ -5,13 +5,22 @@ export interface AuthenticatedSocketData {
     role?: string;
     establishmentId?: string;
     servicePointId?: string;
+    servicePointName?: string;
+    zoneId?: string;
+    zoneName?: string;
+    maxCapacity?: number;
+    clientId?: string;
 }
 
-export interface ClientHelpRequestPayload {
-    servicePointId: string;
+export type StaffCallType = 'HELP' | 'BILL' | 'ORDER' | 'CLEAN';
+
+export interface ClientCallPayload {
+    type: StaffCallType;
     message?: string;
 }
 
-export interface StaffHelpResponsePayload {
+export interface StaffCallResponsePayload {
+    servicePointId: string;
+    clientId: string;
     message?: string;
 }

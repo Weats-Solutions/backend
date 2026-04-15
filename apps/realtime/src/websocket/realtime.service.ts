@@ -24,7 +24,11 @@ export class RealtimeService {
 
             return {
                 establishmentId: servicePoint.zone.establishmentId,
-                servicePointId: servicePoint.id
+                servicePointId: servicePoint.id,
+                servicePointName: servicePoint.name,
+                zoneId: servicePoint.zone.id,
+                zoneName: servicePoint.zone.name,
+                maxCapacity: servicePoint.maxCapacity
             };
         } catch (error) {
             this.logger.error('Client validation failed', error);

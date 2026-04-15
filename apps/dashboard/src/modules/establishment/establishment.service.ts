@@ -83,12 +83,6 @@ export class EstablishmentService {
     const plan = await this.getPlan(id);
     const subscription = await this.getSubscription(id);
 
-    console.log("PLAN", plan)
-    console.log("SUBSCRIPTION", subscription)
-
-    console.log("LOGO IMAGE", establishment.logoImage?.id)
-    console.log("BANNER IMAGE", establishment.bannerImage?.id)
-
     return { ...establishment, subscription, plan };
   }
 
@@ -202,7 +196,6 @@ export class EstablishmentService {
         code: ERRORS.ESTABLISHMENT_NOT_FOUND,
       });
     }
-    console.log(establishment.favicons)
     return {
       branding: {
         logoImage: establishment.logoImage,
@@ -339,7 +332,6 @@ export class EstablishmentService {
     createEstablishmentDto: CreateEstablishmentDto,
     user: User,
   ) {
-    console.log(createEstablishmentDto.countryCode)
     const cleanPhone =
       createEstablishmentDto.phoneNumber.replace(/\D/g, '');
     const cleanTaxId =

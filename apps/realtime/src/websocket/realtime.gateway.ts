@@ -10,8 +10,10 @@ import {
 import { Server, Socket } from 'socket.io';
 import { RoomsService } from '../rooms/rooms.service';
 import { RealtimeService } from './realtime.service';
-import { AuthenticatedSocketData, ClientHelpRequestPayload, StaffHelpResponsePayload } from './realtime.types';
+import { AuthenticatedSocketData, ClientCallPayload, StaffCallResponsePayload } from './realtime.types';
+import { RealtimeStateService } from './state.service';
 import { UsePipes, ValidationPipe, Logger } from '@nestjs/common';
+import { createHash } from 'crypto';
 
 @WebSocketGateway({
     namespace: 'realtime',
@@ -26,34 +28,72 @@ export class RealtimeGateway implements OnGatewayInit {
     constructor(
         private readonly rooms: RoomsService,
         private readonly realtimeService: RealtimeService,
+        private readonly stateService: RealtimeStateService,
     ) { }
 
     afterInit(server: Server) {
         server.use(async (socket: Socket<any, any, any, AuthenticatedSocketData>, next) => {
             try {
+                // Suporte flexível para leitura de auth via cliente nativo, headers (Postman) ou Query URL
+                const inToken = (socket.handshake.auth?.token || socket.handshake.headers['authorization']?.replace('Bearer ', '') || socket.handshake.query?.token) as string;
+                const inEstId = (socket.handshake.auth?.establishmentId || socket.handshake.headers['establishmentid'] || socket.handshake.query?.establishmentId) as string;
+                const inSpId  = (socket.handshake.auth?.servicePointId || socket.handshake.headers['servicepointid'] || socket.handshake.query?.servicePointId) as string;
+
+                const cleanEstId = inEstId?.trim();
+                const cleanSpId = inSpId?.trim();
+
                 // 🧑‍💼 STAFF (Dashboard)
-                if (socket.handshake.auth?.token && socket.handshake.auth?.establishmentId) {
-                    const token = socket.handshake.auth.token;
-                    const establishmentId = socket.handshake.auth.establishmentId;
-                    const result = await this.realtimeService.validateStaff(token, establishmentId);
+                if (inToken && cleanEstId) {
+                    const result = await this.realtimeService.validateStaff(inToken, cleanEstId);
                     
                     if (result) {
                         socket.data.user = result.user;
                         socket.data.role = result.role;
-                        socket.data.establishmentId = result.establishmentId;
+                        socket.data.establishmentId = result.establishmentId.trim();
                         return next();
                     }
                     return next(new Error('Unauthorized Staff'));
                 }
 
                 // 👤 CLIENT (anonymous menu)
-                if (socket.handshake.auth?.servicePointId) {
-                    const servicePointId = socket.handshake.auth.servicePointId;
-                    const result = await this.realtimeService.validateClient(servicePointId);
+                if (cleanSpId) {
+                    const result = await this.realtimeService.validateClient(cleanSpId);
                     
                     if (result) {
+                        // 🛡️ LIMITAR CONEXÕES POR MESA
+                        const spRoom = this.rooms.servicePoint(result.establishmentId, result.servicePointId);
+                        const connectedSockets = await server.in(spRoom).fetchSockets();
+                        const MARGIN = 2; 
+                        
+                        if (connectedSockets.length >= (result.maxCapacity + MARGIN)) {
+                            this.logger.warn(`[LIMIT] Bloqueada nova conexão para Mesa ${result.servicePointName}. Já existem ${connectedSockets.length} ligados.`);
+                            return next(new Error('Mesa cheia (limite de conexões excedido)'));
+                        }
+
                         socket.data.servicePointId = result.servicePointId;
-                        socket.data.establishmentId = result.establishmentId;
+                        socket.data.establishmentId = result.establishmentId.trim();
+                        socket.data.servicePointName = result.servicePointName;
+                        socket.data.zoneId = result.zoneId;
+                        socket.data.zoneName = result.zoneName;
+                        socket.data.maxCapacity = result.maxCapacity;
+
+                        const ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address;
+                        const clientIp = Array.isArray(ip) ? (ip as string[])[0] : (ip as string);
+                        
+                        // 🔑 ID ÚNICO POR DISPOSITIVO: Priorizar o ID que vem do browser (localStorage)
+                        const clientId = (socket.handshake.auth?.clientId as string) || createHash('md5').update(clientIp).digest('hex').substring(0, 8);
+
+                        // 🛡️ Impedir conexão se já estiver banido (IP ou ID)
+                        const isIpBanned = this.blockedIPs.has(clientIp) && Date.now() < (this.blockedIPs.get(clientIp) || 0);
+                        const isIdBanned = this.blockedClientIds.has(clientId) && Date.now() < (this.blockedClientIds.get(clientId) || 0);
+
+                        if (isIpBanned || isIdBanned) {
+                            this.logger.warn(`[SHIELD] Conexão abortada: ${clientIp} (${clientId}) tentou entrar mas está banido.`);
+                            return next(new Error('REALTIME_ERR_IP_BAN'));
+                        }
+
+                        socket.data.clientId = clientId;
+
                         return next();
                     }
                     return next(new Error('Invalid Service Point'));
@@ -67,70 +107,240 @@ export class RealtimeGateway implements OnGatewayInit {
         });
     }
 
-    handleConnection(socket: Socket<any, any, any, AuthenticatedSocketData>) {
-        if (socket.data.user && socket.data.establishmentId) {
+    async handleConnection(socket: Socket<any, any, any, AuthenticatedSocketData>) {
+        const estId = socket.data.establishmentId;
+
+        if (socket.data.user && estId) {
             // Staff
-            socket.join(this.rooms.est(socket.data.establishmentId));
-            this.logger.debug(`Staff ${socket.data.user.id} connected to establishment ${socket.data.establishmentId}`);
-        } else if (socket.data.servicePointId && socket.data.establishmentId) {
+            socket.join(this.rooms.est(estId));
+            console.log(`\n--- 🕵️‍♂️ SYNC DEBUG: STAFF CONNECTED ---`);
+            console.log(`| Staff ID: ${socket.data.user.id}`);
+            console.log(`| Est ID: [${estId}]`);
+            console.log(`------------------------------------\n`);
+
+            // 🔄 SINCRONIZAÇÃO: Enviar pedidos ativos salvos no Redis
+            setTimeout(async () => {
+                const activeCalls = await this.stateService.getActiveCalls(estId);
+                console.log(`\n--- 📡 SENDING SNAPSHOT ---`);
+                console.log(`| Est ID: [${estId}]`);
+                console.log(`| Count: ${activeCalls.length}`);
+                console.log(`| Data:`, JSON.stringify(activeCalls, null, 2));
+                console.log(`---------------------------\n`);
+                socket.emit('call:snapshot', activeCalls);
+            }, 500);
+        } else if (socket.data.servicePointId && estId) {
             // Client
-            socket.join(this.rooms.servicePoint(socket.data.establishmentId, socket.data.servicePointId));
-            this.logger.debug(`Client connected to service point ${socket.data.servicePointId}`);
+            const spId = socket.data.servicePointId;
+            socket.join(this.rooms.servicePoint(estId, spId));
+            this.logger.debug(`Client connected to service point ${spId}`);
         }
     }
+
+    private lastCallTimestamps = new Map<string, number>();
+    private blockedIPs = new Map<string, number>(); // IP -> expiration timestamp
+    private ipStrikes = new Map<string, number>(); // IP -> consecutive violations count
+    private blockedServicePoints = new Map<string, number>(); // SP_ID -> expiration timestamp
+    private blockedClientIds = new Map<string, number>(); // ClientID (Hash) -> expiration timestamp
 
     // 💡 EVENTOS PRINCIPAIS
 
     // Cliente → Backend
     @UsePipes(new ValidationPipe({ transform: true }))
-    @SubscribeMessage('help:request')
-    handleHelpRequest(
+    @SubscribeMessage('call:request')
+    async handleClientCall(
         @ConnectedSocket() socket: Socket<any, any, any, AuthenticatedSocketData>,
-        @MessageBody() payload: ClientHelpRequestPayload,
+        @MessageBody() payload: ClientCallPayload,
     ) {
         if (!socket.data.servicePointId || !socket.data.establishmentId) {
-            return { error: 'Apenas clientes podem pedir ajuda' };
+            return { error: 'Apenas clientes podem fazer chamadas' };
         }
+
+        const spId = socket.data.servicePointId;
+
+        // --- 🛡️ SHIELD: BLOQUEIO DE SERVICE POINT (ADMIN) ---
+        const spBanExpiration = this.blockedServicePoints.get(spId);
+        if (spBanExpiration && Date.now() < spBanExpiration) {
+            this.logger.warn(`[SHIELD] 🛑 MESA BLOQUEADA POR ADMIN: ${spId}`);
+            return { error: 'REALTIME_ERR_SP_BLOCKED', blocked: true };
+        }
+
+        // --- 🛡️ SHIELD: BLOQUEIO DE IP / CLIENTE ---
+        const ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address;
+        const clientIp = Array.isArray(ip) ? (ip as string[])[0] : (ip as string);
+
+        const banExpiration = this.blockedIPs.get(clientIp);
+        const clientId = socket.data.clientId || ''; // Fallback para evitar erro de undefined ⚡
+        const clientBanExpiration = this.blockedClientIds.get(clientId);
+
+        if ((banExpiration && Date.now() < banExpiration) || (clientBanExpiration && Date.now() < clientBanExpiration)) {
+            this.logger.error(`[SHIELD] 🛑 REJEITADO: ${clientIp} (${clientId}) está banido.`);
+            return { error: 'REALTIME_ERR_IP_BAN', blocked: true };
+        }
+
+        // --- 🛡️ SISTEMA ANTI-SPAM (THROTTLE) POR DISPOSITIVO ---
+        const THROTTLE_MS = 10000; 
+        const lastCall = this.lastCallTimestamps.get(clientId);
+        
+        if (lastCall && (Date.now() - lastCall) < THROTTLE_MS) {
+            const strikes = (this.ipStrikes.get(clientIp) || 0) + 1;
+            this.ipStrikes.set(clientIp, strikes);
+
+            if (strikes >= 5) {
+                const ONE_HOUR = 3600000;
+                this.blockedIPs.set(clientIp, Date.now() + ONE_HOUR);
+                this.logger.error(`[SHIELD] 🚨 BANIMENTO ATIVADO: IP ${clientIp} banido por 1 hora por spam massivo.`);
+                socket.disconnect(true);
+                return { error: 'REALTIME_ERR_SPAM_PROTECTION', blocked: true };
+            }
+
+            this.logger.warn(`[ANTI-SPAM] 🔴 VIOLAÇÃO: Client ${clientId} na Mesa ${spId}. Strike ${strikes}/5.`);
+            return { error: 'REALTIME_ERR_THROTTLE', spam: true };
+        }
+        
+        // Se o pedido passou (não é spam), reseta os strikes deste IP
+        this.ipStrikes.set(clientIp, 0);
+
+        // Atualizar registo do DISPOSITIVO com o ms atual
+        this.lastCallTimestamps.set(clientId, Date.now());
+        this.logger.debug(`[ANTI-SPAM] ✅ PERMITIDO. Client: ${clientId} (Mesa: ${spId})`);
 
         const establishmentId = socket.data.establishmentId;
         const estRoom = this.rooms.est(establishmentId);
 
-        // Backend → Staff
-        this.server.to(estRoom).emit('help:requested', {
+        // Se não enviar o tipo, assumimos "HELP" como fallback de compatibilidade
+        const callType = payload?.type || 'HELP';
+
+        // Mapear o tipo de chamada para uma mensagem automática se não houver mensagem custom
+        let defaultMsg = 'REALTIME_MSG_NEED_HELP';
+        if (callType === 'BILL') defaultMsg = 'REALTIME_MSG_NEED_BILL';
+        else if (callType === 'ORDER') defaultMsg = 'REALTIME_MSG_NEED_ORDER';
+        else if (callType === 'CLEAN') defaultMsg = 'REALTIME_MSG_NEED_CLEAN';
+
+        const callPayload = {
             servicePointId: socket.data.servicePointId,
-            message: payload?.message || 'Pedido de ajuda',
+            establishmentId: establishmentId, // Adicionamos no payload para o snapshot
+            servicePointName: socket.data.servicePointName,
+            zoneId: socket.data.zoneId,
+            zoneName: socket.data.zoneName,
+            clientId: clientId,
+            type: callType,
+            message: payload?.message || defaultMsg,
             timestamp: new Date().toISOString(),
-        });
+        };
+
+        console.log(`\n--- 🔔 NEW CALL REQUEST ---`);
+        console.log(`| From Mesa: ${socket.data.servicePointName}`);
+        console.log(`| Est ID: [${establishmentId.trim()}]`);
+        console.log(`| Type: ${callType}`);
+        console.log(`---------------------------\n`);
+
+        // Backend → Staff
+        this.server.to(estRoom).emit('call:requested', callPayload);
         
+        // 💾 PERSISTÊNCIA: Guardar no Redis como pedido ativo
+        await this.stateService.saveActiveCall(establishmentId, socket.data.servicePointId, clientId, callPayload);
+
         return { success: true };
     }
 
     // Staff → Backend
     @UsePipes(new ValidationPipe({ transform: true }))
-    @SubscribeMessage('help:response')
-    handleHelpResponse(
+    @SubscribeMessage('call:response')
+    async handleStaffResponse(
         @ConnectedSocket() socket: Socket<any, any, any, AuthenticatedSocketData>,
-        @MessageBody('servicePointId') servicePointId: string,
-        @MessageBody('message') message?: string,
+        @MessageBody() payload: StaffCallResponsePayload,
     ) {
         if (!socket.data.user || !socket.data.establishmentId) {
-            return { error: 'Apenas staff pode responder a pedidos de ajuda' };
+            return { error: 'Apenas staff pode responder a chamadas' };
         }
 
-        if (!servicePointId) {
-            return { error: 'servicePointId obrigatório' };
+        if (!payload || !payload.servicePointId) {
+            return { error: 'servicePointId obrigatório no corpo' };
         }
 
-        const spRoom = this.rooms.servicePoint(socket.data.establishmentId, servicePointId);
+        const spRoom = this.rooms.servicePoint(socket.data.establishmentId, payload.servicePointId);
 
         // Backend → Cliente
-        this.server.to(spRoom).emit('help:status', {
+        this.server.to(spRoom).emit('call:status', {
             status: 'RESPONDED',
-            message: message || 'A caminho!',
+            message: payload.message || 'REALTIME_MSG_STAFF_ON_WAY',
             staffName: socket.data.user.firstName || 'Staff',
             timestamp: new Date().toISOString(),
         });
-        
+
+        // 🧹 LIMPEZA: Remover do Redis pois foi aceite/respondido
+        await this.stateService.removeActiveCall(socket.data.establishmentId, payload.servicePointId, payload.clientId);
+
         return { success: true };
+    }
+
+    // Admin → Backend (Bloquear Mesa)
+    @UsePipes(new ValidationPipe({ transform: true }))
+    @SubscribeMessage('admin:block:sp')
+    handleAdminBlock(
+        @ConnectedSocket() socket: Socket<any, any, any, AuthenticatedSocketData>,
+        @MessageBody('servicePointId') servicePointId: string,
+        @MessageBody('durationMinutes') durationMinutes?: number,
+    ) {
+        if (!socket.data.user || !socket.data.establishmentId) {
+            return { error: 'Apenas staff pode bloquear mesas' };
+        }
+
+        if (!servicePointId) return { error: 'servicePointId obrigatório' };
+
+        const duration = (durationMinutes || 15) * 60 * 1000;
+        this.blockedServicePoints.set(servicePointId, Date.now() + duration);
+        
+        this.logger.error(`[ADMIN] 🛡️ MESA BLOQUEADA MANUALMENTE: ${servicePointId} por ${durationMinutes || 15} min.`);
+
+        // Opcional: Notificar todos na mesa do bloqueio
+        const spRoom = this.rooms.servicePoint(socket.data.establishmentId, servicePointId);
+        this.server.to(spRoom).emit('call:status', {
+            status: 'BLOCKED',
+            message: 'REALTIME_ERR_SP_BLOCKED',
+            timestamp: new Date().toISOString(),
+        });
+
+        return { success: true, expiresAt: new Date(Date.now() + duration).toISOString() };
+    }
+
+    // Admin → Backend (Bloquear Dispositivo Específico)
+    @UsePipes(new ValidationPipe({ transform: true }))
+    @SubscribeMessage('admin:block:client')
+    handleAdminBlockClient(
+        @ConnectedSocket() socket: Socket<any, any, any, AuthenticatedSocketData>,
+        @MessageBody('clientId') clientId: string,
+        @MessageBody('durationMinutes') durationMinutes?: number,
+    ) {
+        if (!socket.data.user || !socket.data.establishmentId) {
+            return { error: 'Apenas staff pode bloquear clientes' };
+        }
+
+        if (!clientId) return { error: 'clientId obrigatório' };
+
+        const duration = (durationMinutes || 60) * 60 * 1000;
+        this.blockedClientIds.set(clientId, Date.now() + duration);
+        
+        this.logger.error(`[ADMIN] 🛡️ DISPOSITIVO BLOQUEADO MANUALMENTE: ${clientId} por ${durationMinutes || 60} min.`);
+
+        // 👢 Kick imediato do socket específico
+        this.server.fetchSockets().then(sockets => {
+            const victim = sockets.find(s => s.data.clientId === clientId);
+            if (victim) {
+                victim.disconnect(true);
+                this.logger.warn(`[SHIELD] Socket ${victim.id} expulso por banimento manual.`);
+            }
+        });
+
+        return { success: true, expiresAt: new Date(Date.now() + duration).toISOString() };
+    }
+
+    // 🔓 MÉTODOS DE EMERGÊNCIA (Chamados pelo Controller)
+    clearAllBans() {
+        this.blockedIPs.clear();
+        this.blockedClientIds.clear();
+        this.blockedServicePoints.clear();
+        this.ipStrikes.clear();
+        this.logger.log('🔓 [EMERGENCY] Todos os banimentos foram removidos.');
     }
 }
