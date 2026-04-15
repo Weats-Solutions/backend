@@ -32,9 +32,9 @@ export class ZonePointController {
 
     @MessagePattern(DASHBOARD_PATTERNS.POINT_UPDATE)
     async updateServicePoint(
-        @Payload() payload: { pointId: string, dto: UpdateServicePointDto },
+        @Payload() payload: { pointId: string, updateServicePointDto: UpdateServicePointDto },
     ) {
-        return this.zonePointService.updateServicePoint(payload.pointId, payload.dto);
+        return this.zonePointService.updateServicePoint(payload.pointId, payload.updateServicePointDto);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.POINT_DELETE)

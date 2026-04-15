@@ -99,7 +99,7 @@ export class ZonePointService {
                 message: ERRORS.NOT_FOUND,
                 code: 404,
             });
-        }   
+        }
 
         if (servicePoint.zoneId !== zoneId) {
             throw new RpcException({
@@ -138,6 +138,7 @@ export class ZonePointService {
 
             return servicePoint;
         } catch (error) {
+            console.log(error);
             throw new RpcException({
                 message: ERRORS.SERVICE_POINT_UPDATE_FAILED,
                 code: 400,
