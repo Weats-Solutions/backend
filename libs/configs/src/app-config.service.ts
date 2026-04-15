@@ -24,4 +24,8 @@ export class AppConfigService {
   getNodeEnv(): string {
     return this.configService.getOrThrow<string>('NODE_ENV');
   }
+
+  getRealtimePort(): string {
+    return this.configService.getOrThrow<string>('REALTIME_PORT');
+  }
 }
