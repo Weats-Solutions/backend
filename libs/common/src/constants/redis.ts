@@ -6,4 +6,5 @@ export type RedisServiceType =
     | 'webhooks'
     | 'emails'
     | 'cache'
+    | 'realtime'
     | 'qrcodes';
