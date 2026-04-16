@@ -46,3 +46,4 @@ export * from './dashboard/dtos/menu/update/update-category-positions.dto';
 export * from './dashboard/dtos/menu/update/update-menu-positions.dto';
 export * from './dashboard/dtos/menu/update/update-menu.dto';
 export * from './dashboard/dtos/menu/update/update-subcategory-positions.dto';
+export * from './realtime';

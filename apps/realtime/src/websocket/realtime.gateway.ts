@@ -11,6 +11,7 @@ import { Server, Socket } from 'socket.io';
 import { RoomsService } from '../rooms/rooms.service';
 import { RealtimeService } from './realtime.service';
 import { AuthenticatedSocketData, ClientCallPayload, StaffCallResponsePayload } from './realtime.types';
+import { RealtimeCallStatus, RealtimeMessageCode } from '@weats/contracts';
 import { RealtimeStateService } from './state.service';
 import { UsePipes, ValidationPipe, Logger } from '@nestjs/common';
 import { createHash } from 'crypto';
@@ -18,6 +19,8 @@ import { createHash } from 'crypto';
 @WebSocketGateway({
     namespace: 'realtime',
     cors: { origin: '*' },
+    pingInterval: 15000,  // Ping a cada 15 segundos
+    pingTimeout: 20000,   // Espera 20 segundos pela resposta (Total: 35s)
 })
 export class RealtimeGateway implements OnGatewayInit {
     @WebSocketServer()
@@ -42,6 +45,12 @@ export class RealtimeGateway implements OnGatewayInit {
                 const cleanEstId = inEstId?.trim();
                 const cleanSpId = inSpId?.trim();
 
+                this.logger.debug(`--- 🛡️ MIDDLEWARE AUDIT ---`);
+                this.logger.debug(`| Token Presente: ${!!inToken}`);
+                this.logger.debug(`| EstID: [${cleanEstId}]`);
+                this.logger.debug(`| SpID: [${cleanSpId}]`);
+                this.logger.debug(`--------------------------`);
+
                 // 🧑‍💼 STAFF (Dashboard)
                 if (inToken && cleanEstId) {
                     const result = await this.realtimeService.validateStaff(inToken, cleanEstId);
@@ -63,8 +72,21 @@ export class RealtimeGateway implements OnGatewayInit {
                         // 🛡️ LIMITAR CONEXÕES POR MESA
                         const spRoom = this.rooms.servicePoint(result.establishmentId, result.servicePointId);
                         const connectedSockets = await server.in(spRoom).fetchSockets();
-                        const MARGIN = 2; 
+
+                        const ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address;
+                        const clientIp = Array.isArray(ip) ? (ip as string[])[0] : (ip as string);
                         
+                        // 🔑 ID ÚNICO POR DISPOSITIVO: Priorizar o ID que vem do browser (localStorage)
+                        const clientId = (socket.handshake.auth?.clientId as string) || createHash('md5').update(clientIp).digest('hex').substring(0, 8);
+
+                        // 🛡️ BLOQUEAR DUPLICAÇÃO: Verificamos se ESTE dispositivo já está ligado aqui
+                        const alreadyConnected = connectedSockets.find(s => (s.data as AuthenticatedSocketData).clientId === clientId);
+                        if (alreadyConnected) {
+                            this.logger.warn(`[LIMIT] Bloqueada conexão duplicada para Client ${clientId} na Mesa ${result.servicePointName}.`);
+                            return next(new Error('Já existe uma conexão ativa neste dispositivo.'));
+                        }
+
+                        const MARGIN = 2; 
                         if (connectedSockets.length >= (result.maxCapacity + MARGIN)) {
                             this.logger.warn(`[LIMIT] Bloqueada nova conexão para Mesa ${result.servicePointName}. Já existem ${connectedSockets.length} ligados.`);
                             return next(new Error('Mesa cheia (limite de conexões excedido)'));
@@ -77,11 +99,6 @@ export class RealtimeGateway implements OnGatewayInit {
                         socket.data.zoneName = result.zoneName;
                         socket.data.maxCapacity = result.maxCapacity;
 
-                        const ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address;
-                        const clientIp = Array.isArray(ip) ? (ip as string[])[0] : (ip as string);
-                        
-                        // 🔑 ID ÚNICO POR DISPOSITIVO: Priorizar o ID que vem do browser (localStorage)
-                        const clientId = (socket.handshake.auth?.clientId as string) || createHash('md5').update(clientIp).digest('hex').substring(0, 8);
 
                         // 🛡️ Impedir conexão se já estiver banido (IP ou ID)
                         const isIpBanned = this.blockedIPs.has(clientIp) && Date.now() < (this.blockedIPs.get(clientIp) || 0);
@@ -113,10 +130,13 @@ export class RealtimeGateway implements OnGatewayInit {
         if (socket.data.user && estId) {
             // Staff
             socket.join(this.rooms.est(estId));
-            console.log(`\n--- 🕵️‍♂️ SYNC DEBUG: STAFF CONNECTED ---`);
-            console.log(`| Staff ID: ${socket.data.user.id}`);
-            console.log(`| Est ID: [${estId}]`);
-            console.log(`------------------------------------\n`);
+            
+            this.logger.log(`\n[LOGIN] 🧑‍💼 STAFF/ADMIN LIGADO`);
+            console.log(`| Nome: ${socket.data.user.firstName} ${socket.data.user.lastName || ''}`);
+            console.log(`| Email: ${socket.data.user.email}`);
+            console.log(`| Estabelecimento ID: [${estId}]`);
+            console.log(`| Socket ID: ${socket.id}`);
+            console.log(`------------------------------\n`);
 
             // 🔄 SINCRONIZAÇÃO: Enviar pedidos ativos salvos no Redis
             setTimeout(async () => {
@@ -133,6 +153,32 @@ export class RealtimeGateway implements OnGatewayInit {
             const spId = socket.data.servicePointId;
             socket.join(this.rooms.servicePoint(estId, spId));
             this.logger.debug(`Client connected to service point ${spId}`);
+        }
+    }
+
+    async handleDisconnect(socket: Socket<any, any, any, AuthenticatedSocketData>) {
+        const estId = socket.data.establishmentId;
+        const spId = socket.data.servicePointId;
+        const clientId = socket.data.clientId;
+
+        if (socket.data.user) {
+            this.logger.log(`[EXIT] Staff ${socket.data.user.id} saiu do estabelecimento ${estId}`);
+        } else if (spId && estId) {
+            this.logger.log(`[EXIT] Client ${clientId} saiu da Mesa ${socket.data.servicePointName || spId}`);
+            
+            // 🧹 LIMPEZA AUTOMÁTICA: Se o cliente saiu, apagar os seus pedidos ativos no Redis
+            await this.stateService.removeActiveCall(estId, spId, clientId);
+            
+            // Notificar o Dashboard para remover o pedido do ecrã
+            this.server.to(this.rooms.est(estId)).emit('call:removed', { 
+                servicePointId: spId, 
+                clientId 
+            });
+
+            // Auditoria rápida: quantas pessoas restam?
+            const spRoom = this.rooms.servicePoint(estId, spId);
+            const remaining = await this.server.in(spRoom).fetchSockets();
+            this.logger.debug(`[STATS] Mesa ${socket.data.servicePointName || spId} agora tem ${remaining.length} sockets ativos.`);
         }
     }
 
@@ -182,6 +228,7 @@ export class RealtimeGateway implements OnGatewayInit {
         const lastCall = this.lastCallTimestamps.get(clientId);
         
         if (lastCall && (Date.now() - lastCall) < THROTTLE_MS) {
+            const remainingSec = Math.ceil((THROTTLE_MS - (Date.now() - lastCall)) / 1000);
             const strikes = (this.ipStrikes.get(clientIp) || 0) + 1;
             this.ipStrikes.set(clientIp, strikes);
 
@@ -190,11 +237,15 @@ export class RealtimeGateway implements OnGatewayInit {
                 this.blockedIPs.set(clientIp, Date.now() + ONE_HOUR);
                 this.logger.error(`[SHIELD] 🚨 BANIMENTO ATIVADO: IP ${clientIp} banido por 1 hora por spam massivo.`);
                 socket.disconnect(true);
-                return { error: 'REALTIME_ERR_SPAM_PROTECTION', blocked: true };
+                return { error: RealtimeMessageCode.SPAM_PROTECTION, blocked: true };
             }
 
-            this.logger.warn(`[ANTI-SPAM] 🔴 VIOLAÇÃO: Client ${clientId} na Mesa ${spId}. Strike ${strikes}/5.`);
-            return { error: 'REALTIME_ERR_THROTTLE', spam: true };
+            this.logger.warn(`[ANTI-SPAM] 🔴 VIOLAÇÃO: Client ${clientId} na Mesa ${spId}. Aguarde ${remainingSec}s. Strike ${strikes}/5.`);
+            return { 
+                error: RealtimeMessageCode.THROTTLE_ERROR, 
+                spam: true, 
+                remaining: remainingSec 
+            };
         }
         
         // Se o pedido passou (não é spam), reseta os strikes deste IP
@@ -262,8 +313,8 @@ export class RealtimeGateway implements OnGatewayInit {
 
         // Backend → Cliente
         this.server.to(spRoom).emit('call:status', {
-            status: 'RESPONDED',
-            message: payload.message || 'REALTIME_MSG_STAFF_ON_WAY',
+            status: RealtimeCallStatus.RESPONDED,
+            message: payload.message || RealtimeMessageCode.STAFF_ON_WAY,
             staffName: socket.data.user.firstName || 'Staff',
             timestamp: new Date().toISOString(),
         });
@@ -293,11 +344,10 @@ export class RealtimeGateway implements OnGatewayInit {
         
         this.logger.error(`[ADMIN] 🛡️ MESA BLOQUEADA MANUALMENTE: ${servicePointId} por ${durationMinutes || 15} min.`);
 
-        // Opcional: Notificar todos na mesa do bloqueio
         const spRoom = this.rooms.servicePoint(socket.data.establishmentId, servicePointId);
         this.server.to(spRoom).emit('call:status', {
-            status: 'BLOCKED',
-            message: 'REALTIME_ERR_SP_BLOCKED',
+            status: RealtimeCallStatus.BLOCKED,
+            message: RealtimeMessageCode.MESA_BLOQUEADA,
             timestamp: new Date().toISOString(),
         });
 
@@ -319,20 +369,34 @@ export class RealtimeGateway implements OnGatewayInit {
         if (!clientId) return { error: 'clientId obrigatório' };
 
         const duration = (durationMinutes || 60) * 60 * 1000;
-        this.blockedClientIds.set(clientId, Date.now() + duration);
-        
-        this.logger.error(`[ADMIN] 🛡️ DISPOSITIVO BLOQUEADO MANUALMENTE: ${clientId} por ${durationMinutes || 60} min.`);
+        const expiration = Date.now() + duration;
 
-        // 👢 Kick imediato do socket específico
+        // 1. Banir o ID do Dispositivo
+        this.blockedClientIds.set(clientId, expiration);
+        
+        // 2. Tentar encontrar e banir o IP associado a este clientId
+        // Usamos fetchSockets() do namespace para ser compatível com as versões recentes do Socket.io
         this.server.fetchSockets().then(sockets => {
-            const victim = sockets.find(s => s.data.clientId === clientId);
-            if (victim) {
-                victim.disconnect(true);
-                this.logger.warn(`[SHIELD] Socket ${victim.id} expulso por banimento manual.`);
-            }
+            sockets.forEach(s => {
+                if (s.data.clientId === clientId) {
+                    const ip = s.handshake.headers['x-forwarded-for'] || s.handshake.address;
+                    const clientIp = Array.isArray(ip) ? (ip as string[])[0] : (ip as string);
+                    this.blockedIPs.set(clientIp, expiration);
+                    
+                    // Notificar o cliente banido e desligar
+                    s.emit('call:status', {
+                        status: RealtimeCallStatus.BLOCKED,
+                        message: RealtimeMessageCode.IP_BANIDO,
+                        timestamp: new Date().toISOString()
+                    });
+                    s.disconnect(true);
+                }
+            });
         });
 
-        return { success: true, expiresAt: new Date(Date.now() + duration).toISOString() };
+        this.logger.error(`[ADMIN] 🛡️ IP/CLIENT BLOQUEADO MANUALMENTE: ${clientId} por ${durationMinutes || 60} min.`);
+
+        return { success: true, expiresAt: new Date(expiration).toISOString() };
     }
 
     // 🔓 MÉTODOS DE EMERGÊNCIA (Chamados pelo Controller)

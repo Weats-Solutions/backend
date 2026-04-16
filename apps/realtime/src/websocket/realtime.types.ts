@@ -1,4 +1,5 @@
 import { User } from '@weats/types';
+import { RealtimeCallStatus, RealtimeMessageCode, RealtimeStaffCallType } from '@weats/contracts';
 
 export interface AuthenticatedSocketData {
     user?: User;
@@ -12,7 +13,7 @@ export interface AuthenticatedSocketData {
     clientId?: string;
 }
 
-export type StaffCallType = 'HELP' | 'BILL' | 'ORDER' | 'CLEAN';
+export type StaffCallType = RealtimeStaffCallType;
 
 export interface ClientCallPayload {
     type: StaffCallType;
@@ -20,7 +21,9 @@ export interface ClientCallPayload {
 }
 
 export interface StaffCallResponsePayload {
+    status: RealtimeCallStatus;
     servicePointId: string;
     clientId: string;
-    message?: string;
+    message?: RealtimeMessageCode | string;
 }
+

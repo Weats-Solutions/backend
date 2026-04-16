@@ -1,0 +1,26 @@
+export enum RealtimeCallStatus {
+    PENDING = 'PENDING',
+    RESPONDED = 'RESPONDED',
+    CANCELLED = 'CANCELLED',
+    COMPLETED = 'COMPLETED',
+    BLOCKED = 'BLOCKED',
+}
+
+export enum RealtimeMessageCode {
+    // Staff Responses
+    STAFF_ON_WAY = 'REALTIME_MSG_STAFF_ON_WAY',
+    REQUEST_RECEIVED = 'REALTIME_MSG_REQUEST_RECEIVED',
+    
+    // System Messages
+    MESA_BLOQUEADA = 'REALTIME_ERR_SP_BLOCKED',
+    IP_BANIDO = 'REALTIME_ERR_IP_BAN',
+    SPAM_PROTECTION = 'REALTIME_ERR_SPAM_PROTECTION',
+    THROTTLE_ERROR = 'REALTIME_ERR_THROTTLE',
+}
+
+export enum RealtimeStaffCallType {
+    HELP = 'HELP',
+    BILL = 'BILL',
+    ORDER = 'ORDER',
+    CLEAN = 'CLEAN',
+}
