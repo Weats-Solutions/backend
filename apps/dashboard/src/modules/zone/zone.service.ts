@@ -4,7 +4,7 @@ import {
 import { CorePrismaService } from '@weats/database';
 import { CreateServiceZoneDto, UpdateServiceZoneDto } from '@weats/contracts';
 import { ERRORS, FeatureUsageService } from '@weats/common';
-import { Establishment } from '@weats/types';
+import { Establishment, feature } from '@weats/types';
 import { RpcException } from '@nestjs/microservices';
 
 
@@ -66,7 +66,7 @@ export class ZoneService {
         });
 
         const { usage, limit } = await this.usageService.getUsageAndLimit(
-            'points',
+            feature.points,
             establishmentId,
         );
 

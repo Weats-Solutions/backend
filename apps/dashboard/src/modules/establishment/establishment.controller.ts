@@ -1,12 +1,11 @@
-import { Controller, ForbiddenException } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { EstablishmentService } from './establishment.service';
 import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { User, Establishment } from '@weats/types';
-import { UpdateEstablishmentBrandingDto } from '@weats/contracts/dashboard/dtos/establishment/update-establishment-branding.dto';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
-import { UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentSystemSettingsDto, UpdateEstablishmentDigitalSettingsDto } from '@weats/contracts';
+import { UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentSystemSettingsDto, UpdateEstablishmentDigitalSettingsDto, EstablishmentLanguageDto } from '@weats/contracts';
 import { FaviconService } from '@weats/integrations/favicon/favicon.service';
 import { UpdateEstablishmentFaviconDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-favicon';
 
@@ -47,6 +46,11 @@ export class EstablishmentController {
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_SYSTEM)
     getEstablishmentSystemSettings(@Payload() payload: { establishment: Establishment }) {
         return this.establishmentService.getEstablishmentSystemSettings(payload.establishment);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_LANGUAGE_SYNC_STATUS)
+    async getLanguageSyncStatus(@Payload() payload: { jobId: string }) {
+        return this.establishmentService.getLanguageSyncStatus(payload.jobId);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_DIGITAL)
@@ -104,6 +108,11 @@ export class EstablishmentController {
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_SYSTEM)
     updateEstablishmentSystemSettings(@Payload() payload: { establishment: Establishment; updateEstablishmentSystemSettingsDto: UpdateEstablishmentSystemSettingsDto }) {
         return this.establishmentService.updateEstablishmentSystemSettings(payload.establishment, payload.updateEstablishmentSystemSettingsDto);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_LANGUAGES)
+    updateEstablishmentLanguages(@Payload() payload: { establishment: Establishment; updateEstablishmentLanguagesDto: EstablishmentLanguageDto }) {
+        return this.establishmentService.updateLanguages(payload.establishment, payload.updateEstablishmentLanguagesDto);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_VERIFY_DOMAIN)

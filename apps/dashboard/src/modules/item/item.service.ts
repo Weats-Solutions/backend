@@ -227,7 +227,7 @@ export class ItemService {
             include: ITEM_DETAIL_INCLUDE,
         }) as ItemWithDetailIncludes | null;
 
-        if (!item) throw new RpcException({ message: ERRORS.ITEM_NOT_FOUND, code: 404 });
+        if (!item) throw new RpcException({ status: 404, message: ERRORS.ITEM_NOT_FOUND });
         return mapItemDetailResponse(item);
     }
 

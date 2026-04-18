@@ -95,6 +95,11 @@ export class FaviconService {
         const job = await this.jobsQueue.add('generate-favicons', {
             source: source.toString('base64'),
             establishmentId
+        }, {
+            attempts: 3,
+            backoff: { type: 'exponential', delay: 3000 },
+            removeOnComplete: { age: 600 }, // 10 minutos
+            removeOnFail: { age: 600 }, // 10 minutos
         });
         return { jobId: job.id };
     }

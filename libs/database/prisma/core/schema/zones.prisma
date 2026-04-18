@@ -34,6 +34,7 @@ model ServicePoint {
   y            Float            @default(0)
   z            Float            @default(0)
   zone         ServiceZone      @relation(fields: [zoneId], references: [id], onDelete: Cascade)
+  
 
   @@index([zoneId])
 }

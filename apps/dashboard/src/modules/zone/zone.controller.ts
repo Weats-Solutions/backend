@@ -30,8 +30,6 @@ export class ZoneController {
         return this.zoneService.getServiceZones(payload.establishment.id);
     }
 
-
-
     @MessagePattern(DASHBOARD_PATTERNS.ZONE_GET_BY_ID)
     async getServiceZoneById(
         @Payload() payload: {

@@ -54,9 +54,9 @@ import { ZonesController } from './controllers/zone/zone.controller';
     ZonePointController,
 
     //Items
-    ItemController,
     AddonController,
     VariantOptionsController,
+    ItemController,
 
     //Integrations
     EupagoIntegrationController,

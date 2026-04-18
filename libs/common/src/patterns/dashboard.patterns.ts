@@ -9,6 +9,7 @@ export const DASHBOARD_PATTERNS = {
   ESTABLISHMENT_GET_SETTINGS_BILLING: 'dashboard.establishment.get_settings_billing',
   ESTABLISHMENT_GET_SETTINGS_DIGITAL: 'dashboard.establishment.get_settings_digital',
   ESTABLISHMENT_GET_SETTINGS_SYSTEM: 'dashboard.establishment.get_settings_system',
+  ESTABLISHMENT_GET_LANGUAGE_SYNC_STATUS: 'dashboard.establishment.get_language_sync_status',
   ESTABLISHMENT_UPDATE_SETTINGS_GENERAL: 'dashboard.establishment.update_settings_general',
   ESTABLISHMENT_UPDATE_SETTINGS_BRANDING: 'dashboard.establishment.update_settings_branding',
   ESTABLISHMENT_PROCESS_FAVICON: 'dashboard.establishment.process_favicon',
@@ -26,6 +27,7 @@ export const DASHBOARD_PATTERNS = {
 
   ZONE_CREATE: 'dashboard.zone.create',
   ZONE_GET_ALL: 'dashboard.zone.get_all',
+  SERVICE_POINTS_COUNT: 'dashboard.service-points.count',
   ZONE_GET_BY_ID: 'dashboard.zone.get_by_id',
   ZONE_UPDATE: 'dashboard.zone.update',
   ZONE_DELETE: 'dashboard.zone.delete',

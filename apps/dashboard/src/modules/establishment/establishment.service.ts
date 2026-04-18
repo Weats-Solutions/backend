@@ -3,26 +3,50 @@ import { RpcException } from '@nestjs/microservices';
 import { InjectQueue } from '@nestjs/bull';
 import type { Queue } from 'bull';
 import { User, Establishment } from '@weats/types';
-import { RESPONSE_CODES, ERRORS, FeatureUsageService, normalizeSchedule, DEFAULT_SCHEDULE_NAMES, RESERVED_DOMAINS } from '@weats/common';
-import { CreateEstablishmentDto } from '@weats/contracts/dashboard/dtos/establishment';
-import { CorePrismaService, EstablishmentLanguage, ScheduleType } from '@weats/database';
+import {
+  RESPONSE_CODES,
+  ERRORS,
+  FeatureUsageService,
+  normalizeSchedule,
+  DEFAULT_SCHEDULE_NAMES,
+  RESERVED_DOMAINS,
+} from '@weats/common';
+import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
+import {
+  CorePrismaService,
+  EstablishmentLanguage,
+  ScheduleType,
+} from '@weats/database';
 import { EstablishmentStatus } from '@weats/database';
 import { ulid } from 'ulid';
 import { ClerkService, StripeService } from '@weats/integrations';
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
-import { EstablishmentBrandingDto, EstablishmentDomainDto, EstablishmentInformationsDto, EstablishmentLanguageDto, EstablishmentLocationDto, EstablishmentMetadataDto, EstablishmentPreferencesDto, EstablishmentSocialMediaDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentDigitalSettingsDto, UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
+import {
+  EstablishmentBrandingDto,
+  EstablishmentDomainDto,
+  EstablishmentInformationsDto,
+  EstablishmentLanguageDto,
+  EstablishmentLocationDto,
+  EstablishmentMetadataDto,
+  EstablishmentPreferencesDto,
+  EstablishmentSocialMediaDto,
+  UpdateEstablishmentBrandingSettingsDto,
+  UpdateEstablishmentDigitalSettingsDto,
+  UpdateEstablishmentGeneralSettingsDto,
+  UpdateEstablishmentSystemSettingsDto,
+} from '@weats/contracts';
 import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
+import { EstablishmentLanguageSyncService } from './establishment-language-sync.service';
 
 export type NormalizedFeature =
-  | { type: "BOOLEAN"; enabled: boolean }
-  | { type: "QUANTITY"; limit: number };
+  | { type: 'BOOLEAN'; enabled: boolean }
+  | { type: 'QUANTITY'; limit: number };
 
 export interface NormalizedPlan {
   id: string;
   name: string;
   features: Record<string, NormalizedFeature>;
 }
-
 
 @Injectable()
 export class EstablishmentService {
@@ -32,10 +56,12 @@ export class EstablishmentService {
     private readonly prisma: CorePrismaService,
     private readonly stripe: StripeService,
     @InjectQueue('emails') private readonly emailQueue: Queue,
+    @InjectQueue('jobs') private readonly jobsQueue: Queue,
     @Inject('APP_URL') private readonly appUrl: string,
     private readonly clerkService: ClerkService,
     private readonly featureUsageService: FeatureUsageService,
     private readonly menuUtilsService: MenuUtilsService,
+    private readonly establishmentLanguageSyncService: EstablishmentLanguageSyncService,
   ) { }
 
   // ─── Queries ────────────────────────────────────────────────────────
@@ -125,7 +151,7 @@ export class EstablishmentService {
         zipCode: true,
         country: true,
         schedule: {
-          include: { days: { include: { intervals: true } } }
+          include: { days: { include: { intervals: true } } },
         },
       },
     });
@@ -181,11 +207,16 @@ export class EstablishmentService {
           select: { id: true, url: true },
         },
         metadata: {
-          select: { title: true, shortName: true, description: true, ogImage: { select: { id: true, url: true } } }
+          select: {
+            title: true,
+            shortName: true,
+            description: true,
+            ogImage: { select: { id: true, url: true } },
+          },
         },
         favicons: {
-          include: { image: { select: { id: true, url: true } } }
-        }
+          include: { image: { select: { id: true, url: true } } },
+        },
       },
     });
 
@@ -216,13 +247,29 @@ export class EstablishmentService {
         ogImage: establishment.metadata?.ogImage,
       },
       favicons: {
-        faviconIco: establishment.favicons.find((favicon) => favicon.role === 'favicon.ico' || favicon.role === 'favicon-16x16.png')?.image.url || null,
-        favicon32x32Png: establishment.favicons.find((favicon) => favicon.role === 'favicon-32x32.png')?.image.url || null,
-        appleTouchIconPng: establishment.favicons.find((favicon) => favicon.role === 'apple-touch-icon.png')?.image.url || null,
-        androidChrome192x192Png: establishment.favicons.find((favicon) => favicon.role === 'android-chrome-192x192.png')?.image.url || null,
-        androidChrome512x512Png: establishment.favicons.find((favicon) => favicon.role === 'android-chrome-512x512.png')?.image.url || null,
+        faviconIco:
+          establishment.favicons.find(
+            (favicon) =>
+              favicon.role === 'favicon.ico' ||
+              favicon.role === 'favicon-16x16.png',
+          )?.image.url || null,
+        favicon32x32Png:
+          establishment.favicons.find(
+            (favicon) => favicon.role === 'favicon-32x32.png',
+          )?.image.url || null,
+        appleTouchIconPng:
+          establishment.favicons.find(
+            (favicon) => favicon.role === 'apple-touch-icon.png',
+          )?.image.url || null,
+        androidChrome192x192Png:
+          establishment.favicons.find(
+            (favicon) => favicon.role === 'android-chrome-192x192.png',
+          )?.image.url || null,
+        androidChrome512x512Png:
+          establishment.favicons.find(
+            (favicon) => favicon.role === 'android-chrome-512x512.png',
+          )?.image.url || null,
       },
-
     };
   }
 
@@ -235,7 +282,7 @@ export class EstablishmentService {
       languages: {
         primaryLanguage: establishment.primaryLanguage,
         availableLanguages: establishment.availableLanguages,
-      }
+      },
     };
   }
 
@@ -252,9 +299,9 @@ export class EstablishmentService {
       where: { id },
       include: {
         schedule: {
-          include: { days: { include: { intervals: true } } }
+          include: { days: { include: { intervals: true } } },
         },
-      }
+      },
     });
 
     if (!establishment.schedule) {
@@ -263,7 +310,6 @@ export class EstablishmentService {
 
     return normalizeSchedule(establishment.schedule);
   }
-
 
   async getPlan(establishmentId: string): Promise<NormalizedPlan | null> {
     const subscription = await this.prisma.subscription.findUnique({
@@ -292,10 +338,16 @@ export class EstablishmentService {
     for (const f of plan.features) {
       const featureName = f.feature.name;
 
-      if (f.feature.type === "BOOLEAN") {
-        features[featureName] = { type: "BOOLEAN", enabled: f.valueBoolean ?? false };
-      } else if (f.feature.type === "QUANTITY") {
-        features[featureName] = { type: "QUANTITY", limit: f.valueQuantity ?? 0 };
+      if (f.feature.type === 'BOOLEAN') {
+        features[featureName] = {
+          type: 'BOOLEAN',
+          enabled: f.valueBoolean ?? false,
+        };
+      } else if (f.feature.type === 'QUANTITY') {
+        features[featureName] = {
+          type: 'QUANTITY',
+          limit: f.valueQuantity ?? 0,
+        };
       }
     }
 
@@ -305,7 +357,6 @@ export class EstablishmentService {
       features,
     };
   }
-
 
   async getSubscription(establishmentId: string) {
     const subscription = await this.prisma.subscription.findUnique({
@@ -332,12 +383,10 @@ export class EstablishmentService {
     createEstablishmentDto: CreateEstablishmentDto,
     user: User,
   ) {
-    const cleanPhone =
-      createEstablishmentDto.phoneNumber.replace(/\D/g, '');
-    const cleanTaxId =
-      createEstablishmentDto.billingTaxId
-        .toUpperCase()
-        .replace(/[^A-Z0-9]/g, '');
+    const cleanPhone = createEstablishmentDto.phoneNumber.replace(/\D/g, '');
+    const cleanTaxId = createEstablishmentDto.billingTaxId
+      .toUpperCase()
+      .replace(/[^A-Z0-9]/g, '');
 
     const customer = await this.stripe.createCustomer({
       name: createEstablishmentDto.name,
@@ -353,7 +402,7 @@ export class EstablishmentService {
 
       //todo add tax_country
       tax_id_data: cleanTaxId
-        ? [{ type: 'eu_vat', value: "PT" + cleanTaxId }]
+        ? [{ type: 'eu_vat', value: 'PT' + cleanTaxId }]
         : [],
       metadata: {
         business_name: createEstablishmentDto.billingName,
@@ -376,19 +425,12 @@ export class EstablishmentService {
         state: createEstablishmentDto.state,
         zipCode: createEstablishmentDto.zipCode,
         country: createEstablishmentDto.country,
-        countryCode:
-          createEstablishmentDto.countryCode,
-        phoneNumber:
-          createEstablishmentDto.phoneNumber,
-        billingName:
-          createEstablishmentDto.billingName,
-        billingTaxId:
-          createEstablishmentDto.billingTaxId,
-        primaryLanguage:
-          createEstablishmentDto.primaryLanguage,
-        availableLanguages: [
-          createEstablishmentDto.primaryLanguage,
-        ],
+        countryCode: createEstablishmentDto.countryCode,
+        phoneNumber: createEstablishmentDto.phoneNumber,
+        billingName: createEstablishmentDto.billingName,
+        billingTaxId: createEstablishmentDto.billingTaxId,
+        primaryLanguage: createEstablishmentDto.primaryLanguage,
+        availableLanguages: [createEstablishmentDto.primaryLanguage],
         currency: createEstablishmentDto.currency,
         timezone: createEstablishmentDto.timezone,
       },
@@ -470,14 +512,17 @@ export class EstablishmentService {
 
   async updateEstablishmentGeneralSettings(
     establishment: Establishment,
-    dto: UpdateEstablishmentGeneralSettingsDto
+    dto: UpdateEstablishmentGeneralSettingsDto,
   ) {
     try {
       let result;
 
       switch (dto.section) {
         case 'informations':
-          result = await this.updateInformations(establishment.id, dto.informations);
+          result = await this.updateInformations(
+            establishment.id,
+            dto.informations,
+          );
           break;
 
         case 'location':
@@ -499,11 +544,13 @@ export class EstablishmentService {
       this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
 
       return result;
-
     } catch (error) {
       if (error instanceof RpcException) throw error;
 
-      console.error(`[GeneralSettings] Update failed for section ${dto.section}:`, error);
+      console.error(
+        `[GeneralSettings] Update failed for section ${dto.section}:`,
+        error,
+      );
 
       throw new RpcException({
         status: 400,
@@ -512,16 +559,19 @@ export class EstablishmentService {
       });
     }
   }
-  private async updateInformations(id: string, data: EstablishmentInformationsDto) {
+  private async updateInformations(
+    id: string,
+    data: EstablishmentInformationsDto,
+  ) {
     return this.prisma.establishment.update({
       where: { id },
       data: {
         name: data.name,
         email: data.email,
         countryCode: data.countryCode,
-        phoneNumber: data.phoneNumber
-      }
-    })
+        phoneNumber: data.phoneNumber,
+      },
+    });
   }
 
   private async updateLocation(id: string, data: EstablishmentLocationDto) {
@@ -532,14 +582,14 @@ export class EstablishmentService {
         city: data.city,
         state: data.state,
         zipCode: data.zipCode,
-        country: data.country
-      }
-    })
+        country: data.country,
+      },
+    });
   }
 
   async updateEstablishmentBrandingSettings(
     establishment: Establishment,
-    dto: UpdateEstablishmentBrandingSettingsDto
+    dto: UpdateEstablishmentBrandingSettingsDto,
   ) {
     try {
       let result;
@@ -548,16 +598,25 @@ export class EstablishmentService {
       switch (dto.section) {
         case 'branding':
           result = await this.updateBranding(establishment.id, dto.branding);
-          this.menuUtilsService.clearMenuCacheAsync('theme', establishment.slug);
+          this.menuUtilsService.clearMenuCacheAsync(
+            'theme',
+            establishment.slug,
+          );
           break;
 
         case 'socials':
           result = await this.updateSocials(establishment.id, dto.socials);
-          this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
+          this.menuUtilsService.clearMenuCacheAsync(
+            'settings',
+            establishment.slug,
+          );
           break;
         case 'metadata':
           result = await this.updateMetadata(establishment.id, dto.metadata);
-          this.menuUtilsService.clearMenuCacheAsync('theme', establishment.slug);
+          this.menuUtilsService.clearMenuCacheAsync(
+            'theme',
+            establishment.slug,
+          );
           break;
         default:
           throw new RpcException({
@@ -568,7 +627,6 @@ export class EstablishmentService {
       }
 
       return result;
-
     } catch (error) {
       // Se já for uma RpcException, apenas a relança
       if (error instanceof RpcException) throw error;
@@ -591,8 +649,8 @@ export class EstablishmentService {
       data: {
         logoImageId: data.logoImage?.id ?? null,
         bannerImageId: data.bannerImage?.id ?? null,
-      }
-    })
+      },
+    });
   }
 
   private async updateSocials(id: string, data: EstablishmentSocialMediaDto) {
@@ -604,9 +662,9 @@ export class EstablishmentService {
         facebookUrl: data.facebookUrl,
         tripAdvisorUrl: data.tripAdvisorUrl,
         googleReviewUrl: data.googleReviewUrl,
-        websiteUrl: data.websiteUrl
-      }
-    })
+        websiteUrl: data.websiteUrl,
+      },
+    });
   }
 
   private async updateMetadata(id: string, data: EstablishmentMetadataDto) {
@@ -624,23 +682,24 @@ export class EstablishmentService {
         shortName: data.shortName,
         description: data.description,
         ogImageId: data.ogImage?.id ?? null,
-      }
-    })
+      },
+    });
   }
 
-  async updateEstablishmentSystemSettings(establishment: Establishment, dto: UpdateEstablishmentSystemSettingsDto) {
+  async updateEstablishmentSystemSettings(
+    establishment: Establishment,
+    dto: UpdateEstablishmentSystemSettingsDto,
+  ) {
     try {
       let result;
 
       switch (dto.section) {
         case 'preferences':
-          result = await this.updatePreferences(establishment.id, dto.preferences);
+          result = await this.updatePreferences(
+            establishment.id,
+            dto.preferences,
+          );
           break;
-
-        case 'languages':
-          result = await this.updateLanguages(establishment, dto.languages);
-          break;
-
         default:
           throw new RpcException({
             status: 400,
@@ -652,7 +711,6 @@ export class EstablishmentService {
       this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
 
       return result;
-
     } catch (error) {
       // Se já for uma RpcException, apenas a relança
       if (error instanceof RpcException) throw error;
@@ -669,53 +727,82 @@ export class EstablishmentService {
     }
   }
 
-  private async updatePreferences(id: string, data: EstablishmentPreferencesDto) {
+  private async updatePreferences(
+    id: string,
+    data: EstablishmentPreferencesDto,
+  ) {
     return this.prisma.establishment.update({
       where: { id },
       data: {
         currency: data.currency,
         timezone: data.timezone,
-      }
-    })
+      },
+    });
   }
 
-  private async updateLanguages(establishment: Establishment, data: EstablishmentLanguageDto) {
-    const { limit } = await this.featureUsageService.getUsageAndLimit("languages", establishment.id)
-    if (limit !== null && data.availableLanguages.length > limit) {
-      throw new RpcException({
-        status: 400,
-        message: ERRORS.FEATURE_LIMIT_REACHED,
-        code: ERRORS.FEATURE_LIMIT_REACHED,
-      });
-    }
-
+  async updateLanguages(
+    establishment: Establishment,
+    data: EstablishmentLanguageDto,
+  ) {
+    // 1. Validação: a língua primária deve estar sempre na lista
     if (!data.availableLanguages.includes(establishment.primaryLanguage as EstablishmentLanguage)) {
       throw new RpcException({
         status: 400,
-        message: ERRORS.BAD_REQUEST,
+        message: 'Primary language must be included in available languages',
         code: ERRORS.BAD_REQUEST,
       });
     }
 
-    return this.prisma.establishment.update({
-      where: { id: establishment.id },
-      data: {
-        availableLanguages: data.availableLanguages,
-      }
-    })
+    // 2. Validação de limite do plano
+    const { limit } = await this.featureUsageService.getUsageAndLimit('languages', establishment.id);
+    if (limit !== null && data.availableLanguages.length > limit) {
+      throw new RpcException({ status: 400, message: ERRORS.FEATURE_LIMIT_REACHED });
+    }
+
+    // 3. Calcular línguas adicionadas (novas)
+    const currentLanguages = establishment.availableLanguages as EstablishmentLanguage[];
+    const addedLanguages = data.availableLanguages.filter(
+      (locale) => !currentLanguages.includes(locale),
+    );
+
+    // 4. Se não há línguas novas, apenas atualizar a lista no DB (caso de remoção)
+    //    As traduções das línguas removidas são mantidas para o caso de o user reativar
+    if (addedLanguages.length === 0) {
+      await this.prisma.establishment.update({
+        where: { id: establishment.id },
+        data: { availableLanguages: data.availableLanguages },
+      });
+
+      return { syncJobId: null, status: 'completed' };
+    }
+
+    // 5. Enfileiramos o Job passando a lista COMPLETA que queremos ter no final
+    const job = await this.establishmentLanguageSyncService.enqueueLanguageSyncJob(
+      establishment.id,
+      establishment.primaryLanguage as EstablishmentLanguage,
+      addedLanguages,
+      data.availableLanguages, // Passamos a lista final desejada
+    );
+
+    return {
+      syncJobId: job?.id ?? null,
+      status: 'pending_sync'
+    };
   }
 
   private async updateSchedule(id: string, data: CreateScheduleDto) {
-    const establishmentWithSchedule = await this.prisma.establishment.findUnique({
-      where: { id },
-      select: { scheduleId: true },
-    });
+    const establishmentWithSchedule =
+      await this.prisma.establishment.findUnique({
+        where: { id },
+        select: { scheduleId: true },
+      });
 
-    if (!establishmentWithSchedule) throw new RpcException({
-      status: 400,
-      message: ERRORS.ESTABLISHMENT_NOT_FOUND,
-      code: ERRORS.ESTABLISHMENT_NOT_FOUND,
-    });
+    if (!establishmentWithSchedule)
+      throw new RpcException({
+        status: 400,
+        message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+        code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+      });
 
     // Se tem schedule → atualizar, senão → criar
     if (establishmentWithSchedule.scheduleId) {
@@ -765,17 +852,22 @@ export class EstablishmentService {
     }
   }
 
-  async upsertEstablishmentSchedule(establishment: Establishment, scheduleDto: CreateScheduleDto) {
-    const establishmentWithSchedule = await this.prisma.establishment.findUnique({
-      where: { id: establishment.id },
-      select: { scheduleId: true },
-    });
+  async upsertEstablishmentSchedule(
+    establishment: Establishment,
+    scheduleDto: CreateScheduleDto,
+  ) {
+    const establishmentWithSchedule =
+      await this.prisma.establishment.findUnique({
+        where: { id: establishment.id },
+        select: { scheduleId: true },
+      });
 
-    if (!establishmentWithSchedule) throw new RpcException({
-      status: 400,
-      message: ERRORS.ESTABLISHMENT_NOT_FOUND,
-      code: ERRORS.ESTABLISHMENT_NOT_FOUND,
-    });
+    if (!establishmentWithSchedule)
+      throw new RpcException({
+        status: 400,
+        message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+        code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+      });
 
     // Se tem schedule → atualizar, senão → criar
     if (establishmentWithSchedule.scheduleId) {
@@ -825,13 +917,46 @@ export class EstablishmentService {
     }
   }
 
-  async updateEstablishmentDigitalSettings(establishment: Establishment, updateEstablishmentDigitalSettingsDto: UpdateEstablishmentDigitalSettingsDto) {
+  async getLanguageSyncStatus(jobId: string) {
+    const job = await this.jobsQueue.getJob(jobId);
+
+    if (!job) {
+      throw new RpcException({
+        status: 404,
+        message: ERRORS.JOB_NOT_FOUND,
+        code: 404,
+      });
+    }
+
+    const state = await job.getState(); // 'active', 'waiting', 'completed', 'failed', 'delayed'
+    const progress = job.progress(); // Retorna o objeto { percentage, currentStep, label }
+    const reason = job.failedReason; // Caso o job tenha falhado
+
+    return {
+      jobId: job.id,
+      state,
+      progress: progress || { percentage: 0, label: 'A iniciar...' },
+      isFinished: ['completed', 'failed'].includes(state),
+      failedReason: reason,
+    };
+  }
+
+  async updateEstablishmentDigitalSettings(
+    establishment: Establishment,
+    updateEstablishmentDigitalSettingsDto: UpdateEstablishmentDigitalSettingsDto,
+  ) {
     if (updateEstablishmentDigitalSettingsDto.section === 'domain') {
-      return this.updateDomain(establishment, updateEstablishmentDigitalSettingsDto.domain);
+      return this.updateDomain(
+        establishment,
+        updateEstablishmentDigitalSettingsDto.domain,
+      );
     }
   }
 
-  async updateDomain(establishment: Establishment, domainDto: EstablishmentDomainDto) {
+  async updateDomain(
+    establishment: Establishment,
+    domainDto: EstablishmentDomainDto,
+  ) {
     await this.verifyDomain(domainDto.slug);
 
     return this.prisma.establishment.update({
@@ -1043,7 +1168,10 @@ export class EstablishmentService {
     let processedCount = 0;
 
     for (const user of users) {
-      const establishmentsMetadata: Record<string, { status: string; role: string }> = {};
+      const establishmentsMetadata: Record<
+        string,
+        { status: string; role: string }
+      > = {};
       let hasUpdates = false;
 
       for (const establishment of user.establishments) {
@@ -1087,14 +1215,14 @@ export class EstablishmentService {
 
   private generateSlug(name: string): string {
     return name
-      .normalize('NFD')                 // Decompõe caracteres acentuados (ex: á -> a + ´)
+      .normalize('NFD') // Decompõe caracteres acentuados (ex: á -> a + ´)
       .replace(/[\u0300-\u036f]/g, '') // Remove os acentos
       .toLowerCase()
       .trim()
-      .replace(/[^a-z0-9\s-]/g, '')    // Remove caracteres especiais que sobraram
-      .replace(/\s+/g, '-')            // Espaços para hífens
-      .replace(/-+/g, '-')             // Remove hífens duplicados
-      .replace(/^-+|-+$/g, '');        // Remove hífens no início e fim
+      .replace(/[^a-z0-9\s-]/g, '') // Remove caracteres especiais que sobraram
+      .replace(/\s+/g, '-') // Espaços para hífens
+      .replace(/-+/g, '-') // Remove hífens duplicados
+      .replace(/^-+|-+$/g, ''); // Remove hífens no início e fim
   }
 
   private async generateUniqueSlug(name: string): Promise<string> {
@@ -1112,7 +1240,7 @@ export class EstablishmentService {
     while (!isUnique && attempts < 5) {
       const exists = await this.prisma.establishment.findUnique({
         where: { slug: currentSlug },
-        select: { id: true } // Seleciona apenas o ID para ser mais rápido
+        select: { id: true }, // Seleciona apenas o ID para ser mais rápido
       });
 
       if (!exists) {

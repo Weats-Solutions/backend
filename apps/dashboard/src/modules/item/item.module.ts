@@ -13,7 +13,7 @@ import { MenuUtilsModule } from '@weats/common/utils/modules/menu/menu-utils.mod
         DatabaseModule,
         MenuUtilsModule,
     ],
-    controllers: [ItemController, VariantOptionsController, AddonController],
+    controllers: [VariantOptionsController, AddonController, ItemController],
     providers: [
         ItemService,
         VariantOptionsService,
