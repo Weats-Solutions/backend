@@ -10,7 +10,7 @@ import {
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { RpcException } from '@nestjs/microservices';
 import { ERRORS } from '@weats/common';
-import { v4 as uuidv4 } from 'uuid';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class CloudflareR2Service {
@@ -41,7 +41,7 @@ export class CloudflareR2Service {
     async generateUploadUrls(count: number, establishmentId: string) {
         try {
             const requests = Array.from({ length: count }).map(async () => {
-                const fileId = uuidv4();
+                const fileId = crypto.randomUUID();
                 const key = `establishments/${establishmentId}/${fileId}`;
 
                 const command = new PutObjectCommand({
