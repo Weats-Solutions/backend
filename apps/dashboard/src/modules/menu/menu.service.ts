@@ -450,6 +450,7 @@ export class MenuService {
                                                     spiceLevel: true,
                                                     marketingTag: true,
                                                     isFeatured: true,
+                                                    hasAlcohol: true,
                                                     unit: true,
                                                     quantity: true,
                                                     // Image

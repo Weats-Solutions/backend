@@ -23,6 +23,7 @@ import { ExpenseController } from './controllers/expense.controller';
 import { StatsController } from './controllers/stats.controller';
 import { ZonePointController } from './controllers/zone/point.controller';
 import { ZonesController } from './controllers/zone/zone.controller';
+import { InvoiceController } from './controllers/invoice.controller';
 
 @Module({
   imports: [ConfigsModule, IntegrationsModule, DatabaseModule, EncryptionModule, FeatureUsageModule],
@@ -63,6 +64,9 @@ import { ZonesController } from './controllers/zone/zone.controller';
 
     //Expenses
     ExpenseController,
+
+    //Invoices
+    InvoiceController,
 
     //Stats
     StatsController,

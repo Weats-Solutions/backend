@@ -270,4 +270,17 @@ export class StripeService {
       throw error;
     }
   }
+
+  async listInvoicesByCustomer(customerId: string): Promise<Stripe.Invoice[]> {
+    try {
+      const invoices = await this.stripe.invoices.list({
+        customer: customerId,
+        limit: 100,
+      });
+      return invoices.data;
+    } catch (error) {
+      console.error('Error listing invoices:', error);
+      throw error;
+    }
+  }
 }
