@@ -7,6 +7,14 @@ export const ALLOWED_IMAGE_MIME_TYPES = [
     'image/svg+xml',
 ];
 
+export const ALLOWED_IMAGE_R2_MIME_TYPES = [
+    'image/jpeg',
+    'image/png',
+    'image/webp',
+    'image/avif',
+    'image/svg+xml',
+];
+
 export const ALLOWED_IMAGE_EXTENSIONS = [
     '.jpg',
     '.jpeg',

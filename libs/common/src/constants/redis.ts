@@ -7,4 +7,5 @@ export type RedisServiceType =
     | 'emails'
     | 'cache'
     | 'realtime'
-    | 'qrcodes';
+    | 'qrcodes'
+    | 'nextCache';

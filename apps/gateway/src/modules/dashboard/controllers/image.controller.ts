@@ -103,6 +103,20 @@ export class ImageController {
 
     @Roles()
     @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+    @Post('r2-direct-upload-urls')
+    @ThrottleWrite()
+    async generateR2DirectUploadUrls(
+        @Body() body: GenerateUploadUrlsDto,
+        @CurrentEstablishment() establishment: Establishment,
+    ) {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.IMAGE_GENERATE_R2_UPLOAD_URLS, {
+            count: body.count,
+            establishmentId: establishment.id,
+        });
+    }
+
+    @Roles()
+    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
     @Post('confirm-direct-uploads')
     @ThrottleWrite()
     async confirmDirectUploads(

@@ -44,8 +44,9 @@ export class RedisConfigService {
       webhooks: Number(this.configService.getOrThrow<string>('REDIS_WEBHOOK_DB')),
       emails: Number(this.configService.getOrThrow<string>('REDIS_EMAIL_DB')),
       cache: Number(this.configService.getOrThrow<string>('REDIS_CACHE_DB')),
-      realtime: Number(this.configService.get<string>('REDIS_REALTIME_DB') || 8),
+      realtime: Number(this.configService.get<string>('REDIS_REALTIME_DB') || 9),
       qrcodes: Number(this.configService.getOrThrow<string>('REDIS_QRCODES_DB')),
+      nextCache: Number(this.configService.getOrThrow<string>('REDIS_NEXT_CACHE_DB')),
     };
 
     return dbMap[serviceType];

@@ -40,6 +40,9 @@
     "seed:all": "pnpm seed:plans && pnpm seed:items && pnpm seed:tax && pnpm seed:allergens && pnpm seed:themes"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1032.0",
+    "@aws-sdk/s3-presigned-post": "^3.1032.0",
+    "@aws-sdk/s3-request-presigner": "^3.1032.0",
     "@bull-board/api": "^6.20.5",
     "@bull-board/express": "^6.20.5",
     "@clerk/backend": "^3.2.0",

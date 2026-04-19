@@ -105,6 +105,7 @@ export const DASHBOARD_PATTERNS = {
   IMAGE_UPDATE: 'dashboard.image.update',
   IMAGE_DELETE: 'dashboard.image.delete',
   IMAGE_GENERATE_UPLOAD_URLS: 'dashboard.image.generate_upload_urls',
+  IMAGE_GENERATE_R2_UPLOAD_URLS: 'dashboard.image.generate_r2_upload_urls',
   IMAGE_CONFIRM_UPLOAD: 'dashboard.image.confirm_upload',
 
   EUPAGO_GET_STATUS: 'dashboard.eupago.get_status',
