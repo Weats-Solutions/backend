@@ -68,6 +68,11 @@ export class EstablishmentController {
         return this.establishmentService.getSubscription(payload.id);
     }
 
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_INVOICES)
+    getInvoices(@Payload() payload: { id: string }) {
+        return this.establishmentService.getInvoices(payload.id);
+    }
+
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_PORTAL_SESSION)
     getPortalSession(@Payload() payload: { id: string }) {
         return this.establishmentService.getPortalSession(payload.id);
