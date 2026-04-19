@@ -69,6 +69,12 @@ import { CloudflareR2Service } from "./cloudflare-r2.service";
                 cloudflareConfig.getR2ImagesBucketURL(),
             inject: [CloudflareConfigService],
         },
+        {
+            provide: 'R2_CDN_URL',
+            useFactory: async (cloudflareConfig: CloudflareConfigService) =>
+                cloudflareConfig.getR2CdnURL(),
+            inject: [CloudflareConfigService],
+        },
     ],
     exports: [
         CloudflareService,
@@ -79,6 +85,7 @@ import { CloudflareR2Service } from "./cloudflare-r2.service";
         'DIRECT_UPLOAD_URL',
         'CLOUDFLARE_CDN_URL',
         'R2_IMAGES_BUCKET_URL',
+        'R2_CDN_URL',
     ],
 })
 export class CloudflareModule { }

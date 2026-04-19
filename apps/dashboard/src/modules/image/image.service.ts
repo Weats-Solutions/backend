@@ -19,7 +19,7 @@ export class ImageService {
         private readonly cloudflareService: CloudflareService,
         private readonly cloudflareR2Service: CloudflareR2Service,
         @Inject("CLOUDFLARE_CDN_URL") private readonly cloudflareCdnUrl: string,
-        @Inject("R2_IMAGES_BUCKET_URL") private readonly r2CdnUrl: string,
+        @Inject("R2_CDN_URL") private readonly r2CdnUrl: string,
     ) { }
 
     async findImagesByEstablishment(

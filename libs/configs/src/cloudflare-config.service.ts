@@ -48,5 +48,9 @@ export class CloudflareConfigService {
     getR2ImagesBucketURL(): string {
         return this.configService.getOrThrow<string>('R2_IMAGES_BUCKET_URL');
     }
+
+    getR2CdnURL(): string {
+        return this.configService.getOrThrow<string>('R2_CDN_URL');
+    }
 }
 
