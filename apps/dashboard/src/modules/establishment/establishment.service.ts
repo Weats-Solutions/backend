@@ -412,6 +412,7 @@ export class EstablishmentService {
           amountPaid: invoice.amount_paid,
           status: invoice.status,
           createdAt: new Date(invoice.created * 1000),
+          hosted_invoice_url: invoice.hosted_invoice_url,
         };
       });
 
