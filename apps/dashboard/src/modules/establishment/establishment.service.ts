@@ -378,46 +378,55 @@ export class EstablishmentService {
   }
 
   async getInvoices(establishmentId: string) {
-    const subscription = await this.prisma.subscription.findUnique({
-      where: { establishmentId },
-      select: {
-        stripeCustomerId: true,
-      },
-    });
-
-    if (!subscription || !subscription.stripeCustomerId) {
-      throw new RpcException({
-        status: 404,
-        message: 'Subscription or Stripe customer not found',
-        code: 'SUBSCRIPTION_NOT_FOUND',
+    try {
+      const subscription = await this.prisma.subscription.findUnique({
+        where: { establishmentId },
+        select: {
+          stripeCustomerId: true,
+        },
       });
-    }
 
-    const stripeInvoices = await this.stripe.listInvoicesByCustomer(
-      subscription.stripeCustomerId,
-    );
+      if (!subscription || !subscription.stripeCustomerId) {
+        // Return empty invoices if no subscription found
+        return {
+          invoices: [],
+          total: 0,
+        };
+      }
 
-    const invoices = stripeInvoices.map((invoice) => {
-      const subscriptionId =
-        (invoice as any).subscription as string ||
-        invoice.lines.data[0]?.parent?.subscription_item_details?.subscription;
+      const stripeInvoices = await this.stripe.listInvoicesByCustomer(
+        subscription.stripeCustomerId,
+      );
+
+      const invoices = stripeInvoices.map((invoice) => {
+        const subscriptionId =
+          (invoice as any).subscription as string ||
+          invoice.lines.data[0]?.parent?.subscription_item_details?.subscription;
+
+        return {
+          id: invoice.id,
+          customerId: invoice.customer as string,
+          establishmentId,
+          stripeInvoiceId: invoice.id,
+          subscriptionId: subscriptionId || null,
+          amountPaid: invoice.amount_paid,
+          status: invoice.status,
+          createdAt: new Date(invoice.created * 1000),
+        };
+      });
 
       return {
-        id: invoice.id,
-        customerId: invoice.customer as string,
-        establishmentId,
-        stripeInvoiceId: invoice.id,
-        subscriptionId: subscriptionId || null,
-        amountPaid: invoice.amount_paid,
-        status: invoice.status,
-        createdAt: new Date(invoice.created * 1000),
+        invoices,
+        total: invoices.length,
       };
-    });
-
-    return {
-      invoices,
-      total: invoices.length,
-    };
+    } catch (error) {
+      console.error('Error fetching invoices:', error);
+      throw new RpcException({
+        status: 500,
+        message: 'Failed to fetch invoices from Stripe',
+        code: 'STRIPE_FETCH_ERROR',
+      });
+    }
   }
 
   // ─── Mutations ──────────────────────────────────────────────────────
