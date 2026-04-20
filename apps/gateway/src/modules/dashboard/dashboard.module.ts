@@ -46,9 +46,9 @@ import { InvoiceController } from './controllers/invoice.controller';
     LandingpageController,
 
     //Menu
-    MenuController,
-    MenuCategoryController,
     MenuSubcategoryController,
+    MenuCategoryController,
+    MenuController,
 
     //Zones
     ZonesController,
