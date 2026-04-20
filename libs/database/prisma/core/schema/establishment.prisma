@@ -36,6 +36,9 @@ model Establishment {
   currency           Currency                @default(EUR)
   timezone           String                  @default("Europe/Lisbon")
 
+  wifiSsid     String?
+  wifiPassword String?
+
   // ─── Branding & Visuals ────────────────────────────────────────────────────
   logoImageId   String?
   bannerImageId String?

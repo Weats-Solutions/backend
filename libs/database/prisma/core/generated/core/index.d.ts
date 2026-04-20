@@ -982,6 +982,7 @@ export const UnitType: {
   GLASS: 'GLASS',
   CUP: 'CUP',
   SHOT: 'SHOT',
+  MUG: 'MUG',
   BOTTLE: 'BOTTLE',
   CAN: 'CAN',
   MILLILITER: 'MILLILITER',
@@ -26366,6 +26367,8 @@ export namespace Prisma {
     primaryLanguage: $Enums.EstablishmentLanguage | null
     currency: $Enums.Currency | null
     timezone: string | null
+    wifiSsid: string | null
+    wifiPassword: string | null
     logoImageId: string | null
     bannerImageId: string | null
     activeThemeId: string | null
@@ -26402,6 +26405,8 @@ export namespace Prisma {
     primaryLanguage: $Enums.EstablishmentLanguage | null
     currency: $Enums.Currency | null
     timezone: string | null
+    wifiSsid: string | null
+    wifiPassword: string | null
     logoImageId: string | null
     bannerImageId: string | null
     activeThemeId: string | null
@@ -26439,6 +26444,8 @@ export namespace Prisma {
     availableLanguages: number
     currency: number
     timezone: number
+    wifiSsid: number
+    wifiPassword: number
     logoImageId: number
     bannerImageId: number
     activeThemeId: number
@@ -26477,6 +26484,8 @@ export namespace Prisma {
     primaryLanguage?: true
     currency?: true
     timezone?: true
+    wifiSsid?: true
+    wifiPassword?: true
     logoImageId?: true
     bannerImageId?: true
     activeThemeId?: true
@@ -26513,6 +26522,8 @@ export namespace Prisma {
     primaryLanguage?: true
     currency?: true
     timezone?: true
+    wifiSsid?: true
+    wifiPassword?: true
     logoImageId?: true
     bannerImageId?: true
     activeThemeId?: true
@@ -26550,6 +26561,8 @@ export namespace Prisma {
     availableLanguages?: true
     currency?: true
     timezone?: true
+    wifiSsid?: true
+    wifiPassword?: true
     logoImageId?: true
     bannerImageId?: true
     activeThemeId?: true
@@ -26660,6 +26673,8 @@ export namespace Prisma {
     availableLanguages: $Enums.EstablishmentLanguage[]
     currency: $Enums.Currency
     timezone: string
+    wifiSsid: string | null
+    wifiPassword: string | null
     logoImageId: string | null
     bannerImageId: string | null
     activeThemeId: string | null
@@ -26714,6 +26729,8 @@ export namespace Prisma {
     availableLanguages?: boolean
     currency?: boolean
     timezone?: boolean
+    wifiSsid?: boolean
+    wifiPassword?: boolean
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
@@ -26792,6 +26809,8 @@ export namespace Prisma {
     availableLanguages?: boolean
     currency?: boolean
     timezone?: boolean
+    wifiSsid?: boolean
+    wifiPassword?: boolean
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
@@ -26834,6 +26853,8 @@ export namespace Prisma {
     availableLanguages?: boolean
     currency?: boolean
     timezone?: boolean
+    wifiSsid?: boolean
+    wifiPassword?: boolean
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
@@ -26876,6 +26897,8 @@ export namespace Prisma {
     availableLanguages?: boolean
     currency?: boolean
     timezone?: boolean
+    wifiSsid?: boolean
+    wifiPassword?: boolean
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
@@ -26885,7 +26908,7 @@ export namespace Prisma {
     ownerId?: boolean
   }
 
-  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
+  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
   export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     metadata?: boolean | Establishment$metadataArgs<ExtArgs>
@@ -27016,6 +27039,8 @@ export namespace Prisma {
       availableLanguages: $Enums.EstablishmentLanguage[]
       currency: $Enums.Currency
       timezone: string
+      wifiSsid: string | null
+      wifiPassword: string | null
       logoImageId: string | null
       bannerImageId: string | null
       activeThemeId: string | null
@@ -27513,6 +27538,8 @@ export namespace Prisma {
     readonly availableLanguages: FieldRef<"Establishment", 'EstablishmentLanguage[]'>
     readonly currency: FieldRef<"Establishment", 'Currency'>
     readonly timezone: FieldRef<"Establishment", 'String'>
+    readonly wifiSsid: FieldRef<"Establishment", 'String'>
+    readonly wifiPassword: FieldRef<"Establishment", 'String'>
     readonly logoImageId: FieldRef<"Establishment", 'String'>
     readonly bannerImageId: FieldRef<"Establishment", 'String'>
     readonly activeThemeId: FieldRef<"Establishment", 'String'>
@@ -110952,6 +110979,8 @@ export namespace Prisma {
     availableLanguages: 'availableLanguages',
     currency: 'currency',
     timezone: 'timezone',
+    wifiSsid: 'wifiSsid',
+    wifiPassword: 'wifiPassword',
     logoImageId: 'logoImageId',
     bannerImageId: 'bannerImageId',
     activeThemeId: 'activeThemeId',
@@ -113993,6 +114022,8 @@ export namespace Prisma {
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
     currency?: EnumCurrencyFilter<"Establishment"> | $Enums.Currency
     timezone?: StringFilter<"Establishment"> | string
+    wifiSsid?: StringNullableFilter<"Establishment"> | string | null
+    wifiPassword?: StringNullableFilter<"Establishment"> | string | null
     logoImageId?: StringNullableFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableFilter<"Establishment"> | string | null
@@ -114070,6 +114101,8 @@ export namespace Prisma {
     availableLanguages?: SortOrder
     currency?: SortOrder
     timezone?: SortOrder
+    wifiSsid?: SortOrderInput | SortOrder
+    wifiPassword?: SortOrderInput | SortOrder
     logoImageId?: SortOrderInput | SortOrder
     bannerImageId?: SortOrderInput | SortOrder
     activeThemeId?: SortOrderInput | SortOrder
@@ -114151,6 +114184,8 @@ export namespace Prisma {
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
     currency?: EnumCurrencyFilter<"Establishment"> | $Enums.Currency
     timezone?: StringFilter<"Establishment"> | string
+    wifiSsid?: StringNullableFilter<"Establishment"> | string | null
+    wifiPassword?: StringNullableFilter<"Establishment"> | string | null
     logoImageId?: StringNullableFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableFilter<"Establishment"> | string | null
@@ -114227,6 +114262,8 @@ export namespace Prisma {
     availableLanguages?: SortOrder
     currency?: SortOrder
     timezone?: SortOrder
+    wifiSsid?: SortOrderInput | SortOrder
+    wifiPassword?: SortOrderInput | SortOrder
     logoImageId?: SortOrderInput | SortOrder
     bannerImageId?: SortOrderInput | SortOrder
     activeThemeId?: SortOrderInput | SortOrder
@@ -114270,6 +114307,8 @@ export namespace Prisma {
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
     currency?: EnumCurrencyWithAggregatesFilter<"Establishment"> | $Enums.Currency
     timezone?: StringWithAggregatesFilter<"Establishment"> | string
+    wifiSsid?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    wifiPassword?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     logoImageId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
@@ -121297,6 +121336,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -121369,6 +121410,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -121441,6 +121484,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -121513,6 +121558,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -121585,6 +121632,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -121622,6 +121671,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -121654,6 +121705,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -129411,6 +129464,8 @@ export namespace Prisma {
     availableLanguages?: SortOrder
     currency?: SortOrder
     timezone?: SortOrder
+    wifiSsid?: SortOrder
+    wifiPassword?: SortOrder
     logoImageId?: SortOrder
     bannerImageId?: SortOrder
     activeThemeId?: SortOrder
@@ -129447,6 +129502,8 @@ export namespace Prisma {
     primaryLanguage?: SortOrder
     currency?: SortOrder
     timezone?: SortOrder
+    wifiSsid?: SortOrder
+    wifiPassword?: SortOrder
     logoImageId?: SortOrder
     bannerImageId?: SortOrder
     activeThemeId?: SortOrder
@@ -129483,6 +129540,8 @@ export namespace Prisma {
     primaryLanguage?: SortOrder
     currency?: SortOrder
     timezone?: SortOrder
+    wifiSsid?: SortOrder
+    wifiPassword?: SortOrder
     logoImageId?: SortOrder
     bannerImageId?: SortOrder
     activeThemeId?: SortOrder
@@ -141844,6 +141903,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -141915,6 +141976,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -142002,6 +142065,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -142073,6 +142138,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -142144,6 +142211,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -142215,6 +142284,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -142302,6 +142373,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -142373,6 +142446,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -142474,6 +142549,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -142545,6 +142622,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -142661,6 +142740,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -142732,6 +142813,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -142954,6 +143037,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -143025,6 +143110,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -143196,6 +143283,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -143267,6 +143356,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -143537,6 +143628,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -143608,6 +143701,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -143744,6 +143839,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -143815,6 +143912,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -144169,6 +144268,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -144240,6 +144341,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -144377,6 +144480,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -144448,6 +144553,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -144965,6 +145072,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -145036,6 +145145,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -145150,6 +145261,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -145221,6 +145334,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -145432,6 +145547,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -145503,6 +145620,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -145590,6 +145709,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -145661,6 +145782,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -148710,6 +148833,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -148781,6 +148906,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -148868,6 +148995,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -148939,6 +149068,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -149051,6 +149182,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -149122,6 +149255,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -149256,6 +149391,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -149327,6 +149464,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -149398,6 +149537,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -149469,6 +149610,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -149597,6 +149740,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -149668,6 +149813,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -149786,6 +149933,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -149857,6 +150006,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -149944,6 +150095,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -150015,6 +150168,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -150086,6 +150241,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -150157,6 +150314,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     activeThemeId?: string | null
     scheduleId?: string | null
@@ -150238,6 +150397,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -150309,6 +150470,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
     scheduleId?: string | null
@@ -150390,6 +150553,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -150461,6 +150626,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -150749,6 +150916,8 @@ export namespace Prisma {
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
     currency?: EnumCurrencyFilter<"Establishment"> | $Enums.Currency
     timezone?: StringFilter<"Establishment"> | string
+    wifiSsid?: StringNullableFilter<"Establishment"> | string | null
+    wifiPassword?: StringNullableFilter<"Establishment"> | string | null
     logoImageId?: StringNullableFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableFilter<"Establishment"> | string | null
@@ -150813,6 +150982,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -150884,6 +151055,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -151078,6 +151251,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -151149,6 +151324,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -151236,6 +151413,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -151307,6 +151486,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -151378,6 +151559,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -151449,6 +151632,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -151536,6 +151721,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -151607,6 +151794,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -151678,6 +151867,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -151749,6 +151940,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -151836,6 +152029,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -151907,6 +152102,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -151998,6 +152195,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -152069,6 +152268,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -152583,6 +152784,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -152654,6 +152857,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -153520,6 +153725,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -153591,6 +153798,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -153716,6 +153925,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -153787,6 +153998,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -155058,6 +155271,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -155129,6 +155344,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -155272,6 +155489,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -155343,6 +155562,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -156360,6 +156581,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -156431,6 +156654,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -156569,6 +156794,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -156640,6 +156867,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -156821,6 +157050,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -156892,6 +157123,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -157068,6 +157301,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -157139,6 +157374,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -158226,6 +158463,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -158297,6 +158536,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -158414,6 +158655,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -158485,6 +158728,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -158678,6 +158923,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
@@ -158749,6 +158996,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -158973,6 +159222,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
@@ -159044,6 +159295,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -159408,6 +159661,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -159479,6 +159734,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -159692,6 +159949,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -159763,6 +160022,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -160139,6 +160400,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -160210,6 +160473,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -160383,6 +160648,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -160454,6 +160721,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -160571,6 +160840,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -160642,6 +160913,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -160878,6 +161151,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -160949,6 +161224,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -161087,6 +161364,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -161158,6 +161437,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -161606,6 +161887,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -161677,6 +161960,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -162656,6 +162941,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -162727,6 +163014,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -162953,6 +163242,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -163024,6 +163315,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -163550,6 +163843,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -163621,6 +163916,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -163784,6 +164081,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -163855,6 +164154,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -164302,6 +164603,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -164373,6 +164676,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -164633,6 +164938,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -164704,6 +165011,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -164966,6 +165275,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -165037,6 +165348,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -165205,6 +165518,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -165276,6 +165591,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -165434,6 +165751,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -165505,6 +165824,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -165626,6 +165947,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -165697,6 +166020,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -166020,6 +166345,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -166091,6 +166418,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -166203,6 +166532,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -166274,6 +166605,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -166766,6 +167099,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -166837,6 +167172,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -166924,6 +167261,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -166995,6 +167334,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -167156,6 +167497,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -167227,6 +167570,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     scheduleId?: string | null
@@ -167336,6 +167681,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -167407,6 +167754,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -167538,6 +167887,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -167609,6 +167960,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -167734,6 +168087,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -167805,6 +168160,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -167972,6 +168329,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -168043,6 +168402,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -168172,6 +168533,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -168243,6 +168606,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -170354,6 +170719,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     activeThemeId?: string | null
     scheduleId?: string | null
@@ -170390,6 +170757,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
     scheduleId?: string | null
@@ -170474,6 +170843,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -170545,6 +170916,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -170616,6 +170989,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -170652,6 +171027,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -170723,6 +171100,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -170794,6 +171173,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -174068,6 +174449,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     scheduleId?: string | null
@@ -174112,6 +174495,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -174183,6 +174568,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -174254,6 +174641,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -174337,6 +174726,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: $Enums.Currency
     timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -174438,6 +174829,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -174509,6 +174902,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -174580,6 +174975,8 @@ export namespace Prisma {
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
     currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
     timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null

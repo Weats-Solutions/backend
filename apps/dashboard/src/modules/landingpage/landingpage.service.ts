@@ -242,6 +242,10 @@ export class LandingpageService {
                     googleReviewUrl: establishment.googleReviewUrl,
                     websiteUrl: establishment.websiteUrl,
                 },
+                wifi: {
+                    ssid: establishment.wifiSsid,
+                    password: establishment.wifiPassword,
+                },
                 takeway: true,
                 reservations: true,
             };

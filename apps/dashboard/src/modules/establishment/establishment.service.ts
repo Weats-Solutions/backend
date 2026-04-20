@@ -30,6 +30,7 @@ import {
   EstablishmentMetadataDto,
   EstablishmentPreferencesDto,
   EstablishmentSocialMediaDto,
+  EstablishmentWifiDto,
   UpdateEstablishmentBrandingSettingsDto,
   UpdateEstablishmentDigitalSettingsDto,
   UpdateEstablishmentGeneralSettingsDto,
@@ -287,9 +288,23 @@ export class EstablishmentService {
   }
 
   async getEstablishmentDigitalSettings(establishment: Establishment) {
+
+    const establishmentData = await this.prisma.establishment.findUniqueOrThrow({
+      where: { id: establishment.id },
+      select: {
+        slug: true,
+        wifiSsid: true,
+        wifiPassword: true,
+      },
+    });
+
     return {
       domain: {
-        slug: establishment.slug,
+        slug: establishmentData.slug,
+      },
+      wifi: {
+        ssid: establishmentData.wifiSsid,
+        password: establishmentData.wifiPassword,
       },
     };
   }
@@ -1003,6 +1018,11 @@ export class EstablishmentService {
         establishment,
         updateEstablishmentDigitalSettingsDto.domain,
       );
+    } else if (updateEstablishmentDigitalSettingsDto.section === 'wifi') {
+      return this.updateWifi(
+        establishment,
+        updateEstablishmentDigitalSettingsDto.wifi,
+      );
     }
   }
 
@@ -1016,6 +1036,19 @@ export class EstablishmentService {
       where: { id: establishment.id },
       data: {
         slug: domainDto.slug,
+      },
+    });
+  }
+
+  async updateWifi(
+    establishment: Establishment,
+    wifiDto: EstablishmentWifiDto,
+  ) {
+    return this.prisma.establishment.update({
+      where: { id: establishment.id },
+      data: {
+        wifiSsid: wifiDto.wifiSsid,
+        wifiPassword: wifiDto.wifiPassword,
       },
     });
   }

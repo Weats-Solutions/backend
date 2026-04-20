@@ -351,6 +351,7 @@ enum UnitType {
   GLASS
   CUP
   SHOT
+  MUG
 
   // --- Containers ---
   BOTTLE
