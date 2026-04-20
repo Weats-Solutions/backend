@@ -11,6 +11,7 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { RpcException } from '@nestjs/microservices';
 import { ERRORS } from '@weats/common';
 import * as crypto from 'crypto';
+import * as path from 'path';
 
 @Injectable()
 export class CloudflareR2Service {
@@ -21,6 +22,7 @@ export class CloudflareR2Service {
         @Inject("R2_IMAGES_BUCKET_SECRET_KEY") private readonly secretKey: string,
         @Inject("R2_IMAGES_BUCKET_NAME") private readonly bucketName: string,
         @Inject("R2_IMAGES_BUCKET_S3_ENDPOINT") private readonly s3Endpoint: string,
+        @Inject("R2_CDN_URL") private readonly cdnUrl: string,
     ) {
         this.s3Client = new S3Client({
             region: 'auto',
@@ -75,6 +77,35 @@ export class CloudflareR2Service {
             await this.s3Client.send(command);
         } catch (error) {
             console.error(`Não foi possível apagar a imagem ${key} do R2`);
+        }
+    }
+
+    /**
+     * Faz upload direto de um buffer para o R2 (usado pelo backend para favicons, etc)
+     */
+    async uploadFile(content: Buffer, filename: string, establishmentId: string, mimetype: string) {
+        try {
+            const fileId = crypto.randomUUID();
+            const ext = path.extname(filename);
+            const key = `establishments/${establishmentId}/favicons/${fileId}${ext}`;
+
+            const command = new PutObjectCommand({
+                Bucket: this.bucketName,
+                Key: key,
+                Body: content,
+                ContentType: mimetype,
+                CacheControl: "public, max-age=31536000, immutable",
+            });
+
+            await this.s3Client.send(command);
+
+            return {
+                id: key,
+                url: `${this.cdnUrl}/${key}`
+            };
+        } catch (error) {
+            console.error('Erro ao fazer upload direto para R2:', error);
+            throw new RpcException({ message: 'Falha ao guardar ficheiro no R2' });
         }
     }
 }

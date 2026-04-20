@@ -2,11 +2,15 @@ import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
 import { FaviconService } from './favicon.service';
 import { CorePrismaService } from '@weats/database';
-import { CloudflareService } from '../cloudflare/cloudflare.service';
+import { CloudflareR2Service } from '../cloudflare/cloudflare-r2.service';
 
 @Processor('jobs')
 export class FaviconProcessor {
-    constructor(private readonly faviconService: FaviconService, private readonly corePrismaService: CorePrismaService, private readonly cloudflareService: CloudflareService) { }
+    constructor(
+        private readonly faviconService: FaviconService,
+        private readonly corePrismaService: CorePrismaService,
+        private readonly r2Service: CloudflareR2Service,
+    ) { }
 
     @Process('generate-favicons')
     async handleGenerateFavicons(job: Job<{ source: string, establishmentId: string }>) {
@@ -63,7 +67,7 @@ export class FaviconProcessor {
                 // 4. Limpeza (Cleanup): Apagar imagens órfãs da Cloudflare
                 // Fazemos isto DEPOIS da transação ter sucesso
                 for (const cfId of oldCloudflareIds) {
-                    await this.cloudflareService.deleteImage(cfId);
+                    await this.r2Service.deleteImage(cfId);
                 }
             });
 
@@ -73,7 +77,7 @@ export class FaviconProcessor {
         } catch (error) {
             // Se a transação falhar, devemos idealmente apagar as imagens que acabámos de subir para a Cloudflare
             for (const img of newImageIds) {
-                await this.cloudflareService.deleteImage(img.cloudflareId);
+                await this.r2Service.deleteImage(img.cloudflareId);
             }
             throw new Error('Falha ao atualizar favicons na base de dados');
         }

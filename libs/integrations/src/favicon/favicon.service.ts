@@ -3,7 +3,7 @@ import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
 import favicons, { FaviconResponse } from 'favicons';
 import { RpcException } from '@nestjs/microservices';
-import { CloudflareService } from "@weats/integrations/cloudflare/cloudflare.service";
+import { CloudflareR2Service } from "@weats/integrations/cloudflare/cloudflare-r2.service";
 import path from 'path';
 import { ERRORS } from '@weats/common';
 import { CorePrismaService } from '@weats/database';
@@ -25,7 +25,7 @@ export interface FaviconResult {
 export class FaviconService {
     constructor(
         @InjectQueue('jobs') private readonly jobsQueue: Queue,
-        private readonly cloudflareService: CloudflareService,
+        private readonly r2Service: CloudflareR2Service,
         private readonly corePrismaService: CorePrismaService,
         private readonly httpService: HttpService,
     ) { }
@@ -65,13 +65,15 @@ export class FaviconService {
             message: ERRORS.IMAGE_NOT_FOUND,
         });
 
-        const downloadUrl = `${image.url}/public`;
+        // 2. Determinar a URL de download correta
+        // Se for R2 (detetado por metadados ou URL), não adicionamos /public
+        const isR2 = (image.metadata as any)?.provider === 'r2' || image.url.includes('cdn.weats.pro') || image.url.includes('r2.cloudflarestorage.com');
+        const downloadUrl = isR2 ? image.url : `${image.url}/public`;
 
         try {
             const response = await lastValueFrom(
                 this.httpService.get(downloadUrl, {
                     responseType: 'arraybuffer',
-                    // Se a tua conta exigir, podes precisar do token aqui
                     headers: {
                         'Accept': 'image/*'
                     }
@@ -84,7 +86,7 @@ export class FaviconService {
             return this.enqueueFaviconJob(buffer, establishmentId);
 
         } catch (error) {
-            console.error('Erro ao descarregar imagem da Cloudflare:', error.message);
+            console.error('Erro ao descarregar imagem para favicon:', error.message, 'URL:', downloadUrl);
             throw new RpcException({
                 code: 500,
                 message: 'Não foi possível obter a imagem original para processar os favicons.',
@@ -139,16 +141,29 @@ export class FaviconService {
             '.ico': 'image/x-icon',
             '.xml': 'application/xml',
             '.json': 'application/json',
+            '.svg': 'image/svg+xml',
         };
 
-        return await this.cloudflareService.uploadImage(
-            {
-                fileName: filename,
-                buffer: content,
-                mimetype: extMap[ext] || 'image/png', // Default para png se falhar
-            },
-            establishmentId
+        const mimetype = extMap[ext] || 'image/png';
+
+        const uploaded = await this.r2Service.uploadFile(
+            content,
+            filename,
+            establishmentId,
+            mimetype
         );
+
+        // Criar registo na Image table para manter compatibilidade com FaviconProcessor
+        return await this.corePrismaService.image.create({
+            data: {
+                fileName: filename,
+                cloudflareImageId: uploaded.id, // Guardamos a Key do R2 aqui
+                url: uploaded.url,
+                establishmentId,
+                fileSize: content.length,
+                metadata: { source: 'favicon_generator', provider: 'r2' },
+            },
+        });
     }
 
 
