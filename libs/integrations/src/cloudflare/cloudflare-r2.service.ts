@@ -47,6 +47,7 @@ export class CloudflareR2Service {
                 const command = new PutObjectCommand({
                     Bucket: this.bucketName,
                     Key: key,
+                    CacheControl: "public, max-age=31536000, immutable",
                 });
 
                 // URL válida por 1 hora (3600 segundos)
