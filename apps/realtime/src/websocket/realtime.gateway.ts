@@ -40,7 +40,7 @@ export class RealtimeGateway implements OnGatewayInit {
                 // Suporte flexível para leitura de auth via cliente nativo, headers (Postman) ou Query URL
                 const inToken = (socket.handshake.auth?.token || socket.handshake.headers['authorization']?.replace('Bearer ', '') || socket.handshake.query?.token) as string;
                 const inEstId = (socket.handshake.auth?.establishmentId || socket.handshake.headers['establishmentid'] || socket.handshake.query?.establishmentId) as string;
-                const inSpId  = (socket.handshake.auth?.servicePointId || socket.handshake.headers['servicepointid'] || socket.handshake.query?.servicePointId) as string;
+                const inSpId = (socket.handshake.auth?.servicePointId || socket.handshake.headers['servicepointid'] || socket.handshake.query?.servicePointId) as string;
 
                 const cleanEstId = inEstId?.trim();
                 const cleanSpId = inSpId?.trim();
@@ -54,7 +54,7 @@ export class RealtimeGateway implements OnGatewayInit {
                 // 🧑‍💼 STAFF (Dashboard)
                 if (inToken && cleanEstId) {
                     const result = await this.realtimeService.validateStaff(inToken, cleanEstId);
-                    
+
                     if (result) {
                         socket.data.user = result.user;
                         socket.data.role = result.role;
@@ -67,51 +67,63 @@ export class RealtimeGateway implements OnGatewayInit {
                 // 👤 CLIENT (anonymous menu)
                 if (cleanSpId) {
                     const result = await this.realtimeService.validateClient(cleanSpId);
-                    
-                    if (result) {
-                        // 🛡️ LIMITAR CONEXÕES POR MESA
-                        const spRoom = this.rooms.servicePoint(result.establishmentId, result.servicePointId);
-                        const connectedSockets = await server.in(spRoom).fetchSockets();
 
+                    if (result) {
                         const ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address;
                         const clientIp = Array.isArray(ip) ? (ip as string[])[0] : (ip as string);
-                        
+
                         // 🔑 ID ÚNICO POR DISPOSITIVO: Priorizar o ID que vem do browser (localStorage)
                         const clientId = (socket.handshake.auth?.clientId as string) || createHash('md5').update(clientIp).digest('hex').substring(0, 8);
 
-                        // 🛡️ BLOQUEAR DUPLICAÇÃO: Verificamos se ESTE dispositivo já está ligado aqui
-                        const alreadyConnected = connectedSockets.find(s => (s.data as AuthenticatedSocketData).clientId === clientId);
-                        if (alreadyConnected) {
-                            this.logger.warn(`[LIMIT] Bloqueada conexão duplicada para Client ${clientId} na Mesa ${result.servicePointName}.`);
-                            return next(new Error('Já existe uma conexão ativa neste dispositivo.'));
+                        // 🛡️ BLOQUEAR DUPLICAÇÃO (MICRO-LOCK)
+                        // Como fetchSockets é async, se o cliente enviar 10 conexões ao mesmo tempo,
+                        // todas podem passar se não usarmos um lock síncrono local.
+                        if (this.connectingClients.has(clientId)) {
+                            this.logger.warn(`[LIMIT] Conexão ignorada (bloqueada pelo lock síncrono): ${clientId}`);
+                            return next(new Error('Conexão em curso...'));
                         }
+                        this.connectingClients.add(clientId);
 
-                        const MARGIN = 2; 
-                        if (connectedSockets.length >= (result.maxCapacity + MARGIN)) {
-                            this.logger.warn(`[LIMIT] Bloqueada nova conexão para Mesa ${result.servicePointName}. Já existem ${connectedSockets.length} ligados.`);
-                            return next(new Error('Mesa cheia (limite de conexões excedido)'));
+                        const spRoom = this.rooms.servicePoint(result.establishmentId, result.servicePointId);
+
+                        try {
+                            const connectedSockets = await server.in(spRoom).fetchSockets();
+
+                            // 🛡️ BLOQUEAR DUPLICAÇÃO REAL
+                            const alreadyConnected = connectedSockets.find(s => (s.data as AuthenticatedSocketData).clientId === clientId);
+                            if (alreadyConnected) {
+                                this.logger.warn(`[LIMIT] Bloqueada conexão duplicada para Client ${clientId} na Mesa ${result.servicePointName}.`);
+                                return next(new Error('Já existe uma conexão ativa neste dispositivo.'));
+                            }
+
+                            const MARGIN = 2;
+                            if (connectedSockets.length >= (result.maxCapacity + MARGIN)) {
+                                this.logger.warn(`[LIMIT] Bloqueada nova conexão para Mesa ${result.servicePointName}. Já existem ${connectedSockets.length} ligados.`);
+                                return next(new Error('Mesa cheia (limite de conexões excedido)'));
+                            }
+
+                            socket.data.servicePointId = result.servicePointId;
+                            socket.data.establishmentId = result.establishmentId.trim();
+                            socket.data.servicePointName = result.servicePointName;
+                            socket.data.zoneId = result.zoneId;
+                            socket.data.zoneName = result.zoneName;
+                            socket.data.maxCapacity = result.maxCapacity;
+
+                            // 🛡️ Impedir conexão se já estiver banido (IP ou ID)
+                            const isIpBanned = this.blockedIPs.has(clientIp) && Date.now() < (this.blockedIPs.get(clientIp) || 0);
+                            const isIdBanned = this.blockedClientIds.has(clientId) && Date.now() < (this.blockedClientIds.get(clientId) || 0);
+
+                            if (isIpBanned || isIdBanned) {
+                                this.logger.warn(`[SHIELD] Conexão abortada: ${clientIp} (${clientId}) tentou entrar mas está banido.`);
+                                return next(new Error('REALTIME_ERR_IP_BAN'));
+                            }
+
+                            socket.data.clientId = clientId;
+                            return next();
+                        } finally {
+                            // Remover do lock após o await (quer tenha sucesso ou falha)
+                            this.connectingClients.delete(clientId);
                         }
-
-                        socket.data.servicePointId = result.servicePointId;
-                        socket.data.establishmentId = result.establishmentId.trim();
-                        socket.data.servicePointName = result.servicePointName;
-                        socket.data.zoneId = result.zoneId;
-                        socket.data.zoneName = result.zoneName;
-                        socket.data.maxCapacity = result.maxCapacity;
-
-
-                        // 🛡️ Impedir conexão se já estiver banido (IP ou ID)
-                        const isIpBanned = this.blockedIPs.has(clientIp) && Date.now() < (this.blockedIPs.get(clientIp) || 0);
-                        const isIdBanned = this.blockedClientIds.has(clientId) && Date.now() < (this.blockedClientIds.get(clientId) || 0);
-
-                        if (isIpBanned || isIdBanned) {
-                            this.logger.warn(`[SHIELD] Conexão abortada: ${clientIp} (${clientId}) tentou entrar mas está banido.`);
-                            return next(new Error('REALTIME_ERR_IP_BAN'));
-                        }
-
-                        socket.data.clientId = clientId;
-
-                        return next();
                     }
                     return next(new Error('Invalid Service Point'));
                 }
@@ -130,7 +142,7 @@ export class RealtimeGateway implements OnGatewayInit {
         if (socket.data.user && estId) {
             // Staff
             socket.join(this.rooms.est(estId));
-            
+
             this.logger.log(`\n[LOGIN] 🧑‍💼 STAFF/ADMIN LIGADO`);
             console.log(`| Nome: ${socket.data.user.firstName} ${socket.data.user.lastName || ''}`);
             console.log(`| Email: ${socket.data.user.email}`);
@@ -165,14 +177,14 @@ export class RealtimeGateway implements OnGatewayInit {
             this.logger.log(`[EXIT] Staff ${socket.data.user.id} saiu do estabelecimento ${estId}`);
         } else if (spId && estId) {
             this.logger.log(`[EXIT] Client ${clientId} saiu da Mesa ${socket.data.servicePointName || spId}`);
-            
+
             // 🧹 LIMPEZA AUTOMÁTICA: Se o cliente saiu, apagar os seus pedidos ativos no Redis
             await this.stateService.removeActiveCall(estId, spId, clientId);
-            
+
             // Notificar o Dashboard para remover o pedido do ecrã
-            this.server.to(this.rooms.est(estId)).emit('call:removed', { 
-                servicePointId: spId, 
-                clientId 
+            this.server.to(this.rooms.est(estId)).emit('call:removed', {
+                servicePointId: spId,
+                clientId
             });
 
             // Auditoria rápida: quantas pessoas restam?
@@ -188,6 +200,10 @@ export class RealtimeGateway implements OnGatewayInit {
     private blockedServicePoints = new Map<string, number>(); // SP_ID -> expiration timestamp
     private blockedClientIds = new Map<string, number>(); // ClientID (Hash) -> expiration timestamp
 
+    // 🛡️ LOCKS para evitar Race Conditions durante spam
+    private processingClients = new Set<string>(); // Clients com pedido em curso
+    private connectingClients = new Set<string>(); // Clients em processo de middleware/conexão
+
     // 💡 EVENTOS PRINCIPAIS
 
     // Cliente → Backend
@@ -202,96 +218,108 @@ export class RealtimeGateway implements OnGatewayInit {
         }
 
         const spId = socket.data.servicePointId;
+        const clientId = socket.data.clientId || '';
 
-        // --- 🛡️ SHIELD: BLOQUEIO DE SERVICE POINT (ADMIN) ---
-        const spBanExpiration = this.blockedServicePoints.get(spId);
-        if (spBanExpiration && Date.now() < spBanExpiration) {
-            this.logger.warn(`[SHIELD] 🛑 MESA BLOQUEADA POR ADMIN: ${spId}`);
-            return { error: 'REALTIME_ERR_SP_BLOCKED', blocked: true };
+        // --- 🛡️ LOCK ATÓMICO (SINCRONO) ---
+        // Se já houver um pedido síncrono em curso para este clientId, bloqueamos imediatamente.
+        if (this.processingClients.has(clientId)) {
+            return { error: 'REQUEST_OVERLAP', spam: true };
         }
+        this.processingClients.add(clientId);
 
-        // --- 🛡️ SHIELD: BLOQUEIO DE IP / CLIENTE ---
-        const ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address;
-        const clientIp = Array.isArray(ip) ? (ip as string[])[0] : (ip as string);
-
-        const banExpiration = this.blockedIPs.get(clientIp);
-        const clientId = socket.data.clientId || ''; // Fallback para evitar erro de undefined ⚡
-        const clientBanExpiration = this.blockedClientIds.get(clientId);
-
-        if ((banExpiration && Date.now() < banExpiration) || (clientBanExpiration && Date.now() < clientBanExpiration)) {
-            this.logger.error(`[SHIELD] 🛑 REJEITADO: ${clientIp} (${clientId}) está banido.`);
-            return { error: 'REALTIME_ERR_IP_BAN', blocked: true };
-        }
-
-        // --- 🛡️ SISTEMA ANTI-SPAM (THROTTLE) POR DISPOSITIVO ---
-        const THROTTLE_MS = 10000; 
-        const lastCall = this.lastCallTimestamps.get(clientId);
-        
-        if (lastCall && (Date.now() - lastCall) < THROTTLE_MS) {
-            const remainingSec = Math.ceil((THROTTLE_MS - (Date.now() - lastCall)) / 1000);
-            const strikes = (this.ipStrikes.get(clientIp) || 0) + 1;
-            this.ipStrikes.set(clientIp, strikes);
-
-            if (strikes >= 5) {
-                const ONE_HOUR = 3600000;
-                this.blockedIPs.set(clientIp, Date.now() + ONE_HOUR);
-                this.logger.error(`[SHIELD] 🚨 BANIMENTO ATIVADO: IP ${clientIp} banido por 1 hora por spam massivo.`);
-                socket.disconnect(true);
-                return { error: RealtimeMessageCode.SPAM_PROTECTION, blocked: true };
+        try {
+            // --- 🛡️ SHIELD: BLOQUEIO DE SERVICE POINT (ADMIN) ---
+            const spBanExpiration = this.blockedServicePoints.get(spId);
+            if (spBanExpiration && Date.now() < spBanExpiration) {
+                this.logger.warn(`[SHIELD] 🛑 MESA BLOQUEADA POR ADMIN: ${spId}`);
+                return { error: 'REALTIME_ERR_SP_BLOCKED', blocked: true };
             }
 
-            this.logger.warn(`[ANTI-SPAM] 🔴 VIOLAÇÃO: Client ${clientId} na Mesa ${spId}. Aguarde ${remainingSec}s. Strike ${strikes}/5.`);
-            return { 
-                error: RealtimeMessageCode.THROTTLE_ERROR, 
-                spam: true, 
-                remaining: remainingSec 
+            // --- 🛡️ SHIELD: BLOQUEIO DE IP / CLIENTE ---
+            const ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address;
+            const clientIp = Array.isArray(ip) ? (ip as string[])[0] : (ip as string);
+
+            const banExpiration = this.blockedIPs.get(clientIp);
+            const clientBanExpiration = this.blockedClientIds.get(clientId);
+
+            if ((banExpiration && Date.now() < banExpiration) || (clientBanExpiration && Date.now() < clientBanExpiration)) {
+                this.logger.error(`[SHIELD] 🛑 REJEITADO: ${clientIp} (${clientId}) está banido.`);
+                return { error: 'REALTIME_ERR_IP_BAN', blocked: true };
+            }
+
+            // --- 🛡️ SISTEMA ANTI-SPAM (THROTTLE) POR DISPOSITIVO ---
+            const THROTTLE_MS = 60000;
+            const now = Date.now();
+            const lastCall = this.lastCallTimestamps.get(clientId);
+
+            if (lastCall && (now - lastCall) < THROTTLE_MS) {
+                const remainingSec = Math.ceil((THROTTLE_MS - (now - lastCall)) / 1000);
+                const strikes = (this.ipStrikes.get(clientIp) || 0) + 1;
+                this.ipStrikes.set(clientIp, strikes);
+
+                if (strikes >= 5) {
+                    const ONE_HOUR = 3600000;
+                    this.blockedIPs.set(clientIp, now + ONE_HOUR);
+                    this.logger.error(`[SHIELD] 🚨 BANIMENTO ATIVADO: IP ${clientIp} banido por 1 hora por spam massivo.`);
+                    socket.disconnect(true);
+                    return { error: RealtimeMessageCode.SPAM_PROTECTION, blocked: true };
+                }
+
+                this.logger.warn(`[ANTI-SPAM] 🔴 VIOLAÇÃO: Client ${clientId} na Mesa ${spId}. Aguarde ${remainingSec}s. Strike ${strikes}/5.`);
+                return {
+                    error: RealtimeMessageCode.THROTTLE_ERROR,
+                    spam: true,
+                    remaining: remainingSec
+                };
+            }
+
+            // Se o pedido passou (não é spam), reseta os strikes deste IP e guarda o timestamp IMEDIATAMENTE
+            this.ipStrikes.set(clientIp, 0);
+            this.lastCallTimestamps.set(clientId, now);
+
+            this.logger.debug(`[ANTI-SPAM] ✅ PERMITIDO. Client: ${clientId} (Mesa: ${spId})`);
+
+            const establishmentId = socket.data.establishmentId;
+            const estRoom = this.rooms.est(establishmentId);
+
+            // Se não enviar o tipo, assumimos "HELP" como fallback de compatibilidade
+            const callType = payload?.type || 'HELP';
+
+            // Mapear o tipo de chamada para uma mensagem automática se não houver mensagem custom
+            let defaultMsg = 'REALTIME_MSG_NEED_HELP';
+            if (callType === 'BILL') defaultMsg = 'REALTIME_MSG_NEED_BILL';
+            else if (callType === 'ORDER') defaultMsg = 'REALTIME_MSG_NEED_ORDER';
+            else if (callType === 'CLEAN') defaultMsg = 'REALTIME_MSG_NEED_CLEAN';
+
+            const callPayload = {
+                servicePointId: socket.data.servicePointId,
+                establishmentId: establishmentId, // Adicionamos no payload para o snapshot
+                servicePointName: socket.data.servicePointName,
+                zoneId: socket.data.zoneId,
+                zoneName: socket.data.zoneName,
+                clientId: clientId,
+                type: callType,
+                message: payload?.message || defaultMsg,
+                timestamp: new Date().toISOString(),
             };
+
+            console.log(`\n--- 🔔 NEW CALL REQUEST ---`);
+            console.log(`| From Mesa: ${socket.data.servicePointName}`);
+            console.log(`| Est ID: [${establishmentId.trim()}]`);
+            console.log(`| Type: ${callType}`);
+            console.log(`---------------------------\n`);
+
+            // Backend → Staff
+            this.server.to(estRoom).emit('call:requested', callPayload);
+
+            // 💾 PERSISTÊNCIA: Guardar no Redis como pedido ativo
+            await this.stateService.saveActiveCall(establishmentId, socket.data.servicePointId, clientId, callPayload);
+
+            return { success: true };
+        } finally {
+            // Libertar o lock síncrono aconteça o que acontecer
+            this.processingClients.delete(clientId);
         }
-        
-        // Se o pedido passou (não é spam), reseta os strikes deste IP
-        this.ipStrikes.set(clientIp, 0);
-
-        // Atualizar registo do DISPOSITIVO com o ms atual
-        this.lastCallTimestamps.set(clientId, Date.now());
-        this.logger.debug(`[ANTI-SPAM] ✅ PERMITIDO. Client: ${clientId} (Mesa: ${spId})`);
-
-        const establishmentId = socket.data.establishmentId;
-        const estRoom = this.rooms.est(establishmentId);
-
-        // Se não enviar o tipo, assumimos "HELP" como fallback de compatibilidade
-        const callType = payload?.type || 'HELP';
-
-        // Mapear o tipo de chamada para uma mensagem automática se não houver mensagem custom
-        let defaultMsg = 'REALTIME_MSG_NEED_HELP';
-        if (callType === 'BILL') defaultMsg = 'REALTIME_MSG_NEED_BILL';
-        else if (callType === 'ORDER') defaultMsg = 'REALTIME_MSG_NEED_ORDER';
-        else if (callType === 'CLEAN') defaultMsg = 'REALTIME_MSG_NEED_CLEAN';
-
-        const callPayload = {
-            servicePointId: socket.data.servicePointId,
-            establishmentId: establishmentId, // Adicionamos no payload para o snapshot
-            servicePointName: socket.data.servicePointName,
-            zoneId: socket.data.zoneId,
-            zoneName: socket.data.zoneName,
-            clientId: clientId,
-            type: callType,
-            message: payload?.message || defaultMsg,
-            timestamp: new Date().toISOString(),
-        };
-
-        console.log(`\n--- 🔔 NEW CALL REQUEST ---`);
-        console.log(`| From Mesa: ${socket.data.servicePointName}`);
-        console.log(`| Est ID: [${establishmentId.trim()}]`);
-        console.log(`| Type: ${callType}`);
-        console.log(`---------------------------\n`);
-
-        // Backend → Staff
-        this.server.to(estRoom).emit('call:requested', callPayload);
-        
-        // 💾 PERSISTÊNCIA: Guardar no Redis como pedido ativo
-        await this.stateService.saveActiveCall(establishmentId, socket.data.servicePointId, clientId, callPayload);
-
-        return { success: true };
     }
 
     // Staff → Backend
@@ -341,7 +369,7 @@ export class RealtimeGateway implements OnGatewayInit {
 
         const duration = (durationMinutes || 15) * 60 * 1000;
         this.blockedServicePoints.set(servicePointId, Date.now() + duration);
-        
+
         this.logger.error(`[ADMIN] 🛡️ MESA BLOQUEADA MANUALMENTE: ${servicePointId} por ${durationMinutes || 15} min.`);
 
         const spRoom = this.rooms.servicePoint(socket.data.establishmentId, servicePointId);
@@ -373,7 +401,7 @@ export class RealtimeGateway implements OnGatewayInit {
 
         // 1. Banir o ID do Dispositivo
         this.blockedClientIds.set(clientId, expiration);
-        
+
         // 2. Tentar encontrar e banir o IP associado a este clientId
         // Usamos fetchSockets() do namespace para ser compatível com as versões recentes do Socket.io
         this.server.fetchSockets().then(sockets => {
@@ -382,7 +410,7 @@ export class RealtimeGateway implements OnGatewayInit {
                     const ip = s.handshake.headers['x-forwarded-for'] || s.handshake.address;
                     const clientIp = Array.isArray(ip) ? (ip as string[])[0] : (ip as string);
                     this.blockedIPs.set(clientIp, expiration);
-                    
+
                     // Notificar o cliente banido e desligar
                     s.emit('call:status', {
                         status: RealtimeCallStatus.BLOCKED,
@@ -405,6 +433,9 @@ export class RealtimeGateway implements OnGatewayInit {
         this.blockedClientIds.clear();
         this.blockedServicePoints.clear();
         this.ipStrikes.clear();
-        this.logger.log('🔓 [EMERGENCY] Todos os banimentos foram removidos.');
+        this.lastCallTimestamps.clear(); // Limpar também os throttles para debug/emergência
+        this.processingClients.clear();
+        this.connectingClients.clear();
+        this.logger.log('🔓 [EMERGENCY] Todos os banimentos e locks foram removidos.');
     }
 }
