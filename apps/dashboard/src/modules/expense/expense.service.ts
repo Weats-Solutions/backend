@@ -72,7 +72,7 @@ export class ExpenseService {
     });
   }
 
-  async deleteExpense(id: string, establishmentId: string): Promise<void> {
+  async deleteExpense(id: string, establishmentId: string) {
     const expense = await this.prisma.expense.findFirst({
       where: { id, establishmentId },
       select: { id: true },
@@ -87,5 +87,6 @@ export class ExpenseService {
     }
 
     await this.prisma.expense.delete({ where: { id } });
+    return { success: true };
   }
 }

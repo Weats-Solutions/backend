@@ -298,7 +298,7 @@ export class ItemService {
         };
     }
 
-    async deleteItem(itemId: string, establishmentId: string): Promise<void> {
+    async deleteItem(itemId: string, establishmentId: string) {
         const slug = await this.getEstablishmentSlug(establishmentId);
         const item = await this.prisma.item.findFirst({
             where: { id: itemId, establishmentId, deletedAt: null },
@@ -309,6 +309,7 @@ export class ItemService {
             data: { deletedAt: new Date() },
         });
         clearMenuCacheAsync(slug);
+        return { success: true };
     }
 
     async duplicateItem(itemId: string, establishment: Establishment): Promise<ItemListResponse> {

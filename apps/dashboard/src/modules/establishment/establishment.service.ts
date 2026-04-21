@@ -666,10 +666,10 @@ export class EstablishmentService {
       switch (dto.section) {
         case 'branding':
           result = await this.updateBranding(establishment.id, dto.branding);
-          this.menuUtilsService.clearMenuCacheAsync(
-            'theme',
-            establishment.slug,
-          );
+          //this.menuUtilsService.clearMenuCacheAsync(
+          //  'theme',
+          //  establishment.slug,
+          //);
           break;
 
         case 'socials':
