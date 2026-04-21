@@ -1,140 +1,119 @@
 import 'dotenv/config';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../core/generated/core';
 import { PrismaPg } from '@prisma/adapter-pg';
 
-const connectionString = process.env.CORE_DB_URL;
+const connectionString = process.env.CORE_DB_URL!;
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-    // Features definitions 
+    // ======================
+    // FEATURES (upsert safe)
+    // ======================
     const features = [
-        { name: 'menu', type: 'QUANTITY', showInPlans: false }, // Technical, don't show
-        { name: 'languages', type: 'QUANTITY', showInPlans: false }, // Technical, don't show
-        { name: 'menu_settings', type: 'BOOLEAN', showInPlans: false }, // Internal
-        { name: 'booking', type: 'BOOLEAN', showInPlans: true }, // User-facing
-        { name: 'points', type: 'QUANTITY', showInPlans: true }, // User-facing
-        { name: 'livechat', type: 'BOOLEAN', showInPlans: true }, // User-facing
-        { name: 'templates', type: 'BOOLEAN', showInPlans: true }, // User-facing
-        { name: 'takeaway', type: 'BOOLEAN', showInPlans: true }, // User-facing
-        { name: 'devices', type: 'BOOLEAN', showInPlans: true }, // User-facing
-        { name: 'employees', type: 'BOOLEAN', showInPlans: true }, // User-facing
-        { name: 'zones', type: 'BOOLEAN', showInPlans: true }, // User-facing
-        { name: 'marketplace', type: 'BOOLEAN', showInPlans: true }, // User-facing
-        { name: 'ai', type: 'BOOLEAN', showInPlans: true }, // User-facing
-        { name: 'monthly_emails', type: 'QUANTITY', showInPlans: true }, // User-facing
+        // 
+        { name: 'menu', type: 'QUANTITY', showInPlans: false },
+        { name: 'languages', type: 'QUANTITY', showInPlans: false },
+        { name: 'menu_settings', type: 'BOOLEAN', showInPlans: false },
+        { name: 'points', type: 'QUANTITY', showInPlans: true },
+        { name: 'zones', type: 'QUANTITY', showInPlans: true },
+        { name: 'products', type: 'QUANTITY', showInPlans: true },
+        { name: 'custom_variants', type: 'QUANTITY', showInPlans: true },
+        { name: 'custom_addons', type: 'QUANTITY', showInPlans: true },
+        { name: 'livechat', type: 'BOOLEAN', showInPlans: true },
+        { name: 'templates_builder', type: 'BOOLEAN', showInPlans: true },
+        { name: 'metadata', type: 'BOOLEAN', showInPlans: true },
+        { name: 'devices', type: 'BOOLEAN', showInPlans: true },
+        { name: 'employees', type: 'BOOLEAN', showInPlans: true },
+        { name: 'marketplace', type: 'BOOLEAN', showInPlans: true },
+        { name: 'ai', type: 'BOOLEAN', showInPlans: true },
+        { name: 'images', type: 'QUANTITY', showInPlans: true },
+        { name: 'monthly_emails', type: 'QUANTITY', showInPlans: true },
+        // Functions
+        { name: 'takeaway', type: 'BOOLEAN', showInPlans: true },
+        { name: 'booking', type: 'BOOLEAN', showInPlans: true },
     ];
 
-    // Ensure features exist
     for (const f of features) {
         await prisma.feature.upsert({
             where: { name: f.name },
             update: { showInPlans: f.showInPlans },
-            create: { name: f.name, type: f.type as any, showInPlans: f.showInPlans },
+            create: {
+                name: f.name,
+                type: f.type as any,
+                showInPlans: f.showInPlans,
+            },
         });
     }
 
-    // Plans definitions
+    // ======================
+    // PLANS
+    // ======================
     const plans = [
         {
             name: 'Weats Start',
             cycles: [
-                {
-                    price: 49.99,
-                    priceId: 'price_1SOjZ1ELJnossyvmBHIJY1ii',
-                    cycle: 'MONTHLY',
-                },
-                {
-                    price: 134.99,
-                    priceId: 'price_1SOjfGELJnossyvmMwuO154E',
-                    cycle: 'TIMESTRAL',
-                },
+                { price: 49.99, priceId: 'price_1SOjZ1ELJnossyvmBHIJY1ii', cycle: 'MONTHLY' },
+                { price: 134.99, priceId: 'price_1SOjfGELJnossyvmMwuO154E', cycle: 'TIMESTRAL' },
             ],
             features: {
                 menu: 1,
                 languages: 1,
-                menu_settings: 0,
-                booking: 0,
-                points: 0,
-                livechat: 0,
-                templates: 0,
-                takeaway: 0,
-                devices: 0,
-                employees: 0,
-                zones: 0,
-                marketplace: 0,
-                ai: 0,
-                monthly_emails: 1000,
+                points: 100,
+                zones: 3,
+                products: 125,
+                custom_variants: 25,
+                custom_addons: 15,
+                images: 100,
+                templates_builder: true,
+                livechat: true,
+                metadata: false,
             },
         },
         {
             name: 'Weats Plus',
             cycles: [
-                {
-                    price: 149.99,
-                    priceId: 'price_1SOjbgELJnossyvmruC7yY2r',
-                    cycle: 'MONTHLY',
-                },
-                {
-                    price: 404.99,
-                    priceId: 'price_1SOjfnELJnossyvmB3wg7YZH',
-                    cycle: 'TIMESTRAL',
-                },
+                { price: 149.99, priceId: 'price_1SOjbgELJnossyvmruC7yY2r', cycle: 'MONTHLY' },
+                { price: 404.99, priceId: 'price_1SOjfnELJnossyvmB3wg7YZH', cycle: 'TIMESTRAL' },
             ],
             features: {
                 menu: 3,
                 languages: 3,
-                menu_settings: 1,
-                booking: 1,
-                points: 10,
-                livechat: 1,
-                templates: 1,
-                takeaway: 1,
-                devices: 1,
-                employees: 1,
-                zones: 1,
-                marketplace: 1,
-                ai: 1,
-                monthly_emails: 5000,
+                points: 250,
+                zones: 10,
+                products: 300,
+                custom_variants: 100,
+                custom_addons: 85,
+                images: 250,
+                templates_builder: true,
+                livechat: true,
+                metadata: true,
             },
         },
         {
             name: 'Weats Pro',
             cycles: [
-                {
-                    price: 199.99,
-                    priceId: 'price_1SOjgnELJnossyvmGL2tjEFm',
-                    cycle: 'MONTHLY',
-                },
-                {
-                    price: 539.99,
-                    priceId: 'price_1SOjhCELJnossyvmrlr5ecrC',
-                    cycle: 'TIMESTRAL',
-                },
+                { price: 199.99, priceId: 'price_1SOjgnELJnossyvmGL2tjEFm', cycle: 'MONTHLY' },
+                { price: 539.99, priceId: 'price_1SOjhCELJnossyvmrlr5ecrC', cycle: 'TIMESTRAL' },
             ],
             features: {
                 menu: 10,
-                languages: 7,
-                menu_settings: 1,
-                booking: 1,
-                points: 50,
-                livechat: 1,
-                templates: 1,
-                takeaway: 1,
-                devices: 1,
-                employees: 1,
-                zones: 1,
-                marketplace: 1,
-                ai: 1,
-                monthly_emails: 20000,
-
+                languages: 6,
+                points: 500,
+                zones: 25,
+                products: 550,
+                custom_variants: 250,
+                custom_addons: 150,
+                images: 500,
+                templates_builder: true,
+                livechat: true,
+                metadata: true,
             },
         },
     ];
 
     for (const p of plans) {
-        // Create or update the Plan (without price)
-        // Since 'name' is not @unique, we use findFirst + create/update pattern
+        // find or create plan
         let plan = await prisma.plan.findFirst({
             where: { name: p.name },
         });
@@ -145,28 +124,33 @@ async function main() {
             });
         }
 
-        // Attach Plan features
+        // ======================
+        // RESET FEATURES (safe)
+        // ======================
+        await prisma.planFeature.deleteMany({
+            where: { planId: plan.id },
+        });
+
         for (const featureName of Object.keys(p.features)) {
             const feature = await prisma.feature.findUnique({
                 where: { name: featureName },
             });
             if (!feature) continue;
 
+            const rawValue = p.features[featureName];
+
             const valueQuantity =
-                typeof p.features[featureName] === 'number'
-                    ? p.features[featureName]
-                    : null;
+                typeof rawValue === 'number' ? rawValue : null;
+
             const valueBoolean =
-                typeof p.features[featureName] === 'boolean' ||
-                    p.features[featureName] === 0 ||
-                    p.features[featureName] === 1
-                    ? !!p.features[featureName]
+                typeof rawValue === 'boolean' ||
+                    rawValue === 0 ||
+                    rawValue === 1
+                    ? !!rawValue
                     : null;
 
-            await prisma.planFeature.upsert({
-                where: { planId_featureId: { planId: plan.id, featureId: feature.id } },
-                update: { valueQuantity, valueBoolean },
-                create: {
+            await prisma.planFeature.create({
+                data: {
                     planId: plan.id,
                     featureId: feature.id,
                     valueQuantity,
@@ -175,11 +159,18 @@ async function main() {
             });
         }
 
-        // Create PlanCycles
+        // ======================
+        // PLAN CYCLES (SAFE UPSERT)
+        // NÃO apagar (há subscriptions)
+        // ======================
         for (const cycle of p.cycles) {
             await prisma.planCycle.upsert({
                 where: { priceId: cycle.priceId },
-                update: { price: cycle.price, cycle: cycle.cycle as any },
+                update: {
+                    price: cycle.price,
+                    cycle: cycle.cycle as any,
+                    planId: plan.id, // garante ligação correta
+                },
                 create: {
                     planId: plan.id,
                     price: cycle.price,
@@ -190,7 +181,7 @@ async function main() {
         }
     }
 
-    console.log('Seeded plans, features, and plan cycles');
+    console.log('✅ Plans synced successfully');
 }
 
 main()

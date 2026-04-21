@@ -12,8 +12,8 @@ export class EstablishmentDomainDto {
 export class EstablishmentWifiDto {
     @Length(2, 50)
     @IsString()
-    @IsNotEmpty()
-    wifiSsid: string;
+    @IsOptional()
+    wifiSsid?: string;
 
     @Length(5, 63)
     @IsString()

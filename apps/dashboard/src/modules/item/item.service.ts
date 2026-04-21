@@ -46,6 +46,55 @@ export class ItemService {
         return establishment?.slug;
     }
 
+    /**
+     * Finds all menu IDs that contain this item, either directly or as a modifier.
+     */
+    private async getAffectedMenuIds(itemId: string): Promise<string[]> {
+        const item = await this.prisma.item.findUnique({
+            where: { id: itemId },
+            select: {
+                menuItemPositions: {
+                    select: { subcategory: { select: { category: { select: { menuId: true } } } } }
+                },
+                itemModifierOptions: {
+                    select: {
+                        group: {
+                            select: {
+                                item: {
+                                    select: { menuItemPositions: { select: { subcategory: { select: { category: { select: { menuId: true } } } } } } }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        if (!item) return [];
+
+        const directMenuIds = item.menuItemPositions.map(p => p.subcategory?.category?.menuId);
+        const indirectMenuIds = item.itemModifierOptions.flatMap(opt =>
+            opt.group.item?.menuItemPositions.map(p => p.subcategory?.category?.menuId) || []
+        );
+
+        return [...new Set([...directMenuIds, ...indirectMenuIds])].filter(id => !!id) as string[];
+    }
+
+    /**
+     * Invalidates cache only if the item is part of active menus.
+     */
+    private async invalidateItemCache(slug: string | undefined, itemId: string) {
+        if (!slug) return;
+
+        const menuIds = await this.getAffectedMenuIds(itemId);
+        if (menuIds.length === 0) return;
+
+        for (const menuId of menuIds) {
+            this.menuUtilsService.clearMenuCacheAsync('menu-detail', slug, menuId);
+        }
+        this.menuUtilsService.clearMenuCacheAsync('menus', slug);
+    }
+
     // ═══════════════════════════════════════════
     // PUBLIC API
     // ═══════════════════════════════════════════
@@ -105,57 +154,16 @@ export class ItemService {
 
             return created;
         });
-        clearMenuCacheAsync(slug);
         return item;
     }
 
     async updateItem(id: string, establishment: Establishment, dto: UpdateItemDto) {
-        const existing = await this.prisma.item.findUnique({
-            where: { id, establishmentId: establishment.id },
-            include: {
-                menuItemPositions: {
-                    select: {
-                        subcategory: {
-                            select: {
-                                category: { select: { menuId: true } }
-                            }
-                        }
-                    }
-                },
-                itemModifierOptions: {
-                    select: {
-                        group: {
-                            select: {
-                                item: {
-                                    select: {
-                                        menuItemPositions: {
-                                            select: {
-                                                subcategory: {
-                                                    select: {
-                                                        category: { select: { menuId: true } }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        if (!existing) throw new RpcException({ message: ERRORS.ITEM_NOT_FOUND, code: 404 });
-
-        let menuId;
-        if (existing.menuItemPositions && existing.menuItemPositions.length > 0) {
-            menuId = existing.menuItemPositions[0]?.subcategory?.category?.menuId;
-        } else if (existing.itemModifierOptions && existing.itemModifierOptions.length > 0) {
-            menuId = existing.itemModifierOptions[0]?.group?.item?.menuItemPositions?.[0]?.subcategory?.category?.menuId;
-        }
-
         const item = await this.prisma.$transaction(async tx => {
+            const existing = await tx.item.findUnique({
+                where: { id, establishmentId: establishment.id },
+            });
+            if (!existing) throw new RpcException({ message: ERRORS.ITEM_NOT_FOUND, code: 404 });
+
             await tx.itemTranslation.deleteMany({ where: { itemId: id } });
             await tx.itemAllergen.deleteMany({ where: { itemId: id } });
             await tx.itemNutritionInfo.deleteMany({ where: { itemId: id } });
@@ -217,7 +225,7 @@ export class ItemService {
             return updated;
         });
 
-        this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug, menuId);
+        await this.invalidateItemCache(establishment.slug, id);
         return item;
     }
 
@@ -308,7 +316,7 @@ export class ItemService {
             where: { id: itemId },
             data: { deletedAt: new Date() },
         });
-        clearMenuCacheAsync(slug);
+        await this.invalidateItemCache(slug, itemId);
         return { success: true };
     }
 
@@ -397,8 +405,6 @@ export class ItemService {
             return created;
         });
 
-        clearMenuCacheAsync(establishment.slug);
-
         // Return lean response
         const refreshed = await this.prisma.item.findUnique({
             where: { id: newItem.id },
@@ -406,14 +412,15 @@ export class ItemService {
         });
         return mapItemListResponse(refreshed as any, establishment.primaryLanguage);
     }
-
     async bulkUpdateStatus(bulkStatusDto: BulkStatusDto, establishmentId: string) {
         const slug = await this.getEstablishmentSlug(establishmentId);
         const result = await this.prisma.item.updateMany({
             where: { id: { in: bulkStatusDto.ids }, establishmentId, deletedAt: null },
             data: { status: bulkStatusDto.status },
         });
-        clearMenuCacheAsync(slug);
+        for (const id of bulkStatusDto.ids) {
+            await this.invalidateItemCache(slug, id);
+        }
         return { updated: result.count };
     }
 
@@ -423,7 +430,9 @@ export class ItemService {
             where: { id: { in: bulkDeleteDto.ids }, establishmentId, deletedAt: null },
             data: { deletedAt: new Date() },
         });
-        clearMenuCacheAsync(slug);
+        for (const id of bulkDeleteDto.ids) {
+            await this.invalidateItemCache(slug, id);
+        }
         return { deleted: result.count };
     }
 

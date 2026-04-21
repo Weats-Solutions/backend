@@ -14,7 +14,7 @@ import { MenuUtilsModule } from '@weats/common/utils/modules/menu/menu-utils.mod
 import { EstablishmentLanguageSyncService } from './establishment-language-sync.service';
 import { EstablishmentLanguageSyncProcessor } from './establishment-language-sync.processor';
 
-@Module({
+@Module({ 
   imports: [
     ConfigModule,
     ConfigsModule,

@@ -1013,17 +1013,33 @@ export class EstablishmentService {
     establishment: Establishment,
     updateEstablishmentDigitalSettingsDto: UpdateEstablishmentDigitalSettingsDto,
   ) {
-    if (updateEstablishmentDigitalSettingsDto.section === 'domain') {
-      return this.updateDomain(
-        establishment,
-        updateEstablishmentDigitalSettingsDto.domain,
-      );
-    } else if (updateEstablishmentDigitalSettingsDto.section === 'wifi') {
-      return this.updateWifi(
-        establishment,
-        updateEstablishmentDigitalSettingsDto.wifi,
-      );
+    let result;
+
+    switch (updateEstablishmentDigitalSettingsDto.section) {
+      case 'domain':
+        result = await this.updateDomain(
+          establishment,
+          updateEstablishmentDigitalSettingsDto.domain,
+        );
+        this.menuUtilsService.clearAllCacheAsync(establishment.slug);
+
+        break;
+      case 'wifi':
+        result = await this.updateWifi(
+          establishment,
+          updateEstablishmentDigitalSettingsDto.wifi,
+        );
+        this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
+        break;
+      default:
+        throw new RpcException({
+          status: 400,
+          message: 'Invalid section provided',
+          code: ERRORS.BAD_REQUEST,
+        });
     }
+
+    return result;
   }
 
   async updateDomain(

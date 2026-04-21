@@ -7,6 +7,7 @@ import {
 } from '@weats/database';
 import { Job, Queue } from 'bull';
 import { LanguageSyncJobData } from './establishment-language-sync.types';
+import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 
 const LANGUAGE_SYNC_JOB = 'sync-establishment-language-translations';
 const LANGUAGE_SYNC_BATCH_SIZE = 500;
@@ -25,6 +26,7 @@ export class EstablishmentLanguageSyncService {
   constructor(
     @InjectQueue('jobs') private readonly jobsQueue: Queue,
     private readonly prisma: CorePrismaService,
+    private readonly menuUtilsService: MenuUtilsService,
   ) { }
 
   /**
@@ -125,12 +127,19 @@ export class EstablishmentLanguageSyncService {
     try {
       this.logger.log(`Finalizing sync. Updating establishment languages to: ${finalLanguagesList.join(', ')}`);
 
-      await this.prisma.establishment.update({
+      const establishment = await this.prisma.establishment.update({
         where: { id: establishmentId },
         data: {
           availableLanguages: finalLanguagesList,
         },
+        select: {
+          slug: true,
+        }
       });
+
+      this.menuUtilsService.clearAllCacheAsync(
+        establishment.slug,
+      );
 
     } catch (error) {
       this.logger.error(`Failed to update establishment languages after sync: ${error.message}`);
