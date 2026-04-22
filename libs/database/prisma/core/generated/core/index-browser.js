@@ -1378,7 +1378,11 @@ exports.EstablishmentLanguage = exports.$Enums.EstablishmentLanguage = {
 exports.Currency = exports.$Enums.Currency = {
   EUR: 'EUR',
   USD: 'USD',
-  GBP: 'GBP'
+  GBP: 'GBP',
+  JPY: 'JPY',
+  CHF: 'CHF',
+  AED: 'AED',
+  CNY: 'CNY'
 };
 
 exports.UnitType = exports.$Enums.UnitType = {

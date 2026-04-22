@@ -735,6 +735,10 @@ enum Currency {
   EUR
   USD
   GBP
+  JPY
+  CHF
+  AED
+  CNY
 }
 
 model EstablishmentBookingSettings {
