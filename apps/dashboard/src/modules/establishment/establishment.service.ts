@@ -16,6 +16,7 @@ import {
   CorePrismaService,
   EstablishmentLanguage,
   ScheduleType,
+  EstablishmentType,
 } from '@weats/database';
 import { EstablishmentStatus } from '@weats/database';
 import { ulid } from 'ulid';
@@ -640,6 +641,7 @@ export class EstablishmentService {
         email: data.email,
         countryCode: data.countryCode,
         phoneNumber: data.phoneNumber,
+        type: data.type,
       },
     });
   }
