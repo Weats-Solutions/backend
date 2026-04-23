@@ -16,6 +16,7 @@ import {
   CorePrismaService,
   EstablishmentLanguage,
   ScheduleType,
+  EstablishmentType,
 } from '@weats/database';
 import { EstablishmentStatus } from '@weats/database';
 import { ulid } from 'ulid';
@@ -151,6 +152,7 @@ export class EstablishmentService {
         state: true,
         zipCode: true,
         country: true,
+        type: true,
         schedule: {
           include: { days: { include: { intervals: true } } },
         },
@@ -179,6 +181,7 @@ export class EstablishmentService {
         email: establishment.email,
         phoneNumber: establishment.phoneNumber,
         countryCode: establishment.countryCode,
+        type: establishment.type,
       },
       location: {
         address: establishment.address,
@@ -638,6 +641,7 @@ export class EstablishmentService {
         email: data.email,
         countryCode: data.countryCode,
         phoneNumber: data.phoneNumber,
+        type: data.type,
       },
     });
   }

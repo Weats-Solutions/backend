@@ -884,7 +884,11 @@ export type StockInventoryStatus = (typeof StockInventoryStatus)[keyof typeof St
 export const Currency: {
   EUR: 'EUR',
   USD: 'USD',
-  GBP: 'GBP'
+  GBP: 'GBP',
+  JPY: 'JPY',
+  CHF: 'CHF',
+  AED: 'AED',
+  CNY: 'CNY'
 };
 
 export type Currency = (typeof Currency)[keyof typeof Currency]

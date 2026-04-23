@@ -1,7 +1,8 @@
-import { IsEmail, IsIn, IsNotEmpty, IsString, Length, ValidateIf, ValidateNested } from "class-validator";
+import { IsEmail, IsIn, IsNotEmpty, IsString, Length, ValidateIf, ValidateNested, IsEnum } from "class-validator";
 import { IsValidCountryCode, IsValidPhoneNumber } from "@weats/common/validators";
 import { Type } from "class-transformer";
 import { CreateScheduleDto } from "@weats/contracts";
+import { EstablishmentType } from "@weats/database";
 
 export class EstablishmentInformationsDto {
     @Length(2, 50)
@@ -23,6 +24,9 @@ export class EstablishmentInformationsDto {
     @IsNotEmpty()
     @IsValidCountryCode()
     countryCode: string;
+
+    @IsEnum(EstablishmentType)
+    type?: EstablishmentType;
 }
 
 export class EstablishmentLocationDto {
