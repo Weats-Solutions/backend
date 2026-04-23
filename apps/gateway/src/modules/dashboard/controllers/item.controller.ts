@@ -2,11 +2,12 @@
 import { Controller, Post, Put, Body, Param, Get, Query, Delete, Patch, HttpCode, HttpStatus, Inject } from '@nestjs/common';
 import { CreateItemDto, UpdateItemDto, BulkStatusDto, BulkDeleteDto, GetItemsQueryDto } from '@weats/contracts';
 import { UseGuards } from '@nestjs/common';
-import { ClerkGuard, EstablishmentStaffGuard, CurrentEstablishment } from '@weats/common';
+import { ClerkGuard, EstablishmentStaffGuard, CurrentEstablishment, RequiresFeature, FeatureLimitGuard } from '@weats/common';
 import { Establishment } from '@weats/types';
 import { DASHBOARD_SERVICE } from '@weats/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
+import { feature } from '@weats/types';
 
 @Controller('items')
 @UseGuards(ClerkGuard, EstablishmentStaffGuard)
@@ -14,7 +15,10 @@ export class ItemController {
     constructor(
         @Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy) { }
 
+
     @Post()
+    @RequiresFeature(feature.products)
+    @UseGuards(ClerkGuard, EstablishmentStaffGuard, FeatureLimitGuard)
     async createItem(@CurrentEstablishment() establishment: Establishment, @Body() createItemDto: CreateItemDto) {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.ITEM_CREATE, { establishmentId: establishment.id, createItemDto });
     }
@@ -60,7 +64,10 @@ export class ItemController {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.ITEM_DELETE, { id, establishmentId: establishment.id });
     }
 
+
     @Post(':id/duplicate')
+    @RequiresFeature(feature.products)
+    @UseGuards(ClerkGuard, EstablishmentStaffGuard, FeatureLimitGuard)
     async duplicateItem(
         @Param('id') id: string,
         @CurrentEstablishment() establishment: Establishment,

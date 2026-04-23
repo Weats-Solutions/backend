@@ -345,7 +345,7 @@ export class ItemService {
                     translations: {
                         create: source.translations.map(t => ({
                             locale: t.locale,
-                            name: `${t.name} (Cópia)`,
+                            name: `${t.name} (Copy)`,
                             description: t.description,
                         })),
                     },

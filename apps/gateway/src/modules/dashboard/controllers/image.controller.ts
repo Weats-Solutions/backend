@@ -8,7 +8,11 @@ import {
     UseGuards,
     Query,
     Inject,
+    SetMetadata,
 } from '@nestjs/common';
+import { FEATURE_KEY } from '@weats/common/constants';
+import { FeatureLimitGuard } from '@weats/common/guards/feature-limit.guard';
+import { feature } from '@weats/types';
 import { CurrentEstablishment } from '@weats/common/decorators/current-establishment.decorator';
 import { Roles } from '@weats/common/decorators/roles.decorator';
 import { ClerkGuard } from '@weats/common/guards/clerk.guard';
@@ -24,7 +28,7 @@ import {
 } from '@weats/common/decorators/throttle.decorator';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { ClientProxy } from '@nestjs/microservices';
-import { DASHBOARD_SERVICE } from '@weats/common';
+import { DASHBOARD_SERVICE, RequiresFeature } from '@weats/common';
 
 
 
@@ -88,22 +92,9 @@ export class ImageController {
     }
 
     @Roles()
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+    @RequiresFeature(feature.images)
+    @UseGuards(ClerkGuard, EstablishmentStaffGuard, FeatureLimitGuard)
     @Post('direct-upload-urls')
-    @ThrottleWrite()
-    async generateDirectUploadUrls(
-        @Body() body: GenerateUploadUrlsDto,
-        @CurrentEstablishment() establishment: Establishment,
-    ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.IMAGE_GENERATE_UPLOAD_URLS, {
-            count: body.count,
-            establishmentId: establishment.id,
-        });
-    }
-
-    @Roles()
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
-    @Post('r2-direct-upload-urls')
     @ThrottleWrite()
     async generateR2DirectUploadUrls(
         @Body() body: GenerateUploadUrlsDto,

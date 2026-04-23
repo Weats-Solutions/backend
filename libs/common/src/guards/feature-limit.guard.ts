@@ -15,7 +15,7 @@ export class FeatureLimitGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
     private usageService: FeatureUsageService,
-  ) {}
+  ) { }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const feature = this.reflector.get<feature>(
@@ -53,7 +53,13 @@ export class FeatureLimitGuard implements CanActivate {
 
     // If quantity-controlled
     if (limit !== null) {
-      if (usage >= limit) {
+      // Check if there's a count in the request body (useful for batch operations like images)
+      const requestedCount = Number(request.body?.count) || 1;
+
+      if (usage + requestedCount > limit) {
+        console.log('Usage', usage);
+        console.log('Limit', limit);
+        console.log('Requested count', requestedCount);
         throw new ForbiddenException({
           message: 'Feature limit reached for your plan',
           code: ERRORS.FEATURE_LIMIT_REACHED,

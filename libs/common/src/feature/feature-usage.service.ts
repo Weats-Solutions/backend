@@ -14,11 +14,11 @@ export class FeatureUsageService {
 
   constructor(private corePirismaService: CorePrismaService) {
     // register built-in handlers
-    this.register('menu', async (establishmentId: string) => {
+    this.register(feature.menu, async (establishmentId: string) => {
       return this.corePirismaService.menu.count({ where: { establishmentId } });
     });
 
-    this.register('languages', async (establishmentId: string) => {
+    this.register(feature.languages, async (establishmentId: string) => {
       const est =
         await this.corePirismaService.establishment.findUnique({
           where: { id: establishmentId },
@@ -26,11 +26,31 @@ export class FeatureUsageService {
       return (est?.availableLanguages || []).length;
     });
 
-    this.register('points', async (establishmentId: string) => {
+    this.register(feature.points, async (establishmentId: string) => {
       return this.corePirismaService.servicePoint.count({
         where: { zone: { establishmentId } },
       });
     });
+
+    this.register(feature.images, async (establishmentId: string) => {
+      return this.corePirismaService.image.count({
+        where: { establishmentId },
+      });
+    });
+
+    this.register(feature.products, async (establishmentId: string) => {
+      return this.corePirismaService.item.count({
+        where: { establishmentId, deletedAt: null },
+      });
+    });
+
+
+    this.register(feature.zones, async (establishmentId: string) => {
+      return this.corePirismaService.serviceZone.count({
+        where: { establishmentId },
+      });
+    });
+
   }
 
   register(featureName: feature, handler: FeatureUsageHandler) {
