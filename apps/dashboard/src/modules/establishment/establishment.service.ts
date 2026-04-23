@@ -151,6 +151,7 @@ export class EstablishmentService {
         state: true,
         zipCode: true,
         country: true,
+        type: true,
         schedule: {
           include: { days: { include: { intervals: true } } },
         },
@@ -179,6 +180,7 @@ export class EstablishmentService {
         email: establishment.email,
         phoneNumber: establishment.phoneNumber,
         countryCode: establishment.countryCode,
+        type: establishment.type,
       },
       location: {
         address: establishment.address,
