@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CorePrismaService, Schedule } from '@weats/database';
 import { EstablishmentLanguage } from '@weats/database';
 import { RpcException } from '@nestjs/microservices';
-import { ERRORS, normalizeSchedule, clearMenuCacheAsync } from '@weats/common';
+import { ERRORS, normalizeSchedule } from '@weats/common';
 import { UpdateThemeSettingsDto } from '@weats/contracts/dashboard/dtos/theme/update-theme-settings.dto';
 import { Establishment, EupagoMultibancoResponse } from '@weats/types';
 import { AppConfigService } from '@weats/configs/app-config.service';

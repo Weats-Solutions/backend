@@ -6,15 +6,17 @@ import {
 import { CreateMenuDto, UpdateMenuPositionsDto, UpdateMenuDto } from '@weats/contracts';
 import { Establishment } from '@weats/types';
 import { FeatureUsageService } from '@weats/common/feature/feature-usage.service';
-import { ERRORS, MENU_COLOR_PALETTE, clearMenuCacheAsync, normalizeSchedule } from '@weats/common';
+import { ERRORS, MENU_COLOR_PALETTE, normalizeSchedule } from '@weats/common';
 import { CorePrismaService, EstablishmentLanguage, MenuType, ScheduleType } from '@weats/database';
 import { RpcException } from '@nestjs/microservices';
+import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 
 @Injectable()
 export class MenuService {
     constructor(
         private readonly prisma: CorePrismaService,
         private usageService: FeatureUsageService,
+        private readonly menuUtilsService: MenuUtilsService,
     ) { }
 
     async listMenus(establishment: Establishment) {
@@ -179,7 +181,7 @@ export class MenuService {
 
                 return { ...menu, schedule: menu.schedule ? normalizeSchedule(menu.schedule) : null };
             });
-            clearMenuCacheAsync(establishment?.slug);
+            this.menuUtilsService.clearMenuCacheAsync('menus', establishment?.slug);
             return menu;
         } catch (error) {
             console.error('Error creating menu:', error);
@@ -244,7 +246,7 @@ export class MenuService {
                 },
             });
 
-            clearMenuCacheAsync(establishment.slug);
+            this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug);
             return this.getMenuDetails(menuId, establishment);
         } catch (error) {
             console.error('Error updating menu details:', error);
@@ -286,7 +288,7 @@ export class MenuService {
                 },
             });
 
-            clearMenuCacheAsync(establishment.slug);
+            this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug);
             return {
                 id: menu.id,
                 isVisible: menu.isVisible,
@@ -321,7 +323,7 @@ export class MenuService {
             await this.prisma.$transaction(updates);
 
             // Clean Next.JS cache to reflect changes immediately on the frontend
-            clearMenuCacheAsync(establishment.slug);
+            this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug);
 
             return { success: true };
         } catch (error) {
@@ -373,7 +375,7 @@ export class MenuService {
                 where: { id: result.establishmentId },
                 select: { slug: true },
             });
-            clearMenuCacheAsync(establishment?.slug);
+            this.menuUtilsService.clearMenuCacheAsync('menus', establishment?.slug);
             return { success: result.success, remainingMenus: result.remainingMenus };
         } catch (error) {
             console.error('Error deleting menu:', error);

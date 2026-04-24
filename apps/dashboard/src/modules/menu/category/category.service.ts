@@ -2,13 +2,16 @@ import { Injectable, NotFoundException, BadRequestException } from "@nestjs/comm
 import { CorePrismaService } from "@weats/database";
 import { Establishment } from "@weats/types";
 import { CreateCategoryDto, UpdateCategoryPositionsDto } from "@weats/contracts";
-import { clearMenuCacheAsync, ERRORS } from '@weats/common';
+import {  ERRORS } from '@weats/common';
 import { RpcException } from "@nestjs/microservices";
+import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 
 @Injectable()
 export class MenuCategoryService {
-    constructor(private readonly prisma: CorePrismaService) {
-
+    constructor(
+        private readonly prisma: CorePrismaService,
+        private readonly menuUtilsService: MenuUtilsService,
+    ) {
     }
     async createCategory(
         menuId: string,
@@ -55,7 +58,7 @@ export class MenuCategoryService {
                 imageId: newCategory.image?.id,
                 imageUrl: newCategory.image?.url,
             };
-            clearMenuCacheAsync(menu?.establishment?.slug);
+            this.menuUtilsService.clearMenuCacheAsync('menus', menu?.establishment?.slug);
             return response;
         } catch (error) {
             console.error('Error creating menu category:', error);
@@ -183,7 +186,7 @@ export class MenuCategoryService {
                 imageId: updatedCategory.image?.id,
                 imageUrl: updatedCategory.image?.url,
             };
-            clearMenuCacheAsync(establishment.slug);
+            this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug);
             return response;
         } catch (error) {
             console.error('Error updating menu category:', error);
@@ -285,7 +288,7 @@ export class MenuCategoryService {
             await this.prisma.menuCategory.delete({
                 where: { id: categoryId },
             });
-            clearMenuCacheAsync(establishment.slug);
+            this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug);
             return { success: true, message: 'Category deleted successfully' };
         } catch (error) {
             console.error('Error deleting menu category:', error);
@@ -312,7 +315,7 @@ export class MenuCategoryService {
                 ),
             );
 
-            clearMenuCacheAsync(establishment.slug);
+            this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug);
             return { success: true };
         } catch (error) {
             console.error('Error updating menu category positions:', error);

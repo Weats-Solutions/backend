@@ -40,7 +40,7 @@ export class MenuUtilsService implements OnModuleDestroy {
      * @param slug - Slug do estabelecimento
      * @param menuId - ID do menu (apenas para 'menu-detail')
      */
-    clearMenuCacheAsync(type: MenuCacheType, slug: string, menuId?: string) {
+    clearMenuCacheAsync(type: MenuCacheType, slug: string | undefined, menuId?: string) {
         if (!slug) return;
 
         // Constrói o pattern de pesquisa

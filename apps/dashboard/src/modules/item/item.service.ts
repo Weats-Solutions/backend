@@ -21,7 +21,7 @@ import {
 } from '@weats/types';
 import type { Prisma } from '@weats/database';
 import { ItemStatus } from '@weats/database';
-import { clearMenuCacheAsync, ERRORS } from '@weats/common';
+import { ERRORS } from '@weats/common';
 import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 import { RpcException } from '@nestjs/microservices';
 import {

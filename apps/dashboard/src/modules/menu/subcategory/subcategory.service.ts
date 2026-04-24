@@ -1,15 +1,19 @@
 import { CorePrismaService, MenuType, Prisma } from "@weats/database";
 import { Injectable } from "@nestjs/common";
 import { CreateCategoryDto, UpdateSubcategoryPositionsDto } from "@weats/contracts";
-import { clearMenuCacheAsync, ERRORS } from '@weats/common';
+import { ERRORS } from '@weats/common';
 import { Establishment, ITEM_DETAIL_INCLUDE } from "@weats/types";
 import { mapTranslatedItemDetailResponse } from "@weats/item-core";
 import { RpcException } from "@nestjs/microservices";
 import { LinkItemToSubcategoryDto } from "@weats/contracts/dashboard/dtos/item/link-item-to-subcategory.dto";
+import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 
 @Injectable()
 export class MenuSubcategoryService {
-    constructor(private readonly prisma: CorePrismaService) { }
+    constructor(
+        private readonly prisma: CorePrismaService,
+        private readonly menuUtilsService: MenuUtilsService,
+    ) { }
 
     private async getEstablishmentSlugByCategoryId(categoryId: string) {
         const category = await this.prisma.menuCategory.findUnique({
@@ -116,7 +120,7 @@ export class MenuSubcategoryService {
                 },
             });
 
-            clearMenuCacheAsync(slug);
+            this.menuUtilsService.clearMenuCacheAsync('menus', slug);
             return newSubcategory;
         } catch (error) {
             console.error('Error creating subcategory:', error);
@@ -161,7 +165,7 @@ export class MenuSubcategoryService {
                 }
             }
 
-            clearMenuCacheAsync(slug);
+            this.menuUtilsService.clearMenuCacheAsync('menus', slug);
             return { success: true };
         } catch (error) {
             console.error('Error updating subcategory:', error);
@@ -175,7 +179,7 @@ export class MenuSubcategoryService {
             await this.prisma.menuSubcategory.delete({
                 where: { id: subcategoryId },
             });
-            clearMenuCacheAsync(slug);
+            this.menuUtilsService.clearMenuCacheAsync('menus', slug);
             return { success: true };
         } catch (error) {
             console.error('Error deleting subcategory:', error);
@@ -243,7 +247,7 @@ export class MenuSubcategoryService {
         });
 
         // 3️⃣ Invalidação de Cache
-        clearMenuCacheAsync(menu.establishment.slug);
+        this.menuUtilsService.clearMenuCacheAsync('menus', menu.establishment.slug);
 
         return { success: true };
     }
@@ -272,7 +276,7 @@ export class MenuSubcategoryService {
             }
         });
 
-        clearMenuCacheAsync(subcategory.category.menu.establishment.slug);
+        this.menuUtilsService.clearMenuCacheAsync('menus', subcategory.category.menu.establishment.slug);
         return { success: true };
     }
 
@@ -301,7 +305,7 @@ export class MenuSubcategoryService {
             ),
         );
 
-        clearMenuCacheAsync(subcategory.category.menu.establishment.slug);
+        this.menuUtilsService.clearMenuCacheAsync('menus', subcategory.category.menu.establishment.slug);
         return { success: true };
     }
 
@@ -329,7 +333,7 @@ export class MenuSubcategoryService {
             data
         });
 
-        clearMenuCacheAsync(subcategory.category.menu.establishment.slug);
+        this.menuUtilsService.clearMenuCacheAsync('menus', subcategory.category.menu.establishment.slug);
         return { success: true };
     }
 
@@ -354,7 +358,7 @@ export class MenuSubcategoryService {
                 ),
             );
 
-            clearMenuCacheAsync(slug);
+            this.menuUtilsService.clearMenuCacheAsync('menus', slug);
             return { success: true };
         } catch (error) {
             console.error('Error updating subcategory positions:', error);
