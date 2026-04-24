@@ -34,7 +34,12 @@ export class FeatureUsageService {
 
     this.register(feature.images, async (establishmentId: string) => {
       return this.corePirismaService.image.count({
-        where: { establishmentId },
+        where: {
+          establishmentId,
+          faviconAssets: {
+            none: {}
+          },
+        },
       });
     });
 
