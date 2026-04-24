@@ -15,6 +15,7 @@ import { ClerkService } from "@weats/integrations/clerk/clerk.service"
 import { StripeService } from "@weats/integrations/stripe/stripe.service"
 import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
+import { QUEUES } from '@weats/bull/queues/queues.constants';
 
 @Controller('webhooks')
 @ThrottleLenient() // 200 requests por minuto para webhooks
@@ -22,7 +23,7 @@ export class WebhooksController {
     private readonly logger = new Logger(WebhooksController.name);
 
     constructor(
-        @InjectQueue('webhooks-queue') private readonly webhooksQueue: Queue,
+        @InjectQueue(QUEUES.WEBHOOK) private readonly webhooksQueue: Queue,
         private readonly stripeService: StripeService,
         private readonly clerkService: ClerkService,
     ) { }

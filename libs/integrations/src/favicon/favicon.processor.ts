@@ -3,8 +3,9 @@ import { Job } from 'bull';
 import { FaviconService } from './favicon.service';
 import { CorePrismaService } from '@weats/database';
 import { CloudflareR2Service } from '../cloudflare/cloudflare-r2.service';
+import { QUEUES } from '@weats/bull/queues/queues.constants';
 
-@Processor('jobs')
+@Processor(QUEUES.IMAGE)
 export class FaviconProcessor {
     constructor(
         private readonly faviconService: FaviconService,

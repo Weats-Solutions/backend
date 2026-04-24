@@ -10,6 +10,15 @@
   "monorepo": true,
   "root": "apps/gateway",
   "projects": {
+    "bull": {
+      "type": "library",
+      "root": "libs/bull",
+      "entryFile": "index",
+      "sourceRoot": "libs/bull/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/bull/tsconfig.lib.json"
+      }
+    },
     "clerk": {
       "type": "library",
       "root": "libs/clerk",
@@ -134,6 +143,15 @@
       "sourceRoot": "apps/webhooks/src",
       "compilerOptions": {
         "tsConfigPath": "apps/webhooks/tsconfig.app.json"
+      }
+    },
+    "workers": {
+      "type": "application",
+      "root": "apps/workers",
+      "entryFile": "main",
+      "sourceRoot": "apps/workers/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/workers/tsconfig.app.json"
       }
     }
   }

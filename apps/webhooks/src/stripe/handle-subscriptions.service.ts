@@ -1,26 +1,25 @@
 import { Injectable, BadRequestException, Inject } from '@nestjs/common';
-import { SubscriptionStatus, EmailTemplate } from '@weats/database';
+import { SubscriptionStatus } from '@weats/database';
 import { Stripe } from 'stripe';
 import { Logger } from '@nestjs/common';
 import { ClerkService } from '@weats/integrations';
-import { InjectQueue } from '@nestjs/bull';
-import { Queue } from 'bull';
 import { StripeService } from '@weats/integrations';
 import { AppConfigService } from '@weats/configs/app-config.service';
 import { CorePrismaService } from '@weats/database';
+import { SendEmailDto, EmailTemplate, ACCEPTED_LANGUAGES } from '@weats/types';
+import { EmailProducer } from '@weats/bull/producers/email.producer';
 
 @Injectable()
 export class HandleSubscriptionsService {
   private readonly logger = new Logger(HandleSubscriptionsService.name);
 
   constructor(
-    @InjectQueue('emails') private readonly emailQueue: Queue,
     @Inject('APP_URL') private readonly appUrl: string,
     private readonly stripeService: StripeService,
     private readonly prisma: CorePrismaService,
-    private readonly appConfig: AppConfigService,
+    private readonly emailProducer: EmailProducer,
     private readonly clerkService: ClerkService,
-  ) {}
+  ) { }
 
   private async getEstablishmentAndPlan(subscription: Stripe.Subscription) {
     const customerId =
@@ -176,37 +175,26 @@ export class HandleSubscriptionsService {
         },
       });
 
-      await this.emailQueue.add(
-        'send-email',
-        {
-          establishmentId: establishment.id,
-          to: establishment.email,
-          template: EmailTemplate.SUBSCRIPTION_ACTIVATED,
-          lang: establishment.primaryLanguage,
-          context: {
-            firstName: establishment.owner.firstName,
-            lastName: establishment.owner.lastName,
-            establishmentName: establishment.name,
-            planName: planCycle.plan.name,
-            nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
-              establishment.primaryLanguage.toLowerCase(),
-            ),
-            trialEndsAt: subData.trialEnd?.toLocaleDateString(
-              establishment.primaryLanguage.toLowerCase(),
-            ),
-            redirectUrl: `https://app.weats.pro/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
-          },
+      const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_ACTIVATED> = {
+        to: establishment.email,
+        template: EmailTemplate.SUBSCRIPTION_ACTIVATED,
+        lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+        context: {
+          firstName: establishment.owner.firstName,
+          lastName: establishment.owner.lastName,
+          establishmentName: establishment.name,
+          planName: planCycle.plan.name,
+          nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
+            establishment.primaryLanguage.toLowerCase(),
+          ),
+          trialEndsAt: subData.trialEnd?.toLocaleDateString(
+            establishment.primaryLanguage.toLowerCase(),
+          ),
+          redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
         },
-        {
-          attempts: 3,
-          backoff: {
-            type: 'fixed',
-            delay: 30000,
-          },
-          removeOnComplete: true,
-          removeOnFail: false,
-        },
-      );
+      };
+
+      await this.emailProducer.send(payload);
 
       await this.updateClerkMetadata(establishment.id, subscription.status);
     } catch (error) {
@@ -256,30 +244,22 @@ export class HandleSubscriptionsService {
           returnUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
         });
 
-        await this.emailQueue.add(
-          'send-email',
-          {
-            establishmentId: establishment.id,
-            to: establishment.email,
-            template: EmailTemplate.SUBSCRIPTION_CANCELED,
-            lang: establishment.primaryLanguage,
-            context: {
-              firstName: establishment.owner.firstName,
-              lastName: establishment.owner.lastName,
-              establishmentName: establishment.name,
-              accessUntil: subData.currentPeriodEnd?.toLocaleDateString(
-                establishment.primaryLanguage.toLowerCase(),
-              ),
-              redirectUrl: portalUrl,
-            },
+        const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CANCELED> = {
+          to: establishment.email,
+          template: EmailTemplate.SUBSCRIPTION_CANCELED,
+          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          context: {
+            firstName: establishment.owner.firstName,
+            lastName: establishment.owner.lastName,
+            establishmentName: establishment.name,
+            accessUntil: subData.currentPeriodEnd?.toLocaleDateString(
+              establishment.primaryLanguage.toLowerCase(),
+            ),
+            redirectUrl: portalUrl,
           },
-          {
-            attempts: 3,
-            backoff: { type: 'fixed', delay: 30000 },
-            removeOnComplete: true,
-            removeOnFail: false,
-          },
-        );
+        };
+
+        await this.emailProducer.send(payload);
       }
 
       if (justReactivated) {
@@ -287,33 +267,25 @@ export class HandleSubscriptionsService {
           `Subscription ${subscription.id} has been reactivated (uncanceled).`,
         );
 
-        await this.emailQueue.add(
-          'send-email',
-          {
-            establishmentId: establishment.id,
-            to: establishment.email,
-            template: EmailTemplate.SUBSCRIPTION_REACTIVATED,
-            lang: establishment.primaryLanguage,
-            context: {
-              firstName: establishment.owner.firstName,
-              lastName: establishment.owner.lastName,
-              establishmentName: establishment.name,
-              accessUntil: subData.currentPeriodEnd?.toLocaleDateString(
-                establishment.primaryLanguage.toLowerCase(),
-              ),
-              nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
-                establishment.primaryLanguage.toLowerCase(),
-              ),
-              redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
-            },
+        const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_REACTIVATED> = {
+          to: establishment.email,
+          template: EmailTemplate.SUBSCRIPTION_REACTIVATED,
+          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          context: {
+            firstName: establishment.owner.firstName,
+            lastName: establishment.owner.lastName,
+            establishmentName: establishment.name,
+            accessUntil: subData.currentPeriodEnd?.toLocaleDateString(
+              establishment.primaryLanguage.toLowerCase(),
+            ),
+            nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
+              establishment.primaryLanguage.toLowerCase(),
+            ),
+            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
           },
-          {
-            attempts: 3,
-            backoff: { type: 'fixed', delay: 30000 },
-            removeOnComplete: true,
-            removeOnFail: false,
-          },
-        );
+        };
+
+        await this.emailProducer.send(payload);
       }
 
       if (justStartedTrial) {
@@ -329,36 +301,29 @@ export class HandleSubscriptionsService {
         const trialDays =
           trialStart && trialEnd
             ? Math.round(
-                (trialEnd.getTime() - trialStart.getTime()) /
-                  (1000 * 60 * 60 * 24),
-              )
+              (trialEnd.getTime() - trialStart.getTime()) /
+              (1000 * 60 * 60 * 24),
+            )
             : 0;
 
-        await this.emailQueue.add(
-          'send-email',
-          {
-            to: establishment.email,
-            template: EmailTemplate.SUBSCRIPTION_TRIAL_STARTED,
-            lang: establishment.primaryLanguage,
-            context: {
-              firstName: establishment.owner.firstName,
-              lastName: establishment.owner.lastName,
-              establishmentName: establishment.name,
-              planName: data.planCycle.plan.name,
-              trialDays: trialDays,
-              trialEndsAt: subData.trialEnd?.toLocaleDateString(
-                establishment.primaryLanguage.toLowerCase(),
-              ),
-              redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
-            },
+        const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_TRIAL_STARTED> = {
+          to: establishment.email,
+          template: EmailTemplate.SUBSCRIPTION_TRIAL_STARTED,
+          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          context: {
+            firstName: establishment.owner.firstName,
+            lastName: establishment.owner.lastName,
+            establishmentName: establishment.name,
+            planName: data.planCycle.plan.name,
+            trialDays: trialDays,
+            trialEndsAt: subData.trialEnd?.toLocaleDateString(
+              establishment.primaryLanguage.toLowerCase(),
+            ),
+            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
           },
-          {
-            attempts: 3,
-            backoff: { type: 'fixed', delay: 30000 },
-            removeOnComplete: true,
-            removeOnFail: false,
-          },
-        );
+        };
+
+        await this.emailProducer.send(payload);
       }
 
       await this.updateClerkMetadata(establishment.id, subscription.status);

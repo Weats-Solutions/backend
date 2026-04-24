@@ -11,6 +11,7 @@ import { ClerkModule, DiscordModule, StripeModule } from '@weats/integrations';
 import Stripe from 'stripe';
 import { WebhooksProcessor } from './webhooks.processor';
 import { DatabaseModule } from '@weats/database';
+import { QueuesModule } from '@weats/bull';
 
 @Module({
   imports: [
@@ -21,32 +22,11 @@ import { DatabaseModule } from '@weats/database';
       isGlobal: true,
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
     }),
-    BullModule.registerQueueAsync(
-      {
-        name: 'emails',
-        imports: [ConfigsModule],
-        inject: [RedisConfigService],
-        useFactory: async (
-          redisConfig: RedisConfigService,
-        ): Promise<BullModuleOptions> => ({
-          redis: redisConfig.getConnectionOptions('emails'),
-        }),
-      },
-      {
-        name: 'webhooks-queue',
-        imports: [ConfigsModule],
-        inject: [RedisConfigService],
-        useFactory: async (
-          redisConfig: RedisConfigService,
-        ): Promise<BullModuleOptions> => ({
-          redis: redisConfig.getConnectionOptions('webhooks'),
-        }),
-      },
-    ),
+    QueuesModule,
     StripeModule,
     DiscordModule,
   ],
-  controllers: [], // ✅ Removido: WebhooksController já não é necessário
+  controllers: [],
   providers: [
     WebhooksService,
     WebhooksProcessor,

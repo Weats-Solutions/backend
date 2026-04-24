@@ -13,31 +13,13 @@ import { FeatureUsageModule } from '@weats/common/feature/feature-usage.module';
 import { MenuUtilsModule } from '@weats/common/utils/modules/menu/menu-utils.module';
 import { EstablishmentLanguageSyncService } from './establishment-language-sync.service';
 import { EstablishmentLanguageSyncProcessor } from './establishment-language-sync.processor';
+import { QueuesModule } from '@weats/bull';
 
-@Module({ 
+@Module({
   imports: [
     ConfigModule,
     ConfigsModule,
-    BullModule.registerQueueAsync({
-      name: 'emails',
-      imports: [ConfigsModule],
-      inject: [RedisConfigService],
-      useFactory: async (
-        redisConfig: RedisConfigService,
-      ): Promise<BullModuleOptions> => ({
-        redis: redisConfig.getConnectionOptions('emails'),
-      }),
-    }),
-    BullModule.registerQueueAsync({
-      name: 'jobs',
-      imports: [ConfigsModule],
-      inject: [RedisConfigService],
-      useFactory: async (
-        redisConfig: RedisConfigService,
-      ): Promise<BullModuleOptions> => ({
-        redis: redisConfig.getConnectionOptions('jobs'),
-      }),
-    }),
+    QueuesModule,
     DatabaseModule,
     IntegrationsModule,
     FeatureUsageModule,

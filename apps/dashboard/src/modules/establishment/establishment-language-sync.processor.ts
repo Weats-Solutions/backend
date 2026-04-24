@@ -3,8 +3,9 @@ import { Job } from 'bull';
 import { EstablishmentLanguageSyncService } from './establishment-language-sync.service';
 import { LanguageSyncJobData } from './establishment-language-sync.types';
 import { Logger } from '@nestjs/common';
+import { QUEUES } from '@weats/bull/queues/queues.constants';
 
-@Processor('jobs')
+@Processor(QUEUES.LANGUAGES)
 export class EstablishmentLanguageSyncProcessor {
   private readonly logger = new Logger(EstablishmentLanguageSyncProcessor.name);
 

@@ -9,6 +9,7 @@ import { ERRORS } from '@weats/common';
 import { CorePrismaService } from '@weats/database';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
+import { QUEUES } from '@weats/bull';
 
 export interface FaviconResult {
     icons: Record<string, string>;
@@ -24,7 +25,7 @@ export interface FaviconResult {
 @Injectable()
 export class FaviconService {
     constructor(
-        @InjectQueue('jobs') private readonly jobsQueue: Queue,
+        @InjectQueue(QUEUES.IMAGE) private readonly jobsQueue: Queue,
         private readonly r2Service: CloudflareR2Service,
         private readonly corePrismaService: CorePrismaService,
         private readonly httpService: HttpService,

@@ -7,3 +7,4 @@ export * from './item-response';
 export * from './plan';
 export * from './subscription';
 export * from './user';
+export * from './mail';

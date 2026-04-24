@@ -1,4 +1,4 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './user/users.module';
@@ -8,13 +8,11 @@ import { validate } from './validators/env.validation';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ConfigsModule } from '@weats/configs';
 import { IntegrationsModule } from '@weats/integrations';
-import { BullModule, BullModuleOptions } from '@nestjs/bull';
-import { RedisConfigService } from '@weats/configs';
+import { BullModule } from '@nestjs/bull';
 import { WebhooksModule } from './modules/webhook/webhook.module';
 import { TranslateModule } from './modules/translate/translate.module';
-import { ThrottlerModule } from '@nestjs/throttler';
+import { QueuesModule } from '@weats/bull';
 
-import { throttlerConfig } from '@weats/common';
 
 @Module({
   imports: [
@@ -34,20 +32,8 @@ import { throttlerConfig } from '@weats/common';
     DatabaseModule,
     DashboardModule,
     TranslateModule,
-
-    WebhooksModule,  // ✅ Registra webhooks-queue aqui
-    BullModule.registerQueueAsync(
-      {
-        name: 'emails',
-        imports: [ConfigsModule],
-        inject: [RedisConfigService],
-        useFactory: async (
-          redisConfig: RedisConfigService,
-        ): Promise<BullModuleOptions> => ({
-          redis: redisConfig.getConnectionOptions('emails'),
-        }),
-      },
-    ),
+    QueuesModule,
+    WebhooksModule,
   ],
   controllers: [AppController],
   providers: [

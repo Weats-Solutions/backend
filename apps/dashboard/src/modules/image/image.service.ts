@@ -8,7 +8,6 @@ import {
 import { RpcException } from '@nestjs/microservices';
 import { ERRORS } from '@weats/common';
 import { CorePrismaService } from '@weats/database';
-import { CloudflareService } from '@weats/integrations/cloudflare/cloudflare.service';
 import { CloudflareR2Service } from '@weats/integrations/cloudflare/cloudflare-r2.service';
 
 @Injectable()
@@ -16,9 +15,7 @@ export class ImageService {
     private readonly logger = new Logger(ImageService.name);
     constructor(
         private readonly prismaService: CorePrismaService,
-        private readonly cloudflareService: CloudflareService,
         private readonly cloudflareR2Service: CloudflareR2Service,
-        @Inject("CLOUDFLARE_CDN_URL") private readonly cloudflareCdnUrl: string,
         @Inject("R2_CDN_URL") private readonly r2CdnUrl: string,
     ) { }
 
@@ -129,7 +126,7 @@ export class ImageService {
             where: { id: imageId },
             data: { fileName: finalFileName },
         });
-        return {status: 200, updated };
+        return { status: 200, updated };
     }
 
     async deleteImage(
@@ -166,12 +163,7 @@ export class ImageService {
         }
 
         try {
-            // Determine if it's an R2 image or a legacy Cloudflare Image
-            if (image.cloudflareImageId.startsWith('establishments/')) {
-                await this.cloudflareR2Service.deleteImage(image.cloudflareImageId);
-            } else {
-                await this.cloudflareService.deleteImage(image.cloudflareImageId);
-            }
+            await this.cloudflareR2Service.deleteImage(image.cloudflareImageId);
             await this.prismaService.image.delete({ where: { id: image.id } });
             return { deleted: { imageId: image.id } };
         } catch (err) {
@@ -245,11 +237,7 @@ export class ImageService {
         if (deletable.length > 0) {
             for (const d of deletable) {
                 try {
-                    if (d.cloudflareImageId.startsWith('establishments/')) {
-                        await this.cloudflareR2Service.deleteImage(d.cloudflareImageId);
-                    } else {
-                        await this.cloudflareService.deleteImage(d.cloudflareImageId);
-                    }
+                    await this.cloudflareR2Service.deleteImage(d.cloudflareImageId);
                     try {
                         await this.prismaService.image.delete({
                             where: { id: d.prismaId },
@@ -295,7 +283,7 @@ export class ImageService {
                             fileName: img.fileName,
                             url: img.id.startsWith('establishments/')
                                 ? `${this.r2CdnUrl}/${img.id}`
-                                : `${this.cloudflareCdnUrl}/${img.id}`,
+                                : `${this.r2CdnUrl}/${img.id}`,
                             fileSize: img.fileSize,
                             establishmentId,
                             metadata: {},

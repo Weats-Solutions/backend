@@ -23,6 +23,12 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
+      "@weats/bull": [
+        "libs/bull/src"
+      ],
+      "@weats/bull/*": [
+        "libs/bull/src/*"
+      ],
       "@weats/common": [
         "libs/common/src"
       ],

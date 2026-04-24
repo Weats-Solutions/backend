@@ -12,6 +12,7 @@ import { createBullBoard } from '@bull-board/api';
 import { BullAdapter } from '@bull-board/api/bullAdapter';
 import { ExpressAdapter as BBExpressAdapter } from '@bull-board/express';
 import { getQueueToken } from '@nestjs/bull';
+import { QUEUES } from '@weats/bull/queues/queues.constants';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -73,13 +74,18 @@ async function bootstrap() {
 
   const server = app.getHttpServer();
 
-  // pegar filas registradas no Nest
-  const emailQueue = app.get<Queue>(getQueueToken('emails'));
-  const webhookQueue = app.get<Queue>(getQueueToken('webhooks-queue'));
+  const emailQueue = app.get<Queue>(getQueueToken(QUEUES.EMAIL));
+  const webhookQueue = app.get<Queue>(getQueueToken(QUEUES.WEBHOOK));
+  const imageQueue = app.get<Queue>(getQueueToken(QUEUES.IMAGE));
+  const qrCodeQueue = app.get<Queue>(getQueueToken(QUEUES.QRCODE));
+  const languageSyncQueue = app.get<Queue>(getQueueToken(QUEUES.LANGUAGES));
 
   logger.log(`📊 Registando filas Bull Board...`);
   logger.log(`   - Email queue: ${emailQueue.name} (${emailQueue.client?.options?.host}:${emailQueue.client?.options?.port})`);
   logger.log(`   - Webhooks queue: ${webhookQueue.name} (${webhookQueue.client?.options?.host}:${webhookQueue.client?.options?.port})`);
+  logger.log(`   - Image queue: ${imageQueue.name} (${imageQueue.client?.options?.host}:${imageQueue.client?.options?.port})`);
+  logger.log(`   - QrCode queue: ${qrCodeQueue.name} (${qrCodeQueue.client?.options?.host}:${qrCodeQueue.client?.options?.port})`);
+  logger.log(`   - Language sync queue: ${languageSyncQueue.name} (${languageSyncQueue.client?.options?.host}:${languageSyncQueue.client?.options?.port})`);
 
   // Configurar Bull Board
   const serverAdapter = new BBExpressAdapter();
@@ -92,6 +98,9 @@ async function bootstrap() {
     queues: [
       new BullAdapter(emailQueue),
       new BullAdapter(webhookQueue),
+      new BullAdapter(imageQueue),
+      new BullAdapter(qrCodeQueue),
+      new BullAdapter(languageSyncQueue),
     ],
     serverAdapter,
   });

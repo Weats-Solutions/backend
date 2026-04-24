@@ -18,6 +18,9 @@ class EnvironmentVariables {
   @IsNumber()
   DASHBOARD_CLIENT_PORT: number;
 
+  @IsNumber()
+  WEBHOOKS_CLIENT_PORT: number;
+
   @IsString()
   ORDERS_DB_URL: string;
 
@@ -27,11 +30,86 @@ class EnvironmentVariables {
   @IsInt()
   API_PORT: number;
 
-  @IsString()
-  MENU_URL: string;
+  @IsInt()
+  REALTIME_PORT: number;
 
   @IsString()
-  MENU_CACHE_TOKEN: string;
+  APP_URL: string;
+
+  @IsString()
+  CLERK_SECRET_KEY: string;
+
+  @IsString()
+  CLERK_WEBHOOK_SECRET: string;
+
+  @IsString()
+  CLERK_JWT_KEY: string;
+
+  @IsString()
+  STRIPE_API_KEY: string;
+
+  @IsString()
+  STRIPE_API_VERSION: string;
+
+  @IsString()
+  STRIPE_WEBHOOK_SECRET: string;
+
+  @IsString()
+  R2_IMAGES_BUCKET_URL: string;
+
+  @IsString()
+  R2_CDN_URL: string;
+
+  @IsString()
+  R2_IMAGES_BUCKET_NAME: string;
+
+  @IsString()
+  R2_IMAGES_BUCKET_ACCESS_KEY: string;
+
+  @IsString()
+  R2_IMAGES_BUCKET_SECRET_KEY: string;
+
+  @IsString()
+  R2_IMAGES_BUCKET_S3_ENDPOINT: string;
+
+  @IsString()
+  REDIS_HOST: string;
+
+  @IsNumber()
+  REDIS_PORT: number;
+
+  @IsString()
+  REDIS_USERNAME: string;
+
+  @IsString()
+  REDIS_PASSWORD: string;
+
+  @IsNumber()
+  REDIS_JOB_DB: number;
+
+  @IsNumber()
+  REDIS_CACHE_DB: number;
+
+  @IsNumber()
+  REDIS_NEXT_CACHE_DB: number;
+
+  @IsString()
+  ENCRYPTION_ALGORITHM: string;
+
+  @IsString()
+  ENCRYPTION_KEY: string;
+
+  @IsString()
+  ENCRYPTION_SALT: string;
+
+  @IsString()
+  ENCRYPTION_IV: string;
+
+  @IsString()
+  DISCORD_WEBHOOK_URL: string;
+
+  @IsString()
+  EUPAGO_API_URL: string;
 }
 
 export function validate(config: Record<string, unknown>) {

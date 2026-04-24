@@ -1,8 +1,9 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException, BadRequestException } from "@nestjs/common";
 import { CorePrismaService } from "@weats/database";
 import { Establishment } from "@weats/types";
 import { CreateCategoryDto, UpdateCategoryPositionsDto } from "@weats/contracts";
-import { clearMenuCacheAsync } from '@weats/common';
+import { clearMenuCacheAsync, ERRORS } from '@weats/common';
+import { RpcException } from "@nestjs/microservices";
 
 @Injectable()
 export class MenuCategoryService {
@@ -21,6 +22,12 @@ export class MenuCategoryService {
             const categoryCount = await this.prisma.menuCategory.count({
                 where: { menuId },
             })
+            if (categoryCount >= 5) {
+                throw new RpcException({
+                    code: 403,
+                    message: ERRORS.MAX_CATEGORIES_REACHED,
+                });
+            }
             const { translations, imageId } = createCategoryDto;
             const newCategory = await this.prisma.menuCategory.create({
                 data: {
@@ -298,7 +305,7 @@ export class MenuCategoryService {
                     this.prisma.menuCategory.update({
                         where: {
                             id: p.id,
-                            menuId: menuId, 
+                            menuId: menuId,
                         },
                         data: { position: p.position },
                     }),

@@ -9,24 +9,17 @@ import { FaviconProcessor } from './favicon.processor';
 import { DatabaseModule } from '@weats/database';
 import { CloudflareModule } from '../cloudflare/cloudflare.module';
 import { HttpModule } from '@nestjs/axios';
+import { QueuesModule } from '@weats/bull';
 
 @Module({
     imports: [
+        QueuesModule,
         ConfigModule,
         ConfigsModule,
         DatabaseModule,
         CloudflareModule,
         HttpModule,
-        BullModule.registerQueueAsync({
-            name: 'jobs',
-            imports: [ConfigsModule],
-            inject: [RedisConfigService],
-            useFactory: async (
-                redisConfig: RedisConfigService,
-            ): Promise<BullModuleOptions> => ({
-                redis: redisConfig.getConnectionOptions('jobs'),
-            }),
-        }),
+
     ],
     providers: [
         FaviconService,

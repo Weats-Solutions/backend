@@ -8,6 +8,7 @@ import {
 import { Job, Queue } from 'bull';
 import { LanguageSyncJobData } from './establishment-language-sync.types';
 import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
+import { QUEUES } from '@weats/bull/queues/queues.constants';
 
 const LANGUAGE_SYNC_JOB = 'sync-establishment-language-translations';
 const LANGUAGE_SYNC_BATCH_SIZE = 500;
@@ -24,7 +25,8 @@ export class EstablishmentLanguageSyncService {
   private readonly logger = new Logger(EstablishmentLanguageSyncService.name);
 
   constructor(
-    @InjectQueue('jobs') private readonly jobsQueue: Queue,
+    @InjectQueue(QUEUES.LANGUAGES)
+    private readonly jobsQueue: Queue,
     private readonly prisma: CorePrismaService,
     private readonly menuUtilsService: MenuUtilsService,
   ) { }

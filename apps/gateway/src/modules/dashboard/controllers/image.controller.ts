@@ -18,7 +18,6 @@ import { Roles } from '@weats/common/decorators/roles.decorator';
 import { ClerkGuard } from '@weats/common/guards/clerk.guard';
 import { EstablishmentStaffGuard } from '@weats/common/guards/establishment-staff.guard';
 import { Establishment } from '@weats/types/establishment';
-import { CloudflareService } from '@weats/integrations/cloudflare/cloudflare.service';
 import { GenerateUploadUrlsDto } from '@weats/contracts/dashboard/dtos/image/upload-urls.dto';
 import { ConfirmUploadsDto } from '@weats/contracts/dashboard/dtos/image/confirm-upload.dto';
 import { UpdateImageDto } from '@weats/contracts/dashboard/dtos/image/update-image.dto';

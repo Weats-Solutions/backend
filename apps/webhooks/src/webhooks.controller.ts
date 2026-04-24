@@ -4,11 +4,12 @@ import { WEBHOOK_PATTERNS } from '@weats/common/patterns/webhook.patterns';
 import { Stripe } from 'stripe';
 import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
+import { QUEUES } from '@weats/bull/queues/queues.constants';
 
 @Controller()
 export class WebhooksController {
   constructor(
-    @InjectQueue('webhooks-queue') private readonly webhooksQueue: Queue
+    @InjectQueue(QUEUES.WEBHOOK) private readonly webhooksQueue: Queue
   ) { }
 
   @EventPattern(WEBHOOK_PATTERNS.STRIPE_WEBHOOK)

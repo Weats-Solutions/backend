@@ -2,6 +2,8 @@ import { InjectQueue } from '@nestjs/bull';
 import { BadRequestException, Inject, Injectable, Logger } from '@nestjs/common';
 import { Queue } from 'bull';
 import { CorePrismaService } from '@weats/database';
+import { ACCEPTED_LANGUAGES, EmailTemplate, SendEmailDto } from '@weats/types';
+import { EmailProducer } from '@weats/bull/producers/email.producer';
 
 @Injectable()
 export class ClerkWebhookService {
@@ -9,7 +11,7 @@ export class ClerkWebhookService {
 
     constructor(
         @Inject('APP_URL') private readonly appUrl: string,
-        @InjectQueue('emails') private readonly emailQueue: Queue,
+        private readonly emailProducer: EmailProducer,
         private readonly prisma: CorePrismaService,
     ) { }
 
@@ -86,33 +88,25 @@ export class ClerkWebhookService {
                         });
                     }
 
-                    const availableLocales = ['en', 'es', 'fr', 'de', 'it', 'pt', 'nl'];
                     let lang = body.data.unsafe_metadata?.locale || 'en';
 
-                    if (!availableLocales.includes(lang)) {
+                    if (!(ACCEPTED_LANGUAGES as readonly string[]).includes(lang as string)) {
                         lang = 'en';
                     }
 
-                    await this.emailQueue.add(
-                        'send-email',
-                        {
-                            email: primaryEmail,
-                            subject: 'Welcome to Weats!',
-                            template: 'welcome',
-                            lang,
-                            context: {
-                                firstName: body.data.first_name,
-                                lastName: body.data.last_name,
-                                redirectUrl: this.appUrl,
-                            },
+                    const payload: SendEmailDto<EmailTemplate.WELCOME> = {
+                        to: primaryEmail,
+                        template: EmailTemplate.WELCOME,
+                        lang: lang.toLowerCase() as ACCEPTED_LANGUAGES,
+                        context: {
+                            firstName: body.data.first_name,
+                            lastName: body.data.last_name,
+                            redirectUrl: this.appUrl,
                         },
-                        {
-                            attempts: 3,
-                            backoff: { type: 'fixed', delay: 30000 },
-                            removeOnComplete: true,
-                            removeOnFail: false,
-                        },
-                    );
+                    };
+
+                    await this.emailProducer.send(payload);
+
                     break;
 
                 case 'user.updated':

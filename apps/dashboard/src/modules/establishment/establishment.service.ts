@@ -39,6 +39,7 @@ import {
 } from '@weats/contracts';
 import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 import { EstablishmentLanguageSyncService } from './establishment-language-sync.service';
+import { QUEUES } from '@weats/bull/queues/queues.constants';
 
 export type NormalizedFeature =
   | { type: 'BOOLEAN'; enabled: boolean }
@@ -57,8 +58,8 @@ export class EstablishmentService {
   constructor(
     private readonly prisma: CorePrismaService,
     private readonly stripe: StripeService,
-    @InjectQueue('emails') private readonly emailQueue: Queue,
-    @InjectQueue('jobs') private readonly jobsQueue: Queue,
+    @InjectQueue(QUEUES.EMAIL) private readonly emailQueue: Queue,
+    @InjectQueue(QUEUES.LANGUAGES) private readonly languageQueue: Queue,
     @Inject('APP_URL') private readonly appUrl: string,
     private readonly clerkService: ClerkService,
     private readonly featureUsageService: FeatureUsageService,
@@ -102,9 +103,8 @@ export class EstablishmentService {
 
     if (!establishment) {
       throw new RpcException({
-        status: 404,
+        code: 404,
         message: ERRORS.ESTABLISHMENT_NOT_FOUND,
-        code: ERRORS.ESTABLISHMENT_NOT_FOUND,
       });
     }
 
@@ -990,7 +990,7 @@ export class EstablishmentService {
   }
 
   async getLanguageSyncStatus(jobId: string) {
-    const job = await this.jobsQueue.getJob(jobId);
+    const job = await this.languageQueue.getJob(jobId);
 
     if (!job) {
       throw new RpcException({

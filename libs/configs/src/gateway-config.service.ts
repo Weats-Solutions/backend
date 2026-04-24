@@ -39,7 +39,7 @@ export class GatewayConfigService {
     return {
       transport: Transport.REDIS,
       options: {
-        ...this.redisConfig.getConnectionOptions('webhooks'),
+        ...this.redisConfig.getConnectionOptions('jobs'),
         retryAttempts: 10,
         retryDelay: 5000,
         keepAlive: 1000,

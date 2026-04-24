@@ -91,6 +91,14 @@ export class MenuSubcategoryService {
             const subcategoryCount = await this.prisma.menuSubcategory.count({
                 where: { categoryId },
             })
+
+            if (subcategoryCount >= 20) {
+                throw new RpcException({
+                    code: 403,
+                    message: ERRORS.MAX_SUBCATEGORIES_REACHED,
+                });
+            }
+
             const { translations } = createSubcategoryDto;
             const newSubcategory = await this.prisma.menuSubcategory.create({
                 data: {

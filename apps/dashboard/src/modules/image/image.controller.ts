@@ -1,7 +1,6 @@
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { ImageService } from './image.service';
-import { CloudflareService } from '@weats/integrations/cloudflare/cloudflare.service';
 import { CloudflareR2Service } from '@weats/integrations/cloudflare/cloudflare-r2.service';
 import { Controller } from '@nestjs/common';
 
@@ -10,7 +9,6 @@ import { Controller } from '@nestjs/common';
 export class ImageController {
     constructor(
         private readonly imageService: ImageService,
-        private readonly cloudflareService: CloudflareService,
         private readonly cloudflareR2Service: CloudflareR2Service,
     ) { }
 
@@ -52,19 +50,6 @@ export class ImageController {
             payload.imageIds,
             payload.establishmentId,
         );
-    }
-
-
-    @MessagePattern(DASHBOARD_PATTERNS.IMAGE_GENERATE_UPLOAD_URLS)
-    async generateDirectUploadUrls(
-        @Payload() payload: { count: number, establishmentId: string },
-    ) {
-        const urls = await this.cloudflareService.generateUploadUrls(
-            payload.count,
-            payload.establishmentId,
-        );
-
-        return { urls };
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.IMAGE_GENERATE_R2_UPLOAD_URLS)

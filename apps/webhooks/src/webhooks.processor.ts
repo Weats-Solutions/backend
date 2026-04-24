@@ -5,8 +5,9 @@ import { WebhooksService } from './webhooks.service';
 import { ClerkWebhookService } from './clerk/clerk-webhook.service';
 import { Stripe } from 'stripe';
 import { DiscordService } from '@weats/integrations/discord/discord.service';
+import { QUEUES } from '@weats/bull/queues/queues.constants';
 
-@Processor('webhooks-queue')
+@Processor(QUEUES.WEBHOOK)
 export class WebhooksProcessor {
   private readonly logger = new Logger(WebhooksProcessor.name);
 
