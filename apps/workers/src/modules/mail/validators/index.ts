@@ -23,20 +23,20 @@ import {
 export const EmailTemplateConfigs: Record<EmailTemplate, { category: EmailTemplateCategory; schema: ZodSchema<any> }> = {
     // Establishment
     [EmailTemplate.CREATE_ESTABLISHMENT]: { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentCreateEstablishmentSchema },
-    [EmailTemplate.INVITE_EMPLOYEE]:      { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentInviteEmployeeSchema },
-    [EmailTemplate.QRCODES]:              { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentQRCodesSchema },
-    [EmailTemplate.WELCOME]:              { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentWelcomeSchema },
+    [EmailTemplate.INVITE_EMPLOYEE]: { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentInviteEmployeeSchema },
+    [EmailTemplate.QRCODES]: { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentQRCodesSchema },
+    [EmailTemplate.WELCOME]: { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentWelcomeSchema },
 
     // Subscription
-    [EmailTemplate.SUBSCRIPTION_INVOICE]:           { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionInvoiceSchema },
-    [EmailTemplate.SUBSCRIPTION_PAYMENT_FAILED]:    { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionPaymentFailedSchema },
+    [EmailTemplate.SUBSCRIPTION_INVOICE]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionInvoiceSchema },
+    [EmailTemplate.SUBSCRIPTION_PAYMENT_FAILED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionPaymentFailedSchema },
     [EmailTemplate.SUBSCRIPTION_PAYMENT_SUCCEEDED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionPaymentSucceededSchema },
-    [EmailTemplate.SUBSCRIPTION_PLAN_CHANGED]:      { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionPlanChangedSchema },
-    [EmailTemplate.SUBSCRIPTION_CANCELLED]:         { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionCancelledSchema },
-    [EmailTemplate.SUBSCRIPTION_CREATED]:           { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionCreatedSchema },
-    [EmailTemplate.SUBSCRIPTION_REACTIVATED]:       { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionReactivatedSchema },
-    [EmailTemplate.SUBSCRIPTION_TRIAL_STARTED]:     { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionTrialStartedSchema },
-    [EmailTemplate.SUBSCRIPTION_TRIAL_ENDING]:      { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionTrialEndingSchema },
+    [EmailTemplate.SUBSCRIPTION_PLAN_CHANGED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionPlanChangedSchema },
+    [EmailTemplate.SUBSCRIPTION_CANCELLED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionCancelledSchema },
+    [EmailTemplate.SUBSCRIPTION_CREATED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionCreatedSchema },
+    [EmailTemplate.SUBSCRIPTION_REACTIVATED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionReactivatedSchema },
+    [EmailTemplate.SUBSCRIPTION_TRIAL_STARTED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionTrialStartedSchema },
+    [EmailTemplate.SUBSCRIPTION_TRIAL_ENDING]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionTrialEndingSchema },
 };
 
 // Backwards-compatible export for TemplateRenderService

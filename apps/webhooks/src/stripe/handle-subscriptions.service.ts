@@ -185,7 +185,7 @@ export class HandleSubscriptionsService {
           planName: planCycle.plan.name,
           nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
             establishment.primaryLanguage.toLowerCase(),
-          ),
+          ) ?? '',
           trialEndsAt: subData.trialEnd?.toLocaleDateString(
             establishment.primaryLanguage.toLowerCase(),
           ),
@@ -243,17 +243,18 @@ export class HandleSubscriptionsService {
           returnUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
         });
 
-        const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CANCELED> = {
+        const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CANCELLED> = {
           to: establishment.email,
-          template: EmailTemplate.SUBSCRIPTION_CANCELED,
+          template: EmailTemplate.SUBSCRIPTION_CANCELLED,
           lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
           context: {
             firstName: establishment.owner.firstName,
             lastName: establishment.owner.lastName,
             establishmentName: establishment.name,
+            planName: planCycle.plan.name,
             accessUntil: subData.currentPeriodEnd?.toLocaleDateString(
               establishment.primaryLanguage.toLowerCase(),
-            ),
+            ) ?? '',
             redirectUrl: portalUrl,
           },
         };
@@ -274,12 +275,10 @@ export class HandleSubscriptionsService {
             firstName: establishment.owner.firstName,
             lastName: establishment.owner.lastName,
             establishmentName: establishment.name,
-            accessUntil: subData.currentPeriodEnd?.toLocaleDateString(
-              establishment.primaryLanguage.toLowerCase(),
-            ),
+            planName: planCycle.plan.name,
             nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
               establishment.primaryLanguage.toLowerCase(),
-            ),
+            ) ?? '',
             redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
           },
         };
@@ -317,7 +316,7 @@ export class HandleSubscriptionsService {
             trialDays: trialDays,
             trialEndsAt: subData.trialEnd?.toLocaleDateString(
               establishment.primaryLanguage.toLowerCase(),
-            ),
+            ) ?? '',
             redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
           },
         };
