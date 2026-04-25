@@ -162,3 +162,5 @@ export const ERRORS: Record<ErrorCode, ErrorCode> = {
 };
 
 export const availableErrors = Object.keys(ERRORS) as ErrorCode[];
+
+export * from './unrecoverable-job.error';

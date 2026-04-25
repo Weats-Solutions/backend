@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as Handlebars from 'handlebars';
 import { ZodSchema } from 'zod';
 import { EmailTemplate, TemplateMap, ACCEPTED_LANGUAGES } from '@weats/types';
+import { UnrecoverableJobError } from '@weats/common';
 import { EmailSchemas } from './validators';
 import { SUBJECTS } from './subjects';
 
@@ -60,7 +61,7 @@ export class TemplateRenderService {
             }
         }
 
-        throw new Error(
+        throw new UnrecoverableJobError(
             `Template "${template}" not found for languages: ${languagesToTry.join(', ')}`,
         );
     }

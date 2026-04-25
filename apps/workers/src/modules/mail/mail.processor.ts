@@ -4,9 +4,13 @@ import { DiscordService } from "@weats/integrations";
 import { QUEUES } from "@weats/bull";
 import { MailService } from "./mail.service";
 import { SendEmailDto, EmailTemplate } from "@weats/types";
+import { UnrecoverableJobError } from "@weats/common";
+import { Logger } from "@nestjs/common";
 
 @Processor(QUEUES.EMAIL)
 export class MailProcessor {
+    private readonly logger = new Logger(MailProcessor.name);
+
     constructor(
         private readonly emailService: MailService,
         private readonly discord: DiscordService,
@@ -40,14 +44,26 @@ export class MailProcessor {
                 ],
             });
 
-            console.log(`📧 Email sent to: ${job.data.to}`);
+            this.logger.log(`[Mail] Email sent to: ${job.data.to}`);
         } catch (error) {
+            if (error instanceof UnrecoverableJobError) {
+                this.logger.error(`[Mail] Unrecoverable error: ${error.message}. Skipping retries.`);
+                
+                // Opcional: Avisamos o Discord que o erro não tem retry
+                await this.discord.sendToDiscord(
+                    'UNRECOVERABLE EMAIL ERROR',
+                    `Job stopped for template **${job.data.template}** because it's missing.\nError: ${error.message}`
+                );
+                
+                return; // 👈 NÃO lançamos o erro, o job termina aqui como concluído
+            }
+
             await this.handleJobError(job, error);
         }
     }
 
     private async handleJobError(job: Job<SendEmailDto<EmailTemplate>>, error: any) {
-        console.error('❌ Email job failed:', error);
+        this.logger.error(`[Mail] Email job failed: ${error.message}`);
 
         await this.discord.sendJobError({
             jobName: 'send-email',
