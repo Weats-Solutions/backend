@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="pt">
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta name="x-apple-disable-message-reformatting" />
+</head>
+<style>
+    strong { color: #2B7FFF; }
+</style>
+
+<body style='background-color:#ffffff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;margin:0;padding:0;'>
+    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation"
+        style="max-width:560px;margin:0 auto;padding:40px 0 48px">
+        <tbody>
+            <tr>
+                <td>
+                    <img alt="{{saasName}}" src="https://iili.io/qfE4EXI.png"
+                        style="display:block;outline:none;border:none;text-decoration:none;border-radius:1.5rem;width:85px;height:85px"
+                        width="85" height="85" />
+                    
+                    <h1 style="font-size:22px;letter-spacing:-0.5px;line-height:1.3;font-weight:600;color:rgb(50,50,50);padding-top:24px;margin:0;">
+                        Confirmação de Período de Avaliação
+                    </h1>
+
+                    <p style="font-size:16px;line-height:1.6;margin:20px 0;color:#3c4149;">
+                        Exmo.(a) Senhor(a) <strong>{{firstName}} {{lastName}}</strong>,<br /><br />
+                        Vimos por este meio confirmar a abertura do período de avaliação gratuita para o estabelecimento <strong>{{establishmentName}}</strong> no ecossistema <strong>{{saasName}}</strong>.<br /><br />
+                    </p>
+
+                    <div style="margin:25px 0; padding:24px; background:#fcfdfe; border-radius:12px; border: 1px solid #e2e8f0;">
+                        <h3 style="margin:0 0 12px 0; font-size:13px; color:#64748b; text-transform:uppercase; letter-spacing:1px; font-weight:700;">Especificações da Avaliação</h3>
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-size:15px; color:#475569;">
+                            <tr>
+                                <td style="padding:4px 0;">Duração do período:</td>
+                                <td align="right"><strong>{{trialDays}} dias</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:4px 0;">Data de cessação:</td>
+                                <td align="right"><strong>{{trialEndsAt}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:4px 0;">Plano em vigor:</td>
+                                <td align="right"><strong>{{planName}}</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation"
+                        style="padding:16px 0 32px">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href="{{redirectUrl}}"
+                                        style="display:block;text-decoration:none;background-color:#2B7FFF;border-radius:6px;font-weight:600;color:#fff;font-size:15px;text-align:center;padding:18px 23px"
+                                        target="_blank">
+                                        Iniciar Configuração da Plataforma
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p style="font-size:15px;line-height:1.6;margin:0 0 20px;color:#3c4149;">
+                        Instamos a que explore todas as potencialidades da nossa ferramenta de gestão. Relembramos que a nossa equipa de suporte técnico permanece à vossa inteira disposição para auxiliar no processo de configuração inicial (Onboarding).
+                    </p>
+
+                    <p style="font-size:15px;color:#3c4149;margin-bottom:40px;">
+                        Com os nossos melhores cumprimentos,
+                    </p>
+
+                    <hr style="width:100%;border:none;border-top:1px solid #eaeaea;margin:0 0 24px" />
+                    
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td align="left" style="color:#b4becc;font-size:12px;line-height:1.5;">
+                                <strong>{{saasName}} Solutions</strong><br />
+                                Departamento de Apoio ao Parceiro<br />
+                                <a href="https://{{saasName}}.com" style="color:#2B7FFF;text-decoration:none;" target="_blank">Portal do Cliente</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
