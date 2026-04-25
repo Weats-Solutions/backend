@@ -51,12 +51,8 @@ RUN addgroup -g 1001 -S nodejs && \
 
 USER nodejs
 
-# Health check - webhooks expõe endpoint de health
-HEALTHCHECK --interval=15s --timeout=5s --start-period=10s --retries=3 \
-    CMD curl -f http://localhost:3003/health 2>/dev/null || exit 1
-
 # Expose port
-EXPOSE 3003
+EXPOSE 4003
 
 # Start webhooks processor
 CMD ["node", "dist/apps/webhooks/main"]

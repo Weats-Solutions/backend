@@ -1,0 +1,58 @@
+# Build stage
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm@9
+
+# Copy project files
+COPY package.json pnpm-lock.yaml ./
+COPY nest-cli.json tsconfig.json tsconfig.build.json prisma.config.ts ./
+
+# Install all dependencies (frozen lockfile)
+RUN pnpm install --frozen-lockfile
+
+# Copy source code
+COPY apps/workers ./apps/workers
+COPY libs ./libs
+
+# Generate Prisma Client
+ARG CORE_DB_URL
+ARG ORDERS_DB_URL
+ENV CORE_DB_URL=${CORE_DB_URL}
+ENV ORDERS_DB_URL=${ORDERS_DB_URL}
+
+RUN pnpm prisma:core:gen && pnpm prisma:orders:gen
+
+# Build project
+RUN pnpm exec nest build workers
+
+# Production stage
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install pnpm and curl
+RUN npm install -g pnpm@9 && apk add --no-cache curl
+
+# Copy package.json and install production dependencies
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --prod --frozen-lockfile
+
+# Copy built application and generated client
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/libs/database/prisma/core/generated ./libs/database/prisma/core/generated
+COPY --from=builder /app/libs/database/prisma/orders/generated ./libs/database/prisma/orders/generated
+
+# Copy email templates to ensure they are available at runtime
+COPY --from=builder /app/apps/workers/src/modules/mail/templates ./apps/workers/src/modules/mail/templates
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001
+
+USER nodejs
+
+# Start workers application (no ports exposed as it is purely background jobs)
+CMD ["node", "dist/apps/workers/main"]
