@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="pt">
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta name="x-apple-disable-message-reformatting" />
+</head>
+<style>
+    strong {
+        color: #2B7FFF;
+    }
+</style>
+
+<body style='background-color:#ffffff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;margin:0;padding:0;'>
+    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation"
+        style="max-width:560px;margin:0 auto;padding:40px 0 48px">
+        <tbody>
+            <tr>
+                <td>
+                    <img alt="{{saasName}}" src="https://iili.io/qfE4EXI.png"
+                        style="display:block;outline:none;border:none;text-decoration:none;border-radius:1.5rem;width:85px;height:85px" />
+
+                    <h1 style="font-size:24px;letter-spacing:-0.5px;line-height:1.3;font-weight:600;color:rgb(72,72,72);padding-top:24px;margin:0;">
+                        Disponibilização de Identificadores QR 📦
+                    </h1>
+
+                    <p style="font-size:16px;line-height:1.6;margin:20px 0;color:#3c4149;">
+                        Estimado(a) parceiro(a),<br /><br />
+                        Informamos que o processo de geração dos identificadores digitais para o estabelecimento <strong>{{establishmentName}}</strong> foi concluído com sucesso.<br /><br />
+                        Estes recursos foram parametrizados para otimizar o atendimento no seu espaço, garantindo uma ligação direta entre o cliente e o respetivo ponto de serviço.
+                    </p>
+
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0"
+                        style="background-color:#f8fafc; border-radius:10px; margin:24px 0; border: 1px solid #e2e8f0;">
+                        <tr>
+                            <td style="padding:24px; text-align:center;">
+                                <p style="margin:0 0 8px 0; font-size:13px; color:#64748b; text-transform:uppercase; letter-spacing:1px; font-weight:600;">
+                                    Total de QR Codes Gerados</p>
+                                <h2 style="margin:0; font-size:32px; color:#2B7FFF; font-weight:700;">{{qrCodesCount}}</h2>
+                                <p style="margin:8px 0 0 0; font-size:14px; color:#475569;">Arquivo: 
+                                    <strong>{{establishmentName}}.zip</strong>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="margin-bottom:32px;">
+                        <h3 style="font-size:15px; color:#1e293b; border-bottom:1px solid #eaeaea; padding-bottom:10px; margin-bottom:15px;">
+                            Distribuição por Zona de Serviço</h3>
+                        <table width="100%" cellpadding="0" cellspacing="0" style="font-size:15px; color:#475569; line-height:1.6;">
+                            {{#each serviceZones}}
+                            <tr>
+                                <td style="padding:8px 0;">📍 {{this.zoneName}}</td>
+                                <td align="right" style="padding:8px 0;"><strong>{{this.count}} unidades</strong></td>
+                            </tr>
+                            {{/each}}
+                            <tr>
+                                <td colspan="2" style="padding-top:15px; font-size:13px; line-height:1.5; color:#64748b; border-top:1px solid #f1f5f9;">
+                                    <br />
+                                    <strong>Nota Técnica:</strong> Os ficheiros anexados estão em alta resolução. Recomendamos a impressão em suportes resistentes e com acabamento sem brilho para garantir a eficácia da leitura ótica em diferentes condições de iluminação.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+
+                    <p style="font-size:14px;line-height:1.6;margin:0 0 20px;color:#64748b;">
+                        Os QR Codes encontram-se anexados a este email. Caso verifique alguma inconformidade nos dados ou necessite de apoio técnico na implementação, a nossa equipa de suporte está à sua disposição.
+                    </p>
+
+                    <hr style="width:100%;border:none;border-top:1px solid #eaeaea;margin:32px 0 24px" />
+
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="color:#b4becc;font-size:13px;line-height:1.5;">
+                                <strong>{{saasName}} Solutions</strong><br />
+                                Departamento de Apoio ao Cliente e Operações.<br />
+                                <a href="https://{{saasName}}.com" style="color:#2B7FFF;text-decoration:none;"
+                                    target="_blank">Documentação e Suporte</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

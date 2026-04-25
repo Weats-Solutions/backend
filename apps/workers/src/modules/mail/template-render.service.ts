@@ -5,7 +5,7 @@ import * as Handlebars from 'handlebars';
 import { ZodSchema } from 'zod';
 import { EmailTemplate, TemplateMap, ACCEPTED_LANGUAGES } from '@weats/types';
 import { UnrecoverableJobError } from '@weats/common';
-import { EmailSchemas } from './validators';
+import { EmailTemplateConfigs } from './validators';
 import { SUBJECTS } from './subjects';
 
 const LANG_FALLBACKS = ['en'] as const;
@@ -21,7 +21,14 @@ export class TemplateRenderService {
     // -----------------------------
     // TEMPLATE PATH
     // -----------------------------
-    private getTemplatePath(template: string, lang: ACCEPTED_LANGUAGES) {
+    private getTemplatePath(template: EmailTemplate, lang: ACCEPTED_LANGUAGES) {
+        const config = EmailTemplateConfigs[template];
+        const category = config?.category;
+        
+        if (category) {
+            return path.join(this.basePath, lang, category, `${template}.hbs`);
+        }
+
         return path.join(this.basePath, lang, `${template}.hbs`);
     }
 
@@ -29,7 +36,7 @@ export class TemplateRenderService {
     // LOAD TEMPLATE (with fallback)
     // -----------------------------
     private async loadTemplateWithFallback(
-        template: string,
+        template: EmailTemplate,
         lang: ACCEPTED_LANGUAGES,
     ): Promise<{ compiled: Handlebars.TemplateDelegate; usedLang: string }> {
         const languagesToTry = [lang, ...LANG_FALLBACKS];
@@ -73,7 +80,7 @@ export class TemplateRenderService {
         template: T,
         context: unknown,
     ): TemplateMap[T] {
-        const schema = EmailSchemas[template] as ZodSchema<TemplateMap[T]>;
+        const schema = EmailTemplateConfigs[template].schema as ZodSchema<TemplateMap[T]>;
         return schema.parse(context);
     }
 
