@@ -4,7 +4,6 @@ import { Stripe } from 'stripe';
 import { Logger } from '@nestjs/common';
 import { ClerkService } from '@weats/integrations';
 import { StripeService } from '@weats/integrations';
-import { AppConfigService } from '@weats/configs/app-config.service';
 import { CorePrismaService } from '@weats/database';
 import { SendEmailDto, EmailTemplate, ACCEPTED_LANGUAGES } from '@weats/types';
 import { EmailProducer } from '@weats/bull/producers/email.producer';
@@ -175,9 +174,9 @@ export class HandleSubscriptionsService {
         },
       });
 
-      const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_ACTIVATED> = {
+      const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CREATED> = {
         to: establishment.email,
-        template: EmailTemplate.SUBSCRIPTION_ACTIVATED,
+        template: EmailTemplate.SUBSCRIPTION_CREATED,
         lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
         context: {
           firstName: establishment.owner.firstName,

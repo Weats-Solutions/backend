@@ -2,6 +2,7 @@ export const DASHBOARD_PATTERNS = {
   ESTABLISHMENT_CREATE: 'dashboard.establishment.create',
   ESTABLISHMENT_UPDATE: 'dashboard.establishment.update',
   ESTABLISHMENT_GET_BY_ID: 'dashboard.establishment.get_by_id',
+  ESTABLISHMENT_GET_ACCESS: 'dashboard.establishment.get_access',
   ESTABLISHMENT_GET_SCHEDULE_BY_ID: 'dashboard.establishment.get_schedule_by_id',
   ESTABLISHMENT_GET_SETTINGS_GENERAL: 'dashboard.establishment.get_settings_general',
   ESTABLISHMENT_GET_SETTINGS_BRANDING: 'dashboard.establishment.get_settings_branding',

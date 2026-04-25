@@ -114,6 +114,27 @@ export class EstablishmentService {
     return { ...establishment, subscription, plan };
   }
 
+  async getEstablishmentAccess(id: string) {
+    const establishment = await this.prisma.establishment.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        subscription: true,
+      },
+    });
+
+    if (!establishment) {
+      throw new RpcException({
+        code: 404,
+        message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+      });
+    }
+
+    const hasActiveSubscription = establishment.subscription?.status === 'ACTIVE' || establishment.subscription?.status === 'TRIALING';
+
+    return { hasAccess: true, hasActiveSubscription };
+  }
+
   /**
    * Full establishment info including all relations.
    * Used internally (e.g. for update operations).

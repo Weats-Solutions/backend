@@ -26,6 +26,11 @@ export class EstablishmentController {
         return this.establishmentService.getEstablishmentInfo(payload.id);
     }
 
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_ACCESS)
+    getEstablishmentAccess(@Payload() payload: { id: string }) {
+        return this.establishmentService.getEstablishmentAccess(payload.id);
+    }
+
 
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_GENERAL)
     getEstablishmentGeneralSettings(@Payload() payload: { id: string }) {

@@ -1,34 +1,45 @@
 import { EmailTemplate, EmailTemplateCategory } from "@weats/types";
 import { ZodSchema } from "zod";
+
 import {
-    EsatblishmentInviteEmployeeSchema,
-    EsatblishmentQRCodesSchema,
     EstablishmentCreateEstablishmentSchema,
+    EstablishmentInviteEmployeeSchema,
+    EstablishmentQRCodesSchema,
     EstablishmentWelcomeSchema,
-    SubscriptionActivatedSchema,
-    SubscriptionCanceledSchema,
+} from "./establishment";
+
+import {
+    SubscriptionInvoiceSchema,
     SubscriptionPaymentFailedSchema,
-    SubscriptionPaymentSucessfullSchema,
+    SubscriptionPaymentSucceededSchema,
     SubscriptionPlanChangedSchema,
-    SubscriptionTrialEndingSchema,
+    SubscriptionCancelledSchema,
+    SubscriptionCreatedSchema,
+    SubscriptionReactivatedSchema,
     SubscriptionTrialStartedSchema,
-    SubscriptionInvoiceSchema
+    SubscriptionTrialEndingSchema,
 } from "./subscription";
 
 export const EmailTemplateConfigs: Record<EmailTemplate, { category: EmailTemplateCategory; schema: ZodSchema<any> }> = {
-    //Establishment
+    // Establishment
     [EmailTemplate.CREATE_ESTABLISHMENT]: { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentCreateEstablishmentSchema },
-    [EmailTemplate.INVITE_EMPLOYEE]: { category: EmailTemplateCategory.ESTABLISHMENT, schema: EsatblishmentInviteEmployeeSchema },
-    [EmailTemplate.QRCODES]: { category: EmailTemplateCategory.ESTABLISHMENT, schema: EsatblishmentQRCodesSchema },
-    [EmailTemplate.WELCOME]: { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentWelcomeSchema },
+    [EmailTemplate.INVITE_EMPLOYEE]:      { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentInviteEmployeeSchema },
+    [EmailTemplate.QRCODES]:              { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentQRCodesSchema },
+    [EmailTemplate.WELCOME]:              { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentWelcomeSchema },
 
-    //Subscription
-    [EmailTemplate.SUBSCRIPTION_CREATED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionActivatedSchema },
-    [EmailTemplate.SUBSCRIPTION_CANCELLED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionCanceledSchema },
-    [EmailTemplate.SUBSCRIPTION_INVOICE]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionInvoiceSchema },
-    [EmailTemplate.SUBSCRIPTION_PAYMENT_FAILED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionPaymentFailedSchema },
-    [EmailTemplate.SUBSCRIPTION_PAYMENT_SUCCESFULL]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionPaymentSucessfullSchema },
-    [EmailTemplate.SUBSCRIPTION_PLAN_CHANGED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionPlanChangedSchema },
-    [EmailTemplate.SUBSCRIPTION_TRIAL_STARTED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionTrialStartedSchema },
-    [EmailTemplate.SUBSCRIPTION_TRIAL_ENDING]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionTrialEndingSchema },
+    // Subscription
+    [EmailTemplate.SUBSCRIPTION_INVOICE]:           { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionInvoiceSchema },
+    [EmailTemplate.SUBSCRIPTION_PAYMENT_FAILED]:    { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionPaymentFailedSchema },
+    [EmailTemplate.SUBSCRIPTION_PAYMENT_SUCCEEDED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionPaymentSucceededSchema },
+    [EmailTemplate.SUBSCRIPTION_PLAN_CHANGED]:      { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionPlanChangedSchema },
+    [EmailTemplate.SUBSCRIPTION_CANCELLED]:         { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionCancelledSchema },
+    [EmailTemplate.SUBSCRIPTION_CREATED]:           { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionCreatedSchema },
+    [EmailTemplate.SUBSCRIPTION_REACTIVATED]:       { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionReactivatedSchema },
+    [EmailTemplate.SUBSCRIPTION_TRIAL_STARTED]:     { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionTrialStartedSchema },
+    [EmailTemplate.SUBSCRIPTION_TRIAL_ENDING]:      { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionTrialEndingSchema },
 };
+
+// Backwards-compatible export for TemplateRenderService
+export const EmailSchemas = Object.fromEntries(
+    Object.entries(EmailTemplateConfigs).map(([key, val]) => [key, val.schema])
+) as Record<EmailTemplate, ZodSchema<any>>;
