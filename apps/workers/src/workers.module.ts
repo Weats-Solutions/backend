@@ -1,10 +1,18 @@
 import { Module } from '@nestjs/common';
-import { WorkersController } from './workers.controller';
-import { WorkersService } from './workers.service';
+import { MailModule } from './modules/mail/mail.module';
+import { ConfigModule } from '@nestjs/config';
+import { validate } from '../../gateway/src/validators/env.validation';
 
 @Module({
-  imports: [],
-  controllers: [WorkersController],
-  providers: [WorkersService],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      validate,
+      envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
+    }),
+    MailModule
+  ],
+  controllers: [],
+  providers: [],
 })
-export class WorkersModule {}
+export class WorkersModule { }

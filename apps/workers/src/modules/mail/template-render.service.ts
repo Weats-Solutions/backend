@@ -15,7 +15,7 @@ export type SubjectKey = EmailTemplate | string;
 export class TemplateRenderService {
     private templatesCache = new Map<string, Handlebars.TemplateDelegate>();
 
-    private basePath = path.resolve(process.cwd(), 'templates');
+    private basePath = path.resolve(process.cwd(), 'apps/workers/src/modules/mail/templates');
 
     // -----------------------------
     // TEMPLATE PATH
@@ -43,14 +43,19 @@ export class TemplateRenderService {
 
             try {
                 const filePath = this.getTemplatePath(template, l);
+
+                if (!fs.existsSync(filePath)) {
+                    console.warn(`Template file not found at: ${filePath}`);
+                    continue;
+                }
+
                 const templateContent = await fs.promises.readFile(filePath, 'utf-8');
-
                 const compiled = Handlebars.compile(templateContent);
-
                 this.templatesCache.set(cacheKey, compiled);
 
                 return { compiled, usedLang: l };
-            } catch {
+            } catch (err) {
+                console.error(`Error loading template at ${this.getTemplatePath(template, l)}:`, err);
                 continue;
             }
         }

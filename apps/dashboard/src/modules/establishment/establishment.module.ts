@@ -2,9 +2,7 @@ import { EstablishmentService } from './establishment.service';
 import { EstablishmentController } from './establishment.controller';
 import { Module } from '@nestjs/common';
 import { AppConfigService } from '@weats/configs/app-config.service';
-import { BullModule, BullModuleOptions } from '@nestjs/bull';
 import { ConfigModule } from '@nestjs/config';
-import { RedisConfigService } from '@weats/configs/redis-config.service';
 import { IntegrationsModule } from '@weats/integrations';
 import { DatabaseModule } from '@weats/database';
 

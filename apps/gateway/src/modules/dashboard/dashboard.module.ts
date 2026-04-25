@@ -24,10 +24,13 @@ import { StatsController } from './controllers/stats.controller';
 import { ZonePointController } from './controllers/zone/point.controller';
 import { ZonesController } from './controllers/zone/zone.controller';
 import { InvoiceController } from './controllers/invoice.controller';
+import { EmailProducer } from '@weats/bull/producers/email.producer';
+import { QueuesModule } from '@weats/bull';
 
 @Module({
-  imports: [ConfigsModule, IntegrationsModule, DatabaseModule, EncryptionModule, FeatureUsageModule],
+  imports: [ConfigsModule, IntegrationsModule, DatabaseModule, EncryptionModule, FeatureUsageModule, QueuesModule],
   providers: [
+    EmailProducer,
     {
       provide: DASHBOARD_SERVICE,
       useFactory: (configService: GatewayConfigService) => {

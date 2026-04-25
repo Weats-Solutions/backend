@@ -2,8 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { MicroserviceExceptionFilter } from './common/filters/microservice-exception.filter';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
-import { BadRequestException, Logger, ValidationError, ValidationPipe, VersioningType } from '@nestjs/common';
-import * as express from 'express';
+import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { AppConfigService, getCorsOptions } from '@weats/configs';
 import cookieParser from 'cookie-parser';
 import { EupagoConfigService } from '@weats/configs/eupago-config.service';
@@ -20,7 +19,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ResponseInterceptor());
   const appConfigService = app.get(AppConfigService);
   const eupagoConfigService = app.get(EupagoConfigService);
-  const apiPort = appConfigService.getApiPort();
+  const gatewayPort = appConfigService.getGatewayPort();
   const nodeEnv = appConfigService.getNodeEnv();
   const eupagoEnvironment = eupagoConfigService.getEupagoEnvironment();
 
@@ -40,9 +39,8 @@ async function bootstrap() {
   }
     */
 
-  app.use('/v1/webhooks/clerk', express.raw({ type: '*/*' }));
-  app.use('/v1/webhooks/stripe', express.raw({ type: '*/*' }));
-  app.use('/v1/webhooks/eupago', express.raw({ type: '*/*' })); // cobre /eupago/:establishmentId
+
+  //app.use('/v1/webhooks/eupago', express.raw({ type: '*/*' })); // cobre /eupago/:establishmentId
 
 
 
@@ -57,18 +55,6 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
-      exceptionFactory: (errors) => {
-        const firstError = getFirstConstraint(errors);
-
-        return new BadRequestException({
-          errorType: "BadRequestException",
-          message: firstError || "VALIDATION_ERROR",
-          code: firstError || "VALIDATION_ERROR",
-          statusCode: 400,
-          success: false,
-          timestamp: new Date().toISOString(),
-        });
-      },
     }),
   );
 
@@ -107,13 +93,13 @@ async function bootstrap() {
 
   // Registar a rota ANTES do versioning ser aplicado
   app.use('/admin/queues', serverAdapter.getRouter());
-  logger.log(`✅ Bull Board disponível em http://localhost:${apiPort}/admin/queues`);
+  logger.log(`✅ Bull Board disponível em http://localhost:${gatewayPort}/admin/queues`);
 
 
   app.enableShutdownHooks();
 
-  await app.listen(apiPort, () => {
-    logger.log(`🚀 Servidor em http://localhost:${apiPort} - ${process.env.NODE_ENV}`);
+  await app.listen(gatewayPort, () => {
+    logger.log(`🚀 Servidor em http://localhost:${gatewayPort} - ${nodeEnv}`);
     logger.log(`Server timeout: ${server.timeout}`);
     server.keepAliveTimeout = 61 * 1000;
     logger.log(`Server keepAliveTimeout: ${server.keepAliveTimeout / 1000}s `);
@@ -123,21 +109,4 @@ async function bootstrap() {
   });
 }
 bootstrap();
-
-function getFirstConstraint(errors: ValidationError[]): string | null {
-  for (const error of errors) {
-    // 1. erro direto
-    if (error.constraints) {
-      return Object.values(error.constraints)[0];
-    }
-
-    // 2. erro nested
-    if (error.children?.length) {
-      const childError = getFirstConstraint(error.children);
-      if (childError) return childError;
-    }
-  }
-
-  return null;
-}
 

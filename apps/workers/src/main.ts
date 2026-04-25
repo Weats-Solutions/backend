@@ -1,8 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { WorkersModule } from './workers.module';
+import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(WorkersModule);
-  await app.listen(process.env.port ?? 3000);
+  const logger = new Logger('WorkersBootstrap');
+  const app = await NestFactory.createApplicationContext(WorkersModule);
+
+  app.enableShutdownHooks();
+
+  logger.log('Workers application context initialized. Listening to queues...');
 }
 bootstrap();

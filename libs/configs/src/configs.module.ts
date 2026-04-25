@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CryptoConfigService } from './crypto-config.service';
 import { EupagoConfigService } from './eupago-config.service';
 import { DiscordConfigService } from './discord-config.service';
+import { ZeptoConfigService } from './zepto-config.service';
 
 @Module({
   imports: [ConfigModule],
@@ -22,6 +23,7 @@ import { DiscordConfigService } from './discord-config.service';
     CryptoConfigService,
     EupagoConfigService,
     DiscordConfigService,
+    ZeptoConfigService
   ],
   exports: [
     GatewayConfigService,
@@ -33,6 +35,7 @@ import { DiscordConfigService } from './discord-config.service';
     CryptoConfigService,
     EupagoConfigService,
     DiscordConfigService,
+    ZeptoConfigService
   ],
 })
 export class ConfigsModule { }

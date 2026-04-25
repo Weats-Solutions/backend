@@ -8,8 +8,6 @@ import { validate } from './validators/env.validation';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { ConfigsModule } from '@weats/configs';
 import { IntegrationsModule } from '@weats/integrations';
-import { BullModule } from '@nestjs/bull';
-import { WebhooksModule } from './modules/webhook/webhook.module';
 import { TranslateModule } from './modules/translate/translate.module';
 import { QueuesModule } from '@weats/bull';
 
@@ -33,7 +31,6 @@ import { QueuesModule } from '@weats/bull';
     DashboardModule,
     TranslateModule,
     QueuesModule,
-    WebhooksModule,
   ],
   controllers: [AppController],
   providers: [

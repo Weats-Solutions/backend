@@ -18,9 +18,6 @@ class EnvironmentVariables {
   @IsNumber()
   DASHBOARD_CLIENT_PORT: number;
 
-  @IsNumber()
-  WEBHOOKS_CLIENT_PORT: number;
-
   @IsString()
   ORDERS_DB_URL: string;
 
@@ -28,7 +25,10 @@ class EnvironmentVariables {
   CORE_DB_URL: string;
 
   @IsInt()
-  API_PORT: number;
+  GATEWAY_PORT: number;
+
+  @IsNumber()
+  WEBHOOKS_PORT: number;
 
   @IsInt()
   REALTIME_PORT: number;
@@ -110,6 +110,15 @@ class EnvironmentVariables {
 
   @IsString()
   EUPAGO_API_URL: string;
+
+  @IsString()
+  ZEPTO_API_URL: string;
+
+  @IsString()
+  ZEPTO_ZOHO_ENCZAPIKEY: string;
+
+  @IsString()
+  ZEPTO_SENDER_EMAIL: string;
 }
 
 export function validate(config: Record<string, unknown>) {

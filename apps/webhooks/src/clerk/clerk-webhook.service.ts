@@ -24,7 +24,7 @@ export class ClerkWebhookService {
         console.log(eventId)
         const requestId = `clerk-${eventId}-${Date.now()}`;
 
-        this.logger.log(`🔍 Checking idempotency for Clerk event: ${eventId} (${eventType})`);
+        this.logger.log(`[Clerk] Checking idempotency for event: ${eventId} (${eventType})`);
 
         // 1. Idempotência: Usar UPSERT atomicamente para evitar race condition
         const webhookEvent = await this.prisma.webhookEvent.upsert({
@@ -48,7 +48,7 @@ export class ClerkWebhookService {
 
         // 2. Verificar se foi recém-criado ou já existia
         if (webhookEvent.status !== 'PROCESSING') {
-            this.logger.warn(`⚠️ Clerk event ${eventId} already processed (status: ${webhookEvent.status}). Skipping...`);
+            this.logger.warn(`[Clerk] Event ${eventId} already processed (status: ${webhookEvent.status}). Skipping.`);
             return;
         }
 
@@ -57,7 +57,7 @@ export class ClerkWebhookService {
         const MAX_PROCESSING_TIME = 5 * 60 * 1000; // 5 minutos
 
         if (processingDuration > MAX_PROCESSING_TIME && webhookEvent.status === 'PROCESSING') {
-            this.logger.warn(`⚠️ Clerk event ${eventId} stuck in PROCESSING for ${processingDuration}ms. Resetting...`);
+            this.logger.warn(`[Clerk] Event ${eventId} stuck in PROCESSING for ${processingDuration}ms. Resetting timestamp.`);
             await this.prisma.webhookEvent.update({
                 where: { id: webhookEvent.id },
                 data: { status: 'PROCESSING', processedAt: new Date() },
@@ -114,7 +114,7 @@ export class ClerkWebhookService {
 
                     // Validate email is not empty before updating
                     if (!updateEmail) {
-                        this.logger.warn(`⚠️ Clerk user.updated event has no email address, skipping email update`);
+                        this.logger.warn(`[Clerk] user.updated event has no email address, skipping email update`);
                     }
 
                     await this.prisma.user.upsert({
@@ -142,7 +142,7 @@ export class ClerkWebhookService {
                     break;
 
                 default:
-                    this.logger.warn(`⚠️ Evento não tratado: ${eventType}`);
+                    this.logger.warn(`[Clerk] Event type not handled: ${eventType}`);
                     break;
             }
 
@@ -158,7 +158,7 @@ export class ClerkWebhookService {
             });
 
         } catch (error) {
-            this.logger.error(`❌ Failed to process Clerk event ${eventId}: ${error.message}`);
+            this.logger.error(`[Clerk] Failed to process event ${eventId}: ${error.message}`);
 
             try {
                 await this.prisma.webhookEvent.update({
@@ -176,7 +176,7 @@ export class ClerkWebhookService {
                 });
             } catch (dbUpdateError) {
                 this.logger.error(
-                    `⚠️ Failed to update webhook status to FAILED: ${dbUpdateError.message}. Original error: ${error.message}`,
+                    `[Clerk] Failed to update webhook status to FAILED: ${dbUpdateError.message}. Original error: ${error.message}`,
                 );
             }
 

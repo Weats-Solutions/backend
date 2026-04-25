@@ -17,9 +17,14 @@ export class AppConfigService {
     return this.configService.getOrThrow<string>('MENU_CACHE_TOKEN')
   }
 
-  getApiPort(): string {
-    return this.configService.getOrThrow<string>('API_PORT');
+  getGatewayPort(): string {
+    return this.configService.getOrThrow<string>('GATEWAY_PORT');
   }
+
+  getWebhooksPort(): string {
+    return this.configService.getOrThrow<string>('WEBHOOKS_PORT');
+  }
+
 
   getNodeEnv(): string {
     return this.configService.getOrThrow<string>('NODE_ENV');

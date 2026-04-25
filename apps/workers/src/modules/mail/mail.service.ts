@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { TemplateRenderService } from "./template-render.service";
 import { HttpService } from "@nestjs/axios";
 import { SendEmailDto, EmailTemplate } from "@weats/types";
@@ -8,10 +8,12 @@ export class MailService {
     constructor(
         private readonly templateService: TemplateRenderService,
         private readonly http: HttpService,
+        @Inject('ZEPTO_API_URL') private readonly zepToApiUrl: string,
+        @Inject('ZEPTO_ZOHO_ENCZAPIKEY') private readonly zepToZohoEnczapikey: string,
+        @Inject('ZEPTO_SENDER_EMAIL') private readonly zepToSenderEmail: string,
     ) { }
 
     async sendEmail(data: SendEmailDto<EmailTemplate>) {
-        // 1. render template (já validado com Zod dentro do service)
         const html = await this.templateService.renderTemplate(
             data.template,
             data.lang,
@@ -26,10 +28,10 @@ export class MailService {
 
         // 3. send email (isolado)
         const response = await this.http.axiosRef.post(
-            process.env.ZEPTO_URL!,
+            this.zepToApiUrl,
             {
                 from: {
-                    address: process.env.ZEPTO_FROM_EMAIL || 'noreply@weats.pro',
+                    address: this.zepToSenderEmail,
                 },
                 to: [
                     {
@@ -46,7 +48,7 @@ export class MailService {
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
-                    Authorization: `Zoho-enczapikey ${process.env.ZEPTO_TOKEN}`,
+                    Authorization: `Zoho-enczapikey ${this.zepToZohoEnczapikey}`,
                 },
             },
         );

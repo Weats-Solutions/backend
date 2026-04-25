@@ -13,6 +13,8 @@ import { WebhooksProcessor } from './webhooks.processor';
 import { DatabaseModule } from '@weats/database';
 import { QueuesModule } from '@weats/bull';
 
+import { WebhooksController } from './webhooks.controller';
+
 @Module({
   imports: [
     DatabaseModule,
@@ -26,7 +28,7 @@ import { QueuesModule } from '@weats/bull';
     StripeModule,
     DiscordModule,
   ],
-  controllers: [],
+  controllers: [WebhooksController],
   providers: [
     WebhooksService,
     WebhooksProcessor,

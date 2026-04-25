@@ -26,7 +26,7 @@ export class WebhooksService {
   async handleStripeWebhook(event: Stripe.Event) {
     const requestId = `stripe-${event.id}-${Date.now()}`;
     
-    this.logger.log(`🔍 Checking idempotency for Stripe event: ${event.id} (requestId: ${requestId})`);
+    this.logger.log(`[Stripe] Checking idempotency for event: ${event.id} (requestId: ${requestId})`);
 
     // 1. Usar UPSERT atomicamente para evitar race condition
     // Se evento já existe com mesmo eventId, não faz nada (apenas retorna)
@@ -53,7 +53,7 @@ export class WebhooksService {
     // 2. Verificar se foi recém-criado ou já existia
     // Se status não for PROCESSING (já foi processado), skip
     if (webhookEvent.status !== 'PROCESSING') {
-      this.logger.warn(`⚠️ Stripe event ${event.id} already processed (status: ${webhookEvent.status}). Skipping...`);
+      this.logger.warn(`[Stripe] Event ${event.id} already processed (status: ${webhookEvent.status}). Skipping.`);
       return;
     }
 
@@ -62,13 +62,13 @@ export class WebhooksService {
     const MAX_PROCESSING_TIME = 5 * 60 * 1000; // 5 minutos
     
     if (processingDuration > MAX_PROCESSING_TIME && webhookEvent.status === 'PROCESSING') {
-      this.logger.warn(`⚠️ Stripe event ${event.id} stuck in PROCESSING for ${processingDuration}ms. Resetting...`);
+      this.logger.warn(`[Stripe] Event ${event.id} stuck in PROCESSING for ${processingDuration}ms. Resetting timestamp.`);
       // Reset the timestamp but keep processing
       await this.prisma.webhookEvent.update({
         where: { id: webhookEvent.id },
         data: { processedAt: new Date() },
       }).catch((err) => {
-        this.logger.error(`⚠️ Failed to reset stuck webhook timestamp: ${err.message}`);
+        this.logger.error(`[Stripe] Failed to reset stuck webhook timestamp: ${err.message}`);
       });
     }
 
@@ -92,7 +92,7 @@ export class WebhooksService {
             `Webhook received -> ${event.type}`,
           );
         } catch (discordError) {
-          this.logger.warn(`⚠️ Failed to send Discord notification: ${discordError.message}`);
+          this.logger.warn(`[Stripe] Failed to send Discord notification: ${discordError.message}`);
           // Don't throw - webhook processing should continue even if Discord is down
         }
 
@@ -128,7 +128,7 @@ export class WebhooksService {
             await this.handlePaymentsService.handleInvoicePaymentFailed(event);
             break;
           default:
-            this.logger.warn(`Evento Stripe não tratado: ${event.type}`);
+            this.logger.warn(`[Stripe] Event type not handled: ${event.type}`);
             break;
         }
       }
@@ -143,10 +143,10 @@ export class WebhooksService {
         },
         data: { status: 'PROCESSED' },
       });
-      this.logger.log(`✅ Stripe event ${event.id} processed successfully.`);
+      this.logger.log(`[Stripe] Event ${event.id} processed successfully`);
 
     } catch (error) {
-      this.logger.error(`❌ Failed to process Stripe event ${event.id}: ${error.message}`);
+      this.logger.error(`[Stripe] Failed to process event ${event.id}: ${error.message}`);
 
       // Marcar como falha no banco - with proper error handling
       try {
@@ -161,7 +161,7 @@ export class WebhooksService {
         });
       } catch (dbUpdateError) {
         this.logger.error(
-          `❌ Failed to update webhook status to FAILED: ${dbUpdateError.message}. Original error: ${error.message}`,
+          `[Stripe] Failed to update webhook status to FAILED: ${dbUpdateError.message}. Original error: ${error.message}`,
         );
         // Log both errors but don't swallow the original error
       }

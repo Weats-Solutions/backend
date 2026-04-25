@@ -23,7 +23,7 @@ import {
   ERRORS, FeatureUsageService,
   SCHEDULE_VALIDATION_GROUPS
 } from '@weats/common';
-import type { Establishment, User } from '@weats/types';
+import type { Establishment, SendEmailDto, User } from '@weats/types';
 import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { ClientProxy } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
@@ -33,6 +33,8 @@ import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
 import { EstablishmentLanguageDto, UpdateEstablishmentDigitalSettingsDto, UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
 import { UpdateEstablishmentBrandingSettingsDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-branding-settings.dto';
 import { UpdateEstablishmentFaviconDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-favicon';
+import { EmailTemplate } from '@weats/types';
+import { EmailProducer } from '@weats/bull/producers/email.producer';
 
 @Controller('establishments')
 export class EstablishmentController {
@@ -40,11 +42,24 @@ export class EstablishmentController {
     @Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy,
     private readonly featureUsageService: FeatureUsageService,
     private readonly clerkService: ClerkService,
+    private readonly emailProducer: EmailProducer,
   ) { }
 
   @Get('test')
-  test() {
-    return this.clerkService.getUsers();
+  async test() {
+
+    const payload: SendEmailDto<EmailTemplate.WELCOME> = {
+      to: "afonsovelosof@gmail.com",
+      template: EmailTemplate.WELCOME,
+      lang: "pt",
+      context: {
+        firstName: "Afonso",
+        lastName: "Costa",
+        redirectUrl: "https://weats.pt",
+      },
+    };
+
+    await this.emailProducer.send(payload);
   }
 
   @Get('verify-domain')
