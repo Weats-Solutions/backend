@@ -11,7 +11,7 @@ export const subjects = {
     [EmailTemplate.SUBSCRIPTION_CREATED]: 'Tu suscripción está activa',
     [EmailTemplate.SUBSCRIPTION_CANCELLED]: 'Tu suscripción ha sido cancelada',
     [EmailTemplate.SUBSCRIPTION_PAYMENT_FAILED]: 'Error al pagar tu suscripción',
-    [EmailTemplate.SUBSCRIPTION_PAYMENT_SUCCESFULL]: 'Pago realizado con éxito',
+    [EmailTemplate.SUBSCRIPTION_PAYMENT_SUCCEEDED]: 'Pago realizado con éxito',
     [EmailTemplate.SUBSCRIPTION_PLAN_CHANGED]: 'Tu plan ha sido cambiado',
     [EmailTemplate.SUBSCRIPTION_TRIAL_STARTED]: 'Tu periodo de prueba ha comenzado',
     [EmailTemplate.SUBSCRIPTION_TRIAL_ENDING]: 'Tu periodo de prueba ha finalizado',
