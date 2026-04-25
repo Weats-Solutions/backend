@@ -356,6 +356,24 @@ export class HandleSubscriptionsService {
         data: updateData,
       });
 
+      const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CANCELLED> = {
+        to: establishment.email,
+        template: EmailTemplate.SUBSCRIPTION_CANCELLED,
+        lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+        context: {
+          firstName: establishment.owner.firstName,
+          lastName: establishment.owner.lastName,
+          establishmentName: establishment.name,
+          planName: data.planCycle.plan.name,
+          accessUntil: updateData.cancelAt?.toLocaleDateString(
+            establishment.primaryLanguage.toLowerCase(),
+          ) ?? '',
+          redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
+        },
+      };
+
+      await this.emailProducer.send(payload);
+
       await this.updateClerkMetadata(establishment.id, subscription.status);
     } catch (error) {
       this.logger.error('Erro em handleCustomerSubscriptionDeleted', error);
