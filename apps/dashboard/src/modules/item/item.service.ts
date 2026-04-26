@@ -436,6 +436,121 @@ export class ItemService {
         return { deleted: result.count };
     }
 
+    /**
+     * Returns the full menu tree (menus → categories → subcategories) for the establishment,
+     * plus which subcategories this item is currently placed in.
+     */
+    async getItemPlacements(itemId: string, establishment: Establishment) {
+        const [placements, menus] = await Promise.all([
+            this.prisma.menuItemPosition.findMany({
+                where: { itemId },
+                select: { subcategoryId: true },
+            }),
+            this.prisma.menu.findMany({
+                where: { establishmentId: establishment.id },
+                orderBy: { position: 'asc' },
+                select: {
+                    id: true,
+                    translations: {
+                        where: { locale: establishment.primaryLanguage },
+                        select: { name: true },
+                    },
+                    categories: {
+                        orderBy: { position: 'asc' },
+                        select: {
+                            id: true,
+                            translations: {
+                                where: { locale: establishment.primaryLanguage },
+                                select: { name: true },
+                            },
+                            subcategories: {
+                                orderBy: { position: 'asc' },
+                                select: {
+                                    id: true,
+                                    translations: {
+                                        where: { locale: establishment.primaryLanguage },
+                                        select: { name: true },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            }),
+        ]);
+
+        const placedSubcategoryIds = new Set(placements.map(p => p.subcategoryId));
+
+        return {
+            placedSubcategoryIds: Array.from(placedSubcategoryIds),
+            menus: menus.map(menu => ({
+                id: menu.id,
+                name: menu.translations[0]?.name ?? '',
+                categories: menu.categories.map(cat => ({
+                    id: cat.id,
+                    name: cat.translations[0]?.name ?? '',
+                    subcategories: cat.subcategories.map(sub => ({
+                        id: sub.id,
+                        name: sub.translations[0]?.name ?? '',
+                    })),
+                })),
+            })),
+        };
+    }
+
+    /**
+     * Syncs item placements: adds missing MenuItemPositions and removes unchecked ones.
+     */
+    async updateItemPlacements(
+        itemId: string,
+        establishment: Establishment,
+        subcategoryIds: string[],
+    ) {
+        const slug = await this.getEstablishmentSlug(establishment.id);
+
+        await this.prisma.$transaction(async (tx) => {
+            // 1. Get current placements
+            const existing = await tx.menuItemPosition.findMany({
+                where: { itemId },
+                select: { id: true, subcategoryId: true },
+            });
+
+            const existingSubIds = new Set(existing.map(e => e.subcategoryId));
+            const targetSubIds = new Set(subcategoryIds);
+
+            // 2. Remove placements not in the new list
+            const toRemove = existing.filter(e => !targetSubIds.has(e.subcategoryId));
+            if (toRemove.length > 0) {
+                await tx.menuItemPosition.deleteMany({
+                    where: { id: { in: toRemove.map(r => r.id) } },
+                });
+            }
+
+            // 3. Add new placements
+            const toAdd = subcategoryIds.filter(id => !existingSubIds.has(id));
+            if (toAdd.length > 0) {
+                // Get the max position for each subcategory we're adding to
+                for (const subId of toAdd) {
+                    const maxPos = await tx.menuItemPosition.aggregate({
+                        where: { subcategoryId: subId },
+                        _max: { position: true },
+                    });
+                    await tx.menuItemPosition.create({
+                        data: {
+                            itemId,
+                            subcategoryId: subId,
+                            position: (maxPos._max.position ?? -1) + 1,
+                            isVisible: true,
+                        },
+                    });
+                }
+            }
+        });
+
+        await this.invalidateItemCache(slug, itemId);
+        return { success: true };
+    }
+
     async getAllergens() {
         return this.prisma.allergen.findMany({ select: { id: true, code: true } });
     }

@@ -81,6 +81,8 @@ export const DASHBOARD_PATTERNS = {
   ITEM_BULK_DELETE: 'dashboard.item.bulk_delete',
   ITEM_GET_ALLERGENS: 'dashboard.item.get_allergens',
   ITEM_GET_TAXES: 'dashboard.item.get_taxes',
+  ITEM_GET_PLACEMENTS: 'dashboard.item.get_placements',
+  ITEM_UPDATE_PLACEMENTS: 'dashboard.item.update_placements',
 
   EXPENSE_CREATE: 'dashboard.expense.create',
   EXPENSE_GET_BY_ESTABLISHMENT: 'dashboard.expense.get_by_establishment',
