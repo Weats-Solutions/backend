@@ -36,8 +36,9 @@ interface CreateCustomer {
     value: string;
   }>;
   metadata?: {
-    business_name?: string;
-    owner_id?: string;
+    establishmentName?: string;
+    establishmentId?: string;
+    ownerId?: string;
   };
 }
 
@@ -54,8 +55,9 @@ interface UpdateCustomer {
   phone?: string;
   business_name?: string;
   metadata?: {
-    business_name?: string;
-    owner_id?: string;
+    establishmentName?: string;
+    establishmentId?: string;
+    ownerId?: string;
   };
 }
 
@@ -100,11 +102,11 @@ export class StripeService {
       address: data.address,
       phone: data.phone,
       tax_id_data: data.tax_id_data as Stripe.CustomerCreateParams.TaxIdDatum[],
-      business_name: data.metadata?.business_name,
+      business_name: data.metadata?.establishmentName,
       metadata: {
         ...data.metadata,
-        ...(data.metadata?.business_name
-          ? { business_name: data.metadata.business_name }
+        ...(data.metadata?.establishmentName
+          ? { business_name: data.metadata.establishmentName }
           : {}),
       },
       preferred_locales: ['pt-PT', 'en-US'],

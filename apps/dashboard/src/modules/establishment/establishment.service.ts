@@ -40,6 +40,7 @@ import {
 import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 import { EstablishmentLanguageSyncService } from './establishment-language-sync.service';
 import { QUEUES } from '@weats/bull/queues/queues.constants';
+import { create } from 'domain';
 
 export type NormalizedFeature =
   | { type: 'BOOLEAN'; enabled: boolean }
@@ -68,6 +69,41 @@ export class EstablishmentService {
   ) { }
 
   // ─── Queries ────────────────────────────────────────────────────────
+
+  async deleteEstablishmentTest(id: string) {
+    if (process.env.NODE_ENV !== 'development') {
+      throw new RpcException({
+        code: 403,
+        message: 'This route is only available in development mode.',
+      });
+    }
+
+    const establishment = await this.prisma.establishment.findUnique({
+      where: { id },
+      select: { stripeCustomerId: true },
+    });
+
+    if (!establishment) {
+      throw new RpcException({
+        code: 404,
+        message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+      });
+    }
+
+    if (establishment.stripeCustomerId) {
+      try {
+        await this.stripe.deleteCustomer(establishment.stripeCustomerId);
+      } catch (error) {
+        this.logger.error('Failed to delete Stripe customer', error);
+      }
+    }
+
+    await this.prisma.establishment.delete({
+      where: { id },
+    });
+
+    return { message: 'Establishment deleted successfully.' };
+  }
 
   async getEstablishmentInfo(id: string) {
     const establishment = await this.prisma.establishment.findUnique({
@@ -497,8 +533,8 @@ export class EstablishmentService {
         ? [{ type: 'eu_vat', value: 'PT' + cleanTaxId }]
         : [],
       metadata: {
-        business_name: createEstablishmentDto.billingName,
-        owner_id: user.id,
+        establishmentName: createEstablishmentDto.billingName,
+        ownerId: user.id,
       },
     });
 

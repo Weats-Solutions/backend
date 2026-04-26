@@ -26,6 +26,7 @@ export const DASHBOARD_PATTERNS = {
   ESTABLISHMENT_UPDATE_SCHEDULE: 'dashboard.establishment.update_schedule',
   ESTABLISHMENT_VERIFY_DOMAIN: 'dashboard.establishment.verify_domain',
   ESTABLISHMENT_GET_INVOICES: 'dashboard.establishment.get_invoices',
+  ESTABLISHMENT_DELETE_TEST: 'dashboard.establishment.delete_test',
 
   ZONE_CREATE: 'dashboard.zone.create',
   ZONE_GET_ALL: 'dashboard.zone.get_all',
