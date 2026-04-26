@@ -44,6 +44,7 @@ interface CreateCustomer {
 
 interface UpdateCustomer {
   name?: string;
+  email?: string;
   address?: {
     line1?: string;
     line2?: string;
@@ -121,6 +122,7 @@ export class StripeService {
     try {
       return await this.stripe.customers.update(customerId, {
         name: data.name,
+        email: data.email,
         address: data.address,
         phone: data.phone,
         business_name: data.business_name,

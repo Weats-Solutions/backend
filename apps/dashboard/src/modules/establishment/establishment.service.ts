@@ -40,7 +40,6 @@ import {
 import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 import { EstablishmentLanguageSyncService } from './establishment-language-sync.service';
 import { QUEUES } from '@weats/bull/queues/queues.constants';
-import { create } from 'domain';
 
 export type NormalizedFeature =
   | { type: 'BOOLEAN'; enabled: boolean }
@@ -691,7 +690,7 @@ export class EstablishmentService {
     id: string,
     data: EstablishmentInformationsDto,
   ) {
-    return this.prisma.establishment.update({
+    const establishment = await this.prisma.establishment.update({
       where: { id },
       data: {
         name: data.name,
@@ -701,10 +700,30 @@ export class EstablishmentService {
         type: data.type,
       },
     });
+
+    // Sync to Stripe
+    if (establishment.stripeCustomerId) {
+      const cleanPhone = data.phoneNumber?.replace(/\D/g, '');
+      try {
+        await this.stripe.updateCustomer(establishment.stripeCustomerId, {
+          name: data.name,
+          email: data.email,
+          phone: cleanPhone ? `${data.countryCode}${cleanPhone}` : undefined,
+          metadata: {
+            establishmentName: data.name,
+            establishmentId: establishment.id,
+          },
+        });
+      } catch (error) {
+        this.logger.error('Failed to sync informations to Stripe', error);
+      }
+    }
+
+    return establishment;
   }
 
   private async updateLocation(id: string, data: EstablishmentLocationDto) {
-    return this.prisma.establishment.update({
+    const establishment = await this.prisma.establishment.update({
       where: { id },
       data: {
         address: data.address,
@@ -714,6 +733,25 @@ export class EstablishmentService {
         country: data.country,
       },
     });
+
+    // Sync to Stripe
+    if (establishment.stripeCustomerId) {
+      try {
+        await this.stripe.updateCustomer(establishment.stripeCustomerId, {
+          address: {
+            line1: data.address,
+            city: data.city,
+            state: data.state,
+            postal_code: data.zipCode,
+            country: data.country,
+          },
+        });
+      } catch (error) {
+        this.logger.error('Failed to sync location to Stripe', error);
+      }
+    }
+
+    return establishment;
   }
 
   async updateEstablishmentBrandingSettings(
