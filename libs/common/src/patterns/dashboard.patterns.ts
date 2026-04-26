@@ -49,6 +49,7 @@ export const DASHBOARD_PATTERNS = {
   MENU_UPDATE_CONTENT: 'dashboard.menu.update_content',
   MENU_UPDATE_POSITIONS: 'dashboard.menu.update_positions',
   MENU_DELETE: 'dashboard.menu.delete',
+  MENU_DUPLICATE: 'dashboard.menu.duplicate',
 
   CATEGORY_CREATE: 'dashboard.category.create',
   CATEGORY_GET_BY_MENU: 'dashboard.category.get_by_menu',

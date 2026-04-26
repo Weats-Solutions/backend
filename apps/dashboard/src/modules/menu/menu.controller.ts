@@ -66,4 +66,9 @@ export class MenuController {
     deleteMenu(@Payload() payload: { menuId: string }) {
         return this.menuService.deleteMenu(payload.menuId);
     }
+
+    @MessagePattern(DASHBOARD_PATTERNS.MENU_DUPLICATE)
+    duplicateMenu(@Payload() payload: { menuId: string; establishment: Establishment }) {
+        return this.menuService.duplicateMenu(payload.menuId, payload.establishment);
+    }
 }
