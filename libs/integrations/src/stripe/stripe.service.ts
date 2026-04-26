@@ -161,6 +161,10 @@ export class StripeService {
         enabled: true,
       },
 
+      automatic_tax: {
+        enabled: true,
+      },
+
       customer_update: {
         name: 'auto',
         address: 'auto',
