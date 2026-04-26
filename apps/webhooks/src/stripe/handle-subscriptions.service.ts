@@ -266,6 +266,9 @@ export class HandleSubscriptionsService {
           previousAttributes?.status !== 'trialing') ||
         (subscription.trial_end !== null &&
           previousAttributes?.trial_end === null);
+      const justBecameActiveFromTrial =
+        subscription.status === 'active' &&
+        previousAttributes?.status === 'trialing';
 
       if (justCanceled) {
         this.logger.log(
@@ -352,6 +355,30 @@ export class HandleSubscriptionsService {
               establishment.primaryLanguage.toLowerCase(),
             ) ?? '',
             redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
+          },
+        };
+
+        await this.emailProducer.send(payload);
+      }
+
+      if (justBecameActiveFromTrial) {
+        this.logger.log(
+          `Subscription ${subscription.id} transitioned from trialing to active.`,
+        );
+
+        const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CREATED> = {
+          to: establishment.email,
+          template: EmailTemplate.SUBSCRIPTION_CREATED,
+          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          context: {
+            firstName: establishment.owner.firstName,
+            lastName: establishment.owner.lastName,
+            establishmentName: establishment.name,
+            planName: planCycle.plan.name,
+            nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
+              establishment.primaryLanguage.toLowerCase(),
+            ) ?? '',
+            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
           },
         };
 
