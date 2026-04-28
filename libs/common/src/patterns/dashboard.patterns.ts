@@ -40,6 +40,8 @@ export const DASHBOARD_PATTERNS = {
   POINT_UPDATE: 'dashboard.point.update',
   POINT_DELETE: 'dashboard.point.delete',
 
+  QR_GENERATE: 'dashboard.qr.generate',
+
   MENU_LIST: 'dashboard.menu.list',
   MENU_GET_BY_ID: 'dashboard.menu.get_by_id',
   MENU_CREATE: 'dashboard.menu.create',

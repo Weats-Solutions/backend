@@ -778,6 +778,18 @@ exports.Prisma.PrinterScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.QrCodeScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  establishmentId: 'establishmentId',
+  servicePointId: 'servicePointId',
+  type: 'type',
+  active: 'active',
+  config: 'config',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ScheduleScalarFieldEnum = {
   id: 'id',
   type: 'type',
@@ -1473,6 +1485,11 @@ exports.MenuType = exports.$Enums.MenuType = {
   RODIZIO: 'RODIZIO'
 };
 
+exports.QrCodeType = exports.$Enums.QrCodeType = {
+  TABLE: 'TABLE',
+  MENU: 'MENU'
+};
+
 exports.ScheduleType = exports.$Enums.ScheduleType = {
   ESTABLISHMENT: 'ESTABLISHMENT',
   MENU: 'MENU',
@@ -1701,6 +1718,7 @@ exports.Prisma.ModelName = {
   POSCategory: 'POSCategory',
   Device: 'Device',
   Printer: 'Printer',
+  QrCode: 'QrCode',
   Schedule: 'Schedule',
   ScheduleDay: 'ScheduleDay',
   TimeInterval: 'TimeInterval',

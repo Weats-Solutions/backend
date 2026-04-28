@@ -14,6 +14,7 @@ import { ItemModule } from './modules/item/item.module';
 import { ExpenseModule } from './modules/expense/expense.module';
 import { StatsModule } from './modules/stats/stats.module';
 import { ZoneModule } from './modules/zone/zone.module';
+import { QueuesModule } from '@weats/bull';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ZoneModule } from './modules/zone/zone.module';
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
     }),
     ConfigsModule,
+    QueuesModule,
     EstablishmentModule,
     UserModule,
     PlanModule,

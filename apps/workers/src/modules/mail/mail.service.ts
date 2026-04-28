@@ -43,6 +43,13 @@ export class MailService {
                 ],
                 subject,
                 htmlbody: html,
+                ...(data.attachments && {
+                    attachments: data.attachments.map(a => ({
+                        content: a.content,
+                        name: a.name,
+                        mime_type: a.contentType,
+                    }))
+                }),
             },
             {
                 headers: {

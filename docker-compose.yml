@@ -103,6 +103,30 @@ services:
         max-size: '10m'
         max-file: '3'
 
+  catalog:
+    build:
+      context: .
+      dockerfile: Dockerfile.catalog
+      args:
+        CORE_DB_URL: ${CORE_DB_URL}
+        ORDERS_DB_URL: ${ORDERS_DB_URL}
+    container_name: weats-catalog
+    restart: always
+    ports:
+      - '4002:4002' # Usando 4006 para o Catalog
+    env_file:
+      - .env
+    networks:
+      - weats-network
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '3'
+
 networks:
   weats-network:
     driver: bridge

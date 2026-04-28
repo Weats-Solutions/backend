@@ -19,6 +19,15 @@
         "tsConfigPath": "libs/bull/tsconfig.lib.json"
       }
     },
+    "catalog": {
+      "type": "application",
+      "root": "apps/catalog",
+      "entryFile": "main",
+      "sourceRoot": "apps/catalog/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/catalog/tsconfig.app.json"
+      }
+    },
     "clerk": {
       "type": "library",
       "root": "libs/clerk",

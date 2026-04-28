@@ -5,7 +5,6 @@ import {
   validateSync,
   IsOptional,
   IsIn,
-  isInt,
   IsInt,
 } from 'class-validator';
 
@@ -31,10 +30,16 @@ class EnvironmentVariables {
   WEBHOOKS_PORT: number;
 
   @IsInt()
+  CATALOG_PORT: number;
+
+  @IsInt()
   REALTIME_PORT: number;
 
   @IsString()
   APP_URL: string;
+
+  @IsString()
+  CATALOG_URL: string;
 
   @IsString()
   CLERK_SECRET_KEY: string;

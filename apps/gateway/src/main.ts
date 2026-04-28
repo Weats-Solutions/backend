@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { MicroserviceExceptionFilter } from './common/filters/microservice-exception.filter';
-import { ResponseInterceptor } from './common/interceptors/response.interceptor';
+import { MicroserviceExceptionFilter } from '@weats/common/filters/microservice-exception.filter';
+import { ResponseInterceptor } from '@weats/common/interceptors/response.interceptor';
 import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { AppConfigService, getCorsOptions } from '@weats/configs';
 import cookieParser from 'cookie-parser';
@@ -23,27 +23,36 @@ async function bootstrap() {
   const nodeEnv = appConfigService.getNodeEnv();
   const eupagoEnvironment = eupagoConfigService.getEupagoEnvironment();
 
-
   const logger = new Logger('Gateway');
   app.enableCors(getCorsOptions(appConfigService));
   app.use(cookieParser());
 
+  // Obter as queues
+  const emailQueue = app.get<Queue>(getQueueToken(QUEUES.EMAIL));
+  const webhookQueue = app.get<Queue>(getQueueToken(QUEUES.WEBHOOK));
+  const imageQueue = app.get<Queue>(getQueueToken(QUEUES.IMAGE));
+  const qrCodeQueue = app.get<Queue>(getQueueToken(QUEUES.QRCODE));
+  const languageSyncQueue = app.get<Queue>(getQueueToken(QUEUES.LANGUAGES));
 
-  /*
-  // Helmet security middleware
-  if (shouldEnableHelmet(nodeEnv)) {
-    app.use(helmet(helmetConfig));
-    logger.log('🛡️  Helmet security enabled (Production mode)');
-  } else {
-    logger.log('⚠️  Helmet security disabled (Development mode)');
-  }
-    */
+  // Configurar Bull Board ANTES do versionamento e pipes
+  const serverAdapter = new BBExpressAdapter();
+  serverAdapter.setBasePath('/admin/queues');
 
+  createBullBoard({
+    queues: [
+      new BullAdapter(emailQueue),
+      new BullAdapter(webhookQueue),
+      new BullAdapter(imageQueue),
+      new BullAdapter(qrCodeQueue),
+      new BullAdapter(languageSyncQueue),
+    ],
+    serverAdapter,
+  });
 
-  //app.use('/v1/webhooks/eupago', express.raw({ type: '*/*' })); // cobre /eupago/:establishmentId
+  app.use('/admin/queues', serverAdapter.getRouter());
+  logger.log(`✅ Bull Board disponível em http://localhost:${gatewayPort}/admin/queues`);
 
-
-
+  // Configurações globais do NestJS (Versionamento e Pipes)
   app.enableVersioning({
     type: VersioningType.URI,
     prefix: 'v',
@@ -60,42 +69,6 @@ async function bootstrap() {
 
   const server = app.getHttpServer();
 
-  const emailQueue = app.get<Queue>(getQueueToken(QUEUES.EMAIL));
-  const webhookQueue = app.get<Queue>(getQueueToken(QUEUES.WEBHOOK));
-  const imageQueue = app.get<Queue>(getQueueToken(QUEUES.IMAGE));
-  const qrCodeQueue = app.get<Queue>(getQueueToken(QUEUES.QRCODE));
-  const languageSyncQueue = app.get<Queue>(getQueueToken(QUEUES.LANGUAGES));
-
-  logger.log(`📊 Registando filas Bull Board...`);
-  logger.log(`   - Email queue: ${emailQueue.name} (${emailQueue.client?.options?.host}:${emailQueue.client?.options?.port})`);
-  logger.log(`   - Webhooks queue: ${webhookQueue.name} (${webhookQueue.client?.options?.host}:${webhookQueue.client?.options?.port})`);
-  logger.log(`   - Image queue: ${imageQueue.name} (${imageQueue.client?.options?.host}:${imageQueue.client?.options?.port})`);
-  logger.log(`   - QrCode queue: ${qrCodeQueue.name} (${qrCodeQueue.client?.options?.host}:${qrCodeQueue.client?.options?.port})`);
-  logger.log(`   - Language sync queue: ${languageSyncQueue.name} (${languageSyncQueue.client?.options?.host}:${languageSyncQueue.client?.options?.port})`);
-
-  // Configurar Bull Board
-  const serverAdapter = new BBExpressAdapter();
-
-  // IMPORTANTE: basePath deve match com o route path registado
-  // Ambos devem estar sem /v1/ porque a rota é registada antes do versioning
-  serverAdapter.setBasePath('/admin/queues');
-
-  createBullBoard({
-    queues: [
-      new BullAdapter(emailQueue),
-      new BullAdapter(webhookQueue),
-      new BullAdapter(imageQueue),
-      new BullAdapter(qrCodeQueue),
-      new BullAdapter(languageSyncQueue),
-    ],
-    serverAdapter,
-  });
-
-  // Registar a rota ANTES do versioning ser aplicado
-  app.use('/admin/queues', serverAdapter.getRouter());
-  logger.log(`✅ Bull Board disponível em http://localhost:${gatewayPort}/admin/queues`);
-
-
   app.enableShutdownHooks();
 
   await app.listen(gatewayPort, () => {
@@ -109,4 +82,3 @@ async function bootstrap() {
   });
 }
 bootstrap();
-

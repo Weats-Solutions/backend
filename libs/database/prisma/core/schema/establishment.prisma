@@ -69,6 +69,7 @@ model Establishment {
   themes         Theme[]
   employees      Employee[]
   serviceZones   ServiceZone[]
+  qrCodes        QrCode[]
   menus          Menu[]
   Item           Item[]
   addons         Addon[]

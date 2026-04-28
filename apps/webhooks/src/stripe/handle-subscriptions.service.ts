@@ -104,50 +104,7 @@ export class HandleSubscriptionsService {
     };
   }
 
-  private async updateClerkMetadata(
-    establishmentId: string,
-    stripeStatus: string,
-  ) {
-    try {
-      const establishment = await this.prisma.establishment.findUnique({
-        where: { id: establishmentId },
-        include: { owner: true },
-      });
 
-      if (!establishment || !establishment.owner) return;
-
-      const clerkUser = await this.clerkService.getUser(
-        establishment.owner.clerkUserId,
-      );
-      const currentMetadata = clerkUser.publicMetadata;
-      const establishments = currentMetadata.establishments || {};
-
-      let status = 'INACTIVE';
-      if (stripeStatus === 'active') status = 'ACTIVE';
-      if (stripeStatus === 'trialing') status = 'TRIALING';
-
-      this.logger.log(
-        `Updating Clerk metadata for establishment ${establishmentId}: Stripe Status=${stripeStatus} -> App Status=${status}`,
-      );
-
-      establishments[establishment.id] = {
-        status: status,
-        role: 'OWNER',
-      };
-
-      await this.clerkService.updateUserMetadata(
-        establishment.owner.clerkUserId,
-        {
-          establishments,
-        },
-      );
-    } catch (error) {
-      this.logger.error(
-        `Failed to update Clerk metadata for establishment ${establishmentId}:`,
-        error,
-      );
-    }
-  }
 
   async handleCustomerSubscriptionCreated(event: Stripe.Event) {
     try {
@@ -195,7 +152,6 @@ export class HandleSubscriptionsService {
 
       await this.emailProducer.send(payload);
 
-      await this.updateClerkMetadata(establishment.id, subscription.status);
     } catch (error) {
       this.logger.error('Erro em handleCustomerSubscriptionCreated', error);
       throw new BadRequestException('Erro ao processar assinatura');
@@ -324,7 +280,6 @@ export class HandleSubscriptionsService {
         await this.emailProducer.send(payload);
       }
 
-      await this.updateClerkMetadata(establishment.id, subscription.status);
     } catch (error) {
       this.logger.error('Erro em handleCustomerSubscriptionUpdated', error);
       throw new BadRequestException('Erro ao processar assinatura');
@@ -374,7 +329,6 @@ export class HandleSubscriptionsService {
 
       await this.emailProducer.send(payload);
 
-      await this.updateClerkMetadata(establishment.id, subscription.status);
     } catch (error) {
       this.logger.error('Erro em handleCustomerSubscriptionDeleted', error);
       throw new BadRequestException('Erro ao processar assinatura');

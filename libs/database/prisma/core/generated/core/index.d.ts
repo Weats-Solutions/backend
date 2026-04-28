@@ -296,6 +296,11 @@ export type Device = $Result.DefaultSelection<Prisma.$DevicePayload>
  */
 export type Printer = $Result.DefaultSelection<Prisma.$PrinterPayload>
 /**
+ * Model QrCode
+ * 
+ */
+export type QrCode = $Result.DefaultSelection<Prisma.$QrCodePayload>
+/**
  * Model Schedule
  * 
  */
@@ -1008,6 +1013,14 @@ export const MenuType: {
 
 export type MenuType = (typeof MenuType)[keyof typeof MenuType]
 
+
+export const QrCodeType: {
+  TABLE: 'TABLE',
+  MENU: 'MENU'
+};
+
+export type QrCodeType = (typeof QrCodeType)[keyof typeof QrCodeType]
+
 }
 
 export type ActorType = $Enums.ActorType
@@ -1185,6 +1198,10 @@ export const UnitType: typeof $Enums.UnitType
 export type MenuType = $Enums.MenuType
 
 export const MenuType: typeof $Enums.MenuType
+
+export type QrCodeType = $Enums.QrCodeType
+
+export const QrCodeType: typeof $Enums.QrCodeType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1846,6 +1863,16 @@ export class PrismaClient<
     * ```
     */
   get printer(): Prisma.PrinterDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.qrCode`: Exposes CRUD operations for the **QrCode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more QrCodes
+    * const qrCodes = await prisma.qrCode.findMany()
+    * ```
+    */
+  get qrCode(): Prisma.QrCodeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.schedule`: Exposes CRUD operations for the **Schedule** model.
@@ -2634,6 +2661,7 @@ export namespace Prisma {
     POSCategory: 'POSCategory',
     Device: 'Device',
     Printer: 'Printer',
+    QrCode: 'QrCode',
     Schedule: 'Schedule',
     ScheduleDay: 'ScheduleDay',
     TimeInterval: 'TimeInterval',
@@ -2679,7 +2707,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "promotion" | "buyXGetYRule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "establishmentBookingSettings" | "establishmentMetadata" | "faviconAsset" | "expense" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "landingPage" | "landingPageTranslation" | "menu" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "schedule" | "scheduleDay" | "timeInterval" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
+      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "promotion" | "buyXGetYRule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "establishmentBookingSettings" | "establishmentMetadata" | "faviconAsset" | "expense" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "landingPage" | "landingPageTranslation" | "menu" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "qrCode" | "schedule" | "scheduleDay" | "timeInterval" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -6679,6 +6707,80 @@ export namespace Prisma {
           }
         }
       }
+      QrCode: {
+        payload: Prisma.$QrCodePayload<ExtArgs>
+        fields: Prisma.QrCodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.QrCodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QrCodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.QrCodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QrCodePayload>
+          }
+          findFirst: {
+            args: Prisma.QrCodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QrCodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.QrCodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QrCodePayload>
+          }
+          findMany: {
+            args: Prisma.QrCodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QrCodePayload>[]
+          }
+          create: {
+            args: Prisma.QrCodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QrCodePayload>
+          }
+          createMany: {
+            args: Prisma.QrCodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.QrCodeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QrCodePayload>[]
+          }
+          delete: {
+            args: Prisma.QrCodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QrCodePayload>
+          }
+          update: {
+            args: Prisma.QrCodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QrCodePayload>
+          }
+          deleteMany: {
+            args: Prisma.QrCodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.QrCodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.QrCodeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QrCodePayload>[]
+          }
+          upsert: {
+            args: Prisma.QrCodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QrCodePayload>
+          }
+          aggregate: {
+            args: Prisma.QrCodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateQrCode>
+          }
+          groupBy: {
+            args: Prisma.QrCodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<QrCodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.QrCodeCountArgs<ExtArgs>
+            result: $Utils.Optional<QrCodeCountAggregateOutputType> | number
+          }
+        }
+      }
       Schedule: {
         payload: Prisma.$SchedulePayload<ExtArgs>
         fields: Prisma.ScheduleFieldRefs
@@ -9061,6 +9163,7 @@ export namespace Prisma {
     pOSCategory?: POSCategoryOmit
     device?: DeviceOmit
     printer?: PrinterOmit
+    qrCode?: QrCodeOmit
     schedule?: ScheduleOmit
     scheduleDay?: ScheduleDayOmit
     timeInterval?: TimeIntervalOmit
@@ -9332,6 +9435,7 @@ export namespace Prisma {
     themes: number
     employees: number
     serviceZones: number
+    qrCodes: number
     menus: number
     Item: number
     addons: number
@@ -9364,6 +9468,7 @@ export namespace Prisma {
     themes?: boolean | EstablishmentCountOutputTypeCountThemesArgs
     employees?: boolean | EstablishmentCountOutputTypeCountEmployeesArgs
     serviceZones?: boolean | EstablishmentCountOutputTypeCountServiceZonesArgs
+    qrCodes?: boolean | EstablishmentCountOutputTypeCountQrCodesArgs
     menus?: boolean | EstablishmentCountOutputTypeCountMenusArgs
     Item?: boolean | EstablishmentCountOutputTypeCountItemArgs
     addons?: boolean | EstablishmentCountOutputTypeCountAddonsArgs
@@ -9440,6 +9545,13 @@ export namespace Prisma {
    */
   export type EstablishmentCountOutputTypeCountServiceZonesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ServiceZoneWhereInput
+  }
+
+  /**
+   * EstablishmentCountOutputType without action
+   */
+  export type EstablishmentCountOutputTypeCountQrCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QrCodeWhereInput
   }
 
   /**
@@ -10953,6 +11065,37 @@ export namespace Prisma {
    */
   export type ServiceZoneCountOutputTypeCountServicePointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ServicePointWhereInput
+  }
+
+
+  /**
+   * Count Type ServicePointCountOutputType
+   */
+
+  export type ServicePointCountOutputType = {
+    qrCodes: number
+  }
+
+  export type ServicePointCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    qrCodes?: boolean | ServicePointCountOutputTypeCountQrCodesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ServicePointCountOutputType without action
+   */
+  export type ServicePointCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServicePointCountOutputType
+     */
+    select?: ServicePointCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ServicePointCountOutputType without action
+   */
+  export type ServicePointCountOutputTypeCountQrCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QrCodeWhereInput
   }
 
 
@@ -26754,6 +26897,7 @@ export namespace Prisma {
     themes?: boolean | Establishment$themesArgs<ExtArgs>
     employees?: boolean | Establishment$employeesArgs<ExtArgs>
     serviceZones?: boolean | Establishment$serviceZonesArgs<ExtArgs>
+    qrCodes?: boolean | Establishment$qrCodesArgs<ExtArgs>
     menus?: boolean | Establishment$menusArgs<ExtArgs>
     Item?: boolean | Establishment$ItemArgs<ExtArgs>
     addons?: boolean | Establishment$addonsArgs<ExtArgs>
@@ -26926,6 +27070,7 @@ export namespace Prisma {
     themes?: boolean | Establishment$themesArgs<ExtArgs>
     employees?: boolean | Establishment$employeesArgs<ExtArgs>
     serviceZones?: boolean | Establishment$serviceZonesArgs<ExtArgs>
+    qrCodes?: boolean | Establishment$qrCodesArgs<ExtArgs>
     menus?: boolean | Establishment$menusArgs<ExtArgs>
     Item?: boolean | Establishment$ItemArgs<ExtArgs>
     addons?: boolean | Establishment$addonsArgs<ExtArgs>
@@ -26986,6 +27131,7 @@ export namespace Prisma {
       themes: Prisma.$ThemePayload<ExtArgs>[]
       employees: Prisma.$EmployeePayload<ExtArgs>[]
       serviceZones: Prisma.$ServiceZonePayload<ExtArgs>[]
+      qrCodes: Prisma.$QrCodePayload<ExtArgs>[]
       menus: Prisma.$MenuPayload<ExtArgs>[]
       Item: Prisma.$ItemPayload<ExtArgs>[]
       addons: Prisma.$AddonPayload<ExtArgs>[]
@@ -27458,6 +27604,7 @@ export namespace Prisma {
     themes<T extends Establishment$themesArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$themesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ThemePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     employees<T extends Establishment$employeesArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     serviceZones<T extends Establishment$serviceZonesArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$serviceZonesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ServiceZonePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    qrCodes<T extends Establishment$qrCodesArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$qrCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     menus<T extends Establishment$menusArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$menusArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Item<T extends Establishment$ItemArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$ItemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     addons<T extends Establishment$addonsArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$addonsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AddonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -28183,6 +28330,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ServiceZoneScalarFieldEnum | ServiceZoneScalarFieldEnum[]
+  }
+
+  /**
+   * Establishment.qrCodes
+   */
+  export type Establishment$qrCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeInclude<ExtArgs> | null
+    where?: QrCodeWhereInput
+    orderBy?: QrCodeOrderByWithRelationInput | QrCodeOrderByWithRelationInput[]
+    cursor?: QrCodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QrCodeScalarFieldEnum | QrCodeScalarFieldEnum[]
   }
 
   /**
@@ -74717,6 +74888,1139 @@ export namespace Prisma {
 
 
   /**
+   * Model QrCode
+   */
+
+  export type AggregateQrCode = {
+    _count: QrCodeCountAggregateOutputType | null
+    _min: QrCodeMinAggregateOutputType | null
+    _max: QrCodeMaxAggregateOutputType | null
+  }
+
+  export type QrCodeMinAggregateOutputType = {
+    id: string | null
+    token: string | null
+    establishmentId: string | null
+    servicePointId: string | null
+    type: $Enums.QrCodeType | null
+    active: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type QrCodeMaxAggregateOutputType = {
+    id: string | null
+    token: string | null
+    establishmentId: string | null
+    servicePointId: string | null
+    type: $Enums.QrCodeType | null
+    active: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type QrCodeCountAggregateOutputType = {
+    id: number
+    token: number
+    establishmentId: number
+    servicePointId: number
+    type: number
+    active: number
+    config: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type QrCodeMinAggregateInputType = {
+    id?: true
+    token?: true
+    establishmentId?: true
+    servicePointId?: true
+    type?: true
+    active?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type QrCodeMaxAggregateInputType = {
+    id?: true
+    token?: true
+    establishmentId?: true
+    servicePointId?: true
+    type?: true
+    active?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type QrCodeCountAggregateInputType = {
+    id?: true
+    token?: true
+    establishmentId?: true
+    servicePointId?: true
+    type?: true
+    active?: true
+    config?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type QrCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QrCode to aggregate.
+     */
+    where?: QrCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QrCodes to fetch.
+     */
+    orderBy?: QrCodeOrderByWithRelationInput | QrCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: QrCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QrCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QrCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned QrCodes
+    **/
+    _count?: true | QrCodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: QrCodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: QrCodeMaxAggregateInputType
+  }
+
+  export type GetQrCodeAggregateType<T extends QrCodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateQrCode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateQrCode[P]>
+      : GetScalarType<T[P], AggregateQrCode[P]>
+  }
+
+
+
+
+  export type QrCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QrCodeWhereInput
+    orderBy?: QrCodeOrderByWithAggregationInput | QrCodeOrderByWithAggregationInput[]
+    by: QrCodeScalarFieldEnum[] | QrCodeScalarFieldEnum
+    having?: QrCodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: QrCodeCountAggregateInputType | true
+    _min?: QrCodeMinAggregateInputType
+    _max?: QrCodeMaxAggregateInputType
+  }
+
+  export type QrCodeGroupByOutputType = {
+    id: string
+    token: string
+    establishmentId: string
+    servicePointId: string | null
+    type: $Enums.QrCodeType
+    active: boolean
+    config: JsonValue | null
+    createdAt: Date
+    updatedAt: Date
+    _count: QrCodeCountAggregateOutputType | null
+    _min: QrCodeMinAggregateOutputType | null
+    _max: QrCodeMaxAggregateOutputType | null
+  }
+
+  type GetQrCodeGroupByPayload<T extends QrCodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<QrCodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof QrCodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], QrCodeGroupByOutputType[P]>
+            : GetScalarType<T[P], QrCodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type QrCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    establishmentId?: boolean
+    servicePointId?: boolean
+    type?: boolean
+    active?: boolean
+    config?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    servicePoint?: boolean | QrCode$servicePointArgs<ExtArgs>
+  }, ExtArgs["result"]["qrCode"]>
+
+  export type QrCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    establishmentId?: boolean
+    servicePointId?: boolean
+    type?: boolean
+    active?: boolean
+    config?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    servicePoint?: boolean | QrCode$servicePointArgs<ExtArgs>
+  }, ExtArgs["result"]["qrCode"]>
+
+  export type QrCodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    token?: boolean
+    establishmentId?: boolean
+    servicePointId?: boolean
+    type?: boolean
+    active?: boolean
+    config?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    servicePoint?: boolean | QrCode$servicePointArgs<ExtArgs>
+  }, ExtArgs["result"]["qrCode"]>
+
+  export type QrCodeSelectScalar = {
+    id?: boolean
+    token?: boolean
+    establishmentId?: boolean
+    servicePointId?: boolean
+    type?: boolean
+    active?: boolean
+    config?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type QrCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "establishmentId" | "servicePointId" | "type" | "active" | "config" | "createdAt" | "updatedAt", ExtArgs["result"]["qrCode"]>
+  export type QrCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    servicePoint?: boolean | QrCode$servicePointArgs<ExtArgs>
+  }
+  export type QrCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    servicePoint?: boolean | QrCode$servicePointArgs<ExtArgs>
+  }
+  export type QrCodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    servicePoint?: boolean | QrCode$servicePointArgs<ExtArgs>
+  }
+
+  export type $QrCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "QrCode"
+    objects: {
+      establishment: Prisma.$EstablishmentPayload<ExtArgs>
+      servicePoint: Prisma.$ServicePointPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      token: string
+      establishmentId: string
+      servicePointId: string | null
+      type: $Enums.QrCodeType
+      active: boolean
+      config: Prisma.JsonValue | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["qrCode"]>
+    composites: {}
+  }
+
+  type QrCodeGetPayload<S extends boolean | null | undefined | QrCodeDefaultArgs> = $Result.GetResult<Prisma.$QrCodePayload, S>
+
+  type QrCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<QrCodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: QrCodeCountAggregateInputType | true
+    }
+
+  export interface QrCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['QrCode'], meta: { name: 'QrCode' } }
+    /**
+     * Find zero or one QrCode that matches the filter.
+     * @param {QrCodeFindUniqueArgs} args - Arguments to find a QrCode
+     * @example
+     * // Get one QrCode
+     * const qrCode = await prisma.qrCode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends QrCodeFindUniqueArgs>(args: SelectSubset<T, QrCodeFindUniqueArgs<ExtArgs>>): Prisma__QrCodeClient<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one QrCode that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {QrCodeFindUniqueOrThrowArgs} args - Arguments to find a QrCode
+     * @example
+     * // Get one QrCode
+     * const qrCode = await prisma.qrCode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends QrCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, QrCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__QrCodeClient<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QrCode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QrCodeFindFirstArgs} args - Arguments to find a QrCode
+     * @example
+     * // Get one QrCode
+     * const qrCode = await prisma.qrCode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends QrCodeFindFirstArgs>(args?: SelectSubset<T, QrCodeFindFirstArgs<ExtArgs>>): Prisma__QrCodeClient<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QrCode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QrCodeFindFirstOrThrowArgs} args - Arguments to find a QrCode
+     * @example
+     * // Get one QrCode
+     * const qrCode = await prisma.qrCode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends QrCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, QrCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__QrCodeClient<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more QrCodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QrCodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all QrCodes
+     * const qrCodes = await prisma.qrCode.findMany()
+     * 
+     * // Get first 10 QrCodes
+     * const qrCodes = await prisma.qrCode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const qrCodeWithIdOnly = await prisma.qrCode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends QrCodeFindManyArgs>(args?: SelectSubset<T, QrCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a QrCode.
+     * @param {QrCodeCreateArgs} args - Arguments to create a QrCode.
+     * @example
+     * // Create one QrCode
+     * const QrCode = await prisma.qrCode.create({
+     *   data: {
+     *     // ... data to create a QrCode
+     *   }
+     * })
+     * 
+     */
+    create<T extends QrCodeCreateArgs>(args: SelectSubset<T, QrCodeCreateArgs<ExtArgs>>): Prisma__QrCodeClient<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many QrCodes.
+     * @param {QrCodeCreateManyArgs} args - Arguments to create many QrCodes.
+     * @example
+     * // Create many QrCodes
+     * const qrCode = await prisma.qrCode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends QrCodeCreateManyArgs>(args?: SelectSubset<T, QrCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many QrCodes and returns the data saved in the database.
+     * @param {QrCodeCreateManyAndReturnArgs} args - Arguments to create many QrCodes.
+     * @example
+     * // Create many QrCodes
+     * const qrCode = await prisma.qrCode.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many QrCodes and only return the `id`
+     * const qrCodeWithIdOnly = await prisma.qrCode.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends QrCodeCreateManyAndReturnArgs>(args?: SelectSubset<T, QrCodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a QrCode.
+     * @param {QrCodeDeleteArgs} args - Arguments to delete one QrCode.
+     * @example
+     * // Delete one QrCode
+     * const QrCode = await prisma.qrCode.delete({
+     *   where: {
+     *     // ... filter to delete one QrCode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends QrCodeDeleteArgs>(args: SelectSubset<T, QrCodeDeleteArgs<ExtArgs>>): Prisma__QrCodeClient<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one QrCode.
+     * @param {QrCodeUpdateArgs} args - Arguments to update one QrCode.
+     * @example
+     * // Update one QrCode
+     * const qrCode = await prisma.qrCode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends QrCodeUpdateArgs>(args: SelectSubset<T, QrCodeUpdateArgs<ExtArgs>>): Prisma__QrCodeClient<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more QrCodes.
+     * @param {QrCodeDeleteManyArgs} args - Arguments to filter QrCodes to delete.
+     * @example
+     * // Delete a few QrCodes
+     * const { count } = await prisma.qrCode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends QrCodeDeleteManyArgs>(args?: SelectSubset<T, QrCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QrCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QrCodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many QrCodes
+     * const qrCode = await prisma.qrCode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends QrCodeUpdateManyArgs>(args: SelectSubset<T, QrCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QrCodes and returns the data updated in the database.
+     * @param {QrCodeUpdateManyAndReturnArgs} args - Arguments to update many QrCodes.
+     * @example
+     * // Update many QrCodes
+     * const qrCode = await prisma.qrCode.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more QrCodes and only return the `id`
+     * const qrCodeWithIdOnly = await prisma.qrCode.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends QrCodeUpdateManyAndReturnArgs>(args: SelectSubset<T, QrCodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one QrCode.
+     * @param {QrCodeUpsertArgs} args - Arguments to update or create a QrCode.
+     * @example
+     * // Update or create a QrCode
+     * const qrCode = await prisma.qrCode.upsert({
+     *   create: {
+     *     // ... data to create a QrCode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the QrCode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends QrCodeUpsertArgs>(args: SelectSubset<T, QrCodeUpsertArgs<ExtArgs>>): Prisma__QrCodeClient<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of QrCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QrCodeCountArgs} args - Arguments to filter QrCodes to count.
+     * @example
+     * // Count the number of QrCodes
+     * const count = await prisma.qrCode.count({
+     *   where: {
+     *     // ... the filter for the QrCodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends QrCodeCountArgs>(
+      args?: Subset<T, QrCodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], QrCodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a QrCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QrCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends QrCodeAggregateArgs>(args: Subset<T, QrCodeAggregateArgs>): Prisma.PrismaPromise<GetQrCodeAggregateType<T>>
+
+    /**
+     * Group by QrCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QrCodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends QrCodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: QrCodeGroupByArgs['orderBy'] }
+        : { orderBy?: QrCodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, QrCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetQrCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the QrCode model
+   */
+  readonly fields: QrCodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for QrCode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__QrCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    establishment<T extends EstablishmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EstablishmentDefaultArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    servicePoint<T extends QrCode$servicePointArgs<ExtArgs> = {}>(args?: Subset<T, QrCode$servicePointArgs<ExtArgs>>): Prisma__ServicePointClient<$Result.GetResult<Prisma.$ServicePointPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the QrCode model
+   */
+  interface QrCodeFieldRefs {
+    readonly id: FieldRef<"QrCode", 'String'>
+    readonly token: FieldRef<"QrCode", 'String'>
+    readonly establishmentId: FieldRef<"QrCode", 'String'>
+    readonly servicePointId: FieldRef<"QrCode", 'String'>
+    readonly type: FieldRef<"QrCode", 'QrCodeType'>
+    readonly active: FieldRef<"QrCode", 'Boolean'>
+    readonly config: FieldRef<"QrCode", 'Json'>
+    readonly createdAt: FieldRef<"QrCode", 'DateTime'>
+    readonly updatedAt: FieldRef<"QrCode", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * QrCode findUnique
+   */
+  export type QrCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which QrCode to fetch.
+     */
+    where: QrCodeWhereUniqueInput
+  }
+
+  /**
+   * QrCode findUniqueOrThrow
+   */
+  export type QrCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which QrCode to fetch.
+     */
+    where: QrCodeWhereUniqueInput
+  }
+
+  /**
+   * QrCode findFirst
+   */
+  export type QrCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which QrCode to fetch.
+     */
+    where?: QrCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QrCodes to fetch.
+     */
+    orderBy?: QrCodeOrderByWithRelationInput | QrCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QrCodes.
+     */
+    cursor?: QrCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QrCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QrCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QrCodes.
+     */
+    distinct?: QrCodeScalarFieldEnum | QrCodeScalarFieldEnum[]
+  }
+
+  /**
+   * QrCode findFirstOrThrow
+   */
+  export type QrCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which QrCode to fetch.
+     */
+    where?: QrCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QrCodes to fetch.
+     */
+    orderBy?: QrCodeOrderByWithRelationInput | QrCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QrCodes.
+     */
+    cursor?: QrCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QrCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QrCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QrCodes.
+     */
+    distinct?: QrCodeScalarFieldEnum | QrCodeScalarFieldEnum[]
+  }
+
+  /**
+   * QrCode findMany
+   */
+  export type QrCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which QrCodes to fetch.
+     */
+    where?: QrCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QrCodes to fetch.
+     */
+    orderBy?: QrCodeOrderByWithRelationInput | QrCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing QrCodes.
+     */
+    cursor?: QrCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QrCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QrCodes.
+     */
+    skip?: number
+    distinct?: QrCodeScalarFieldEnum | QrCodeScalarFieldEnum[]
+  }
+
+  /**
+   * QrCode create
+   */
+  export type QrCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a QrCode.
+     */
+    data: XOR<QrCodeCreateInput, QrCodeUncheckedCreateInput>
+  }
+
+  /**
+   * QrCode createMany
+   */
+  export type QrCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many QrCodes.
+     */
+    data: QrCodeCreateManyInput | QrCodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * QrCode createManyAndReturn
+   */
+  export type QrCodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * The data used to create many QrCodes.
+     */
+    data: QrCodeCreateManyInput | QrCodeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * QrCode update
+   */
+  export type QrCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a QrCode.
+     */
+    data: XOR<QrCodeUpdateInput, QrCodeUncheckedUpdateInput>
+    /**
+     * Choose, which QrCode to update.
+     */
+    where: QrCodeWhereUniqueInput
+  }
+
+  /**
+   * QrCode updateMany
+   */
+  export type QrCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update QrCodes.
+     */
+    data: XOR<QrCodeUpdateManyMutationInput, QrCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which QrCodes to update
+     */
+    where?: QrCodeWhereInput
+    /**
+     * Limit how many QrCodes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * QrCode updateManyAndReturn
+   */
+  export type QrCodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * The data used to update QrCodes.
+     */
+    data: XOR<QrCodeUpdateManyMutationInput, QrCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which QrCodes to update
+     */
+    where?: QrCodeWhereInput
+    /**
+     * Limit how many QrCodes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * QrCode upsert
+   */
+  export type QrCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the QrCode to update in case it exists.
+     */
+    where: QrCodeWhereUniqueInput
+    /**
+     * In case the QrCode found by the `where` argument doesn't exist, create a new QrCode with this data.
+     */
+    create: XOR<QrCodeCreateInput, QrCodeUncheckedCreateInput>
+    /**
+     * In case the QrCode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<QrCodeUpdateInput, QrCodeUncheckedUpdateInput>
+  }
+
+  /**
+   * QrCode delete
+   */
+  export type QrCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeInclude<ExtArgs> | null
+    /**
+     * Filter which QrCode to delete.
+     */
+    where: QrCodeWhereUniqueInput
+  }
+
+  /**
+   * QrCode deleteMany
+   */
+  export type QrCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QrCodes to delete
+     */
+    where?: QrCodeWhereInput
+    /**
+     * Limit how many QrCodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * QrCode.servicePoint
+   */
+  export type QrCode$servicePointArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServicePoint
+     */
+    select?: ServicePointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ServicePoint
+     */
+    omit?: ServicePointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServicePointInclude<ExtArgs> | null
+    where?: ServicePointWhereInput
+  }
+
+  /**
+   * QrCode without action
+   */
+  export type QrCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Schedule
    */
 
@@ -109747,7 +111051,9 @@ export namespace Prisma {
     x?: boolean
     y?: boolean
     z?: boolean
+    qrCodes?: boolean | ServicePoint$qrCodesArgs<ExtArgs>
     zone?: boolean | ServiceZoneDefaultArgs<ExtArgs>
+    _count?: boolean | ServicePointCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["servicePoint"]>
 
   export type ServicePointSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -109823,7 +111129,9 @@ export namespace Prisma {
 
   export type ServicePointOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "type" | "maxCapacity" | "minCapacity" | "isReservable" | "isPriority" | "isActive" | "token" | "zoneId" | "createdAt" | "updatedAt" | "color" | "height" | "rotation" | "shape" | "width" | "x" | "y" | "z", ExtArgs["result"]["servicePoint"]>
   export type ServicePointInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    qrCodes?: boolean | ServicePoint$qrCodesArgs<ExtArgs>
     zone?: boolean | ServiceZoneDefaultArgs<ExtArgs>
+    _count?: boolean | ServicePointCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ServicePointIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     zone?: boolean | ServiceZoneDefaultArgs<ExtArgs>
@@ -109835,6 +111143,7 @@ export namespace Prisma {
   export type $ServicePointPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ServicePoint"
     objects: {
+      qrCodes: Prisma.$QrCodePayload<ExtArgs>[]
       zone: Prisma.$ServiceZonePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -110252,6 +111561,7 @@ export namespace Prisma {
    */
   export interface Prisma__ServicePointClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    qrCodes<T extends ServicePoint$qrCodesArgs<ExtArgs> = {}>(args?: Subset<T, ServicePoint$qrCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     zone<T extends ServiceZoneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ServiceZoneDefaultArgs<ExtArgs>>): Prisma__ServiceZoneClient<$Result.GetResult<Prisma.$ServiceZonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -110695,6 +112005,30 @@ export namespace Prisma {
      * Limit how many ServicePoints to delete.
      */
     limit?: number
+  }
+
+  /**
+   * ServicePoint.qrCodes
+   */
+  export type ServicePoint$qrCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeInclude<ExtArgs> | null
+    where?: QrCodeWhereInput
+    orderBy?: QrCodeOrderByWithRelationInput | QrCodeOrderByWithRelationInput[]
+    cursor?: QrCodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QrCodeScalarFieldEnum | QrCodeScalarFieldEnum[]
   }
 
   /**
@@ -111548,6 +112882,21 @@ export namespace Prisma {
   };
 
   export type PrinterScalarFieldEnum = (typeof PrinterScalarFieldEnum)[keyof typeof PrinterScalarFieldEnum]
+
+
+  export const QrCodeScalarFieldEnum: {
+    id: 'id',
+    token: 'token',
+    establishmentId: 'establishmentId',
+    servicePointId: 'servicePointId',
+    type: 'type',
+    active: 'active',
+    config: 'config',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type QrCodeScalarFieldEnum = (typeof QrCodeScalarFieldEnum)[keyof typeof QrCodeScalarFieldEnum]
 
 
   export const ScheduleScalarFieldEnum: {
@@ -112557,6 +113906,20 @@ export namespace Prisma {
    * Reference to a field of type 'MenuType[]'
    */
   export type ListEnumMenuTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MenuType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'QrCodeType'
+   */
+  export type EnumQrCodeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QrCodeType'>
+    
+
+
+  /**
+   * Reference to a field of type 'QrCodeType[]'
+   */
+  export type ListEnumQrCodeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QrCodeType[]'>
     
 
 
@@ -114047,6 +115410,7 @@ export namespace Prisma {
     themes?: ThemeListRelationFilter
     employees?: EmployeeListRelationFilter
     serviceZones?: ServiceZoneListRelationFilter
+    qrCodes?: QrCodeListRelationFilter
     menus?: MenuListRelationFilter
     Item?: ItemListRelationFilter
     addons?: AddonListRelationFilter
@@ -114126,6 +115490,7 @@ export namespace Prisma {
     themes?: ThemeOrderByRelationAggregateInput
     employees?: EmployeeOrderByRelationAggregateInput
     serviceZones?: ServiceZoneOrderByRelationAggregateInput
+    qrCodes?: QrCodeOrderByRelationAggregateInput
     menus?: MenuOrderByRelationAggregateInput
     Item?: ItemOrderByRelationAggregateInput
     addons?: AddonOrderByRelationAggregateInput
@@ -114208,6 +115573,7 @@ export namespace Prisma {
     themes?: ThemeListRelationFilter
     employees?: EmployeeListRelationFilter
     serviceZones?: ServiceZoneListRelationFilter
+    qrCodes?: QrCodeListRelationFilter
     menus?: MenuListRelationFilter
     Item?: ItemListRelationFilter
     addons?: AddonListRelationFilter
@@ -117298,6 +118664,84 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Printer"> | Date | string
   }
 
+  export type QrCodeWhereInput = {
+    AND?: QrCodeWhereInput | QrCodeWhereInput[]
+    OR?: QrCodeWhereInput[]
+    NOT?: QrCodeWhereInput | QrCodeWhereInput[]
+    id?: StringFilter<"QrCode"> | string
+    token?: StringFilter<"QrCode"> | string
+    establishmentId?: StringFilter<"QrCode"> | string
+    servicePointId?: StringNullableFilter<"QrCode"> | string | null
+    type?: EnumQrCodeTypeFilter<"QrCode"> | $Enums.QrCodeType
+    active?: BoolFilter<"QrCode"> | boolean
+    config?: JsonNullableFilter<"QrCode">
+    createdAt?: DateTimeFilter<"QrCode"> | Date | string
+    updatedAt?: DateTimeFilter<"QrCode"> | Date | string
+    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+    servicePoint?: XOR<ServicePointNullableScalarRelationFilter, ServicePointWhereInput> | null
+  }
+
+  export type QrCodeOrderByWithRelationInput = {
+    id?: SortOrder
+    token?: SortOrder
+    establishmentId?: SortOrder
+    servicePointId?: SortOrderInput | SortOrder
+    type?: SortOrder
+    active?: SortOrder
+    config?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    establishment?: EstablishmentOrderByWithRelationInput
+    servicePoint?: ServicePointOrderByWithRelationInput
+  }
+
+  export type QrCodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    token?: string
+    AND?: QrCodeWhereInput | QrCodeWhereInput[]
+    OR?: QrCodeWhereInput[]
+    NOT?: QrCodeWhereInput | QrCodeWhereInput[]
+    establishmentId?: StringFilter<"QrCode"> | string
+    servicePointId?: StringNullableFilter<"QrCode"> | string | null
+    type?: EnumQrCodeTypeFilter<"QrCode"> | $Enums.QrCodeType
+    active?: BoolFilter<"QrCode"> | boolean
+    config?: JsonNullableFilter<"QrCode">
+    createdAt?: DateTimeFilter<"QrCode"> | Date | string
+    updatedAt?: DateTimeFilter<"QrCode"> | Date | string
+    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+    servicePoint?: XOR<ServicePointNullableScalarRelationFilter, ServicePointWhereInput> | null
+  }, "id" | "token">
+
+  export type QrCodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    token?: SortOrder
+    establishmentId?: SortOrder
+    servicePointId?: SortOrderInput | SortOrder
+    type?: SortOrder
+    active?: SortOrder
+    config?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: QrCodeCountOrderByAggregateInput
+    _max?: QrCodeMaxOrderByAggregateInput
+    _min?: QrCodeMinOrderByAggregateInput
+  }
+
+  export type QrCodeScalarWhereWithAggregatesInput = {
+    AND?: QrCodeScalarWhereWithAggregatesInput | QrCodeScalarWhereWithAggregatesInput[]
+    OR?: QrCodeScalarWhereWithAggregatesInput[]
+    NOT?: QrCodeScalarWhereWithAggregatesInput | QrCodeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"QrCode"> | string
+    token?: StringWithAggregatesFilter<"QrCode"> | string
+    establishmentId?: StringWithAggregatesFilter<"QrCode"> | string
+    servicePointId?: StringNullableWithAggregatesFilter<"QrCode"> | string | null
+    type?: EnumQrCodeTypeWithAggregatesFilter<"QrCode"> | $Enums.QrCodeType
+    active?: BoolWithAggregatesFilter<"QrCode"> | boolean
+    config?: JsonNullableWithAggregatesFilter<"QrCode">
+    createdAt?: DateTimeWithAggregatesFilter<"QrCode"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"QrCode"> | Date | string
+  }
+
   export type ScheduleWhereInput = {
     AND?: ScheduleWhereInput | ScheduleWhereInput[]
     OR?: ScheduleWhereInput[]
@@ -119898,6 +121342,7 @@ export namespace Prisma {
     x?: FloatFilter<"ServicePoint"> | number
     y?: FloatFilter<"ServicePoint"> | number
     z?: FloatFilter<"ServicePoint"> | number
+    qrCodes?: QrCodeListRelationFilter
     zone?: XOR<ServiceZoneScalarRelationFilter, ServiceZoneWhereInput>
   }
 
@@ -119922,6 +121367,7 @@ export namespace Prisma {
     x?: SortOrder
     y?: SortOrder
     z?: SortOrder
+    qrCodes?: QrCodeOrderByRelationAggregateInput
     zone?: ServiceZoneOrderByWithRelationInput
   }
 
@@ -119949,6 +121395,7 @@ export namespace Prisma {
     x?: FloatFilter<"ServicePoint"> | number
     y?: FloatFilter<"ServicePoint"> | number
     z?: FloatFilter<"ServicePoint"> | number
+    qrCodes?: QrCodeListRelationFilter
     zone?: XOR<ServiceZoneScalarRelationFilter, ServiceZoneWhereInput>
   }, "id" | "token">
 
@@ -121356,6 +122803,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -121430,6 +122878,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -121504,6 +122953,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -121578,6 +123028,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -124862,6 +126313,88 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type QrCodeCreateInput = {
+    id?: string
+    token: string
+    type?: $Enums.QrCodeType
+    active?: boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    establishment: EstablishmentCreateNestedOneWithoutQrCodesInput
+    servicePoint?: ServicePointCreateNestedOneWithoutQrCodesInput
+  }
+
+  export type QrCodeUncheckedCreateInput = {
+    id?: string
+    token: string
+    establishmentId: string
+    servicePointId?: string | null
+    type?: $Enums.QrCodeType
+    active?: boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QrCodeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    establishment?: EstablishmentUpdateOneRequiredWithoutQrCodesNestedInput
+    servicePoint?: ServicePointUpdateOneWithoutQrCodesNestedInput
+  }
+
+  export type QrCodeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    servicePointId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QrCodeCreateManyInput = {
+    id?: string
+    token: string
+    establishmentId: string
+    servicePointId?: string | null
+    type?: $Enums.QrCodeType
+    active?: boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QrCodeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QrCodeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    servicePointId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ScheduleCreateInput = {
     id?: string
     type: $Enums.ScheduleType
@@ -127716,6 +129249,7 @@ export namespace Prisma {
     x?: number
     y?: number
     z?: number
+    qrCodes?: QrCodeCreateNestedManyWithoutServicePointInput
     zone: ServiceZoneCreateNestedOneWithoutServicePointsInput
   }
 
@@ -127740,6 +129274,7 @@ export namespace Prisma {
     x?: number
     y?: number
     z?: number
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutServicePointInput
   }
 
   export type ServicePointUpdateInput = {
@@ -127762,6 +129297,7 @@ export namespace Prisma {
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
     z?: FloatFieldUpdateOperationsInput | number
+    qrCodes?: QrCodeUpdateManyWithoutServicePointNestedInput
     zone?: ServiceZoneUpdateOneRequiredWithoutServicePointsNestedInput
   }
 
@@ -127786,6 +129322,7 @@ export namespace Prisma {
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
     z?: FloatFieldUpdateOperationsInput | number
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutServicePointNestedInput
   }
 
   export type ServicePointCreateManyInput = {
@@ -129171,6 +130708,12 @@ export namespace Prisma {
     none?: ServiceZoneWhereInput
   }
 
+  export type QrCodeListRelationFilter = {
+    every?: QrCodeWhereInput
+    some?: QrCodeWhereInput
+    none?: QrCodeWhereInput
+  }
+
   export type MenuListRelationFilter = {
     every?: MenuWhereInput
     some?: MenuWhereInput
@@ -129349,6 +130892,10 @@ export namespace Prisma {
   }
 
   export type ServiceZoneOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type QrCodeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -131740,6 +133287,62 @@ export namespace Prisma {
     deviceId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EnumQrCodeTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.QrCodeType | EnumQrCodeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.QrCodeType[] | ListEnumQrCodeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.QrCodeType[] | ListEnumQrCodeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumQrCodeTypeFilter<$PrismaModel> | $Enums.QrCodeType
+  }
+
+  export type ServicePointNullableScalarRelationFilter = {
+    is?: ServicePointWhereInput | null
+    isNot?: ServicePointWhereInput | null
+  }
+
+  export type QrCodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    establishmentId?: SortOrder
+    servicePointId?: SortOrder
+    type?: SortOrder
+    active?: SortOrder
+    config?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QrCodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    establishmentId?: SortOrder
+    servicePointId?: SortOrder
+    type?: SortOrder
+    active?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QrCodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    token?: SortOrder
+    establishmentId?: SortOrder
+    servicePointId?: SortOrder
+    type?: SortOrder
+    active?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumQrCodeTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.QrCodeType | EnumQrCodeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.QrCodeType[] | ListEnumQrCodeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.QrCodeType[] | ListEnumQrCodeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumQrCodeTypeWithAggregatesFilter<$PrismaModel> | $Enums.QrCodeType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumQrCodeTypeFilter<$PrismaModel>
+    _max?: NestedEnumQrCodeTypeFilter<$PrismaModel>
   }
 
   export type EnumScheduleTypeFilter<$PrismaModel = never> = {
@@ -134565,6 +136168,13 @@ export namespace Prisma {
     connect?: ServiceZoneWhereUniqueInput | ServiceZoneWhereUniqueInput[]
   }
 
+  export type QrCodeCreateNestedManyWithoutEstablishmentInput = {
+    create?: XOR<QrCodeCreateWithoutEstablishmentInput, QrCodeUncheckedCreateWithoutEstablishmentInput> | QrCodeCreateWithoutEstablishmentInput[] | QrCodeUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: QrCodeCreateOrConnectWithoutEstablishmentInput | QrCodeCreateOrConnectWithoutEstablishmentInput[]
+    createMany?: QrCodeCreateManyEstablishmentInputEnvelope
+    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+  }
+
   export type MenuCreateNestedManyWithoutEstablishmentInput = {
     create?: XOR<MenuCreateWithoutEstablishmentInput, MenuUncheckedCreateWithoutEstablishmentInput> | MenuCreateWithoutEstablishmentInput[] | MenuUncheckedCreateWithoutEstablishmentInput[]
     connectOrCreate?: MenuCreateOrConnectWithoutEstablishmentInput | MenuCreateOrConnectWithoutEstablishmentInput[]
@@ -134802,6 +136412,13 @@ export namespace Prisma {
     connectOrCreate?: ServiceZoneCreateOrConnectWithoutEstablishmentInput | ServiceZoneCreateOrConnectWithoutEstablishmentInput[]
     createMany?: ServiceZoneCreateManyEstablishmentInputEnvelope
     connect?: ServiceZoneWhereUniqueInput | ServiceZoneWhereUniqueInput[]
+  }
+
+  export type QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput = {
+    create?: XOR<QrCodeCreateWithoutEstablishmentInput, QrCodeUncheckedCreateWithoutEstablishmentInput> | QrCodeCreateWithoutEstablishmentInput[] | QrCodeUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: QrCodeCreateOrConnectWithoutEstablishmentInput | QrCodeCreateOrConnectWithoutEstablishmentInput[]
+    createMany?: QrCodeCreateManyEstablishmentInputEnvelope
+    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
   }
 
   export type MenuUncheckedCreateNestedManyWithoutEstablishmentInput = {
@@ -135156,6 +136773,20 @@ export namespace Prisma {
     update?: ServiceZoneUpdateWithWhereUniqueWithoutEstablishmentInput | ServiceZoneUpdateWithWhereUniqueWithoutEstablishmentInput[]
     updateMany?: ServiceZoneUpdateManyWithWhereWithoutEstablishmentInput | ServiceZoneUpdateManyWithWhereWithoutEstablishmentInput[]
     deleteMany?: ServiceZoneScalarWhereInput | ServiceZoneScalarWhereInput[]
+  }
+
+  export type QrCodeUpdateManyWithoutEstablishmentNestedInput = {
+    create?: XOR<QrCodeCreateWithoutEstablishmentInput, QrCodeUncheckedCreateWithoutEstablishmentInput> | QrCodeCreateWithoutEstablishmentInput[] | QrCodeUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: QrCodeCreateOrConnectWithoutEstablishmentInput | QrCodeCreateOrConnectWithoutEstablishmentInput[]
+    upsert?: QrCodeUpsertWithWhereUniqueWithoutEstablishmentInput | QrCodeUpsertWithWhereUniqueWithoutEstablishmentInput[]
+    createMany?: QrCodeCreateManyEstablishmentInputEnvelope
+    set?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    disconnect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    delete?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    update?: QrCodeUpdateWithWhereUniqueWithoutEstablishmentInput | QrCodeUpdateWithWhereUniqueWithoutEstablishmentInput[]
+    updateMany?: QrCodeUpdateManyWithWhereWithoutEstablishmentInput | QrCodeUpdateManyWithWhereWithoutEstablishmentInput[]
+    deleteMany?: QrCodeScalarWhereInput | QrCodeScalarWhereInput[]
   }
 
   export type MenuUpdateManyWithoutEstablishmentNestedInput = {
@@ -135622,6 +137253,20 @@ export namespace Prisma {
     update?: ServiceZoneUpdateWithWhereUniqueWithoutEstablishmentInput | ServiceZoneUpdateWithWhereUniqueWithoutEstablishmentInput[]
     updateMany?: ServiceZoneUpdateManyWithWhereWithoutEstablishmentInput | ServiceZoneUpdateManyWithWhereWithoutEstablishmentInput[]
     deleteMany?: ServiceZoneScalarWhereInput | ServiceZoneScalarWhereInput[]
+  }
+
+  export type QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput = {
+    create?: XOR<QrCodeCreateWithoutEstablishmentInput, QrCodeUncheckedCreateWithoutEstablishmentInput> | QrCodeCreateWithoutEstablishmentInput[] | QrCodeUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: QrCodeCreateOrConnectWithoutEstablishmentInput | QrCodeCreateOrConnectWithoutEstablishmentInput[]
+    upsert?: QrCodeUpsertWithWhereUniqueWithoutEstablishmentInput | QrCodeUpsertWithWhereUniqueWithoutEstablishmentInput[]
+    createMany?: QrCodeCreateManyEstablishmentInputEnvelope
+    set?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    disconnect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    delete?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    update?: QrCodeUpdateWithWhereUniqueWithoutEstablishmentInput | QrCodeUpdateWithWhereUniqueWithoutEstablishmentInput[]
+    updateMany?: QrCodeUpdateManyWithWhereWithoutEstablishmentInput | QrCodeUpdateManyWithWhereWithoutEstablishmentInput[]
+    deleteMany?: QrCodeScalarWhereInput | QrCodeScalarWhereInput[]
   }
 
   export type MenuUncheckedUpdateManyWithoutEstablishmentNestedInput = {
@@ -138526,6 +140171,40 @@ export namespace Prisma {
     update?: XOR<XOR<DeviceUpdateToOneWithWhereWithoutPrintersInput, DeviceUpdateWithoutPrintersInput>, DeviceUncheckedUpdateWithoutPrintersInput>
   }
 
+  export type EstablishmentCreateNestedOneWithoutQrCodesInput = {
+    create?: XOR<EstablishmentCreateWithoutQrCodesInput, EstablishmentUncheckedCreateWithoutQrCodesInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutQrCodesInput
+    connect?: EstablishmentWhereUniqueInput
+  }
+
+  export type ServicePointCreateNestedOneWithoutQrCodesInput = {
+    create?: XOR<ServicePointCreateWithoutQrCodesInput, ServicePointUncheckedCreateWithoutQrCodesInput>
+    connectOrCreate?: ServicePointCreateOrConnectWithoutQrCodesInput
+    connect?: ServicePointWhereUniqueInput
+  }
+
+  export type EnumQrCodeTypeFieldUpdateOperationsInput = {
+    set?: $Enums.QrCodeType
+  }
+
+  export type EstablishmentUpdateOneRequiredWithoutQrCodesNestedInput = {
+    create?: XOR<EstablishmentCreateWithoutQrCodesInput, EstablishmentUncheckedCreateWithoutQrCodesInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutQrCodesInput
+    upsert?: EstablishmentUpsertWithoutQrCodesInput
+    connect?: EstablishmentWhereUniqueInput
+    update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutQrCodesInput, EstablishmentUpdateWithoutQrCodesInput>, EstablishmentUncheckedUpdateWithoutQrCodesInput>
+  }
+
+  export type ServicePointUpdateOneWithoutQrCodesNestedInput = {
+    create?: XOR<ServicePointCreateWithoutQrCodesInput, ServicePointUncheckedCreateWithoutQrCodesInput>
+    connectOrCreate?: ServicePointCreateOrConnectWithoutQrCodesInput
+    upsert?: ServicePointUpsertWithoutQrCodesInput
+    disconnect?: ServicePointWhereInput | boolean
+    delete?: ServicePointWhereInput | boolean
+    connect?: ServicePointWhereUniqueInput
+    update?: XOR<XOR<ServicePointUpdateToOneWithWhereWithoutQrCodesInput, ServicePointUpdateWithoutQrCodesInput>, ServicePointUncheckedUpdateWithoutQrCodesInput>
+  }
+
   export type ScheduleDayCreateNestedManyWithoutScheduleInput = {
     create?: XOR<ScheduleDayCreateWithoutScheduleInput, ScheduleDayUncheckedCreateWithoutScheduleInput> | ScheduleDayCreateWithoutScheduleInput[] | ScheduleDayUncheckedCreateWithoutScheduleInput[]
     connectOrCreate?: ScheduleDayCreateOrConnectWithoutScheduleInput | ScheduleDayCreateOrConnectWithoutScheduleInput[]
@@ -140750,14 +142429,42 @@ export namespace Prisma {
     deleteMany?: ServicePointScalarWhereInput | ServicePointScalarWhereInput[]
   }
 
+  export type QrCodeCreateNestedManyWithoutServicePointInput = {
+    create?: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput> | QrCodeCreateWithoutServicePointInput[] | QrCodeUncheckedCreateWithoutServicePointInput[]
+    connectOrCreate?: QrCodeCreateOrConnectWithoutServicePointInput | QrCodeCreateOrConnectWithoutServicePointInput[]
+    createMany?: QrCodeCreateManyServicePointInputEnvelope
+    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+  }
+
   export type ServiceZoneCreateNestedOneWithoutServicePointsInput = {
     create?: XOR<ServiceZoneCreateWithoutServicePointsInput, ServiceZoneUncheckedCreateWithoutServicePointsInput>
     connectOrCreate?: ServiceZoneCreateOrConnectWithoutServicePointsInput
     connect?: ServiceZoneWhereUniqueInput
   }
 
+  export type QrCodeUncheckedCreateNestedManyWithoutServicePointInput = {
+    create?: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput> | QrCodeCreateWithoutServicePointInput[] | QrCodeUncheckedCreateWithoutServicePointInput[]
+    connectOrCreate?: QrCodeCreateOrConnectWithoutServicePointInput | QrCodeCreateOrConnectWithoutServicePointInput[]
+    createMany?: QrCodeCreateManyServicePointInputEnvelope
+    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+  }
+
   export type EnumServicePointTypeFieldUpdateOperationsInput = {
     set?: $Enums.ServicePointType
+  }
+
+  export type QrCodeUpdateManyWithoutServicePointNestedInput = {
+    create?: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput> | QrCodeCreateWithoutServicePointInput[] | QrCodeUncheckedCreateWithoutServicePointInput[]
+    connectOrCreate?: QrCodeCreateOrConnectWithoutServicePointInput | QrCodeCreateOrConnectWithoutServicePointInput[]
+    upsert?: QrCodeUpsertWithWhereUniqueWithoutServicePointInput | QrCodeUpsertWithWhereUniqueWithoutServicePointInput[]
+    createMany?: QrCodeCreateManyServicePointInputEnvelope
+    set?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    disconnect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    delete?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    update?: QrCodeUpdateWithWhereUniqueWithoutServicePointInput | QrCodeUpdateWithWhereUniqueWithoutServicePointInput[]
+    updateMany?: QrCodeUpdateManyWithWhereWithoutServicePointInput | QrCodeUpdateManyWithWhereWithoutServicePointInput[]
+    deleteMany?: QrCodeScalarWhereInput | QrCodeScalarWhereInput[]
   }
 
   export type ServiceZoneUpdateOneRequiredWithoutServicePointsNestedInput = {
@@ -140766,6 +142473,20 @@ export namespace Prisma {
     upsert?: ServiceZoneUpsertWithoutServicePointsInput
     connect?: ServiceZoneWhereUniqueInput
     update?: XOR<XOR<ServiceZoneUpdateToOneWithWhereWithoutServicePointsInput, ServiceZoneUpdateWithoutServicePointsInput>, ServiceZoneUncheckedUpdateWithoutServicePointsInput>
+  }
+
+  export type QrCodeUncheckedUpdateManyWithoutServicePointNestedInput = {
+    create?: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput> | QrCodeCreateWithoutServicePointInput[] | QrCodeUncheckedCreateWithoutServicePointInput[]
+    connectOrCreate?: QrCodeCreateOrConnectWithoutServicePointInput | QrCodeCreateOrConnectWithoutServicePointInput[]
+    upsert?: QrCodeUpsertWithWhereUniqueWithoutServicePointInput | QrCodeUpsertWithWhereUniqueWithoutServicePointInput[]
+    createMany?: QrCodeCreateManyServicePointInputEnvelope
+    set?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    disconnect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    delete?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    update?: QrCodeUpdateWithWhereUniqueWithoutServicePointInput | QrCodeUpdateWithWhereUniqueWithoutServicePointInput[]
+    updateMany?: QrCodeUpdateManyWithWhereWithoutServicePointInput | QrCodeUpdateManyWithWhereWithoutServicePointInput[]
+    deleteMany?: QrCodeScalarWhereInput | QrCodeScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -141537,6 +143258,23 @@ export namespace Prisma {
     _max?: NestedEnumMenuTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumQrCodeTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.QrCodeType | EnumQrCodeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.QrCodeType[] | ListEnumQrCodeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.QrCodeType[] | ListEnumQrCodeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumQrCodeTypeFilter<$PrismaModel> | $Enums.QrCodeType
+  }
+
+  export type NestedEnumQrCodeTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.QrCodeType | EnumQrCodeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.QrCodeType[] | ListEnumQrCodeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.QrCodeType[] | ListEnumQrCodeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumQrCodeTypeWithAggregatesFilter<$PrismaModel> | $Enums.QrCodeType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumQrCodeTypeFilter<$PrismaModel>
+    _max?: NestedEnumQrCodeTypeFilter<$PrismaModel>
+  }
+
   export type NestedEnumScheduleTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ScheduleType | EnumScheduleTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ScheduleType[] | ListEnumScheduleTypeFieldRefInput<$PrismaModel>
@@ -141923,6 +143661,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -141996,6 +143735,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -142085,6 +143825,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -142158,6 +143899,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -142231,6 +143973,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -142304,6 +144047,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -142393,6 +144137,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -142466,6 +144211,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -142569,6 +144315,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -142642,6 +144389,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -142760,6 +144508,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -142833,6 +144582,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -143057,6 +144807,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -143130,6 +144881,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -143303,6 +145055,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -143376,6 +145129,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -143648,6 +145402,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -143721,6 +145476,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -143859,6 +145615,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -143932,6 +145689,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -144288,6 +146046,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -144361,6 +146120,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -144500,6 +146260,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -144573,6 +146334,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -145092,6 +146854,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -145165,6 +146928,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -145281,6 +147045,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -145354,6 +147119,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -145566,6 +147332,7 @@ export namespace Prisma {
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -145639,6 +147406,7 @@ export namespace Prisma {
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -145728,6 +147496,7 @@ export namespace Prisma {
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -145801,6 +147570,7 @@ export namespace Prisma {
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -146226,6 +147996,38 @@ export namespace Prisma {
 
   export type ServiceZoneCreateManyEstablishmentInputEnvelope = {
     data: ServiceZoneCreateManyEstablishmentInput | ServiceZoneCreateManyEstablishmentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type QrCodeCreateWithoutEstablishmentInput = {
+    id?: string
+    token: string
+    type?: $Enums.QrCodeType
+    active?: boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    servicePoint?: ServicePointCreateNestedOneWithoutQrCodesInput
+  }
+
+  export type QrCodeUncheckedCreateWithoutEstablishmentInput = {
+    id?: string
+    token: string
+    servicePointId?: string | null
+    type?: $Enums.QrCodeType
+    active?: boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QrCodeCreateOrConnectWithoutEstablishmentInput = {
+    where: QrCodeWhereUniqueInput
+    create: XOR<QrCodeCreateWithoutEstablishmentInput, QrCodeUncheckedCreateWithoutEstablishmentInput>
+  }
+
+  export type QrCodeCreateManyEstablishmentInputEnvelope = {
+    data: QrCodeCreateManyEstablishmentInput | QrCodeCreateManyEstablishmentInput[]
     skipDuplicates?: boolean
   }
 
@@ -147820,6 +149622,37 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ServiceZone"> | Date | string
   }
 
+  export type QrCodeUpsertWithWhereUniqueWithoutEstablishmentInput = {
+    where: QrCodeWhereUniqueInput
+    update: XOR<QrCodeUpdateWithoutEstablishmentInput, QrCodeUncheckedUpdateWithoutEstablishmentInput>
+    create: XOR<QrCodeCreateWithoutEstablishmentInput, QrCodeUncheckedCreateWithoutEstablishmentInput>
+  }
+
+  export type QrCodeUpdateWithWhereUniqueWithoutEstablishmentInput = {
+    where: QrCodeWhereUniqueInput
+    data: XOR<QrCodeUpdateWithoutEstablishmentInput, QrCodeUncheckedUpdateWithoutEstablishmentInput>
+  }
+
+  export type QrCodeUpdateManyWithWhereWithoutEstablishmentInput = {
+    where: QrCodeScalarWhereInput
+    data: XOR<QrCodeUpdateManyMutationInput, QrCodeUncheckedUpdateManyWithoutEstablishmentInput>
+  }
+
+  export type QrCodeScalarWhereInput = {
+    AND?: QrCodeScalarWhereInput | QrCodeScalarWhereInput[]
+    OR?: QrCodeScalarWhereInput[]
+    NOT?: QrCodeScalarWhereInput | QrCodeScalarWhereInput[]
+    id?: StringFilter<"QrCode"> | string
+    token?: StringFilter<"QrCode"> | string
+    establishmentId?: StringFilter<"QrCode"> | string
+    servicePointId?: StringNullableFilter<"QrCode"> | string | null
+    type?: EnumQrCodeTypeFilter<"QrCode"> | $Enums.QrCodeType
+    active?: BoolFilter<"QrCode"> | boolean
+    config?: JsonNullableFilter<"QrCode">
+    createdAt?: DateTimeFilter<"QrCode"> | Date | string
+    updatedAt?: DateTimeFilter<"QrCode"> | Date | string
+  }
+
   export type MenuUpsertWithWhereUniqueWithoutEstablishmentInput = {
     where: MenuWhereUniqueInput
     update: XOR<MenuUpdateWithoutEstablishmentInput, MenuUncheckedUpdateWithoutEstablishmentInput>
@@ -148853,6 +150686,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -148926,6 +150760,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -149015,6 +150850,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -149088,6 +150924,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -149201,6 +151038,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -149274,6 +151112,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -149410,6 +151249,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -149483,6 +151323,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -149556,6 +151397,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -149629,6 +151471,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -149759,6 +151602,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -149832,6 +151676,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -149952,6 +151797,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -150025,6 +151871,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -150114,6 +151961,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -150187,6 +152035,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -150260,6 +152109,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -150333,6 +152183,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -150416,6 +152267,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -150489,6 +152341,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -150572,6 +152425,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -150645,6 +152499,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -151001,6 +152856,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -151074,6 +152930,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -151271,6 +153128,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -151344,6 +153202,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -151433,6 +153292,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -151506,6 +153366,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -151579,6 +153440,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -151652,6 +153514,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -151741,6 +153604,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -151814,6 +153678,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -151887,6 +153752,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -151960,6 +153826,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -152049,6 +153916,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -152122,6 +153990,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -152215,6 +154084,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
     variantOptions?: VariantOptionCreateNestedManyWithoutEstablishmentInput
@@ -152288,6 +154158,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
     variantOptions?: VariantOptionUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -152804,6 +154675,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
     variantOptions?: VariantOptionUpdateManyWithoutEstablishmentNestedInput
@@ -152877,6 +154749,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
     variantOptions?: VariantOptionUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -153745,6 +155618,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -153818,6 +155692,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -153945,6 +155820,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -154018,6 +155894,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -155291,6 +157168,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     variantOptions?: VariantOptionCreateNestedManyWithoutEstablishmentInput
@@ -155364,6 +157242,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     variantOptions?: VariantOptionUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -155509,6 +157388,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     variantOptions?: VariantOptionUpdateManyWithoutEstablishmentNestedInput
@@ -155582,6 +157462,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     variantOptions?: VariantOptionUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -156601,6 +158482,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -156674,6 +158556,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -156814,6 +158697,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -156887,6 +158771,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -157070,6 +158955,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
     variantOptions?: VariantOptionCreateNestedManyWithoutEstablishmentInput
@@ -157143,6 +159029,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
     variantOptions?: VariantOptionUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -157321,6 +159208,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
     variantOptions?: VariantOptionUpdateManyWithoutEstablishmentNestedInput
@@ -157394,6 +159282,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
     variantOptions?: VariantOptionUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -158483,6 +160372,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -158556,6 +160446,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -158675,6 +160566,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -158748,6 +160640,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -158871,6 +160764,426 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EstablishmentCreateWithoutQrCodesInput = {
+    id?: string
+    name: string
+    slug: string
+    type: $Enums.EstablishmentType
+    status?: $Enums.EstablishmentStatus
+    isOnline?: boolean
+    email: string
+    countryCode: string
+    phoneNumber: string
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    country: string
+    billingName: string
+    billingTaxId: string
+    stripeCustomerId: string
+    instagramUrl?: string | null
+    tiktokUrl?: string | null
+    facebookUrl?: string | null
+    googleReviewUrl?: string | null
+    tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
+    primaryLanguage?: $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: $Enums.Currency
+    timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
+    metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
+    owner: UserCreateNestedOneWithoutEstablishmentsInput
+    activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
+    logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
+    bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
+    images?: ImageCreateNestedManyWithoutEstablishmentInput
+    themes?: ThemeCreateNestedManyWithoutEstablishmentInput
+    employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
+    serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    menus?: MenuCreateNestedManyWithoutEstablishmentInput
+    Item?: ItemCreateNestedManyWithoutEstablishmentInput
+    addons?: AddonCreateNestedManyWithoutEstablishmentInput
+    variantOptions?: VariantOptionCreateNestedManyWithoutEstablishmentInput
+    bookings?: BookingCreateNestedManyWithoutEstablishmentInput
+    bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
+    establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
+    integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
+    subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
+    invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
+    devices?: DeviceCreateNestedManyWithoutEstablishmentInput
+    vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
+    sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
+    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
+    emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
+    auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
+    discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
+    promotions?: PromotionCreateNestedManyWithoutEstablishmentInput
+    suppliers?: SupplierCreateNestedManyWithoutEstablishmentInput
+    stockCategories?: StockCategoryCreateNestedManyWithoutEstablishmentInput
+    stockItems?: StockItemCreateNestedManyWithoutEstablishmentInput
+    stockEntries?: StockEntryCreateNestedManyWithoutEstablishmentInput
+    stockExits?: StockExitCreateNestedManyWithoutEstablishmentInput
+    stockMovements?: StockMovementCreateNestedManyWithoutEstablishmentInput
+    stockAlerts?: StockAlertCreateNestedManyWithoutEstablishmentInput
+    stockInventoryCounts?: StockInventoryCountCreateNestedManyWithoutEstablishmentInput
+    stockWarehouses?: StockWarehouseCreateNestedManyWithoutEstablishmentInput
+  }
+
+  export type EstablishmentUncheckedCreateWithoutQrCodesInput = {
+    id?: string
+    name: string
+    slug: string
+    type: $Enums.EstablishmentType
+    status?: $Enums.EstablishmentStatus
+    isOnline?: boolean
+    email: string
+    countryCode: string
+    phoneNumber: string
+    address: string
+    city: string
+    state: string
+    zipCode: string
+    country: string
+    billingName: string
+    billingTaxId: string
+    stripeCustomerId: string
+    instagramUrl?: string | null
+    tiktokUrl?: string | null
+    facebookUrl?: string | null
+    googleReviewUrl?: string | null
+    tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
+    primaryLanguage?: $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: $Enums.Currency
+    timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
+    logoImageId?: string | null
+    bannerImageId?: string | null
+    activeThemeId?: string | null
+    scheduleId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: string
+    metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
+    images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
+    themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
+    serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
+    Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
+    addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
+    variantOptions?: VariantOptionUncheckedCreateNestedManyWithoutEstablishmentInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutEstablishmentInput
+    bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
+    integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
+    devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
+    vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
+    sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
+    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
+    emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
+    discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
+    promotions?: PromotionUncheckedCreateNestedManyWithoutEstablishmentInput
+    suppliers?: SupplierUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockCategories?: StockCategoryUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockItems?: StockItemUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockEntries?: StockEntryUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockExits?: StockExitUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockMovements?: StockMovementUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockAlerts?: StockAlertUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockInventoryCounts?: StockInventoryCountUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockWarehouses?: StockWarehouseUncheckedCreateNestedManyWithoutEstablishmentInput
+  }
+
+  export type EstablishmentCreateOrConnectWithoutQrCodesInput = {
+    where: EstablishmentWhereUniqueInput
+    create: XOR<EstablishmentCreateWithoutQrCodesInput, EstablishmentUncheckedCreateWithoutQrCodesInput>
+  }
+
+  export type ServicePointCreateWithoutQrCodesInput = {
+    id?: string
+    name: string
+    type?: $Enums.ServicePointType
+    maxCapacity?: number
+    minCapacity?: number
+    isReservable?: boolean
+    isPriority?: boolean
+    isActive?: boolean
+    token?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    color?: string
+    height?: number
+    rotation?: number
+    shape?: string
+    width?: number
+    x?: number
+    y?: number
+    z?: number
+    zone: ServiceZoneCreateNestedOneWithoutServicePointsInput
+  }
+
+  export type ServicePointUncheckedCreateWithoutQrCodesInput = {
+    id?: string
+    name: string
+    type?: $Enums.ServicePointType
+    maxCapacity?: number
+    minCapacity?: number
+    isReservable?: boolean
+    isPriority?: boolean
+    isActive?: boolean
+    token?: string | null
+    zoneId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    color?: string
+    height?: number
+    rotation?: number
+    shape?: string
+    width?: number
+    x?: number
+    y?: number
+    z?: number
+  }
+
+  export type ServicePointCreateOrConnectWithoutQrCodesInput = {
+    where: ServicePointWhereUniqueInput
+    create: XOR<ServicePointCreateWithoutQrCodesInput, ServicePointUncheckedCreateWithoutQrCodesInput>
+  }
+
+  export type EstablishmentUpsertWithoutQrCodesInput = {
+    update: XOR<EstablishmentUpdateWithoutQrCodesInput, EstablishmentUncheckedUpdateWithoutQrCodesInput>
+    create: XOR<EstablishmentCreateWithoutQrCodesInput, EstablishmentUncheckedCreateWithoutQrCodesInput>
+    where?: EstablishmentWhereInput
+  }
+
+  export type EstablishmentUpdateToOneWithWhereWithoutQrCodesInput = {
+    where?: EstablishmentWhereInput
+    data: XOR<EstablishmentUpdateWithoutQrCodesInput, EstablishmentUncheckedUpdateWithoutQrCodesInput>
+  }
+
+  export type EstablishmentUpdateWithoutQrCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
+    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    billingName?: StringFieldUpdateOperationsInput | string
+    billingTaxId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
+    metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
+    owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
+    activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
+    logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
+    bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
+    images?: ImageUpdateManyWithoutEstablishmentNestedInput
+    themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
+    employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
+    serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    menus?: MenuUpdateManyWithoutEstablishmentNestedInput
+    Item?: ItemUpdateManyWithoutEstablishmentNestedInput
+    addons?: AddonUpdateManyWithoutEstablishmentNestedInput
+    variantOptions?: VariantOptionUpdateManyWithoutEstablishmentNestedInput
+    bookings?: BookingUpdateManyWithoutEstablishmentNestedInput
+    bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
+    integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
+    subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
+    invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
+    devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
+    vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
+    sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
+    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
+    emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
+    discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
+    promotions?: PromotionUpdateManyWithoutEstablishmentNestedInput
+    suppliers?: SupplierUpdateManyWithoutEstablishmentNestedInput
+    stockCategories?: StockCategoryUpdateManyWithoutEstablishmentNestedInput
+    stockItems?: StockItemUpdateManyWithoutEstablishmentNestedInput
+    stockEntries?: StockEntryUpdateManyWithoutEstablishmentNestedInput
+    stockExits?: StockExitUpdateManyWithoutEstablishmentNestedInput
+    stockMovements?: StockMovementUpdateManyWithoutEstablishmentNestedInput
+    stockAlerts?: StockAlertUpdateManyWithoutEstablishmentNestedInput
+    stockInventoryCounts?: StockInventoryCountUpdateManyWithoutEstablishmentNestedInput
+    stockWarehouses?: StockWarehouseUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type EstablishmentUncheckedUpdateWithoutQrCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
+    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    zipCode?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    billingName?: StringFieldUpdateOperationsInput | string
+    billingTaxId?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
+    images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
+    themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
+    Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
+    addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
+    variantOptions?: VariantOptionUncheckedUpdateManyWithoutEstablishmentNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutEstablishmentNestedInput
+    bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
+    integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
+    devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
+    vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
+    sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
+    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
+    emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
+    discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
+    promotions?: PromotionUncheckedUpdateManyWithoutEstablishmentNestedInput
+    suppliers?: SupplierUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockCategories?: StockCategoryUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockItems?: StockItemUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockEntries?: StockEntryUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockExits?: StockExitUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockMovements?: StockMovementUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockAlerts?: StockAlertUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockInventoryCounts?: StockInventoryCountUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type ServicePointUpsertWithoutQrCodesInput = {
+    update: XOR<ServicePointUpdateWithoutQrCodesInput, ServicePointUncheckedUpdateWithoutQrCodesInput>
+    create: XOR<ServicePointCreateWithoutQrCodesInput, ServicePointUncheckedCreateWithoutQrCodesInput>
+    where?: ServicePointWhereInput
+  }
+
+  export type ServicePointUpdateToOneWithWhereWithoutQrCodesInput = {
+    where?: ServicePointWhereInput
+    data: XOR<ServicePointUpdateWithoutQrCodesInput, ServicePointUncheckedUpdateWithoutQrCodesInput>
+  }
+
+  export type ServicePointUpdateWithoutQrCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumServicePointTypeFieldUpdateOperationsInput | $Enums.ServicePointType
+    maxCapacity?: IntFieldUpdateOperationsInput | number
+    minCapacity?: IntFieldUpdateOperationsInput | number
+    isReservable?: BoolFieldUpdateOperationsInput | boolean
+    isPriority?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    token?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    color?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    rotation?: FloatFieldUpdateOperationsInput | number
+    shape?: StringFieldUpdateOperationsInput | string
+    width?: FloatFieldUpdateOperationsInput | number
+    x?: FloatFieldUpdateOperationsInput | number
+    y?: FloatFieldUpdateOperationsInput | number
+    z?: FloatFieldUpdateOperationsInput | number
+    zone?: ServiceZoneUpdateOneRequiredWithoutServicePointsNestedInput
+  }
+
+  export type ServicePointUncheckedUpdateWithoutQrCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumServicePointTypeFieldUpdateOperationsInput | $Enums.ServicePointType
+    maxCapacity?: IntFieldUpdateOperationsInput | number
+    minCapacity?: IntFieldUpdateOperationsInput | number
+    isReservable?: BoolFieldUpdateOperationsInput | boolean
+    isPriority?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    token?: NullableStringFieldUpdateOperationsInput | string | null
+    zoneId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    color?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    rotation?: FloatFieldUpdateOperationsInput | number
+    shape?: StringFieldUpdateOperationsInput | string
+    width?: FloatFieldUpdateOperationsInput | number
+    x?: FloatFieldUpdateOperationsInput | number
+    y?: FloatFieldUpdateOperationsInput | number
+    z?: FloatFieldUpdateOperationsInput | number
+  }
+
   export type ScheduleDayCreateWithoutScheduleInput = {
     id?: string
     dayOfWeek: $Enums.DayOfWeek
@@ -158942,6 +161255,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -159015,6 +161329,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -159241,6 +161556,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -159314,6 +161630,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -159681,6 +161998,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -159754,6 +162072,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -159969,6 +162288,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -160042,6 +162362,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -160420,6 +162741,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -160493,6 +162815,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -160668,6 +162991,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -160741,6 +163065,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -160860,6 +163185,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -160933,6 +163259,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -161171,6 +163498,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -161244,6 +163572,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -161384,6 +163713,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -161457,6 +163787,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -161907,6 +164238,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -161980,6 +164312,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -162961,6 +165294,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -163034,6 +165368,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -163262,6 +165597,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -163335,6 +165671,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -163863,6 +166200,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -163936,6 +166274,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -164101,6 +166440,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -164174,6 +166514,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -164623,6 +166964,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -164696,6 +167038,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -164958,6 +167301,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -165031,6 +167375,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -165295,6 +167640,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -165368,6 +167714,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -165538,6 +167885,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -165611,6 +167959,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -165771,6 +168120,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -165844,6 +168194,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -165967,6 +168318,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -166040,6 +168392,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -166365,6 +168718,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -166438,6 +168792,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -166552,6 +168907,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -166625,6 +168981,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -167119,6 +169476,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -167192,6 +169550,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -167281,6 +169640,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -167354,6 +169714,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -167516,6 +169877,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -167589,6 +169951,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -167700,6 +170063,7 @@ export namespace Prisma {
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -167773,6 +170137,7 @@ export namespace Prisma {
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -167906,6 +170271,7 @@ export namespace Prisma {
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -167979,6 +170345,7 @@ export namespace Prisma {
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -168106,6 +170473,7 @@ export namespace Prisma {
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -168179,6 +170547,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
     serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -168271,6 +170640,7 @@ export namespace Prisma {
     x?: number
     y?: number
     z?: number
+    qrCodes?: QrCodeCreateNestedManyWithoutServicePointInput
   }
 
   export type ServicePointUncheckedCreateWithoutZoneInput = {
@@ -168293,6 +170663,7 @@ export namespace Prisma {
     x?: number
     y?: number
     z?: number
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutServicePointInput
   }
 
   export type ServicePointCreateOrConnectWithoutZoneInput = {
@@ -168348,6 +170719,7 @@ export namespace Prisma {
     images?: ImageCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
     menus?: MenuCreateNestedManyWithoutEstablishmentInput
     Item?: ItemCreateNestedManyWithoutEstablishmentInput
     addons?: AddonCreateNestedManyWithoutEstablishmentInput
@@ -168421,6 +170793,7 @@ export namespace Prisma {
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
     themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
     menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
     Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
     addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -168552,6 +170925,7 @@ export namespace Prisma {
     images?: ImageUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -168625,6 +170999,7 @@ export namespace Prisma {
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -168655,6 +171030,38 @@ export namespace Prisma {
     stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
   }
 
+  export type QrCodeCreateWithoutServicePointInput = {
+    id?: string
+    token: string
+    type?: $Enums.QrCodeType
+    active?: boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    establishment: EstablishmentCreateNestedOneWithoutQrCodesInput
+  }
+
+  export type QrCodeUncheckedCreateWithoutServicePointInput = {
+    id?: string
+    token: string
+    establishmentId: string
+    type?: $Enums.QrCodeType
+    active?: boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QrCodeCreateOrConnectWithoutServicePointInput = {
+    where: QrCodeWhereUniqueInput
+    create: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput>
+  }
+
+  export type QrCodeCreateManyServicePointInputEnvelope = {
+    data: QrCodeCreateManyServicePointInput | QrCodeCreateManyServicePointInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ServiceZoneCreateWithoutServicePointsInput = {
     id?: string
     name: string
@@ -168678,6 +171085,22 @@ export namespace Prisma {
   export type ServiceZoneCreateOrConnectWithoutServicePointsInput = {
     where: ServiceZoneWhereUniqueInput
     create: XOR<ServiceZoneCreateWithoutServicePointsInput, ServiceZoneUncheckedCreateWithoutServicePointsInput>
+  }
+
+  export type QrCodeUpsertWithWhereUniqueWithoutServicePointInput = {
+    where: QrCodeWhereUniqueInput
+    update: XOR<QrCodeUpdateWithoutServicePointInput, QrCodeUncheckedUpdateWithoutServicePointInput>
+    create: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput>
+  }
+
+  export type QrCodeUpdateWithWhereUniqueWithoutServicePointInput = {
+    where: QrCodeWhereUniqueInput
+    data: XOR<QrCodeUpdateWithoutServicePointInput, QrCodeUncheckedUpdateWithoutServicePointInput>
+  }
+
+  export type QrCodeUpdateManyWithWhereWithoutServicePointInput = {
+    where: QrCodeScalarWhereInput
+    data: XOR<QrCodeUpdateManyMutationInput, QrCodeUncheckedUpdateManyWithoutServicePointInput>
   }
 
   export type ServiceZoneUpsertWithoutServicePointsInput = {
@@ -168995,6 +171418,17 @@ export namespace Prisma {
     name: string
     isActive?: boolean
     position?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QrCodeCreateManyEstablishmentInput = {
+    id?: string
+    token: string
+    servicePointId?: string | null
+    type?: $Enums.QrCodeType
+    active?: boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -169566,6 +172000,39 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     position?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QrCodeUpdateWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    servicePoint?: ServicePointUpdateOneWithoutQrCodesNestedInput
+  }
+
+  export type QrCodeUncheckedUpdateWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    servicePointId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QrCodeUncheckedUpdateManyWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    servicePointId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -170862,6 +173329,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -170935,6 +173403,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -171046,6 +173515,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -171119,6 +173589,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -174514,6 +176985,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -174587,6 +177059,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -174848,6 +177321,7 @@ export namespace Prisma {
     themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUpdateManyWithoutEstablishmentNestedInput
@@ -174921,6 +177395,7 @@ export namespace Prisma {
     themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
     serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
     menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
     Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
     addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -175031,6 +177506,7 @@ export namespace Prisma {
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
     z?: FloatFieldUpdateOperationsInput | number
+    qrCodes?: QrCodeUpdateManyWithoutServicePointNestedInput
   }
 
   export type ServicePointUncheckedUpdateWithoutZoneInput = {
@@ -175053,6 +177529,7 @@ export namespace Prisma {
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
     z?: FloatFieldUpdateOperationsInput | number
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutServicePointNestedInput
   }
 
   export type ServicePointUncheckedUpdateManyWithoutZoneInput = {
@@ -175075,6 +177552,50 @@ export namespace Prisma {
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
     z?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type QrCodeCreateManyServicePointInput = {
+    id?: string
+    token: string
+    establishmentId: string
+    type?: $Enums.QrCodeType
+    active?: boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QrCodeUpdateWithoutServicePointInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    establishment?: EstablishmentUpdateOneRequiredWithoutQrCodesNestedInput
+  }
+
+  export type QrCodeUncheckedUpdateWithoutServicePointInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QrCodeUncheckedUpdateManyWithoutServicePointInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

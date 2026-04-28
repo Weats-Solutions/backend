@@ -9,12 +9,16 @@ export class AppConfigService {
     return this.configService.getOrThrow<string>('APP_URL');
   }
 
-  getMenuUrl(): string {
-    return this.configService.getOrThrow<string>('MENU_URL')
+  getCatalogPort(): string {
+    return this.configService.getOrThrow<string>('CATALOG_PORT');
+  }
+
+  getCatalogUrl(): string {
+    return this.configService.getOrThrow<string>('CATALOG_URL');
   }
 
   getMenuCacheToken(): string {
-    return this.configService.getOrThrow<string>('MENU_CACHE_TOKEN')
+    return this.configService.getOrThrow<string>('MENU_CACHE_TOKEN');
   }
 
   getGatewayPort(): string {
@@ -24,7 +28,6 @@ export class AppConfigService {
   getWebhooksPort(): string {
     return this.configService.getOrThrow<string>('WEBHOOKS_PORT');
   }
-
 
   getNodeEnv(): string {
     return this.configService.getOrThrow<string>('NODE_ENV');

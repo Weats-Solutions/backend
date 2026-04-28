@@ -33,8 +33,8 @@ model ServicePoint {
   x            Float            @default(0)
   y            Float            @default(0)
   z            Float            @default(0)
+  qrCodes      QrCode[]
   zone         ServiceZone      @relation(fields: [zoneId], references: [id], onDelete: Cascade)
-  
 
   @@index([zoneId])
 }

@@ -23,6 +23,7 @@ import { ExpenseController } from './controllers/expense.controller';
 import { StatsController } from './controllers/stats.controller';
 import { ZonePointController } from './controllers/zone/point.controller';
 import { ZonesController } from './controllers/zone/zone.controller';
+import { QrCodesController } from './controllers/zone/qr-codes.controller';
 import { InvoiceController } from './controllers/invoice.controller';
 import { EmailProducer } from '@weats/bull/producers/email.producer';
 import { QueuesModule } from '@weats/bull';
@@ -56,6 +57,7 @@ import { QueuesModule } from '@weats/bull';
     //Zones
     ZonesController,
     ZonePointController,
+    QrCodesController,
 
     //Items
     AddonController,

@@ -217,16 +217,4 @@ export class ClerkService {
     return this.clerkClient.users.getUser(userId);
   }
 
-  async updateUserMetadata(userId: string, metadata: any) {
-    try {
-      await this.clerkClient.users.updateUserMetadata(userId, {
-        publicMetadata: metadata,
-      });
-    } catch (error) {
-      this.logger.error(
-        `Failed to update metadata for user ${userId}: ${error.message}`,
-      );
-      throw error;
-    }
-  }
 }

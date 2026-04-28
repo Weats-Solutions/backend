@@ -50,6 +50,11 @@ export type SendEmailDto<T extends EmailTemplate> = {
     lang: ACCEPTED_LANGUAGES;
     template: T;
     context: TemplateMap[T];
+    attachments?: Array<{
+        name: string;
+        content: string; // Base64
+        contentType: string;
+    }>;
 };
 
 // ---------------------------------------------------------------------------

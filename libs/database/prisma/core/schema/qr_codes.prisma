@@ -1,0 +1,20 @@
+model QrCode {
+    id              String        @id @default(ulid())
+    token           String        @unique
+    establishmentId String
+    establishment   Establishment @relation(fields: [establishmentId], references: [id])
+    servicePointId  String?
+    servicePoint    ServicePoint? @relation(fields: [servicePointId], references: [id])
+    type            QrCodeType    @default(TABLE)
+
+    active Boolean @default(true)
+    config Json?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+enum QrCodeType {
+    TABLE
+    MENU
+}

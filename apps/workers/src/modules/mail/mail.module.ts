@@ -31,5 +31,6 @@ import { TemplateRenderService } from "./template-render.service";
             inject: [ZeptoConfigService],
         },
     ],
+    exports: [MailService],
 })
 export class MailModule { }

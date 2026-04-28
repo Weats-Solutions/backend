@@ -7,6 +7,7 @@ export const getCorsOptions = (appConfigService: AppConfigService): CorsOptions 
             appConfigService.getAppUrl(),
             'http://localhost:3000',
             'http://localhost:3001',
+            'http://localhost:4000',
             'https://staff.weats.pro',
             'https://app.weats.pro',
         ];

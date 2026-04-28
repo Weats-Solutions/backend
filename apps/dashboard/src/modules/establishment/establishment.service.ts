@@ -528,24 +528,6 @@ export class EstablishmentService {
       },
     });
 
-    // Update Clerk Metadata
-    try {
-      const clerkUser = await this.clerkService.getUser(user.clerkUserId);
-      const currentMetadata = clerkUser.publicMetadata;
-      const establishments = currentMetadata.establishments || {};
-
-      establishments[createdEstablishment.id] = {
-        status: 'INACTIVE',
-        role: 'OWNER',
-      };
-
-      await this.clerkService.updateUserMetadata(user.clerkUserId, {
-        establishments,
-      });
-    } catch (error) {
-      this.logger.error('Error updating Clerk metadata:', error);
-    }
-
     return {
       message: RESPONSE_CODES.ESTABLISHMENT.CREATED,
       establishmentId: createdEstablishment.id,
@@ -1283,59 +1265,6 @@ export class EstablishmentService {
     await this.stripe.cancelSubscription(subscription.stripeSubscriptionId);
 
     return { success: true };
-  }
-
-  // ─── Sync ────────────────────────────────────────────────────────────
-
-  async syncSubscriptionStatus() {
-    const users = await this.prisma.user.findMany({
-      include: { establishments: true },
-    });
-
-    let processedCount = 0;
-
-    for (const user of users) {
-      const establishmentsMetadata: Record<
-        string,
-        { status: string; role: string }
-      > = {};
-      let hasUpdates = false;
-
-      for (const establishment of user.establishments) {
-        if (!establishment.stripeCustomerId) continue;
-
-        const statusString = await this.stripe.getSubscriptionStatus(
-          establishment.stripeCustomerId,
-        );
-
-        let dbStatus: EstablishmentStatus = EstablishmentStatus.INACTIVE;
-        if (statusString === 'ACTIVE' || statusString === 'TRIALING') {
-          dbStatus = EstablishmentStatus.ACTIVE;
-        }
-
-        establishmentsMetadata[establishment.id] = {
-          status: statusString,
-          role: 'OWNER',
-        };
-        hasUpdates = true;
-
-        if (establishment.status !== dbStatus) {
-          await this.prisma.establishment.update({
-            where: { id: establishment.id },
-            data: { status: dbStatus },
-          });
-        }
-      }
-
-      if (hasUpdates) {
-        await this.clerkService.updateUserMetadata(user.clerkUserId, {
-          establishments: establishmentsMetadata,
-        });
-        processedCount++;
-      }
-    }
-
-    return { success: true, processedCount };
   }
 
   // ─── Helpers ─────────────────────────────────────────────────────────
