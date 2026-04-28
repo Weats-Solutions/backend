@@ -6,18 +6,15 @@ import { CorePrismaService } from '@weats/database';
 export class HandleCustomerService {
 	private readonly logger = new Logger(HandleCustomerService.name);
 
-	constructor(private readonly prisma: CorePrismaService) {}
+	constructor(private readonly prisma: CorePrismaService) { }
 
 	async handleCustomerCreated(event: Stripe.Event) {
-		// No momento apenas logamos ou poderíamos inicializar algo se necessário
-		this.logger.log(`Stripe Customer Created: ${(event.data.object as Stripe.Customer).id}`);
 	}
 
 	async handleCustomerUpdated(event: Stripe.Event) {
 		const customer = event.data.object as Stripe.Customer;
 
 		try {
-			// Encontrar o estabelecimento associado a este ID de cliente Stripe
 			const establishment = await this.prisma.establishment.findUnique({
 				where: { stripeCustomerId: customer.id },
 				select: { id: true, name: true },
@@ -30,12 +27,10 @@ export class HandleCustomerService {
 
 			const updateData: any = {};
 
-			// Sincronizar Nome Fiscal (Billing Name)
 			if (customer.name) {
 				updateData.billingName = customer.name;
 			}
 
-			// Sincronizar Contactos
 			if (customer.email) {
 				updateData.email = customer.email;
 			}
@@ -44,7 +39,6 @@ export class HandleCustomerService {
 				updateData.phoneNumber = customer.phone;
 			}
 
-			// Sincronizar Morada (Address)
 			if (customer.address) {
 				if (customer.address.line1) updateData.address = customer.address.line1;
 				if (customer.address.city) updateData.city = customer.address.city;
@@ -53,7 +47,6 @@ export class HandleCustomerService {
 				if (customer.address.country) updateData.country = customer.address.country;
 			}
 
-			// Apenas atualizar se houver campos para alterar
 			if (Object.keys(updateData).length > 0) {
 				await this.prisma.establishment.update({
 					where: { stripeCustomerId: customer.id },
@@ -71,10 +64,6 @@ export class HandleCustomerService {
 	}
 
 	async handleCustomerDeleted(event: Stripe.Event) {
-		const customer = event.data.object as Stripe.Customer;
-		this.logger.warn(`Stripe Customer Deleted: ${customer.id}. O estabelecimento correspondente pode precisar de revisão.`);
-		
-		// Opcionalmente poderíamos marcar o estabelecimento como "sem conta stripe"
-		// mas normalmente a eliminação é feita por nós via admin.
+
 	}
 }
