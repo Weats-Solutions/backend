@@ -158,7 +158,7 @@ export class HandleSubscriptionsService {
             trialEndsAt: subData.trialEnd?.toLocaleDateString(
               establishment.primaryLanguage.toLowerCase(),
             ) ?? '',
-            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
+            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
           },
         };
 
@@ -233,7 +233,7 @@ export class HandleSubscriptionsService {
 
         const portalUrl = await this.stripeService.getPortalSession({
           customerId: establishment.stripeCustomerId,
-          returnUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
+          returnUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
         });
 
         const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CANCELLED> = {
@@ -310,7 +310,7 @@ export class HandleSubscriptionsService {
             trialEndsAt: subData.trialEnd?.toLocaleDateString(
               establishment.primaryLanguage.toLowerCase(),
             ) ?? '',
-            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
+            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
           },
         };
 
@@ -407,7 +407,7 @@ export class HandleSubscriptionsService {
           accessUntil: updateData.cancelAt?.toLocaleDateString(
             establishment.primaryLanguage.toLowerCase(),
           ) ?? '',
-          redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
+          redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
         },
       };
 
@@ -440,7 +440,7 @@ export class HandleSubscriptionsService {
           trialEndsAt: subData.trialEnd?.toLocaleDateString(
             establishment.primaryLanguage.toLowerCase(),
           ) ?? '',
-          redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
+          redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
         },
       };
 

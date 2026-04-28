@@ -1270,7 +1270,7 @@ export class EstablishmentService {
       customerId: establishment.stripeCustomerId,
       priceId: plan.priceId,
       successUrl: `${this.appUrl}/establishment/${establishment.id}`,
-      cancelUrl: `${this.appUrl}/establishment/${establishment.id}/subscription`,
+      cancelUrl: `${this.appUrl}/establishment/${establishment.id}`,
       metadata: { establishmentId: establishment.id },
     });
 
@@ -1293,7 +1293,7 @@ export class EstablishmentService {
 
     const portalUrl = await this.stripe.getPortalSession({
       customerId: establishment.stripeCustomerId,
-      returnUrl: `${this.appUrl}/establishment/${establishment.id}/subscription`,
+      returnUrl: `${this.appUrl}/establishment/${establishment.id}`,
     });
 
     return { url: portalUrl };
