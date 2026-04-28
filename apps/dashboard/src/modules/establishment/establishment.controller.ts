@@ -145,6 +145,13 @@ export class EstablishmentController {
         return this.establishmentService.upsertEstablishmentSchedule(payload.establishment, payload.updateEstablishmentScheduleDto);
     }
 
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_DELETE_MENU_CACHE)
+    deleteEstablishmentMenuCache(
+        @Payload() payload: { id: string }
+    ) {
+        return this.establishmentService.deleteEstablishmentMenuCache(payload.id);
+    }
+
     /*
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_LANGUAGES)
     updateLanguages(@Payload() payload: { establishment: Establishment; updateEstablishmentLanguagesDto: UpdateEstablishmentLanguagesDto }) {

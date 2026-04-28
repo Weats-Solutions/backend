@@ -12,6 +12,7 @@ export * from './dashboard/dtos/item/bulk-items.dto';
 export * from './dashboard/dtos/item/create-item.dto';
 export * from './dashboard/dtos/item/get-items-query.dto';
 export * from './dashboard/dtos/item/link-item-to-subcategory.dto';
+export * from './dashboard/dtos/item/update-item-placements.dto';
 export * from './dashboard/dtos/item/update-item.dto';
 export * from './dashboard/dtos/eupago/create-hosted-payment.dto';
 export * from './dashboard/dtos/eupago/create-mbway-payment.dto';

@@ -1299,6 +1299,22 @@ export class EstablishmentService {
     return { url: portalUrl };
   }
 
+  async deleteEstablishmentMenuCache(id: string) {
+    const establishment = await this.prisma.establishment.findUnique({
+      where: { id },
+    });
+
+    if (!establishment) {
+      throw new RpcException({
+        status: 404,
+        message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+        code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+      });
+    }
+
+    return this.menuUtilsService.clearAllCacheAsync(id)
+  }
+
   async cancelSubscription(establishmentId: string, user: User) {
     const establishment = await this.prisma.establishment.findUnique({
       where: { id: establishmentId, ownerId: user.id },

@@ -141,6 +141,8 @@ export class EstablishmentController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_BY_ID, { id });
   }
 
+
+
   @Roles()
   @UseGuards(ClerkGuard, EstablishmentStaffGuard)
   @Get(':id/access')
@@ -157,6 +159,21 @@ export class EstablishmentController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_ACCESS, { id });
   }
 
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Delete(':id/menu-cache')
+  deleteEstablishmentMenuCache(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_DELETE_MENU_CACHE, { id });
+  }
 
   @Get('sync-status/:jobId')
   async getSyncStatus(@Param('jobId') jobId: string) {
