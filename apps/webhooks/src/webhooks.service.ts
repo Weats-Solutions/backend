@@ -81,6 +81,7 @@ export class WebhooksService {
         event.type === 'customer.subscription.created' ||
         event.type === 'customer.subscription.updated' ||
         event.type === 'customer.subscription.deleted' ||
+        event.type === 'customer.subscription.trial_will_end' ||
         event.type === 'invoice.payment_succeeded' ||
         event.type === 'invoice.payment_failed' ||
         event.type === 'subscription_schedule.completed' ||
@@ -118,6 +119,11 @@ export class WebhooksService {
             break;
           case 'customer.subscription.deleted':
             await this.handleSubscriptionsService.handleCustomerSubscriptionDeleted(
+              event,
+            );
+            break;
+          case 'customer.subscription.trial_will_end':
+            await this.handleSubscriptionsService.handleCustomerSubscriptionTrialWillEnd(
               event,
             );
             break;

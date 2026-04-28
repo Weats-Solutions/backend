@@ -130,6 +130,11 @@ export class EstablishmentController {
         return this.establishmentService.verifyDomain(payload.slug);
     }
 
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_DELETE_TEST)
+    deleteEstablishmentTest(@Payload() payload: { id: string }) {
+        return this.establishmentService.deleteEstablishmentTest(payload.id);
+    }
+
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_DIGITAL)
     updateEstablishmentDigitalSettings(@Payload() payload: { establishment: Establishment; updateEstablishmentDigitalSettingsDto: UpdateEstablishmentDigitalSettingsDto }) {
         return this.establishmentService.updateEstablishmentDigitalSettings(payload.establishment, payload.updateEstablishmentDigitalSettingsDto);

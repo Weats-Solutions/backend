@@ -69,4 +69,18 @@ export class ItemController {
     ) {
         return this.itemService.bulkDelete(payload.bulkDeleteDto, payload.establishmentId);
     }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ITEM_GET_PLACEMENTS)
+    async getItemPlacements(
+        @Payload() payload: { itemId: string, establishment: Establishment },
+    ) {
+        return this.itemService.getItemPlacements(payload.itemId, payload.establishment);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ITEM_UPDATE_PLACEMENTS)
+    async updateItemPlacements(
+        @Payload() payload: { itemId: string, establishment: Establishment, subcategoryIds: string[] },
+    ) {
+        return this.itemService.updateItemPlacements(payload.itemId, payload.establishment, payload.subcategoryIds);
+    }
 }

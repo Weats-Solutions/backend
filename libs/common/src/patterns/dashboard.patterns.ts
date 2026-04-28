@@ -26,6 +26,7 @@ export const DASHBOARD_PATTERNS = {
   ESTABLISHMENT_UPDATE_SCHEDULE: 'dashboard.establishment.update_schedule',
   ESTABLISHMENT_VERIFY_DOMAIN: 'dashboard.establishment.verify_domain',
   ESTABLISHMENT_GET_INVOICES: 'dashboard.establishment.get_invoices',
+  ESTABLISHMENT_DELETE_TEST: 'dashboard.establishment.delete_test',
 
   ZONE_CREATE: 'dashboard.zone.create',
   ZONE_GET_ALL: 'dashboard.zone.get_all',
@@ -50,6 +51,7 @@ export const DASHBOARD_PATTERNS = {
   MENU_UPDATE_CONTENT: 'dashboard.menu.update_content',
   MENU_UPDATE_POSITIONS: 'dashboard.menu.update_positions',
   MENU_DELETE: 'dashboard.menu.delete',
+  MENU_DUPLICATE: 'dashboard.menu.duplicate',
 
   CATEGORY_CREATE: 'dashboard.category.create',
   CATEGORY_GET_BY_MENU: 'dashboard.category.get_by_menu',
@@ -81,6 +83,8 @@ export const DASHBOARD_PATTERNS = {
   ITEM_BULK_DELETE: 'dashboard.item.bulk_delete',
   ITEM_GET_ALLERGENS: 'dashboard.item.get_allergens',
   ITEM_GET_TAXES: 'dashboard.item.get_taxes',
+  ITEM_GET_PLACEMENTS: 'dashboard.item.get_placements',
+  ITEM_UPDATE_PLACEMENTS: 'dashboard.item.update_placements',
 
   EXPENSE_CREATE: 'dashboard.expense.create',
   EXPENSE_GET_BY_ESTABLISHMENT: 'dashboard.expense.get_by_establishment',

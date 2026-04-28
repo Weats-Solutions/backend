@@ -131,26 +131,60 @@ export class HandleSubscriptionsService {
         },
       });
 
-      const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CREATED> = {
-        to: establishment.email,
-        template: EmailTemplate.SUBSCRIPTION_CREATED,
-        lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
-        context: {
-          firstName: establishment.owner.firstName,
-          lastName: establishment.owner.lastName,
-          establishmentName: establishment.name,
-          planName: planCycle.plan.name,
-          nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
-            establishment.primaryLanguage.toLowerCase(),
-          ) ?? '',
-          trialEndsAt: subData.trialEnd?.toLocaleDateString(
-            establishment.primaryLanguage.toLowerCase(),
-          ),
-          redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
-        },
-      };
+      if (subscription.status === 'trialing') {
+        const trialStart = subscription.trial_start
+          ? new Date(subscription.trial_start * 1000)
+          : subData.currentPeriodStart;
+        const trialEnd = subData.trialEnd;
 
-      await this.emailProducer.send(payload);
+        const trialDays =
+          trialStart && trialEnd
+            ? Math.round(
+              (trialEnd.getTime() - trialStart.getTime()) /
+              (1000 * 60 * 60 * 24),
+            )
+            : 0;
+
+        const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_TRIAL_STARTED> = {
+          to: establishment.email,
+          template: EmailTemplate.SUBSCRIPTION_TRIAL_STARTED,
+          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          context: {
+            firstName: establishment.owner.firstName,
+            lastName: establishment.owner.lastName,
+            establishmentName: establishment.name,
+            planName: planCycle.plan.name,
+            trialDays: trialDays,
+            trialEndsAt: subData.trialEnd?.toLocaleDateString(
+              establishment.primaryLanguage.toLowerCase(),
+            ) ?? '',
+            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
+          },
+        };
+
+        await this.emailProducer.send(payload);
+      } else {
+        const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CREATED> = {
+          to: establishment.email,
+          template: EmailTemplate.SUBSCRIPTION_CREATED,
+          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          context: {
+            firstName: establishment.owner.firstName,
+            lastName: establishment.owner.lastName,
+            establishmentName: establishment.name,
+            planName: planCycle.plan.name,
+            nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
+              establishment.primaryLanguage.toLowerCase(),
+            ) ?? '',
+            trialEndsAt: subData.trialEnd?.toLocaleDateString(
+              establishment.primaryLanguage.toLowerCase(),
+            ),
+            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
+          },
+        };
+
+        await this.emailProducer.send(payload);
+      }
 
     } catch (error) {
       this.logger.error('Erro em handleCustomerSubscriptionCreated', error);
@@ -188,6 +222,9 @@ export class HandleSubscriptionsService {
           previousAttributes?.status !== 'trialing') ||
         (subscription.trial_end !== null &&
           previousAttributes?.trial_end === null);
+      const justBecameActiveFromTrial =
+        subscription.status === 'active' &&
+        previousAttributes?.status === 'trialing';
 
       if (justCanceled) {
         this.logger.log(
@@ -280,6 +317,53 @@ export class HandleSubscriptionsService {
         await this.emailProducer.send(payload);
       }
 
+      if (justBecameActiveFromTrial) {
+        this.logger.log(
+          `Subscription ${subscription.id} transitioned from trialing to active.`,
+        );
+
+        const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CREATED> = {
+          to: establishment.email,
+          template: EmailTemplate.SUBSCRIPTION_CREATED,
+          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          context: {
+            firstName: establishment.owner.firstName,
+            lastName: establishment.owner.lastName,
+            establishmentName: establishment.name,
+            planName: planCycle.plan.name,
+            nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
+              establishment.primaryLanguage.toLowerCase(),
+            ) ?? '',
+            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
+          },
+        };
+
+        await this.emailProducer.send(payload);
+      }
+
+      if (justBecameActiveFromTrial) {
+        this.logger.log(
+          `Subscription ${subscription.id} transitioned from trialing to active.`,
+        );
+
+        const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CREATED> = {
+          to: establishment.email,
+          template: EmailTemplate.SUBSCRIPTION_CREATED,
+          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          context: {
+            firstName: establishment.owner.firstName,
+            lastName: establishment.owner.lastName,
+            establishmentName: establishment.name,
+            planName: planCycle.plan.name,
+            nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
+              establishment.primaryLanguage.toLowerCase(),
+            ) ?? '',
+            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
+          },
+        };
+
+        await this.emailProducer.send(payload);
+      }
     } catch (error) {
       this.logger.error('Erro em handleCustomerSubscriptionUpdated', error);
       throw new BadRequestException('Erro ao processar assinatura');
@@ -331,6 +415,38 @@ export class HandleSubscriptionsService {
 
     } catch (error) {
       this.logger.error('Erro em handleCustomerSubscriptionDeleted', error);
+      throw new BadRequestException('Erro ao processar assinatura');
+    }
+  }
+
+  async handleCustomerSubscriptionTrialWillEnd(event: Stripe.Event) {
+    try {
+      const subscription = event.data.object as Stripe.Subscription;
+      const data = await this.getEstablishmentAndPlan(subscription);
+      if (!data) return;
+
+      const { establishment, planCycle } = data;
+      const subData = this.buildSubscriptionData(subscription, planCycle.id);
+
+      const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_TRIAL_ENDING> = {
+        to: establishment.email,
+        template: EmailTemplate.SUBSCRIPTION_TRIAL_ENDING,
+        lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+        context: {
+          firstName: establishment.owner.firstName,
+          lastName: establishment.owner.lastName,
+          establishmentName: establishment.name,
+          planName: planCycle.plan.name,
+          trialEndsAt: subData.trialEnd?.toLocaleDateString(
+            establishment.primaryLanguage.toLowerCase(),
+          ) ?? '',
+          redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}/subscription`,
+        },
+      };
+
+      await this.emailProducer.send(payload);
+    } catch (error) {
+      this.logger.error('Erro em handleCustomerSubscriptionTrialWillEnd', error);
       throw new BadRequestException('Erro ao processar assinatura');
     }
   }

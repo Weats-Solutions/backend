@@ -36,13 +36,15 @@ interface CreateCustomer {
     value: string;
   }>;
   metadata?: {
-    business_name?: string;
-    owner_id?: string;
+    establishmentName?: string;
+    establishmentId?: string;
+    ownerId?: string;
   };
 }
 
 interface UpdateCustomer {
   name?: string;
+  email?: string;
   address?: {
     line1?: string;
     line2?: string;
@@ -54,8 +56,9 @@ interface UpdateCustomer {
   phone?: string;
   business_name?: string;
   metadata?: {
-    business_name?: string;
-    owner_id?: string;
+    establishmentName?: string;
+    establishmentId?: string;
+    ownerId?: string;
   };
 }
 
@@ -100,11 +103,11 @@ export class StripeService {
       address: data.address,
       phone: data.phone,
       tax_id_data: data.tax_id_data as Stripe.CustomerCreateParams.TaxIdDatum[],
-      business_name: data.metadata?.business_name,
+      business_name: data.metadata?.establishmentName,
       metadata: {
         ...data.metadata,
-        ...(data.metadata?.business_name
-          ? { business_name: data.metadata.business_name }
+        ...(data.metadata?.establishmentName
+          ? { business_name: data.metadata.establishmentName }
           : {}),
       },
       preferred_locales: ['pt-PT', 'en-US'],
@@ -119,6 +122,7 @@ export class StripeService {
     try {
       return await this.stripe.customers.update(customerId, {
         name: data.name,
+        email: data.email,
         address: data.address,
         phone: data.phone,
         business_name: data.business_name,
@@ -156,6 +160,10 @@ export class StripeService {
       allow_promotion_codes: true,
       customer: params.customerId,
       phone_number_collection: {
+        enabled: true,
+      },
+
+      automatic_tax: {
         enabled: true,
       },
 

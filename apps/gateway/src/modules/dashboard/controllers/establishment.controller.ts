@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   ForbiddenException,
   Get,
   Inject,
@@ -60,6 +61,14 @@ export class EstablishmentController {
     };
 
     await this.emailProducer.send(payload);
+  }
+
+  @Delete('test/:id')
+  async testDelete(@Param('id') id: string) {
+    if (process.env.NODE_ENV !== 'development') {
+      throw new ForbiddenException('This route is only available in development mode.');
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_DELETE_TEST, { id });
   }
 
   @Get('verify-domain')

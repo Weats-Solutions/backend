@@ -384,6 +384,176 @@ export class MenuService {
         }
     }
 
+    async duplicateMenu(menuId: string, establishment: Establishment) {
+        try {
+            const sourceMenu = await this.prisma.menu.findFirst({
+                where: { id: menuId, establishmentId: establishment.id },
+                include: {
+                    translations: true,
+                    schedule: {
+                        include: {
+                            days: {
+                                include: { intervals: true },
+                            },
+                        },
+                    },
+                    categories: {
+                        include: {
+                            translations: true,
+                            subcategories: {
+                                include: {
+                                    translations: true,
+                                    items: true,
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+
+            if (!sourceMenu) {
+                throw new NotFoundException('Menu not found');
+            }
+
+            const newMenu = await this.prisma.$transaction(async (prisma) => {
+                // 1. Create schedule if source has one
+                let scheduleId: string | undefined;
+                if (sourceMenu.schedule) {
+                    const createdSchedule = await prisma.schedule.create({
+                        data: {
+                            type: ScheduleType.MENU,
+                            days: {
+                                create: sourceMenu.schedule.days.map((day) => ({
+                                    dayOfWeek: day.dayOfWeek,
+                                    isOpen: day.isOpen,
+                                    intervals: {
+                                        create: day.intervals.map((interval) => ({
+                                            startTime: interval.startTime,
+                                            endTime: interval.endTime,
+                                        })),
+                                    },
+                                })),
+                            },
+                        },
+                    });
+                    scheduleId = createdSchedule.id;
+                }
+
+                // 2. Count existing menus for position
+                const menuCount = await prisma.menu.count({
+                    where: { establishmentId: establishment.id },
+                });
+
+                // 3. Create the new menu
+                const duplicatedMenu = await prisma.menu.create({
+                    data: {
+                        establishmentId: establishment.id,
+                        position: menuCount,
+                        color: sourceMenu.color,
+                        isVisible: false,
+                        isHighlighted: sourceMenu.isHighlighted,
+                        type: sourceMenu.type,
+                        price: sourceMenu.price,
+                        showImages: sourceMenu.showImages,
+                        maxItemsPerOrder: sourceMenu.maxItemsPerOrder,
+                        translations: {
+                            create: sourceMenu.translations.map((t) => ({
+                                locale: t.locale,
+                                name: `${t.name} (Cópia)`,
+                                description: t.description,
+                                observations: t.observations,
+                            })),
+                        },
+                        ...(scheduleId && { scheduleId }),
+                    },
+                });
+
+                // 4. Duplicate categories, subcategories, and item positions
+                for (const category of sourceMenu.categories) {
+                    const newCategory = await prisma.menuCategory.create({
+                        data: {
+                            menuId: duplicatedMenu.id,
+                            position: category.position,
+                            isVisible: category.isVisible,
+                            imageId: category.imageId,
+                            translations: {
+                                create: category.translations.map((t) => ({
+                                    locale: t.locale,
+                                    name: t.name,
+                                })),
+                            },
+                        },
+                    });
+
+                    for (const subcategory of category.subcategories) {
+                        const newSubcategory = await prisma.menuSubcategory.create({
+                            data: {
+                                categoryId: newCategory.id,
+                                position: subcategory.position,
+                                isVisible: subcategory.isVisible,
+                                translations: {
+                                    create: subcategory.translations.map((t) => ({
+                                        locale: t.locale,
+                                        name: t.name,
+                                        description: t.description,
+                                    })),
+                                },
+                            },
+                        });
+
+                        // Link same items (MenuItemPosition)
+                        if (subcategory.items.length > 0) {
+                            await prisma.menuItemPosition.createMany({
+                                data: subcategory.items.map((item) => ({
+                                    itemId: item.itemId,
+                                    subcategoryId: newSubcategory.id,
+                                    position: item.position,
+                                    isVisible: item.isVisible,
+                                    isIncluded: item.isIncluded,
+                                })),
+                            });
+                        }
+                    }
+                }
+
+                // 5. Return the new menu with data for frontend
+                return prisma.menu.findUnique({
+                    where: { id: duplicatedMenu.id },
+                    select: {
+                        id: true,
+                        isVisible: true,
+                        position: true,
+                        color: true,
+                        isHighlighted: true,
+                        type: true,
+                        translations: {
+                            where: { locale: establishment.primaryLanguage },
+                            select: {
+                                name: true,
+                                description: true,
+                                observations: true,
+                            },
+                        },
+                        schedule: {
+                            include: { days: { include: { intervals: true } } },
+                        },
+                    },
+                });
+            });
+
+            this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug);
+
+            return {
+                ...newMenu,
+                schedule: newMenu?.schedule ? normalizeSchedule(newMenu.schedule) : null,
+            };
+        } catch (error) {
+            console.error('Error duplicating menu:', error);
+            if (error instanceof NotFoundException) throw error;
+            throw new BadRequestException('Error duplicating menu');
+        }
+    }
+
 
     /**
      * Returns the complete menu tree in a single query:

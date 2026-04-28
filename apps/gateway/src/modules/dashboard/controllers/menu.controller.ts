@@ -102,4 +102,20 @@ export class MenuController {
     deleteMenu(@Param('menuId') menuId: string) {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.MENU_DELETE, { menuId });
     }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @RequiresFeature('menu')
+    @UseGuards(
+        ClerkGuard,
+        EstablishmentStaffGuard,
+        ActiveSubscriptionGuard,
+        FeatureLimitGuard,
+    )
+    @Post('/:menuId/duplicate')
+    duplicateMenu(
+        @Param('menuId') menuId: string,
+        @CurrentEstablishment() currentEstablishment: Establishment,
+    ) {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.MENU_DUPLICATE, { menuId, establishment: currentEstablishment });
+    }
 }

@@ -91,4 +91,21 @@ export class ItemController {
     ) {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.ITEM_BULK_DELETE, { establishmentId: establishment.id, bulkDeleteDto });
     }
+
+    @Get(':id/placements')
+    async getItemPlacements(
+        @Param('id') id: string,
+        @CurrentEstablishment() establishment: Establishment,
+    ) {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.ITEM_GET_PLACEMENTS, { itemId: id, establishment });
+    }
+
+    @Put(':id/placements')
+    async updateItemPlacements(
+        @Param('id') id: string,
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() body: { subcategoryIds: string[] },
+    ) {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.ITEM_UPDATE_PLACEMENTS, { itemId: id, establishment, subcategoryIds: body.subcategoryIds });
+    }
 }
