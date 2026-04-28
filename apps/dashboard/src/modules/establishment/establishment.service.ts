@@ -133,6 +133,8 @@ export class EstablishmentService {
         bannerImage: {
           select: { id: true, url: true },
         },
+        billingName: true,
+        billingTaxId: true,
       },
     });
 
