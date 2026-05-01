@@ -21,6 +21,10 @@ export class GenerateQrCodesDto {
   @IsBoolean()
   useServicePointNameAsFrameText?: boolean;
 
+  @IsOptional()
+  @IsString()
+  menuOnlyFrameText?: string;
+
   @ValidateIf((o: GenerateQrCodesDto) => !o.onlyMenu)
   @IsArray()
   @IsString({ each: true })

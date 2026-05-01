@@ -94,9 +94,11 @@ export class QrCodeProcessor {
         ...point,
         token: crypto.randomBytes(12).toString('base64url'),
         frameText:
-          dto.useServicePointNameAsFrameText && !point.isMenuOnly
-            ? point.name
-            : undefined,
+          point.isMenuOnly
+            ? dto.menuOnlyFrameText
+            : dto.useServicePointNameAsFrameText
+              ? point.name
+              : undefined,
       }));
 
       // Keep old QR codes untouched and append fresh tokenized records.
