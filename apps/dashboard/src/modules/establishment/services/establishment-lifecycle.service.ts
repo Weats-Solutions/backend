@@ -55,9 +55,10 @@ export class EstablishmentLifeCycleService {
         let customer;
         try {
             customer = await this.stripeService.createB2BCustomer({
-                name: createEstablishmentDto.billingName,
+                name: createEstablishmentDto.name,
                 email: createEstablishmentDto.email,
                 phone: createEstablishmentDto.countryCode + cleanPhone,
+                business_name: createEstablishmentDto.billingName,
                 address: {
                     line1: createEstablishmentDto.billingAddress,
                     city: createEstablishmentDto.billingCity,

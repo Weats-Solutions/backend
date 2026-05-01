@@ -1,7 +1,7 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
 import { EstablishmentLanguageSyncService } from './establishment-language-sync.service';
-import { LanguageSyncJobData } from './establishment-language-sync.types';
+import { LanguageSyncJobData } from './services/establishment-system-settings.service';
 import { Logger } from '@nestjs/common';
 import { QUEUES } from '@weats/bull/queues/queues.constants';
 

@@ -23,6 +23,7 @@ interface CreateCheckoutSessionParams {
 
 interface CreateCustomer {
   name: string;
+  business_name?: string;
   email: string;
   phone: string;
   address?: {
@@ -117,7 +118,7 @@ export class StripeService {
       email: data.email,
       phone: data.phone,
       address: data.address,
-      business_name: data.name,
+      business_name: data.business_name,
       metadata: {
         ...data.metadata,
       },
@@ -145,6 +146,20 @@ export class StripeService {
         value: taxId,
       }
     );
+  }
+
+  async listCustomerTaxIds(
+    customerId: string,
+  ): Promise<Stripe.TaxId[]> {
+    const response = await this.stripe.customers.listTaxIds(customerId);
+    return response.data;
+  }
+
+  async deleteCustomerTaxId(
+    customerId: string,
+    taxId: string,
+  ): Promise<Stripe.DeletedTaxId> {
+    return await this.stripe.customers.deleteTaxId(customerId, taxId);
   }
 
   async updateCustomer(

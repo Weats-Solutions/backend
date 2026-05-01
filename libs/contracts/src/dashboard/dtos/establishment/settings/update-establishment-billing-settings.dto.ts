@@ -10,7 +10,7 @@ export class EstablishmentBillingDataDto {
 
     @IsString()
     @IsNotEmpty()
-    @IsValidTaxId('countryCode')
+    //@IsValidTaxId('billingCountry')
     billingTaxId: string;
 
 

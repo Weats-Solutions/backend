@@ -7,6 +7,7 @@ import {
 import { CorePrismaService } from '@weats/database';
 import { Establishment } from '@weats/types';
 import { EstablishmentSubscriptionService } from './establishment-subscription.service';
+import { StripeService } from '@weats/integrations';
 
 @Injectable()
 export class EstablishmentBillingSettingsService {
@@ -14,6 +15,7 @@ export class EstablishmentBillingSettingsService {
 
     constructor(
         private readonly prisma: CorePrismaService,
+        private readonly stripe: StripeService,
         private readonly establishmentSubscriptionService: EstablishmentSubscriptionService,
     ) { }
 
@@ -44,13 +46,13 @@ export class EstablishmentBillingSettingsService {
 
         return {
             billingInfo: {
-                name: establishment.billingName,
-                taxId: establishment.billingTaxId,
-                address: establishment.billingAddress,
-                city: establishment.billingCity,
-                state: establishment.billingState,
-                zipCode: establishment.billingZipCode,
-                country: establishment.billingCountry,
+                billingName: establishment.billingName,
+                billingTaxId: establishment.billingTaxId,
+                billingAddress: establishment.billingAddress,
+                billingCity: establishment.billingCity,
+                billingState: establishment.billingState,
+                billingZipCode: establishment.billingZipCode,
+                billingCountry: establishment.billingCountry,
             },
             plan,
             subscription
@@ -89,6 +91,7 @@ export class EstablishmentBillingSettingsService {
     }
 
     private async updateBillingInfo(id: string, data: EstablishmentBillingDataDto) {
+        this.logger.log(data)
         const establishment = await this.prisma.establishment.update({
             where: { id },
             data: {
@@ -101,6 +104,7 @@ export class EstablishmentBillingSettingsService {
                 billingCountry: data.billingCountry,
             },
             select: {
+                stripeCustomerId: true,
                 billingName: true,
                 billingTaxId: true,
                 billingAddress: true,
@@ -110,6 +114,32 @@ export class EstablishmentBillingSettingsService {
                 billingCountry: true,
             }
         });
+
+
+        // 🔥 1. atualizar customer
+        await this.stripe.updateCustomer(establishment.stripeCustomerId, {
+            business_name: establishment.billingName,
+            address: {
+                line1: data.billingAddress,
+                city: data.billingCity,
+                state: data.billingState,
+                postal_code: data.billingZipCode,
+                country: data.billingCountry,
+            },
+        });
+
+        if (data.billingTaxId) {
+            const taxIds = await this.stripe.listCustomerTaxIds(establishment.stripeCustomerId);
+
+            for (const taxId of taxIds) {
+                await this.stripe.deleteCustomerTaxId(establishment.stripeCustomerId, taxId.id);
+            }
+
+            await this.stripe.createCustomerTaxId(
+                establishment.stripeCustomerId,
+                `${data.billingCountry}${data.billingTaxId}`,
+            );
+        }
 
         return establishment;
     }
