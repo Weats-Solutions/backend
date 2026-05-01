@@ -7,22 +7,15 @@ import { CatalogModule } from './catalog.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(CatalogModule);
-  app.useGlobalInterceptors(new ResponseInterceptor());
   const appConfigService = app.get(AppConfigService);
-  const catalogPort = appConfigService.getCatalogPort();
+  const catalogPort = appConfigService.getCatalogPort() || 4008;
   const nodeEnv = appConfigService.getNodeEnv();
 
   const logger = new Logger('Catalog');
   app.enableCors(getCorsOptions(appConfigService));
   app.use(cookieParser());
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
-    }),
-  );
+
 
   const server = app.getHttpServer();
 

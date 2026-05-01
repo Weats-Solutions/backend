@@ -5,7 +5,8 @@ import {
 import {
     S3Client,
     DeleteObjectCommand,
-    PutObjectCommand
+    PutObjectCommand,
+    GetObjectCommand,
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { RpcException } from '@nestjs/microservices';
@@ -106,6 +107,29 @@ export class CloudflareR2Service {
         } catch (error) {
             console.error('Erro ao fazer upload direto para R2:', error);
             throw new RpcException({ message: 'Falha ao guardar ficheiro no R2' });
+        }
+    }
+
+    async getFileDataUri(key: string) {
+        try {
+            const command = new GetObjectCommand({
+                Bucket: this.bucketName,
+                Key: key,
+            });
+
+            const response = await this.s3Client.send(command);
+            if (!response.Body) {
+                throw new Error('R2 object body is empty');
+            }
+
+            const bytes = await response.Body.transformToByteArray();
+            const base64 = Buffer.from(bytes).toString('base64');
+            const contentType = response.ContentType || 'image/png';
+
+            return `data:${contentType};base64,${base64}`;
+        } catch (error) {
+            console.error(`Erro ao obter ficheiro ${key} do R2:`, error);
+            throw new RpcException({ message: 'Falha ao obter ficheiro do R2' });
         }
     }
 }

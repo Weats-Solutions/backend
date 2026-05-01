@@ -12,6 +12,14 @@ import { MenuUtilsModule } from '@weats/common/utils/modules/menu/menu-utils.mod
 import { EstablishmentLanguageSyncService } from './establishment-language-sync.service';
 import { EstablishmentLanguageSyncProcessor } from './establishment-language-sync.processor';
 import { QueuesModule } from '@weats/bull';
+import { EstablishmentSubscriptionService } from './services/establishment-subscription.service';
+import { EstablishmentBillingSettingsService } from './services/establishment-billing-settings.service';
+import { EstablishmentDigitalSettingsService } from './services/establishment-digital-settings.service';
+import { EstablishmentGeneralSettingsService } from './services/establishment-general-settings.service';
+import { EstablishmentSystemSettingsService } from './services/establishment-system-settings.service';
+import { EstablishmentBrandingSettingsService } from './services/establishment-branding-settings.service';
+import { EstablishmentLifeCycleService } from './services/establishment-lifecycle.service';
+import { EstablishmentQueryService } from './services/establishment-query.service';
 
 @Module({
   imports: [
@@ -34,6 +42,16 @@ import { QueuesModule } from '@weats/bull';
     EstablishmentService,
     EstablishmentLanguageSyncService,
     EstablishmentLanguageSyncProcessor,
+
+    // Services
+    EstablishmentSubscriptionService,
+    EstablishmentBillingSettingsService,
+    EstablishmentDigitalSettingsService,
+    EstablishmentGeneralSettingsService,
+    EstablishmentSystemSettingsService,
+    EstablishmentBrandingSettingsService,
+    EstablishmentLifeCycleService,
+    EstablishmentQueryService,
   ],
   exports: [EstablishmentService],
 })

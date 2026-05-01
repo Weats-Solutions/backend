@@ -5,6 +5,8 @@ import {
   IsOptional,
   IsString,
   Length,
+  MaxLength,
+  MinLength,
   ValidateNested,
 } from 'class-validator';
 import {
@@ -12,7 +14,7 @@ import {
   EstablishmentLanguage,
   EstablishmentType,
 } from '@weats/database/core-prisma.service';
-import { IsValidCountryCode, IsValidPhoneNumber } from '@weats/common';
+import { IsValidCountryCode, IsValidPhoneNumber, IsValidTaxId } from '@weats/common';
 
 export class CreateEstablishmentDto {
   @Length(2, 50)
@@ -24,35 +26,37 @@ export class CreateEstablishmentDto {
   @IsNotEmpty()
   type: EstablishmentType;
 
+
   @Length(7, 100)
   @IsEmail()
   @IsNotEmpty()
   email: string;
-
-  @Length(3, 100)
-  @IsString()
-  @IsNotEmpty()
-  address: string;
-
-  @Length(3, 50)
-  @IsString()
-  @IsNotEmpty()
-  city: string;
-
-  @Length(3, 50)
-  @IsString()
-  @IsNotEmpty()
-  state: string;
-
-  @Length(5, 10)
-  @IsString()
-  @IsNotEmpty()
-  zipCode: string;
-
-  @Length(3, 25)
-  @IsString()
-  @IsNotEmpty()
-  country: string;
+  /*
+   @Length(3, 100)
+   @IsString()
+   @IsNotEmpty()
+   address: string;
+ 
+   @Length(3, 50)
+   @IsString()
+   @IsNotEmpty()
+   city: string;
+ 
+   @Length(3, 50)
+   @IsString()
+   @IsNotEmpty()
+   state: string;
+ 
+   @Length(5, 10)
+   @IsString()
+   @IsNotEmpty()
+   zipCode: string;
+ 
+   @Length(3, 25)
+   @IsString()
+   @IsNotEmpty()
+   country: string;
+ */
 
   /** Número de telefone do cliente (sem indicativo, ex: "911111111") */
   @IsString()
@@ -66,15 +70,47 @@ export class CreateEstablishmentDto {
   @IsValidCountryCode()
   countryCode: string;
 
-  @Length(3, 50)
+  @Length(2, 100)
   @IsString()
   @IsNotEmpty()
   billingName: string;
 
-  @Length(9, 20)
   @IsString()
   @IsNotEmpty()
+  @IsValidTaxId('countryCode')
   billingTaxId: string;
+
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(3)
+  @MaxLength(100)
+  billingAddress: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(3)
+  @MaxLength(50)
+  billingCity: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(3)
+  @MaxLength(50)
+  billingState: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(3)
+  @MaxLength(10)
+  billingZipCode: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(1)
+  @MaxLength(5)
+  billingCountry: string;
+
 
   @IsEnum(EstablishmentLanguage)
   primaryLanguage: EstablishmentLanguage;

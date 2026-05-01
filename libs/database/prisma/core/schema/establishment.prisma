@@ -9,17 +9,23 @@ model Establishment {
 
   // ─── Contactos & Localização ────────────────────────────────────────────────
   email       String
-  countryCode String
+  countryCode String //Calling code
   phoneNumber String
-  address     String
-  city        String
-  state       String
-  zipCode     String
-  country     String
+  address     String?
+  city        String?
+  state       String?
+  zipCode     String?
+  country     String? //NOT ISO country name
 
   // ─── Detalhes & Faturação ──────────────────────────────────────────────────
-  billingName      String
-  billingTaxId     String
+  billingName    String
+  billingTaxId   String
+  billingAddress String?
+  billingCity    String?
+  billingState   String?
+  billingZipCode String?
+  billingCountry String? //ISO
+
   stripeCustomerId String @unique
 
   // ─── Social Media ──────────────────────────────────────────────────────────

@@ -35,9 +35,24 @@ export class QrCodeService {
       return `${this.catalogUrl}/404`;
     }
 
-    const menuBaseUrl = this.catalogUrl.replace(/\/+$/, '');
+    // Função auxiliar para construir a URL com subdomínio
+    const buildSubdomainUrl = (slug: string, path = '') => {
+      const normalizedCatalogUrl = this.catalogUrl.startsWith('http')
+        ? this.catalogUrl
+        : `https://${this.catalogUrl}`;
+      const parsedCatalogUrl = new URL(normalizedCatalogUrl);
+      const hostParts = parsedCatalogUrl.hostname.split('.');
+      if (hostParts[0] === 'catalog') {
+        hostParts.shift();
+      }
+      const baseHost = hostParts.join('.');
+      const subdomainHost = `${slug}.${baseHost}`;
+      const portPart = parsedCatalogUrl.port ? `:${parsedCatalogUrl.port}` : '';
 
-    // Case 1: TABLE (Menu with pre-selected table)
+      return `${parsedCatalogUrl.protocol}//${subdomainHost}${portPart}${path}`;
+    };
+
+    // Case 1: TABLE (Menu com mesa pré-selecionada)
     if (qrCode.type === QrCodeType.TABLE) {
       if (!qrCode.servicePoint) {
         this.logger.warn(`QR Token ${token} is TABLE type but has no servicePoint`);
@@ -55,10 +70,16 @@ export class QrCodeService {
         return `${this.catalogUrl}/no-subscription`;
       }
 
-      return `${menuBaseUrl}/menu/${qrCode.establishmentId}?table=${qrCode.servicePointId}`;
+      if (!qrCode.establishment?.slug) {
+        this.logger.warn(`Establishment slug not found for token ${token}`);
+        return `${this.catalogUrl}/404`;
+      }
+
+      // Redireciona para slug.weats.pro?table=ID
+      return buildSubdomainUrl(qrCode.establishment.slug, `?table=${qrCode.servicePointId}`);
     }
 
-    // Case 2: MENU (Direct to general menu)
+    // Case 2: MENU (Direto para o menu geral)
     if (qrCode.type === QrCodeType.MENU) {
       if (!qrCode.establishment) {
         this.logger.warn(`QR Token ${token} is MENU type but has no establishment`);
@@ -71,7 +92,13 @@ export class QrCodeService {
         return `${this.catalogUrl}/no-subscription`;
       }
 
-      return `${menuBaseUrl}/menu/${qrCode.establishmentId}`;
+      if (!qrCode.establishment?.slug) {
+        this.logger.warn(`Establishment slug not found for token ${token}`);
+        return `${this.catalogUrl}/404`;
+      }
+
+      // Redireciona para slug.weats.pro
+      return buildSubdomainUrl(qrCode.establishment.slug);
     }
 
     this.logger.error(`Invalid QR code type for token ${token}: ${qrCode.type}`);

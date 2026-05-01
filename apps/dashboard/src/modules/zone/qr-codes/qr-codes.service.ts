@@ -63,6 +63,20 @@ export class QrCodesService {
       });
     }
 
+    if (dto.imageId) {
+      const image = await this.prisma.image.findFirst({
+        where: { id: dto.imageId, establishmentId },
+        select: { id: true },
+      });
+
+      if (!image) {
+        throw new RpcException({
+          message: ERRORS.NOT_FOUND,
+          code: 404,
+        });
+      }
+    }
+
     const points = servicePoints.map((sp) => ({
       id: sp.id,
       name: sp.name,

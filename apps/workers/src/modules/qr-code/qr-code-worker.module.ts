@@ -8,6 +8,7 @@ import { EmailProducer } from '@weats/bull/producers/email.producer';
 import { ConfigModule } from '@nestjs/config';
 import { ConfigsModule } from '@weats/configs';
 import { AppConfigService } from '@weats/configs/app-config.service';
+import { IntegrationsModule } from '@weats/integrations';
 
 @Module({
     imports: [
@@ -17,13 +18,14 @@ import { AppConfigService } from '@weats/configs/app-config.service';
         QrGeneratorModule,
         MailModule,
         DatabaseModule,
+        IntegrationsModule,
     ],
     providers: [
         QrCodeProcessor, 
         EmailProducer,
         {
             provide: 'CATALOG_URL',
-            useFactory: (appConfig: AppConfigService) => appConfig.getCatalogPort(),
+            useFactory: (appConfig: AppConfigService) => appConfig.getCatalogUrl(),
             inject: [AppConfigService],
         },
     ],

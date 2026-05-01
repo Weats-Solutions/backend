@@ -6,9 +6,9 @@ import {
   Prisma
 } from '@weats/database';
 import { Job, Queue } from 'bull';
-import { LanguageSyncJobData } from './establishment-language-sync.types';
 import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 import { QUEUES } from '@weats/bull/queues/queues.constants';
+import { LanguageSyncJobData } from './services/establishment-system-settings.service';
 
 const LANGUAGE_SYNC_JOB = 'sync-establishment-language-translations';
 const LANGUAGE_SYNC_BATCH_SIZE = 500;

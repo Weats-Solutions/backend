@@ -26504,6 +26504,11 @@ export namespace Prisma {
     country: string | null
     billingName: string | null
     billingTaxId: string | null
+    billingAddress: string | null
+    billingCity: string | null
+    billingState: string | null
+    billingZipCode: string | null
+    billingCountry: string | null
     stripeCustomerId: string | null
     instagramUrl: string | null
     tiktokUrl: string | null
@@ -26542,6 +26547,11 @@ export namespace Prisma {
     country: string | null
     billingName: string | null
     billingTaxId: string | null
+    billingAddress: string | null
+    billingCity: string | null
+    billingState: string | null
+    billingZipCode: string | null
+    billingCountry: string | null
     stripeCustomerId: string | null
     instagramUrl: string | null
     tiktokUrl: string | null
@@ -26580,6 +26590,11 @@ export namespace Prisma {
     country: number
     billingName: number
     billingTaxId: number
+    billingAddress: number
+    billingCity: number
+    billingState: number
+    billingZipCode: number
+    billingCountry: number
     stripeCustomerId: number
     instagramUrl: number
     tiktokUrl: number
@@ -26621,6 +26636,11 @@ export namespace Prisma {
     country?: true
     billingName?: true
     billingTaxId?: true
+    billingAddress?: true
+    billingCity?: true
+    billingState?: true
+    billingZipCode?: true
+    billingCountry?: true
     stripeCustomerId?: true
     instagramUrl?: true
     tiktokUrl?: true
@@ -26659,6 +26679,11 @@ export namespace Prisma {
     country?: true
     billingName?: true
     billingTaxId?: true
+    billingAddress?: true
+    billingCity?: true
+    billingState?: true
+    billingZipCode?: true
+    billingCountry?: true
     stripeCustomerId?: true
     instagramUrl?: true
     tiktokUrl?: true
@@ -26697,6 +26722,11 @@ export namespace Prisma {
     country?: true
     billingName?: true
     billingTaxId?: true
+    billingAddress?: true
+    billingCity?: true
+    billingState?: true
+    billingZipCode?: true
+    billingCountry?: true
     stripeCustomerId?: true
     instagramUrl?: true
     tiktokUrl?: true
@@ -26802,13 +26832,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address: string | null
+    city: string | null
+    state: string | null
+    zipCode: string | null
+    country: string | null
     billingName: string
     billingTaxId: string
+    billingAddress: string | null
+    billingCity: string | null
+    billingState: string | null
+    billingZipCode: string | null
+    billingCountry: string | null
     stripeCustomerId: string
     instagramUrl: string | null
     tiktokUrl: string | null
@@ -26865,6 +26900,11 @@ export namespace Prisma {
     country?: boolean
     billingName?: boolean
     billingTaxId?: boolean
+    billingAddress?: boolean
+    billingCity?: boolean
+    billingState?: boolean
+    billingZipCode?: boolean
+    billingCountry?: boolean
     stripeCustomerId?: boolean
     instagramUrl?: boolean
     tiktokUrl?: boolean
@@ -26946,6 +26986,11 @@ export namespace Prisma {
     country?: boolean
     billingName?: boolean
     billingTaxId?: boolean
+    billingAddress?: boolean
+    billingCity?: boolean
+    billingState?: boolean
+    billingZipCode?: boolean
+    billingCountry?: boolean
     stripeCustomerId?: boolean
     instagramUrl?: boolean
     tiktokUrl?: boolean
@@ -26990,6 +27035,11 @@ export namespace Prisma {
     country?: boolean
     billingName?: boolean
     billingTaxId?: boolean
+    billingAddress?: boolean
+    billingCity?: boolean
+    billingState?: boolean
+    billingZipCode?: boolean
+    billingCountry?: boolean
     stripeCustomerId?: boolean
     instagramUrl?: boolean
     tiktokUrl?: boolean
@@ -27034,6 +27084,11 @@ export namespace Prisma {
     country?: boolean
     billingName?: boolean
     billingTaxId?: boolean
+    billingAddress?: boolean
+    billingCity?: boolean
+    billingState?: boolean
+    billingZipCode?: boolean
+    billingCountry?: boolean
     stripeCustomerId?: boolean
     instagramUrl?: boolean
     tiktokUrl?: boolean
@@ -27056,7 +27111,7 @@ export namespace Prisma {
     ownerId?: boolean
   }
 
-  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
+  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
   export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     metadata?: boolean | Establishment$metadataArgs<ExtArgs>
@@ -27171,13 +27226,18 @@ export namespace Prisma {
       email: string
       countryCode: string
       phoneNumber: string
-      address: string
-      city: string
-      state: string
-      zipCode: string
-      country: string
+      address: string | null
+      city: string | null
+      state: string | null
+      zipCode: string | null
+      country: string | null
       billingName: string
       billingTaxId: string
+      billingAddress: string | null
+      billingCity: string | null
+      billingState: string | null
+      billingZipCode: string | null
+      billingCountry: string | null
       stripeCustomerId: string
       instagramUrl: string | null
       tiktokUrl: string | null
@@ -27678,6 +27738,11 @@ export namespace Prisma {
     readonly country: FieldRef<"Establishment", 'String'>
     readonly billingName: FieldRef<"Establishment", 'String'>
     readonly billingTaxId: FieldRef<"Establishment", 'String'>
+    readonly billingAddress: FieldRef<"Establishment", 'String'>
+    readonly billingCity: FieldRef<"Establishment", 'String'>
+    readonly billingState: FieldRef<"Establishment", 'String'>
+    readonly billingZipCode: FieldRef<"Establishment", 'String'>
+    readonly billingCountry: FieldRef<"Establishment", 'String'>
     readonly stripeCustomerId: FieldRef<"Establishment", 'String'>
     readonly instagramUrl: FieldRef<"Establishment", 'String'>
     readonly tiktokUrl: FieldRef<"Establishment", 'String'>
@@ -112306,6 +112371,11 @@ export namespace Prisma {
     country: 'country',
     billingName: 'billingName',
     billingTaxId: 'billingTaxId',
+    billingAddress: 'billingAddress',
+    billingCity: 'billingCity',
+    billingState: 'billingState',
+    billingZipCode: 'billingZipCode',
+    billingCountry: 'billingCountry',
     stripeCustomerId: 'stripeCustomerId',
     instagramUrl: 'instagramUrl',
     tiktokUrl: 'tiktokUrl',
@@ -115371,13 +115441,18 @@ export namespace Prisma {
     email?: StringFilter<"Establishment"> | string
     countryCode?: StringFilter<"Establishment"> | string
     phoneNumber?: StringFilter<"Establishment"> | string
-    address?: StringFilter<"Establishment"> | string
-    city?: StringFilter<"Establishment"> | string
-    state?: StringFilter<"Establishment"> | string
-    zipCode?: StringFilter<"Establishment"> | string
-    country?: StringFilter<"Establishment"> | string
+    address?: StringNullableFilter<"Establishment"> | string | null
+    city?: StringNullableFilter<"Establishment"> | string | null
+    state?: StringNullableFilter<"Establishment"> | string | null
+    zipCode?: StringNullableFilter<"Establishment"> | string | null
+    country?: StringNullableFilter<"Establishment"> | string | null
     billingName?: StringFilter<"Establishment"> | string
     billingTaxId?: StringFilter<"Establishment"> | string
+    billingAddress?: StringNullableFilter<"Establishment"> | string | null
+    billingCity?: StringNullableFilter<"Establishment"> | string | null
+    billingState?: StringNullableFilter<"Establishment"> | string | null
+    billingZipCode?: StringNullableFilter<"Establishment"> | string | null
+    billingCountry?: StringNullableFilter<"Establishment"> | string | null
     stripeCustomerId?: StringFilter<"Establishment"> | string
     instagramUrl?: StringNullableFilter<"Establishment"> | string | null
     tiktokUrl?: StringNullableFilter<"Establishment"> | string | null
@@ -115451,13 +115526,18 @@ export namespace Prisma {
     email?: SortOrder
     countryCode?: SortOrder
     phoneNumber?: SortOrder
-    address?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    zipCode?: SortOrder
-    country?: SortOrder
+    address?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    state?: SortOrderInput | SortOrder
+    zipCode?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
     billingName?: SortOrder
     billingTaxId?: SortOrder
+    billingAddress?: SortOrderInput | SortOrder
+    billingCity?: SortOrderInput | SortOrder
+    billingState?: SortOrderInput | SortOrder
+    billingZipCode?: SortOrderInput | SortOrder
+    billingCountry?: SortOrderInput | SortOrder
     stripeCustomerId?: SortOrder
     instagramUrl?: SortOrderInput | SortOrder
     tiktokUrl?: SortOrderInput | SortOrder
@@ -115536,13 +115616,18 @@ export namespace Prisma {
     email?: StringFilter<"Establishment"> | string
     countryCode?: StringFilter<"Establishment"> | string
     phoneNumber?: StringFilter<"Establishment"> | string
-    address?: StringFilter<"Establishment"> | string
-    city?: StringFilter<"Establishment"> | string
-    state?: StringFilter<"Establishment"> | string
-    zipCode?: StringFilter<"Establishment"> | string
-    country?: StringFilter<"Establishment"> | string
+    address?: StringNullableFilter<"Establishment"> | string | null
+    city?: StringNullableFilter<"Establishment"> | string | null
+    state?: StringNullableFilter<"Establishment"> | string | null
+    zipCode?: StringNullableFilter<"Establishment"> | string | null
+    country?: StringNullableFilter<"Establishment"> | string | null
     billingName?: StringFilter<"Establishment"> | string
     billingTaxId?: StringFilter<"Establishment"> | string
+    billingAddress?: StringNullableFilter<"Establishment"> | string | null
+    billingCity?: StringNullableFilter<"Establishment"> | string | null
+    billingState?: StringNullableFilter<"Establishment"> | string | null
+    billingZipCode?: StringNullableFilter<"Establishment"> | string | null
+    billingCountry?: StringNullableFilter<"Establishment"> | string | null
     instagramUrl?: StringNullableFilter<"Establishment"> | string | null
     tiktokUrl?: StringNullableFilter<"Establishment"> | string | null
     facebookUrl?: StringNullableFilter<"Establishment"> | string | null
@@ -115614,13 +115699,18 @@ export namespace Prisma {
     email?: SortOrder
     countryCode?: SortOrder
     phoneNumber?: SortOrder
-    address?: SortOrder
-    city?: SortOrder
-    state?: SortOrder
-    zipCode?: SortOrder
-    country?: SortOrder
+    address?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    state?: SortOrderInput | SortOrder
+    zipCode?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
     billingName?: SortOrder
     billingTaxId?: SortOrder
+    billingAddress?: SortOrderInput | SortOrder
+    billingCity?: SortOrderInput | SortOrder
+    billingState?: SortOrderInput | SortOrder
+    billingZipCode?: SortOrderInput | SortOrder
+    billingCountry?: SortOrderInput | SortOrder
     stripeCustomerId?: SortOrder
     instagramUrl?: SortOrderInput | SortOrder
     tiktokUrl?: SortOrderInput | SortOrder
@@ -115659,13 +115749,18 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"Establishment"> | string
     countryCode?: StringWithAggregatesFilter<"Establishment"> | string
     phoneNumber?: StringWithAggregatesFilter<"Establishment"> | string
-    address?: StringWithAggregatesFilter<"Establishment"> | string
-    city?: StringWithAggregatesFilter<"Establishment"> | string
-    state?: StringWithAggregatesFilter<"Establishment"> | string
-    zipCode?: StringWithAggregatesFilter<"Establishment"> | string
-    country?: StringWithAggregatesFilter<"Establishment"> | string
+    address?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    city?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    state?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    zipCode?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    country?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     billingName?: StringWithAggregatesFilter<"Establishment"> | string
     billingTaxId?: StringWithAggregatesFilter<"Establishment"> | string
+    billingAddress?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    billingCity?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    billingState?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    billingZipCode?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    billingCountry?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     stripeCustomerId?: StringWithAggregatesFilter<"Establishment"> | string
     instagramUrl?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     tiktokUrl?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
@@ -122769,13 +122864,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -122844,13 +122944,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -122919,13 +123024,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -122994,13 +123104,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -123069,13 +123184,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -123108,13 +123228,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -123142,13 +123267,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -131004,6 +131134,11 @@ export namespace Prisma {
     country?: SortOrder
     billingName?: SortOrder
     billingTaxId?: SortOrder
+    billingAddress?: SortOrder
+    billingCity?: SortOrder
+    billingState?: SortOrder
+    billingZipCode?: SortOrder
+    billingCountry?: SortOrder
     stripeCustomerId?: SortOrder
     instagramUrl?: SortOrder
     tiktokUrl?: SortOrder
@@ -131043,6 +131178,11 @@ export namespace Prisma {
     country?: SortOrder
     billingName?: SortOrder
     billingTaxId?: SortOrder
+    billingAddress?: SortOrder
+    billingCity?: SortOrder
+    billingState?: SortOrder
+    billingZipCode?: SortOrder
+    billingCountry?: SortOrder
     stripeCustomerId?: SortOrder
     instagramUrl?: SortOrder
     tiktokUrl?: SortOrder
@@ -131081,6 +131221,11 @@ export namespace Prisma {
     country?: SortOrder
     billingName?: SortOrder
     billingTaxId?: SortOrder
+    billingAddress?: SortOrder
+    billingCity?: SortOrder
+    billingState?: SortOrder
+    billingZipCode?: SortOrder
+    billingCountry?: SortOrder
     stripeCustomerId?: SortOrder
     instagramUrl?: SortOrder
     tiktokUrl?: SortOrder
@@ -143627,13 +143772,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -143701,13 +143851,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -143791,13 +143946,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -143865,13 +144025,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -143939,13 +144104,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -144013,13 +144183,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -144103,13 +144278,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -144177,13 +144357,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -144281,13 +144466,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -144355,13 +144545,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -144474,13 +144669,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -144548,13 +144748,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -144773,13 +144978,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -144847,13 +145057,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -145021,13 +145236,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -145095,13 +145315,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -145368,13 +145593,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -145442,13 +145672,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -145581,13 +145816,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -145655,13 +145895,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -146012,13 +146257,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -146086,13 +146336,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -146226,13 +146481,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -146300,13 +146560,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -146820,13 +147085,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -146894,13 +147164,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -147011,13 +147286,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -147085,13 +147365,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -147299,13 +147584,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -147373,13 +147663,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -147463,13 +147758,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -147537,13 +147837,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -150652,13 +150957,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -150726,13 +151036,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -150816,13 +151131,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -150890,13 +151210,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -151005,13 +151330,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -151079,13 +151409,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -151216,13 +151551,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -151290,13 +151630,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -151364,13 +151709,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -151438,13 +151788,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -151569,13 +151924,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -151643,13 +152003,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -151764,13 +152129,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -151838,13 +152208,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -151928,13 +152303,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -152002,13 +152382,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -152076,13 +152461,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -152150,13 +152540,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -152234,13 +152629,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -152308,13 +152708,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -152392,13 +152797,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -152466,13 +152876,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -152757,13 +153172,18 @@ export namespace Prisma {
     email?: StringFilter<"Establishment"> | string
     countryCode?: StringFilter<"Establishment"> | string
     phoneNumber?: StringFilter<"Establishment"> | string
-    address?: StringFilter<"Establishment"> | string
-    city?: StringFilter<"Establishment"> | string
-    state?: StringFilter<"Establishment"> | string
-    zipCode?: StringFilter<"Establishment"> | string
-    country?: StringFilter<"Establishment"> | string
+    address?: StringNullableFilter<"Establishment"> | string | null
+    city?: StringNullableFilter<"Establishment"> | string | null
+    state?: StringNullableFilter<"Establishment"> | string | null
+    zipCode?: StringNullableFilter<"Establishment"> | string | null
+    country?: StringNullableFilter<"Establishment"> | string | null
     billingName?: StringFilter<"Establishment"> | string
     billingTaxId?: StringFilter<"Establishment"> | string
+    billingAddress?: StringNullableFilter<"Establishment"> | string | null
+    billingCity?: StringNullableFilter<"Establishment"> | string | null
+    billingState?: StringNullableFilter<"Establishment"> | string | null
+    billingZipCode?: StringNullableFilter<"Establishment"> | string | null
+    billingCountry?: StringNullableFilter<"Establishment"> | string | null
     stripeCustomerId?: StringFilter<"Establishment"> | string
     instagramUrl?: StringNullableFilter<"Establishment"> | string | null
     tiktokUrl?: StringNullableFilter<"Establishment"> | string | null
@@ -152823,13 +153243,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -152897,13 +153322,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -153094,13 +153524,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -153168,13 +153603,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -153258,13 +153698,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -153332,13 +153777,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -153406,13 +153856,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -153480,13 +153935,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -153570,13 +154030,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -153644,13 +154109,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -153718,13 +154188,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -153792,13 +154267,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -153882,13 +154362,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -153956,13 +154441,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -154050,13 +154540,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -154124,13 +154619,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -154641,13 +155141,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -154715,13 +155220,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -155584,13 +156094,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -155658,13 +156173,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -155786,13 +156306,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -155860,13 +156385,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -157134,13 +157664,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -157208,13 +157743,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -157354,13 +157894,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -157428,13 +157973,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -158448,13 +158998,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -158522,13 +159077,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -158663,13 +159223,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -158737,13 +159302,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -158921,13 +159491,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -158995,13 +159570,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -159174,13 +159754,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -159248,13 +159833,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -160338,13 +160928,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -160412,13 +161007,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -160532,13 +161132,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -160606,13 +161211,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -160774,13 +161384,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -160848,13 +161463,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -160989,13 +161609,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -161063,13 +161688,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -161222,13 +161852,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -161296,13 +161931,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -161523,13 +162163,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -161597,13 +162242,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -161964,13 +162614,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -162038,13 +162693,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -162254,13 +162914,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -162328,13 +162993,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -162707,13 +163377,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -162781,13 +163456,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -162957,13 +163637,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -163031,13 +163716,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -163151,13 +163841,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -163225,13 +163920,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -163464,13 +164164,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -163538,13 +164243,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -163679,13 +164389,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -163753,13 +164468,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -164204,13 +164924,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -164278,13 +165003,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -165260,13 +165990,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -165334,13 +166069,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -165563,13 +166303,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -165637,13 +166382,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -166166,13 +166916,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -166240,13 +166995,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -166406,13 +167166,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -166480,13 +167245,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -166930,13 +167700,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -167004,13 +167779,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -167267,13 +168047,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -167341,13 +168126,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -167606,13 +168396,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -167680,13 +168475,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -167851,13 +168651,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -167925,13 +168730,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -168086,13 +168896,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -168160,13 +168975,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -168284,13 +169104,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -168358,13 +169183,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -168684,13 +169514,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -168758,13 +169593,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -168873,13 +169713,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -168947,13 +169792,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -169442,13 +170292,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -169516,13 +170371,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -169606,13 +170466,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -169680,13 +170545,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -169844,13 +170714,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -169918,13 +170793,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -170030,13 +170910,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -170104,13 +170989,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -170238,13 +171128,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -170312,13 +171207,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -170440,13 +171340,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -170514,13 +171419,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -170686,13 +171596,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -170760,13 +171675,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -170892,13 +171812,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -170966,13 +171891,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -173172,13 +174102,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -173210,13 +174145,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -173296,13 +174236,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -173370,13 +174315,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -173444,13 +174394,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -173482,13 +174437,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -173556,13 +174516,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -173630,13 +174595,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -176906,13 +177876,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -176952,13 +177927,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -177026,13 +178006,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -177100,13 +178085,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -177185,13 +178175,18 @@ export namespace Prisma {
     email: string
     countryCode: string
     phoneNumber: string
-    address: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
     billingName: string
     billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
     stripeCustomerId: string
     instagramUrl?: string | null
     tiktokUrl?: string | null
@@ -177288,13 +178283,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -177362,13 +178362,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -177436,13 +178441,18 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    state?: StringFieldUpdateOperationsInput | string
-    zipCode?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     billingName?: StringFieldUpdateOperationsInput | string
     billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
     instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
     tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null

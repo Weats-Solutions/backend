@@ -631,15 +631,21 @@ model Establishment {
   email       String
   countryCode String
   phoneNumber String
-  address     String
-  city        String
-  state       String
-  zipCode     String
-  country     String
+  address     String?
+  city        String?
+  state       String?
+  zipCode     String?
+  country     String?
 
   // ─── Detalhes & Faturação ──────────────────────────────────────────────────
-  billingName      String
-  billingTaxId     String
+  billingName    String
+  billingTaxId   String
+  billingAddress String?
+  billingCity    String?
+  billingState   String?
+  billingZipCode String?
+  billingCountry String?
+
   stripeCustomerId String @unique
 
   // ─── Social Media ──────────────────────────────────────────────────────────

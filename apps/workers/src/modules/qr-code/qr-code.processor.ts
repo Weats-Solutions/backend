@@ -12,6 +12,7 @@ import { EmailProducer } from '@weats/bull/producers/email.producer';
 import { EmailTemplate } from '@weats/types';
 import { GenerateQrCodesDto } from '@weats/contracts';
 import { CorePrismaService, QrCodeType } from '@weats/database';
+import { CloudflareR2Service } from '@weats/integrations/cloudflare/cloudflare-r2.service';
 import crypto from 'crypto';
 
 @Processor(QUEUES.QRCODE)
@@ -22,8 +23,29 @@ export class QrCodeProcessor {
     private readonly qrGenerator: QrGeneratorService,
     private readonly emailProducer: EmailProducer,
     private readonly prisma: CorePrismaService,
+    private readonly cloudflareR2Service: CloudflareR2Service,
     @Inject('CATALOG_URL') private readonly catalogUrl: string,
   ) {}
+
+  private async resolveLogoDataUri(
+    establishmentId: string,
+    imageId?: string,
+  ): Promise<string> {
+    if (!imageId) return '';
+
+    const image = await this.prisma.image.findFirst({
+      where: { id: imageId, establishmentId },
+      select: { cloudflareImageId: true },
+    });
+
+    if (!image?.cloudflareImageId) {
+      throw new Error(
+        `Image not found for QR logo: imageId=${imageId}, establishmentId=${establishmentId}`,
+      );
+    }
+
+    return this.cloudflareR2Service.getFileDataUri(image.cloudflareImageId);
+  }
 
   @Process('generate-batch')
   async handleGenerateBatch(
@@ -42,6 +64,11 @@ export class QrCodeProcessor {
     );
 
     try {
+      const logoDataUri = await this.resolveLogoDataUri(
+        establishmentId,
+        dto.imageId,
+      );
+
       // 2. Build QR config
       const config: QrStyleConfig = {
         dotColor: dto.dotColor,
@@ -51,7 +78,7 @@ export class QrCodeProcessor {
         frameColor: dto.frameColor,
         frameText: dto.frameText,
         frameTextColor: dto.frameTextColor,
-        logoBase64: dto.logoBase64 || '',
+        logoBase64: logoDataUri,
       };
 
       const persistedConfig = {
@@ -66,9 +93,10 @@ export class QrCodeProcessor {
       const pointsWithTokens: ServicePointQrInput[] = points.map((point) => ({
         ...point,
         token: crypto.randomBytes(12).toString('base64url'),
-        frameText: dto.useServicePointNameAsFrameText && !point.isMenuOnly
-          ? point.name
-          : undefined,
+        frameText:
+          dto.useServicePointNameAsFrameText && !point.isMenuOnly
+            ? point.name
+            : undefined,
       }));
 
       // Keep old QR codes untouched and append fresh tokenized records.
@@ -91,7 +119,7 @@ export class QrCodeProcessor {
         `Persisted ${pointsWithTokens.length} QR token records for ${establishmentId}`,
       );
 
-      const baseUrl = `${this.catalogUrl.replace(/\/+$/, '')}/qr/`;
+      const baseUrl = `${this.catalogUrl}/qr/`;
 
       // 3. Generate batch
       const result = await this.qrGenerator.generateBatch(

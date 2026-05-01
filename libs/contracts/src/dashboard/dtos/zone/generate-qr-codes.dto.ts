@@ -65,5 +65,5 @@ export class GenerateQrCodesDto {
 
   @IsOptional()
   @IsString()
-  logoBase64?: string;
+  imageId?: string;
 }

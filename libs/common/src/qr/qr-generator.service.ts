@@ -37,10 +37,10 @@ export interface GenerateBatchResult {
 
 /** Safe logo size ratios relative to QR size, per error correction level */
 const LOGO_MAX_RATIO: Record<string, number> = {
-  L: 0.07,
-  M: 0.12,
-  Q: 0.2,
-  H: 0.25,
+  L: 0.2,
+  M: 0.22,
+  Q: 0.24,
+  H: 0.26,
 };
 
 /** Blend a hex color towards white */
@@ -119,7 +119,12 @@ export class QrGeneratorService {
 
     // If there's a logo, embed it centered inside the QR SVG
     if (config.logoBase64) {
-      return this.embedLogoInQrSvg(qrSvg, config.logoBase64, config.errorLevel);
+      return this.embedLogoInQrSvg(
+        qrSvg,
+        config.logoBase64,
+        config.errorLevel,
+        config.bgColor,
+      );
     }
 
     return qrSvg;
@@ -132,6 +137,7 @@ export class QrGeneratorService {
     qrSvg: string,
     logoBase64: string,
     errorLevel: string,
+    bgColor: string,
   ): string {
     // Parse viewBox to get actual QR dimensions
     const viewBoxMatch = qrSvg.match(/viewBox="([^"]+)"/);
@@ -144,8 +150,14 @@ export class QrGeneratorService {
     const logoSize = Math.floor(qrViewSize * ratio);
     const logoX = Math.floor((qrViewSize - logoSize) / 2);
     const logoY = Math.floor((qrViewSize - logoSize) / 2);
+    const logoPadding = Math.max(Math.floor(logoSize * 0.015), 0);
+    const shieldSize = logoSize + logoPadding * 2;
+    const shieldX = Math.floor((qrViewSize - shieldSize) / 2);
+    const shieldY = Math.floor((qrViewSize - shieldSize) / 2);
 
-    const logoElement = `<image x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" href="${logoBase64}" preserveAspectRatio="xMidYMid meet" />`;
+    const logoElement = `
+<rect x="${shieldX}" y="${shieldY}" width="${shieldSize}" height="${shieldSize}" fill="${bgColor}" />
+<image x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" href="${logoBase64}" preserveAspectRatio="xMidYMid meet" />`;
 
     // Insert before closing </svg>
     return qrSvg.replace('</svg>', `${logoElement}\n</svg>`);

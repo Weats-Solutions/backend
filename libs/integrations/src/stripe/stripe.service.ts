@@ -2,6 +2,7 @@ import {
   Inject,
   Injectable,
   InternalServerErrorException,
+  Logger,
   UnauthorizedException,
 } from '@nestjs/common';
 import Stripe from 'stripe';
@@ -36,12 +37,10 @@ interface CreateCustomer {
     value: string;
   }>;
   metadata?: {
-    establishmentName?: string;
     establishmentId?: string;
     ownerId?: string;
   };
 }
-
 interface UpdateCustomer {
   name?: string;
   email?: string;
@@ -65,6 +64,7 @@ interface UpdateCustomer {
 @Injectable()
 export class StripeService {
   private stripe: Stripe;
+  private readonly logger = new Logger(StripeService.name);
 
   constructor(
     @Inject('STRIPE_API_KEY') private readonly apiKey: string,
@@ -89,7 +89,7 @@ export class StripeService {
         this.webhookSecret
       );
     } catch (err) {
-      console.log(`⚠️ Webhook signature verification failed.`, err.message);
+      this.logger.log(`⚠️ Webhook signature verification failed.`, err.message);
       throw new UnauthorizedException('Invalid signature');
     }
 
@@ -103,16 +103,48 @@ export class StripeService {
       address: data.address,
       phone: data.phone,
       tax_id_data: data.tax_id_data as Stripe.CustomerCreateParams.TaxIdDatum[],
-      business_name: data.metadata?.establishmentName,
+      business_name: data.name,
       metadata: {
         ...data.metadata,
-        ...(data.metadata?.establishmentName
-          ? { business_name: data.metadata.establishmentName }
-          : {}),
       },
       preferred_locales: ['pt-PT', 'en-US'],
     });
     return customer;
+  }
+
+  async createB2BCustomer(data: CreateCustomer): Promise<Stripe.Customer> {
+    const customer = await this.stripe.customers.create({
+      email: data.email,
+      phone: data.phone,
+      address: data.address,
+      business_name: data.name,
+      metadata: {
+        ...data.metadata,
+      },
+      preferred_locales: ['pt-PT', 'en-US'],
+    });
+
+    if (data.tax_id_data) {
+      await this.createCustomerTaxId(
+        customer.id,
+        data.tax_id_data[0].value,
+      );
+    }
+
+    return customer;
+  }
+
+  async createCustomerTaxId(
+    customerId: string,
+    taxId: string,
+  ): Promise<Stripe.TaxId> {
+    return await this.stripe.customers.createTaxId(
+      customerId,
+      {
+        type: "eu_vat",
+        value: taxId,
+      }
+    );
   }
 
   async updateCustomer(
@@ -133,7 +165,7 @@ export class StripeService {
         preferred_locales: ['pt-PT', 'en-US'],
       });
     } catch (error) {
-      console.error('Stripe Update Error:', error.message);
+      this.logger.error('Stripe Update Error:', error.message);
       throw error;
     }
   }
