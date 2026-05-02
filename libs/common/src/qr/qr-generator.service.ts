@@ -3,6 +3,7 @@ import * as QRCode from 'qrcode';
 import * as fs from 'fs';
 import * as path from 'path';
 import { FRAME_CONFIGS } from './frame-configs';
+import { FRAME_SVGS } from './frame-svgs';
 import archiver from 'archiver';
 import pLimit from 'p-limit';
 
@@ -93,15 +94,6 @@ function computeFontSize(
 @Injectable()
 export class QrGeneratorService {
   private readonly logger = new Logger(QrGeneratorService.name);
-  // Use process.cwd() since webpack bundles __dirname to '/'
-  private readonly framesDir = path.resolve(
-    process.cwd(),
-    'libs',
-    'common',
-    'src',
-    'qr',
-    'frames',
-  );
 
   /**
    * Generate a single QR code as SVG string (no frame).
@@ -177,12 +169,10 @@ export class QrGeneratorService {
       throw new Error(`Unknown frame ID: ${config.frameId}`);
     }
 
-    // Read frame template
-    const framePath = path.join(this.framesDir, `frame-${config.frameId}.svg`);
-    if (!fs.existsSync(framePath)) {
-      throw new Error(`Frame SVG not found: ${framePath}`);
+    let frameSvg = FRAME_SVGS[config.frameId];
+    if (!frameSvg) {
+      throw new Error(`Frame SVG not found for ID: ${config.frameId}`);
     }
-    let frameSvg = fs.readFileSync(framePath, 'utf-8');
 
     // Replace placeholders
     const accentColor = blendWithWhite(config.frameColor, 0.4);
