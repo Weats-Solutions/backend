@@ -1,12 +1,13 @@
-import { Currency } from "@weats/database";
+import { Currency, EstablishmentLanguage } from "@weats/database";
 
 export interface Establishment {
     id: string;
+    name: string,
     ownerId: string;
     slug: string;
     stripeCustomerId: string;
-    primaryLanguage: string;
-    availableLanguages: string[];
+    primaryLanguage: EstablishmentLanguage;
+    availableLanguages: EstablishmentLanguage[];
     currency: Currency;
     timezone: string;
 }

@@ -6,6 +6,7 @@ import { GenerateQrCodesDto } from '@weats/contracts';
 import { InjectQueue } from '@nestjs/bull';
 import type { Queue } from 'bull';
 import { QUEUES } from '@weats/bull';
+import { Establishment } from '@weats/types';
 
 @Injectable()
 export class QrCodesService {
@@ -18,20 +19,9 @@ export class QrCodesService {
 
   async generateQrCodes(
     dto: GenerateQrCodesDto,
-    establishmentId: string,
+    establishment: Establishment,
     userEmail: string,
   ) {
-    const establishment = await this.prisma.establishment.findUnique({
-      where: { id: establishmentId },
-      select: { name: true },
-    });
-
-    if (!establishment) {
-      throw new RpcException({
-        message: ERRORS.NOT_FOUND,
-        code: 404,
-      });
-    }
 
     // 1. Fetch service points and validate they belong to this establishment
     // Apenas para garantir que os IDs são válidos e pertencem ao establishment
@@ -41,7 +31,7 @@ export class QrCodesService {
           where: {
             id: { in: requestedServicePointIds },
             zone: {
-              establishmentId,
+              establishmentId: establishment.id,
             },
           },
           select: {
@@ -65,7 +55,7 @@ export class QrCodesService {
 
     if (dto.imageId) {
       const image = await this.prisma.image.findFirst({
-        where: { id: dto.imageId, establishmentId },
+        where: { id: dto.imageId, establishmentId: establishment.id },
         select: { id: true },
       });
 
@@ -96,15 +86,14 @@ export class QrCodesService {
     // 2. Add job to queue
     const job = await this.qrCodeQueue.add('generate-batch', {
       dto,
-      establishmentId,
-      establishmentName: establishment.name,
+      establishmentId: establishment.id,
       userEmail,
       recipientEmail: dto.recipientEmail || userEmail,
       points,
     });
 
     this.logger.log(
-      `Job QRCODE created: ${job.id} for establishment ${establishmentId}`,
+      `Job QRCODE created: ${job.id} for establishment ${establishment.id}`,
     );
 
     return { jobId: job.id, status: 'queued' };

@@ -29,8 +29,7 @@ export class EstablishmentStaffGuard implements CanActivate {
     if (!establishmentId) {
       this.logger.warn('x-establishment-id header is missing');
       throw new ForbiddenException({
-        message: 'x-establishment-id header is required',
-        code: ERRORS.ESTABLISHMENT_ID_HEADER_REQUIRED,
+        message: ERRORS.ESTABLISHMENT_ID_HEADER_REQUIRED,
       });
     }
 
@@ -56,13 +55,13 @@ export class EstablishmentStaffGuard implements CanActivate {
       !establishment.slug
     ) {
       throw new BadRequestException({
-        message: 'Establishment not found',
-        code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+        message: ERRORS.ESTABLISHMENT_NOT_FOUND,
       });
     }
 
     request.establishment = {
       id: establishment.id,
+      name: establishment.name,
       ownerId: establishment.ownerId,
       slug: establishment.slug,
       stripeCustomerId: establishment.stripeCustomerId,
@@ -83,8 +82,7 @@ export class EstablishmentStaffGuard implements CanActivate {
     if (!user) {
       this.logger.warn('User not found in request');
       throw new ForbiddenException({
-        message: 'User not authenticated',
-        code: ERRORS.USER_NOT_AUTHENTICATED,
+        message: ERRORS.USER_NOT_AUTHENTICATED,
       });
     }
 
@@ -94,8 +92,7 @@ export class EstablishmentStaffGuard implements CanActivate {
         `User is not owner of establishment: ${establishment.id} and ${user.id} and ${establishment.ownerId}`,
       );
       throw new ForbiddenException({
-        message: 'User is not owner of establishment',
-        code: ERRORS.ESTABLISHMENT_OWNER_REQUIRED,
+        message: ERRORS.ESTABLISHMENT_OWNER_REQUIRED,
       });
     }
 
@@ -107,8 +104,7 @@ export class EstablishmentStaffGuard implements CanActivate {
     if (!requiredRoles) {
       this.logger.warn('No roles required and user is not owner');
       throw new ForbiddenException({
-        message: 'Access denied',
-        code: ERRORS.ACCESS_DENIED,
+        message: ERRORS.ACCESS_DENIED,
       });
     }
 
@@ -117,8 +113,7 @@ export class EstablishmentStaffGuard implements CanActivate {
     if (!employee) {
       this.logger.warn('Employee not found in request');
       throw new ForbiddenException({
-        message: 'Employee not found or not authorized',
-        code: ERRORS.EMPLOYEE_NOT_AUTHORIZED,
+        message: ERRORS.EMPLOYEE_NOT_AUTHORIZED,
       });
     }
 
@@ -129,8 +124,7 @@ export class EstablishmentStaffGuard implements CanActivate {
         `Employee does not have required role(s): ${requiredRoles.join(', ')}`,
       );
       throw new ForbiddenException({
-        message: 'Insufficient role',
-        code: ERRORS.INSUFFICIENT_ROLE,
+        message: ERRORS.INSUFFICIENT_ROLE,
       });
     }
     return true;

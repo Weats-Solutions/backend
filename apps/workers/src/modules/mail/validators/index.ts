@@ -5,6 +5,7 @@ import {
     EstablishmentCreateEstablishmentSchema,
     EstablishmentInviteEmployeeSchema,
     EstablishmentQRCodesSchema,
+    EstablishmentQRCodesSharedSchema,
     EstablishmentWelcomeSchema,
 } from "./establishment";
 
@@ -25,6 +26,7 @@ export const EmailTemplateConfigs: Record<EmailTemplate, { category: EmailTempla
     [EmailTemplate.CREATE_ESTABLISHMENT]: { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentCreateEstablishmentSchema },
     [EmailTemplate.INVITE_EMPLOYEE]: { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentInviteEmployeeSchema },
     [EmailTemplate.QRCODES]: { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentQRCodesSchema },
+    [EmailTemplate.QRCODES_SHARED]: { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentQRCodesSharedSchema },
     [EmailTemplate.WELCOME]: { category: EmailTemplateCategory.ESTABLISHMENT, schema: EstablishmentWelcomeSchema },
 
     // Subscription

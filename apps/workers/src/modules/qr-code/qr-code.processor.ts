@@ -9,9 +9,9 @@ import {
   ServicePointQrInput,
 } from '@weats/common/qr/qr-generator.service';
 import { EmailProducer } from '@weats/bull/producers/email.producer';
-import { EmailTemplate } from '@weats/types';
+import { EmailTemplate, Establishment } from '@weats/types';
 import { GenerateQrCodesDto } from '@weats/contracts';
-import { CorePrismaService, QrCodeType } from '@weats/database';
+import { CorePrismaService, EstablishmentLanguage, QrCodeType } from '@weats/database';
 import { CloudflareR2Service } from '@weats/integrations/cloudflare/cloudflare-r2.service';
 import crypto from 'crypto';
 
@@ -25,7 +25,7 @@ export class QrCodeProcessor {
     private readonly prisma: CorePrismaService,
     private readonly cloudflareR2Service: CloudflareR2Service,
     @Inject('CATALOG_URL') private readonly catalogUrl: string,
-  ) {}
+  ) { }
 
   private async resolveLogoDataUri(
     establishmentId: string,
@@ -51,22 +51,21 @@ export class QrCodeProcessor {
   async handleGenerateBatch(
     job: Job<{
       dto: GenerateQrCodesDto;
-      establishmentId: string;
-      establishmentName: string;
+      establishment: Establishment,
       userEmail: string;
       recipientEmail: string;
       points: ServicePointInput[];
     }>,
   ) {
-    const { dto, establishmentId, establishmentName, userEmail, recipientEmail, points } =
+    const { dto, establishment, userEmail, recipientEmail, points } =
       job.data;
     this.logger.log(
-      `Processing QR Code batch job ${job.id} for ${establishmentId}`,
+      `Processing QR Code batch job ${job.id} for ${establishment.id}`,
     );
 
     try {
       const logoDataUri = await this.resolveLogoDataUri(
-        establishmentId,
+        establishment.id,
         dto.imageId,
       );
 
@@ -107,7 +106,7 @@ export class QrCodeProcessor {
         await tx.qrCode.createMany({
           data: pointsWithTokens.map((point) => ({
             token: point.token,
-            establishmentId,
+            establishmentId: establishment.id,
             servicePointId: point.isMenuOnly ? null : point.id,
             type: point.isMenuOnly ? QrCodeType.MENU : QrCodeType.TABLE,
             config: {
@@ -119,7 +118,7 @@ export class QrCodeProcessor {
       });
 
       this.logger.log(
-        `Persisted ${pointsWithTokens.length} QR token records for ${establishmentId}`,
+        `Persisted ${pointsWithTokens.length} QR token records for ${establishment.id}`,
       );
 
       const baseUrl = `${this.catalogUrl}/qr/`;
@@ -153,20 +152,20 @@ export class QrCodeProcessor {
 
       const emailContext = isSharedEmail
         ? {
-            establishmentName,
-            qrCodesCount: points.length,
-            senderName: userEmail, 
-            serviceZones,
-          }
+          establishmentName: establishment.name,
+          qrCodesCount: points.length,
+          serviceZones,
+          senderName: userEmail,
+        }
         : {
-            establishmentName,
-            qrCodesCount: points.length,
-            serviceZones,
-          };
+          establishmentName: establishment.name,
+          qrCodesCount: points.length,
+          serviceZones,
+        };
 
       await this.emailProducer.send({
         to: recipientEmail,
-        lang: 'pt',
+        lang: establishment.primaryLanguage.toLowerCase() as "pt" | "en" | "es",
         template,
         context: emailContext,
         attachments: [

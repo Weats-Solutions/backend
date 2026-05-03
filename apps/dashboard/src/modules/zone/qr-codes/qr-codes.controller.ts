@@ -3,6 +3,7 @@ import { MessagePattern, Payload } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common';
 import { QrCodesService } from './qr-codes.service';
 import { GenerateQrCodesDto } from '@weats/contracts';
+import { Establishment } from '@weats/types';
 
 @Controller()
 export class QrCodesController {
@@ -12,13 +13,13 @@ export class QrCodesController {
     async generateQrCodes(
         @Payload() payload: {
             dto: GenerateQrCodesDto;
-            establishmentId: string;
+            establishment: Establishment;
             userEmail: string;
         },
     ) {
         return this.qrCodesService.generateQrCodes(
             payload.dto,
-            payload.establishmentId,
+            payload.establishment,
             payload.userEmail,
         );
     }

@@ -26,7 +26,7 @@ export class QrCodesController {
     ) {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.QR_GENERATE, {
             dto,
-            establishmentId: establishment.id,
+            establishment,
             userEmail: user.email,
         });
     }

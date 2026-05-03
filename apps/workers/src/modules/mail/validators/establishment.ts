@@ -29,6 +29,18 @@ export const EstablishmentQRCodesSchema = z.object({
     })),
 });
 
+// Template: establishment/qrcodes.hbs
+// Variables: establishmentName, qrCodesCount, serviceZones[].zoneName, serviceZones[].count
+export const EstablishmentQRCodesSharedSchema = z.object({
+    establishmentName: z.string(),
+    qrCodesCount: z.number().int().positive(),
+    serviceZones: z.array(z.object({
+        zoneName: z.string(),
+        count: z.number().int().positive(),
+    })),
+    senderName: z.string(),
+});
+
 // Template: establishment/welcome.hbs
 // Variables: firstName, lastName, redirectUrl
 export const EstablishmentWelcomeSchema = z.object({
