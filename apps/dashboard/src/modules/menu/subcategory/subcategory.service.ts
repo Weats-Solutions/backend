@@ -87,6 +87,7 @@ export class MenuSubcategoryService {
     }
 
     async createSubcategory(
+        menuId: string,
         categoryId: string,
         createSubcategoryDto: CreateCategoryDto,
     ) {
@@ -120,7 +121,7 @@ export class MenuSubcategoryService {
                 },
             });
 
-            this.menuUtilsService.clearMenuCacheAsync('menus', slug);
+            this.menuUtilsService.clearMenuCacheAsync('menu-detail', slug, menuId);
             return newSubcategory;
         } catch (error) {
             console.error('Error creating subcategory:', error);
@@ -129,6 +130,7 @@ export class MenuSubcategoryService {
     }
 
     async updateSubcategory(
+        menuId: string,
         subcategoryId: string,
         updateSubcategoryDto: any,
     ) {
@@ -165,7 +167,7 @@ export class MenuSubcategoryService {
                 }
             }
 
-            this.menuUtilsService.clearMenuCacheAsync('menus', slug);
+            this.menuUtilsService.clearMenuCacheAsync('menu-detail', slug, menuId);
             return { success: true };
         } catch (error) {
             console.error('Error updating subcategory:', error);
@@ -173,13 +175,13 @@ export class MenuSubcategoryService {
         }
     }
 
-    async deleteSubcategory(subcategoryId: string) {
+    async deleteSubcategory(menuId: string, subcategoryId: string) {
         try {
             const slug = await this.getEstablishmentSlugBySubcategoryId(subcategoryId);
             await this.prisma.menuSubcategory.delete({
                 where: { id: subcategoryId },
             });
-            this.menuUtilsService.clearMenuCacheAsync('menus', slug);
+            this.menuUtilsService.clearMenuCacheAsync('menu-detail', slug, menuId);
             return { success: true };
         } catch (error) {
             console.error('Error deleting subcategory:', error);
@@ -247,8 +249,7 @@ export class MenuSubcategoryService {
         });
 
         // 3️⃣ Invalidação de Cache
-        this.menuUtilsService.clearMenuCacheAsync('menus', menu.establishment.slug);
-
+        this.menuUtilsService.clearMenuCacheAsync('menu-detail', subcategory.category.menu.establishment.slug, subcategory.category.menu.id);
         return { success: true };
     }
 
@@ -276,7 +277,7 @@ export class MenuSubcategoryService {
             }
         });
 
-        this.menuUtilsService.clearMenuCacheAsync('menus', subcategory.category.menu.establishment.slug);
+        this.menuUtilsService.clearMenuCacheAsync('menu-detail', subcategory.category.menu.establishment.slug, subcategory.category.menu.id);
         return { success: true };
     }
 
@@ -305,7 +306,7 @@ export class MenuSubcategoryService {
             ),
         );
 
-        this.menuUtilsService.clearMenuCacheAsync('menus', subcategory.category.menu.establishment.slug);
+        this.menuUtilsService.clearMenuCacheAsync('menu-detail', subcategory.category.menu.establishment.slug, subcategory.category.menu.id);
         return { success: true };
     }
 
@@ -333,7 +334,7 @@ export class MenuSubcategoryService {
             data
         });
 
-        this.menuUtilsService.clearMenuCacheAsync('menus', subcategory.category.menu.establishment.slug);
+        this.menuUtilsService.clearMenuCacheAsync('menu-detail', subcategory.category.menu.establishment.slug, subcategory.category.menu.id);
         return { success: true };
     }
 
@@ -358,7 +359,7 @@ export class MenuSubcategoryService {
                 ),
             );
 
-            this.menuUtilsService.clearMenuCacheAsync('menus', slug);
+            this.menuUtilsService.clearMenuCacheAsync('menu-detail', slug, menuId);
             return { success: true };
         } catch (error) {
             console.error('Error updating subcategory positions:', error);

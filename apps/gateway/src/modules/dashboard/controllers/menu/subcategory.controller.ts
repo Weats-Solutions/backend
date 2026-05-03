@@ -53,19 +53,21 @@ export class MenuSubcategoryController {
     @UseGuards(ClerkGuard, EstablishmentStaffGuard)
     @Patch('/:subcategoryId')
     updateSubcategory(
+        @Param('menuId') menuId: string,
         @Param('subcategoryId') subcategoryId: string,
         @Body() updateSubcategoryDto: any,
     ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.SUBCATEGORY_EDIT, { subcategoryId, updateSubcategoryDto });
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.SUBCATEGORY_EDIT, { menuId, subcategoryId, updateSubcategoryDto });
     }
 
     @Roles(EmployeeRoles.MANAGER)
     @UseGuards(ClerkGuard, EstablishmentStaffGuard)
     @Delete('/:subcategoryId')
     deleteSubcategory(
+        @Param('menuId') menuId: string,
         @Param('subcategoryId') subcategoryId: string,
     ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.SUBCATEGORY_DELETE, { subcategoryId });
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.SUBCATEGORY_DELETE, { menuId, subcategoryId });
     }
 
     @Roles(EmployeeRoles.MANAGER)
