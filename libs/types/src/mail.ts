@@ -3,6 +3,7 @@ export enum EmailTemplate {
     CREATE_ESTABLISHMENT = 'create-establishment',
     INVITE_EMPLOYEE = 'invite-employee',
     QRCODES = 'qrcodes',
+    QRCODES_SHARED = 'qrcodes-shared',
     WELCOME = 'welcome',
 
     // Subscription Templates Category
@@ -31,6 +32,7 @@ export type TemplateMap = {
     [EmailTemplate.CREATE_ESTABLISHMENT]: CreateEstablishmentContext;
     [EmailTemplate.INVITE_EMPLOYEE]: InviteEmployeeContext;
     [EmailTemplate.QRCODES]: QRCodesContext;
+    [EmailTemplate.QRCODES_SHARED]: QRCodesSharedContext;
     [EmailTemplate.WELCOME]: WelcomeContext;
 
     // Subscription Templates Category
@@ -84,6 +86,18 @@ export type InviteEmployeeContext = {
 export type QRCodesContext = {
     establishmentName: string;
     qrCodesCount: number;
+    serviceZones: Array<{
+        zoneName: string;
+        count: number;
+    }>;
+};
+
+// Template: pt/establishment/qrcodes-shared.hbs
+// Variables: {{establishmentName}}, {{qrCodesCount}}, {{senderName}}, {{#each serviceZones}} {{this.zoneName}}, {{this.count}} {{/each}}
+export type QRCodesSharedContext = {
+    establishmentName: string;
+    qrCodesCount: number;
+    senderName: string;
     serviceZones: Array<{
         zoneName: string;
         count: number;

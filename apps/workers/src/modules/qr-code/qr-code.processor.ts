@@ -54,10 +54,11 @@ export class QrCodeProcessor {
       establishmentId: string;
       establishmentName: string;
       userEmail: string;
+      recipientEmail: string;
       points: ServicePointInput[];
     }>,
   ) {
-    const { dto, establishmentId, establishmentName, userEmail, points } =
+    const { dto, establishmentId, establishmentName, userEmail, recipientEmail, points } =
       job.data;
     this.logger.log(
       `Processing QR Code batch job ${job.id} for ${establishmentId}`,
@@ -131,7 +132,7 @@ export class QrCodeProcessor {
       );
 
       // 4. Send email with ZIP
-      this.logger.log(`Sending QR Codes email to ${userEmail}`);
+      this.logger.log(`Sending QR Codes email to ${recipientEmail}`);
 
       // Re-order service zones for context
       const zonesMap = new Map<string, number>();
@@ -145,15 +146,29 @@ export class QrCodeProcessor {
         }),
       );
 
+      const isSharedEmail = recipientEmail !== userEmail;
+      const template = isSharedEmail
+        ? EmailTemplate.QRCODES_SHARED
+        : EmailTemplate.QRCODES;
+
+      const emailContext = isSharedEmail
+        ? {
+            establishmentName,
+            qrCodesCount: points.length,
+            senderName: userEmail, 
+            serviceZones,
+          }
+        : {
+            establishmentName,
+            qrCodesCount: points.length,
+            serviceZones,
+          };
+
       await this.emailProducer.send({
-        to: userEmail,
-        lang: 'pt', // Default to PT for now, could be passed from Gateway
-        template: EmailTemplate.QRCODES,
-        context: {
-          establishmentName,
-          qrCodesCount: points.length,
-          serviceZones,
-        },
+        to: recipientEmail,
+        lang: 'pt',
+        template,
+        context: emailContext,
         attachments: [
           {
             name: 'qr-codes.zip',
