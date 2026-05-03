@@ -6,6 +6,7 @@ import {
   IsBoolean,
   IsIn,
   IsInt,
+  IsEmail,
   Min,
   Max,
   ValidateIf,
@@ -70,4 +71,8 @@ export class GenerateQrCodesDto {
   @IsOptional()
   @IsString()
   imageId?: string;
+
+  @IsOptional()
+  @IsEmail()
+  recipientEmail?: string;
 }

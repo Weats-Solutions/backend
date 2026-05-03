@@ -99,6 +99,7 @@ export class QrCodesService {
       establishmentId,
       establishmentName: establishment.name,
       userEmail,
+      recipientEmail: dto.recipientEmail || userEmail,
       points,
     });
 
