@@ -22,7 +22,6 @@ export class EstablishmentWifiDto {
 }
 
 export class EstablishmentAnalyticsDto {
-    @Length(2, 50)
     @IsString()
     @IsOptional()
     googleAnalyticsId?: string;

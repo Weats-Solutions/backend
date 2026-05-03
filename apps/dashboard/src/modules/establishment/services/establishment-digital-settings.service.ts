@@ -129,7 +129,7 @@ export class EstablishmentDigitalSettingsService {
         return this.prisma.establishment.update({
             where: { id: establishment.id },
             data: {
-                googleAnalyticsId: analyticsDto.googleAnalyticsId,
+                googleAnalyticsId: analyticsDto.googleAnalyticsId || null,
             },
         });
     }
