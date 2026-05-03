@@ -21,10 +21,17 @@ export class EstablishmentWifiDto {
     wifiPassword?: string;
 }
 
+export class EstablishmentAnalyticsDto {
+    @Length(2, 50)
+    @IsString()
+    @IsOptional()
+    googleAnalyticsId?: string;
+}
+
 export class UpdateEstablishmentDigitalSettingsDto {
     @IsString()
     @IsNotEmpty()
-    @IsIn(['domain', 'wifi'])
+    @IsIn(['domain', 'wifi', 'analytics'])
     section: string;
 
     @ValidateIf(o => o.section === 'domain')
@@ -36,4 +43,9 @@ export class UpdateEstablishmentDigitalSettingsDto {
     @Type(() => EstablishmentWifiDto)
     @IsNotEmpty()
     wifi: EstablishmentWifiDto;
+
+    @ValidateIf(o => o.section === 'analytics')
+    @Type(() => EstablishmentAnalyticsDto)
+    @IsNotEmpty()
+    analytics: EstablishmentAnalyticsDto;
 }

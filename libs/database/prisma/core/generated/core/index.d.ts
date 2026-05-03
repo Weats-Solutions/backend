@@ -26521,6 +26521,7 @@ export namespace Prisma {
     timezone: string | null
     wifiSsid: string | null
     wifiPassword: string | null
+    googleAnalyticsId: string | null
     logoImageId: string | null
     bannerImageId: string | null
     activeThemeId: string | null
@@ -26564,6 +26565,7 @@ export namespace Prisma {
     timezone: string | null
     wifiSsid: string | null
     wifiPassword: string | null
+    googleAnalyticsId: string | null
     logoImageId: string | null
     bannerImageId: string | null
     activeThemeId: string | null
@@ -26608,6 +26610,7 @@ export namespace Prisma {
     timezone: number
     wifiSsid: number
     wifiPassword: number
+    googleAnalyticsId: number
     logoImageId: number
     bannerImageId: number
     activeThemeId: number
@@ -26653,6 +26656,7 @@ export namespace Prisma {
     timezone?: true
     wifiSsid?: true
     wifiPassword?: true
+    googleAnalyticsId?: true
     logoImageId?: true
     bannerImageId?: true
     activeThemeId?: true
@@ -26696,6 +26700,7 @@ export namespace Prisma {
     timezone?: true
     wifiSsid?: true
     wifiPassword?: true
+    googleAnalyticsId?: true
     logoImageId?: true
     bannerImageId?: true
     activeThemeId?: true
@@ -26740,6 +26745,7 @@ export namespace Prisma {
     timezone?: true
     wifiSsid?: true
     wifiPassword?: true
+    googleAnalyticsId?: true
     logoImageId?: true
     bannerImageId?: true
     activeThemeId?: true
@@ -26857,6 +26863,7 @@ export namespace Prisma {
     timezone: string
     wifiSsid: string | null
     wifiPassword: string | null
+    googleAnalyticsId: string | null
     logoImageId: string | null
     bannerImageId: string | null
     activeThemeId: string | null
@@ -26918,6 +26925,7 @@ export namespace Prisma {
     timezone?: boolean
     wifiSsid?: boolean
     wifiPassword?: boolean
+    googleAnalyticsId?: boolean
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
@@ -27004,6 +27012,7 @@ export namespace Prisma {
     timezone?: boolean
     wifiSsid?: boolean
     wifiPassword?: boolean
+    googleAnalyticsId?: boolean
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
@@ -27053,6 +27062,7 @@ export namespace Prisma {
     timezone?: boolean
     wifiSsid?: boolean
     wifiPassword?: boolean
+    googleAnalyticsId?: boolean
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
@@ -27102,6 +27112,7 @@ export namespace Prisma {
     timezone?: boolean
     wifiSsid?: boolean
     wifiPassword?: boolean
+    googleAnalyticsId?: boolean
     logoImageId?: boolean
     bannerImageId?: boolean
     activeThemeId?: boolean
@@ -27111,7 +27122,7 @@ export namespace Prisma {
     ownerId?: boolean
   }
 
-  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
+  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "googleAnalyticsId" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
   export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     metadata?: boolean | Establishment$metadataArgs<ExtArgs>
@@ -27251,6 +27262,7 @@ export namespace Prisma {
       timezone: string
       wifiSsid: string | null
       wifiPassword: string | null
+      googleAnalyticsId: string | null
       logoImageId: string | null
       bannerImageId: string | null
       activeThemeId: string | null
@@ -27756,6 +27768,7 @@ export namespace Prisma {
     readonly timezone: FieldRef<"Establishment", 'String'>
     readonly wifiSsid: FieldRef<"Establishment", 'String'>
     readonly wifiPassword: FieldRef<"Establishment", 'String'>
+    readonly googleAnalyticsId: FieldRef<"Establishment", 'String'>
     readonly logoImageId: FieldRef<"Establishment", 'String'>
     readonly bannerImageId: FieldRef<"Establishment", 'String'>
     readonly activeThemeId: FieldRef<"Establishment", 'String'>
@@ -112389,6 +112402,7 @@ export namespace Prisma {
     timezone: 'timezone',
     wifiSsid: 'wifiSsid',
     wifiPassword: 'wifiPassword',
+    googleAnalyticsId: 'googleAnalyticsId',
     logoImageId: 'logoImageId',
     bannerImageId: 'bannerImageId',
     activeThemeId: 'activeThemeId',
@@ -115466,6 +115480,7 @@ export namespace Prisma {
     timezone?: StringFilter<"Establishment"> | string
     wifiSsid?: StringNullableFilter<"Establishment"> | string | null
     wifiPassword?: StringNullableFilter<"Establishment"> | string | null
+    googleAnalyticsId?: StringNullableFilter<"Establishment"> | string | null
     logoImageId?: StringNullableFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableFilter<"Establishment"> | string | null
@@ -115551,6 +115566,7 @@ export namespace Prisma {
     timezone?: SortOrder
     wifiSsid?: SortOrderInput | SortOrder
     wifiPassword?: SortOrderInput | SortOrder
+    googleAnalyticsId?: SortOrderInput | SortOrder
     logoImageId?: SortOrderInput | SortOrder
     bannerImageId?: SortOrderInput | SortOrder
     activeThemeId?: SortOrderInput | SortOrder
@@ -115640,6 +115656,7 @@ export namespace Prisma {
     timezone?: StringFilter<"Establishment"> | string
     wifiSsid?: StringNullableFilter<"Establishment"> | string | null
     wifiPassword?: StringNullableFilter<"Establishment"> | string | null
+    googleAnalyticsId?: StringNullableFilter<"Establishment"> | string | null
     logoImageId?: StringNullableFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableFilter<"Establishment"> | string | null
@@ -115724,6 +115741,7 @@ export namespace Prisma {
     timezone?: SortOrder
     wifiSsid?: SortOrderInput | SortOrder
     wifiPassword?: SortOrderInput | SortOrder
+    googleAnalyticsId?: SortOrderInput | SortOrder
     logoImageId?: SortOrderInput | SortOrder
     bannerImageId?: SortOrderInput | SortOrder
     activeThemeId?: SortOrderInput | SortOrder
@@ -115774,6 +115792,7 @@ export namespace Prisma {
     timezone?: StringWithAggregatesFilter<"Establishment"> | string
     wifiSsid?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     wifiPassword?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    googleAnalyticsId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     logoImageId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
@@ -122889,6 +122908,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -122969,6 +122989,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -123049,6 +123070,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -123129,6 +123151,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -123209,6 +123232,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -123253,6 +123277,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -123292,6 +123317,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -131152,6 +131178,7 @@ export namespace Prisma {
     timezone?: SortOrder
     wifiSsid?: SortOrder
     wifiPassword?: SortOrder
+    googleAnalyticsId?: SortOrder
     logoImageId?: SortOrder
     bannerImageId?: SortOrder
     activeThemeId?: SortOrder
@@ -131195,6 +131222,7 @@ export namespace Prisma {
     timezone?: SortOrder
     wifiSsid?: SortOrder
     wifiPassword?: SortOrder
+    googleAnalyticsId?: SortOrder
     logoImageId?: SortOrder
     bannerImageId?: SortOrder
     activeThemeId?: SortOrder
@@ -131238,6 +131266,7 @@ export namespace Prisma {
     timezone?: SortOrder
     wifiSsid?: SortOrder
     wifiPassword?: SortOrder
+    googleAnalyticsId?: SortOrder
     logoImageId?: SortOrder
     bannerImageId?: SortOrder
     activeThemeId?: SortOrder
@@ -143797,6 +143826,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -143876,6 +143906,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -143971,6 +144002,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -144050,6 +144082,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -144129,6 +144162,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -144208,6 +144242,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -144303,6 +144338,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -144382,6 +144418,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -144491,6 +144528,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -144570,6 +144608,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -144694,6 +144733,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -144773,6 +144813,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -145003,6 +145044,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -145082,6 +145124,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -145261,6 +145304,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -145340,6 +145384,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -145618,6 +145663,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -145697,6 +145743,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -145841,6 +145888,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -145920,6 +145968,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -146282,6 +146331,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -146361,6 +146411,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -146506,6 +146557,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -146585,6 +146637,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -147110,6 +147163,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -147189,6 +147243,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -147311,6 +147366,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -147390,6 +147446,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -147609,6 +147666,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -147688,6 +147746,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -147783,6 +147842,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -147862,6 +147922,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -150982,6 +151043,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -151061,6 +151123,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -151156,6 +151219,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -151235,6 +151299,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -151355,6 +151420,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -151434,6 +151500,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -151576,6 +151643,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -151655,6 +151723,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -151734,6 +151803,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -151813,6 +151883,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -151949,6 +152020,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -152028,6 +152100,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -152154,6 +152227,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -152233,6 +152307,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -152328,6 +152403,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -152407,6 +152483,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -152486,6 +152563,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -152565,6 +152643,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     activeThemeId?: string | null
     scheduleId?: string | null
@@ -152654,6 +152733,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -152733,6 +152813,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
     scheduleId?: string | null
@@ -152822,6 +152903,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -152901,6 +152983,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -153197,6 +153280,7 @@ export namespace Prisma {
     timezone?: StringFilter<"Establishment"> | string
     wifiSsid?: StringNullableFilter<"Establishment"> | string | null
     wifiPassword?: StringNullableFilter<"Establishment"> | string | null
+    googleAnalyticsId?: StringNullableFilter<"Establishment"> | string | null
     logoImageId?: StringNullableFilter<"Establishment"> | string | null
     bannerImageId?: StringNullableFilter<"Establishment"> | string | null
     activeThemeId?: StringNullableFilter<"Establishment"> | string | null
@@ -153268,6 +153352,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -153347,6 +153432,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -153549,6 +153635,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -153628,6 +153715,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -153723,6 +153811,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -153802,6 +153891,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -153881,6 +153971,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -153960,6 +154051,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -154055,6 +154147,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -154134,6 +154227,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -154213,6 +154307,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -154292,6 +154387,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -154387,6 +154483,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -154466,6 +154563,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -154565,6 +154663,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -154644,6 +154743,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -155166,6 +155266,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -155245,6 +155346,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -156119,6 +156221,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -156198,6 +156301,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -156331,6 +156435,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -156410,6 +156515,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -157689,6 +157795,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -157768,6 +157875,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -157919,6 +158027,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -157998,6 +158107,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -159023,6 +159133,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -159102,6 +159213,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -159248,6 +159360,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -159327,6 +159440,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -159516,6 +159630,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -159595,6 +159710,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -159779,6 +159895,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -159858,6 +159975,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -160953,6 +161071,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -161032,6 +161151,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -161157,6 +161277,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -161236,6 +161357,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -161409,6 +161531,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -161488,6 +161611,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -161634,6 +161758,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -161713,6 +161838,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -161877,6 +162003,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
@@ -161956,6 +162083,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -162188,6 +162316,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
@@ -162267,6 +162396,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -162639,6 +162769,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -162718,6 +162849,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -162939,6 +163071,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -163018,6 +163151,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -163402,6 +163536,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -163481,6 +163616,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -163662,6 +163798,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -163741,6 +163878,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -163866,6 +164004,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -163945,6 +164084,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -164189,6 +164329,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -164268,6 +164409,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -164414,6 +164556,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -164493,6 +164636,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -164949,6 +165093,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -165028,6 +165173,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -166015,6 +166161,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -166094,6 +166241,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -166328,6 +166476,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -166407,6 +166556,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -166941,6 +167091,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -167020,6 +167171,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -167191,6 +167343,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -167270,6 +167423,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -167725,6 +167879,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -167804,6 +167959,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -168072,6 +168228,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -168151,6 +168308,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -168421,6 +168579,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -168500,6 +168659,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -168676,6 +168836,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -168755,6 +168916,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -168921,6 +169083,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -169000,6 +169163,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -169129,6 +169293,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -169208,6 +169373,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -169539,6 +169705,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -169618,6 +169785,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -169738,6 +169906,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -169817,6 +169986,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -170317,6 +170487,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -170396,6 +170567,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -170491,6 +170663,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -170570,6 +170743,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -170739,6 +170913,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -170818,6 +170993,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     scheduleId?: string | null
@@ -170935,6 +171111,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -171014,6 +171191,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -171153,6 +171331,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -171232,6 +171411,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -171365,6 +171545,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -171444,6 +171625,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -171621,6 +171803,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
@@ -171700,6 +171883,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -171837,6 +172021,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -171916,6 +172101,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -174127,6 +174313,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     activeThemeId?: string | null
     scheduleId?: string | null
@@ -174170,6 +174357,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
     scheduleId?: string | null
@@ -174261,6 +174449,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -174340,6 +174529,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -174419,6 +174609,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -174462,6 +174653,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -174541,6 +174733,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -174620,6 +174813,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -177901,6 +178095,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     scheduleId?: string | null
@@ -177952,6 +178147,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -178031,6 +178227,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -178110,6 +178307,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -178200,6 +178398,7 @@ export namespace Prisma {
     timezone?: string
     wifiSsid?: string | null
     wifiPassword?: string | null
+    googleAnalyticsId?: string | null
     logoImageId?: string | null
     bannerImageId?: string | null
     activeThemeId?: string | null
@@ -178308,6 +178507,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
@@ -178387,6 +178587,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -178466,6 +178667,7 @@ export namespace Prisma {
     timezone?: StringFieldUpdateOperationsInput | string
     wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
     wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
     activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null

@@ -45,6 +45,8 @@ model Establishment {
   wifiSsid     String?
   wifiPassword String?
 
+  googleAnalyticsId String?
+
   // ─── Branding & Visuals ────────────────────────────────────────────────────
   logoImageId   String?
   bannerImageId String?

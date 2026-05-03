@@ -341,6 +341,7 @@ exports.Prisma.EstablishmentScalarFieldEnum = {
   timezone: 'timezone',
   wifiSsid: 'wifiSsid',
   wifiPassword: 'wifiPassword',
+  googleAnalyticsId: 'googleAnalyticsId',
   logoImageId: 'logoImageId',
   bannerImageId: 'bannerImageId',
   activeThemeId: 'activeThemeId',

@@ -246,6 +246,9 @@ export class LandingpageService {
                     ssid: establishment.wifiSsid,
                     password: establishment.wifiPassword,
                 },
+                analytics: {
+                    googleAnalyticsId: establishment.googleAnalyticsId,
+                },
                 takeway: true,
                 reservations: true,
             };

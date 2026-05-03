@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
 import { ERRORS, RESERVED_DOMAINS } from '@weats/common';
 import {
+    EstablishmentAnalyticsDto,
     EstablishmentDomainDto, EstablishmentWifiDto,
     UpdateEstablishmentDigitalSettingsDto
 } from '@weats/contracts';
@@ -27,6 +28,7 @@ export class EstablishmentDigitalSettingsService {
                 slug: true,
                 wifiSsid: true,
                 wifiPassword: true,
+                googleAnalyticsId: true,
             },
         });
 
@@ -37,6 +39,9 @@ export class EstablishmentDigitalSettingsService {
             wifi: {
                 ssid: establishmentData.wifiSsid,
                 password: establishmentData.wifiPassword,
+            },
+            analytics: {
+                googleAnalyticsId: establishmentData.googleAnalyticsId,
             },
         };
     }
@@ -61,6 +66,13 @@ export class EstablishmentDigitalSettingsService {
                 result = await this.updateWifi(
                     establishment,
                     updateEstablishmentDigitalSettingsDto.wifi,
+                );
+                this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
+                break;
+            case 'analytics':
+                result = await this.updateAnalytics(
+                    establishment,
+                    updateEstablishmentDigitalSettingsDto.analytics,
                 );
                 this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
                 break;
@@ -106,6 +118,18 @@ export class EstablishmentDigitalSettingsService {
             data: {
                 wifiSsid: wifiDto.wifiSsid,
                 wifiPassword: wifiDto.wifiPassword,
+            },
+        });
+    }
+
+    async updateAnalytics(
+        establishment: Establishment,
+        analyticsDto: EstablishmentAnalyticsDto,
+    ) {
+        return this.prisma.establishment.update({
+            where: { id: establishment.id },
+            data: {
+                googleAnalyticsId: analyticsDto.googleAnalyticsId,
             },
         });
     }
