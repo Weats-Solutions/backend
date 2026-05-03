@@ -146,15 +146,29 @@ export class QrCodeProcessor {
         }),
       );
 
+      const isSharedEmail = recipientEmail !== userEmail;
+      const template = isSharedEmail
+        ? EmailTemplate.QRCODES_SHARED
+        : EmailTemplate.QRCODES;
+
+      const emailContext = isSharedEmail
+        ? {
+            establishmentName,
+            qrCodesCount: points.length,
+            senderName: userEmail, 
+            serviceZones,
+          }
+        : {
+            establishmentName,
+            qrCodesCount: points.length,
+            serviceZones,
+          };
+
       await this.emailProducer.send({
         to: recipientEmail,
-        lang: 'pt', // Default to PT for now, could be passed from Gateway
-        template: EmailTemplate.QRCODES,
-        context: {
-          establishmentName,
-          qrCodesCount: points.length,
-          serviceZones,
-        },
+        lang: 'pt',
+        template,
+        context: emailContext,
         attachments: [
           {
             name: 'qr-codes.zip',
