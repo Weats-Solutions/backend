@@ -18,6 +18,7 @@ export class UserService {
     async getEstablishments(userId: string) {
         const establishments = await this.prisma.establishment.findMany({
             where: { ownerId: userId },
+            orderBy: { createdAt: 'desc' },
             select: {
                 id: true,
                 name: true,
