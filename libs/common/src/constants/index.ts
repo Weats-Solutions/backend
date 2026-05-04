@@ -6,4 +6,3 @@ export * from './menu';
 export * from './redis';
 export * from './schedule';
 export * from './services';
-export * from './throttle';
