@@ -1,5 +1,4 @@
 import { Controller, Get, Param, Query, Inject, Post, Body, UseGuards } from '@nestjs/common';
-import { ThrottlePublic } from '@weats/common/decorators/throttle.decorator';
 import { EstablishmentLanguage } from '@weats/database';
 import { ToUpperCasePipe } from '@weats/common/pipes/upper-case.pipe';
 import { ClientProxy } from '@nestjs/microservices';
@@ -10,7 +9,6 @@ import { Establishment } from '@weats/types';
 import { UpdateThemeSettingsDto } from '@weats/contracts/dashboard/dtos/theme/update-theme-settings.dto';
 
 @Controller('landingpage')
-@ThrottlePublic()
 export class LandingpageController {
   constructor(
     @Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy,
