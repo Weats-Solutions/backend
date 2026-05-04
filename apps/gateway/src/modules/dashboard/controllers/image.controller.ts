@@ -8,7 +8,6 @@ import {
     UseGuards,
     Query,
     Inject,
-    SetMetadata,
 } from '@nestjs/common';
 import { FEATURE_KEY } from '@weats/common/constants';
 import { FeatureLimitGuard } from '@weats/common/guards/feature-limit.guard';
@@ -21,13 +20,9 @@ import { Establishment } from '@weats/types/establishment';
 import { GenerateUploadUrlsDto } from '@weats/contracts/dashboard/dtos/image/upload-urls.dto';
 import { ConfirmUploadsDto } from '@weats/contracts/dashboard/dtos/image/confirm-upload.dto';
 import { UpdateImageDto } from '@weats/contracts/dashboard/dtos/image/update-image.dto';
-import {
-    ThrottleRead,
-    ThrottleWrite,
-} from '@weats/common/decorators/throttle.decorator';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { ClientProxy } from '@nestjs/microservices';
-import { DASHBOARD_SERVICE, RequiresFeature } from '@weats/common';
+import { DASHBOARD_SERVICE, RequiresFeature, RateLimit } from '@weats/common';
 
 
 
@@ -40,7 +35,7 @@ export class ImageController {
     @Roles()
     @UseGuards(ClerkGuard, EstablishmentStaffGuard)
     @Get()
-    @ThrottleRead()
+    @RateLimit('RELAXED') // 120 req/min — listagem de imagens
     findImagesByEstablishment(
         @CurrentEstablishment() establishment: Establishment,
         @Query('cursor') cursor?: string,
@@ -63,7 +58,7 @@ export class ImageController {
     @Roles()
     @UseGuards(ClerkGuard, EstablishmentStaffGuard)
     @Patch(':id')
-    @ThrottleWrite()
+    @RateLimit('MEDIUM') // 30 req/min — rename de imagem
     async updateImageName(
         @Param('id') id: string,
         @Body() body: UpdateImageDto,
@@ -79,7 +74,7 @@ export class ImageController {
     @Roles()
     @UseGuards(ClerkGuard, EstablishmentStaffGuard)
     @Post('delete')
-    @ThrottleWrite()
+    @RateLimit('MEDIUM') // 30 req/min — delete de imagens
     async deleteImages(
         @Body() body: { imageIds: string[] },
         @CurrentEstablishment() establishment: Establishment,
@@ -94,7 +89,7 @@ export class ImageController {
     @RequiresFeature(feature.images)
     @UseGuards(ClerkGuard, EstablishmentStaffGuard, FeatureLimitGuard)
     @Post('direct-upload-urls')
-    @ThrottleWrite()
+    @RateLimit('MEDIUM') // 30 req/min — gera URLs de upload
     async generateR2DirectUploadUrls(
         @Body() body: GenerateUploadUrlsDto,
         @CurrentEstablishment() establishment: Establishment,
@@ -108,7 +103,7 @@ export class ImageController {
     @Roles()
     @UseGuards(ClerkGuard, EstablishmentStaffGuard)
     @Post('confirm-direct-uploads')
-    @ThrottleWrite()
+    @RateLimit('MEDIUM') // 30 req/min — confirma uploads
     async confirmDirectUploads(
         @Body() body: ConfirmUploadsDto,
         @CurrentEstablishment() establishment: Establishment,

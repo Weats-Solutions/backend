@@ -23,6 +23,12 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
+      "@weats/cache": [
+        "libs/cache/src"
+      ],
+      "@weats/cache/*": [
+        "libs/cache/src/*"
+      ],
       "@weats/bull": [
         "libs/bull/src"
       ],
@@ -70,6 +76,12 @@
       ],
       "@weats/item-core/*": [
         "libs/item-core/src/*"
+      ],
+      "@weats/rate-limit": [
+        "libs/rate-limit/src"
+      ],
+      "@weats/rate-limit/*": [
+        "libs/rate-limit/src/*"
       ],
       "@weats/translate": [
         "libs/translate/src"

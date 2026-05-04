@@ -98,6 +98,9 @@ class EnvironmentVariables {
   @IsNumber()
   REDIS_NEXT_CACHE_DB: number;
 
+  @IsNumber()
+  REDIS_RATE_LIMIT_DB: number;
+
   @IsString()
   ENCRYPTION_ALGORITHM: string;
 

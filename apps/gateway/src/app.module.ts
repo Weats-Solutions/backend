@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './user/users.module';
@@ -10,6 +11,8 @@ import { ConfigsModule } from '@weats/configs';
 import { IntegrationsModule } from '@weats/integrations';
 import { TranslateModule } from './modules/translate/translate.module';
 import { QueuesModule } from '@weats/bull';
+import { RateLimitModule } from '@weats/rate-limit';
+import { RateLimitGuard } from '@weats/common';
 
 
 @Module({
@@ -19,11 +22,6 @@ import { QueuesModule } from '@weats/bull';
       validate,
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
     }),
-    /*
-    ThrottlerModule.forRootAsync({
-      useFactory: () => throttlerConfig,
-    }),
-    */
     ConfigsModule,
     IntegrationsModule,
     UsersModule,
@@ -31,14 +29,17 @@ import { QueuesModule } from '@weats/bull';
     DashboardModule,
     TranslateModule,
     QueuesModule,
+    RateLimitModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
-    /*{
+    // Rate Limiting global — 200 req/min por utilizador por defeito
+    // Rotas sensíveis têm políticas específicas via @RateLimit('POLICY')
+    {
       provide: APP_GUARD,
-      useClass: ThrottlerGuard,
-    },*/
+      useClass: RateLimitGuard,
+    },
   ],
 }) export class AppModule { }
 /*

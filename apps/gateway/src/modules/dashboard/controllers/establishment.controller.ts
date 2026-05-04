@@ -20,7 +20,8 @@ import {
   EstablishmentStaffGuard,
   DASHBOARD_SERVICE,
   ERRORS, FeatureUsageService,
-  SCHEDULE_VALIDATION_GROUPS
+  SCHEDULE_VALIDATION_GROUPS,
+  RateLimit,
 } from '@weats/common';
 import type { Establishment, SendEmailDto, User } from '@weats/types';
 import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
@@ -64,6 +65,7 @@ export class EstablishmentController {
 
   @UseGuards(ClerkGuard)
   @Post()
+  @RateLimit('STRICT') // 5 req/min — criar establishment é raro e envolve Stripe + DB
   createEstablishment(
     @Body() createEstablishmentDto: CreateEstablishmentDto,
     @CurrentUser() user: User,
@@ -241,6 +243,7 @@ export class EstablishmentController {
   @Roles()
   @UseGuards(ClerkGuard, EstablishmentStaffGuard)
   @Post(':id/settings/favicon/process')
+  @RateLimit('STRICT') // 5 req/min — job pesado: gera e faz upload de 5 variantes de imagem
   processEstablishmentFavicon(
     @CurrentEstablishment() establishment: Establishment,
     @Param('id') id: string,

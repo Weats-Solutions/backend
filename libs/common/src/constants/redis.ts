@@ -4,4 +4,5 @@ export type RedisServiceType =
     | 'jobs'
     | 'cache'
     | 'realtime'
-    | 'nextCache';
+    | 'nextCache'
+    | 'rateLimit';

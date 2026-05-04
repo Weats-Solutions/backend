@@ -86,7 +86,7 @@ export class QrCodesService {
     // 2. Add job to queue
     const job = await this.qrCodeQueue.add('generate-batch', {
       dto,
-      establishmentId: establishment.id,
+      establishment,
       userEmail,
       recipientEmail: dto.recipientEmail || userEmail,
       points,

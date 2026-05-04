@@ -12,6 +12,9 @@ import Stripe from 'stripe';
 import { WebhooksProcessor } from './webhooks.processor';
 import { DatabaseModule } from '@weats/database';
 import { QueuesModule } from '@weats/bull';
+import { RateLimitModule } from '@weats/rate-limit';
+import { RateLimitGuard } from '@weats/common';
+import { APP_GUARD } from '@nestjs/core';
 
 import { WebhooksController } from './webhooks.controller';
 
@@ -27,6 +30,7 @@ import { WebhooksController } from './webhooks.controller';
     QueuesModule,
     StripeModule,
     DiscordModule,
+    RateLimitModule,
   ],
   controllers: [WebhooksController],
   providers: [
@@ -49,6 +53,10 @@ import { WebhooksController } from './webhooks.controller';
         });
       },
       inject: [ConfigService],
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RateLimitGuard,
     },
   ],
   exports: [WebhooksService]

@@ -5,7 +5,7 @@ import {
     UseGuards,
     Inject,
 } from '@nestjs/common';
-import { ClerkGuard, EstablishmentStaffGuard, CurrentEstablishment, CurrentUser, Roles, DASHBOARD_SERVICE, DASHBOARD_PATTERNS } from '@weats/common';
+import { ClerkGuard, EstablishmentStaffGuard, CurrentEstablishment, CurrentUser, Roles, DASHBOARD_SERVICE, DASHBOARD_PATTERNS, RateLimit } from '@weats/common';
 import { Establishment, User } from '@weats/types';
 import { GenerateQrCodesDto } from '@weats/contracts';
 import { EmployeeRoles } from '@weats/database';
@@ -19,6 +19,7 @@ export class QrCodesController {
     @Roles(EmployeeRoles.MANAGER)
     @UseGuards(ClerkGuard, EstablishmentStaffGuard)
     @Post('generate')
+    @RateLimit('STRICT') // 5 req/min — job pesado: gera ZIPs, envia email, consome Redis
     async generateQrCodes(
         @CurrentEstablishment() establishment: Establishment,
         @CurrentUser() user: User,

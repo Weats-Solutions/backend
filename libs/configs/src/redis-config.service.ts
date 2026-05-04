@@ -41,8 +41,9 @@ export class RedisConfigService {
     const dbMap: Record<RedisServiceType, number> = {
       jobs: Number(this.configService.getOrThrow<string>('REDIS_JOB_DB')),
       cache: Number(this.configService.getOrThrow<string>('REDIS_CACHE_DB')),
-      realtime: Number(this.configService.get<string>('REDIS_REALTIME_DB') || 9),
+      realtime: Number(this.configService.get<string>('REDIS_REALTIME_DB')),
       nextCache: Number(this.configService.getOrThrow<string>('REDIS_NEXT_CACHE_DB')),
+      rateLimit: Number(this.configService.get<string>('REDIS_RATE_LIMIT_DB')),
     };
 
     return dbMap[serviceType];

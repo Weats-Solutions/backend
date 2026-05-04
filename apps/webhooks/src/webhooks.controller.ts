@@ -14,6 +14,7 @@ import { Queue } from 'bull';
 import { QUEUES } from '@weats/bull/queues/queues.constants';
 import { StripeService } from "@weats/integrations/stripe/stripe.service";
 import { ClerkService } from "@weats/integrations/clerk/clerk.service";
+import { RateLimit } from '@weats/common';
 
 @Controller('webhooks')
 export class WebhooksController {
@@ -27,6 +28,7 @@ export class WebhooksController {
 
     @Version('1')
     @Post('stripe')
+    @RateLimit('WEBHOOK')
     async handleStripeWebhook(@Req() req: RawBodyRequest<Request>, @Res() res: Response) {
         try {
             const signature = req.headers['stripe-signature'] as string;
@@ -66,6 +68,7 @@ export class WebhooksController {
 
     @Version('1')
     @Post('clerk')
+    @RateLimit('WEBHOOK')
     async handleClerkWebhook(
         @Headers('svix-signature') signature: string,
         @Headers('svix-id') svixId: string,

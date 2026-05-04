@@ -1,11 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { MicroserviceExceptionFilter } from '@weats/common/filters/microservice-exception.filter';
-import { ResponseInterceptor } from '@weats/common/interceptors/response.interceptor';
-import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
+import {
+  Logger,
+  ValidationPipe,
+  VersioningType,
+} from '@nestjs/common';
 import { AppConfigService, getCorsOptions } from '@weats/configs';
 import cookieParser from 'cookie-parser';
+
+import { MicroserviceExceptionFilter } from '@weats/common/filters/microservice-exception.filter';
+import { ResponseInterceptor } from '@weats/common/interceptors/response.interceptor';
+
 import { EupagoConfigService } from '@weats/configs/eupago-config.service';
+
 import { Queue } from 'bull';
 import { createBullBoard } from '@bull-board/api';
 import { BullAdapter } from '@bull-board/api/bullAdapter';
@@ -13,28 +20,64 @@ import { ExpressAdapter as BBExpressAdapter } from '@bull-board/express';
 import { getQueueToken } from '@nestjs/bull';
 import { QUEUES } from '@weats/bull/queues/queues.constants';
 
+import {
+  CorePrismaService,
+  OrdersPrismaService,
+} from '@weats/database';
+import helmet from 'helmet';
+import { NestExpressApplication } from '@nestjs/platform-express';
+
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.useGlobalFilters(new MicroserviceExceptionFilter());
-  app.useGlobalInterceptors(new ResponseInterceptor());
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const logger = new Logger('Gateway');
+
+  // =========================
+  // SERVICES
+  // =========================
   const appConfigService = app.get(AppConfigService);
   const eupagoConfigService = app.get(EupagoConfigService);
+
+  const corePrisma = app.get(CorePrismaService);
+  const ordersPrisma = app.get(OrdersPrismaService);
+
   const gatewayPort = appConfigService.getGatewayPort();
   const nodeEnv = appConfigService.getNodeEnv();
   const eupagoEnvironment = eupagoConfigService.getEupagoEnvironment();
 
-  const logger = new Logger('Gateway');
+  // =========================
+  // GLOBAL MIDDLEWARE
+  // =========================
   app.enableCors(getCorsOptions(appConfigService));
   app.use(cookieParser());
+  app.use(helmet());
 
-  // Obter as queues
+
+  app.useGlobalFilters(new MicroserviceExceptionFilter());
+  app.useGlobalInterceptors(new ResponseInterceptor());
+
+  app.enableVersioning({
+    type: VersioningType.URI,
+    prefix: 'v',
+    defaultVersion: '1',
+  });
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
+
+  // =========================
+  // BULL BOARD
+  // =========================
   const emailQueue = app.get<Queue>(getQueueToken(QUEUES.EMAIL));
   const webhookQueue = app.get<Queue>(getQueueToken(QUEUES.WEBHOOK));
   const imageQueue = app.get<Queue>(getQueueToken(QUEUES.IMAGE));
   const qrCodeQueue = app.get<Queue>(getQueueToken(QUEUES.QRCODE));
   const languageSyncQueue = app.get<Queue>(getQueueToken(QUEUES.LANGUAGES));
 
-  // Configurar Bull Board ANTES do versionamento e pipes
   const serverAdapter = new BBExpressAdapter();
   serverAdapter.setBasePath('/admin/queues');
 
@@ -50,35 +93,75 @@ async function bootstrap() {
   });
 
   app.use('/admin/queues', serverAdapter.getRouter());
-  logger.log(`✅ Bull Board disponível em http://localhost:${gatewayPort}/admin/queues`);
 
-  // Configurações globais do NestJS (Versionamento e Pipes)
-  app.enableVersioning({
-    type: VersioningType.URI,
-    prefix: 'v',
-    defaultVersion: '1',
-  });
-
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
-    }),
-  );
-
+  // =========================
+  // SERVER OPTIMIZATIONS
+  // =========================
   const server = app.getHttpServer();
+  server.keepAliveTimeout = 61 * 1000;
+  server.headersTimeout = 65 * 1000;
 
   app.enableShutdownHooks();
 
-  await app.listen(gatewayPort, () => {
-    logger.log(`🚀 Servidor em http://localhost:${gatewayPort} - ${nodeEnv}`);
-    logger.log(`Server timeout: ${server.timeout}`);
-    server.keepAliveTimeout = 61 * 1000;
-    logger.log(`Server keepAliveTimeout: ${server.keepAliveTimeout / 1000}s `);
-    server.headersTimeout = 65 * 1000;
-    logger.log(`Server headersTimeout: ${server.headersTimeout / 1000}s `);
-    logger.log(`Eupago em modo ${eupagoEnvironment}`)
+  // =========================
+  // STARTUP SEQUENCE (SAFE)
+  // =========================
+
+  // DB connections FIRST (fail fast se algo estiver errado)
+  await corePrisma.$connect();
+  await ordersPrisma.$connect();
+
+  // Start server only after dependencies are ready
+  await app.listen(gatewayPort);
+
+  // =========================
+  // LOGS (AGRUPADOS NO FINAL)
+  // =========================
+  logger.log('===================================');
+  logger.log(`🚀 Gateway running on http://localhost:${gatewayPort}`);
+  logger.log(`🌍 Environment: ${nodeEnv}`);
+  logger.log(`💳 Eupago mode: ${eupagoEnvironment}`);
+  logger.log(`⏱ KeepAlive: ${server.keepAliveTimeout / 1000}s`);
+  logger.log(`⏱ HeadersTimeout: ${server.headersTimeout / 1000}s`);
+  logger.log('===================================');
+
+  logger.log('📦 Database connections:');
+  logger.log('✔ Core Database connected');
+  logger.log('✔ Orders Database connected');
+
+  logger.log('⚡ Bull queues:');
+  logger.log('✔ Email queue ready');
+  logger.log('✔ Webhook queue ready');
+  logger.log('✔ Image queue ready');
+  logger.log('✔ QR Code queue ready');
+  logger.log('✔ Language sync queue ready');
+
+  logger.log('===================================');
+  logger.log('📊 Admin panel: /admin/queues');
+  logger.log('===================================');
+
+  // =========================
+  // GRACEFUL SHUTDOWN
+  // =========================
+  process.on('SIGTERM', async () => {
+    logger.warn('SIGTERM received, shutting down...');
+
+    await app.close();
+    await corePrisma.$disconnect();
+    await ordersPrisma.$disconnect();
+
+    logger.log('Graceful shutdown completed');
+  });
+
+  process.on('SIGINT', async () => {
+    logger.warn('SIGINT received, shutting down...');
+
+    await app.close();
+    await corePrisma.$disconnect();
+    await ordersPrisma.$disconnect();
+
+    logger.log('Graceful shutdown completed');
   });
 }
+
 bootstrap();
