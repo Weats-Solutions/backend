@@ -40,6 +40,7 @@ export class QrCodeController {
         httpOnly: true,
         secure: true,
         sameSite: 'strict',
+        domain: '.weats.pro',
         maxAge: 4 * 60 * 60 * 1000, // 4 hours in ms
         path: '/',
       });
