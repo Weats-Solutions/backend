@@ -20,9 +20,9 @@ import { RealtimeV2Error } from './realtime-v2.constants';
 
 @WebSocketGateway({
   namespace: 'realtime-v2-client',
-  cors: { 
-    origin: ['http://localhost:3001', 'http://localhost:3002', 'http://localhost:4000', 'http://localhost:3000'],
-    credentials: true 
+  cors: {
+    origin: ['http://localhost:3001', 'http://localhost:3002', 'http://localhost:4000', 'http://localhost:3000', 'https://*.weats.pro'],
+    credentials: true
   },
   pingInterval: 15000,
   pingTimeout: 20000,
@@ -132,7 +132,7 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
 
     socket.join(this.rooms.est(estId));
     socket.join(this.rooms.servicePoint(estId, spId));
-    
+
     const count = (this.server as any).sockets.size;
     this.logger.log(`[V2 CONNECT] Client ${clientId} na mesa ${spId} (Total: ${count})`);
   }
