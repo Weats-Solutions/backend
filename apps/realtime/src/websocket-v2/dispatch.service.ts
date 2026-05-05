@@ -28,12 +28,12 @@ export class RealtimeV2DispatchService {
     this.logger.log(`[V2 DISPATCH] call:requested est=${establishmentId} sp=${payload.servicePointId}`);
   }
 
-  emitCallRemoved(establishmentId: string, servicePointId: string, clientId: string) {
+  emitCallRemoved(establishmentId: string, servicePointId: string, clientId?: string) {
     this.staffServer?.to(this.rooms.est(establishmentId)).emit('call:removed', {
       servicePointId,
       clientId,
     });
-    this.logger.log(`[V2 DISPATCH] call:removed est=${establishmentId} sp=${servicePointId}`);
+    this.logger.log(`[V2 DISPATCH] call:removed est=${establishmentId} sp=${servicePointId}${clientId ? ` client=${clientId}` : ''}`);
   }
 
   emitClientStatus(

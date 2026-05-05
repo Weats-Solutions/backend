@@ -106,6 +106,7 @@ export class RealtimeV2StaffGateway implements OnGatewayInit {
       return { error: 'servicePointId e clientId são obrigatórios' };
     }
 
+    // 1. Avisar TODOS na mesa que o staff está a caminho
     this.dispatchService.emitClientStatus(
       establishmentId,
       payload.servicePointId,
@@ -116,12 +117,11 @@ export class RealtimeV2StaffGateway implements OnGatewayInit {
       },
     );
 
-    this.securityService.cancelPendingDisconnectCleanup(
-      this.securityService.buildConnectionKey(establishmentId, payload.servicePointId, payload.clientId),
-    );
+    // 2. Limpar TODOS os pedidos desta mesa no Redis
+    await this.stateService.removeActiveCall(establishmentId, payload.servicePointId);
 
-    await this.stateService.removeActiveCall(establishmentId, payload.servicePointId, payload.clientId);
-    this.dispatchService.emitCallRemoved(establishmentId, payload.servicePointId, payload.clientId);
+    // 3. Avisar todos os KDS para removerem os alertas desta mesa
+    this.dispatchService.emitCallRemoved(establishmentId, payload.servicePointId);
 
     return { success: true };
   }

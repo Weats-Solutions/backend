@@ -55,7 +55,7 @@ export interface CallRequestedPayload {
 
 export interface CallRemovedPayload {
   servicePointId: string;
-  clientId: string;
+  clientId?: string;
 }
 
 export interface CallStatusPayload {
