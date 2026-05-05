@@ -656,15 +656,20 @@ model Establishment {
   tripAdvisorUrl  String?
   websiteUrl      String?
 
+  // ─── Configurações de Módulos ──────────────────────────────────────────────
+  myPageModule       Boolean @default(false)
+  callStaffModule    Boolean @default(false)
+  takeAwayModule     Boolean @default(false)
+  reservationsModule Boolean @default(false)
+
   // ─── Configurações ─────────────────────────────────────────────────────────
   primaryLanguage    EstablishmentLanguage   @default(PT)
   availableLanguages EstablishmentLanguage[] @default([PT])
   currency           Currency                @default(EUR)
   timezone           String                  @default("Europe/Lisbon")
 
-  wifiSsid     String?
-  wifiPassword String?
-
+  wifiSsid          String?
+  wifiPassword      String?
   googleAnalyticsId String?
 
   // ─── Branding & Visuals ────────────────────────────────────────────────────

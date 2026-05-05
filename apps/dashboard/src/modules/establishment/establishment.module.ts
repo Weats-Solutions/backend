@@ -20,6 +20,7 @@ import { EstablishmentSystemSettingsService } from './services/establishment-sys
 import { EstablishmentBrandingSettingsService } from './services/establishment-branding-settings.service';
 import { EstablishmentLifeCycleService } from './services/establishment-lifecycle.service';
 import { EstablishmentQueryService } from './services/establishment-query.service';
+import { EstablishmentModuleSettingsService } from './services/establishment-module-settings.service';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { EstablishmentQueryService } from './services/establishment-query.servic
     EstablishmentLanguageSyncProcessor,
 
     // Services
+    EstablishmentModuleSettingsService,
     EstablishmentSubscriptionService,
     EstablishmentBillingSettingsService,
     EstablishmentDigitalSettingsService,

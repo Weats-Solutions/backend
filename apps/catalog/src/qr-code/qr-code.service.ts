@@ -2,6 +2,17 @@ import { Inject, Injectable, Logger } from '@nestjs/common';
 import { CorePrismaService, QrCodeType } from '@weats/database';
 import { CacheService } from '@weats/cache';
 
+export interface QrSessionPayload {
+  servicePointId: string | null;
+  establishmentId: string;
+  type: QrCodeType;
+}
+
+export interface ResolvedQrCode {
+  url: string;
+  session: QrSessionPayload | null;
+}
+
 @Injectable()
 export class QrCodeService {
   private readonly logger = new Logger(QrCodeService.name);
@@ -86,5 +97,35 @@ export class QrCodeService {
 
       return `${this.catalogUrl}/404`;
     });
+  }
+
+  /**
+   * Resolves a QR token and returns both the redirect URL and session metadata.
+   * Does NOT use cache for the session payload — always reads fresh from DB.
+   */
+  async resolveQrCode(token: string): Promise<ResolvedQrCode> {
+    const url = await this.getRedirectUrl(token);
+
+    const qrCode = await this.prisma.qrCode.findUnique({
+      where: { token },
+      select: {
+        type: true,
+        servicePointId: true,
+        establishmentId: true,
+      },
+    });
+
+    if (!qrCode) {
+      return { url, session: null };
+    }
+
+    return {
+      url,
+      session: {
+        type: qrCode.type,
+        servicePointId: qrCode.servicePointId,
+        establishmentId: qrCode.establishmentId,
+      },
+    };
   }
 }

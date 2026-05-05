@@ -17,6 +17,8 @@ import { EstablishmentSystemSettingsService } from './services/establishment-sys
 import { EstablishmentSubscriptionService } from './services/establishment-subscription.service';
 import { CreateEstablishmentDto, UpdateEstablishmentBillingSettingsDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentDigitalSettingsDto, UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentLanguagesDto, UpdateEstablishmentSystemSettingsDto } from '@weats/contracts';
 import { EstablishmentLifeCycleService } from './services/establishment-lifecycle.service';
+import { EstablishmentModuleSettingsService } from './services/establishment-module-settings.service';
+import { UpdateEstablishmentModuleSettingsDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-module-settings.dto';
 
 
 
@@ -28,6 +30,7 @@ export class EstablishmentService {
     private readonly prisma: CorePrismaService,
     private readonly establishmentLifeCycleService: EstablishmentLifeCycleService,
     private readonly establishmentQueryService: EstablishmentQueryService,
+    private readonly establishmentModuleSettingsService: EstablishmentModuleSettingsService,
     private readonly establishmentBrandingSettingsService: EstablishmentBrandingSettingsService,
     private readonly establishmentDigitalSettingsService: EstablishmentDigitalSettingsService,
     private readonly establishmentGeneralSettingsService: EstablishmentGeneralSettingsService,
@@ -67,6 +70,17 @@ export class EstablishmentService {
 
   async getEstablishmentSchedule(id: string) {
     return this.establishmentQueryService.getEstablishmentSchedule(id);
+  }
+
+  // -------------------------------------------------------------------------
+  // Modules Settings
+  // -------------------------------------------------------------------------
+  async getEstablishmentModuleSettings(id: string) {
+    return this.establishmentModuleSettingsService.getEstablishmentModuleSettings(id);
+  }
+
+  async updateEstablishmentModuleSettings(id: string, updateEstablishmentModuleSettingsDto: UpdateEstablishmentModuleSettingsDto) {
+    return this.establishmentModuleSettingsService.updateEstablishmentModuleSettings(id, updateEstablishmentModuleSettingsDto);
   }
 
   // -------------------------------------------------------------------------

@@ -34,6 +34,7 @@ import { UpdateEstablishmentBrandingSettingsDto } from '@weats/contracts/dashboa
 import { UpdateEstablishmentFaviconDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-favicon';
 import { EmailTemplate } from '@weats/types';
 import { EmailProducer } from '@weats/bull/producers/email.producer';
+import { UpdateEstablishmentModuleSettingsDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-module-settings.dto';
 
 @Controller('establishments')
 export class EstablishmentController {
@@ -147,6 +148,42 @@ export class EstablishmentController {
       });
     }
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SCHEDULE_BY_ID, { id: establishment.id });
+  }
+
+  // -------------------------------------------------------------------------
+  // Modules Settings
+  // -------------------------------------------------------------------------
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Get(':id/settings/modules')
+  getEstablishmentModulesSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_MODULES_SETTINGS, { id });
+  }
+
+  @Roles()
+  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @Patch(':id/settings/modules')
+  updateEstablishmentModuleSettings(
+    @CurrentEstablishment() establishment: Establishment,
+    @Param('id') id: string,
+    @Body() updateEstablishmentModuleSettingsDto: UpdateEstablishmentModuleSettingsDto,
+  ) {
+    if (establishment.id !== id) {
+      throw new ForbiddenException({
+        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_MODULE, { id, updateEstablishmentModuleSettingsDto });
   }
 
   // -------------------------------------------------------------------------

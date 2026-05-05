@@ -337,6 +337,7 @@ export class LandingpageService {
                     establishmentId: establishment.id,
                     isVisible: true,
                 },
+                orderBy: { position: 'asc' },
                 select: {
                     id: true,
                     isHighlighted: true,

@@ -8,6 +8,7 @@ import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
 import { UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentBrandingSettingsDto, UpdateEstablishmentSystemSettingsDto, UpdateEstablishmentDigitalSettingsDto, EstablishmentLanguageDto, UpdateEstablishmentBillingSettingsDto } from '@weats/contracts';
 import { FaviconService } from '@weats/integrations/favicon/favicon.service';
 import { UpdateEstablishmentFaviconDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-favicon';
+import { UpdateEstablishmentModuleSettingsDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-module-settings.dto';
 
 @Controller()
 export class EstablishmentController {
@@ -52,6 +53,19 @@ export class EstablishmentController {
     @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SCHEDULE_BY_ID)
     getEstablishmentSchedule(@Payload() payload: { id: string }) {
         return this.establishmentService.getEstablishmentSchedule(payload.id);
+    }
+
+    // -------------------------------------------------------------------------
+    // Modules Settings
+    // -------------------------------------------------------------------------
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_MODULES_SETTINGS)
+    getEstablishmentModulesSettings(@Payload() payload: { id: string }) {
+        return this.establishmentService.getEstablishmentModuleSettings(payload.id);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_MODULE)
+    updateEstablishmentModuleSettings(@Payload() payload: { id: string, updateEstablishmentModuleSettingsDto: UpdateEstablishmentModuleSettingsDto }) {
+        return this.establishmentService.updateEstablishmentModuleSettings(payload.id, payload.updateEstablishmentModuleSettingsDto);
     }
 
     // -------------------------------------------------------------------------

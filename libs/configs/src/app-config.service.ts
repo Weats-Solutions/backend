@@ -36,4 +36,8 @@ export class AppConfigService {
   getRealtimePort(): string {
     return this.configService.getOrThrow<string>('REALTIME_PORT');
   }
+
+  getQrSessionSecret(): string {
+    return this.configService.getOrThrow<string>('QR_SESSION_SECRET');
+  }
 }
