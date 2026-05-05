@@ -71,22 +71,25 @@ export class RealtimeV2SecurityService {
     this.blockedIPs.set(clientIp, Date.now() + durationMs);
   }
 
-  evaluateThrottle(clientIp: string, clientId: string, throttleMs = 60000): ThrottleResult {
+  evaluateThrottle(clientIp: string, clientId: string, increment = true, throttleMs = 60000): ThrottleResult {
     const now = Date.now();
     const lastCall = this.lastCallTimestamps.get(clientId);
 
     if (lastCall && now - lastCall < throttleMs) {
-      const remaining = Math.ceil((throttleMs - (now - lastCall)) / 1000);
-      const strikes = (this.ipStrikes.get(clientIp) || 0) + 1;
-      this.ipStrikes.set(clientIp, strikes);
+      const remaining = Math.ceil((throttleMs - (now - lastCall))); // Devolvemos ms agora para ser mais preciso
+      
+      if (increment) {
+        const strikes = (this.ipStrikes.get(clientIp) || 0) + 1;
+        this.ipStrikes.set(clientIp, strikes);
 
-      if (strikes >= 5) {
-        this.blockIp(clientIp, 3600000);
-        return {
-          allowed: false,
-          blocked: true,
-          error: RealtimeMessageCode.SPAM_PROTECTION,
-        };
+        if (strikes >= 5) {
+          this.blockIp(clientIp, 3600000);
+          return {
+            allowed: false,
+            blocked: true,
+            error: RealtimeMessageCode.SPAM_PROTECTION,
+          };
+        }
       }
 
       return {
@@ -97,8 +100,10 @@ export class RealtimeV2SecurityService {
       };
     }
 
-    this.ipStrikes.set(clientIp, 0);
-    this.lastCallTimestamps.set(clientId, now);
+    if (increment) {
+      this.ipStrikes.set(clientIp, 0);
+      this.lastCallTimestamps.set(clientId, now);
+    }
 
     return {
       allowed: true,

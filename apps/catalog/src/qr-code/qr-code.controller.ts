@@ -36,12 +36,14 @@ export class QrCodeController {
         type: session.type,
       });
 
+      const isDev = process.env.NODE_ENV !== 'production';
+
       res.cookie('qr_session', sessionToken, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'lax',
-        domain: '.weats.pro',
-        maxAge: 4 * 60 * 60 * 1000, // 4 hours in ms
+        httpOnly: false, // Permitir que o JS leia para mandar no auth do socket
+        secure: !isDev,
+        sameSite: isDev ? 'lax' : 'none',
+        ...(isDev ? {} : { domain: '.weats.pro' }),
+        maxAge: 4 * 60 * 60 * 1000, 
         path: '/',
       });
     }

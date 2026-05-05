@@ -121,6 +121,8 @@ export class RealtimeV2StaffGateway implements OnGatewayInit {
     );
 
     await this.stateService.removeActiveCall(establishmentId, payload.servicePointId, payload.clientId);
+    this.dispatchService.emitCallRemoved(establishmentId, payload.servicePointId, payload.clientId);
+
     return { success: true };
   }
 

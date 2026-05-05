@@ -16,10 +16,14 @@ import { RealtimeV2ClientAuthService } from './client-auth.service';
 import { RealtimeV2DispatchService } from './dispatch.service';
 import { RealtimeV2SecurityService } from './security.service';
 import { ClientCallPayload, CallRequestedPayload, RealtimeV2ClientServer, RealtimeV2SocketData } from './realtime-v2.types';
+import { RealtimeV2Error } from './realtime-v2.constants';
 
 @WebSocketGateway({
   namespace: 'realtime-v2-client',
-  cors: { origin: '*' },
+  cors: { 
+    origin: ['http://localhost:3001', 'http://localhost:3002', 'http://localhost:4000', 'http://localhost:3000'],
+    credentials: true 
+  },
   pingInterval: 15000,
   pingTimeout: 20000,
 })
@@ -60,40 +64,40 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
             : null;
 
         if (!context) {
-          if (qrSessionToken) {
-            return next(new Error('Invalid QR Session'));
-          }
-          if (cleanSpId) {
-            return next(new Error('Invalid Service Point'));
-          }
-          return next(new Error('Missing Client Authentication'));
+          const err = qrSessionToken ? RealtimeV2Error.INVALID_QR : cleanSpId ? RealtimeV2Error.INVALID_SP : RealtimeV2Error.MISSING_AUTH;
+          return next(new Error(err));
         }
 
         const clientIp = this.securityService.resolveClientIp(socket);
         const clientId = (socket.handshake.auth?.clientId as string)
           || createHash('md5').update(clientIp).digest('hex').substring(0, 8);
 
-        if (!this.securityService.beginConnecting(clientId)) {
-          return next(new Error('Conexão em curso...'));
+        // --- RATE LIMIT HANDSHAKE ---
+        if (this.securityService.isClientBlocked(clientIp, clientId)) {
+          return next(new Error(RealtimeV2Error.IP_BAN));
         }
 
-        const spRoom = this.rooms.servicePoint(context.establishmentId, context.servicePointId);
+        const throttle = this.securityService.evaluateThrottle(clientIp, clientId, false);
+        if (!throttle.allowed) {
+          return next(new Error(`${RealtimeV2Error.THROTTLE}:${throttle.remaining || 0}`));
+        }
+
+        if (!this.securityService.beginConnecting(clientId)) {
+          return next(new Error(RealtimeV2Error.CONNECTING_LOCK));
+        }
 
         try {
+          const spRoom = this.rooms.servicePoint(context.establishmentId, context.servicePointId);
           const connectedSockets = await server.in(spRoom).fetchSockets();
           const alreadyConnected = connectedSockets.find(s => (s.data as RealtimeV2SocketData).clientId === clientId);
 
           if (alreadyConnected) {
-            return next(new Error('Já existe uma conexão ativa neste dispositivo.'));
+            return next(new Error(RealtimeV2Error.ALREADY_CONNECTED));
           }
 
           const MARGIN = 2;
           if (connectedSockets.length >= context.maxCapacity + MARGIN) {
-            return next(new Error('Mesa cheia (limite de conexões excedido)'));
-          }
-
-          if (this.securityService.isClientBlocked(clientIp, clientId)) {
-            return next(new Error('REALTIME_ERR_IP_BAN'));
+            return next(new Error(RealtimeV2Error.CAPACITY_EXCEEDED));
           }
 
           socket.data.clientId = clientId;
@@ -110,7 +114,7 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
         }
       } catch (error) {
         this.logger.error('Client socket auth failed', error);
-        return next(new Error('Internal Server Error'));
+        return next(new Error(RealtimeV2Error.INTERNAL_ERROR));
       }
     });
   }
@@ -120,9 +124,7 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
     const spId = socket.data.servicePointId;
     const clientId = socket.data.clientId;
 
-    if (!estId || !spId || !clientId) {
-      return;
-    }
+    if (!estId || !spId || !clientId) return;
 
     this.securityService.cancelPendingDisconnectCleanup(
       this.securityService.buildConnectionKey(estId, spId, clientId),
@@ -130,7 +132,9 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
 
     socket.join(this.rooms.est(estId));
     socket.join(this.rooms.servicePoint(estId, spId));
-    this.logger.debug(`[V2] Client ${clientId} ligado em ${spId}`);
+    
+    const count = (this.server as any).sockets.size;
+    this.logger.log(`[V2 CONNECT] Client ${clientId} na mesa ${spId} (Total: ${count})`);
   }
 
   handleDisconnect(socket: Socket<any, any, any, RealtimeV2SocketData>) {
@@ -138,9 +142,10 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
     const spId = socket.data.servicePointId;
     const clientId = socket.data.clientId;
 
-    if (!estId || !spId || !clientId) {
-      return;
-    }
+    if (!estId || !spId || !clientId) return;
+
+    const count = (this.server as any).sockets.size;
+    this.logger.log(`[V2 DISCONNECT] Client ${clientId} saiu da mesa ${spId} (Total: ${count})`);
 
     const cleanupKey = this.securityService.buildConnectionKey(estId, spId, clientId);
     this.securityService.schedulePendingDisconnectCleanup(
@@ -150,9 +155,7 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
         const sockets = await this.dispatchService.fetchClientSocketsInServicePoint(estId, spId);
         const hasReconnected = sockets.some(s => (s.data as RealtimeV2SocketData).clientId === clientId);
 
-        if (hasReconnected) {
-          return;
-        }
+        if (hasReconnected) return;
 
         await this.stateService.removeActiveCall(estId, spId, clientId);
         this.dispatchService.emitCallRemoved(estId, spId, clientId);
@@ -171,7 +174,7 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
     const clientId = socket.data.clientId;
 
     if (!establishmentId || !servicePointId || !clientId) {
-      return { error: 'Apenas clientes podem fazer chamadas' };
+      return { error: RealtimeV2Error.UNAUTHORIZED };
     }
 
     if (!this.securityService.beginProcessing(clientId)) {
@@ -180,18 +183,18 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
 
     try {
       if (this.securityService.isServicePointBlocked(servicePointId)) {
-        return { error: 'REALTIME_ERR_SP_BLOCKED', blocked: true };
+        return { error: RealtimeV2Error.SP_BLOCKED, blocked: true };
       }
 
       const clientIp = this.securityService.resolveClientIp(socket);
       if (this.securityService.isClientBlocked(clientIp, clientId)) {
-        return { error: 'REALTIME_ERR_IP_BAN', blocked: true };
+        return { error: RealtimeV2Error.IP_BAN, blocked: true };
       }
 
       const throttle = this.securityService.evaluateThrottle(clientIp, clientId);
       if (!throttle.allowed) {
         return {
-          error: throttle.error,
+          error: throttle.blocked ? RealtimeV2Error.SPAM_PROTECTION : RealtimeV2Error.THROTTLE,
           blocked: throttle.blocked,
           spam: !throttle.blocked,
           remaining: throttle.remaining,
@@ -225,5 +228,27 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
     } finally {
       this.securityService.endProcessing(clientId);
     }
+  }
+
+  @SubscribeMessage('call:cancel')
+  async handleClientCancel(
+    @ConnectedSocket() socket: Socket<any, any, any, RealtimeV2SocketData>,
+  ) {
+    const establishmentId = socket.data.establishmentId;
+    const servicePointId = socket.data.servicePointId;
+    const clientId = socket.data.clientId;
+
+    if (!establishmentId || !servicePointId || !clientId) {
+      return { error: RealtimeV2Error.UNAUTHORIZED };
+    }
+
+    this.securityService.cancelPendingDisconnectCleanup(
+      this.securityService.buildConnectionKey(establishmentId, servicePointId, clientId),
+    );
+
+    await this.stateService.removeActiveCall(establishmentId, servicePointId, clientId);
+    this.dispatchService.emitCallRemoved(establishmentId, servicePointId, clientId);
+
+    return { success: true };
   }
 }

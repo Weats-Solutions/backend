@@ -63,6 +63,7 @@ export class EstablishmentQueryService {
             where: { id },
             select: {
                 id: true,
+                callStaffModule: true,
                 subscription: true,
             },
         });
@@ -76,7 +77,13 @@ export class EstablishmentQueryService {
 
         const hasActiveSubscription = establishment.subscription?.status === 'ACTIVE' || establishment.subscription?.status === 'TRIALING';
 
-        return { hasAccess: true, hasActiveSubscription };
+        this.logger.log({
+            hasAccess: true,
+            hasActiveSubscription,
+            hasCallStaffModule: establishment.callStaffModule,
+        })
+
+        return { hasAccess: true, hasActiveSubscription, hasCallStaffModule: establishment.callStaffModule };
     }
 
     async getEstablishmentSchedule(id: string) {

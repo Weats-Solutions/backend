@@ -87,6 +87,12 @@ export class RealtimeV2ClientAuthService {
     }
 
     const rawCookie = Array.isArray(cookieHeader) ? cookieHeader.join('; ') : cookieHeader;
+    
+    this.logger.debug(`Extracting token. Auth: ${!!fromAuth}, CookieHeader present: ${!!rawCookie}`);
+    if (rawCookie) {
+      this.logger.debug(`Raw Cookie Header: ${rawCookie}`);
+    }
+
     if (!rawCookie) {
       return undefined;
     }
@@ -95,7 +101,9 @@ export class RealtimeV2ClientAuthService {
     for (const entry of entries) {
       const [rawKey, ...rawValue] = entry.trim().split('=');
       if (rawKey === 'qr_session') {
-        return decodeURIComponent(rawValue.join('='));
+        const token = decodeURIComponent(rawValue.join('='));
+        this.logger.debug(`Found qr_session cookie! Length: ${token.length}`);
+        return token;
       }
     }
 
