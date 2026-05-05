@@ -52,7 +52,7 @@ export class ZonesController {
         @Param('zoneId') zoneId: string,
         @Body() dto: UpdateServiceZoneDto,
     ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.ZONE_UPDATE, { zoneId, dto });
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.ZONE_UPDATE, { zoneId, updateServiceZoneDto: dto });
     }
 
     @Roles(EmployeeRoles.MANAGER)
