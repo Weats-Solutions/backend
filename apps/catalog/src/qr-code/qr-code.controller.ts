@@ -39,7 +39,7 @@ export class QrCodeController {
       res.cookie('qr_session', sessionToken, {
         httpOnly: true,
         secure: true,
-        sameSite: 'strict',
+        sameSite: 'lax',
         domain: '.weats.pro',
         maxAge: 4 * 60 * 60 * 1000, // 4 hours in ms
         path: '/',
