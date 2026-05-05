@@ -198,19 +198,9 @@ export class RealtimeGateway implements OnGatewayInit {
         } else if (spId && estId) {
             this.logger.log(`[EXIT] Client ${clientId} saiu da Mesa ${socket.data.servicePointName || spId}`);
 
-            // 🧹 LIMPEZA AUTOMÁTICA: Se o cliente saiu, apagar os seus pedidos ativos no Redis
-            await this.stateService.removeActiveCall(estId, spId, clientId);
-
-            // Notificar o Dashboard para remover o pedido do ecrã
-            this.server.to(this.rooms.est(estId)).emit('call:removed', {
-                servicePointId: spId,
-                clientId
-            });
-
-            // Auditoria rápida: quantas pessoas restam?
-            const spRoom = this.rooms.servicePoint(estId, spId);
-            const remaining = await this.server.in(spRoom).fetchSockets();
-            this.logger.debug(`[STATS] Mesa ${socket.data.servicePointName || spId} agora tem ${remaining.length} sockets ativos.`);
+            if (clientId) {
+                this.scheduleDisconnectCleanup(estId, spId, clientId);
+            }
         }
     }
 
@@ -257,8 +247,7 @@ export class RealtimeGateway implements OnGatewayInit {
             }
 
             // --- 🛡️ SHIELD: BLOQUEIO DE IP / CLIENTE ---
-            const ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address;
-            const clientIp = Array.isArray(ip) ? (ip as string[])[0] : (ip as string);
+            const clientIp = this.resolveClientIp(socket);
 
             const banExpiration = this.blockedIPs.get(clientIp);
             const clientBanExpiration = this.blockedClientIds.get(clientId);
@@ -369,6 +358,7 @@ export class RealtimeGateway implements OnGatewayInit {
         });
 
         // 🧹 LIMPEZA: Remover do Redis pois foi aceite/respondido
+        this.cancelPendingDisconnectCleanup(socket.data.establishmentId, payload.servicePointId, payload.clientId);
         await this.stateService.removeActiveCall(socket.data.establishmentId, payload.servicePointId, payload.clientId);
 
         return { success: true };
@@ -464,7 +454,7 @@ export class RealtimeGateway implements OnGatewayInit {
         return undefined;
     }
 
-    private resolveClientIp(socket: Socket<any, any, any, AuthenticatedSocketData>): string {
+    private resolveClientIp(socket: { handshake: { headers: Record<string, string | string[] | undefined>; address: string } }): string {
         const forwardedFor = socket.handshake.headers['x-forwarded-for'];
 
         if (Array.isArray(forwardedFor)) {
@@ -478,6 +468,53 @@ export class RealtimeGateway implements OnGatewayInit {
         return socket.handshake.address;
     }
 
+    private getDisconnectCleanupKey(estId: string, spId: string, clientId: string) {
+        return `${estId}:${spId}:${clientId}`;
+    }
+
+    private cancelPendingDisconnectCleanup(estId: string, spId: string, clientId: string) {
+        const key = this.getDisconnectCleanupKey(estId, spId, clientId);
+        const timer = this.pendingDisconnectCleanup.get(key);
+
+        if (!timer) {
+            return;
+        }
+
+        clearTimeout(timer);
+        this.pendingDisconnectCleanup.delete(key);
+        this.logger.debug(`[GRACE] Cancelado cleanup pendente para ${key}.`);
+    }
+
+    private scheduleDisconnectCleanup(estId: string, spId: string, clientId: string) {
+        const key = this.getDisconnectCleanupKey(estId, spId, clientId);
+        this.cancelPendingDisconnectCleanup(estId, spId, clientId);
+
+        const timer = setTimeout(async () => {
+            this.pendingDisconnectCleanup.delete(key);
+
+            const spRoom = this.rooms.servicePoint(estId, spId);
+            const sockets = await this.server.in(spRoom).fetchSockets();
+            const hasReconnected = sockets.some(s => (s.data as AuthenticatedSocketData).clientId === clientId);
+
+            if (hasReconnected) {
+                this.logger.debug(`[GRACE] Cliente ${clientId} reconectou na mesa ${spId}. Cleanup ignorado.`);
+                return;
+            }
+
+            await this.stateService.removeActiveCall(estId, spId, clientId);
+
+            this.server.to(this.rooms.est(estId)).emit('call:removed', {
+                servicePointId: spId,
+                clientId,
+            });
+
+            this.logger.debug(`[GRACE] Cleanup executado após 5 min para client ${clientId} na mesa ${spId}.`);
+        }, RealtimeGateway.DISCONNECT_GRACE_MS);
+
+        this.pendingDisconnectCleanup.set(key, timer);
+        this.logger.debug(`[GRACE] Cleanup agendado para ${key} em ${RealtimeGateway.DISCONNECT_GRACE_MS / 1000}s.`);
+    }
+
     // 🔓 MÉTODOS DE EMERGÊNCIA (Chamados pelo Controller)
     clearAllBans() {
         this.blockedIPs.clear();
@@ -487,6 +524,8 @@ export class RealtimeGateway implements OnGatewayInit {
         this.lastCallTimestamps.clear(); // Limpar também os throttles para debug/emergência
         this.processingClients.clear();
         this.connectingClients.clear();
+        this.pendingDisconnectCleanup.forEach(timer => clearTimeout(timer));
+        this.pendingDisconnectCleanup.clear();
         this.logger.log('🔓 [EMERGENCY] Todos os banimentos e locks foram removidos.');
     }
 }

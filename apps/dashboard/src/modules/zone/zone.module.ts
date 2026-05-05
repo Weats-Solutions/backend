@@ -11,6 +11,7 @@ import { ZonePointController } from './point/zone-point.controller';
 import { ZoneController } from './zone.controller';
 import { QrCodesController } from './qr-codes/qr-codes.controller';
 import { QrCodesService } from './qr-codes/qr-codes.service';
+import { CacheModule } from '@weats/cache';
 
 @Module({
     imports: [
@@ -18,6 +19,7 @@ import { QrCodesService } from './qr-codes/qr-codes.service';
         ConfigModule,
         FeatureUsageModule,
         QrGeneratorModule,
+        CacheModule,
         BullModule.registerQueue({
             name: QUEUES.QRCODE,
         }),
