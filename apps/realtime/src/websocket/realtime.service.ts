@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ClerkService } from '@weats/integrations';
 import { CorePrismaService } from '@weats/database';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class RealtimeService {
@@ -9,6 +10,7 @@ export class RealtimeService {
     constructor(
         private readonly clerkService: ClerkService,
         private readonly prisma: CorePrismaService,
+        private readonly jwtService: JwtService,
     ) { }
 
     async validateClient(servicePointId: string) {
@@ -32,6 +34,34 @@ export class RealtimeService {
             };
         } catch (error) {
             this.logger.error('Client validation failed', error);
+            return null;
+        }
+    }
+
+    async validateClientSession(sessionToken: string) {
+        try {
+            const payload = await this.jwtService.verifyAsync<{
+                eid?: string;
+                spid?: string;
+                type?: string;
+            }>(sessionToken, {
+                issuer: 'weats-catalog',
+                audience: 'weats-menu',
+            });
+
+            if (!payload?.eid || !payload?.spid || payload.type !== 'TABLE') {
+                return null;
+            }
+
+            const client = await this.validateClient(payload.spid);
+
+            if (!client || client.establishmentId !== payload.eid) {
+                return null;
+            }
+
+            return client;
+        } catch (error: any) {
+            this.logger.warn('Client session validation failed: ' + error.message);
             return null;
         }
     }

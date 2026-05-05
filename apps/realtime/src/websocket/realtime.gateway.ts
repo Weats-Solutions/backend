@@ -27,6 +27,7 @@ export class RealtimeGateway implements OnGatewayInit {
     server: Server;
 
     private readonly logger = new Logger(RealtimeGateway.name);
+    private static readonly DISCONNECT_GRACE_MS = 5 * 60 * 1000;
 
     constructor(
         private readonly rooms: RoomsService,
@@ -41,12 +42,15 @@ export class RealtimeGateway implements OnGatewayInit {
                 const inToken = (socket.handshake.auth?.token || socket.handshake.headers['authorization']?.replace('Bearer ', '') || socket.handshake.query?.token) as string;
                 const inEstId = (socket.handshake.auth?.establishmentId || socket.handshake.headers['establishmentid'] || socket.handshake.query?.establishmentId) as string;
                 const inSpId = (socket.handshake.auth?.servicePointId || socket.handshake.headers['servicepointid'] || socket.handshake.query?.servicePointId) as string;
+                const cookieHeader = socket.handshake.headers['cookie'];
+                const inQrSession = (socket.handshake.auth?.qrSession || this.extractCookieValue(Array.isArray(cookieHeader) ? cookieHeader.join('; ') : cookieHeader, 'qr_session')) as string | undefined;
 
                 const cleanEstId = inEstId?.trim();
                 const cleanSpId = inSpId?.trim();
 
                 this.logger.debug(`--- 🛡️ MIDDLEWARE AUDIT ---`);
                 this.logger.debug(`| Token Presente: ${!!inToken}`);
+                this.logger.debug(`| QR Session Presente: ${!!inQrSession}`);
                 this.logger.debug(`| EstID: [${cleanEstId}]`);
                 this.logger.debug(`| SpID: [${cleanSpId}]`);
                 this.logger.debug(`--------------------------`);
@@ -64,67 +68,77 @@ export class RealtimeGateway implements OnGatewayInit {
                     return next(new Error('Unauthorized Staff'));
                 }
 
-                // 👤 CLIENT (anonymous menu)
-                if (cleanSpId) {
-                    const result = await this.realtimeService.validateClient(cleanSpId);
+                // 👤 CLIENT (menu com sessão QR em cookie)
+                const clientValidation = inQrSession
+                    ? await this.realtimeService.validateClientSession(inQrSession)
+                    : cleanSpId
+                        ? await this.realtimeService.validateClient(cleanSpId)
+                        : null;
 
-                    if (result) {
-                        const ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address;
-                        const clientIp = Array.isArray(ip) ? (ip as string[])[0] : (ip as string);
+                if (clientValidation) {
+                    const result = clientValidation;
 
-                        // 🔑 ID ÚNICO POR DISPOSITIVO: Priorizar o ID que vem do browser (localStorage)
-                        const clientId = (socket.handshake.auth?.clientId as string) || createHash('md5').update(clientIp).digest('hex').substring(0, 8);
+                    const clientIp = this.resolveClientIp(socket);
 
-                        // 🛡️ BLOQUEAR DUPLICAÇÃO (MICRO-LOCK)
-                        // Como fetchSockets é async, se o cliente enviar 10 conexões ao mesmo tempo,
-                        // todas podem passar se não usarmos um lock síncrono local.
-                        if (this.connectingClients.has(clientId)) {
-                            this.logger.warn(`[LIMIT] Conexão ignorada (bloqueada pelo lock síncrono): ${clientId}`);
-                            return next(new Error('Conexão em curso...'));
-                        }
-                        this.connectingClients.add(clientId);
+                    // 🔑 ID ÚNICO POR DISPOSITIVO: Priorizar o ID que vem do browser (localStorage)
+                    const clientId = (socket.handshake.auth?.clientId as string) || createHash('md5').update(clientIp).digest('hex').substring(0, 8);
 
-                        const spRoom = this.rooms.servicePoint(result.establishmentId, result.servicePointId);
-
-                        try {
-                            const connectedSockets = await server.in(spRoom).fetchSockets();
-
-                            // 🛡️ BLOQUEAR DUPLICAÇÃO REAL
-                            const alreadyConnected = connectedSockets.find(s => (s.data as AuthenticatedSocketData).clientId === clientId);
-                            if (alreadyConnected) {
-                                this.logger.warn(`[LIMIT] Bloqueada conexão duplicada para Client ${clientId} na Mesa ${result.servicePointName}.`);
-                                return next(new Error('Já existe uma conexão ativa neste dispositivo.'));
-                            }
-
-                            const MARGIN = 2;
-                            if (connectedSockets.length >= (result.maxCapacity + MARGIN)) {
-                                this.logger.warn(`[LIMIT] Bloqueada nova conexão para Mesa ${result.servicePointName}. Já existem ${connectedSockets.length} ligados.`);
-                                return next(new Error('Mesa cheia (limite de conexões excedido)'));
-                            }
-
-                            socket.data.servicePointId = result.servicePointId;
-                            socket.data.establishmentId = result.establishmentId.trim();
-                            socket.data.servicePointName = result.servicePointName;
-                            socket.data.zoneId = result.zoneId;
-                            socket.data.zoneName = result.zoneName;
-                            socket.data.maxCapacity = result.maxCapacity;
-
-                            // 🛡️ Impedir conexão se já estiver banido (IP ou ID)
-                            const isIpBanned = this.blockedIPs.has(clientIp) && Date.now() < (this.blockedIPs.get(clientIp) || 0);
-                            const isIdBanned = this.blockedClientIds.has(clientId) && Date.now() < (this.blockedClientIds.get(clientId) || 0);
-
-                            if (isIpBanned || isIdBanned) {
-                                this.logger.warn(`[SHIELD] Conexão abortada: ${clientIp} (${clientId}) tentou entrar mas está banido.`);
-                                return next(new Error('REALTIME_ERR_IP_BAN'));
-                            }
-
-                            socket.data.clientId = clientId;
-                            return next();
-                        } finally {
-                            // Remover do lock após o await (quer tenha sucesso ou falha)
-                            this.connectingClients.delete(clientId);
-                        }
+                    // 🛡️ BLOQUEAR DUPLICAÇÃO (MICRO-LOCK)
+                    // Como fetchSockets é async, se o cliente enviar 10 conexões ao mesmo tempo,
+                    // todas podem passar se não usarmos um lock síncrono local.
+                    if (this.connectingClients.has(clientId)) {
+                        this.logger.warn(`[LIMIT] Conexão ignorada (bloqueada pelo lock síncrono): ${clientId}`);
+                        return next(new Error('Conexão em curso...'));
                     }
+                    this.connectingClients.add(clientId);
+
+                    const spRoom = this.rooms.servicePoint(result.establishmentId, result.servicePointId);
+
+                    try {
+                        const connectedSockets = await server.in(spRoom).fetchSockets();
+
+                        // 🛡️ BLOQUEAR DUPLICAÇÃO REAL
+                        const alreadyConnected = connectedSockets.find(s => (s.data as AuthenticatedSocketData).clientId === clientId);
+                        if (alreadyConnected) {
+                            this.logger.warn(`[LIMIT] Bloqueada conexão duplicada para Client ${clientId} na Mesa ${result.servicePointName}.`);
+                            return next(new Error('Já existe uma conexão ativa neste dispositivo.'));
+                        }
+
+                        const MARGIN = 2;
+                        if (connectedSockets.length >= (result.maxCapacity + MARGIN)) {
+                            this.logger.warn(`[LIMIT] Bloqueada nova conexão para Mesa ${result.servicePointName}. Já existem ${connectedSockets.length} ligados.`);
+                            return next(new Error('Mesa cheia (limite de conexões excedido)'));
+                        }
+
+                        socket.data.servicePointId = result.servicePointId;
+                        socket.data.establishmentId = result.establishmentId.trim();
+                        socket.data.servicePointName = result.servicePointName;
+                        socket.data.zoneId = result.zoneId;
+                        socket.data.zoneName = result.zoneName;
+                        socket.data.maxCapacity = result.maxCapacity;
+
+                        // 🛡️ Impedir conexão se já estiver banido (IP ou ID)
+                        const isIpBanned = this.blockedIPs.has(clientIp) && Date.now() < (this.blockedIPs.get(clientIp) || 0);
+                        const isIdBanned = this.blockedClientIds.has(clientId) && Date.now() < (this.blockedClientIds.get(clientId) || 0);
+
+                        if (isIpBanned || isIdBanned) {
+                            this.logger.warn(`[SHIELD] Conexão abortada: ${clientIp} (${clientId}) tentou entrar mas está banido.`);
+                            return next(new Error('REALTIME_ERR_IP_BAN'));
+                        }
+
+                        socket.data.clientId = clientId;
+                        return next();
+                    } finally {
+                        // Remover do lock após o await (quer tenha sucesso ou falha)
+                        this.connectingClients.delete(clientId);
+                    }
+                }
+
+                if (inQrSession) {
+                    return next(new Error('Invalid QR Session'));
+                }
+
+                if (cleanSpId) {
                     return next(new Error('Invalid Service Point'));
                 }
 
@@ -163,6 +177,12 @@ export class RealtimeGateway implements OnGatewayInit {
         } else if (socket.data.servicePointId && estId) {
             // Client
             const spId = socket.data.servicePointId;
+            const clientId = socket.data.clientId;
+
+            if (clientId) {
+                this.cancelPendingDisconnectCleanup(estId, spId, clientId);
+            }
+
             socket.join(this.rooms.servicePoint(estId, spId));
             this.logger.debug(`Client connected to service point ${spId}`);
         }
@@ -203,6 +223,7 @@ export class RealtimeGateway implements OnGatewayInit {
     // 🛡️ LOCKS para evitar Race Conditions durante spam
     private processingClients = new Set<string>(); // Clients com pedido em curso
     private connectingClients = new Set<string>(); // Clients em processo de middleware/conexão
+    private pendingDisconnectCleanup = new Map<string, NodeJS.Timeout>(); // est:sp:client -> timer
 
     // 💡 EVENTOS PRINCIPAIS
 
@@ -403,12 +424,12 @@ export class RealtimeGateway implements OnGatewayInit {
         this.blockedClientIds.set(clientId, expiration);
 
         // 2. Tentar encontrar e banir o IP associado a este clientId
-        // Usamos fetchSockets() do namespace para ser compatível com as versões recentes do Socket.io
-        this.server.fetchSockets().then(sockets => {
+        // Limitamos a busca à sala do estabelecimento para evitar varrer todo o namespace.
+        const estRoom = this.rooms.est(socket.data.establishmentId);
+        this.server.in(estRoom).fetchSockets().then(sockets => {
             sockets.forEach(s => {
                 if (s.data.clientId === clientId) {
-                    const ip = s.handshake.headers['x-forwarded-for'] || s.handshake.address;
-                    const clientIp = Array.isArray(ip) ? (ip as string[])[0] : (ip as string);
+                    const clientIp = this.resolveClientIp(s);
                     this.blockedIPs.set(clientIp, expiration);
 
                     // Notificar o cliente banido e desligar
@@ -425,6 +446,36 @@ export class RealtimeGateway implements OnGatewayInit {
         this.logger.error(`[ADMIN] 🛡️ IP/CLIENT BLOQUEADO MANUALMENTE: ${clientId} por ${durationMinutes || 60} min.`);
 
         return { success: true, expiresAt: new Date(expiration).toISOString() };
+    }
+
+    private extractCookieValue(cookieHeader: string | undefined, name: string): string | undefined {
+        if (!cookieHeader) {
+            return undefined;
+        }
+
+        const entries = cookieHeader.split(';');
+        for (const entry of entries) {
+            const [rawKey, ...rawValue] = entry.trim().split('=');
+            if (rawKey === name) {
+                return decodeURIComponent(rawValue.join('='));
+            }
+        }
+
+        return undefined;
+    }
+
+    private resolveClientIp(socket: Socket<any, any, any, AuthenticatedSocketData>): string {
+        const forwardedFor = socket.handshake.headers['x-forwarded-for'];
+
+        if (Array.isArray(forwardedFor)) {
+            return forwardedFor[0];
+        }
+
+        if (typeof forwardedFor === 'string') {
+            return forwardedFor.split(',')[0].trim();
+        }
+
+        return socket.handshake.address;
     }
 
     // 🔓 MÉTODOS DE EMERGÊNCIA (Chamados pelo Controller)

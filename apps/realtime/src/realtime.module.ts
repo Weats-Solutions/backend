@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
 import { ClerkModule } from '@weats/integrations';
 import { DatabaseModule } from '@weats/database';
-import { ConfigsModule } from '@weats/configs';
+import { ConfigsModule, AppConfigService } from '@weats/configs';
 import { ConfigModule } from '@nestjs/config';
 import { RealtimeGateway } from './websocket/realtime.gateway';
 import { RoomsService } from './rooms/rooms.service';
@@ -17,7 +18,14 @@ import { RealtimeStateService } from './websocket/state.service';
     }),
     DatabaseModule, 
     ClerkModule, 
-    ConfigsModule
+    ConfigsModule,
+    JwtModule.registerAsync({
+      imports: [ConfigsModule],
+      inject: [AppConfigService],
+      useFactory: (appConfig: AppConfigService) => ({
+        secret: appConfig.getQrSessionSecret(),
+      }),
+    }),
   ],
   controllers: [RealtimeController],
   providers: [RealtimeGateway, RealtimeService, RoomsService, RealtimeStateService],
