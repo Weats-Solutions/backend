@@ -11,11 +11,14 @@ import { CacheService } from './cache.service';
     {
       provide: 'CACHE_REDIS_CLIENT',
       useFactory: (redisConfig: RedisConfigService) => {
-        return new Redis(redisConfig.getConnectionOptions('cache'));
+        const options = redisConfig.getConnectionOptions('cache');
+        console.log(`[CacheModule] Inicializando Redis com: host=${options.host}, port=${options.port}, db=${options.db}`);
+        const client = new Redis(options);
+        return client;
       },
       inject: [RedisConfigService],
     },
   ],
   exports: [CacheService],
 })
-export class CacheModule {}
+export class CacheModule { }

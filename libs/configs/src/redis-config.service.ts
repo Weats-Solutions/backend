@@ -31,6 +31,12 @@ export class RedisConfigService {
       username: this.getRedisUsername(),
       password: this.getRedisPassword(),
       db,
+      maxRetriesPerRequest: 3,
+      retryStrategy(times: number) {
+        // Tenta reconectar a cada (tentativas * 2s), até um máximo de 30s
+        const delay = Math.min(times * 2000, 30000);
+        return delay;
+      },
     };
   }
 

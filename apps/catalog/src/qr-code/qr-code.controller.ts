@@ -19,6 +19,7 @@ export class QrCodeController {
 
   @Get(':token')
   async handleRedirect(@Param('token') token: string, @Res() res: Response) {
+    console.log(`[Catalog] Recebido pedido de redirecionamento para token: ${token}`);
     if (!token) {
       throw new BadRequestException('Token is required');
     }
