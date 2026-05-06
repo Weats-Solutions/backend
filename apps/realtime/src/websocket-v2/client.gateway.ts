@@ -8,15 +8,19 @@ import {
 } from '@nestjs/websockets';
 import { Logger, UsePipes, ValidationPipe } from '@nestjs/common';
 import { createHash } from 'crypto';
-import { RealtimeStaffCallType } from '@weats/contracts';
 import { Socket } from 'socket.io';
 import { RoomsService } from '../rooms/rooms.service';
-import { RealtimeStateService } from '../websocket/state.service';
+import { RealtimeStateService } from './state.service';
 import { RealtimeV2ClientAuthService } from './client-auth.service';
 import { RealtimeV2DispatchService } from './dispatch.service';
 import { RealtimeV2SecurityService } from './security.service';
-import { ClientCallPayload, CallRequestedPayload, RealtimeV2ClientServer, RealtimeV2SocketData } from './realtime-v2.types';
-import { RealtimeV2Error } from './realtime-v2.constants';
+import {
+  ClientCallPayload,
+  CallRequestedPayload,
+  RealtimeV2ClientServer,
+  RealtimeV2SocketData,
+  RealtimeV2Error, RealtimeStaffCallType
+} from './realtime-v2.types';
 
 @WebSocketGateway({
   namespace: 'realtime-v2-client',
@@ -72,8 +76,14 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
         const clientId = (socket.handshake.auth?.clientId as string)
           || createHash('md5').update(clientIp).digest('hex').substring(0, 8);
 
-        // --- RATE LIMIT HANDSHAKE ---
+        // --- SECURITY CHECKS ---
+        if (await this.securityService.isServicePointBlocked(context.establishmentId, context.servicePointId)) {
+          this.logger.warn(`[SECURITY] Ligação REJEITADA - Mesa Bloqueada: ${context.servicePointId} (Est: ${context.establishmentId})`);
+          return next(new Error(RealtimeV2Error.SP_BLOCKED));
+        }
+
         if (this.securityService.isClientBlocked(clientIp, clientId)) {
+          this.logger.warn(`[SECURITY] Ligação REJEITADA - IP/ID Banido: ${clientIp} / ${clientId}`);
           return next(new Error(RealtimeV2Error.IP_BAN));
         }
 
@@ -134,7 +144,7 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
     socket.join(this.rooms.servicePoint(estId, spId));
 
     const count = (this.server as any).sockets.size;
-    this.logger.log(`[V2 CONNECT] Client ${clientId} na mesa ${spId} (Total: ${count})`);
+    this.logger.log(`[CLIENT CONNECT] ✅ Cliente ${clientId} entrou na mesa ${spId} (Est: ${estId}) | Total: ${count}`);
   }
 
   handleDisconnect(socket: Socket<any, any, any, RealtimeV2SocketData>) {
@@ -145,7 +155,7 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
     if (!estId || !spId || !clientId) return;
 
     const count = (this.server as any).sockets.size;
-    this.logger.log(`[V2 DISCONNECT] Client ${clientId} saiu da mesa ${spId} (Total: ${count})`);
+    this.logger.log(`[CLIENT DISCONNECT] ❌ Cliente ${clientId} saiu da mesa ${spId} (Est: ${estId}) | Total: ${count}`);
 
     const cleanupKey = this.securityService.buildConnectionKey(estId, spId, clientId);
     this.securityService.schedulePendingDisconnectCleanup(
@@ -182,7 +192,8 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
     }
 
     try {
-      if (this.securityService.isServicePointBlocked(servicePointId)) {
+      if (await this.securityService.isServicePointBlocked(establishmentId, servicePointId)) {
+        this.logger.warn(`[SECURITY] Pedido REJEITADO - Mesa Bloqueada: ${servicePointId} (Client: ${clientId})`);
         return { error: RealtimeV2Error.SP_BLOCKED, blocked: true };
       }
 

@@ -10,7 +10,7 @@ import { Logger, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Socket } from 'socket.io';
 import { RealtimeCallStatus, RealtimeMessageCode } from '@weats/contracts';
 import { RoomsService } from '../rooms/rooms.service';
-import { RealtimeStateService } from '../websocket/state.service';
+import { RealtimeStateService } from './state.service';
 import { RealtimeV2DispatchService } from './dispatch.service';
 import { RealtimeV2SecurityService } from './security.service';
 import { RealtimeV2SocketData, RealtimeV2StaffServer, StaffCallResponsePayload } from './realtime-v2.types';
@@ -83,6 +83,9 @@ export class RealtimeV2StaffGateway implements OnGatewayInit {
 
     const activeCalls = await this.stateService.getActiveCalls(estId);
     socket.emit('call:snapshot', activeCalls);
+
+    const blockedTables = await this.stateService.getBlockedTablesSnapshot(estId);
+    socket.emit('table:snapshot', blockedTables);
   }
 
   handleDisconnect(socket: Socket<any, any, any, RealtimeV2SocketData>) {
@@ -128,7 +131,7 @@ export class RealtimeV2StaffGateway implements OnGatewayInit {
 
   @UsePipes(new ValidationPipe({ transform: true }))
   @SubscribeMessage('admin:block:sp')
-  handleAdminBlockServicePoint(
+  async handleAdminBlockServicePoint(
     @ConnectedSocket() socket: Socket<any, any, any, RealtimeV2SocketData>,
     @MessageBody('servicePointId') servicePointId: string,
     @MessageBody('durationMinutes') durationMinutes?: number,
@@ -143,7 +146,7 @@ export class RealtimeV2StaffGateway implements OnGatewayInit {
     }
 
     const durationMs = (durationMinutes || 15) * 60 * 1000;
-    this.securityService.blockServicePoint(servicePointId, durationMs);
+    await this.stateService.saveTableBlock(establishmentId, servicePointId, durationMs);
 
     this.dispatchService.emitClientStatus(
       establishmentId,

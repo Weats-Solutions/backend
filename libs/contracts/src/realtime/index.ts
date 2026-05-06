@@ -4,6 +4,7 @@ export enum RealtimeCallStatus {
     CANCELLED = 'CANCELLED',
     COMPLETED = 'COMPLETED',
     BLOCKED = 'BLOCKED',
+    ACTIVE = 'ACTIVE',
 }
 
 export enum RealtimeMessageCode {
@@ -13,6 +14,7 @@ export enum RealtimeMessageCode {
     
     // System Messages
     MESA_BLOQUEADA = 'REALTIME_ERR_SP_BLOCKED',
+    MESA_LIBERADA = 'REALTIME_MSG_SP_UNBLOCKED',
     IP_BANIDO = 'REALTIME_ERR_IP_BAN',
     SPAM_PROTECTION = 'REALTIME_ERR_SPAM_PROTECTION',
     THROTTLE_ERROR = 'REALTIME_ERR_THROTTLE',

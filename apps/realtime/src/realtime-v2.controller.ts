@@ -1,5 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { RealtimeStateService } from './websocket/state.service';
+import { RealtimeStateService } from './websocket-v2/state.service';
 import { RealtimeV2DispatchService } from './websocket-v2/dispatch.service';
 import { RealtimeV2SocketData } from './websocket-v2/realtime-v2.types';
 import { RealtimeV2SecurityService } from './websocket-v2/security.service';

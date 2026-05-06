@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { RealtimeMessageCode } from '@weats/contracts';
+import { RealtimeStateService } from './state.service';
 
 interface ThrottleResult {
   allowed: boolean;
@@ -13,11 +14,12 @@ export class RealtimeV2SecurityService {
   private readonly lastCallTimestamps = new Map<string, number>();
   private readonly blockedIPs = new Map<string, number>();
   private readonly ipStrikes = new Map<string, number>();
-  private readonly blockedServicePoints = new Map<string, number>();
   private readonly blockedClientIds = new Map<string, number>();
   private readonly processingClients = new Set<string>();
   private readonly connectingClients = new Set<string>();
   private readonly pendingDisconnectCleanup = new Map<string, NodeJS.Timeout>();
+
+  constructor(private readonly stateService: RealtimeStateService) { }
 
   buildConnectionKey(estId: string, spId: string, clientId: string) {
     return `${estId}:${spId}:${clientId}`;
@@ -47,9 +49,8 @@ export class RealtimeV2SecurityService {
     this.processingClients.delete(clientId);
   }
 
-  isServicePointBlocked(servicePointId: string) {
-    const expiration = this.blockedServicePoints.get(servicePointId);
-    return !!expiration && Date.now() < expiration;
+  async isServicePointBlocked(estId: string, servicePointId: string) {
+    return this.stateService.isTableBlocked(estId, servicePointId);
   }
 
   isClientBlocked(clientIp: string, clientId: string) {
@@ -57,10 +58,6 @@ export class RealtimeV2SecurityService {
     const idBanExpiration = this.blockedClientIds.get(clientId);
 
     return (ipBanExpiration && Date.now() < ipBanExpiration) || (idBanExpiration && Date.now() < idBanExpiration);
-  }
-
-  blockServicePoint(servicePointId: string, durationMs: number) {
-    this.blockedServicePoints.set(servicePointId, Date.now() + durationMs);
   }
 
   blockClientId(clientId: string, durationMs: number) {
@@ -76,9 +73,9 @@ export class RealtimeV2SecurityService {
     const lastCall = this.lastCallTimestamps.get(clientId);
 
     if (lastCall && now - lastCall < throttleMs) {
-      const remaining = Math.ceil((throttleMs - (now - lastCall))); // Devolvemos ms agora para ser mais preciso
-      
-      if (increment) {
+      const remaining = Math.ceil((throttleMs - (now - lastCall)));
+
+      if (increment && clientIp) {
         const strikes = (this.ipStrikes.get(clientIp) || 0) + 1;
         this.ipStrikes.set(clientIp, strikes);
 
@@ -134,7 +131,6 @@ export class RealtimeV2SecurityService {
   clearAll() {
     this.blockedIPs.clear();
     this.blockedClientIds.clear();
-    this.blockedServicePoints.clear();
     this.ipStrikes.clear();
     this.lastCallTimestamps.clear();
     this.processingClients.clear();

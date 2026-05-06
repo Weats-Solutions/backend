@@ -66,4 +66,55 @@ export class RealtimeStateService implements OnModuleInit {
     async clearAll(estId: string) {
         await this.redis.del(this.getEstKey(estId));
     }
+
+    // ─── BLOQUEIOS DE MESA (REDIS PERSISTENTE) ──────────────────────────────────
+    
+    private getBlockKey(estId: string) {
+        return `realtime:blocks:est:${estId}`;
+    }
+
+    async saveTableBlock(estId: string, spId: string, durationMs: number) {
+        const key = this.getBlockKey(estId);
+        const expiresAt = Date.now() + durationMs;
+        await this.redis.zadd(key, expiresAt, spId);
+        await this.redis.expire(key, 86400); // 24h cleanup
+        console.log(`[REDIS] Mesa ${spId} bloqueada até ${new Date(expiresAt).toISOString()}`);
+    }
+
+    async getBlockedTablesSnapshot(estId: string): Promise<Record<string, string>> {
+        const key = this.getBlockKey(estId);
+        const now = Date.now();
+        
+        console.log(`[REDIS] Gerando snapshot de mesas bloqueadas para Est: ${estId} (DB: ${this.redis.options.db})`);
+
+        // 1. Limpar bloqueios expirados no Redis
+        await this.redis.zremrangebyscore(key, '-inf', now);
+
+        // 2. Buscar todos os bloqueios ativos
+        const blocks = await this.redis.zrange(key, 0, -1, 'WITHSCORES');
+        const snapshot: Record<string, string> = {};
+
+        // Redis devolve [id1, score1, id2, score2, ...]
+        for (let i = 0; i < blocks.length; i += 2) {
+            const spId = blocks[i];
+            const expiresAt = parseInt(blocks[i + 1]);
+            snapshot[spId] = new Date(expiresAt).toISOString();
+        }
+
+        console.log(`[REDIS] Encontradas ${Object.keys(snapshot).length} mesas bloqueadas ativas.`);
+        return snapshot;
+    }
+
+    async isTableBlocked(estId: string, spId: string): Promise<boolean> {
+        const key = this.getBlockKey(estId);
+        const score = await this.redis.zscore(key, spId);
+        if (!score) return false;
+        return parseInt(score) > Date.now();
+    }
+
+    async removeTableBlock(estId: string, spId: string) {
+        const key = this.getBlockKey(estId);
+        await this.redis.zrem(key, spId);
+        console.log(`[REDIS] Mesa ${spId} DESBLOQUEADA manualmente.`);
+    }
 }
