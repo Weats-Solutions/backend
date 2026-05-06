@@ -8,17 +8,17 @@ import {
 } from '@nestjs/websockets';
 import { Logger, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Socket } from 'socket.io';
-import { RealtimeCallStatus, RealtimeMessageCode } from '@weats/contracts';
 import { RoomsService } from '../rooms/rooms.service';
 import { RealtimeStateService } from './state.service';
 import { RealtimeV2DispatchService } from './dispatch.service';
 import { RealtimeV2SecurityService } from './security.service';
-import { RealtimeV2SocketData, RealtimeV2StaffServer, StaffCallResponsePayload } from './realtime-v2.types';
+import { RealtimeV2SocketData, RealtimeV2StaffServer, StaffCallResponsePayload, RealtimeCallStatus, RealtimeMessageCode } from './realtime-v2.types';
 import { RealtimeV2StaffAuthService } from './staff-auth.service';
 
 @WebSocketGateway({
   namespace: 'realtime-v2-staff',
-  cors: { origin: '*' },
+  origin: ['http://localhost:3001', 'http://localhost:3002', 'http://localhost:4000', 'http://localhost:3000', 'https://*.weats.pro', 'https://table-management.weats.pro'],
+  credentials: true,
   pingInterval: 15000,
   pingTimeout: 20000,
 })
@@ -148,11 +148,12 @@ export class RealtimeV2StaffGateway implements OnGatewayInit {
     const durationMs = (durationMinutes || 15) * 60 * 1000;
     await this.stateService.saveTableBlock(establishmentId, servicePointId, durationMs);
 
-    this.dispatchService.emitClientStatus(
+    const expiresAt = new Date(Date.now() + durationMs).toISOString();
+    this.dispatchService.emitTableStatus(
       establishmentId,
       servicePointId,
       RealtimeCallStatus.BLOCKED,
-      RealtimeMessageCode.MESA_BLOQUEADA,
+      expiresAt
     );
 
     return { success: true, expiresAt: new Date(Date.now() + durationMs).toISOString() };
@@ -186,15 +187,6 @@ export class RealtimeV2StaffGateway implements OnGatewayInit {
       const servicePointId = (s.data as RealtimeV2SocketData).servicePointId;
       const clientIp = this.securityService.resolveClientIp(s);
       this.securityService.blockIp(clientIp, durationMs);
-
-      if (servicePointId) {
-        this.dispatchService.emitClientStatus(
-          establishmentId,
-          servicePointId,
-          RealtimeCallStatus.BLOCKED,
-          RealtimeMessageCode.IP_BANIDO,
-        );
-      }
 
       s.disconnect(true);
     });

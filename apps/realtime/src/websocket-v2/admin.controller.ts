@@ -2,11 +2,11 @@ import { Controller, Post, Body, UseGuards, UsePipes, ValidationPipe } from '@ne
 import { RealtimeStateService } from './state.service';
 import { RealtimeV2SecurityService } from '../websocket-v2/security.service';
 import { RealtimeV2DispatchService } from '../websocket-v2/dispatch.service';
-import { ClerkGuard } from '@weats/common';
+import { ClerkGuard, EstablishmentStaffGuard } from '@weats/common';
 import { AdminBlockTablePayload, AdminUnblockTablePayload, RealtimeCallStatus, RealtimeMessageCode } from './realtime-v2.types';
 
 @Controller('v2/admin')
-@UseGuards(ClerkGuard)
+@UseGuards(ClerkGuard, EstablishmentStaffGuard)
 export class RealtimeV2AdminController {
   constructor(
     private readonly stateService: RealtimeStateService,
@@ -24,24 +24,18 @@ export class RealtimeV2AdminController {
     // 1. Bloquear no Redis (Persistente)
     await this.stateService.saveTableBlock(payload.establishmentId, payload.servicePointId, durationMs);
 
-    // 2. Notificar todos os clientes (Menu) ligados a essa mesa
-    this.dispatchService.emitClientStatus(
-      payload.establishmentId,
-      payload.servicePointId,
-      RealtimeCallStatus.BLOCKED,
-      RealtimeMessageCode.MESA_BLOQUEADA,
+    // 2. Notificar todos os KDS (Staff) ligados a este estabelecimento
+    const expiresAt = new Date(Date.now() + durationMs).toISOString();
+    this.dispatchService.emitTableStatus(
+      payload.establishmentId, 
+      payload.servicePointId, 
+      RealtimeCallStatus.BLOCKED, 
+      expiresAt
     );
-
-    // 3. Notificar todos os KDS (Staff) ligados a este estabelecimento
-    this.dispatchService.staffServer?.to(`est:${payload.establishmentId}`).emit('table:status', {
-      servicePointId: payload.servicePointId,
-      status: RealtimeCallStatus.BLOCKED,
-      expiresAt: new Date(Date.now() + durationMs).toISOString()
-    });
 
     return {
       success: true,
-      expiresAt: new Date(Date.now() + durationMs).toISOString()
+      expiresAt
     };
   }
 
@@ -54,17 +48,10 @@ export class RealtimeV2AdminController {
     await this.stateService.removeTableBlock(payload.establishmentId, payload.servicePointId);
 
     // 2. Notificar todos os KDS (Staff) que a mesa está ativa
-    this.dispatchService.staffServer?.to(`est:${payload.establishmentId}`).emit('table:status', {
-      servicePointId: payload.servicePointId,
-      status: RealtimeCallStatus.ACTIVE, // Status para "Livre/Ativa"
-    });
-
-    // 3. Notificar clientes na mesa (opcional, mas bom para eles saberem que podem pedir)
-    this.dispatchService.emitClientStatus(
-      payload.establishmentId,
-      payload.servicePointId,
-      RealtimeCallStatus.ACTIVE,
-      RealtimeMessageCode.MESA_LIBERADA,
+    this.dispatchService.emitTableStatus(
+      payload.establishmentId, 
+      payload.servicePointId, 
+      RealtimeCallStatus.ACTIVE
     );
 
     return { success: true };

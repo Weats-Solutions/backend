@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ClerkGuard } from '@weats/common';
+import { ClerkGuard, EstablishmentStaffGuard } from '@weats/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ClerkModule } from '@weats/integrations';
 import { DatabaseModule } from '@weats/database';
@@ -47,6 +47,7 @@ import { RealtimeV2AdminController } from './websocket-v2/admin.controller';
     RealtimeV2DispatchService,
     RealtimeV2SecurityService,
     ClerkGuard,
+    EstablishmentStaffGuard,
   ],
 })
 export class RealtimeModule { }

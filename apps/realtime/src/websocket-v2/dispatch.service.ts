@@ -49,7 +49,21 @@ export class RealtimeV2DispatchService {
       timestamp: new Date().toISOString(),
       ...extra,
     });
-    this.logger.debug(`[V2 DISPATCH] call:status est=${establishmentId} sp=${servicePointId} status=${status}`);
+    this.logger.log(`[V2 DISPATCH] call:status est=${establishmentId} sp=${servicePointId} status=${status}`);
+  }
+
+  emitTableStatus(
+    establishmentId: string,
+    servicePointId: string,
+    status: RealtimeCallStatus,
+    expiresAt?: string
+  ) {
+    this.staffServer?.to(this.rooms.est(establishmentId)).emit('table:status', {
+      servicePointId,
+      status,
+      expiresAt
+    });
+    this.logger.log(`[V2 DISPATCH] table:status est=${establishmentId} sp=${servicePointId} status=${status}${expiresAt ? ` expires=${expiresAt}` : ''}`);
   }
 
   async fetchClientSocketsInServicePoint(establishmentId: string, servicePointId: string) {
