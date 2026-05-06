@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, BadRequestException } from "@nestjs/comm
 import { CorePrismaService } from "@weats/database";
 import { Establishment } from "@weats/types";
 import { CreateCategoryDto, UpdateCategoryPositionsDto } from "@weats/contracts";
-import {  ERRORS } from '@weats/common';
+import { ERRORS } from '@weats/common';
 import { RpcException } from "@nestjs/microservices";
 import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
 
@@ -186,7 +186,7 @@ export class MenuCategoryService {
                 imageId: updatedCategory.image?.id,
                 imageUrl: updatedCategory.image?.url,
             };
-            this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug);
+            this.menuUtilsService.clearMenuCacheAsync('menu-detail', establishment.slug, menuId);
             return response;
         } catch (error) {
             console.error('Error updating menu category:', error);
