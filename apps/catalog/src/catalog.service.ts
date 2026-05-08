@@ -95,6 +95,11 @@ export class CatalogService {
         availableLocales: establishment.availableLanguages,
         currency: establishment.currency,
         timezone: establishment.timezone,
+        address: establishment.address,
+        city: establishment.city,
+        zipCode: establishment.zipCode,
+        state: establishment.state,
+        phone: establishment.phoneNumber,
         schedule: normalizeSchedule(establishment.schedule ?? undefined),
         socials: {
           tiktokUrl: establishment.tiktokUrl,

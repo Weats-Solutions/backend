@@ -3,7 +3,7 @@ import { CatalogService } from './catalog.service';
 import { ToUpperCasePipe } from '@weats/common';
 import { EstablishmentLanguage } from '@weats/database';
 
-@Controller()
+@Controller('catalog')
 export class CatalogController {
   constructor(private readonly catalogService: CatalogService) { }
 
