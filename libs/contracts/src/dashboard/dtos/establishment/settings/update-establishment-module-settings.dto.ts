@@ -7,6 +7,9 @@ export class UpdateEstablishmentModuleSettingsDto {
 
     @IsBoolean()
     @IsNotEmpty()
-    callStaffModule: boolean;
+    menusModule: boolean;
 
+    @IsBoolean()
+    @IsNotEmpty()
+    callStaffModule: boolean;
 }
