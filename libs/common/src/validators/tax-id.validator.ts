@@ -5,7 +5,7 @@ import {
     ValidatorConstraintInterface,
     ValidationArguments,
 } from 'class-validator';
-import { validateVatEU  } from '@salespark/validate-vat-eu';
+//import { validateVatEU  } from '@salespark/validate-vat-eu';
 
 /**
  * Validator for Tax IDs (VAT numbers) using country code.
@@ -22,14 +22,15 @@ export class IsValidTaxIdConstraint implements ValidatorConstraintInterface {
         }
 
         const cleanValue = value.replace(/\s|-/g, '').toUpperCase();
-        
-        try {
+
+        return this.basicValidation(cleanValue, countryCode);
+        /* try {
             const result = await validateVatEU(countryCode, cleanValue);
             return result.valid;
         } catch {
             // If VIES service fails, do basic validation as fallback
             return this.basicValidation(cleanValue, countryCode);
-        }
+        } */
     }
 
     defaultMessage(args: ValidationArguments): string {
