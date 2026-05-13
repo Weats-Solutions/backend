@@ -5,7 +5,6 @@ import { LandingpageService } from './landingpage.service';
 import { HttpModule } from '@nestjs/axios';
 import { ConfigsModule } from '@weats/configs';
 import { MenuModule } from '../menu/menu.module';
-import { MenuUtilsModule } from '@weats/common/utils/modules/menu/menu-utils.module';
 
 @Module({
     imports: [
@@ -13,7 +12,6 @@ import { MenuUtilsModule } from '@weats/common/utils/modules/menu/menu-utils.mod
         HttpModule,
         ConfigsModule,
         MenuModule,
-        MenuUtilsModule
     ],
     controllers: [LandingpageController],
     providers: [

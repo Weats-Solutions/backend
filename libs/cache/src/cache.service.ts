@@ -94,4 +94,41 @@ export class CacheService {
       stream.on('error', reject);
     });
   }
+
+  // ═══════════════════════════════════════════
+  // CATALOG SPECIFIC INVALIDATION
+  // ═══════════════════════════════════════════
+
+  /**
+   * Limpa a cache de definições core (configurações, tema, etc)
+   */
+  async clearCoreCache(slug: string) {
+    const key = `catalog:est:${slug}:core`;
+    await this.invalidate(key);
+    this.logger.debug(`[Cache] Cache CORE limpa para: ${slug}`);
+  }
+
+  /**
+   * Limpa a cache das listas de menus (todas as línguas e targets)
+   */
+  async clearMenuListCache(slug: string) {
+    const pattern = `catalog:est:${slug}:lang:*:menu*`;
+    await this.invalidatePattern(pattern);
+  }
+
+  /**
+   * Limpa a cache do conteúdo de um menu específico ou de todos os menus
+   */
+  async clearMenuContentCache(slug: string, menuId?: string) {
+    const pattern = `catalog:est:${slug}:lang:*:menu:${menuId || '*'}:content`;
+    await this.invalidatePattern(pattern);
+  }
+
+  /**
+   * Limpa TODA a cache de um estabelecimento (definições, listas e conteúdos)
+   */
+  async clearEstablishmentCache(slug: string) {
+    const pattern = `catalog:est:${slug}:*`;
+    await this.invalidatePattern(pattern);
+  }
 }

@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { ERRORS, isScheduleOpenNow, normalizeSchedule } from '@weats/common';
 import { CorePrismaService, EstablishmentLanguage } from '@weats/database';
 import { Logger } from '@nestjs/common';
-import { CacheService } from '@weats/cache';
+import { CacheService, coreCacheKey, menuItemsCacheKey, menuListCacheKey } from '@weats/cache';
 
 @Injectable()
 export class CatalogService {
@@ -18,7 +18,7 @@ export class CatalogService {
    * Centraliza a consulta e a cache para evitar hits duplicados na BD.
    */
   private async getEstablishmentCore(slug: string) {
-    const cacheKey = `catalog:est:${slug}:core`;
+    const cacheKey = coreCacheKey(slug);
 
     const establishment = await this.cache.wrap(cacheKey, 3600, async () => {
       return this.prisma.establishment.findUnique({
@@ -116,8 +116,12 @@ export class CatalogService {
         analytics: {
           googleAnalyticsId: establishment.googleAnalyticsId,
         },
-        takeway: true,
-        reservations: true,
+        modules: {
+          menus: establishment.menusModule,
+          takeaway: establishment.takeAwayModule,
+          reservations: establishment.reservationsModule,
+          callStaff: establishment.callStaffModule,
+        }
       };
     } catch (error) {
       this.logger.error(`Erro ao buscar settings para ${slug}:`, error);
@@ -136,7 +140,7 @@ export class CatalogService {
         currentLang = establishment.primaryLanguage;
       }
 
-      const menuCacheKey = `catalog:est:${slug}:lang:${currentLang}:menu${targetId ? `:target:${targetId}` : ''}`;
+      const menuCacheKey = menuListCacheKey(slug, currentLang, targetId);
 
       return await this.cache.wrap(menuCacheKey, 3600, async () => {
         if (targetId) {
@@ -188,7 +192,7 @@ export class CatalogService {
         currentLang = establishment.primaryLanguage;
       }
 
-      const cacheKey = `catalog:est:${slug}:lang:${currentLang}:menu:${menuId}:content`;
+      const cacheKey = menuItemsCacheKey(slug, currentLang, menuId);
 
       return await this.cache.wrap(cacheKey, 3600, async () => {
         const menu = await this.prisma.menu.findFirst({

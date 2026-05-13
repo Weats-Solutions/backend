@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import { isScheduleOpenNow } from '@weats/common/utils/schedule.utils';
-import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
+import { CacheService } from '@weats/cache';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -22,8 +22,7 @@ export class LandingpageService {
         private readonly prisma: CorePrismaService,
         private readonly appConfigService: AppConfigService,
         private readonly menuService: MenuService,
-        private readonly menuUtilsService: MenuUtilsService,
-        //@Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
+        private readonly cacheService: CacheService,
     ) { }
 
     async getLandingpage(establishmentSlug: string, lang: string, targetId?: string) {
@@ -496,7 +495,7 @@ export class LandingpageService {
 
             // Só limpa a cache se o tema afetado for o tema ativo do estabelecimento
             if (shouldClearCache) {
-                this.menuUtilsService.clearMenuCacheAsync('theme', establishment.slug);
+                this.cacheService.clearCoreCache(establishment.slug);
             }
 
             return theme;
@@ -568,7 +567,7 @@ export class LandingpageService {
             });
 
             // Clear menu cache
-            this.menuUtilsService.clearMenuCacheAsync('theme', establishment.slug);
+            this.cacheService.clearCoreCache(establishment.slug);
             return theme;
         } catch (error) {
             if (error instanceof RpcException) throw error;

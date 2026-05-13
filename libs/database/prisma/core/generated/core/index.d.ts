@@ -26517,6 +26517,7 @@ export namespace Prisma {
     tripAdvisorUrl: string | null
     websiteUrl: string | null
     myPageModule: boolean | null
+    menusModule: boolean | null
     callStaffModule: boolean | null
     takeAwayModule: boolean | null
     reservationsModule: boolean | null
@@ -26565,6 +26566,7 @@ export namespace Prisma {
     tripAdvisorUrl: string | null
     websiteUrl: string | null
     myPageModule: boolean | null
+    menusModule: boolean | null
     callStaffModule: boolean | null
     takeAwayModule: boolean | null
     reservationsModule: boolean | null
@@ -26613,6 +26615,7 @@ export namespace Prisma {
     tripAdvisorUrl: number
     websiteUrl: number
     myPageModule: number
+    menusModule: number
     callStaffModule: number
     takeAwayModule: number
     reservationsModule: number
@@ -26664,6 +26667,7 @@ export namespace Prisma {
     tripAdvisorUrl?: true
     websiteUrl?: true
     myPageModule?: true
+    menusModule?: true
     callStaffModule?: true
     takeAwayModule?: true
     reservationsModule?: true
@@ -26712,6 +26716,7 @@ export namespace Prisma {
     tripAdvisorUrl?: true
     websiteUrl?: true
     myPageModule?: true
+    menusModule?: true
     callStaffModule?: true
     takeAwayModule?: true
     reservationsModule?: true
@@ -26760,6 +26765,7 @@ export namespace Prisma {
     tripAdvisorUrl?: true
     websiteUrl?: true
     myPageModule?: true
+    menusModule?: true
     callStaffModule?: true
     takeAwayModule?: true
     reservationsModule?: true
@@ -26882,6 +26888,7 @@ export namespace Prisma {
     tripAdvisorUrl: string | null
     websiteUrl: string | null
     myPageModule: boolean
+    menusModule: boolean
     callStaffModule: boolean
     takeAwayModule: boolean
     reservationsModule: boolean
@@ -26948,6 +26955,7 @@ export namespace Prisma {
     tripAdvisorUrl?: boolean
     websiteUrl?: boolean
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -27039,6 +27047,7 @@ export namespace Prisma {
     tripAdvisorUrl?: boolean
     websiteUrl?: boolean
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -27093,6 +27102,7 @@ export namespace Prisma {
     tripAdvisorUrl?: boolean
     websiteUrl?: boolean
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -27147,6 +27157,7 @@ export namespace Prisma {
     tripAdvisorUrl?: boolean
     websiteUrl?: boolean
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -27166,7 +27177,7 @@ export namespace Prisma {
     ownerId?: boolean
   }
 
-  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "myPageModule" | "callStaffModule" | "takeAwayModule" | "reservationsModule" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "googleAnalyticsId" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
+  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "myPageModule" | "menusModule" | "callStaffModule" | "takeAwayModule" | "reservationsModule" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "googleAnalyticsId" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
   export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     metadata?: boolean | Establishment$metadataArgs<ExtArgs>
@@ -27301,6 +27312,7 @@ export namespace Prisma {
       tripAdvisorUrl: string | null
       websiteUrl: string | null
       myPageModule: boolean
+      menusModule: boolean
       callStaffModule: boolean
       takeAwayModule: boolean
       reservationsModule: boolean
@@ -27811,6 +27823,7 @@ export namespace Prisma {
     readonly tripAdvisorUrl: FieldRef<"Establishment", 'String'>
     readonly websiteUrl: FieldRef<"Establishment", 'String'>
     readonly myPageModule: FieldRef<"Establishment", 'Boolean'>
+    readonly menusModule: FieldRef<"Establishment", 'Boolean'>
     readonly callStaffModule: FieldRef<"Establishment", 'Boolean'>
     readonly takeAwayModule: FieldRef<"Establishment", 'Boolean'>
     readonly reservationsModule: FieldRef<"Establishment", 'Boolean'>
@@ -112449,6 +112462,7 @@ export namespace Prisma {
     tripAdvisorUrl: 'tripAdvisorUrl',
     websiteUrl: 'websiteUrl',
     myPageModule: 'myPageModule',
+    menusModule: 'menusModule',
     callStaffModule: 'callStaffModule',
     takeAwayModule: 'takeAwayModule',
     reservationsModule: 'reservationsModule',
@@ -115531,6 +115545,7 @@ export namespace Prisma {
     tripAdvisorUrl?: StringNullableFilter<"Establishment"> | string | null
     websiteUrl?: StringNullableFilter<"Establishment"> | string | null
     myPageModule?: BoolFilter<"Establishment"> | boolean
+    menusModule?: BoolFilter<"Establishment"> | boolean
     callStaffModule?: BoolFilter<"Establishment"> | boolean
     takeAwayModule?: BoolFilter<"Establishment"> | boolean
     reservationsModule?: BoolFilter<"Establishment"> | boolean
@@ -115621,6 +115636,7 @@ export namespace Prisma {
     tripAdvisorUrl?: SortOrderInput | SortOrder
     websiteUrl?: SortOrderInput | SortOrder
     myPageModule?: SortOrder
+    menusModule?: SortOrder
     callStaffModule?: SortOrder
     takeAwayModule?: SortOrder
     reservationsModule?: SortOrder
@@ -115715,6 +115731,7 @@ export namespace Prisma {
     tripAdvisorUrl?: StringNullableFilter<"Establishment"> | string | null
     websiteUrl?: StringNullableFilter<"Establishment"> | string | null
     myPageModule?: BoolFilter<"Establishment"> | boolean
+    menusModule?: BoolFilter<"Establishment"> | boolean
     callStaffModule?: BoolFilter<"Establishment"> | boolean
     takeAwayModule?: BoolFilter<"Establishment"> | boolean
     reservationsModule?: BoolFilter<"Establishment"> | boolean
@@ -115804,6 +115821,7 @@ export namespace Prisma {
     tripAdvisorUrl?: SortOrderInput | SortOrder
     websiteUrl?: SortOrderInput | SortOrder
     myPageModule?: SortOrder
+    menusModule?: SortOrder
     callStaffModule?: SortOrder
     takeAwayModule?: SortOrder
     reservationsModule?: SortOrder
@@ -115859,6 +115877,7 @@ export namespace Prisma {
     tripAdvisorUrl?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     websiteUrl?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     myPageModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
+    menusModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     callStaffModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     takeAwayModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     reservationsModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
@@ -122979,6 +122998,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -123064,6 +123084,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -123149,6 +123170,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -123234,6 +123256,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -123319,6 +123342,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -123368,6 +123392,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -123412,6 +123437,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -131277,6 +131303,7 @@ export namespace Prisma {
     tripAdvisorUrl?: SortOrder
     websiteUrl?: SortOrder
     myPageModule?: SortOrder
+    menusModule?: SortOrder
     callStaffModule?: SortOrder
     takeAwayModule?: SortOrder
     reservationsModule?: SortOrder
@@ -131326,6 +131353,7 @@ export namespace Prisma {
     tripAdvisorUrl?: SortOrder
     websiteUrl?: SortOrder
     myPageModule?: SortOrder
+    menusModule?: SortOrder
     callStaffModule?: SortOrder
     takeAwayModule?: SortOrder
     reservationsModule?: SortOrder
@@ -131374,6 +131402,7 @@ export namespace Prisma {
     tripAdvisorUrl?: SortOrder
     websiteUrl?: SortOrder
     myPageModule?: SortOrder
+    menusModule?: SortOrder
     callStaffModule?: SortOrder
     takeAwayModule?: SortOrder
     reservationsModule?: SortOrder
@@ -143937,6 +143966,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -144021,6 +144051,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -144121,6 +144152,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -144205,6 +144237,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -144289,6 +144322,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -144373,6 +144407,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -144473,6 +144508,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -144557,6 +144593,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -144671,6 +144708,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -144755,6 +144793,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -144884,6 +144923,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -144968,6 +145008,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -145203,6 +145244,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -145287,6 +145329,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -145471,6 +145514,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -145555,6 +145599,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -145838,6 +145883,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -145922,6 +145968,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -146071,6 +146118,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -146155,6 +146203,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -146522,6 +146571,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -146606,6 +146656,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -146756,6 +146807,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -146840,6 +146892,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -147370,6 +147423,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -147454,6 +147508,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -147581,6 +147636,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -147665,6 +147721,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -147889,6 +147946,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -147973,6 +148031,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -148073,6 +148132,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -148157,6 +148217,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -151282,6 +151343,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -151366,6 +151428,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -151466,6 +151529,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -151550,6 +151614,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -151675,6 +151740,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -151759,6 +151825,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -151906,6 +151973,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -151990,6 +152058,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -152074,6 +152143,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -152158,6 +152228,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -152299,6 +152370,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -152383,6 +152455,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -152514,6 +152587,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -152598,6 +152672,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -152698,6 +152773,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -152782,6 +152858,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -152866,6 +152943,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -152950,6 +153028,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -153044,6 +153123,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -153128,6 +153208,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -153222,6 +153303,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -153306,6 +153388,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -153607,6 +153690,7 @@ export namespace Prisma {
     tripAdvisorUrl?: StringNullableFilter<"Establishment"> | string | null
     websiteUrl?: StringNullableFilter<"Establishment"> | string | null
     myPageModule?: BoolFilter<"Establishment"> | boolean
+    menusModule?: BoolFilter<"Establishment"> | boolean
     callStaffModule?: BoolFilter<"Establishment"> | boolean
     takeAwayModule?: BoolFilter<"Establishment"> | boolean
     reservationsModule?: BoolFilter<"Establishment"> | boolean
@@ -153683,6 +153767,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -153767,6 +153852,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -153974,6 +154060,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -154058,6 +154145,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -154158,6 +154246,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -154242,6 +154331,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -154326,6 +154416,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -154410,6 +154501,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -154510,6 +154602,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -154594,6 +154687,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -154678,6 +154772,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -154762,6 +154857,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -154862,6 +154958,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -154946,6 +155043,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -155050,6 +155148,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -155134,6 +155233,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -155661,6 +155761,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -155745,6 +155846,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -156624,6 +156726,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -156708,6 +156811,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -156846,6 +156950,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -156930,6 +157035,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -158214,6 +158320,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -158298,6 +158405,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -158454,6 +158562,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -158538,6 +158647,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -159568,6 +159678,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -159652,6 +159763,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -159803,6 +159915,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -159887,6 +160000,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -160081,6 +160195,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -160165,6 +160280,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -160354,6 +160470,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -160438,6 +160555,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -161538,6 +161656,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -161622,6 +161741,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -161752,6 +161872,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -161836,6 +161957,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -162014,6 +162136,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -162098,6 +162221,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -162249,6 +162373,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -162333,6 +162458,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -162502,6 +162628,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -162586,6 +162713,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -162823,6 +162951,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -162907,6 +163036,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -163284,6 +163414,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -163368,6 +163499,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -163594,6 +163726,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -163678,6 +163811,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -164067,6 +164201,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -164151,6 +164286,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -164337,6 +164473,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -164421,6 +164558,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -164551,6 +164689,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -164635,6 +164774,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -164884,6 +165024,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -164968,6 +165109,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -165119,6 +165261,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -165203,6 +165346,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -165664,6 +165808,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -165748,6 +165893,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -166740,6 +166886,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -166824,6 +166971,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -167063,6 +167211,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -167147,6 +167296,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -167686,6 +167836,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -167770,6 +167921,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -167946,6 +168098,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -168030,6 +168183,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -168490,6 +168644,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -168574,6 +168729,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -168847,6 +169003,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -168931,6 +169088,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -169206,6 +169364,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -169290,6 +169449,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -169471,6 +169631,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -169555,6 +169716,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -169726,6 +169888,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -169810,6 +169973,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -169944,6 +170108,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -170028,6 +170193,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -170364,6 +170530,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -170448,6 +170615,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -170573,6 +170741,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -170657,6 +170826,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -171162,6 +171332,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -171246,6 +171417,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -171346,6 +171518,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -171430,6 +171603,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -171604,6 +171778,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -171688,6 +171863,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -171810,6 +171986,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -171894,6 +172071,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -172038,6 +172216,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -172122,6 +172301,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -172260,6 +172440,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -172344,6 +172525,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -172526,6 +172708,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -172610,6 +172793,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -172752,6 +172936,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -172836,6 +173021,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -175052,6 +175238,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -175100,6 +175287,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -175196,6 +175384,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -175280,6 +175469,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -175364,6 +175554,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -175412,6 +175603,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -175496,6 +175688,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -175580,6 +175773,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -178866,6 +179060,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -178922,6 +179117,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -179006,6 +179202,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -179090,6 +179287,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -179185,6 +179383,7 @@ export namespace Prisma {
     tripAdvisorUrl?: string | null
     websiteUrl?: string | null
     myPageModule?: boolean
+    menusModule?: boolean
     callStaffModule?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
@@ -179298,6 +179497,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -179382,6 +179582,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
@@ -179466,6 +179667,7 @@ export namespace Prisma {
     tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
     websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean

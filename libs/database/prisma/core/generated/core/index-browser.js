@@ -336,6 +336,7 @@ exports.Prisma.EstablishmentScalarFieldEnum = {
   tripAdvisorUrl: 'tripAdvisorUrl',
   websiteUrl: 'websiteUrl',
   myPageModule: 'myPageModule',
+  menusModule: 'menusModule',
   callStaffModule: 'callStaffModule',
   takeAwayModule: 'takeAwayModule',
   reservationsModule: 'reservationsModule',

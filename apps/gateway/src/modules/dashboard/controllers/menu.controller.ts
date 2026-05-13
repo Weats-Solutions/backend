@@ -99,8 +99,8 @@ export class MenuController {
     @Roles(EmployeeRoles.MANAGER)
     @UseGuards(ClerkGuard, EstablishmentStaffGuard, ActiveSubscriptionGuard)
     @Delete('/:menuId')
-    deleteMenu(@Param('menuId') menuId: string) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.MENU_DELETE, { menuId });
+    deleteMenu(@Param('menuId') menuId: string, @CurrentEstablishment() currentEstablishment: Establishment) {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.MENU_DELETE, { menuId, establishment: currentEstablishment });
     }
 
     @Roles(EmployeeRoles.MANAGER)

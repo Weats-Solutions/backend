@@ -6,7 +6,7 @@ import {
   Prisma
 } from '@weats/database';
 import { Job, Queue } from 'bull';
-import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
+import { CacheService } from '@weats/cache';
 import { QUEUES } from '@weats/bull/queues/queues.constants';
 import { LanguageSyncJobData } from './services/establishment-system-settings.service';
 
@@ -28,7 +28,7 @@ export class EstablishmentLanguageSyncService {
     @InjectQueue(QUEUES.LANGUAGES)
     private readonly jobsQueue: Queue,
     private readonly prisma: CorePrismaService,
-    private readonly menuUtilsService: MenuUtilsService,
+    private readonly cacheService: CacheService,
   ) { }
 
   /**
@@ -139,7 +139,7 @@ export class EstablishmentLanguageSyncService {
         }
       });
 
-      this.menuUtilsService.clearAllCacheAsync(
+      this.cacheService.clearEstablishmentCache(
         establishment.slug,
       );
 

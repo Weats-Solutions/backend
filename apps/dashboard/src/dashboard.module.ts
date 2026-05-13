@@ -15,6 +15,7 @@ import { ExpenseModule } from './modules/expense/expense.module';
 import { StatsModule } from './modules/stats/stats.module';
 import { ZoneModule } from './modules/zone/zone.module';
 import { QueuesModule } from '@weats/bull';
+import { CacheModule } from '@weats/cache';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { QueuesModule } from '@weats/bull';
     }),
     ConfigsModule,
     QueuesModule,
+    CacheModule,
     EstablishmentModule,
     UserModule,
     PlanModule,

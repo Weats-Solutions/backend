@@ -7,7 +7,7 @@ import {
     UpdateEstablishmentDigitalSettingsDto
 } from '@weats/contracts';
 import { CorePrismaService } from '@weats/database';
-import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
+import { CacheService } from '@weats/cache';
 import { Establishment } from '@weats/types';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class EstablishmentDigitalSettingsService {
 
     constructor(
         private readonly prisma: CorePrismaService,
-        private readonly menuUtilsService: MenuUtilsService,
+        private readonly cacheService: CacheService,
     ) { }
 
 
@@ -59,7 +59,7 @@ export class EstablishmentDigitalSettingsService {
                     establishment,
                     updateEstablishmentDigitalSettingsDto.domain,
                 );
-                this.menuUtilsService.clearAllCacheAsync(establishment.slug);
+                this.cacheService.clearEstablishmentCache(establishment.slug);
 
                 break;
             case 'wifi':
@@ -67,14 +67,14 @@ export class EstablishmentDigitalSettingsService {
                     establishment,
                     updateEstablishmentDigitalSettingsDto.wifi,
                 );
-                this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
+                this.cacheService.clearCoreCache(establishment.slug);
                 break;
             case 'analytics':
                 result = await this.updateAnalytics(
                     establishment,
                     updateEstablishmentDigitalSettingsDto.analytics,
                 );
-                this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
+                this.cacheService.clearCoreCache(establishment.slug);
                 break;
             default:
                 throw new RpcException({

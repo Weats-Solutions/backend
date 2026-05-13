@@ -29,7 +29,7 @@ export class MenuController {
     createMenu(
         @Payload() payload: { createMenuDto: CreateMenuDto, establishment: Establishment },
     ) {
-        return this.menuService.createMenu(payload.createMenuDto, payload.establishment.id);
+        return this.menuService.createMenu(payload.createMenuDto, payload.establishment);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.MENU_UPDATE)
@@ -63,12 +63,12 @@ export class MenuController {
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.MENU_DELETE)
-    deleteMenu(@Payload() payload: { menuId: string }) {
-        return this.menuService.deleteMenu(payload.menuId);
+    deleteMenu(@Payload() payload: { menuId: string, establishment: Establishment }) {
+        return this.menuService.deleteMenu(payload.menuId, payload.establishment);
     }
 
     @MessagePattern(DASHBOARD_PATTERNS.MENU_DUPLICATE)
-    duplicateMenu(@Payload() payload: { menuId: string; establishment: Establishment }) {
+    duplicateMenu(@Payload() payload: { menuId: string, establishment: Establishment }) {
         return this.menuService.duplicateMenu(payload.menuId, payload.establishment);
     }
 }

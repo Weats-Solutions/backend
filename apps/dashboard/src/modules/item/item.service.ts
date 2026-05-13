@@ -22,7 +22,7 @@ import {
 import type { Prisma } from '@weats/database';
 import { ItemStatus } from '@weats/database';
 import { ERRORS } from '@weats/common';
-import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
+import { CacheService } from '@weats/cache';
 import { RpcException } from '@nestjs/microservices';
 import {
   buildModifierGroupData,
@@ -35,7 +35,7 @@ import {
 export class ItemService {
   constructor(
     private readonly prisma: CorePrismaService,
-    private readonly menuUtilsService: MenuUtilsService,
+    private readonly cacheService: CacheService,
   ) {}
 
   private async getEstablishmentSlug(establishmentId: string) {
@@ -119,9 +119,9 @@ export class ItemService {
     if (menuIds.length === 0) return;
 
     for (const menuId of menuIds) {
-      this.menuUtilsService.clearMenuCacheAsync('menu-detail', slug, menuId);
+      this.cacheService.clearMenuContentCache(slug, menuId);
     }
-    this.menuUtilsService.clearMenuCacheAsync('menus', slug);
+    this.cacheService.clearMenuListCache(slug);
   }
 
   // ═══════════════════════════════════════════

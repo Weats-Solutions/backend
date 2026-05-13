@@ -9,7 +9,7 @@ import {
 import { CreateScheduleDto } from '@weats/contracts/dashboard/dtos/schedule';
 import { CorePrismaService, ScheduleType } from '@weats/database';
 import { StripeService } from '@weats/integrations';
-import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
+import { CacheService } from '@weats/cache';
 import { Establishment } from '@weats/types';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class EstablishmentGeneralSettingsService {
   constructor(
     private readonly prisma: CorePrismaService,
     private readonly stripeService: StripeService,
-    private readonly menuUtilsService: MenuUtilsService,
+    private readonly cacheService: CacheService,
   ) {}
 
   async getEstablishmentGeneralSettings(id: string) {
@@ -95,7 +95,7 @@ export class EstablishmentGeneralSettingsService {
         });
     }
 
-    this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
+    this.cacheService.clearCoreCache(establishment.slug);
 
     return result;
   }

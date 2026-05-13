@@ -7,7 +7,7 @@ import {
 } from '@weats/contracts';
 import { CorePrismaService } from '@weats/database';
 import { StripeService } from '@weats/integrations';
-import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
+import { CacheService } from '@weats/cache';
 import { User } from '@weats/types';
 import { ulid } from 'ulid';
 
@@ -18,7 +18,7 @@ export class EstablishmentLifeCycleService {
     constructor(
         private readonly prisma: CorePrismaService,
         private readonly stripeService: StripeService,
-        private readonly menuUtilsService: MenuUtilsService,
+        private readonly cacheService: CacheService,
     ) { }
 
 
@@ -142,7 +142,7 @@ export class EstablishmentLifeCycleService {
             });
         }
 
-        return this.menuUtilsService.clearAllCacheAsync(id)
+        return this.cacheService.clearEstablishmentCache(establishment.slug);
     }
 
 

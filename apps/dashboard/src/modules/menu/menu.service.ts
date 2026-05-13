@@ -9,14 +9,14 @@ import { FeatureUsageService } from '@weats/common/feature/feature-usage.service
 import { ERRORS, MENU_COLOR_PALETTE, normalizeSchedule } from '@weats/common';
 import { CorePrismaService, EstablishmentLanguage, MenuType, ScheduleType } from '@weats/database';
 import { RpcException } from '@nestjs/microservices';
-import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
+import { CacheService } from '@weats/cache';
 
 @Injectable()
 export class MenuService {
     constructor(
         private readonly prisma: CorePrismaService,
         private usageService: FeatureUsageService,
-        private readonly menuUtilsService: MenuUtilsService,
+        private readonly cacheService: CacheService,
     ) { }
 
     async listMenus(establishment: Establishment) {
@@ -119,14 +119,9 @@ export class MenuService {
         }
     }
 
-    async createMenu(createMenuDto: CreateMenuDto, establishmentId: string) {
+    async createMenu(createMenuDto: CreateMenuDto, establishment: Establishment) {
         try {
             const { translations, schedule } = createMenuDto;
-            const establishment = await this.prisma.establishment.findUnique({
-                where: { id: establishmentId },
-                select: { slug: true },
-            });
-
             const menu = await this.prisma.$transaction(async (prisma) => {
                 let scheduleId: string | undefined;
                 if (schedule) {
@@ -147,14 +142,14 @@ export class MenuService {
                     scheduleId = createdSchedule.id;
                 }
 
-                const menuCount = await prisma.menu.count({ where: { establishmentId } });
+                const menuCount = await prisma.menu.count({ where: { establishmentId: establishment.id } });
                 const selectedColor = MENU_COLOR_PALETTE[Math.floor(Math.random() * MENU_COLOR_PALETTE.length)];
 
                 const finalPrice = createMenuDto.type === MenuType.RODIZIO ? createMenuDto.price : null;
 
                 const menu = await prisma.menu.create({
                     data: {
-                        establishmentId,
+                        establishmentId: establishment.id,
                         position: menuCount + 1,
                         color: MENU_COLOR_PALETTE[Math.floor(Math.random() * MENU_COLOR_PALETTE.length)],
                         type: createMenuDto.type,
@@ -183,7 +178,7 @@ export class MenuService {
 
                 return { ...menu, schedule: menu.schedule ? normalizeSchedule(menu.schedule) : null };
             });
-            this.menuUtilsService.clearMenuCacheAsync('menus', establishment?.slug);
+            await this.cacheService.clearMenuListCache(establishment.slug);
             return menu;
         } catch (error) {
             console.error('Error creating menu:', error);
@@ -248,7 +243,8 @@ export class MenuService {
                 },
             });
 
-            this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug);
+            await this.cacheService.clearMenuListCache(establishment.slug);
+            await this.cacheService.clearMenuContentCache(establishment.slug, menuId);
             return this.getMenuDetails(menuId, establishment);
         } catch (error) {
             console.error('Error updating menu details:', error);
@@ -290,7 +286,7 @@ export class MenuService {
                 },
             });
 
-            this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug);
+            this.cacheService.clearMenuListCache(establishment.slug);
             return {
                 id: menu.id,
                 isVisible: menu.isVisible,
@@ -325,7 +321,7 @@ export class MenuService {
             await this.prisma.$transaction(updates);
 
             // Clean Next.JS cache to reflect changes immediately on the frontend
-            this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug);
+            this.cacheService.clearMenuListCache(establishment.slug);
 
             return { success: true };
         } catch (error) {
@@ -334,7 +330,7 @@ export class MenuService {
         }
     }
 
-    async deleteMenu(menuId: string) {
+    async deleteMenu(menuId: string, establishment: Establishment) {
         try {
             const result = await this.prisma.$transaction(async (tx) => {
                 // 1. Get menu info to know position and establishment
@@ -373,11 +369,7 @@ export class MenuService {
 
                 return { success: true, remainingMenus, establishmentId: menu.establishmentId };
             });
-            const establishment = await this.prisma.establishment.findUnique({
-                where: { id: result.establishmentId },
-                select: { slug: true },
-            });
-            this.menuUtilsService.clearMenuCacheAsync('menus', establishment?.slug);
+            await this.cacheService.clearMenuListCache(establishment.slug);
             return { success: result.success, remainingMenus: result.remainingMenus };
         } catch (error) {
             console.error('Error deleting menu:', error);
@@ -543,7 +535,7 @@ export class MenuService {
                 });
             });
 
-            this.menuUtilsService.clearMenuCacheAsync('menus', establishment.slug);
+            this.cacheService.clearMenuListCache(establishment.slug);
 
             return {
                 ...newMenu,

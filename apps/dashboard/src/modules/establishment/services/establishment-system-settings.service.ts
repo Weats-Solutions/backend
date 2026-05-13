@@ -5,7 +5,7 @@ import {
     EstablishmentLanguageDto, EstablishmentPreferencesDto, UpdateEstablishmentSystemSettingsDto
 } from '@weats/contracts';
 import { CorePrismaService, EstablishmentLanguage } from '@weats/database';
-import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
+import { CacheService } from '@weats/cache';
 import { Establishment } from '@weats/types';
 import { EstablishmentLanguageSyncService } from '../establishment-language-sync.service';
 import { InjectQueue } from '@nestjs/bull';
@@ -26,7 +26,7 @@ export class EstablishmentSystemSettingsService {
 
     constructor(
         private readonly prisma: CorePrismaService,
-        private readonly menuUtilsService: MenuUtilsService,
+        private readonly cacheService: CacheService,
         private readonly featureUsageService: FeatureUsageService,
         private readonly establishmentLanguageSyncService: EstablishmentLanguageSyncService,
         @InjectQueue(QUEUES.LANGUAGES) private readonly languageQueue: Queue,
@@ -67,7 +67,7 @@ export class EstablishmentSystemSettingsService {
                     });
             }
 
-            this.menuUtilsService.clearMenuCacheAsync('settings', establishment.slug);
+            this.cacheService.clearCoreCache(establishment.slug);
 
             return result;
         } catch (error) {

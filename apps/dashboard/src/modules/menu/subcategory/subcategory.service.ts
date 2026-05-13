@@ -6,13 +6,13 @@ import { Establishment, ITEM_DETAIL_INCLUDE } from "@weats/types";
 import { mapTranslatedItemDetailResponse } from "@weats/item-core";
 import { RpcException } from "@nestjs/microservices";
 import { LinkItemToSubcategoryDto } from "@weats/contracts/dashboard/dtos/item/link-item-to-subcategory.dto";
-import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
+import { CacheService } from '@weats/cache';
 
 @Injectable()
 export class MenuSubcategoryService {
     constructor(
         private readonly prisma: CorePrismaService,
-        private readonly menuUtilsService: MenuUtilsService,
+        private readonly cacheService: CacheService,
     ) { }
 
     private async getEstablishmentSlugByCategoryId(categoryId: string) {
@@ -20,7 +20,15 @@ export class MenuSubcategoryService {
             where: { id: categoryId },
             select: { menu: { select: { establishment: { select: { slug: true } } } } },
         });
-        return category?.menu?.establishment?.slug;
+
+        if (!category?.menu?.establishment?.slug) {
+            throw new RpcException({
+                code: 404,
+                message: ERRORS.NOT_FOUND,
+            });
+        }
+
+        return category.menu.establishment.slug;
     }
 
     private async getEstablishmentSlugBySubcategoryId(subcategoryId: string) {
@@ -30,7 +38,15 @@ export class MenuSubcategoryService {
                 category: { select: { menu: { select: { establishment: { select: { slug: true } } } } } },
             },
         });
-        return subcategory?.category?.menu?.establishment?.slug;
+
+        if (!subcategory?.category?.menu?.establishment?.slug) {
+            throw new RpcException({
+                code: 404,
+                message: ERRORS.NOT_FOUND,
+            });
+        }
+
+        return subcategory.category.menu.establishment.slug;
     }
 
 
@@ -63,16 +79,23 @@ export class MenuSubcategoryService {
                 },
             });
 
+            if (!menu) {
+                throw new RpcException({
+                    code: 404,
+                    message: ERRORS.NOT_FOUND,
+                });
+            }
+
             return {
                 menu: {
-                    id: menu?.id,
-                    translations: menu?.translations,
+                    id: menu.id,
+                    translations: menu.translations,
                 },
                 category: {
-                    id: menu?.categories[0].id,
-                    translations: menu?.categories[0].translations,
+                    id: menu.categories[0].id,
+                    translations: menu.categories[0].translations,
                 },
-                subcategories: menu?.categories[0].subcategories.map((subcategory) => ({
+                subcategories: menu.categories[0].subcategories.map((subcategory) => ({
                     id: subcategory.id,
                     translations: subcategory.translations,
                     position: subcategory.position,
@@ -121,7 +144,7 @@ export class MenuSubcategoryService {
                 },
             });
 
-            this.menuUtilsService.clearMenuCacheAsync('menu-detail', slug, menuId);
+            await this.cacheService.clearMenuContentCache(slug, menuId);
             return newSubcategory;
         } catch (error) {
             console.error('Error creating subcategory:', error);
@@ -167,7 +190,7 @@ export class MenuSubcategoryService {
                 }
             }
 
-            this.menuUtilsService.clearMenuCacheAsync('menu-detail', slug, menuId);
+            this.cacheService.clearMenuContentCache(slug, menuId);
             return { success: true };
         } catch (error) {
             console.error('Error updating subcategory:', error);
@@ -181,7 +204,7 @@ export class MenuSubcategoryService {
             await this.prisma.menuSubcategory.delete({
                 where: { id: subcategoryId },
             });
-            this.menuUtilsService.clearMenuCacheAsync('menu-detail', slug, menuId);
+            this.cacheService.clearMenuContentCache(slug, menuId);
             return { success: true };
         } catch (error) {
             console.error('Error deleting subcategory:', error);
@@ -249,7 +272,7 @@ export class MenuSubcategoryService {
         });
 
         // 3️⃣ Invalidação de Cache
-        this.menuUtilsService.clearMenuCacheAsync('menu-detail', subcategory.category.menu.establishment.slug, subcategory.category.menu.id);
+        this.cacheService.clearMenuContentCache(subcategory.category.menu.establishment.slug, subcategory.category.menu.id);
         return { success: true };
     }
 
@@ -277,7 +300,7 @@ export class MenuSubcategoryService {
             }
         });
 
-        this.menuUtilsService.clearMenuCacheAsync('menu-detail', subcategory.category.menu.establishment.slug, subcategory.category.menu.id);
+        this.cacheService.clearMenuContentCache(subcategory.category.menu.establishment.slug, subcategory.category.menu.id);
         return { success: true };
     }
 
@@ -306,7 +329,7 @@ export class MenuSubcategoryService {
             ),
         );
 
-        this.menuUtilsService.clearMenuCacheAsync('menu-detail', subcategory.category.menu.establishment.slug, subcategory.category.menu.id);
+        this.cacheService.clearMenuContentCache(subcategory.category.menu.establishment.slug, subcategory.category.menu.id);
         return { success: true };
     }
 
@@ -334,7 +357,7 @@ export class MenuSubcategoryService {
             data
         });
 
-        this.menuUtilsService.clearMenuCacheAsync('menu-detail', subcategory.category.menu.establishment.slug, subcategory.category.menu.id);
+        this.cacheService.clearMenuContentCache(subcategory.category.menu.establishment.slug, subcategory.category.menu.id);
         return { success: true };
     }
 
@@ -359,7 +382,7 @@ export class MenuSubcategoryService {
                 ),
             );
 
-            this.menuUtilsService.clearMenuCacheAsync('menu-detail', slug, menuId);
+            this.cacheService.clearMenuContentCache(slug, menuId);
             return { success: true };
         } catch (error) {
             console.error('Error updating subcategory positions:', error);

@@ -3,7 +3,6 @@ import { IntegrationsModule } from '@weats/integrations';
 import { DatabaseModule } from '@weats/database';
 
 import { FeatureUsageModule } from '@weats/common/feature/feature-usage.module';
-import { MenuUtilsModule } from '@weats/common/utils/modules/menu/menu-utils.module';
 import { MenuController } from './menu.controller';
 import { MenuService } from './menu.service';
 import { MenuCategoryController } from './category/category.controller';
@@ -16,7 +15,6 @@ import { MenuSubcategoryService } from './subcategory/subcategory.service';
         DatabaseModule,
         IntegrationsModule,
         FeatureUsageModule,
-        MenuUtilsModule
     ],
     controllers: [MenuController, MenuCategoryController, MenuSubcategoryController],
     providers: [

@@ -6,12 +6,10 @@ import { AddonController } from './addon/addon.controller';
 import { AddonService } from './addon/addon.service';
 import { VariantOptionsController } from './variant/variant-options.controller';
 import { VariantOptionsService } from './variant/variant-options.service';
-import { MenuUtilsModule } from '@weats/common/utils/modules/menu/menu-utils.module';
 
 @Module({
     imports: [
         DatabaseModule,
-        MenuUtilsModule,
     ],
     controllers: [VariantOptionsController, AddonController, ItemController],
     providers: [

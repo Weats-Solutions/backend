@@ -7,7 +7,7 @@ import {
     UpdateEstablishmentBrandingSettingsDto
 } from '@weats/contracts';
 import { CorePrismaService } from '@weats/database';
-import { MenuUtilsService } from '@weats/common/utils/modules/menu/menu-utils.service';
+import { CacheService } from '@weats/cache';
 import { Establishment } from '@weats/types';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class EstablishmentBrandingSettingsService {
 
     constructor(
         private readonly prisma: CorePrismaService,
-        private readonly menuUtilsService: MenuUtilsService,
+        private readonly cacheService: CacheService,
     ) { }
 
     async getEstablishmentBrandingSettings(id: string) {
@@ -113,25 +113,16 @@ export class EstablishmentBrandingSettingsService {
             switch (dto.section) {
                 case 'branding':
                     result = await this.updateBranding(establishment.id, dto.branding);
-                    this.menuUtilsService.clearMenuCacheAsync(
-                        'theme',
-                        establishment.slug,
-                    );
+                    this.cacheService.clearCoreCache(establishment.slug);
                     break;
 
                 case 'socials':
                     result = await this.updateSocials(establishment.id, dto.socials);
-                    this.menuUtilsService.clearMenuCacheAsync(
-                        'settings',
-                        establishment.slug,
-                    );
+                    this.cacheService.clearCoreCache(establishment.slug);
                     break;
                 case 'metadata':
                     result = await this.updateMetadata(establishment.id, dto.metadata);
-                    this.menuUtilsService.clearMenuCacheAsync(
-                        'theme',
-                        establishment.slug,
-                    );
+                    this.cacheService.clearCoreCache(establishment.slug);
                     break;
                 default:
                     throw new RpcException({
