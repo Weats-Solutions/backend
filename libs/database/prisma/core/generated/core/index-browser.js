@@ -636,25 +636,6 @@ exports.Prisma.ItemAttributeScalarFieldEnum = {
   itemId: 'itemId'
 };
 
-exports.Prisma.LandingPageScalarFieldEnum = {
-  id: 'id',
-  shortName: 'shortName',
-  themeId: 'themeId',
-  establishmentId: 'establishmentId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.LandingPageTranslationScalarFieldEnum = {
-  id: 'id',
-  locale: 'locale',
-  title: 'title',
-  description: 'description',
-  landingPageId: 'landingPageId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.MenuScalarFieldEnum = {
   id: 'id',
   position: 'position',
@@ -1715,8 +1696,6 @@ exports.Prisma.ModelName = {
   ItemVariantAllergen: 'ItemVariantAllergen',
   ItemModifierOption: 'ItemModifierOption',
   ItemAttribute: 'ItemAttribute',
-  LandingPage: 'LandingPage',
-  LandingPageTranslation: 'LandingPageTranslation',
   Menu: 'Menu',
   MenuTranslation: 'MenuTranslation',
   MenuCategory: 'MenuCategory',

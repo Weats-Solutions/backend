@@ -104,7 +104,6 @@ model Establishment {
   sumupReaders  SumupReader[]
 
   // ─── Relações: Marketing & Logs ────────────────────────────────────────────
-  landingPage LandingPage?
   emailLogs   EmailLog[]
   auditLogs   AuditLog[]
   discounts   Discount[]

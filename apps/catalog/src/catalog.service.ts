@@ -40,6 +40,7 @@ export class CatalogService {
           favicons: {
             include: { image: { select: { url: true } } }
           },
+          subscription: true,
           schedule: {
             include: { days: { include: { intervals: true } } }
           }
@@ -54,11 +55,27 @@ export class CatalogService {
     return establishment;
   }
 
+  /**
+   * Valida se o estabelecimento pode ser visualizado publicamente.
+   * Verifica Módulo Ativo + Subscrição Válida.
+   */
+  private validateEstablishment(establishment: any) {
+    if (!establishment.myPageModule) {
+      throw new NotFoundException(ERRORS.NOT_FOUND);
+    }
+
+    const validStatuses = ['ACTIVE', 'TRIALING'];
+    if (!establishment.subscription || !validStatuses.includes(establishment.subscription.status)) {
+      throw new NotFoundException(ERRORS.NO_ACTIVE_SUBSCRIPTION);
+    }
+  }
+
   async getTheme(slug: string) {
     try {
       const establishment = await this.getEstablishmentCore(slug);
+      this.validateEstablishment(establishment);
 
-      if (!establishment || !establishment.myPageModule) {
+      if (!establishment.activeTheme) {
         throw new NotFoundException(ERRORS.NOT_FOUND);
       }
 
@@ -91,11 +108,7 @@ export class CatalogService {
   async getEstablishmentSettings(slug: string) {
     try {
       const establishment = await this.getEstablishmentCore(slug);
-
-      if (!establishment || !establishment.myPageModule) {
-        throw new NotFoundException(ERRORS.NOT_FOUND);
-      }
-
+      this.validateEstablishment(establishment);
 
       return {
         id: establishment.id,
@@ -142,8 +155,9 @@ export class CatalogService {
   async getMenuList(slug: string, lang: string, targetId?: string) {
     try {
       const establishment = await this.getEstablishmentCore(slug);
+      this.validateEstablishment(establishment);
 
-      if (!establishment || !establishment.myPageModule || !establishment.menusModule) {
+      if (!establishment.menusModule) {
         throw new NotFoundException(ERRORS.NOT_FOUND);
       }
 
@@ -198,8 +212,9 @@ export class CatalogService {
   async getMenuContent(slug: string, menuId: string, lang: EstablishmentLanguage, targetId?: string) {
     try {
       const establishment = await this.getEstablishmentCore(slug);
+      this.validateEstablishment(establishment);
 
-      if (!establishment || !establishment.myPageModule || !establishment.menusModule) {
+      if (!establishment.menusModule) {
         throw new NotFoundException(ERRORS.NOT_FOUND);
       }
 

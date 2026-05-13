@@ -97,7 +97,6 @@ export class EstablishmentLanguageSyncService {
       { id: 'variantGroups', label: 'Grupos de Variantes', action: () => this.syncEntity(this.prisma.itemVariantGroupTranslation, { itemVariantGroup: { item: { establishmentId } } }, 'itemVariantGroupId', job.data, (s) => ({ itemVariantGroupId: s.itemVariantGroupId, name: s.name })) },
       { id: 'modifierGroups', label: 'Grupos de Modificadores', action: () => this.syncEntity(this.prisma.itemModifierGroupTranslation, { modifierGroup: { item: { establishmentId } } }, 'modifierGroupId', job.data, (s) => ({ modifierGroupId: s.modifierGroupId, name: s.name, deletedAt: s.deletedAt })) },
       { id: 'addons', label: 'Complementos', action: () => this.syncEntity(this.prisma.addonTranslation, { addon: { establishmentId } }, 'addonId', job.data, (s) => ({ addonId: s.addonId, name: s.name })) },
-      { id: 'landingPage', label: 'Página Inicial', action: () => this.syncEntity(this.prisma.landingPageTranslation, { landingPage: { establishmentId } }, 'landingPageId', job.data, (s) => ({ landingPageId: s.landingPageId, title: s.title, description: s.description })) },
     ];
 
     // Executa cada etapa e atualiza o progresso no Bull

@@ -226,16 +226,6 @@ export type ItemModifierOption = $Result.DefaultSelection<Prisma.$ItemModifierOp
  */
 export type ItemAttribute = $Result.DefaultSelection<Prisma.$ItemAttributePayload>
 /**
- * Model LandingPage
- * 
- */
-export type LandingPage = $Result.DefaultSelection<Prisma.$LandingPagePayload>
-/**
- * Model LandingPageTranslation
- * 
- */
-export type LandingPageTranslation = $Result.DefaultSelection<Prisma.$LandingPageTranslationPayload>
-/**
  * Model Menu
  * 
  */
@@ -1725,26 +1715,6 @@ export class PrismaClient<
   get itemAttribute(): Prisma.ItemAttributeDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.landingPage`: Exposes CRUD operations for the **LandingPage** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more LandingPages
-    * const landingPages = await prisma.landingPage.findMany()
-    * ```
-    */
-  get landingPage(): Prisma.LandingPageDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.landingPageTranslation`: Exposes CRUD operations for the **LandingPageTranslation** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more LandingPageTranslations
-    * const landingPageTranslations = await prisma.landingPageTranslation.findMany()
-    * ```
-    */
-  get landingPageTranslation(): Prisma.LandingPageTranslationDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.menu`: Exposes CRUD operations for the **Menu** model.
     * Example usage:
     * ```ts
@@ -2647,8 +2617,6 @@ export namespace Prisma {
     ItemVariantAllergen: 'ItemVariantAllergen',
     ItemModifierOption: 'ItemModifierOption',
     ItemAttribute: 'ItemAttribute',
-    LandingPage: 'LandingPage',
-    LandingPageTranslation: 'LandingPageTranslation',
     Menu: 'Menu',
     MenuTranslation: 'MenuTranslation',
     MenuCategory: 'MenuCategory',
@@ -2707,7 +2675,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "promotion" | "buyXGetYRule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "establishmentBookingSettings" | "establishmentMetadata" | "faviconAsset" | "expense" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "landingPage" | "landingPageTranslation" | "menu" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "qrCode" | "schedule" | "scheduleDay" | "timeInterval" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
+      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "promotion" | "buyXGetYRule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "establishmentBookingSettings" | "establishmentMetadata" | "faviconAsset" | "expense" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "menu" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "qrCode" | "schedule" | "scheduleDay" | "timeInterval" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -5668,154 +5636,6 @@ export namespace Prisma {
           count: {
             args: Prisma.ItemAttributeCountArgs<ExtArgs>
             result: $Utils.Optional<ItemAttributeCountAggregateOutputType> | number
-          }
-        }
-      }
-      LandingPage: {
-        payload: Prisma.$LandingPagePayload<ExtArgs>
-        fields: Prisma.LandingPageFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.LandingPageFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPagePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.LandingPageFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPagePayload>
-          }
-          findFirst: {
-            args: Prisma.LandingPageFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPagePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.LandingPageFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPagePayload>
-          }
-          findMany: {
-            args: Prisma.LandingPageFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPagePayload>[]
-          }
-          create: {
-            args: Prisma.LandingPageCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPagePayload>
-          }
-          createMany: {
-            args: Prisma.LandingPageCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.LandingPageCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPagePayload>[]
-          }
-          delete: {
-            args: Prisma.LandingPageDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPagePayload>
-          }
-          update: {
-            args: Prisma.LandingPageUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPagePayload>
-          }
-          deleteMany: {
-            args: Prisma.LandingPageDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.LandingPageUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.LandingPageUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPagePayload>[]
-          }
-          upsert: {
-            args: Prisma.LandingPageUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPagePayload>
-          }
-          aggregate: {
-            args: Prisma.LandingPageAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateLandingPage>
-          }
-          groupBy: {
-            args: Prisma.LandingPageGroupByArgs<ExtArgs>
-            result: $Utils.Optional<LandingPageGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.LandingPageCountArgs<ExtArgs>
-            result: $Utils.Optional<LandingPageCountAggregateOutputType> | number
-          }
-        }
-      }
-      LandingPageTranslation: {
-        payload: Prisma.$LandingPageTranslationPayload<ExtArgs>
-        fields: Prisma.LandingPageTranslationFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.LandingPageTranslationFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPageTranslationPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.LandingPageTranslationFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPageTranslationPayload>
-          }
-          findFirst: {
-            args: Prisma.LandingPageTranslationFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPageTranslationPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.LandingPageTranslationFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPageTranslationPayload>
-          }
-          findMany: {
-            args: Prisma.LandingPageTranslationFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPageTranslationPayload>[]
-          }
-          create: {
-            args: Prisma.LandingPageTranslationCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPageTranslationPayload>
-          }
-          createMany: {
-            args: Prisma.LandingPageTranslationCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.LandingPageTranslationCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPageTranslationPayload>[]
-          }
-          delete: {
-            args: Prisma.LandingPageTranslationDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPageTranslationPayload>
-          }
-          update: {
-            args: Prisma.LandingPageTranslationUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPageTranslationPayload>
-          }
-          deleteMany: {
-            args: Prisma.LandingPageTranslationDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.LandingPageTranslationUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.LandingPageTranslationUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPageTranslationPayload>[]
-          }
-          upsert: {
-            args: Prisma.LandingPageTranslationUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$LandingPageTranslationPayload>
-          }
-          aggregate: {
-            args: Prisma.LandingPageTranslationAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateLandingPageTranslation>
-          }
-          groupBy: {
-            args: Prisma.LandingPageTranslationGroupByArgs<ExtArgs>
-            result: $Utils.Optional<LandingPageTranslationGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.LandingPageTranslationCountArgs<ExtArgs>
-            result: $Utils.Optional<LandingPageTranslationCountAggregateOutputType> | number
           }
         }
       }
@@ -9149,8 +8969,6 @@ export namespace Prisma {
     itemVariantAllergen?: ItemVariantAllergenOmit
     itemModifierOption?: ItemModifierOptionOmit
     itemAttribute?: ItemAttributeOmit
-    landingPage?: LandingPageOmit
-    landingPageTranslation?: LandingPageTranslationOmit
     menu?: MenuOmit
     menuTranslation?: MenuTranslationOmit
     menuCategory?: MenuCategoryOmit
@@ -10154,37 +9972,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type LandingPageCountOutputType
-   */
-
-  export type LandingPageCountOutputType = {
-    landingPageTranslations: number
-  }
-
-  export type LandingPageCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    landingPageTranslations?: boolean | LandingPageCountOutputTypeCountLandingPageTranslationsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * LandingPageCountOutputType without action
-   */
-  export type LandingPageCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageCountOutputType
-     */
-    select?: LandingPageCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * LandingPageCountOutputType without action
-   */
-  export type LandingPageCountOutputTypeCountLandingPageTranslationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: LandingPageTranslationWhereInput
-  }
-
-
-  /**
    * Count Type MenuCountOutputType
    */
 
@@ -10963,12 +10750,10 @@ export namespace Prisma {
 
   export type ThemeCountOutputType = {
     activeEstablishments: number
-    landingPages: number
   }
 
   export type ThemeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     activeEstablishments?: boolean | ThemeCountOutputTypeCountActiveEstablishmentsArgs
-    landingPages?: boolean | ThemeCountOutputTypeCountLandingPagesArgs
   }
 
   // Custom InputTypes
@@ -10987,13 +10772,6 @@ export namespace Prisma {
    */
   export type ThemeCountOutputTypeCountActiveEstablishmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EstablishmentWhereInput
-  }
-
-  /**
-   * ThemeCountOutputType without action
-   */
-  export type ThemeCountOutputTypeCountLandingPagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: LandingPageWhereInput
   }
 
 
@@ -27000,7 +26778,6 @@ export namespace Prisma {
     devices?: boolean | Establishment$devicesArgs<ExtArgs>
     vivaTerminals?: boolean | Establishment$vivaTerminalsArgs<ExtArgs>
     sumupReaders?: boolean | Establishment$sumupReadersArgs<ExtArgs>
-    landingPage?: boolean | Establishment$landingPageArgs<ExtArgs>
     emailLogs?: boolean | Establishment$emailLogsArgs<ExtArgs>
     auditLogs?: boolean | Establishment$auditLogsArgs<ExtArgs>
     discounts?: boolean | Establishment$discountsArgs<ExtArgs>
@@ -27206,7 +26983,6 @@ export namespace Prisma {
     devices?: boolean | Establishment$devicesArgs<ExtArgs>
     vivaTerminals?: boolean | Establishment$vivaTerminalsArgs<ExtArgs>
     sumupReaders?: boolean | Establishment$sumupReadersArgs<ExtArgs>
-    landingPage?: boolean | Establishment$landingPageArgs<ExtArgs>
     emailLogs?: boolean | Establishment$emailLogsArgs<ExtArgs>
     auditLogs?: boolean | Establishment$auditLogsArgs<ExtArgs>
     discounts?: boolean | Establishment$discountsArgs<ExtArgs>
@@ -27267,7 +27043,6 @@ export namespace Prisma {
       devices: Prisma.$DevicePayload<ExtArgs>[]
       vivaTerminals: Prisma.$VivaTerminalPayload<ExtArgs>[]
       sumupReaders: Prisma.$SumupReaderPayload<ExtArgs>[]
-      landingPage: Prisma.$LandingPagePayload<ExtArgs> | null
       emailLogs: Prisma.$EmailLogPayload<ExtArgs>[]
       auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
       discounts: Prisma.$DiscountPayload<ExtArgs>[]
@@ -27751,7 +27526,6 @@ export namespace Prisma {
     devices<T extends Establishment$devicesArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$devicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DevicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     vivaTerminals<T extends Establishment$vivaTerminalsArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$vivaTerminalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VivaTerminalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sumupReaders<T extends Establishment$sumupReadersArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$sumupReadersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SumupReaderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    landingPage<T extends Establishment$landingPageArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$landingPageArgs<ExtArgs>>): Prisma__LandingPageClient<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     emailLogs<T extends Establishment$emailLogsArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$emailLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     auditLogs<T extends Establishment$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     discounts<T extends Establishment$discountsArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$discountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -28813,25 +28587,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SumupReaderScalarFieldEnum | SumupReaderScalarFieldEnum[]
-  }
-
-  /**
-   * Establishment.landingPage
-   */
-  export type Establishment$landingPageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageInclude<ExtArgs> | null
-    where?: LandingPageWhereInput
   }
 
   /**
@@ -59252,2218 +59007,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ItemAttributeInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model LandingPage
-   */
-
-  export type AggregateLandingPage = {
-    _count: LandingPageCountAggregateOutputType | null
-    _min: LandingPageMinAggregateOutputType | null
-    _max: LandingPageMaxAggregateOutputType | null
-  }
-
-  export type LandingPageMinAggregateOutputType = {
-    id: string | null
-    shortName: string | null
-    themeId: string | null
-    establishmentId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type LandingPageMaxAggregateOutputType = {
-    id: string | null
-    shortName: string | null
-    themeId: string | null
-    establishmentId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type LandingPageCountAggregateOutputType = {
-    id: number
-    shortName: number
-    themeId: number
-    establishmentId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type LandingPageMinAggregateInputType = {
-    id?: true
-    shortName?: true
-    themeId?: true
-    establishmentId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type LandingPageMaxAggregateInputType = {
-    id?: true
-    shortName?: true
-    themeId?: true
-    establishmentId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type LandingPageCountAggregateInputType = {
-    id?: true
-    shortName?: true
-    themeId?: true
-    establishmentId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type LandingPageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which LandingPage to aggregate.
-     */
-    where?: LandingPageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of LandingPages to fetch.
-     */
-    orderBy?: LandingPageOrderByWithRelationInput | LandingPageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: LandingPageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` LandingPages from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` LandingPages.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned LandingPages
-    **/
-    _count?: true | LandingPageCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: LandingPageMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: LandingPageMaxAggregateInputType
-  }
-
-  export type GetLandingPageAggregateType<T extends LandingPageAggregateArgs> = {
-        [P in keyof T & keyof AggregateLandingPage]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateLandingPage[P]>
-      : GetScalarType<T[P], AggregateLandingPage[P]>
-  }
-
-
-
-
-  export type LandingPageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: LandingPageWhereInput
-    orderBy?: LandingPageOrderByWithAggregationInput | LandingPageOrderByWithAggregationInput[]
-    by: LandingPageScalarFieldEnum[] | LandingPageScalarFieldEnum
-    having?: LandingPageScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: LandingPageCountAggregateInputType | true
-    _min?: LandingPageMinAggregateInputType
-    _max?: LandingPageMaxAggregateInputType
-  }
-
-  export type LandingPageGroupByOutputType = {
-    id: string
-    shortName: string
-    themeId: string | null
-    establishmentId: string
-    createdAt: Date
-    updatedAt: Date
-    _count: LandingPageCountAggregateOutputType | null
-    _min: LandingPageMinAggregateOutputType | null
-    _max: LandingPageMaxAggregateOutputType | null
-  }
-
-  type GetLandingPageGroupByPayload<T extends LandingPageGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<LandingPageGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof LandingPageGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], LandingPageGroupByOutputType[P]>
-            : GetScalarType<T[P], LandingPageGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type LandingPageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    shortName?: boolean
-    themeId?: boolean
-    establishmentId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-    theme?: boolean | LandingPage$themeArgs<ExtArgs>
-    landingPageTranslations?: boolean | LandingPage$landingPageTranslationsArgs<ExtArgs>
-    _count?: boolean | LandingPageCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["landingPage"]>
-
-  export type LandingPageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    shortName?: boolean
-    themeId?: boolean
-    establishmentId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-    theme?: boolean | LandingPage$themeArgs<ExtArgs>
-  }, ExtArgs["result"]["landingPage"]>
-
-  export type LandingPageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    shortName?: boolean
-    themeId?: boolean
-    establishmentId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-    theme?: boolean | LandingPage$themeArgs<ExtArgs>
-  }, ExtArgs["result"]["landingPage"]>
-
-  export type LandingPageSelectScalar = {
-    id?: boolean
-    shortName?: boolean
-    themeId?: boolean
-    establishmentId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type LandingPageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "shortName" | "themeId" | "establishmentId" | "createdAt" | "updatedAt", ExtArgs["result"]["landingPage"]>
-  export type LandingPageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-    theme?: boolean | LandingPage$themeArgs<ExtArgs>
-    landingPageTranslations?: boolean | LandingPage$landingPageTranslationsArgs<ExtArgs>
-    _count?: boolean | LandingPageCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type LandingPageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-    theme?: boolean | LandingPage$themeArgs<ExtArgs>
-  }
-  export type LandingPageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
-    theme?: boolean | LandingPage$themeArgs<ExtArgs>
-  }
-
-  export type $LandingPagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "LandingPage"
-    objects: {
-      establishment: Prisma.$EstablishmentPayload<ExtArgs>
-      theme: Prisma.$ThemePayload<ExtArgs> | null
-      landingPageTranslations: Prisma.$LandingPageTranslationPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      shortName: string
-      themeId: string | null
-      establishmentId: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["landingPage"]>
-    composites: {}
-  }
-
-  type LandingPageGetPayload<S extends boolean | null | undefined | LandingPageDefaultArgs> = $Result.GetResult<Prisma.$LandingPagePayload, S>
-
-  type LandingPageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<LandingPageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: LandingPageCountAggregateInputType | true
-    }
-
-  export interface LandingPageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LandingPage'], meta: { name: 'LandingPage' } }
-    /**
-     * Find zero or one LandingPage that matches the filter.
-     * @param {LandingPageFindUniqueArgs} args - Arguments to find a LandingPage
-     * @example
-     * // Get one LandingPage
-     * const landingPage = await prisma.landingPage.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends LandingPageFindUniqueArgs>(args: SelectSubset<T, LandingPageFindUniqueArgs<ExtArgs>>): Prisma__LandingPageClient<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one LandingPage that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {LandingPageFindUniqueOrThrowArgs} args - Arguments to find a LandingPage
-     * @example
-     * // Get one LandingPage
-     * const landingPage = await prisma.landingPage.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends LandingPageFindUniqueOrThrowArgs>(args: SelectSubset<T, LandingPageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LandingPageClient<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first LandingPage that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageFindFirstArgs} args - Arguments to find a LandingPage
-     * @example
-     * // Get one LandingPage
-     * const landingPage = await prisma.landingPage.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends LandingPageFindFirstArgs>(args?: SelectSubset<T, LandingPageFindFirstArgs<ExtArgs>>): Prisma__LandingPageClient<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first LandingPage that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageFindFirstOrThrowArgs} args - Arguments to find a LandingPage
-     * @example
-     * // Get one LandingPage
-     * const landingPage = await prisma.landingPage.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends LandingPageFindFirstOrThrowArgs>(args?: SelectSubset<T, LandingPageFindFirstOrThrowArgs<ExtArgs>>): Prisma__LandingPageClient<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more LandingPages that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all LandingPages
-     * const landingPages = await prisma.landingPage.findMany()
-     * 
-     * // Get first 10 LandingPages
-     * const landingPages = await prisma.landingPage.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const landingPageWithIdOnly = await prisma.landingPage.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends LandingPageFindManyArgs>(args?: SelectSubset<T, LandingPageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a LandingPage.
-     * @param {LandingPageCreateArgs} args - Arguments to create a LandingPage.
-     * @example
-     * // Create one LandingPage
-     * const LandingPage = await prisma.landingPage.create({
-     *   data: {
-     *     // ... data to create a LandingPage
-     *   }
-     * })
-     * 
-     */
-    create<T extends LandingPageCreateArgs>(args: SelectSubset<T, LandingPageCreateArgs<ExtArgs>>): Prisma__LandingPageClient<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many LandingPages.
-     * @param {LandingPageCreateManyArgs} args - Arguments to create many LandingPages.
-     * @example
-     * // Create many LandingPages
-     * const landingPage = await prisma.landingPage.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends LandingPageCreateManyArgs>(args?: SelectSubset<T, LandingPageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many LandingPages and returns the data saved in the database.
-     * @param {LandingPageCreateManyAndReturnArgs} args - Arguments to create many LandingPages.
-     * @example
-     * // Create many LandingPages
-     * const landingPage = await prisma.landingPage.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many LandingPages and only return the `id`
-     * const landingPageWithIdOnly = await prisma.landingPage.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends LandingPageCreateManyAndReturnArgs>(args?: SelectSubset<T, LandingPageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a LandingPage.
-     * @param {LandingPageDeleteArgs} args - Arguments to delete one LandingPage.
-     * @example
-     * // Delete one LandingPage
-     * const LandingPage = await prisma.landingPage.delete({
-     *   where: {
-     *     // ... filter to delete one LandingPage
-     *   }
-     * })
-     * 
-     */
-    delete<T extends LandingPageDeleteArgs>(args: SelectSubset<T, LandingPageDeleteArgs<ExtArgs>>): Prisma__LandingPageClient<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one LandingPage.
-     * @param {LandingPageUpdateArgs} args - Arguments to update one LandingPage.
-     * @example
-     * // Update one LandingPage
-     * const landingPage = await prisma.landingPage.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends LandingPageUpdateArgs>(args: SelectSubset<T, LandingPageUpdateArgs<ExtArgs>>): Prisma__LandingPageClient<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more LandingPages.
-     * @param {LandingPageDeleteManyArgs} args - Arguments to filter LandingPages to delete.
-     * @example
-     * // Delete a few LandingPages
-     * const { count } = await prisma.landingPage.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends LandingPageDeleteManyArgs>(args?: SelectSubset<T, LandingPageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more LandingPages.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many LandingPages
-     * const landingPage = await prisma.landingPage.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends LandingPageUpdateManyArgs>(args: SelectSubset<T, LandingPageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more LandingPages and returns the data updated in the database.
-     * @param {LandingPageUpdateManyAndReturnArgs} args - Arguments to update many LandingPages.
-     * @example
-     * // Update many LandingPages
-     * const landingPage = await prisma.landingPage.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more LandingPages and only return the `id`
-     * const landingPageWithIdOnly = await prisma.landingPage.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends LandingPageUpdateManyAndReturnArgs>(args: SelectSubset<T, LandingPageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one LandingPage.
-     * @param {LandingPageUpsertArgs} args - Arguments to update or create a LandingPage.
-     * @example
-     * // Update or create a LandingPage
-     * const landingPage = await prisma.landingPage.upsert({
-     *   create: {
-     *     // ... data to create a LandingPage
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the LandingPage we want to update
-     *   }
-     * })
-     */
-    upsert<T extends LandingPageUpsertArgs>(args: SelectSubset<T, LandingPageUpsertArgs<ExtArgs>>): Prisma__LandingPageClient<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of LandingPages.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageCountArgs} args - Arguments to filter LandingPages to count.
-     * @example
-     * // Count the number of LandingPages
-     * const count = await prisma.landingPage.count({
-     *   where: {
-     *     // ... the filter for the LandingPages we want to count
-     *   }
-     * })
-    **/
-    count<T extends LandingPageCountArgs>(
-      args?: Subset<T, LandingPageCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], LandingPageCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a LandingPage.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends LandingPageAggregateArgs>(args: Subset<T, LandingPageAggregateArgs>): Prisma.PrismaPromise<GetLandingPageAggregateType<T>>
-
-    /**
-     * Group by LandingPage.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends LandingPageGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: LandingPageGroupByArgs['orderBy'] }
-        : { orderBy?: LandingPageGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, LandingPageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLandingPageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the LandingPage model
-   */
-  readonly fields: LandingPageFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for LandingPage.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__LandingPageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    establishment<T extends EstablishmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EstablishmentDefaultArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    theme<T extends LandingPage$themeArgs<ExtArgs> = {}>(args?: Subset<T, LandingPage$themeArgs<ExtArgs>>): Prisma__ThemeClient<$Result.GetResult<Prisma.$ThemePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    landingPageTranslations<T extends LandingPage$landingPageTranslationsArgs<ExtArgs> = {}>(args?: Subset<T, LandingPage$landingPageTranslationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LandingPageTranslationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the LandingPage model
-   */
-  interface LandingPageFieldRefs {
-    readonly id: FieldRef<"LandingPage", 'String'>
-    readonly shortName: FieldRef<"LandingPage", 'String'>
-    readonly themeId: FieldRef<"LandingPage", 'String'>
-    readonly establishmentId: FieldRef<"LandingPage", 'String'>
-    readonly createdAt: FieldRef<"LandingPage", 'DateTime'>
-    readonly updatedAt: FieldRef<"LandingPage", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * LandingPage findUnique
-   */
-  export type LandingPageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageInclude<ExtArgs> | null
-    /**
-     * Filter, which LandingPage to fetch.
-     */
-    where: LandingPageWhereUniqueInput
-  }
-
-  /**
-   * LandingPage findUniqueOrThrow
-   */
-  export type LandingPageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageInclude<ExtArgs> | null
-    /**
-     * Filter, which LandingPage to fetch.
-     */
-    where: LandingPageWhereUniqueInput
-  }
-
-  /**
-   * LandingPage findFirst
-   */
-  export type LandingPageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageInclude<ExtArgs> | null
-    /**
-     * Filter, which LandingPage to fetch.
-     */
-    where?: LandingPageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of LandingPages to fetch.
-     */
-    orderBy?: LandingPageOrderByWithRelationInput | LandingPageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for LandingPages.
-     */
-    cursor?: LandingPageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` LandingPages from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` LandingPages.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of LandingPages.
-     */
-    distinct?: LandingPageScalarFieldEnum | LandingPageScalarFieldEnum[]
-  }
-
-  /**
-   * LandingPage findFirstOrThrow
-   */
-  export type LandingPageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageInclude<ExtArgs> | null
-    /**
-     * Filter, which LandingPage to fetch.
-     */
-    where?: LandingPageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of LandingPages to fetch.
-     */
-    orderBy?: LandingPageOrderByWithRelationInput | LandingPageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for LandingPages.
-     */
-    cursor?: LandingPageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` LandingPages from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` LandingPages.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of LandingPages.
-     */
-    distinct?: LandingPageScalarFieldEnum | LandingPageScalarFieldEnum[]
-  }
-
-  /**
-   * LandingPage findMany
-   */
-  export type LandingPageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageInclude<ExtArgs> | null
-    /**
-     * Filter, which LandingPages to fetch.
-     */
-    where?: LandingPageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of LandingPages to fetch.
-     */
-    orderBy?: LandingPageOrderByWithRelationInput | LandingPageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing LandingPages.
-     */
-    cursor?: LandingPageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` LandingPages from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` LandingPages.
-     */
-    skip?: number
-    distinct?: LandingPageScalarFieldEnum | LandingPageScalarFieldEnum[]
-  }
-
-  /**
-   * LandingPage create
-   */
-  export type LandingPageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageInclude<ExtArgs> | null
-    /**
-     * The data needed to create a LandingPage.
-     */
-    data: XOR<LandingPageCreateInput, LandingPageUncheckedCreateInput>
-  }
-
-  /**
-   * LandingPage createMany
-   */
-  export type LandingPageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many LandingPages.
-     */
-    data: LandingPageCreateManyInput | LandingPageCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * LandingPage createManyAndReturn
-   */
-  export type LandingPageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * The data used to create many LandingPages.
-     */
-    data: LandingPageCreateManyInput | LandingPageCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * LandingPage update
-   */
-  export type LandingPageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageInclude<ExtArgs> | null
-    /**
-     * The data needed to update a LandingPage.
-     */
-    data: XOR<LandingPageUpdateInput, LandingPageUncheckedUpdateInput>
-    /**
-     * Choose, which LandingPage to update.
-     */
-    where: LandingPageWhereUniqueInput
-  }
-
-  /**
-   * LandingPage updateMany
-   */
-  export type LandingPageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update LandingPages.
-     */
-    data: XOR<LandingPageUpdateManyMutationInput, LandingPageUncheckedUpdateManyInput>
-    /**
-     * Filter which LandingPages to update
-     */
-    where?: LandingPageWhereInput
-    /**
-     * Limit how many LandingPages to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * LandingPage updateManyAndReturn
-   */
-  export type LandingPageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * The data used to update LandingPages.
-     */
-    data: XOR<LandingPageUpdateManyMutationInput, LandingPageUncheckedUpdateManyInput>
-    /**
-     * Filter which LandingPages to update
-     */
-    where?: LandingPageWhereInput
-    /**
-     * Limit how many LandingPages to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * LandingPage upsert
-   */
-  export type LandingPageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageInclude<ExtArgs> | null
-    /**
-     * The filter to search for the LandingPage to update in case it exists.
-     */
-    where: LandingPageWhereUniqueInput
-    /**
-     * In case the LandingPage found by the `where` argument doesn't exist, create a new LandingPage with this data.
-     */
-    create: XOR<LandingPageCreateInput, LandingPageUncheckedCreateInput>
-    /**
-     * In case the LandingPage was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<LandingPageUpdateInput, LandingPageUncheckedUpdateInput>
-  }
-
-  /**
-   * LandingPage delete
-   */
-  export type LandingPageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageInclude<ExtArgs> | null
-    /**
-     * Filter which LandingPage to delete.
-     */
-    where: LandingPageWhereUniqueInput
-  }
-
-  /**
-   * LandingPage deleteMany
-   */
-  export type LandingPageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which LandingPages to delete
-     */
-    where?: LandingPageWhereInput
-    /**
-     * Limit how many LandingPages to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * LandingPage.theme
-   */
-  export type LandingPage$themeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Theme
-     */
-    select?: ThemeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Theme
-     */
-    omit?: ThemeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ThemeInclude<ExtArgs> | null
-    where?: ThemeWhereInput
-  }
-
-  /**
-   * LandingPage.landingPageTranslations
-   */
-  export type LandingPage$landingPageTranslationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageTranslation
-     */
-    select?: LandingPageTranslationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPageTranslation
-     */
-    omit?: LandingPageTranslationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageTranslationInclude<ExtArgs> | null
-    where?: LandingPageTranslationWhereInput
-    orderBy?: LandingPageTranslationOrderByWithRelationInput | LandingPageTranslationOrderByWithRelationInput[]
-    cursor?: LandingPageTranslationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: LandingPageTranslationScalarFieldEnum | LandingPageTranslationScalarFieldEnum[]
-  }
-
-  /**
-   * LandingPage without action
-   */
-  export type LandingPageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model LandingPageTranslation
-   */
-
-  export type AggregateLandingPageTranslation = {
-    _count: LandingPageTranslationCountAggregateOutputType | null
-    _min: LandingPageTranslationMinAggregateOutputType | null
-    _max: LandingPageTranslationMaxAggregateOutputType | null
-  }
-
-  export type LandingPageTranslationMinAggregateOutputType = {
-    id: string | null
-    locale: string | null
-    title: string | null
-    description: string | null
-    landingPageId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type LandingPageTranslationMaxAggregateOutputType = {
-    id: string | null
-    locale: string | null
-    title: string | null
-    description: string | null
-    landingPageId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type LandingPageTranslationCountAggregateOutputType = {
-    id: number
-    locale: number
-    title: number
-    description: number
-    landingPageId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type LandingPageTranslationMinAggregateInputType = {
-    id?: true
-    locale?: true
-    title?: true
-    description?: true
-    landingPageId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type LandingPageTranslationMaxAggregateInputType = {
-    id?: true
-    locale?: true
-    title?: true
-    description?: true
-    landingPageId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type LandingPageTranslationCountAggregateInputType = {
-    id?: true
-    locale?: true
-    title?: true
-    description?: true
-    landingPageId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type LandingPageTranslationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which LandingPageTranslation to aggregate.
-     */
-    where?: LandingPageTranslationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of LandingPageTranslations to fetch.
-     */
-    orderBy?: LandingPageTranslationOrderByWithRelationInput | LandingPageTranslationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: LandingPageTranslationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` LandingPageTranslations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` LandingPageTranslations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned LandingPageTranslations
-    **/
-    _count?: true | LandingPageTranslationCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: LandingPageTranslationMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: LandingPageTranslationMaxAggregateInputType
-  }
-
-  export type GetLandingPageTranslationAggregateType<T extends LandingPageTranslationAggregateArgs> = {
-        [P in keyof T & keyof AggregateLandingPageTranslation]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateLandingPageTranslation[P]>
-      : GetScalarType<T[P], AggregateLandingPageTranslation[P]>
-  }
-
-
-
-
-  export type LandingPageTranslationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: LandingPageTranslationWhereInput
-    orderBy?: LandingPageTranslationOrderByWithAggregationInput | LandingPageTranslationOrderByWithAggregationInput[]
-    by: LandingPageTranslationScalarFieldEnum[] | LandingPageTranslationScalarFieldEnum
-    having?: LandingPageTranslationScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: LandingPageTranslationCountAggregateInputType | true
-    _min?: LandingPageTranslationMinAggregateInputType
-    _max?: LandingPageTranslationMaxAggregateInputType
-  }
-
-  export type LandingPageTranslationGroupByOutputType = {
-    id: string
-    locale: string
-    title: string
-    description: string
-    landingPageId: string
-    createdAt: Date
-    updatedAt: Date
-    _count: LandingPageTranslationCountAggregateOutputType | null
-    _min: LandingPageTranslationMinAggregateOutputType | null
-    _max: LandingPageTranslationMaxAggregateOutputType | null
-  }
-
-  type GetLandingPageTranslationGroupByPayload<T extends LandingPageTranslationGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<LandingPageTranslationGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof LandingPageTranslationGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], LandingPageTranslationGroupByOutputType[P]>
-            : GetScalarType<T[P], LandingPageTranslationGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type LandingPageTranslationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    locale?: boolean
-    title?: boolean
-    description?: boolean
-    landingPageId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    landingPage?: boolean | LandingPageDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["landingPageTranslation"]>
-
-  export type LandingPageTranslationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    locale?: boolean
-    title?: boolean
-    description?: boolean
-    landingPageId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    landingPage?: boolean | LandingPageDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["landingPageTranslation"]>
-
-  export type LandingPageTranslationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    locale?: boolean
-    title?: boolean
-    description?: boolean
-    landingPageId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    landingPage?: boolean | LandingPageDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["landingPageTranslation"]>
-
-  export type LandingPageTranslationSelectScalar = {
-    id?: boolean
-    locale?: boolean
-    title?: boolean
-    description?: boolean
-    landingPageId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type LandingPageTranslationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "locale" | "title" | "description" | "landingPageId" | "createdAt" | "updatedAt", ExtArgs["result"]["landingPageTranslation"]>
-  export type LandingPageTranslationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    landingPage?: boolean | LandingPageDefaultArgs<ExtArgs>
-  }
-  export type LandingPageTranslationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    landingPage?: boolean | LandingPageDefaultArgs<ExtArgs>
-  }
-  export type LandingPageTranslationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    landingPage?: boolean | LandingPageDefaultArgs<ExtArgs>
-  }
-
-  export type $LandingPageTranslationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "LandingPageTranslation"
-    objects: {
-      landingPage: Prisma.$LandingPagePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      locale: string
-      title: string
-      description: string
-      landingPageId: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["landingPageTranslation"]>
-    composites: {}
-  }
-
-  type LandingPageTranslationGetPayload<S extends boolean | null | undefined | LandingPageTranslationDefaultArgs> = $Result.GetResult<Prisma.$LandingPageTranslationPayload, S>
-
-  type LandingPageTranslationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<LandingPageTranslationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: LandingPageTranslationCountAggregateInputType | true
-    }
-
-  export interface LandingPageTranslationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LandingPageTranslation'], meta: { name: 'LandingPageTranslation' } }
-    /**
-     * Find zero or one LandingPageTranslation that matches the filter.
-     * @param {LandingPageTranslationFindUniqueArgs} args - Arguments to find a LandingPageTranslation
-     * @example
-     * // Get one LandingPageTranslation
-     * const landingPageTranslation = await prisma.landingPageTranslation.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends LandingPageTranslationFindUniqueArgs>(args: SelectSubset<T, LandingPageTranslationFindUniqueArgs<ExtArgs>>): Prisma__LandingPageTranslationClient<$Result.GetResult<Prisma.$LandingPageTranslationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one LandingPageTranslation that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {LandingPageTranslationFindUniqueOrThrowArgs} args - Arguments to find a LandingPageTranslation
-     * @example
-     * // Get one LandingPageTranslation
-     * const landingPageTranslation = await prisma.landingPageTranslation.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends LandingPageTranslationFindUniqueOrThrowArgs>(args: SelectSubset<T, LandingPageTranslationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LandingPageTranslationClient<$Result.GetResult<Prisma.$LandingPageTranslationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first LandingPageTranslation that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageTranslationFindFirstArgs} args - Arguments to find a LandingPageTranslation
-     * @example
-     * // Get one LandingPageTranslation
-     * const landingPageTranslation = await prisma.landingPageTranslation.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends LandingPageTranslationFindFirstArgs>(args?: SelectSubset<T, LandingPageTranslationFindFirstArgs<ExtArgs>>): Prisma__LandingPageTranslationClient<$Result.GetResult<Prisma.$LandingPageTranslationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first LandingPageTranslation that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageTranslationFindFirstOrThrowArgs} args - Arguments to find a LandingPageTranslation
-     * @example
-     * // Get one LandingPageTranslation
-     * const landingPageTranslation = await prisma.landingPageTranslation.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends LandingPageTranslationFindFirstOrThrowArgs>(args?: SelectSubset<T, LandingPageTranslationFindFirstOrThrowArgs<ExtArgs>>): Prisma__LandingPageTranslationClient<$Result.GetResult<Prisma.$LandingPageTranslationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more LandingPageTranslations that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageTranslationFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all LandingPageTranslations
-     * const landingPageTranslations = await prisma.landingPageTranslation.findMany()
-     * 
-     * // Get first 10 LandingPageTranslations
-     * const landingPageTranslations = await prisma.landingPageTranslation.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const landingPageTranslationWithIdOnly = await prisma.landingPageTranslation.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends LandingPageTranslationFindManyArgs>(args?: SelectSubset<T, LandingPageTranslationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LandingPageTranslationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a LandingPageTranslation.
-     * @param {LandingPageTranslationCreateArgs} args - Arguments to create a LandingPageTranslation.
-     * @example
-     * // Create one LandingPageTranslation
-     * const LandingPageTranslation = await prisma.landingPageTranslation.create({
-     *   data: {
-     *     // ... data to create a LandingPageTranslation
-     *   }
-     * })
-     * 
-     */
-    create<T extends LandingPageTranslationCreateArgs>(args: SelectSubset<T, LandingPageTranslationCreateArgs<ExtArgs>>): Prisma__LandingPageTranslationClient<$Result.GetResult<Prisma.$LandingPageTranslationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many LandingPageTranslations.
-     * @param {LandingPageTranslationCreateManyArgs} args - Arguments to create many LandingPageTranslations.
-     * @example
-     * // Create many LandingPageTranslations
-     * const landingPageTranslation = await prisma.landingPageTranslation.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends LandingPageTranslationCreateManyArgs>(args?: SelectSubset<T, LandingPageTranslationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many LandingPageTranslations and returns the data saved in the database.
-     * @param {LandingPageTranslationCreateManyAndReturnArgs} args - Arguments to create many LandingPageTranslations.
-     * @example
-     * // Create many LandingPageTranslations
-     * const landingPageTranslation = await prisma.landingPageTranslation.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many LandingPageTranslations and only return the `id`
-     * const landingPageTranslationWithIdOnly = await prisma.landingPageTranslation.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends LandingPageTranslationCreateManyAndReturnArgs>(args?: SelectSubset<T, LandingPageTranslationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LandingPageTranslationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a LandingPageTranslation.
-     * @param {LandingPageTranslationDeleteArgs} args - Arguments to delete one LandingPageTranslation.
-     * @example
-     * // Delete one LandingPageTranslation
-     * const LandingPageTranslation = await prisma.landingPageTranslation.delete({
-     *   where: {
-     *     // ... filter to delete one LandingPageTranslation
-     *   }
-     * })
-     * 
-     */
-    delete<T extends LandingPageTranslationDeleteArgs>(args: SelectSubset<T, LandingPageTranslationDeleteArgs<ExtArgs>>): Prisma__LandingPageTranslationClient<$Result.GetResult<Prisma.$LandingPageTranslationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one LandingPageTranslation.
-     * @param {LandingPageTranslationUpdateArgs} args - Arguments to update one LandingPageTranslation.
-     * @example
-     * // Update one LandingPageTranslation
-     * const landingPageTranslation = await prisma.landingPageTranslation.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends LandingPageTranslationUpdateArgs>(args: SelectSubset<T, LandingPageTranslationUpdateArgs<ExtArgs>>): Prisma__LandingPageTranslationClient<$Result.GetResult<Prisma.$LandingPageTranslationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more LandingPageTranslations.
-     * @param {LandingPageTranslationDeleteManyArgs} args - Arguments to filter LandingPageTranslations to delete.
-     * @example
-     * // Delete a few LandingPageTranslations
-     * const { count } = await prisma.landingPageTranslation.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends LandingPageTranslationDeleteManyArgs>(args?: SelectSubset<T, LandingPageTranslationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more LandingPageTranslations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageTranslationUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many LandingPageTranslations
-     * const landingPageTranslation = await prisma.landingPageTranslation.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends LandingPageTranslationUpdateManyArgs>(args: SelectSubset<T, LandingPageTranslationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more LandingPageTranslations and returns the data updated in the database.
-     * @param {LandingPageTranslationUpdateManyAndReturnArgs} args - Arguments to update many LandingPageTranslations.
-     * @example
-     * // Update many LandingPageTranslations
-     * const landingPageTranslation = await prisma.landingPageTranslation.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more LandingPageTranslations and only return the `id`
-     * const landingPageTranslationWithIdOnly = await prisma.landingPageTranslation.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends LandingPageTranslationUpdateManyAndReturnArgs>(args: SelectSubset<T, LandingPageTranslationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LandingPageTranslationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one LandingPageTranslation.
-     * @param {LandingPageTranslationUpsertArgs} args - Arguments to update or create a LandingPageTranslation.
-     * @example
-     * // Update or create a LandingPageTranslation
-     * const landingPageTranslation = await prisma.landingPageTranslation.upsert({
-     *   create: {
-     *     // ... data to create a LandingPageTranslation
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the LandingPageTranslation we want to update
-     *   }
-     * })
-     */
-    upsert<T extends LandingPageTranslationUpsertArgs>(args: SelectSubset<T, LandingPageTranslationUpsertArgs<ExtArgs>>): Prisma__LandingPageTranslationClient<$Result.GetResult<Prisma.$LandingPageTranslationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of LandingPageTranslations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageTranslationCountArgs} args - Arguments to filter LandingPageTranslations to count.
-     * @example
-     * // Count the number of LandingPageTranslations
-     * const count = await prisma.landingPageTranslation.count({
-     *   where: {
-     *     // ... the filter for the LandingPageTranslations we want to count
-     *   }
-     * })
-    **/
-    count<T extends LandingPageTranslationCountArgs>(
-      args?: Subset<T, LandingPageTranslationCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], LandingPageTranslationCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a LandingPageTranslation.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageTranslationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends LandingPageTranslationAggregateArgs>(args: Subset<T, LandingPageTranslationAggregateArgs>): Prisma.PrismaPromise<GetLandingPageTranslationAggregateType<T>>
-
-    /**
-     * Group by LandingPageTranslation.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {LandingPageTranslationGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends LandingPageTranslationGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: LandingPageTranslationGroupByArgs['orderBy'] }
-        : { orderBy?: LandingPageTranslationGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, LandingPageTranslationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLandingPageTranslationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the LandingPageTranslation model
-   */
-  readonly fields: LandingPageTranslationFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for LandingPageTranslation.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__LandingPageTranslationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    landingPage<T extends LandingPageDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LandingPageDefaultArgs<ExtArgs>>): Prisma__LandingPageClient<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the LandingPageTranslation model
-   */
-  interface LandingPageTranslationFieldRefs {
-    readonly id: FieldRef<"LandingPageTranslation", 'String'>
-    readonly locale: FieldRef<"LandingPageTranslation", 'String'>
-    readonly title: FieldRef<"LandingPageTranslation", 'String'>
-    readonly description: FieldRef<"LandingPageTranslation", 'String'>
-    readonly landingPageId: FieldRef<"LandingPageTranslation", 'String'>
-    readonly createdAt: FieldRef<"LandingPageTranslation", 'DateTime'>
-    readonly updatedAt: FieldRef<"LandingPageTranslation", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * LandingPageTranslation findUnique
-   */
-  export type LandingPageTranslationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageTranslation
-     */
-    select?: LandingPageTranslationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPageTranslation
-     */
-    omit?: LandingPageTranslationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageTranslationInclude<ExtArgs> | null
-    /**
-     * Filter, which LandingPageTranslation to fetch.
-     */
-    where: LandingPageTranslationWhereUniqueInput
-  }
-
-  /**
-   * LandingPageTranslation findUniqueOrThrow
-   */
-  export type LandingPageTranslationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageTranslation
-     */
-    select?: LandingPageTranslationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPageTranslation
-     */
-    omit?: LandingPageTranslationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageTranslationInclude<ExtArgs> | null
-    /**
-     * Filter, which LandingPageTranslation to fetch.
-     */
-    where: LandingPageTranslationWhereUniqueInput
-  }
-
-  /**
-   * LandingPageTranslation findFirst
-   */
-  export type LandingPageTranslationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageTranslation
-     */
-    select?: LandingPageTranslationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPageTranslation
-     */
-    omit?: LandingPageTranslationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageTranslationInclude<ExtArgs> | null
-    /**
-     * Filter, which LandingPageTranslation to fetch.
-     */
-    where?: LandingPageTranslationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of LandingPageTranslations to fetch.
-     */
-    orderBy?: LandingPageTranslationOrderByWithRelationInput | LandingPageTranslationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for LandingPageTranslations.
-     */
-    cursor?: LandingPageTranslationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` LandingPageTranslations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` LandingPageTranslations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of LandingPageTranslations.
-     */
-    distinct?: LandingPageTranslationScalarFieldEnum | LandingPageTranslationScalarFieldEnum[]
-  }
-
-  /**
-   * LandingPageTranslation findFirstOrThrow
-   */
-  export type LandingPageTranslationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageTranslation
-     */
-    select?: LandingPageTranslationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPageTranslation
-     */
-    omit?: LandingPageTranslationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageTranslationInclude<ExtArgs> | null
-    /**
-     * Filter, which LandingPageTranslation to fetch.
-     */
-    where?: LandingPageTranslationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of LandingPageTranslations to fetch.
-     */
-    orderBy?: LandingPageTranslationOrderByWithRelationInput | LandingPageTranslationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for LandingPageTranslations.
-     */
-    cursor?: LandingPageTranslationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` LandingPageTranslations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` LandingPageTranslations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of LandingPageTranslations.
-     */
-    distinct?: LandingPageTranslationScalarFieldEnum | LandingPageTranslationScalarFieldEnum[]
-  }
-
-  /**
-   * LandingPageTranslation findMany
-   */
-  export type LandingPageTranslationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageTranslation
-     */
-    select?: LandingPageTranslationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPageTranslation
-     */
-    omit?: LandingPageTranslationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageTranslationInclude<ExtArgs> | null
-    /**
-     * Filter, which LandingPageTranslations to fetch.
-     */
-    where?: LandingPageTranslationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of LandingPageTranslations to fetch.
-     */
-    orderBy?: LandingPageTranslationOrderByWithRelationInput | LandingPageTranslationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing LandingPageTranslations.
-     */
-    cursor?: LandingPageTranslationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` LandingPageTranslations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` LandingPageTranslations.
-     */
-    skip?: number
-    distinct?: LandingPageTranslationScalarFieldEnum | LandingPageTranslationScalarFieldEnum[]
-  }
-
-  /**
-   * LandingPageTranslation create
-   */
-  export type LandingPageTranslationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageTranslation
-     */
-    select?: LandingPageTranslationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPageTranslation
-     */
-    omit?: LandingPageTranslationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageTranslationInclude<ExtArgs> | null
-    /**
-     * The data needed to create a LandingPageTranslation.
-     */
-    data: XOR<LandingPageTranslationCreateInput, LandingPageTranslationUncheckedCreateInput>
-  }
-
-  /**
-   * LandingPageTranslation createMany
-   */
-  export type LandingPageTranslationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many LandingPageTranslations.
-     */
-    data: LandingPageTranslationCreateManyInput | LandingPageTranslationCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * LandingPageTranslation createManyAndReturn
-   */
-  export type LandingPageTranslationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageTranslation
-     */
-    select?: LandingPageTranslationSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPageTranslation
-     */
-    omit?: LandingPageTranslationOmit<ExtArgs> | null
-    /**
-     * The data used to create many LandingPageTranslations.
-     */
-    data: LandingPageTranslationCreateManyInput | LandingPageTranslationCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageTranslationIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * LandingPageTranslation update
-   */
-  export type LandingPageTranslationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageTranslation
-     */
-    select?: LandingPageTranslationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPageTranslation
-     */
-    omit?: LandingPageTranslationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageTranslationInclude<ExtArgs> | null
-    /**
-     * The data needed to update a LandingPageTranslation.
-     */
-    data: XOR<LandingPageTranslationUpdateInput, LandingPageTranslationUncheckedUpdateInput>
-    /**
-     * Choose, which LandingPageTranslation to update.
-     */
-    where: LandingPageTranslationWhereUniqueInput
-  }
-
-  /**
-   * LandingPageTranslation updateMany
-   */
-  export type LandingPageTranslationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update LandingPageTranslations.
-     */
-    data: XOR<LandingPageTranslationUpdateManyMutationInput, LandingPageTranslationUncheckedUpdateManyInput>
-    /**
-     * Filter which LandingPageTranslations to update
-     */
-    where?: LandingPageTranslationWhereInput
-    /**
-     * Limit how many LandingPageTranslations to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * LandingPageTranslation updateManyAndReturn
-   */
-  export type LandingPageTranslationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageTranslation
-     */
-    select?: LandingPageTranslationSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPageTranslation
-     */
-    omit?: LandingPageTranslationOmit<ExtArgs> | null
-    /**
-     * The data used to update LandingPageTranslations.
-     */
-    data: XOR<LandingPageTranslationUpdateManyMutationInput, LandingPageTranslationUncheckedUpdateManyInput>
-    /**
-     * Filter which LandingPageTranslations to update
-     */
-    where?: LandingPageTranslationWhereInput
-    /**
-     * Limit how many LandingPageTranslations to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageTranslationIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * LandingPageTranslation upsert
-   */
-  export type LandingPageTranslationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageTranslation
-     */
-    select?: LandingPageTranslationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPageTranslation
-     */
-    omit?: LandingPageTranslationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageTranslationInclude<ExtArgs> | null
-    /**
-     * The filter to search for the LandingPageTranslation to update in case it exists.
-     */
-    where: LandingPageTranslationWhereUniqueInput
-    /**
-     * In case the LandingPageTranslation found by the `where` argument doesn't exist, create a new LandingPageTranslation with this data.
-     */
-    create: XOR<LandingPageTranslationCreateInput, LandingPageTranslationUncheckedCreateInput>
-    /**
-     * In case the LandingPageTranslation was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<LandingPageTranslationUpdateInput, LandingPageTranslationUncheckedUpdateInput>
-  }
-
-  /**
-   * LandingPageTranslation delete
-   */
-  export type LandingPageTranslationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageTranslation
-     */
-    select?: LandingPageTranslationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPageTranslation
-     */
-    omit?: LandingPageTranslationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageTranslationInclude<ExtArgs> | null
-    /**
-     * Filter which LandingPageTranslation to delete.
-     */
-    where: LandingPageTranslationWhereUniqueInput
-  }
-
-  /**
-   * LandingPageTranslation deleteMany
-   */
-  export type LandingPageTranslationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which LandingPageTranslations to delete
-     */
-    where?: LandingPageTranslationWhereInput
-    /**
-     * Limit how many LandingPageTranslations to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * LandingPageTranslation without action
-   */
-  export type LandingPageTranslationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPageTranslation
-     */
-    select?: LandingPageTranslationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPageTranslation
-     */
-    omit?: LandingPageTranslationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageTranslationInclude<ExtArgs> | null
   }
 
 
@@ -106499,7 +104042,6 @@ export namespace Prisma {
     isDefault?: boolean
     establishmentId?: boolean
     activeEstablishments?: boolean | Theme$activeEstablishmentsArgs<ExtArgs>
-    landingPages?: boolean | Theme$landingPagesArgs<ExtArgs>
     establishment?: boolean | Theme$establishmentArgs<ExtArgs>
     _count?: boolean | ThemeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["theme"]>
@@ -106533,7 +104075,6 @@ export namespace Prisma {
   export type ThemeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "config" | "isDefault" | "establishmentId", ExtArgs["result"]["theme"]>
   export type ThemeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     activeEstablishments?: boolean | Theme$activeEstablishmentsArgs<ExtArgs>
-    landingPages?: boolean | Theme$landingPagesArgs<ExtArgs>
     establishment?: boolean | Theme$establishmentArgs<ExtArgs>
     _count?: boolean | ThemeCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -106548,7 +104089,6 @@ export namespace Prisma {
     name: "Theme"
     objects: {
       activeEstablishments: Prisma.$EstablishmentPayload<ExtArgs>[]
-      landingPages: Prisma.$LandingPagePayload<ExtArgs>[]
       establishment: Prisma.$EstablishmentPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -106952,7 +104492,6 @@ export namespace Prisma {
   export interface Prisma__ThemeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     activeEstablishments<T extends Theme$activeEstablishmentsArgs<ExtArgs> = {}>(args?: Subset<T, Theme$activeEstablishmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    landingPages<T extends Theme$landingPagesArgs<ExtArgs> = {}>(args?: Subset<T, Theme$landingPagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LandingPagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     establishment<T extends Theme$establishmentArgs<ExtArgs> = {}>(args?: Subset<T, Theme$establishmentArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -107405,30 +104944,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EstablishmentScalarFieldEnum | EstablishmentScalarFieldEnum[]
-  }
-
-  /**
-   * Theme.landingPages
-   */
-  export type Theme$landingPagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the LandingPage
-     */
-    select?: LandingPageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the LandingPage
-     */
-    omit?: LandingPageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LandingPageInclude<ExtArgs> | null
-    where?: LandingPageWhereInput
-    orderBy?: LandingPageOrderByWithRelationInput | LandingPageOrderByWithRelationInput[]
-    cursor?: LandingPageWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: LandingPageScalarFieldEnum | LandingPageScalarFieldEnum[]
   }
 
   /**
@@ -112843,31 +110358,6 @@ export namespace Prisma {
   export type ItemAttributeScalarFieldEnum = (typeof ItemAttributeScalarFieldEnum)[keyof typeof ItemAttributeScalarFieldEnum]
 
 
-  export const LandingPageScalarFieldEnum: {
-    id: 'id',
-    shortName: 'shortName',
-    themeId: 'themeId',
-    establishmentId: 'establishmentId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type LandingPageScalarFieldEnum = (typeof LandingPageScalarFieldEnum)[keyof typeof LandingPageScalarFieldEnum]
-
-
-  export const LandingPageTranslationScalarFieldEnum: {
-    id: 'id',
-    locale: 'locale',
-    title: 'title',
-    description: 'description',
-    landingPageId: 'landingPageId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type LandingPageTranslationScalarFieldEnum = (typeof LandingPageTranslationScalarFieldEnum)[keyof typeof LandingPageTranslationScalarFieldEnum]
-
-
   export const MenuScalarFieldEnum: {
     id: 'id',
     position: 'position',
@@ -115590,7 +113080,6 @@ export namespace Prisma {
     devices?: DeviceListRelationFilter
     vivaTerminals?: VivaTerminalListRelationFilter
     sumupReaders?: SumupReaderListRelationFilter
-    landingPage?: XOR<LandingPageNullableScalarRelationFilter, LandingPageWhereInput> | null
     emailLogs?: EmailLogListRelationFilter
     auditLogs?: AuditLogListRelationFilter
     discounts?: DiscountListRelationFilter
@@ -115681,7 +113170,6 @@ export namespace Prisma {
     devices?: DeviceOrderByRelationAggregateInput
     vivaTerminals?: VivaTerminalOrderByRelationAggregateInput
     sumupReaders?: SumupReaderOrderByRelationAggregateInput
-    landingPage?: LandingPageOrderByWithRelationInput
     emailLogs?: EmailLogOrderByRelationAggregateInput
     auditLogs?: AuditLogOrderByRelationAggregateInput
     discounts?: DiscountOrderByRelationAggregateInput
@@ -115775,7 +113263,6 @@ export namespace Prisma {
     devices?: DeviceListRelationFilter
     vivaTerminals?: VivaTerminalListRelationFilter
     sumupReaders?: SumupReaderListRelationFilter
-    landingPage?: XOR<LandingPageNullableScalarRelationFilter, LandingPageWhereInput> | null
     emailLogs?: EmailLogListRelationFilter
     auditLogs?: AuditLogListRelationFilter
     discounts?: DiscountListRelationFilter
@@ -117851,137 +115338,6 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"ItemAttribute"> | string
     type?: EnumAttributeTypeWithAggregatesFilter<"ItemAttribute"> | $Enums.AttributeType
     itemId?: StringWithAggregatesFilter<"ItemAttribute"> | string
-  }
-
-  export type LandingPageWhereInput = {
-    AND?: LandingPageWhereInput | LandingPageWhereInput[]
-    OR?: LandingPageWhereInput[]
-    NOT?: LandingPageWhereInput | LandingPageWhereInput[]
-    id?: StringFilter<"LandingPage"> | string
-    shortName?: StringFilter<"LandingPage"> | string
-    themeId?: StringNullableFilter<"LandingPage"> | string | null
-    establishmentId?: StringFilter<"LandingPage"> | string
-    createdAt?: DateTimeFilter<"LandingPage"> | Date | string
-    updatedAt?: DateTimeFilter<"LandingPage"> | Date | string
-    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
-    theme?: XOR<ThemeNullableScalarRelationFilter, ThemeWhereInput> | null
-    landingPageTranslations?: LandingPageTranslationListRelationFilter
-  }
-
-  export type LandingPageOrderByWithRelationInput = {
-    id?: SortOrder
-    shortName?: SortOrder
-    themeId?: SortOrderInput | SortOrder
-    establishmentId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    establishment?: EstablishmentOrderByWithRelationInput
-    theme?: ThemeOrderByWithRelationInput
-    landingPageTranslations?: LandingPageTranslationOrderByRelationAggregateInput
-  }
-
-  export type LandingPageWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    establishmentId?: string
-    AND?: LandingPageWhereInput | LandingPageWhereInput[]
-    OR?: LandingPageWhereInput[]
-    NOT?: LandingPageWhereInput | LandingPageWhereInput[]
-    shortName?: StringFilter<"LandingPage"> | string
-    themeId?: StringNullableFilter<"LandingPage"> | string | null
-    createdAt?: DateTimeFilter<"LandingPage"> | Date | string
-    updatedAt?: DateTimeFilter<"LandingPage"> | Date | string
-    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
-    theme?: XOR<ThemeNullableScalarRelationFilter, ThemeWhereInput> | null
-    landingPageTranslations?: LandingPageTranslationListRelationFilter
-  }, "id" | "establishmentId">
-
-  export type LandingPageOrderByWithAggregationInput = {
-    id?: SortOrder
-    shortName?: SortOrder
-    themeId?: SortOrderInput | SortOrder
-    establishmentId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: LandingPageCountOrderByAggregateInput
-    _max?: LandingPageMaxOrderByAggregateInput
-    _min?: LandingPageMinOrderByAggregateInput
-  }
-
-  export type LandingPageScalarWhereWithAggregatesInput = {
-    AND?: LandingPageScalarWhereWithAggregatesInput | LandingPageScalarWhereWithAggregatesInput[]
-    OR?: LandingPageScalarWhereWithAggregatesInput[]
-    NOT?: LandingPageScalarWhereWithAggregatesInput | LandingPageScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"LandingPage"> | string
-    shortName?: StringWithAggregatesFilter<"LandingPage"> | string
-    themeId?: StringNullableWithAggregatesFilter<"LandingPage"> | string | null
-    establishmentId?: StringWithAggregatesFilter<"LandingPage"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"LandingPage"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"LandingPage"> | Date | string
-  }
-
-  export type LandingPageTranslationWhereInput = {
-    AND?: LandingPageTranslationWhereInput | LandingPageTranslationWhereInput[]
-    OR?: LandingPageTranslationWhereInput[]
-    NOT?: LandingPageTranslationWhereInput | LandingPageTranslationWhereInput[]
-    id?: StringFilter<"LandingPageTranslation"> | string
-    locale?: StringFilter<"LandingPageTranslation"> | string
-    title?: StringFilter<"LandingPageTranslation"> | string
-    description?: StringFilter<"LandingPageTranslation"> | string
-    landingPageId?: StringFilter<"LandingPageTranslation"> | string
-    createdAt?: DateTimeFilter<"LandingPageTranslation"> | Date | string
-    updatedAt?: DateTimeFilter<"LandingPageTranslation"> | Date | string
-    landingPage?: XOR<LandingPageScalarRelationFilter, LandingPageWhereInput>
-  }
-
-  export type LandingPageTranslationOrderByWithRelationInput = {
-    id?: SortOrder
-    locale?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    landingPageId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    landingPage?: LandingPageOrderByWithRelationInput
-  }
-
-  export type LandingPageTranslationWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: LandingPageTranslationWhereInput | LandingPageTranslationWhereInput[]
-    OR?: LandingPageTranslationWhereInput[]
-    NOT?: LandingPageTranslationWhereInput | LandingPageTranslationWhereInput[]
-    locale?: StringFilter<"LandingPageTranslation"> | string
-    title?: StringFilter<"LandingPageTranslation"> | string
-    description?: StringFilter<"LandingPageTranslation"> | string
-    landingPageId?: StringFilter<"LandingPageTranslation"> | string
-    createdAt?: DateTimeFilter<"LandingPageTranslation"> | Date | string
-    updatedAt?: DateTimeFilter<"LandingPageTranslation"> | Date | string
-    landingPage?: XOR<LandingPageScalarRelationFilter, LandingPageWhereInput>
-  }, "id">
-
-  export type LandingPageTranslationOrderByWithAggregationInput = {
-    id?: SortOrder
-    locale?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    landingPageId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: LandingPageTranslationCountOrderByAggregateInput
-    _max?: LandingPageTranslationMaxOrderByAggregateInput
-    _min?: LandingPageTranslationMinOrderByAggregateInput
-  }
-
-  export type LandingPageTranslationScalarWhereWithAggregatesInput = {
-    AND?: LandingPageTranslationScalarWhereWithAggregatesInput | LandingPageTranslationScalarWhereWithAggregatesInput[]
-    OR?: LandingPageTranslationScalarWhereWithAggregatesInput[]
-    NOT?: LandingPageTranslationScalarWhereWithAggregatesInput | LandingPageTranslationScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"LandingPageTranslation"> | string
-    locale?: StringWithAggregatesFilter<"LandingPageTranslation"> | string
-    title?: StringWithAggregatesFilter<"LandingPageTranslation"> | string
-    description?: StringWithAggregatesFilter<"LandingPageTranslation"> | string
-    landingPageId?: StringWithAggregatesFilter<"LandingPageTranslation"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"LandingPageTranslation"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"LandingPageTranslation"> | Date | string
   }
 
   export type MenuWhereInput = {
@@ -121253,7 +118609,6 @@ export namespace Prisma {
     isDefault?: BoolFilter<"Theme"> | boolean
     establishmentId?: StringNullableFilter<"Theme"> | string | null
     activeEstablishments?: EstablishmentListRelationFilter
-    landingPages?: LandingPageListRelationFilter
     establishment?: XOR<EstablishmentNullableScalarRelationFilter, EstablishmentWhereInput> | null
   }
 
@@ -121264,7 +118619,6 @@ export namespace Prisma {
     isDefault?: SortOrder
     establishmentId?: SortOrderInput | SortOrder
     activeEstablishments?: EstablishmentOrderByRelationAggregateInput
-    landingPages?: LandingPageOrderByRelationAggregateInput
     establishment?: EstablishmentOrderByWithRelationInput
   }
 
@@ -121278,7 +118632,6 @@ export namespace Prisma {
     isDefault?: BoolFilter<"Theme"> | boolean
     establishmentId?: StringNullableFilter<"Theme"> | string | null
     activeEstablishments?: EstablishmentListRelationFilter
-    landingPages?: LandingPageListRelationFilter
     establishment?: XOR<EstablishmentNullableScalarRelationFilter, EstablishmentWhereInput> | null
   }, "id">
 
@@ -123038,7 +120391,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -123124,7 +120476,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -123210,7 +120561,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -123296,7 +120646,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -125505,140 +122854,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumAttributeTypeFieldUpdateOperationsInput | $Enums.AttributeType
     itemId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type LandingPageCreateInput = {
-    id?: string
-    shortName: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    establishment: EstablishmentCreateNestedOneWithoutLandingPageInput
-    theme?: ThemeCreateNestedOneWithoutLandingPagesInput
-    landingPageTranslations?: LandingPageTranslationCreateNestedManyWithoutLandingPageInput
-  }
-
-  export type LandingPageUncheckedCreateInput = {
-    id?: string
-    shortName: string
-    themeId?: string | null
-    establishmentId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    landingPageTranslations?: LandingPageTranslationUncheckedCreateNestedManyWithoutLandingPageInput
-  }
-
-  export type LandingPageUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    shortName?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishment?: EstablishmentUpdateOneRequiredWithoutLandingPageNestedInput
-    theme?: ThemeUpdateOneWithoutLandingPagesNestedInput
-    landingPageTranslations?: LandingPageTranslationUpdateManyWithoutLandingPageNestedInput
-  }
-
-  export type LandingPageUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    shortName?: StringFieldUpdateOperationsInput | string
-    themeId?: NullableStringFieldUpdateOperationsInput | string | null
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    landingPageTranslations?: LandingPageTranslationUncheckedUpdateManyWithoutLandingPageNestedInput
-  }
-
-  export type LandingPageCreateManyInput = {
-    id?: string
-    shortName: string
-    themeId?: string | null
-    establishmentId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type LandingPageUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    shortName?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LandingPageUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    shortName?: StringFieldUpdateOperationsInput | string
-    themeId?: NullableStringFieldUpdateOperationsInput | string | null
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LandingPageTranslationCreateInput = {
-    id?: string
-    locale: string
-    title: string
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    landingPage: LandingPageCreateNestedOneWithoutLandingPageTranslationsInput
-  }
-
-  export type LandingPageTranslationUncheckedCreateInput = {
-    id?: string
-    locale: string
-    title: string
-    description: string
-    landingPageId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type LandingPageTranslationUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    locale?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    landingPage?: LandingPageUpdateOneRequiredWithoutLandingPageTranslationsNestedInput
-  }
-
-  export type LandingPageTranslationUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    locale?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    landingPageId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LandingPageTranslationCreateManyInput = {
-    id?: string
-    locale: string
-    title: string
-    description: string
-    landingPageId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type LandingPageTranslationUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    locale?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LandingPageTranslationUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    locale?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    landingPageId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MenuCreateInput = {
@@ -129209,7 +126424,6 @@ export namespace Prisma {
     config: JsonNullValueInput | InputJsonValue
     isDefault?: boolean
     activeEstablishments?: EstablishmentCreateNestedManyWithoutActiveThemeInput
-    landingPages?: LandingPageCreateNestedManyWithoutThemeInput
     establishment?: EstablishmentCreateNestedOneWithoutThemesInput
   }
 
@@ -129220,7 +126434,6 @@ export namespace Prisma {
     isDefault?: boolean
     establishmentId?: string | null
     activeEstablishments?: EstablishmentUncheckedCreateNestedManyWithoutActiveThemeInput
-    landingPages?: LandingPageUncheckedCreateNestedManyWithoutThemeInput
   }
 
   export type ThemeUpdateInput = {
@@ -129229,7 +126442,6 @@ export namespace Prisma {
     config?: JsonNullValueInput | InputJsonValue
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     activeEstablishments?: EstablishmentUpdateManyWithoutActiveThemeNestedInput
-    landingPages?: LandingPageUpdateManyWithoutThemeNestedInput
     establishment?: EstablishmentUpdateOneWithoutThemesNestedInput
   }
 
@@ -129240,7 +126452,6 @@ export namespace Prisma {
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     establishmentId?: NullableStringFieldUpdateOperationsInput | string | null
     activeEstablishments?: EstablishmentUncheckedUpdateManyWithoutActiveThemeNestedInput
-    landingPages?: LandingPageUncheckedUpdateManyWithoutThemeNestedInput
   }
 
   export type ThemeCreateManyInput = {
@@ -131072,11 +128283,6 @@ export namespace Prisma {
     every?: SumupReaderWhereInput
     some?: SumupReaderWhereInput
     none?: SumupReaderWhereInput
-  }
-
-  export type LandingPageNullableScalarRelationFilter = {
-    is?: LandingPageWhereInput | null
-    isNot?: LandingPageWhereInput | null
   }
 
   export type EmailLogListRelationFilter = {
@@ -132959,78 +130165,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumAttributeTypeFilter<$PrismaModel>
     _max?: NestedEnumAttributeTypeFilter<$PrismaModel>
-  }
-
-  export type LandingPageTranslationListRelationFilter = {
-    every?: LandingPageTranslationWhereInput
-    some?: LandingPageTranslationWhereInput
-    none?: LandingPageTranslationWhereInput
-  }
-
-  export type LandingPageTranslationOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type LandingPageCountOrderByAggregateInput = {
-    id?: SortOrder
-    shortName?: SortOrder
-    themeId?: SortOrder
-    establishmentId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type LandingPageMaxOrderByAggregateInput = {
-    id?: SortOrder
-    shortName?: SortOrder
-    themeId?: SortOrder
-    establishmentId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type LandingPageMinOrderByAggregateInput = {
-    id?: SortOrder
-    shortName?: SortOrder
-    themeId?: SortOrder
-    establishmentId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type LandingPageScalarRelationFilter = {
-    is?: LandingPageWhereInput
-    isNot?: LandingPageWhereInput
-  }
-
-  export type LandingPageTranslationCountOrderByAggregateInput = {
-    id?: SortOrder
-    locale?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    landingPageId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type LandingPageTranslationMaxOrderByAggregateInput = {
-    id?: SortOrder
-    locale?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    landingPageId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type LandingPageTranslationMinOrderByAggregateInput = {
-    id?: SortOrder
-    locale?: SortOrder
-    title?: SortOrder
-    description?: SortOrder
-    landingPageId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type EnumMenuTypeFilter<$PrismaModel = never> = {
@@ -135475,16 +132609,6 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type LandingPageListRelationFilter = {
-    every?: LandingPageWhereInput
-    some?: LandingPageWhereInput
-    none?: LandingPageWhereInput
-  }
-
-  export type LandingPageOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type ThemeCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -136588,12 +133712,6 @@ export namespace Prisma {
     connect?: SumupReaderWhereUniqueInput | SumupReaderWhereUniqueInput[]
   }
 
-  export type LandingPageCreateNestedOneWithoutEstablishmentInput = {
-    create?: XOR<LandingPageCreateWithoutEstablishmentInput, LandingPageUncheckedCreateWithoutEstablishmentInput>
-    connectOrCreate?: LandingPageCreateOrConnectWithoutEstablishmentInput
-    connect?: LandingPageWhereUniqueInput
-  }
-
   export type EmailLogCreateNestedManyWithoutEstablishmentInput = {
     create?: XOR<EmailLogCreateWithoutEstablishmentInput, EmailLogUncheckedCreateWithoutEstablishmentInput> | EmailLogCreateWithoutEstablishmentInput[] | EmailLogUncheckedCreateWithoutEstablishmentInput[]
     connectOrCreate?: EmailLogCreateOrConnectWithoutEstablishmentInput | EmailLogCreateOrConnectWithoutEstablishmentInput[]
@@ -136832,12 +133950,6 @@ export namespace Prisma {
     connectOrCreate?: SumupReaderCreateOrConnectWithoutEstablishmentInput | SumupReaderCreateOrConnectWithoutEstablishmentInput[]
     createMany?: SumupReaderCreateManyEstablishmentInputEnvelope
     connect?: SumupReaderWhereUniqueInput | SumupReaderWhereUniqueInput[]
-  }
-
-  export type LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput = {
-    create?: XOR<LandingPageCreateWithoutEstablishmentInput, LandingPageUncheckedCreateWithoutEstablishmentInput>
-    connectOrCreate?: LandingPageCreateOrConnectWithoutEstablishmentInput
-    connect?: LandingPageWhereUniqueInput
   }
 
   export type EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput = {
@@ -137286,16 +134398,6 @@ export namespace Prisma {
     update?: SumupReaderUpdateWithWhereUniqueWithoutEstablishmentInput | SumupReaderUpdateWithWhereUniqueWithoutEstablishmentInput[]
     updateMany?: SumupReaderUpdateManyWithWhereWithoutEstablishmentInput | SumupReaderUpdateManyWithWhereWithoutEstablishmentInput[]
     deleteMany?: SumupReaderScalarWhereInput | SumupReaderScalarWhereInput[]
-  }
-
-  export type LandingPageUpdateOneWithoutEstablishmentNestedInput = {
-    create?: XOR<LandingPageCreateWithoutEstablishmentInput, LandingPageUncheckedCreateWithoutEstablishmentInput>
-    connectOrCreate?: LandingPageCreateOrConnectWithoutEstablishmentInput
-    upsert?: LandingPageUpsertWithoutEstablishmentInput
-    disconnect?: LandingPageWhereInput | boolean
-    delete?: LandingPageWhereInput | boolean
-    connect?: LandingPageWhereUniqueInput
-    update?: XOR<XOR<LandingPageUpdateToOneWithWhereWithoutEstablishmentInput, LandingPageUpdateWithoutEstablishmentInput>, LandingPageUncheckedUpdateWithoutEstablishmentInput>
   }
 
   export type EmailLogUpdateManyWithoutEstablishmentNestedInput = {
@@ -137766,16 +134868,6 @@ export namespace Prisma {
     update?: SumupReaderUpdateWithWhereUniqueWithoutEstablishmentInput | SumupReaderUpdateWithWhereUniqueWithoutEstablishmentInput[]
     updateMany?: SumupReaderUpdateManyWithWhereWithoutEstablishmentInput | SumupReaderUpdateManyWithWhereWithoutEstablishmentInput[]
     deleteMany?: SumupReaderScalarWhereInput | SumupReaderScalarWhereInput[]
-  }
-
-  export type LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput = {
-    create?: XOR<LandingPageCreateWithoutEstablishmentInput, LandingPageUncheckedCreateWithoutEstablishmentInput>
-    connectOrCreate?: LandingPageCreateOrConnectWithoutEstablishmentInput
-    upsert?: LandingPageUpsertWithoutEstablishmentInput
-    disconnect?: LandingPageWhereInput | boolean
-    delete?: LandingPageWhereInput | boolean
-    connect?: LandingPageWhereUniqueInput
-    update?: XOR<XOR<LandingPageUpdateToOneWithWhereWithoutEstablishmentInput, LandingPageUpdateWithoutEstablishmentInput>, LandingPageUncheckedUpdateWithoutEstablishmentInput>
   }
 
   export type EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput = {
@@ -139888,92 +136980,6 @@ export namespace Prisma {
     upsert?: ItemUpsertWithoutAttributesInput
     connect?: ItemWhereUniqueInput
     update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutAttributesInput, ItemUpdateWithoutAttributesInput>, ItemUncheckedUpdateWithoutAttributesInput>
-  }
-
-  export type EstablishmentCreateNestedOneWithoutLandingPageInput = {
-    create?: XOR<EstablishmentCreateWithoutLandingPageInput, EstablishmentUncheckedCreateWithoutLandingPageInput>
-    connectOrCreate?: EstablishmentCreateOrConnectWithoutLandingPageInput
-    connect?: EstablishmentWhereUniqueInput
-  }
-
-  export type ThemeCreateNestedOneWithoutLandingPagesInput = {
-    create?: XOR<ThemeCreateWithoutLandingPagesInput, ThemeUncheckedCreateWithoutLandingPagesInput>
-    connectOrCreate?: ThemeCreateOrConnectWithoutLandingPagesInput
-    connect?: ThemeWhereUniqueInput
-  }
-
-  export type LandingPageTranslationCreateNestedManyWithoutLandingPageInput = {
-    create?: XOR<LandingPageTranslationCreateWithoutLandingPageInput, LandingPageTranslationUncheckedCreateWithoutLandingPageInput> | LandingPageTranslationCreateWithoutLandingPageInput[] | LandingPageTranslationUncheckedCreateWithoutLandingPageInput[]
-    connectOrCreate?: LandingPageTranslationCreateOrConnectWithoutLandingPageInput | LandingPageTranslationCreateOrConnectWithoutLandingPageInput[]
-    createMany?: LandingPageTranslationCreateManyLandingPageInputEnvelope
-    connect?: LandingPageTranslationWhereUniqueInput | LandingPageTranslationWhereUniqueInput[]
-  }
-
-  export type LandingPageTranslationUncheckedCreateNestedManyWithoutLandingPageInput = {
-    create?: XOR<LandingPageTranslationCreateWithoutLandingPageInput, LandingPageTranslationUncheckedCreateWithoutLandingPageInput> | LandingPageTranslationCreateWithoutLandingPageInput[] | LandingPageTranslationUncheckedCreateWithoutLandingPageInput[]
-    connectOrCreate?: LandingPageTranslationCreateOrConnectWithoutLandingPageInput | LandingPageTranslationCreateOrConnectWithoutLandingPageInput[]
-    createMany?: LandingPageTranslationCreateManyLandingPageInputEnvelope
-    connect?: LandingPageTranslationWhereUniqueInput | LandingPageTranslationWhereUniqueInput[]
-  }
-
-  export type EstablishmentUpdateOneRequiredWithoutLandingPageNestedInput = {
-    create?: XOR<EstablishmentCreateWithoutLandingPageInput, EstablishmentUncheckedCreateWithoutLandingPageInput>
-    connectOrCreate?: EstablishmentCreateOrConnectWithoutLandingPageInput
-    upsert?: EstablishmentUpsertWithoutLandingPageInput
-    connect?: EstablishmentWhereUniqueInput
-    update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutLandingPageInput, EstablishmentUpdateWithoutLandingPageInput>, EstablishmentUncheckedUpdateWithoutLandingPageInput>
-  }
-
-  export type ThemeUpdateOneWithoutLandingPagesNestedInput = {
-    create?: XOR<ThemeCreateWithoutLandingPagesInput, ThemeUncheckedCreateWithoutLandingPagesInput>
-    connectOrCreate?: ThemeCreateOrConnectWithoutLandingPagesInput
-    upsert?: ThemeUpsertWithoutLandingPagesInput
-    disconnect?: ThemeWhereInput | boolean
-    delete?: ThemeWhereInput | boolean
-    connect?: ThemeWhereUniqueInput
-    update?: XOR<XOR<ThemeUpdateToOneWithWhereWithoutLandingPagesInput, ThemeUpdateWithoutLandingPagesInput>, ThemeUncheckedUpdateWithoutLandingPagesInput>
-  }
-
-  export type LandingPageTranslationUpdateManyWithoutLandingPageNestedInput = {
-    create?: XOR<LandingPageTranslationCreateWithoutLandingPageInput, LandingPageTranslationUncheckedCreateWithoutLandingPageInput> | LandingPageTranslationCreateWithoutLandingPageInput[] | LandingPageTranslationUncheckedCreateWithoutLandingPageInput[]
-    connectOrCreate?: LandingPageTranslationCreateOrConnectWithoutLandingPageInput | LandingPageTranslationCreateOrConnectWithoutLandingPageInput[]
-    upsert?: LandingPageTranslationUpsertWithWhereUniqueWithoutLandingPageInput | LandingPageTranslationUpsertWithWhereUniqueWithoutLandingPageInput[]
-    createMany?: LandingPageTranslationCreateManyLandingPageInputEnvelope
-    set?: LandingPageTranslationWhereUniqueInput | LandingPageTranslationWhereUniqueInput[]
-    disconnect?: LandingPageTranslationWhereUniqueInput | LandingPageTranslationWhereUniqueInput[]
-    delete?: LandingPageTranslationWhereUniqueInput | LandingPageTranslationWhereUniqueInput[]
-    connect?: LandingPageTranslationWhereUniqueInput | LandingPageTranslationWhereUniqueInput[]
-    update?: LandingPageTranslationUpdateWithWhereUniqueWithoutLandingPageInput | LandingPageTranslationUpdateWithWhereUniqueWithoutLandingPageInput[]
-    updateMany?: LandingPageTranslationUpdateManyWithWhereWithoutLandingPageInput | LandingPageTranslationUpdateManyWithWhereWithoutLandingPageInput[]
-    deleteMany?: LandingPageTranslationScalarWhereInput | LandingPageTranslationScalarWhereInput[]
-  }
-
-  export type LandingPageTranslationUncheckedUpdateManyWithoutLandingPageNestedInput = {
-    create?: XOR<LandingPageTranslationCreateWithoutLandingPageInput, LandingPageTranslationUncheckedCreateWithoutLandingPageInput> | LandingPageTranslationCreateWithoutLandingPageInput[] | LandingPageTranslationUncheckedCreateWithoutLandingPageInput[]
-    connectOrCreate?: LandingPageTranslationCreateOrConnectWithoutLandingPageInput | LandingPageTranslationCreateOrConnectWithoutLandingPageInput[]
-    upsert?: LandingPageTranslationUpsertWithWhereUniqueWithoutLandingPageInput | LandingPageTranslationUpsertWithWhereUniqueWithoutLandingPageInput[]
-    createMany?: LandingPageTranslationCreateManyLandingPageInputEnvelope
-    set?: LandingPageTranslationWhereUniqueInput | LandingPageTranslationWhereUniqueInput[]
-    disconnect?: LandingPageTranslationWhereUniqueInput | LandingPageTranslationWhereUniqueInput[]
-    delete?: LandingPageTranslationWhereUniqueInput | LandingPageTranslationWhereUniqueInput[]
-    connect?: LandingPageTranslationWhereUniqueInput | LandingPageTranslationWhereUniqueInput[]
-    update?: LandingPageTranslationUpdateWithWhereUniqueWithoutLandingPageInput | LandingPageTranslationUpdateWithWhereUniqueWithoutLandingPageInput[]
-    updateMany?: LandingPageTranslationUpdateManyWithWhereWithoutLandingPageInput | LandingPageTranslationUpdateManyWithWhereWithoutLandingPageInput[]
-    deleteMany?: LandingPageTranslationScalarWhereInput | LandingPageTranslationScalarWhereInput[]
-  }
-
-  export type LandingPageCreateNestedOneWithoutLandingPageTranslationsInput = {
-    create?: XOR<LandingPageCreateWithoutLandingPageTranslationsInput, LandingPageUncheckedCreateWithoutLandingPageTranslationsInput>
-    connectOrCreate?: LandingPageCreateOrConnectWithoutLandingPageTranslationsInput
-    connect?: LandingPageWhereUniqueInput
-  }
-
-  export type LandingPageUpdateOneRequiredWithoutLandingPageTranslationsNestedInput = {
-    create?: XOR<LandingPageCreateWithoutLandingPageTranslationsInput, LandingPageUncheckedCreateWithoutLandingPageTranslationsInput>
-    connectOrCreate?: LandingPageCreateOrConnectWithoutLandingPageTranslationsInput
-    upsert?: LandingPageUpsertWithoutLandingPageTranslationsInput
-    connect?: LandingPageWhereUniqueInput
-    update?: XOR<XOR<LandingPageUpdateToOneWithWhereWithoutLandingPageTranslationsInput, LandingPageUpdateWithoutLandingPageTranslationsInput>, LandingPageUncheckedUpdateWithoutLandingPageTranslationsInput>
   }
 
   export type EstablishmentCreateNestedOneWithoutMenusInput = {
@@ -142515,13 +139521,6 @@ export namespace Prisma {
     connect?: EstablishmentWhereUniqueInput | EstablishmentWhereUniqueInput[]
   }
 
-  export type LandingPageCreateNestedManyWithoutThemeInput = {
-    create?: XOR<LandingPageCreateWithoutThemeInput, LandingPageUncheckedCreateWithoutThemeInput> | LandingPageCreateWithoutThemeInput[] | LandingPageUncheckedCreateWithoutThemeInput[]
-    connectOrCreate?: LandingPageCreateOrConnectWithoutThemeInput | LandingPageCreateOrConnectWithoutThemeInput[]
-    createMany?: LandingPageCreateManyThemeInputEnvelope
-    connect?: LandingPageWhereUniqueInput | LandingPageWhereUniqueInput[]
-  }
-
   export type EstablishmentCreateNestedOneWithoutThemesInput = {
     create?: XOR<EstablishmentCreateWithoutThemesInput, EstablishmentUncheckedCreateWithoutThemesInput>
     connectOrCreate?: EstablishmentCreateOrConnectWithoutThemesInput
@@ -142533,13 +139532,6 @@ export namespace Prisma {
     connectOrCreate?: EstablishmentCreateOrConnectWithoutActiveThemeInput | EstablishmentCreateOrConnectWithoutActiveThemeInput[]
     createMany?: EstablishmentCreateManyActiveThemeInputEnvelope
     connect?: EstablishmentWhereUniqueInput | EstablishmentWhereUniqueInput[]
-  }
-
-  export type LandingPageUncheckedCreateNestedManyWithoutThemeInput = {
-    create?: XOR<LandingPageCreateWithoutThemeInput, LandingPageUncheckedCreateWithoutThemeInput> | LandingPageCreateWithoutThemeInput[] | LandingPageUncheckedCreateWithoutThemeInput[]
-    connectOrCreate?: LandingPageCreateOrConnectWithoutThemeInput | LandingPageCreateOrConnectWithoutThemeInput[]
-    createMany?: LandingPageCreateManyThemeInputEnvelope
-    connect?: LandingPageWhereUniqueInput | LandingPageWhereUniqueInput[]
   }
 
   export type EstablishmentUpdateManyWithoutActiveThemeNestedInput = {
@@ -142554,20 +139546,6 @@ export namespace Prisma {
     update?: EstablishmentUpdateWithWhereUniqueWithoutActiveThemeInput | EstablishmentUpdateWithWhereUniqueWithoutActiveThemeInput[]
     updateMany?: EstablishmentUpdateManyWithWhereWithoutActiveThemeInput | EstablishmentUpdateManyWithWhereWithoutActiveThemeInput[]
     deleteMany?: EstablishmentScalarWhereInput | EstablishmentScalarWhereInput[]
-  }
-
-  export type LandingPageUpdateManyWithoutThemeNestedInput = {
-    create?: XOR<LandingPageCreateWithoutThemeInput, LandingPageUncheckedCreateWithoutThemeInput> | LandingPageCreateWithoutThemeInput[] | LandingPageUncheckedCreateWithoutThemeInput[]
-    connectOrCreate?: LandingPageCreateOrConnectWithoutThemeInput | LandingPageCreateOrConnectWithoutThemeInput[]
-    upsert?: LandingPageUpsertWithWhereUniqueWithoutThemeInput | LandingPageUpsertWithWhereUniqueWithoutThemeInput[]
-    createMany?: LandingPageCreateManyThemeInputEnvelope
-    set?: LandingPageWhereUniqueInput | LandingPageWhereUniqueInput[]
-    disconnect?: LandingPageWhereUniqueInput | LandingPageWhereUniqueInput[]
-    delete?: LandingPageWhereUniqueInput | LandingPageWhereUniqueInput[]
-    connect?: LandingPageWhereUniqueInput | LandingPageWhereUniqueInput[]
-    update?: LandingPageUpdateWithWhereUniqueWithoutThemeInput | LandingPageUpdateWithWhereUniqueWithoutThemeInput[]
-    updateMany?: LandingPageUpdateManyWithWhereWithoutThemeInput | LandingPageUpdateManyWithWhereWithoutThemeInput[]
-    deleteMany?: LandingPageScalarWhereInput | LandingPageScalarWhereInput[]
   }
 
   export type EstablishmentUpdateOneWithoutThemesNestedInput = {
@@ -142592,20 +139570,6 @@ export namespace Prisma {
     update?: EstablishmentUpdateWithWhereUniqueWithoutActiveThemeInput | EstablishmentUpdateWithWhereUniqueWithoutActiveThemeInput[]
     updateMany?: EstablishmentUpdateManyWithWhereWithoutActiveThemeInput | EstablishmentUpdateManyWithWhereWithoutActiveThemeInput[]
     deleteMany?: EstablishmentScalarWhereInput | EstablishmentScalarWhereInput[]
-  }
-
-  export type LandingPageUncheckedUpdateManyWithoutThemeNestedInput = {
-    create?: XOR<LandingPageCreateWithoutThemeInput, LandingPageUncheckedCreateWithoutThemeInput> | LandingPageCreateWithoutThemeInput[] | LandingPageUncheckedCreateWithoutThemeInput[]
-    connectOrCreate?: LandingPageCreateOrConnectWithoutThemeInput | LandingPageCreateOrConnectWithoutThemeInput[]
-    upsert?: LandingPageUpsertWithWhereUniqueWithoutThemeInput | LandingPageUpsertWithWhereUniqueWithoutThemeInput[]
-    createMany?: LandingPageCreateManyThemeInputEnvelope
-    set?: LandingPageWhereUniqueInput | LandingPageWhereUniqueInput[]
-    disconnect?: LandingPageWhereUniqueInput | LandingPageWhereUniqueInput[]
-    delete?: LandingPageWhereUniqueInput | LandingPageWhereUniqueInput[]
-    connect?: LandingPageWhereUniqueInput | LandingPageWhereUniqueInput[]
-    update?: LandingPageUpdateWithWhereUniqueWithoutThemeInput | LandingPageUpdateWithWhereUniqueWithoutThemeInput[]
-    updateMany?: LandingPageUpdateManyWithWhereWithoutThemeInput | LandingPageUpdateManyWithWhereWithoutThemeInput[]
-    deleteMany?: LandingPageScalarWhereInput | LandingPageScalarWhereInput[]
   }
 
   export type BookingCreateNestedManyWithoutUserInput = {
@@ -144006,7 +140970,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
     promotions?: PromotionCreateNestedManyWithoutEstablishmentInput
@@ -144091,7 +141054,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
     promotions?: PromotionUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -144192,7 +141154,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
     promotions?: PromotionUpdateManyWithoutEstablishmentNestedInput
@@ -144277,7 +141238,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
     promotions?: PromotionUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -144361,7 +141321,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -144446,7 +141405,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -144547,7 +141505,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -144632,7 +141589,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -144747,7 +141703,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -144832,7 +141787,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -144962,7 +141916,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -145047,7 +142000,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -145283,7 +142235,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -145368,7 +142319,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -145553,7 +142503,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -145638,7 +142587,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -145923,7 +142871,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     promotions?: PromotionCreateNestedManyWithoutEstablishmentInput
@@ -146008,7 +142955,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     promotions?: PromotionUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -146158,7 +143104,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     promotions?: PromotionUpdateManyWithoutEstablishmentNestedInput
@@ -146243,7 +143188,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     promotions?: PromotionUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -146611,7 +143555,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -146696,7 +143639,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -146847,7 +143789,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -146932,7 +143873,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -147463,7 +144403,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
     promotions?: PromotionCreateNestedManyWithoutEstablishmentInput
@@ -147548,7 +144487,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
     promotions?: PromotionUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -147676,7 +144614,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
     promotions?: PromotionUpdateManyWithoutEstablishmentNestedInput
@@ -147761,7 +144698,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
     promotions?: PromotionUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -147985,7 +144921,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -148070,7 +145005,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -148171,7 +145105,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -148256,7 +145189,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -148376,7 +145308,6 @@ export namespace Prisma {
     name: string
     config: JsonNullValueInput | InputJsonValue
     isDefault?: boolean
-    landingPages?: LandingPageCreateNestedManyWithoutThemeInput
     establishment?: EstablishmentCreateNestedOneWithoutThemesInput
   }
 
@@ -148386,7 +145317,6 @@ export namespace Prisma {
     config: JsonNullValueInput | InputJsonValue
     isDefault?: boolean
     establishmentId?: string | null
-    landingPages?: LandingPageUncheckedCreateNestedManyWithoutThemeInput
   }
 
   export type ThemeCreateOrConnectWithoutActiveEstablishmentsInput = {
@@ -148580,7 +145510,6 @@ export namespace Prisma {
     config: JsonNullValueInput | InputJsonValue
     isDefault?: boolean
     activeEstablishments?: EstablishmentCreateNestedManyWithoutActiveThemeInput
-    landingPages?: LandingPageCreateNestedManyWithoutThemeInput
   }
 
   export type ThemeUncheckedCreateWithoutEstablishmentInput = {
@@ -148589,7 +145518,6 @@ export namespace Prisma {
     config: JsonNullValueInput | InputJsonValue
     isDefault?: boolean
     activeEstablishments?: EstablishmentUncheckedCreateNestedManyWithoutActiveThemeInput
-    landingPages?: LandingPageUncheckedCreateNestedManyWithoutThemeInput
   }
 
   export type ThemeCreateOrConnectWithoutEstablishmentInput = {
@@ -149236,29 +146164,6 @@ export namespace Prisma {
   export type SumupReaderCreateManyEstablishmentInputEnvelope = {
     data: SumupReaderCreateManyEstablishmentInput | SumupReaderCreateManyEstablishmentInput[]
     skipDuplicates?: boolean
-  }
-
-  export type LandingPageCreateWithoutEstablishmentInput = {
-    id?: string
-    shortName: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    theme?: ThemeCreateNestedOneWithoutLandingPagesInput
-    landingPageTranslations?: LandingPageTranslationCreateNestedManyWithoutLandingPageInput
-  }
-
-  export type LandingPageUncheckedCreateWithoutEstablishmentInput = {
-    id?: string
-    shortName: string
-    themeId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    landingPageTranslations?: LandingPageTranslationUncheckedCreateNestedManyWithoutLandingPageInput
-  }
-
-  export type LandingPageCreateOrConnectWithoutEstablishmentInput = {
-    where: LandingPageWhereUniqueInput
-    create: XOR<LandingPageCreateWithoutEstablishmentInput, LandingPageUncheckedCreateWithoutEstablishmentInput>
   }
 
   export type EmailLogCreateWithoutEstablishmentInput = {
@@ -150024,7 +146929,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     config?: JsonNullValueInput | InputJsonValue
     isDefault?: BoolFieldUpdateOperationsInput | boolean
-    landingPages?: LandingPageUpdateManyWithoutThemeNestedInput
     establishment?: EstablishmentUpdateOneWithoutThemesNestedInput
   }
 
@@ -150034,7 +146938,6 @@ export namespace Prisma {
     config?: JsonNullValueInput | InputJsonValue
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     establishmentId?: NullableStringFieldUpdateOperationsInput | string | null
-    landingPages?: LandingPageUncheckedUpdateManyWithoutThemeNestedInput
   }
 
   export type ImageUpsertWithoutLogoUsedInBrandsInput = {
@@ -150797,35 +147700,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"SumupReader"> | Date | string
   }
 
-  export type LandingPageUpsertWithoutEstablishmentInput = {
-    update: XOR<LandingPageUpdateWithoutEstablishmentInput, LandingPageUncheckedUpdateWithoutEstablishmentInput>
-    create: XOR<LandingPageCreateWithoutEstablishmentInput, LandingPageUncheckedCreateWithoutEstablishmentInput>
-    where?: LandingPageWhereInput
-  }
-
-  export type LandingPageUpdateToOneWithWhereWithoutEstablishmentInput = {
-    where?: LandingPageWhereInput
-    data: XOR<LandingPageUpdateWithoutEstablishmentInput, LandingPageUncheckedUpdateWithoutEstablishmentInput>
-  }
-
-  export type LandingPageUpdateWithoutEstablishmentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    shortName?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    theme?: ThemeUpdateOneWithoutLandingPagesNestedInput
-    landingPageTranslations?: LandingPageTranslationUpdateManyWithoutLandingPageNestedInput
-  }
-
-  export type LandingPageUncheckedUpdateWithoutEstablishmentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    shortName?: StringFieldUpdateOperationsInput | string
-    themeId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    landingPageTranslations?: LandingPageTranslationUncheckedUpdateManyWithoutLandingPageNestedInput
-  }
-
   export type EmailLogUpsertWithWhereUniqueWithoutEstablishmentInput = {
     where: EmailLogWhereUniqueInput
     update: XOR<EmailLogUpdateWithoutEstablishmentInput, EmailLogUncheckedUpdateWithoutEstablishmentInput>
@@ -151382,7 +148256,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -151467,7 +148340,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -151568,7 +148440,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -151653,7 +148524,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -151779,7 +148649,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -151864,7 +148733,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -152012,7 +148880,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -152097,7 +148964,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -152182,7 +149048,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -152267,7 +149132,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -152409,7 +149273,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -152494,7 +149357,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -152626,7 +149488,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -152711,7 +149572,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -152812,7 +149672,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -152897,7 +149756,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -152982,7 +149840,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -153067,7 +149924,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -153162,7 +150018,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -153247,7 +150102,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -153342,7 +150196,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -153427,7 +150280,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -153806,7 +150658,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -153891,7 +150742,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -154099,7 +150949,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -154184,7 +151033,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -154285,7 +151133,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -154370,7 +151217,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -154455,7 +151301,6 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -154540,7 +151385,6 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -154641,7 +151485,6 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -154726,7 +151569,6 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -154811,7 +151653,6 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -154896,7 +151737,6 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -154997,7 +151837,6 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -155082,7 +151921,6 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -155187,7 +152025,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -155272,7 +152109,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -155800,7 +152636,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -155885,7 +152720,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -156765,7 +153599,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -156850,7 +153683,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -156989,7 +153821,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -157074,7 +153905,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -158359,7 +155189,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -158444,7 +155273,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -158601,7 +155429,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -158686,7 +155513,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -159648,523 +156474,6 @@ export namespace Prisma {
     rewardItemRules?: BuyXGetYRuleUncheckedUpdateManyWithoutRewardItemNestedInput
   }
 
-  export type EstablishmentCreateWithoutLandingPageInput = {
-    id?: string
-    name: string
-    slug: string
-    type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
-    email: string
-    countryCode: string
-    phoneNumber: string
-    address?: string | null
-    city?: string | null
-    state?: string | null
-    zipCode?: string | null
-    country?: string | null
-    billingName: string
-    billingTaxId: string
-    billingAddress?: string | null
-    billingCity?: string | null
-    billingState?: string | null
-    billingZipCode?: string | null
-    billingCountry?: string | null
-    stripeCustomerId: string
-    instagramUrl?: string | null
-    tiktokUrl?: string | null
-    facebookUrl?: string | null
-    googleReviewUrl?: string | null
-    tripAdvisorUrl?: string | null
-    websiteUrl?: string | null
-    myPageModule?: boolean
-    menusModule?: boolean
-    callStaffModule?: boolean
-    takeAwayModule?: boolean
-    reservationsModule?: boolean
-    primaryLanguage?: $Enums.EstablishmentLanguage
-    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
-    currency?: $Enums.Currency
-    timezone?: string
-    wifiSsid?: string | null
-    wifiPassword?: string | null
-    googleAnalyticsId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
-    metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
-    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
-    owner: UserCreateNestedOneWithoutEstablishmentsInput
-    activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
-    logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
-    bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
-    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
-    images?: ImageCreateNestedManyWithoutEstablishmentInput
-    themes?: ThemeCreateNestedManyWithoutEstablishmentInput
-    employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
-    serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
-    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
-    menus?: MenuCreateNestedManyWithoutEstablishmentInput
-    Item?: ItemCreateNestedManyWithoutEstablishmentInput
-    addons?: AddonCreateNestedManyWithoutEstablishmentInput
-    variantOptions?: VariantOptionCreateNestedManyWithoutEstablishmentInput
-    bookings?: BookingCreateNestedManyWithoutEstablishmentInput
-    bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
-    establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
-    establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
-    integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
-    subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
-    invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
-    devices?: DeviceCreateNestedManyWithoutEstablishmentInput
-    vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
-    sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
-    auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
-    discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
-    promotions?: PromotionCreateNestedManyWithoutEstablishmentInput
-    suppliers?: SupplierCreateNestedManyWithoutEstablishmentInput
-    stockCategories?: StockCategoryCreateNestedManyWithoutEstablishmentInput
-    stockItems?: StockItemCreateNestedManyWithoutEstablishmentInput
-    stockEntries?: StockEntryCreateNestedManyWithoutEstablishmentInput
-    stockExits?: StockExitCreateNestedManyWithoutEstablishmentInput
-    stockMovements?: StockMovementCreateNestedManyWithoutEstablishmentInput
-    stockAlerts?: StockAlertCreateNestedManyWithoutEstablishmentInput
-    stockInventoryCounts?: StockInventoryCountCreateNestedManyWithoutEstablishmentInput
-    stockWarehouses?: StockWarehouseCreateNestedManyWithoutEstablishmentInput
-  }
-
-  export type EstablishmentUncheckedCreateWithoutLandingPageInput = {
-    id?: string
-    name: string
-    slug: string
-    type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
-    email: string
-    countryCode: string
-    phoneNumber: string
-    address?: string | null
-    city?: string | null
-    state?: string | null
-    zipCode?: string | null
-    country?: string | null
-    billingName: string
-    billingTaxId: string
-    billingAddress?: string | null
-    billingCity?: string | null
-    billingState?: string | null
-    billingZipCode?: string | null
-    billingCountry?: string | null
-    stripeCustomerId: string
-    instagramUrl?: string | null
-    tiktokUrl?: string | null
-    facebookUrl?: string | null
-    googleReviewUrl?: string | null
-    tripAdvisorUrl?: string | null
-    websiteUrl?: string | null
-    myPageModule?: boolean
-    menusModule?: boolean
-    callStaffModule?: boolean
-    takeAwayModule?: boolean
-    reservationsModule?: boolean
-    primaryLanguage?: $Enums.EstablishmentLanguage
-    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
-    currency?: $Enums.Currency
-    timezone?: string
-    wifiSsid?: string | null
-    wifiPassword?: string | null
-    googleAnalyticsId?: string | null
-    logoImageId?: string | null
-    bannerImageId?: string | null
-    activeThemeId?: string | null
-    scheduleId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ownerId: string
-    metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
-    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
-    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
-    images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
-    themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
-    employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
-    serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
-    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
-    menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
-    Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
-    addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
-    variantOptions?: VariantOptionUncheckedCreateNestedManyWithoutEstablishmentInput
-    bookings?: BookingUncheckedCreateNestedManyWithoutEstablishmentInput
-    bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
-    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
-    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
-    integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
-    subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
-    invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
-    devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
-    vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
-    sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
-    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
-    discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
-    promotions?: PromotionUncheckedCreateNestedManyWithoutEstablishmentInput
-    suppliers?: SupplierUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockCategories?: StockCategoryUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockItems?: StockItemUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockEntries?: StockEntryUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockExits?: StockExitUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockMovements?: StockMovementUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockAlerts?: StockAlertUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockInventoryCounts?: StockInventoryCountUncheckedCreateNestedManyWithoutEstablishmentInput
-    stockWarehouses?: StockWarehouseUncheckedCreateNestedManyWithoutEstablishmentInput
-  }
-
-  export type EstablishmentCreateOrConnectWithoutLandingPageInput = {
-    where: EstablishmentWhereUniqueInput
-    create: XOR<EstablishmentCreateWithoutLandingPageInput, EstablishmentUncheckedCreateWithoutLandingPageInput>
-  }
-
-  export type ThemeCreateWithoutLandingPagesInput = {
-    id?: string
-    name: string
-    config: JsonNullValueInput | InputJsonValue
-    isDefault?: boolean
-    activeEstablishments?: EstablishmentCreateNestedManyWithoutActiveThemeInput
-    establishment?: EstablishmentCreateNestedOneWithoutThemesInput
-  }
-
-  export type ThemeUncheckedCreateWithoutLandingPagesInput = {
-    id?: string
-    name: string
-    config: JsonNullValueInput | InputJsonValue
-    isDefault?: boolean
-    establishmentId?: string | null
-    activeEstablishments?: EstablishmentUncheckedCreateNestedManyWithoutActiveThemeInput
-  }
-
-  export type ThemeCreateOrConnectWithoutLandingPagesInput = {
-    where: ThemeWhereUniqueInput
-    create: XOR<ThemeCreateWithoutLandingPagesInput, ThemeUncheckedCreateWithoutLandingPagesInput>
-  }
-
-  export type LandingPageTranslationCreateWithoutLandingPageInput = {
-    id?: string
-    locale: string
-    title: string
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type LandingPageTranslationUncheckedCreateWithoutLandingPageInput = {
-    id?: string
-    locale: string
-    title: string
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type LandingPageTranslationCreateOrConnectWithoutLandingPageInput = {
-    where: LandingPageTranslationWhereUniqueInput
-    create: XOR<LandingPageTranslationCreateWithoutLandingPageInput, LandingPageTranslationUncheckedCreateWithoutLandingPageInput>
-  }
-
-  export type LandingPageTranslationCreateManyLandingPageInputEnvelope = {
-    data: LandingPageTranslationCreateManyLandingPageInput | LandingPageTranslationCreateManyLandingPageInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type EstablishmentUpsertWithoutLandingPageInput = {
-    update: XOR<EstablishmentUpdateWithoutLandingPageInput, EstablishmentUncheckedUpdateWithoutLandingPageInput>
-    create: XOR<EstablishmentCreateWithoutLandingPageInput, EstablishmentUncheckedCreateWithoutLandingPageInput>
-    where?: EstablishmentWhereInput
-  }
-
-  export type EstablishmentUpdateToOneWithWhereWithoutLandingPageInput = {
-    where?: EstablishmentWhereInput
-    data: XOR<EstablishmentUpdateWithoutLandingPageInput, EstablishmentUncheckedUpdateWithoutLandingPageInput>
-  }
-
-  export type EstablishmentUpdateWithoutLandingPageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
-    email?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
-    phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    billingName?: StringFieldUpdateOperationsInput | string
-    billingTaxId?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
-    billingState?: NullableStringFieldUpdateOperationsInput | string | null
-    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeCustomerId?: StringFieldUpdateOperationsInput | string
-    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    myPageModule?: BoolFieldUpdateOperationsInput | boolean
-    menusModule?: BoolFieldUpdateOperationsInput | boolean
-    callStaffModule?: BoolFieldUpdateOperationsInput | boolean
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
-    reservationsModule?: BoolFieldUpdateOperationsInput | boolean
-    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
-    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
-    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-    timezone?: StringFieldUpdateOperationsInput | string
-    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
-    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
-    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
-    metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
-    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
-    owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
-    activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
-    logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
-    bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
-    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
-    images?: ImageUpdateManyWithoutEstablishmentNestedInput
-    themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
-    employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
-    serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
-    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
-    menus?: MenuUpdateManyWithoutEstablishmentNestedInput
-    Item?: ItemUpdateManyWithoutEstablishmentNestedInput
-    addons?: AddonUpdateManyWithoutEstablishmentNestedInput
-    variantOptions?: VariantOptionUpdateManyWithoutEstablishmentNestedInput
-    bookings?: BookingUpdateManyWithoutEstablishmentNestedInput
-    bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
-    establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
-    establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
-    integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
-    subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
-    invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
-    devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
-    vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
-    sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
-    auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
-    discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
-    promotions?: PromotionUpdateManyWithoutEstablishmentNestedInput
-    suppliers?: SupplierUpdateManyWithoutEstablishmentNestedInput
-    stockCategories?: StockCategoryUpdateManyWithoutEstablishmentNestedInput
-    stockItems?: StockItemUpdateManyWithoutEstablishmentNestedInput
-    stockEntries?: StockEntryUpdateManyWithoutEstablishmentNestedInput
-    stockExits?: StockExitUpdateManyWithoutEstablishmentNestedInput
-    stockMovements?: StockMovementUpdateManyWithoutEstablishmentNestedInput
-    stockAlerts?: StockAlertUpdateManyWithoutEstablishmentNestedInput
-    stockInventoryCounts?: StockInventoryCountUpdateManyWithoutEstablishmentNestedInput
-    stockWarehouses?: StockWarehouseUpdateManyWithoutEstablishmentNestedInput
-  }
-
-  export type EstablishmentUncheckedUpdateWithoutLandingPageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
-    email?: StringFieldUpdateOperationsInput | string
-    countryCode?: StringFieldUpdateOperationsInput | string
-    phoneNumber?: StringFieldUpdateOperationsInput | string
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    billingName?: StringFieldUpdateOperationsInput | string
-    billingTaxId?: StringFieldUpdateOperationsInput | string
-    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
-    billingState?: NullableStringFieldUpdateOperationsInput | string | null
-    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
-    stripeCustomerId?: StringFieldUpdateOperationsInput | string
-    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    myPageModule?: BoolFieldUpdateOperationsInput | boolean
-    menusModule?: BoolFieldUpdateOperationsInput | boolean
-    callStaffModule?: BoolFieldUpdateOperationsInput | boolean
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
-    reservationsModule?: BoolFieldUpdateOperationsInput | boolean
-    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
-    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
-    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
-    timezone?: StringFieldUpdateOperationsInput | string
-    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
-    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
-    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
-    logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
-    bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
-    activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
-    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ownerId?: StringFieldUpdateOperationsInput | string
-    metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
-    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
-    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
-    images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
-    themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
-    employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
-    serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
-    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
-    menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
-    Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
-    addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
-    variantOptions?: VariantOptionUncheckedUpdateManyWithoutEstablishmentNestedInput
-    bookings?: BookingUncheckedUpdateManyWithoutEstablishmentNestedInput
-    bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
-    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
-    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
-    integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
-    subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
-    invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
-    devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
-    vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
-    sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
-    auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
-    discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
-    promotions?: PromotionUncheckedUpdateManyWithoutEstablishmentNestedInput
-    suppliers?: SupplierUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockCategories?: StockCategoryUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockItems?: StockItemUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockEntries?: StockEntryUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockExits?: StockExitUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockMovements?: StockMovementUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockAlerts?: StockAlertUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockInventoryCounts?: StockInventoryCountUncheckedUpdateManyWithoutEstablishmentNestedInput
-    stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
-  }
-
-  export type ThemeUpsertWithoutLandingPagesInput = {
-    update: XOR<ThemeUpdateWithoutLandingPagesInput, ThemeUncheckedUpdateWithoutLandingPagesInput>
-    create: XOR<ThemeCreateWithoutLandingPagesInput, ThemeUncheckedCreateWithoutLandingPagesInput>
-    where?: ThemeWhereInput
-  }
-
-  export type ThemeUpdateToOneWithWhereWithoutLandingPagesInput = {
-    where?: ThemeWhereInput
-    data: XOR<ThemeUpdateWithoutLandingPagesInput, ThemeUncheckedUpdateWithoutLandingPagesInput>
-  }
-
-  export type ThemeUpdateWithoutLandingPagesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    config?: JsonNullValueInput | InputJsonValue
-    isDefault?: BoolFieldUpdateOperationsInput | boolean
-    activeEstablishments?: EstablishmentUpdateManyWithoutActiveThemeNestedInput
-    establishment?: EstablishmentUpdateOneWithoutThemesNestedInput
-  }
-
-  export type ThemeUncheckedUpdateWithoutLandingPagesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    config?: JsonNullValueInput | InputJsonValue
-    isDefault?: BoolFieldUpdateOperationsInput | boolean
-    establishmentId?: NullableStringFieldUpdateOperationsInput | string | null
-    activeEstablishments?: EstablishmentUncheckedUpdateManyWithoutActiveThemeNestedInput
-  }
-
-  export type LandingPageTranslationUpsertWithWhereUniqueWithoutLandingPageInput = {
-    where: LandingPageTranslationWhereUniqueInput
-    update: XOR<LandingPageTranslationUpdateWithoutLandingPageInput, LandingPageTranslationUncheckedUpdateWithoutLandingPageInput>
-    create: XOR<LandingPageTranslationCreateWithoutLandingPageInput, LandingPageTranslationUncheckedCreateWithoutLandingPageInput>
-  }
-
-  export type LandingPageTranslationUpdateWithWhereUniqueWithoutLandingPageInput = {
-    where: LandingPageTranslationWhereUniqueInput
-    data: XOR<LandingPageTranslationUpdateWithoutLandingPageInput, LandingPageTranslationUncheckedUpdateWithoutLandingPageInput>
-  }
-
-  export type LandingPageTranslationUpdateManyWithWhereWithoutLandingPageInput = {
-    where: LandingPageTranslationScalarWhereInput
-    data: XOR<LandingPageTranslationUpdateManyMutationInput, LandingPageTranslationUncheckedUpdateManyWithoutLandingPageInput>
-  }
-
-  export type LandingPageTranslationScalarWhereInput = {
-    AND?: LandingPageTranslationScalarWhereInput | LandingPageTranslationScalarWhereInput[]
-    OR?: LandingPageTranslationScalarWhereInput[]
-    NOT?: LandingPageTranslationScalarWhereInput | LandingPageTranslationScalarWhereInput[]
-    id?: StringFilter<"LandingPageTranslation"> | string
-    locale?: StringFilter<"LandingPageTranslation"> | string
-    title?: StringFilter<"LandingPageTranslation"> | string
-    description?: StringFilter<"LandingPageTranslation"> | string
-    landingPageId?: StringFilter<"LandingPageTranslation"> | string
-    createdAt?: DateTimeFilter<"LandingPageTranslation"> | Date | string
-    updatedAt?: DateTimeFilter<"LandingPageTranslation"> | Date | string
-  }
-
-  export type LandingPageCreateWithoutLandingPageTranslationsInput = {
-    id?: string
-    shortName: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    establishment: EstablishmentCreateNestedOneWithoutLandingPageInput
-    theme?: ThemeCreateNestedOneWithoutLandingPagesInput
-  }
-
-  export type LandingPageUncheckedCreateWithoutLandingPageTranslationsInput = {
-    id?: string
-    shortName: string
-    themeId?: string | null
-    establishmentId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type LandingPageCreateOrConnectWithoutLandingPageTranslationsInput = {
-    where: LandingPageWhereUniqueInput
-    create: XOR<LandingPageCreateWithoutLandingPageTranslationsInput, LandingPageUncheckedCreateWithoutLandingPageTranslationsInput>
-  }
-
-  export type LandingPageUpsertWithoutLandingPageTranslationsInput = {
-    update: XOR<LandingPageUpdateWithoutLandingPageTranslationsInput, LandingPageUncheckedUpdateWithoutLandingPageTranslationsInput>
-    create: XOR<LandingPageCreateWithoutLandingPageTranslationsInput, LandingPageUncheckedCreateWithoutLandingPageTranslationsInput>
-    where?: LandingPageWhereInput
-  }
-
-  export type LandingPageUpdateToOneWithWhereWithoutLandingPageTranslationsInput = {
-    where?: LandingPageWhereInput
-    data: XOR<LandingPageUpdateWithoutLandingPageTranslationsInput, LandingPageUncheckedUpdateWithoutLandingPageTranslationsInput>
-  }
-
-  export type LandingPageUpdateWithoutLandingPageTranslationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    shortName?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishment?: EstablishmentUpdateOneRequiredWithoutLandingPageNestedInput
-    theme?: ThemeUpdateOneWithoutLandingPagesNestedInput
-  }
-
-  export type LandingPageUncheckedUpdateWithoutLandingPageTranslationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    shortName?: StringFieldUpdateOperationsInput | string
-    themeId?: NullableStringFieldUpdateOperationsInput | string | null
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type EstablishmentCreateWithoutMenusInput = {
     id?: string
     name: string
@@ -160234,7 +156543,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -160319,7 +156627,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -160509,7 +156816,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -160594,7 +156900,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -161695,7 +158000,6 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -161780,7 +158084,6 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -161911,7 +158214,6 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -161996,7 +158298,6 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -162175,7 +158476,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -162260,7 +158560,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -162412,7 +158711,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -162497,7 +158795,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -162667,7 +158964,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -162752,7 +159048,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -162990,7 +159285,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -163075,7 +159369,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -163454,7 +159747,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -163539,7 +159831,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -163766,7 +160057,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -163851,7 +160141,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -164241,7 +160530,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -164326,7 +160614,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -164513,7 +160800,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -164598,7 +160884,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -164729,7 +161014,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -164814,7 +161098,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -165064,7 +161347,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -165149,7 +161431,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -165301,7 +161582,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -165386,7 +161666,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -165848,7 +162127,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -165933,7 +162211,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -166926,7 +163203,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -167011,7 +163287,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -167251,7 +163526,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -167336,7 +163610,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -167876,7 +164149,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -167961,7 +164233,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -168138,7 +164409,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -168223,7 +164493,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -168684,7 +164953,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -168769,7 +165037,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -169043,7 +165310,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -169128,7 +165394,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -169404,7 +165669,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -169489,7 +165753,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -169671,7 +165934,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -169756,7 +166018,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -169928,7 +166189,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -170013,7 +166273,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -170148,7 +166407,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -170233,7 +166491,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -170569,7 +166826,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -170654,7 +166910,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -170780,7 +167035,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -170865,7 +167119,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -171371,7 +167624,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -171456,7 +167708,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -171557,7 +167808,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -171642,7 +167892,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -171817,7 +168066,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -171902,7 +168150,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -171925,34 +168172,6 @@ export namespace Prisma {
 
   export type EstablishmentCreateManyActiveThemeInputEnvelope = {
     data: EstablishmentCreateManyActiveThemeInput | EstablishmentCreateManyActiveThemeInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type LandingPageCreateWithoutThemeInput = {
-    id?: string
-    shortName: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    establishment: EstablishmentCreateNestedOneWithoutLandingPageInput
-    landingPageTranslations?: LandingPageTranslationCreateNestedManyWithoutLandingPageInput
-  }
-
-  export type LandingPageUncheckedCreateWithoutThemeInput = {
-    id?: string
-    shortName: string
-    establishmentId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    landingPageTranslations?: LandingPageTranslationUncheckedCreateNestedManyWithoutLandingPageInput
-  }
-
-  export type LandingPageCreateOrConnectWithoutThemeInput = {
-    where: LandingPageWhereUniqueInput
-    create: XOR<LandingPageCreateWithoutThemeInput, LandingPageUncheckedCreateWithoutThemeInput>
-  }
-
-  export type LandingPageCreateManyThemeInputEnvelope = {
-    data: LandingPageCreateManyThemeInput | LandingPageCreateManyThemeInput[]
     skipDuplicates?: boolean
   }
 
@@ -172025,7 +168244,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -172110,7 +168328,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -172145,34 +168362,6 @@ export namespace Prisma {
   export type EstablishmentUpdateManyWithWhereWithoutActiveThemeInput = {
     where: EstablishmentScalarWhereInput
     data: XOR<EstablishmentUpdateManyMutationInput, EstablishmentUncheckedUpdateManyWithoutActiveThemeInput>
-  }
-
-  export type LandingPageUpsertWithWhereUniqueWithoutThemeInput = {
-    where: LandingPageWhereUniqueInput
-    update: XOR<LandingPageUpdateWithoutThemeInput, LandingPageUncheckedUpdateWithoutThemeInput>
-    create: XOR<LandingPageCreateWithoutThemeInput, LandingPageUncheckedCreateWithoutThemeInput>
-  }
-
-  export type LandingPageUpdateWithWhereUniqueWithoutThemeInput = {
-    where: LandingPageWhereUniqueInput
-    data: XOR<LandingPageUpdateWithoutThemeInput, LandingPageUncheckedUpdateWithoutThemeInput>
-  }
-
-  export type LandingPageUpdateManyWithWhereWithoutThemeInput = {
-    where: LandingPageScalarWhereInput
-    data: XOR<LandingPageUpdateManyMutationInput, LandingPageUncheckedUpdateManyWithoutThemeInput>
-  }
-
-  export type LandingPageScalarWhereInput = {
-    AND?: LandingPageScalarWhereInput | LandingPageScalarWhereInput[]
-    OR?: LandingPageScalarWhereInput[]
-    NOT?: LandingPageScalarWhereInput | LandingPageScalarWhereInput[]
-    id?: StringFilter<"LandingPage"> | string
-    shortName?: StringFilter<"LandingPage"> | string
-    themeId?: StringNullableFilter<"LandingPage"> | string | null
-    establishmentId?: StringFilter<"LandingPage"> | string
-    createdAt?: DateTimeFilter<"LandingPage"> | Date | string
-    updatedAt?: DateTimeFilter<"LandingPage"> | Date | string
   }
 
   export type EstablishmentUpsertWithoutThemesInput = {
@@ -172255,7 +168444,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -172340,7 +168528,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -172479,7 +168666,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -172564,7 +168750,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -172747,7 +168932,6 @@ export namespace Prisma {
     devices?: DeviceCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
@@ -172832,7 +169016,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
     vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
     sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
-    landingPage?: LandingPageUncheckedCreateNestedOneWithoutEstablishmentInput
     emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
     discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -172975,7 +169158,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -173060,7 +169242,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -173960,7 +170141,6 @@ export namespace Prisma {
     config?: JsonNullValueInput | InputJsonValue
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     activeEstablishments?: EstablishmentUpdateManyWithoutActiveThemeNestedInput
-    landingPages?: LandingPageUpdateManyWithoutThemeNestedInput
   }
 
   export type ThemeUncheckedUpdateWithoutEstablishmentInput = {
@@ -173969,7 +170149,6 @@ export namespace Prisma {
     config?: JsonNullValueInput | InputJsonValue
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     activeEstablishments?: EstablishmentUncheckedUpdateManyWithoutActiveThemeNestedInput
-    landingPages?: LandingPageUncheckedUpdateManyWithoutThemeNestedInput
   }
 
   export type ThemeUncheckedUpdateManyWithoutEstablishmentInput = {
@@ -175423,7 +171602,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -175508,7 +171686,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -175642,7 +171819,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -175727,7 +171903,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -176770,42 +172945,6 @@ export namespace Prisma {
   export type ItemVariantAllergenUncheckedUpdateManyWithoutAllergenInput = {
     id?: StringFieldUpdateOperationsInput | string
     itemVariantId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type LandingPageTranslationCreateManyLandingPageInput = {
-    id?: string
-    locale: string
-    title: string
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type LandingPageTranslationUpdateWithoutLandingPageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    locale?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LandingPageTranslationUncheckedUpdateWithoutLandingPageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    locale?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type LandingPageTranslationUncheckedUpdateManyWithoutLandingPageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    locale?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MenuCategoryCreateManyMenuInput = {
@@ -179079,14 +175218,6 @@ export namespace Prisma {
     ownerId: string
   }
 
-  export type LandingPageCreateManyThemeInput = {
-    id?: string
-    shortName: string
-    establishmentId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type EstablishmentUpdateWithoutActiveThemeInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -179156,7 +175287,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -179241,7 +175371,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -179304,32 +175433,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type LandingPageUpdateWithoutThemeInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    shortName?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishment?: EstablishmentUpdateOneRequiredWithoutLandingPageNestedInput
-    landingPageTranslations?: LandingPageTranslationUpdateManyWithoutLandingPageNestedInput
-  }
-
-  export type LandingPageUncheckedUpdateWithoutThemeInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    shortName?: StringFieldUpdateOperationsInput | string
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    landingPageTranslations?: LandingPageTranslationUncheckedUpdateManyWithoutLandingPageNestedInput
-  }
-
-  export type LandingPageUncheckedUpdateManyWithoutThemeInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    shortName?: StringFieldUpdateOperationsInput | string
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BookingCreateManyUserInput = {
@@ -179536,7 +175639,6 @@ export namespace Prisma {
     devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
@@ -179621,7 +175723,6 @@ export namespace Prisma {
     devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
     vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
     sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
-    landingPage?: LandingPageUncheckedUpdateOneWithoutEstablishmentNestedInput
     emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
     discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
