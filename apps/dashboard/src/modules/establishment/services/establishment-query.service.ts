@@ -22,7 +22,7 @@ export class EstablishmentQueryService {
     private async getEstablishmentCore(id: string) {
         const cacheKey = dashboardEstKey(id);
 
-        const establishment = await this.cache.wrap(cacheKey, 3600, async () => {
+        const establishment = await this.cache.wrap(cacheKey, 300, async () => {
             return this.prisma.establishment.findUnique({
                 where: { id },
                 include: {
