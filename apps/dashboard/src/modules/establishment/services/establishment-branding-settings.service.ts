@@ -113,16 +113,19 @@ export class EstablishmentBrandingSettingsService {
             switch (dto.section) {
                 case 'branding':
                     result = await this.updateBranding(establishment.id, dto.branding);
-                    this.cacheService.clearCoreCache(establishment.slug);
+                    await this.cacheService.clearCoreCache(establishment.slug);
+                    await this.cacheService.clearDashboardEstCache(establishment.id);
                     break;
 
                 case 'socials':
                     result = await this.updateSocials(establishment.id, dto.socials);
-                    this.cacheService.clearCoreCache(establishment.slug);
+                    await this.cacheService.clearCoreCache(establishment.slug);
+                    await this.cacheService.clearDashboardEstCache(establishment.id);
                     break;
                 case 'metadata':
                     result = await this.updateMetadata(establishment.id, dto.metadata);
-                    this.cacheService.clearCoreCache(establishment.slug);
+                    await this.cacheService.clearCoreCache(establishment.slug);
+                    await this.cacheService.clearDashboardEstCache(establishment.id);
                     break;
                 default:
                     throw new RpcException({

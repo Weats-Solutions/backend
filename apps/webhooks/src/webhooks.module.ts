@@ -17,6 +17,7 @@ import { RateLimitGuard } from '@weats/common';
 import { APP_GUARD } from '@nestjs/core';
 
 import { WebhooksController } from './webhooks.controller';
+import { CacheModule } from '@weats/cache';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { WebhooksController } from './webhooks.controller';
     StripeModule,
     DiscordModule,
     RateLimitModule,
+    CacheModule,
   ],
   controllers: [WebhooksController],
   providers: [

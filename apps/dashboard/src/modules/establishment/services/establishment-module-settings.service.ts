@@ -42,6 +42,7 @@ export class EstablishmentModuleSettingsService {
             })
 
             await this.cacheService.clearCoreCache(establishment.slug)
+            await this.cacheService.clearDashboardEstCache(id)
 
             return {
                 myPageModule: establishment.myPageModule,

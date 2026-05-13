@@ -12,12 +12,14 @@ import { CustomRequest } from '@weats/types';
 import { ERRORS } from '@weats/common';
 import { CorePrismaService } from '@weats/database';
 import { BadRequestException } from '@nestjs/common';
+import { CacheService, dashboardEstKey } from '@weats/cache';
 
 @Injectable()
 export class EstablishmentStaffGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
     private corePrismaService: CorePrismaService,
+    private cache: CacheService,
   ) { }
   private readonly logger = new Logger(EstablishmentStaffGuard.name);
 
@@ -33,19 +35,21 @@ export class EstablishmentStaffGuard implements CanActivate {
       });
     }
 
-    const establishment = await this.corePrismaService.establishment.findUnique(
-      {
+    const cacheKey = dashboardEstKey(establishmentId);
+
+    const establishment = await this.cache.wrap(cacheKey, 3600, async () => {
+      return this.corePrismaService.establishment.findUnique({
         where: { id: establishmentId },
         include: {
-          owner: true,
-          subscription: {
-            select: {
-              status: true,
-            },
+          logoImage: { select: { id: true, url: true } },
+          bannerImage: { select: { id: true, url: true } },
+          subscription: true,
+          schedule: {
+            include: { days: { include: { intervals: true } } },
           },
         },
-      },
-    );
+      });
+    });
     if (
       !establishment ||
       !establishment.primaryLanguage ||

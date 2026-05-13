@@ -13,6 +13,7 @@ import { TranslateModule } from './modules/translate/translate.module';
 import { QueuesModule } from '@weats/bull';
 import { RateLimitModule } from '@weats/rate-limit';
 import { RateLimitGuard } from '@weats/common';
+import { CacheModule } from '@weats/cache';
 
 
 @Module({
@@ -30,6 +31,7 @@ import { RateLimitGuard } from '@weats/common';
     TranslateModule,
     QueuesModule,
     RateLimitModule,
+    CacheModule,
   ],
   controllers: [AppController],
   providers: [

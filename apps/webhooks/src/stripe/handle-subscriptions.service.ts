@@ -7,6 +7,7 @@ import { StripeService } from '@weats/integrations';
 import { CorePrismaService } from '@weats/database';
 import { SendEmailDto, EmailTemplate, ACCEPTED_LANGUAGES } from '@weats/types';
 import { EmailProducer } from '@weats/bull/producers/email.producer';
+import { CacheService } from '@weats/cache';
 
 @Injectable()
 export class HandleSubscriptionsService {
@@ -18,6 +19,7 @@ export class HandleSubscriptionsService {
     private readonly prisma: CorePrismaService,
     private readonly emailProducer: EmailProducer,
     private readonly clerkService: ClerkService,
+    private readonly cacheService: CacheService,
   ) { }
 
   private async getEstablishmentAndPlan(subscription: Stripe.Subscription) {
@@ -130,6 +132,8 @@ export class HandleSubscriptionsService {
           stripeCustomerId: customerId,
         },
       });
+      
+      await this.cacheService.clearDashboardEstCache(establishment.id);
 
       if (subscription.status === 'trialing') {
         const trialStart = subscription.trial_start
@@ -206,6 +210,8 @@ export class HandleSubscriptionsService {
         where: { stripeSubscriptionId: subscription.id },
         data: subData,
       });
+
+      await this.cacheService.clearDashboardEstCache(establishment.id);
 
       const previousAttributes = event.data
         .previous_attributes as Partial<Stripe.Subscription>;
@@ -394,6 +400,8 @@ export class HandleSubscriptionsService {
         },
         data: updateData,
       });
+
+      await this.cacheService.clearDashboardEstCache(establishment.id);
 
       const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CANCELLED> = {
         to: establishment.email,

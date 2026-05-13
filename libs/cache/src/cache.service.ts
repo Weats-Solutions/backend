@@ -109,6 +109,15 @@ export class CacheService {
   }
 
   /**
+   * Limpa a cache de definições do dashboard
+   */
+  async clearDashboardEstCache(id: string) {
+    const key = `dashboard:est:${id}:core`;
+    await this.invalidate(key);
+    this.logger.debug(`[Cache] Cache Dashboard limpa para: ${id}`);
+  }
+
+  /**
    * Limpa a cache das listas de menus (todas as línguas e targets)
    */
   async clearMenuListCache(slug: string) {
