@@ -22,6 +22,9 @@ export class MenuCategoryService {
                 where: { id: menuId },
                 select: { establishment: { select: { slug: true } } },
             });
+            if (!menu) {
+                throw new NotFoundException('Menu not found');
+            }
             const categoryCount = await this.prisma.menuCategory.count({
                 where: { menuId },
             })
@@ -58,7 +61,7 @@ export class MenuCategoryService {
                 imageId: newCategory.image?.id,
                 imageUrl: newCategory.image?.url,
             };
-            this.cacheService.clearMenuListCache(menu?.establishment?.slug);
+            this.cacheService.clearMenuListCache(menu.establishment.slug);
             return response;
         } catch (error) {
             console.error('Error creating menu category:', error);

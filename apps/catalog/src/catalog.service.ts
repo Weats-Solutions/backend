@@ -58,6 +58,10 @@ export class CatalogService {
     try {
       const establishment = await this.getEstablishmentCore(slug);
 
+      if (!establishment || !establishment.myPageModule) {
+        throw new NotFoundException(ERRORS.NOT_FOUND);
+      }
+
       return {
         themeName: establishment.activeTheme?.name,
         themeConfig: establishment.activeTheme?.config,
@@ -87,6 +91,11 @@ export class CatalogService {
   async getEstablishmentSettings(slug: string) {
     try {
       const establishment = await this.getEstablishmentCore(slug);
+
+      if (!establishment || !establishment.myPageModule) {
+        throw new NotFoundException(ERRORS.NOT_FOUND);
+      }
+
 
       return {
         id: establishment.id,
@@ -133,6 +142,10 @@ export class CatalogService {
   async getMenuList(slug: string, lang: string, targetId?: string) {
     try {
       const establishment = await this.getEstablishmentCore(slug);
+
+      if (!establishment || !establishment.myPageModule || !establishment.menusModule) {
+        throw new NotFoundException(ERRORS.NOT_FOUND);
+      }
 
       // Normalizar a língua
       let currentLang = lang;
@@ -185,6 +198,10 @@ export class CatalogService {
   async getMenuContent(slug: string, menuId: string, lang: EstablishmentLanguage, targetId?: string) {
     try {
       const establishment = await this.getEstablishmentCore(slug);
+
+      if (!establishment || !establishment.myPageModule || !establishment.menusModule) {
+        throw new NotFoundException(ERRORS.NOT_FOUND);
+      }
 
       // Normalizar a língua
       let currentLang = lang;
