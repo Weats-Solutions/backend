@@ -5,7 +5,7 @@ import { EstablishmentModule } from './modules/establishment/establishment.modul
 import { UserModule } from './modules/user/user.module';
 import { PlanModule } from './modules/plan/plan.module';
 import { ImageModule } from './modules/image/image.module';
-import { LandingpageModule } from './modules/landingpage/landingpage.module';
+
 import { ConfigsModule } from '@weats/configs';
 import { ConfigModule } from '@nestjs/config';
 import { EupagoModule } from './modules/integrations/eupago/eupago.module';
@@ -30,7 +30,6 @@ import { CacheModule } from '@weats/cache';
     UserModule,
     PlanModule,
     ImageModule,
-    LandingpageModule,
     EupagoModule,
     MenuModule,
     ItemModule,

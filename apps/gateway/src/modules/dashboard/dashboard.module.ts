@@ -9,7 +9,6 @@ import { EstablishmentController } from './controllers/establishment.controller'
 import { UserController } from './controllers/user.controller';
 import { ImageController } from './controllers/image.controller';
 import { PlanController } from './controllers/plan.controller';
-import { LandingpageController } from './controllers/landingpage.controller';
 import { EupagoIntegrationController } from './controllers/integrations/eupago.controller';
 import { EncryptionModule } from '@weats/encryption';
 import { FeatureUsageModule } from '@weats/common/feature/feature-usage.module';
@@ -47,7 +46,6 @@ import { QueuesModule } from '@weats/bull';
     UserController,
     PlanController,
     ImageController,
-    LandingpageController,
 
     //Menu
     MenuSubcategoryController,
