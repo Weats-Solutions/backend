@@ -24,10 +24,12 @@ import { DatabaseModule } from '@weats/database';
   providers: [CatalogService,
     // Rate Limiting global — 200 req/min por utilizador por defeito
     // Rotas sensíveis têm políticas específicas via @RateLimit('POLICY')
+    /*
     {
       provide: APP_GUARD,
       useClass: RateLimitGuard,
-    },],
+    },*/
+  ],
 })
 
 
