@@ -80,11 +80,15 @@ export class RateLimitGuard implements CanActivate {
         //   - CF-Connecting-IP: injetado pelo Cloudflare com o IP original do cliente
         //   - X-Forwarded-For: injetado por qualquer proxy (1º valor = IP do cliente)
         //   - request.ip: fallback para desenvolvimento local sem proxy
-        const realIp: string =
+        const rawIp: string =
             (request.headers['cf-connecting-ip'] as string) ||
             ((request.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim()) ||
             request.ip ||
             'unknown';
+
+        //ADICIONADO PARA EVITAR PROBLEMAS COM IPv6
+        const realIp = rawIp.replace(/:/g, '_');
+        //FIM DA ADICIONADO
 
         const userIdentifier = request.user?.id
             ? `user:${request.user.id}`

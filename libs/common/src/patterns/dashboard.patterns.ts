@@ -132,16 +132,9 @@ export const DASHBOARD_PATTERNS = {
   EUPAGO_GENERATE_HOSTED_PAYMENT: 'dashboard.eupago.generate_hosted_payment',
   EUPAGO_GENERATE_MBWAY_PAYMENT: 'dashboard.eupago.generate_mbway_payment',
 
-  LANDINGPAGE_GET_BY_SLUG: 'dashboard.landingpage.get_by_slug',
-  LANDINGPAGE_GET_THEME: 'dashboard.landingpage.get_theme',
-  LANDINGPAGE_GET_MENU_CONTENT: 'dashboard.landingpage.get_menu_content',
-  LANDINGPAGE_GET_SUBCATEGORY_ITEMS: 'dashboard.landingpage.get_subcategory_items',
+  THEME_GET_ACTIVE: 'dashboard.theme.get_active',
   THEME_UPDATE: 'dashboard.theme.update',
-  //new
-  LANDINGPAGE_GET_CATALOG_THEME: 'dashboard.landingpage.get_catalog_theme',
-  LANDINGPAGE_GET_CATALOG_MENU_LIST: 'dashboard.landingpage.get_catalog_menu_list',
-  LANDINGPAGE_GET_CATALOG_MENU_CONTENT: 'dashboard.landingpage.get_catalog_menu_content',
-  LANDINGPAGE_GET_CATALOG_ESTABLISHMENT_SETTINGS: 'dashboard.landingpage.get_catalog_establishment_settings',
+  THEME_GET_BY_ID: 'dashboard.theme.get_by_id',
   THEME_GET_AVAILABLE: 'dashboard.theme.get_available',
   THEME_SET_ACTIVE: 'dashboard.theme.set_active',
 };
