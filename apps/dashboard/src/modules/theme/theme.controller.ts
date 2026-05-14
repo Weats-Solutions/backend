@@ -1,15 +1,15 @@
-import { Controller } from '@nestjs/common';
+/* import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { EstablishmentLanguage } from '@weats/database';
-import { LandingpageService } from './landingpage.service';
+//import { LandingpageService } from './landingpage.service';
 import { UpdateThemeSettingsDto } from '@weats/contracts/dashboard/dtos/theme/update-theme-settings.dto';
 import { Establishment } from '@weats/types';
 
 @Controller()
 export class ThemeController {
     constructor(
-        private readonly landingpageService: LandingpageService,
+       // private readonly landingpageService: LandingpageService,
     ) { }
 
     @MessagePattern(DASHBOARD_PATTERNS.THEME_GET_ACTIVE)
@@ -36,4 +36,4 @@ export class ThemeController {
     setActiveTheme(@Payload() payload: { establishmentId: string; themeId: string }) {
         return this.landingpageService.setActiveTheme(payload.establishmentId, payload.themeId);
     }
-}
+} */
