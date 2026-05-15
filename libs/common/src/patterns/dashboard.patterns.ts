@@ -133,8 +133,9 @@ export const DASHBOARD_PATTERNS = {
   EUPAGO_GENERATE_MBWAY_PAYMENT: 'dashboard.eupago.generate_mbway_payment',
 
   THEME_GET_ACTIVE: 'dashboard.theme.get_active',
+  THEME_CREATE: 'dashboard.theme.create',
   THEME_UPDATE: 'dashboard.theme.update',
   THEME_GET_BY_ID: 'dashboard.theme.get_by_id',
-  THEME_GET_AVAILABLE: 'dashboard.theme.get_available',
+  THEME_GET_ALL: 'dashboard.theme.get_available',
   THEME_SET_ACTIVE: 'dashboard.theme.set_active',
 };

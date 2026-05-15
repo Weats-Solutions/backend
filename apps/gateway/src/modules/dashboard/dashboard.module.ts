@@ -26,6 +26,7 @@ import { QrCodesController } from './controllers/zone/qr-codes.controller';
 import { InvoiceController } from './controllers/invoice.controller';
 import { EmailProducer } from '@weats/bull/producers/email.producer';
 import { QueuesModule } from '@weats/bull';
+import { ThemeController } from './controllers/theme.controller';
 
 @Module({
   imports: [ConfigsModule, IntegrationsModule, DatabaseModule, EncryptionModule, FeatureUsageModule, QueuesModule],
@@ -70,6 +71,9 @@ import { QueuesModule } from '@weats/bull';
 
     //Invoices
     InvoiceController,
+
+    //Theme
+    ThemeController,
 
     //Stats
     StatsController,

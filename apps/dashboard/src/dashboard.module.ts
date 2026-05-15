@@ -14,6 +14,7 @@ import { ItemModule } from './modules/item/item.module';
 import { ExpenseModule } from './modules/expense/expense.module';
 import { StatsModule } from './modules/stats/stats.module';
 import { ZoneModule } from './modules/zone/zone.module';
+import { ThemeModule } from './modules/theme/theme.module';
 import { QueuesModule } from '@weats/bull';
 import { CacheModule } from '@weats/cache';
 
@@ -36,6 +37,7 @@ import { CacheModule } from '@weats/cache';
     ExpenseModule,
     StatsModule,
     ZoneModule,
+    ThemeModule,
   ],
   controllers: [DashboardController],
   providers: [DashboardService],
