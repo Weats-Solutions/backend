@@ -25,6 +25,7 @@ export class UserService {
                 type: true,
                 slug: true,
                 isOnline: true,
+                isDemo: true,
                 subscription: {
                     select: {
                         status: true,

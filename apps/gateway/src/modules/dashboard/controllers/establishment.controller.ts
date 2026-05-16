@@ -120,8 +120,9 @@ export class EstablishmentController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_BY_ID, { id });
   }
 
+  @SkipEstablishmentStaff()
+  @SkipActiveSubscription()
   @Roles()
-
   @Get(':id/access')
   getEstablishmentAccess(
     @CurrentEstablishment() establishment: Establishment,
