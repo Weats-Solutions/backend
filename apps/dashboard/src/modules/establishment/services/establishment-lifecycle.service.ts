@@ -80,6 +80,19 @@ export class EstablishmentLifeCycleService {
 
             const slug = await this.generateUniqueSlug(createEstablishmentDto.name);
 
+            const targetThemeId = 'cmnm20i4y00001sw1pk626ovy';
+
+            const themes = await this.prisma.theme.findFirst({
+                where: {
+                    OR: [
+                        { id: targetThemeId },
+                        { isDefault: true },
+                    ],
+                },
+            });
+
+            const activeThemeId = themes?.id || null;
+
             const createdEstablishment = await this.prisma.establishment.create({
                 data: {
                     name: createEstablishmentDto.name,
@@ -101,6 +114,7 @@ export class EstablishmentLifeCycleService {
                     availableLanguages: [createEstablishmentDto.primaryLanguage],
                     currency: createEstablishmentDto.currency,
                     timezone: createEstablishmentDto.timezone,
+                    activeThemeId,
                 },
             });
 

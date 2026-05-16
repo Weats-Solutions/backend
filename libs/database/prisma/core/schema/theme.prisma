@@ -1,5 +1,5 @@
 model Theme {
-  id                   String          @id @default(cuid())
+  id                   String          @id @default(ulid())
   name                 String
   config               Json
   isDefault            Boolean         @default(false)

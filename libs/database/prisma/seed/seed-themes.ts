@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@weats/database';
 import { PrismaPg } from '@prisma/adapter-pg';
 
 const connectionString = process.env.CORE_DB_URL;
