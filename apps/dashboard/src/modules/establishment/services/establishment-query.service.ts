@@ -58,6 +58,7 @@ export class EstablishmentQueryService {
             type: establishment.type,
             slug: establishment.slug,
             isOnline: establishment.isOnline,
+            isDemo: establishment.isDemo,
             address: establishment.address,
             city: establishment.city,
             state: establishment.state,
@@ -82,7 +83,10 @@ export class EstablishmentQueryService {
     async getEstablishmentAccess(id: string) {
         const establishment = await this.getEstablishmentCore(id);
 
-        const hasActiveSubscription = establishment.subscription?.status === 'ACTIVE' || establishment.subscription?.status === 'TRIALING';
+        const hasActiveSubscription =
+            establishment.subscription?.status === 'ACTIVE' ||
+            establishment.subscription?.status === 'TRIALING' ||
+            establishment.isDemo;
 
         return {
             hasAccess: true,
