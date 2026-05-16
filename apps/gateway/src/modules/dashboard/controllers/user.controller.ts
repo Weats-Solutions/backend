@@ -2,13 +2,10 @@ import {
     Controller,
     Get,
     Inject,
-    UseGuards,
 } from '@nestjs/common';
 import {
-    ClerkGuard,
     CurrentUser,
     CurrentEstablishment,
-    EstablishmentStaffGuard,
     DASHBOARD_SERVICE,
     SkipActiveSubscription,
     SkipEstablishmentStaff,

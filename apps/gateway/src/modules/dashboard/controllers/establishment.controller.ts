@@ -105,7 +105,7 @@ export class EstablishmentController {
   // -------------------------------------------------------------------------
 
   @Roles()
-
+  @SkipActiveSubscription()
   @Get(':id')
   getEstablishmentInfo(
     @CurrentEstablishment() establishment: Establishment,
