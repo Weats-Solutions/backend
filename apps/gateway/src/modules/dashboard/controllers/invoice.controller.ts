@@ -23,7 +23,7 @@ export class InvoiceController {
         @Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy,
     ) { }
 
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Get(':establishmentId')
     getInvoices(
         @Param('establishmentId') establishmentId: string,

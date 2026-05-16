@@ -32,14 +32,14 @@ export class MenuController {
     ) { }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Get('list')
     listMenus(@CurrentEstablishment() currentEstablishment: Establishment) {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.MENU_LIST, { establishment: currentEstablishment });
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Get('/:menuId/details')
     getMenuDetails(
         @Param('menuId') menuId: string,
@@ -65,7 +65,7 @@ export class MenuController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard, ActiveSubscriptionGuard)
+
     @Put('/positions')
     updateMenuPositions(
         @Body() updateMenuPositionsDto: UpdateMenuPositionsDto,
@@ -75,7 +75,7 @@ export class MenuController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard, ActiveSubscriptionGuard)
+
     @Put('/:menuId')
     updateMenu(
         @Param('menuId') menuId: string,
@@ -86,7 +86,7 @@ export class MenuController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard, ActiveSubscriptionGuard)
+
     @Patch('/:menuId/settings')
     updateMenuSettings(
         @Param('menuId') menuId: string,
@@ -97,7 +97,7 @@ export class MenuController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard, ActiveSubscriptionGuard)
+
     @Delete('/:menuId')
     deleteMenu(@Param('menuId') menuId: string, @CurrentEstablishment() currentEstablishment: Establishment) {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.MENU_DELETE, { menuId, establishment: currentEstablishment });

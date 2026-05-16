@@ -33,7 +33,7 @@ export class ImageController {
     ) { }
 
     @Roles()
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Get()
     @RateLimit('RELAXED') // 120 req/min — listagem de imagens
     findImagesByEstablishment(
@@ -56,7 +56,7 @@ export class ImageController {
     }
 
     @Roles()
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Patch(':id')
     @RateLimit('MEDIUM') // 30 req/min — rename de imagem
     async updateImageName(
@@ -72,7 +72,7 @@ export class ImageController {
     }
 
     @Roles()
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Post('delete')
     @RateLimit('MEDIUM') // 30 req/min — delete de imagens
     async deleteImages(
@@ -87,7 +87,7 @@ export class ImageController {
 
     @Roles()
     @RequiresFeature(feature.images)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard, FeatureLimitGuard)
+    @UseGuards(FeatureLimitGuard)
     @Post('direct-upload-urls')
     @RateLimit('MEDIUM') // 30 req/min — gera URLs de upload
     async generateR2DirectUploadUrls(
@@ -101,7 +101,7 @@ export class ImageController {
     }
 
     @Roles()
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Post('confirm-direct-uploads')
     @RateLimit('MEDIUM') // 30 req/min — confirma uploads
     async confirmDirectUploads(

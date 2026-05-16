@@ -10,7 +10,7 @@ import { DASHBOARD_PATTERNS } from "@weats/common/patterns/dashboard.patterns";
 import { CreateThemeDto } from "@weats/contracts";
 
 @Controller('themes')
-@UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
 export class ThemeController {
     constructor(
         @Inject(DASHBOARD_SERVICE)

@@ -13,6 +13,7 @@ import { ERRORS } from '@weats/common';
 import { CorePrismaService } from '@weats/database';
 import { BadRequestException } from '@nestjs/common';
 import { CacheService, dashboardEstKey } from '@weats/cache';
+import { SKIP_ESTABLISHMENT_STAFF_KEY } from '../decorators/skip-establishment-staff.decorator';
 
 @Injectable()
 export class EstablishmentStaffGuard implements CanActivate {
@@ -24,6 +25,15 @@ export class EstablishmentStaffGuard implements CanActivate {
   private readonly logger = new Logger(EstablishmentStaffGuard.name);
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    const skipEstablishmentStaff = this.reflector.getAllAndOverride<boolean>(
+      SKIP_ESTABLISHMENT_STAFF_KEY,
+      [context.getHandler(), context.getClass()],
+    );
+
+    if (skipEstablishmentStaff) {
+      return true;
+    }
+
     const request = context.switchToHttp().getRequest<CustomRequest>();
 
     const establishmentId = request.headers['x-establishment-id'] as string;
@@ -74,6 +84,7 @@ export class EstablishmentStaffGuard implements CanActivate {
         establishment.availableLanguages,
       currency: establishment.currency,
       timezone: establishment.timezone,
+      subscription: establishment.subscription,
     };
 
     // Recupera os roles exigidos pelo endpoint

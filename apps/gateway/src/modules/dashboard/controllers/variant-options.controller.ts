@@ -15,7 +15,7 @@ import { Inject } from '@nestjs/common';
 import { DASHBOARD_SERVICE, DASHBOARD_PATTERNS } from '@weats/common';
 import { ClientProxy } from '@nestjs/microservices';
 
-@UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
 @Controller('items/variants-options')
 export class VariantOptionsController {
   constructor(@Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy) { }

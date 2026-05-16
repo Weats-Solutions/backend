@@ -7,7 +7,7 @@ import { DASHBOARD_SERVICE, DASHBOARD_PATTERNS } from '@weats/common';
 import { ClientProxy } from '@nestjs/microservices';
 
 @Controller('items/addons')
-@UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
 export class AddonController {
     constructor(@Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy) { }
 

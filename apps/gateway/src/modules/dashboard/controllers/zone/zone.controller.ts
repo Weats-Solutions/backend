@@ -16,12 +16,12 @@ import { EmployeeRoles } from '@weats/database';
 import { ClientProxy } from '@nestjs/microservices';
 
 @Controller('zones')
-@UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
 export class ZonesController {
     constructor(@Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy) { }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Post()
     async createServiceZone(
         @CurrentEstablishment() establishment: Establishment,
@@ -30,13 +30,13 @@ export class ZonesController {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.ZONE_CREATE, { createServiceZoneDto, establishment });
     }
 
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Get()
     async getServiceZones(@CurrentEstablishment() establishment: Establishment) {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.ZONE_GET_ALL, { establishment });
     }
 
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Get(':zoneId')
     async getServiceZoneById(
         @Param('zoneId') zoneId: string,
@@ -46,7 +46,7 @@ export class ZonesController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Patch(':zoneId')
     async updateServiceZone(
         @Param('zoneId') zoneId: string,
@@ -56,7 +56,7 @@ export class ZonesController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Delete(':zoneId')
     async deleteServiceZone(
         @Param('zoneId') zoneId: string,

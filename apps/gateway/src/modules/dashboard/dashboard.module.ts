@@ -28,6 +28,9 @@ import { EmailProducer } from '@weats/bull/producers/email.producer';
 import { QueuesModule } from '@weats/bull';
 import { ThemeController } from './controllers/theme.controller';
 
+import { APP_GUARD } from '@nestjs/core';
+import { ClerkGuard, EstablishmentStaffGuard, ActiveSubscriptionGuard } from '@weats/common';
+
 @Module({
   imports: [ConfigsModule, IntegrationsModule, DatabaseModule, EncryptionModule, FeatureUsageModule, QueuesModule],
   providers: [
@@ -39,6 +42,18 @@ import { ThemeController } from './controllers/theme.controller';
         return ClientProxyFactory.create(clientOptions);
       },
       inject: [GatewayConfigService],
+    },
+    {
+      provide: APP_GUARD,
+      useClass: ClerkGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: EstablishmentStaffGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: ActiveSubscriptionGuard,
     },
   ],
   controllers: [
@@ -77,6 +92,8 @@ import { ThemeController } from './controllers/theme.controller';
 
     //Stats
     StatsController,
+
+    
   ],
 })
 export class DashboardModule { }

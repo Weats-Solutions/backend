@@ -1,4 +1,4 @@
-import { Currency, EstablishmentLanguage } from "@weats/database";
+import { Currency, EstablishmentLanguage, SubscriptionStatus } from "@weats/database";
 
 export interface Establishment {
     id: string;
@@ -10,4 +10,8 @@ export interface Establishment {
     availableLanguages: EstablishmentLanguage[];
     currency: Currency;
     timezone: string;
+    subscription?: {
+        status: SubscriptionStatus;
+        currentPeriodEnd?: Date | null;
+    } | null;
 }

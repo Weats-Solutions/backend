@@ -12,12 +12,12 @@ import { EmployeeRoles } from '@weats/database';
 import { ClientProxy } from '@nestjs/microservices';
 
 @Controller('zones/qr-codes')
-@UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
 export class QrCodesController {
     constructor(@Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy) { }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Post('generate')
     @RateLimit('STRICT') // 5 req/min — job pesado: gera ZIPs, envia email, consome Redis
     async generateQrCodes(

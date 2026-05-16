@@ -8,7 +8,7 @@ import { DASHBOARD_SERVICE } from '@weats/common/constants';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 
 @Roles()
-@UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
 @Controller('integrations/eupago')
 export class EupagoIntegrationController {
     constructor(

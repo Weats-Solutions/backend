@@ -8,11 +8,11 @@ import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { Establishment } from '@weats/types';
 
 @Controller('dashboard')
-@UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
 export class StatsController {
   constructor(
     @Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy,
-  ) {}
+  ) { }
 
   @Get('stats')
   getDashboardStats(@CurrentEstablishment() establishment: Establishment) {

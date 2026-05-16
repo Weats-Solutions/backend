@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './user/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from '@weats/database';
 import { validate } from './validators/env.validation';
@@ -25,7 +24,6 @@ import { CacheModule } from '@weats/cache';
     }),
     ConfigsModule,
     IntegrationsModule,
-    UsersModule,
     DatabaseModule,
     DashboardModule,
     TranslateModule,

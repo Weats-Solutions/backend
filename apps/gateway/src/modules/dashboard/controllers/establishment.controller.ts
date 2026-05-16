@@ -22,6 +22,7 @@ import {
   ERRORS, FeatureUsageService,
   SCHEDULE_VALIDATION_GROUPS,
   RateLimit,
+  SkipActiveSubscription,
 } from '@weats/common';
 import type { Establishment, SendEmailDto, User } from '@weats/types';
 import { CreateEstablishmentDto, UpdateEstablishmentLanguagesDto } from '@weats/contracts/dashboard/dtos/establishment';
@@ -64,7 +65,6 @@ export class EstablishmentController {
     await this.emailProducer.send(payload);
   }
 
-  @UseGuards(ClerkGuard)
   @Post()
   @RateLimit('STRICT') // 5 req/min — criar establishment é raro e envolve Stripe + DB
   createEstablishment(
@@ -83,7 +83,6 @@ export class EstablishmentController {
   }
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
   @Delete(':id/menu-cache')
   deleteEstablishmentMenuCache(
     @CurrentEstablishment() establishment: Establishment,
@@ -103,7 +102,7 @@ export class EstablishmentController {
   // -------------------------------------------------------------------------
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Get(':id')
   getEstablishmentInfo(
     @CurrentEstablishment() establishment: Establishment,
@@ -119,7 +118,7 @@ export class EstablishmentController {
   }
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Get(':id/access')
   getEstablishmentAccess(
     @CurrentEstablishment() establishment: Establishment,
@@ -135,7 +134,7 @@ export class EstablishmentController {
   }
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Get(':id/schedule')
   getEstablishmentSchedule(
     @CurrentEstablishment() establishment: Establishment,
@@ -154,7 +153,7 @@ export class EstablishmentController {
   // Modules Settings
   // -------------------------------------------------------------------------
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Get(':id/settings/modules')
   getEstablishmentModulesSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -170,7 +169,7 @@ export class EstablishmentController {
   }
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Patch(':id/settings/modules')
   updateEstablishmentModuleSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -191,7 +190,7 @@ export class EstablishmentController {
   // -------------------------------------------------------------------------
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Get(':id/settings/general')
   getEstablishmentGeneralSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -207,7 +206,7 @@ export class EstablishmentController {
   }
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Patch(':id/settings/general')
   updateEstablishmentGeneralSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -228,7 +227,7 @@ export class EstablishmentController {
   // -------------------------------------------------------------------------
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Get(':id/settings/branding')
   getEstablishmentBrandingSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -244,7 +243,7 @@ export class EstablishmentController {
   }
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Patch(':id/settings/branding')
   updateEstablishmentBrandingSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -261,7 +260,7 @@ export class EstablishmentController {
   }
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Get(':id/settings/favicon/job/:jobId')
   getEstablishmentFaviconJobStatus(
     @CurrentEstablishment() establishment: Establishment,
@@ -278,7 +277,7 @@ export class EstablishmentController {
   }
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Post(':id/settings/favicon/process')
   @RateLimit('STRICT') // 5 req/min — job pesado: gera e faz upload de 5 variantes de imagem
   processEstablishmentFavicon(
@@ -295,7 +294,7 @@ export class EstablishmentController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_PROCESS_FAVICON, { establishment, updateEstablishmentFaviconDto });
   }
 
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Patch(':id/branding')
   updateBranding(
     @Body() updateEstablishmentBrandingDto: UpdateEstablishmentBrandingDto,
@@ -312,7 +311,7 @@ export class EstablishmentController {
   // -------------------------------------------------------------------------
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Get(':id/settings/billing')
   getEstablishmentBillingSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -328,7 +327,7 @@ export class EstablishmentController {
   }
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Patch(':id/settings/billing')
   updateEstablishmentBillingSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -349,7 +348,7 @@ export class EstablishmentController {
   // -------------------------------------------------------------------------
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Get(':id/settings/digital')
   getEstablishmentDigitalSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -365,7 +364,7 @@ export class EstablishmentController {
   }
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Patch(':id/settings/digital')
   updateEstablishmentDigitalSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -382,7 +381,6 @@ export class EstablishmentController {
   }
 
   @Get('verify-domain')
-  @UseGuards(ClerkGuard)
   verifyDomain(
     @Query('slug') slug: string,
   ) {
@@ -400,7 +398,7 @@ export class EstablishmentController {
   // -------------------------------------------------------------------------
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Get(':id/settings/system')
   getEstablishmentSystemSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -416,7 +414,7 @@ export class EstablishmentController {
   }
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Patch(':id/settings/system')
   updateEstablishmentSystemSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -433,7 +431,7 @@ export class EstablishmentController {
   }
 
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Patch(':id/settings/languages')
   updateEstablishmentLanguages(
     @CurrentEstablishment() establishment: Establishment,
@@ -449,7 +447,7 @@ export class EstablishmentController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_LANGUAGES, { establishment, updateEstablishmentLanguagesDto });
   }
 
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Patch(':id/languages')
   async updateLanguages(
     @Body() updateEstablishmentLanguagesDto: UpdateEstablishmentLanguagesDto,
@@ -475,25 +473,26 @@ export class EstablishmentController {
   // Subscription
   // -------------------------------------------------------------------------
 
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Get('subscription')
   getSubscription(@CurrentEstablishment() establishment: Establishment) {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SUBSCRIPTION, { id: establishment.id });
   }
 
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Get('subscription-and-plan')
   getSubscriptionAndPlan(@CurrentEstablishment() establishment: Establishment) {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SUBSCRIPTION_AND_PLAN, { id: establishment.id });
   }
 
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
+  @SkipActiveSubscription()
   @Get('portal-session')
   getPortalSession(@CurrentEstablishment() establishment: Establishment) {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_PORTAL_SESSION, { id: establishment.id });
   }
 
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @SkipActiveSubscription()
   @Post('subscription')
   subscribeToPlan(
     @Body() { planCycleId }: { planCycleId: string },
@@ -502,7 +501,7 @@ export class EstablishmentController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_SUBSCRIBE_TO_PLAN, { planCycleId, establishment });
   }
 
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+  @SkipActiveSubscription()
   @Get('cancel-subscription')
   cancelSubscription(
     @CurrentEstablishment() establishment: Establishment,
@@ -517,7 +516,7 @@ export class EstablishmentController {
 
   @UsePipes(new ValidationPipe({ groups: [SCHEDULE_VALIDATION_GROUPS.ESTABLISHMENT] }))
   @Roles()
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
   @Post(':id/schedule')
   updateEstablishmentSchedule(
     @CurrentEstablishment() establishment: Establishment,

@@ -19,32 +19,32 @@ export class MenuCategoryController {
     constructor(@Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy) { }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Put('/positions')
     updateCategoryPositions(
         @Param('menuId') menuId: string,
         @Body() updateCategoryPositionsDto: UpdateCategoryPositionsDto,
         @CurrentEstablishment() currentEstablishment: Establishment,
     ) {
-        return this.dashboardClient.send(DASHBOARD_PATTERNS.CATEGORY_UPDATE_POSITIONS, { 
-            menuId, 
-            updateCategoryPositionsDto, 
-            establishment: currentEstablishment 
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.CATEGORY_UPDATE_POSITIONS, {
+            menuId,
+            updateCategoryPositionsDto,
+            establishment: currentEstablishment
         });
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Post()
     createCategory(
         @Param('menuId') menuId: string,
-        @Body() createCategoryDto: CreateCategoryDto,   
+        @Body() createCategoryDto: CreateCategoryDto,
     ) {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.CATEGORY_CREATE, { menuId, createCategoryDto });
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Get()
     listMenuCategories(
         @Param('menuId') menuId: string,
@@ -54,7 +54,7 @@ export class MenuCategoryController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Put('/:categoryId')
     updateCategory(
         @Param('menuId') menuId: string,
@@ -66,7 +66,7 @@ export class MenuCategoryController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Delete('/:categoryId')
     deleteCategory(
         @Param('menuId') menuId: string,

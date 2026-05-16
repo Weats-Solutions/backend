@@ -13,7 +13,7 @@ export class MenuSubcategoryController {
     constructor(@Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy) { }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Put('/positions')
     updateSubcategoryPositions(
         @Param('menuId') menuId: string,
@@ -28,7 +28,7 @@ export class MenuSubcategoryController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Get()
     listSubcategories(
         @Param('menuId') menuId: string,
@@ -39,7 +39,7 @@ export class MenuSubcategoryController {
 
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Post()
     createSubcategory(
         @Param('menuId') menuId: string,
@@ -50,7 +50,7 @@ export class MenuSubcategoryController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Patch('/:subcategoryId')
     updateSubcategory(
         @Param('menuId') menuId: string,
@@ -61,7 +61,7 @@ export class MenuSubcategoryController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Delete('/:subcategoryId')
     deleteSubcategory(
         @Param('menuId') menuId: string,
@@ -71,7 +71,7 @@ export class MenuSubcategoryController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Get('/:subcategoryId/items')
     listSubcategoryItems(
         @CurrentEstablishment() establishment: Establishment,
@@ -81,7 +81,7 @@ export class MenuSubcategoryController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Post('/:subcategoryId/items')
     linkItemsToSubcategory(
         @Body() linkItemToSubcategoryDto: LinkItemToSubcategoryDto,
@@ -92,7 +92,7 @@ export class MenuSubcategoryController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Delete('/:subcategoryId/items')
     unlinkItemsFromSubcategory(
         @Param('subcategoryId') subcategoryId: string,
@@ -105,7 +105,7 @@ export class MenuSubcategoryController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Put('/:subcategoryId/items/positions')
     updateItemPositions(
         @Param('subcategoryId') subcategoryId: string,
@@ -118,7 +118,7 @@ export class MenuSubcategoryController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-    @UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
     @Patch('/:subcategoryId/items/link')
     updateItemsLinkProperties(
         @Param('subcategoryId') subcategoryId: string,

@@ -37,15 +37,15 @@ import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { feature } from '@weats/types';
 
 @Controller('items')
-@UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
 export class ItemController {
   constructor(
     @Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy,
-  ) {}
+  ) { }
 
   @Post()
   @RequiresFeature(feature.products)
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard, FeatureLimitGuard)
+  @UseGuards(FeatureLimitGuard)
   async createItem(
     @CurrentEstablishment() establishment: Establishment,
     @Body() createItemDto: CreateItemDto,
@@ -109,7 +109,7 @@ export class ItemController {
 
   @Post(':id/duplicate')
   @RequiresFeature(feature.products)
-  @UseGuards(ClerkGuard, EstablishmentStaffGuard, FeatureLimitGuard)
+  @UseGuards(FeatureLimitGuard)
   async duplicateItem(
     @Param('id') id: string,
     @CurrentEstablishment() establishment: Establishment,

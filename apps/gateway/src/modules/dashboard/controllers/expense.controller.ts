@@ -20,11 +20,11 @@ import { CreateExpenseDto } from '@weats/contracts';
 import { Establishment } from '@weats/types';
 
 @Controller('expenses')
-@UseGuards(ClerkGuard, EstablishmentStaffGuard)
+
 export class ExpenseController {
   constructor(
     @Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy,
-  ) {}
+  ) { }
 
   @Post()
   createExpense(

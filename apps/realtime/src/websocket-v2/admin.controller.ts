@@ -27,9 +27,9 @@ export class RealtimeV2AdminController {
     // 2. Notificar todos os KDS (Staff) ligados a este estabelecimento
     const expiresAt = new Date(Date.now() + durationMs).toISOString();
     this.dispatchService.emitTableStatus(
-      payload.establishmentId, 
-      payload.servicePointId, 
-      RealtimeCallStatus.BLOCKED, 
+      payload.establishmentId,
+      payload.servicePointId,
+      RealtimeCallStatus.BLOCKED,
       expiresAt
     );
 
@@ -49,8 +49,8 @@ export class RealtimeV2AdminController {
 
     // 2. Notificar todos os KDS (Staff) que a mesa está ativa
     this.dispatchService.emitTableStatus(
-      payload.establishmentId, 
-      payload.servicePointId, 
+      payload.establishmentId,
+      payload.servicePointId,
       RealtimeCallStatus.ACTIVE
     );
 
