@@ -38,6 +38,10 @@ export class ActiveSubscriptionGuard implements CanActivate {
             });
         }
 
+        if (establishment.isDemo) {
+            return true;
+        }
+
         const status = establishment.subscription?.status;
         const hasActiveSubscription =
             status === SubscriptionStatus.ACTIVE ||

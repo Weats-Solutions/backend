@@ -84,6 +84,7 @@ export class EstablishmentStaffGuard implements CanActivate {
         establishment.availableLanguages,
       currency: establishment.currency,
       timezone: establishment.timezone,
+      isDemo: establishment.isDemo,
       subscription: establishment.subscription,
     };
 

@@ -340,6 +340,7 @@ exports.Prisma.EstablishmentScalarFieldEnum = {
   callStaffModule: 'callStaffModule',
   takeAwayModule: 'takeAwayModule',
   reservationsModule: 'reservationsModule',
+  isDemo: 'isDemo',
   primaryLanguage: 'primaryLanguage',
   availableLanguages: 'availableLanguages',
   currency: 'currency',

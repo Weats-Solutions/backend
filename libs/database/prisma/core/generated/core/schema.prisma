@@ -664,6 +664,7 @@ model Establishment {
   reservationsModule Boolean @default(false)
 
   // ─── Configurações ─────────────────────────────────────────────────────────
+  isDemo             Boolean                 @default(false)
   primaryLanguage    EstablishmentLanguage   @default(PT)
   availableLanguages EstablishmentLanguage[] @default([PT])
   currency           Currency                @default(EUR)

@@ -10,6 +10,7 @@ export interface Establishment {
     availableLanguages: EstablishmentLanguage[];
     currency: Currency;
     timezone: string;
+    isDemo: boolean;
     subscription?: {
         status: SubscriptionStatus;
         currentPeriodEnd?: Date | null;
