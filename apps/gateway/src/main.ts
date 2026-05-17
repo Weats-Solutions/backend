@@ -47,6 +47,7 @@ async function bootstrap() {
   // =========================
   // GLOBAL MIDDLEWARE
   // =========================
+  app.set('trust proxy', true);
   app.enableCors(getCorsOptions(appConfigService));
   app.use(cookieParser());
   app.use(helmet());

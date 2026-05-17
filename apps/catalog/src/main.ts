@@ -4,9 +4,10 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { AppConfigService, getCorsOptions } from '@weats/configs';
 import cookieParser from 'cookie-parser';
 import { CatalogModule } from './catalog.module';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  const app = await NestFactory.create(CatalogModule);
+  const app = await NestFactory.create<NestExpressApplication>(CatalogModule);
   const appConfigService = app.get(AppConfigService);
   const catalogPort = appConfigService.getCatalogPort() || 4008;
   const nodeEnv = appConfigService.getNodeEnv();
@@ -14,6 +15,8 @@ async function bootstrap() {
   const logger = new Logger('Catalog');
   app.enableCors(getCorsOptions(appConfigService));
   app.use(cookieParser());
+  app.set('trust proxy', true);
+
 
 
 

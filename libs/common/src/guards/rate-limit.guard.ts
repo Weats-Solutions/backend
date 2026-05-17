@@ -94,6 +94,8 @@ export class RateLimitGuard implements CanActivate {
             ? `user:${request.user.id}`
             : `ip:${realIp}`;
 
+        this.logger.log(`[RateLimit] Client ID: ${userIdentifier} (IP: ${rawIp}) -> Route: ${request.method} ${request.originalUrl}`);
+
         // 4. Chave da rota — remove query params para consistência
         const routeKey = `${request.method}:${request.originalUrl.split('?')[0]}`;
 
