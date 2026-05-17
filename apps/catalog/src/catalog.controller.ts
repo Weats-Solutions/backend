@@ -2,7 +2,6 @@ import { Controller, Get, Param, Query } from '@nestjs/common';
 import { CatalogService } from './catalog.service';
 import { ToUpperCasePipe } from '@weats/common';
 import { EstablishmentLanguage } from '@weats/database';
-import { RateLimit } from '@weats/common';
 
 @Controller('catalog')
 export class CatalogController {

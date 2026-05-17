@@ -81,6 +81,7 @@ export class RateLimitGuard implements CanActivate {
         //   - X-Forwarded-For: injetado por qualquer proxy (1º valor = IP do cliente)
         //   - request.ip: fallback para desenvolvimento local sem proxy
         const rawIp: string =
+            (request.headers['x-client-ip'] as string) ||
             (request.headers['cf-connecting-ip'] as string) ||
             ((request.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim()) ||
             request.ip ||
