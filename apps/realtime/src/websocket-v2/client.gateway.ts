@@ -116,28 +116,7 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
 
           const MARGIN = 2;
           if (uniqueClientIds.size >= context.maxCapacity + MARGIN) {
-            this.logger.warn(`[SECURITY] Mesa ${context.servicePointId} excedeu o limite máximo (${context.maxCapacity} + ${MARGIN}). A bloquear a mesa no Redis...`);
-            
-            const durationMs = 15 * 60 * 1000; // Bloqueia por 15 minutos
-            const expiresAt = new Date(Date.now() + durationMs).toISOString();
-
-            // 1. Bloquear no Redis (Persistente)
-            await this.stateService.saveTableBlock(context.establishmentId, context.servicePointId, durationMs);
-
-            // 2. Notificar todos os KDS (Staff) que a mesa foi bloqueada por excesso de lotação
-            this.dispatchService.emitTableStatus(
-              context.establishmentId,
-              context.servicePointId,
-              RealtimeCallStatus.BLOCKED,
-              expiresAt
-            );
-
-            // 3. Desconectar todos os clientes que já estavam ligados na mesa (medida de segurança)
-            for (const s of connectedSockets) {
-              s.disconnect(true);
-            }
-
-            return next(new Error(RealtimeV2Error.SP_BLOCKED));
+            return next(new Error(RealtimeV2Error.CAPACITY_EXCEEDED));
           }
 
           socket.data.clientId = clientId;
