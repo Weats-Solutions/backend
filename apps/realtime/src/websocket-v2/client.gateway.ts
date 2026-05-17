@@ -114,8 +114,11 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
               .filter(Boolean)
           );
 
-          const MARGIN = 2;
+          const MARGIN = 0;
           if (uniqueClientIds.size >= context.maxCapacity + MARGIN) {
+            this.logger.warn(`[SECURITY] Mesa ${context.servicePointId} excedeu o limite máximo (${context.maxCapacity} + ${MARGIN}). A bloquear a mesa no Redis...`);
+
+
             return next(new Error(RealtimeV2Error.CAPACITY_EXCEEDED));
           }
 
