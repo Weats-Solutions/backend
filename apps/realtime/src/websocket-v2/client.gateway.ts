@@ -19,7 +19,9 @@ import {
   CallRequestedPayload,
   RealtimeV2ClientServer,
   RealtimeV2SocketData,
-  RealtimeV2Error, RealtimeStaffCallType
+  RealtimeV2Error,
+  RealtimeStaffCallType,
+  RealtimeCallStatus
 } from './realtime-v2.types';
 
 @WebSocketGateway({
@@ -105,9 +107,37 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
             return next(new Error(RealtimeV2Error.ALREADY_CONNECTED));
           }
 
+          // Agrupa por clientId único para ignorar reconexões, abas duplicadas ou artefatos de HTTP Polling
+          const uniqueClientIds = new Set(
+            connectedSockets
+              .map(s => (s.data as RealtimeV2SocketData).clientId)
+              .filter(Boolean)
+          );
+
           const MARGIN = 2;
-          if (connectedSockets.length >= context.maxCapacity + MARGIN) {
-            return next(new Error(RealtimeV2Error.CAPACITY_EXCEEDED));
+          if (uniqueClientIds.size >= context.maxCapacity + MARGIN) {
+            this.logger.warn(`[SECURITY] Mesa ${context.servicePointId} excedeu o limite máximo (${context.maxCapacity} + ${MARGIN}). A bloquear a mesa no Redis...`);
+            
+            const durationMs = 15 * 60 * 1000; // Bloqueia por 15 minutos
+            const expiresAt = new Date(Date.now() + durationMs).toISOString();
+
+            // 1. Bloquear no Redis (Persistente)
+            await this.stateService.saveTableBlock(context.establishmentId, context.servicePointId, durationMs);
+
+            // 2. Notificar todos os KDS (Staff) que a mesa foi bloqueada por excesso de lotação
+            this.dispatchService.emitTableStatus(
+              context.establishmentId,
+              context.servicePointId,
+              RealtimeCallStatus.BLOCKED,
+              expiresAt
+            );
+
+            // 3. Desconectar todos os clientes que já estavam ligados na mesa (medida de segurança)
+            for (const s of connectedSockets) {
+              s.disconnect(true);
+            }
+
+            return next(new Error(RealtimeV2Error.SP_BLOCKED));
           }
 
           socket.data.clientId = clientId;
