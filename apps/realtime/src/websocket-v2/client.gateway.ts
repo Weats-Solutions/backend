@@ -141,7 +141,7 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
     });
   }
 
-  handleConnection(socket: Socket<any, any, any, RealtimeV2SocketData>) {
+  async handleConnection(socket: Socket<any, any, any, RealtimeV2SocketData>) {
     const estId = socket.data.establishmentId;
     const spId = socket.data.servicePointId;
     const clientId = socket.data.clientId;
@@ -157,6 +157,24 @@ export class RealtimeV2ClientGateway implements OnGatewayInit {
 
     const count = (this.server as any).sockets.size;
     this.logger.log(`[CLIENT CONNECT] ✅ Cliente ${clientId} entrou na mesa ${spId} (Est: ${estId}) | Total: ${count}`);
+
+    // Verificar se existe chamada ativa deste cliente no Redis
+    const activeCall = await this.stateService.getActiveCall(estId, spId, clientId);
+    if (activeCall) {
+      this.logger.log(`[CLIENT CONNECT] 📢 Cliente ${clientId} reconectou e tem chamada ativa. A enviar status...`);
+      socket.emit('call:status', {
+        status: RealtimeCallStatus.PENDING,
+        message: activeCall.message,
+        timestamp: activeCall.timestamp,
+      });
+    } else {
+      // Se não houver chamada ativa, emitimos COMPLETED para limpar qualquer estado pendente no frontend
+      socket.emit('call:status', {
+        status: RealtimeCallStatus.COMPLETED,
+        message: 'No active calls',
+        timestamp: new Date().toISOString(),
+      });
+    }
   }
 
   handleDisconnect(socket: Socket<any, any, any, RealtimeV2SocketData>) {

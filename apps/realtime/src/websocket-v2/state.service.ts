@@ -35,6 +35,19 @@ export class RealtimeStateService implements OnModuleInit {
         await this.redis.expire(key, 86400); 
     }
 
+    // Buscar um pedido ativo específico
+    async getActiveCall(estId: string, spId: string, clientId: string): Promise<any | null> {
+        const key = this.getEstKey(estId);
+        const field = `${spId}:${clientId}`;
+        const data = await this.redis.hget(key, field);
+        if (!data) return null;
+        try {
+            return JSON.parse(data);
+        } catch {
+            return null;
+        }
+    }
+
     // Remover um pedido (quando aceite ou cancelado)
     async removeActiveCall(estId: string, spId: string, clientId?: string) {
         const key = this.getEstKey(estId);
