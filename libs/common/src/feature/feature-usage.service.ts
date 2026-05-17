@@ -88,7 +88,8 @@ export class FeatureUsageService {
     // find planFeature for this establishment
     const est = await this.corePirismaService.establishment.findUnique({
       where: { id: establishmentId },
-      include: {
+      select: {
+        isDemo: true,
         subscription: {
           select: {
             planCycle: {
@@ -100,6 +101,18 @@ export class FeatureUsageService {
         },
       },
     });
+
+    if (est?.isDemo) {
+      return {
+        usage,
+        limit: null,
+        enabled: true,
+      } as {
+        usage: number;
+        limit: number | null;
+        enabled: boolean | null;
+      };
+    }
 
     let limit: number | null = null;
     let enabled: boolean | null = null;

@@ -50,12 +50,7 @@ export class MenuController {
 
     @Roles(EmployeeRoles.MANAGER)
     @RequiresFeature('menu')
-    @UseGuards(
-        ClerkGuard,
-        EstablishmentStaffGuard,
-        ActiveSubscriptionGuard,
-        FeatureLimitGuard,
-    )
+    @UseGuards(FeatureLimitGuard)
     @Post()
     createMenu(
         @Body() createMenuDto: CreateMenuDto,
