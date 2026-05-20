@@ -312,7 +312,6 @@ export class CatalogService {
                                     variantOption: {
                                       select: {
                                         id: true,
-                                        type: true,
                                         translations: {
                                           where: { locale: currentLang as any },
                                           select: { name: true },

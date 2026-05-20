@@ -668,7 +668,6 @@ export class MenuService {
                                                                     variantOption: {
                                                                         select: {
                                                                             id: true,
-                                                                            type: true,
                                                                             translations: {
                                                                                 where: { locale: lang },
                                                                                 select: { name: true },
