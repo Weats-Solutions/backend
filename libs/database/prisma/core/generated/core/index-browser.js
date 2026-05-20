@@ -527,7 +527,6 @@ exports.Prisma.VariantOptionScalarFieldEnum = {
   id: 'id',
   establishmentId: 'establishmentId',
   isGlobal: 'isGlobal',
-  code: 'code',
   isActive: 'isActive',
   quantity: 'quantity',
   unit: 'unit',

@@ -29,7 +29,6 @@ export class VariantOptionsService {
       data: {
         unit: dto.unit,
         quantity: dto.quantity,
-        code: defaultTranslation.name.toUpperCase().replace(/\s+/g, '_'), // Gera um código simples
         isActive: dto.isActive ?? true,
         isGlobal: false, // Por defeito, as criadas pelo cliente não são globais
         establishmentId: establishment.id,
@@ -41,7 +40,6 @@ export class VariantOptionsService {
         id: true,
         unit: true,
         quantity: true,
-        code: true,
         isActive: true,
         isGlobal: true,
         establishmentId: true,
@@ -72,7 +70,6 @@ export class VariantOptionsService {
         id: true,
         unit: true,
         quantity: true,
-        code: true,
         isActive: true,
         isGlobal: true,
         establishmentId: true,
@@ -95,7 +92,6 @@ export class VariantOptionsService {
         id: true,
         unit: true,
         quantity: true,
-        code: true,
         isActive: true,
         isGlobal: true,
         translations: {
@@ -118,7 +114,6 @@ export class VariantOptionsService {
         id: true,
         unit: true,
         quantity: true,
-        code: true,
         isActive: true,
         isGlobal: true,
         establishmentId: true,
@@ -177,7 +172,6 @@ export class VariantOptionsService {
         id: true,
         unit: true,
         quantity: true,
-        code: true,
         isActive: true,
         isGlobal: true,
         establishmentId: true,

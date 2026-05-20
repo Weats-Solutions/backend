@@ -94,10 +94,9 @@ model VariantOption {
   id              String                     @id @default(ulid())
   establishmentId String?
   isGlobal        Boolean                    @default(false)
-  code            String?                    @unique
   isActive        Boolean                    @default(true)
-  quantity        Float?
-  unit            UnitType?
+  quantity        Float
+  unit            UnitType
   itemVariants    ItemVariant[]
   establishment   Establishment?             @relation(fields: [establishmentId], references: [id])
   translations    VariantOptionTranslation[]

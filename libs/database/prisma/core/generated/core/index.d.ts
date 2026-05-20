@@ -43465,7 +43465,6 @@ export namespace Prisma {
     id: string | null
     establishmentId: string | null
     isGlobal: boolean | null
-    code: string | null
     isActive: boolean | null
     quantity: number | null
     unit: $Enums.UnitType | null
@@ -43477,7 +43476,6 @@ export namespace Prisma {
     id: string | null
     establishmentId: string | null
     isGlobal: boolean | null
-    code: string | null
     isActive: boolean | null
     quantity: number | null
     unit: $Enums.UnitType | null
@@ -43489,7 +43487,6 @@ export namespace Prisma {
     id: number
     establishmentId: number
     isGlobal: number
-    code: number
     isActive: number
     quantity: number
     unit: number
@@ -43511,7 +43508,6 @@ export namespace Prisma {
     id?: true
     establishmentId?: true
     isGlobal?: true
-    code?: true
     isActive?: true
     quantity?: true
     unit?: true
@@ -43523,7 +43519,6 @@ export namespace Prisma {
     id?: true
     establishmentId?: true
     isGlobal?: true
-    code?: true
     isActive?: true
     quantity?: true
     unit?: true
@@ -43535,7 +43530,6 @@ export namespace Prisma {
     id?: true
     establishmentId?: true
     isGlobal?: true
-    code?: true
     isActive?: true
     quantity?: true
     unit?: true
@@ -43634,10 +43628,9 @@ export namespace Prisma {
     id: string
     establishmentId: string | null
     isGlobal: boolean
-    code: string | null
     isActive: boolean
-    quantity: number | null
-    unit: $Enums.UnitType | null
+    quantity: number
+    unit: $Enums.UnitType
     createdAt: Date
     updatedAt: Date
     _count: VariantOptionCountAggregateOutputType | null
@@ -43665,7 +43658,6 @@ export namespace Prisma {
     id?: boolean
     establishmentId?: boolean
     isGlobal?: boolean
-    code?: boolean
     isActive?: boolean
     quantity?: boolean
     unit?: boolean
@@ -43681,7 +43673,6 @@ export namespace Prisma {
     id?: boolean
     establishmentId?: boolean
     isGlobal?: boolean
-    code?: boolean
     isActive?: boolean
     quantity?: boolean
     unit?: boolean
@@ -43694,7 +43685,6 @@ export namespace Prisma {
     id?: boolean
     establishmentId?: boolean
     isGlobal?: boolean
-    code?: boolean
     isActive?: boolean
     quantity?: boolean
     unit?: boolean
@@ -43707,7 +43697,6 @@ export namespace Prisma {
     id?: boolean
     establishmentId?: boolean
     isGlobal?: boolean
-    code?: boolean
     isActive?: boolean
     quantity?: boolean
     unit?: boolean
@@ -43715,7 +43704,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type VariantOptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "isGlobal" | "code" | "isActive" | "quantity" | "unit" | "createdAt" | "updatedAt", ExtArgs["result"]["variantOption"]>
+  export type VariantOptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "isGlobal" | "isActive" | "quantity" | "unit" | "createdAt" | "updatedAt", ExtArgs["result"]["variantOption"]>
   export type VariantOptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     itemVariants?: boolean | VariantOption$itemVariantsArgs<ExtArgs>
     establishment?: boolean | VariantOption$establishmentArgs<ExtArgs>
@@ -43740,10 +43729,9 @@ export namespace Prisma {
       id: string
       establishmentId: string | null
       isGlobal: boolean
-      code: string | null
       isActive: boolean
-      quantity: number | null
-      unit: $Enums.UnitType | null
+      quantity: number
+      unit: $Enums.UnitType
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["variantOption"]>
@@ -44175,7 +44163,6 @@ export namespace Prisma {
     readonly id: FieldRef<"VariantOption", 'String'>
     readonly establishmentId: FieldRef<"VariantOption", 'String'>
     readonly isGlobal: FieldRef<"VariantOption", 'Boolean'>
-    readonly code: FieldRef<"VariantOption", 'String'>
     readonly isActive: FieldRef<"VariantOption", 'Boolean'>
     readonly quantity: FieldRef<"VariantOption", 'Float'>
     readonly unit: FieldRef<"VariantOption", 'UnitType'>
@@ -110218,7 +110205,6 @@ export namespace Prisma {
     id: 'id',
     establishmentId: 'establishmentId',
     isGlobal: 'isGlobal',
-    code: 'code',
     isActive: 'isActive',
     quantity: 'quantity',
     unit: 'unit',
@@ -114492,10 +114478,9 @@ export namespace Prisma {
     id?: StringFilter<"VariantOption"> | string
     establishmentId?: StringNullableFilter<"VariantOption"> | string | null
     isGlobal?: BoolFilter<"VariantOption"> | boolean
-    code?: StringNullableFilter<"VariantOption"> | string | null
     isActive?: BoolFilter<"VariantOption"> | boolean
-    quantity?: FloatNullableFilter<"VariantOption"> | number | null
-    unit?: EnumUnitTypeNullableFilter<"VariantOption"> | $Enums.UnitType | null
+    quantity?: FloatFilter<"VariantOption"> | number
+    unit?: EnumUnitTypeFilter<"VariantOption"> | $Enums.UnitType
     createdAt?: DateTimeFilter<"VariantOption"> | Date | string
     updatedAt?: DateTimeFilter<"VariantOption"> | Date | string
     itemVariants?: ItemVariantListRelationFilter
@@ -114507,10 +114492,9 @@ export namespace Prisma {
     id?: SortOrder
     establishmentId?: SortOrderInput | SortOrder
     isGlobal?: SortOrder
-    code?: SortOrderInput | SortOrder
     isActive?: SortOrder
-    quantity?: SortOrderInput | SortOrder
-    unit?: SortOrderInput | SortOrder
+    quantity?: SortOrder
+    unit?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     itemVariants?: ItemVariantOrderByRelationAggregateInput
@@ -114520,30 +114504,28 @@ export namespace Prisma {
 
   export type VariantOptionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    code?: string
     AND?: VariantOptionWhereInput | VariantOptionWhereInput[]
     OR?: VariantOptionWhereInput[]
     NOT?: VariantOptionWhereInput | VariantOptionWhereInput[]
     establishmentId?: StringNullableFilter<"VariantOption"> | string | null
     isGlobal?: BoolFilter<"VariantOption"> | boolean
     isActive?: BoolFilter<"VariantOption"> | boolean
-    quantity?: FloatNullableFilter<"VariantOption"> | number | null
-    unit?: EnumUnitTypeNullableFilter<"VariantOption"> | $Enums.UnitType | null
+    quantity?: FloatFilter<"VariantOption"> | number
+    unit?: EnumUnitTypeFilter<"VariantOption"> | $Enums.UnitType
     createdAt?: DateTimeFilter<"VariantOption"> | Date | string
     updatedAt?: DateTimeFilter<"VariantOption"> | Date | string
     itemVariants?: ItemVariantListRelationFilter
     establishment?: XOR<EstablishmentNullableScalarRelationFilter, EstablishmentWhereInput> | null
     translations?: VariantOptionTranslationListRelationFilter
-  }, "id" | "code">
+  }, "id">
 
   export type VariantOptionOrderByWithAggregationInput = {
     id?: SortOrder
     establishmentId?: SortOrderInput | SortOrder
     isGlobal?: SortOrder
-    code?: SortOrderInput | SortOrder
     isActive?: SortOrder
-    quantity?: SortOrderInput | SortOrder
-    unit?: SortOrderInput | SortOrder
+    quantity?: SortOrder
+    unit?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: VariantOptionCountOrderByAggregateInput
@@ -114560,10 +114542,9 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"VariantOption"> | string
     establishmentId?: StringNullableWithAggregatesFilter<"VariantOption"> | string | null
     isGlobal?: BoolWithAggregatesFilter<"VariantOption"> | boolean
-    code?: StringNullableWithAggregatesFilter<"VariantOption"> | string | null
     isActive?: BoolWithAggregatesFilter<"VariantOption"> | boolean
-    quantity?: FloatNullableWithAggregatesFilter<"VariantOption"> | number | null
-    unit?: EnumUnitTypeNullableWithAggregatesFilter<"VariantOption"> | $Enums.UnitType | null
+    quantity?: FloatWithAggregatesFilter<"VariantOption"> | number
+    unit?: EnumUnitTypeWithAggregatesFilter<"VariantOption"> | $Enums.UnitType
     createdAt?: DateTimeWithAggregatesFilter<"VariantOption"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"VariantOption"> | Date | string
   }
@@ -122046,10 +122027,9 @@ export namespace Prisma {
   export type VariantOptionCreateInput = {
     id?: string
     isGlobal?: boolean
-    code?: string | null
     isActive?: boolean
-    quantity?: number | null
-    unit?: $Enums.UnitType | null
+    quantity: number
+    unit: $Enums.UnitType
     createdAt?: Date | string
     updatedAt?: Date | string
     itemVariants?: ItemVariantCreateNestedManyWithoutVariantOptionInput
@@ -122061,10 +122041,9 @@ export namespace Prisma {
     id?: string
     establishmentId?: string | null
     isGlobal?: boolean
-    code?: string | null
     isActive?: boolean
-    quantity?: number | null
-    unit?: $Enums.UnitType | null
+    quantity: number
+    unit: $Enums.UnitType
     createdAt?: Date | string
     updatedAt?: Date | string
     itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutVariantOptionInput
@@ -122074,10 +122053,9 @@ export namespace Prisma {
   export type VariantOptionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     isGlobal?: BoolFieldUpdateOperationsInput | boolean
-    code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemVariants?: ItemVariantUpdateManyWithoutVariantOptionNestedInput
@@ -122089,10 +122067,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: NullableStringFieldUpdateOperationsInput | string | null
     isGlobal?: BoolFieldUpdateOperationsInput | boolean
-    code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemVariants?: ItemVariantUncheckedUpdateManyWithoutVariantOptionNestedInput
@@ -122103,10 +122080,9 @@ export namespace Prisma {
     id?: string
     establishmentId?: string | null
     isGlobal?: boolean
-    code?: string | null
     isActive?: boolean
-    quantity?: number | null
-    unit?: $Enums.UnitType | null
+    quantity: number
+    unit: $Enums.UnitType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -122114,10 +122090,9 @@ export namespace Prisma {
   export type VariantOptionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     isGlobal?: BoolFieldUpdateOperationsInput | boolean
-    code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -122126,10 +122101,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: NullableStringFieldUpdateOperationsInput | string | null
     isGlobal?: BoolFieldUpdateOperationsInput | boolean
-    code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -129577,13 +129551,6 @@ export namespace Prisma {
     itemId?: SortOrder
   }
 
-  export type EnumUnitTypeNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.UnitType | EnumUnitTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumUnitTypeNullableFilter<$PrismaModel> | $Enums.UnitType | null
-  }
-
   export type VariantOptionTranslationListRelationFilter = {
     every?: VariantOptionTranslationWhereInput
     some?: VariantOptionTranslationWhereInput
@@ -129598,7 +129565,6 @@ export namespace Prisma {
     id?: SortOrder
     establishmentId?: SortOrder
     isGlobal?: SortOrder
-    code?: SortOrder
     isActive?: SortOrder
     quantity?: SortOrder
     unit?: SortOrder
@@ -129614,7 +129580,6 @@ export namespace Prisma {
     id?: SortOrder
     establishmentId?: SortOrder
     isGlobal?: SortOrder
-    code?: SortOrder
     isActive?: SortOrder
     quantity?: SortOrder
     unit?: SortOrder
@@ -129626,7 +129591,6 @@ export namespace Prisma {
     id?: SortOrder
     establishmentId?: SortOrder
     isGlobal?: SortOrder
-    code?: SortOrder
     isActive?: SortOrder
     quantity?: SortOrder
     unit?: SortOrder
@@ -129636,16 +129600,6 @@ export namespace Prisma {
 
   export type VariantOptionSumOrderByAggregateInput = {
     quantity?: SortOrder
-  }
-
-  export type EnumUnitTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.UnitType | EnumUnitTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumUnitTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.UnitType | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumUnitTypeNullableFilter<$PrismaModel>
-    _max?: NestedEnumUnitTypeNullableFilter<$PrismaModel>
   }
 
   export type VariantOptionScalarRelationFilter = {
@@ -136166,10 +136120,6 @@ export namespace Prisma {
     connect?: VariantOptionTranslationWhereUniqueInput | VariantOptionTranslationWhereUniqueInput[]
   }
 
-  export type NullableEnumUnitTypeFieldUpdateOperationsInput = {
-    set?: $Enums.UnitType | null
-  }
-
   export type ItemVariantUpdateManyWithoutVariantOptionNestedInput = {
     create?: XOR<ItemVariantCreateWithoutVariantOptionInput, ItemVariantUncheckedCreateWithoutVariantOptionInput> | ItemVariantCreateWithoutVariantOptionInput[] | ItemVariantUncheckedCreateWithoutVariantOptionInput[]
     connectOrCreate?: ItemVariantCreateOrConnectWithoutVariantOptionInput | ItemVariantCreateOrConnectWithoutVariantOptionInput[]
@@ -140445,23 +140395,6 @@ export namespace Prisma {
     _sum?: NestedFloatNullableFilter<$PrismaModel>
     _min?: NestedFloatNullableFilter<$PrismaModel>
     _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type NestedEnumUnitTypeNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.UnitType | EnumUnitTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumUnitTypeNullableFilter<$PrismaModel> | $Enums.UnitType | null
-  }
-
-  export type NestedEnumUnitTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.UnitType | EnumUnitTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.UnitType[] | ListEnumUnitTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumUnitTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.UnitType | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumUnitTypeNullableFilter<$PrismaModel>
-    _max?: NestedEnumUnitTypeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumModifierDisplayModeFilter<$PrismaModel = never> = {
@@ -145800,10 +145733,9 @@ export namespace Prisma {
   export type VariantOptionCreateWithoutEstablishmentInput = {
     id?: string
     isGlobal?: boolean
-    code?: string | null
     isActive?: boolean
-    quantity?: number | null
-    unit?: $Enums.UnitType | null
+    quantity: number
+    unit: $Enums.UnitType
     createdAt?: Date | string
     updatedAt?: Date | string
     itemVariants?: ItemVariantCreateNestedManyWithoutVariantOptionInput
@@ -145813,10 +145745,9 @@ export namespace Prisma {
   export type VariantOptionUncheckedCreateWithoutEstablishmentInput = {
     id?: string
     isGlobal?: boolean
-    code?: string | null
     isActive?: boolean
-    quantity?: number | null
-    unit?: $Enums.UnitType | null
+    quantity: number
+    unit: $Enums.UnitType
     createdAt?: Date | string
     updatedAt?: Date | string
     itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutVariantOptionInput
@@ -147376,10 +147307,9 @@ export namespace Prisma {
     id?: StringFilter<"VariantOption"> | string
     establishmentId?: StringNullableFilter<"VariantOption"> | string | null
     isGlobal?: BoolFilter<"VariantOption"> | boolean
-    code?: StringNullableFilter<"VariantOption"> | string | null
     isActive?: BoolFilter<"VariantOption"> | boolean
-    quantity?: FloatNullableFilter<"VariantOption"> | number | null
-    unit?: EnumUnitTypeNullableFilter<"VariantOption"> | $Enums.UnitType | null
+    quantity?: FloatFilter<"VariantOption"> | number
+    unit?: EnumUnitTypeFilter<"VariantOption"> | $Enums.UnitType
     createdAt?: DateTimeFilter<"VariantOption"> | Date | string
     updatedAt?: DateTimeFilter<"VariantOption"> | Date | string
   }
@@ -154020,10 +153950,9 @@ export namespace Prisma {
   export type VariantOptionCreateWithoutTranslationsInput = {
     id?: string
     isGlobal?: boolean
-    code?: string | null
     isActive?: boolean
-    quantity?: number | null
-    unit?: $Enums.UnitType | null
+    quantity: number
+    unit: $Enums.UnitType
     createdAt?: Date | string
     updatedAt?: Date | string
     itemVariants?: ItemVariantCreateNestedManyWithoutVariantOptionInput
@@ -154034,10 +153963,9 @@ export namespace Prisma {
     id?: string
     establishmentId?: string | null
     isGlobal?: boolean
-    code?: string | null
     isActive?: boolean
-    quantity?: number | null
-    unit?: $Enums.UnitType | null
+    quantity: number
+    unit: $Enums.UnitType
     createdAt?: Date | string
     updatedAt?: Date | string
     itemVariants?: ItemVariantUncheckedCreateNestedManyWithoutVariantOptionInput
@@ -154062,10 +153990,9 @@ export namespace Prisma {
   export type VariantOptionUpdateWithoutTranslationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     isGlobal?: BoolFieldUpdateOperationsInput | boolean
-    code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemVariants?: ItemVariantUpdateManyWithoutVariantOptionNestedInput
@@ -154076,10 +154003,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: NullableStringFieldUpdateOperationsInput | string | null
     isGlobal?: BoolFieldUpdateOperationsInput | boolean
-    code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemVariants?: ItemVariantUncheckedUpdateManyWithoutVariantOptionNestedInput
@@ -154565,10 +154491,9 @@ export namespace Prisma {
   export type VariantOptionCreateWithoutItemVariantsInput = {
     id?: string
     isGlobal?: boolean
-    code?: string | null
     isActive?: boolean
-    quantity?: number | null
-    unit?: $Enums.UnitType | null
+    quantity: number
+    unit: $Enums.UnitType
     createdAt?: Date | string
     updatedAt?: Date | string
     establishment?: EstablishmentCreateNestedOneWithoutVariantOptionsInput
@@ -154579,10 +154504,9 @@ export namespace Prisma {
     id?: string
     establishmentId?: string | null
     isGlobal?: boolean
-    code?: string | null
     isActive?: boolean
-    quantity?: number | null
-    unit?: $Enums.UnitType | null
+    quantity: number
+    unit: $Enums.UnitType
     createdAt?: Date | string
     updatedAt?: Date | string
     translations?: VariantOptionTranslationUncheckedCreateNestedManyWithoutVariantOptionInput
@@ -154828,10 +154752,9 @@ export namespace Prisma {
   export type VariantOptionUpdateWithoutItemVariantsInput = {
     id?: StringFieldUpdateOperationsInput | string
     isGlobal?: BoolFieldUpdateOperationsInput | boolean
-    code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     establishment?: EstablishmentUpdateOneWithoutVariantOptionsNestedInput
@@ -154842,10 +154765,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     establishmentId?: NullableStringFieldUpdateOperationsInput | string | null
     isGlobal?: BoolFieldUpdateOperationsInput | boolean
-    code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     translations?: VariantOptionTranslationUncheckedUpdateManyWithoutVariantOptionNestedInput
@@ -169859,10 +169781,9 @@ export namespace Prisma {
   export type VariantOptionCreateManyEstablishmentInput = {
     id?: string
     isGlobal?: boolean
-    code?: string | null
     isActive?: boolean
-    quantity?: number | null
-    unit?: $Enums.UnitType | null
+    quantity: number
+    unit: $Enums.UnitType
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -170576,10 +170497,9 @@ export namespace Prisma {
   export type VariantOptionUpdateWithoutEstablishmentInput = {
     id?: StringFieldUpdateOperationsInput | string
     isGlobal?: BoolFieldUpdateOperationsInput | boolean
-    code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemVariants?: ItemVariantUpdateManyWithoutVariantOptionNestedInput
@@ -170589,10 +170509,9 @@ export namespace Prisma {
   export type VariantOptionUncheckedUpdateWithoutEstablishmentInput = {
     id?: StringFieldUpdateOperationsInput | string
     isGlobal?: BoolFieldUpdateOperationsInput | boolean
-    code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemVariants?: ItemVariantUncheckedUpdateManyWithoutVariantOptionNestedInput
@@ -170602,10 +170521,9 @@ export namespace Prisma {
   export type VariantOptionUncheckedUpdateManyWithoutEstablishmentInput = {
     id?: StringFieldUpdateOperationsInput | string
     isGlobal?: BoolFieldUpdateOperationsInput | boolean
-    code?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    quantity?: NullableFloatFieldUpdateOperationsInput | number | null
-    unit?: NullableEnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType | null
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unit?: EnumUnitTypeFieldUpdateOperationsInput | $Enums.UnitType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

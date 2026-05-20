@@ -26,43 +26,43 @@ type MultiLangString = {
 // DATASETS (O TEU ATIVO MAIS VALIOSO)
 // ============================================
 
-const GLOBAL_VARIANTS: { name: MultiLangString; unit?: string; quantity?: number }[] = [
+const GLOBAL_VARIANTS: { name: MultiLangString; unit: UnitType; quantity: number }[] = [
   // --- TAMANHOS GENÉRICOS (SIZE) ---
-  { name: { PT: 'Mini', EN: 'Mini', ES: 'Mini', FR: 'Mini', DE: 'Mini', IT: 'Mini' } },
-  { name: { PT: 'Pequena', EN: 'Small', ES: 'Pequeña', FR: 'Petite', DE: 'Klein', IT: 'Piccola' } },
-  { name: { PT: 'Média', EN: 'Medium', ES: 'Mediana', FR: 'Moyenne', DE: 'Mittel', IT: 'Media' } },
-  { name: { PT: 'Grande', EN: 'Large', ES: 'Grande', FR: 'Grande', DE: 'Groß', IT: 'Grande' } },
-  { name: { PT: 'Extra Grande (XL)', EN: 'Extra Large (XL)', ES: 'Extra Grande (XL)', FR: 'Extra Grande (XL)', DE: 'Extra Groß (XL)', IT: 'Extra Grande (XL)' } },
-  { name: { PT: 'Familiar', EN: 'Family Size', ES: 'Familiar', FR: 'Familiale', DE: 'Familien', IT: 'Familiare' } },
-  { name: { PT: 'Dose', EN: 'Serving', ES: 'Ración', FR: 'Portion', DE: 'Portion', IT: 'Porzione' } },
-  { name: { PT: 'Meia Dose', EN: 'Half Serving', ES: 'Media Ración', FR: 'Demi-portion', DE: 'Halbe Portion', IT: 'Mezza Porzione' } },
-  { name: { PT: 'Fatia', EN: 'Slice', ES: 'Porción', FR: 'Part', DE: 'Stück', IT: 'Trancio' } },
+  { name: { PT: 'Mini', EN: 'Mini', ES: 'Mini', FR: 'Mini', DE: 'Mini', IT: 'Mini' }, unit: UnitType.UNIT, quantity: 1 },
+  { name: { PT: 'Pequena', EN: 'Small', ES: 'Pequeña', FR: 'Petite', DE: 'Klein', IT: 'Piccola' }, unit: UnitType.UNIT, quantity: 1 },
+  { name: { PT: 'Média', EN: 'Medium', ES: 'Mediana', FR: 'Moyenne', DE: 'Mittel', IT: 'Media' }, unit: UnitType.UNIT, quantity: 1 },
+  { name: { PT: 'Grande', EN: 'Large', ES: 'Grande', FR: 'Grande', DE: 'Groß', IT: 'Grande' }, unit: UnitType.UNIT, quantity: 1 },
+  { name: { PT: 'Extra Grande (XL)', EN: 'Extra Large (XL)', ES: 'Extra Grande (XL)', FR: 'Extra Grande (XL)', DE: 'Extra Groß (XL)', IT: 'Extra Grande (XL)' }, unit: UnitType.UNIT, quantity: 1 },
+  { name: { PT: 'Familiar', EN: 'Family Size', ES: 'Familiar', FR: 'Familiale', DE: 'Familien', IT: 'Familiare' }, unit: UnitType.UNIT, quantity: 1 },
+  { name: { PT: 'Dose', EN: 'Serving', ES: 'Ración', FR: 'Portion', DE: 'Portion', IT: 'Porzione' }, unit: UnitType.UNIT, quantity: 1 },
+  { name: { PT: 'Meia Dose', EN: 'Half Serving', ES: 'Media Ración', FR: 'Demi-portion', DE: 'Halbe Portion', IT: 'Mezza Porzione' }, unit: UnitType.HALF, quantity: 1 },
+  { name: { PT: 'Fatia', EN: 'Slice', ES: 'Porción', FR: 'Part', DE: 'Stück', IT: 'Trancio' }, unit: UnitType.SLICE, quantity: 1 },
 
   // --- VOLUMES (SIZE) ---
-  { name: { PT: 'Shot', EN: 'Shot', ES: 'Chupito', FR: 'Shooter', DE: 'Shot', IT: 'Cicchetto' } },
-  { name: { PT: 'Copo / Caneca (Pint)', EN: 'Pint', ES: 'Pinta', FR: 'Pinte', DE: 'Pint', IT: 'Pinta' } },
-  { name: { PT: 'Jarro', EN: 'Pitcher', ES: 'Jarra', FR: 'Pichet', DE: 'Krug', IT: 'Caraffa' } },
-  { name: { PT: 'Garrafa', EN: 'Bottle', ES: 'Botella', FR: 'Bouteille', DE: 'Flasche', IT: 'Bottiglia' } },
-  { name: { PT: '20cl', EN: '20cl', ES: '20cl', FR: '20cl', DE: '20cl', IT: '20cl' }, unit: 'cl', quantity: 20 },
-  { name: { PT: '33cl', EN: '33cl', ES: '33cl', FR: '33cl', DE: '33cl', IT: '33cl' }, unit: 'cl', quantity: 33 },
-  { name: { PT: '50cl', EN: '50cl', ES: '50cl', FR: '50cl', DE: '50cl', IT: '50cl' }, unit: 'cl', quantity: 50 },
-  { name: { PT: '75cl', EN: '75cl', ES: '75cl', FR: '75cl', DE: '75cl', IT: '75cl' }, unit: 'cl', quantity: 75 },
-  { name: { PT: '1L', EN: '1L', ES: '1L', FR: '1L', DE: '1L', IT: '1L' }, unit: 'L', quantity: 1 },
-  { name: { PT: '1.5L', EN: '1.5L', ES: '1.5L', FR: '1.5L', DE: '1.5L', IT: '1.5L' }, unit: 'L', quantity: 1.5 },
+  { name: { PT: 'Shot', EN: 'Shot', ES: 'Chupito', FR: 'Shooter', DE: 'Shot', IT: 'Cicchetto' }, unit: UnitType.UNIT, quantity: 1 },
+  { name: { PT: 'Copo / Caneca (Pint)', EN: 'Pint', ES: 'Pinta', FR: 'Pinte', DE: 'Pint', IT: 'Pinta' }, unit: UnitType.UNIT, quantity: 1 },
+  { name: { PT: 'Jarro', EN: 'Pitcher', ES: 'Jarra', FR: 'Pichet', DE: 'Krug', IT: 'Caraffa' }, unit: UnitType.UNIT, quantity: 1 },
+  { name: { PT: 'Garrafa', EN: 'Bottle', ES: 'Botella', FR: 'Bouteille', DE: 'Flasche', IT: 'Bottiglia' }, unit: UnitType.UNIT, quantity: 1 },
+  { name: { PT: '20cl', EN: '20cl', ES: '20cl', FR: '20cl', DE: '20cl', IT: '20cl' }, unit: UnitType.CENTILITER, quantity: 20 },
+  { name: { PT: '33cl', EN: '33cl', ES: '33cl', FR: '33cl', DE: '33cl', IT: '33cl' }, unit: UnitType.CENTILITER, quantity: 33 },
+  { name: { PT: '50cl', EN: '50cl', ES: '50cl', FR: '50cl', DE: '50cl', IT: '50cl' }, unit: UnitType.CENTILITER, quantity: 50 },
+  { name: { PT: '75cl', EN: '75cl', ES: '75cl', FR: '75cl', DE: '75cl', IT: '75cl' }, unit: UnitType.CENTILITER, quantity: 75 },
+  { name: { PT: '1L', EN: '1L', ES: '1L', FR: '1L', DE: '1L', IT: '1L' }, unit: UnitType.LITER, quantity: 1 },
+  { name: { PT: '1.5L', EN: '1.5L', ES: '1.5L', FR: '1.5L', DE: '1.5L', IT: '1.5L' }, unit: UnitType.LITER, quantity: 1.5 },
 
   // --- PESOS (SIZE) ---
-  { name: { PT: '100g', EN: '100g', ES: '100g', FR: '100g', DE: '100g', IT: '100g' }, unit: 'g', quantity: 100 },
-  { name: { PT: '200g', EN: '200g', ES: '200g', FR: '200g', DE: '200g', IT: '200g' }, unit: 'g', quantity: 200 },
-  { name: { PT: '300g', EN: '300g', ES: '300g', FR: '300g', DE: '300g', IT: '300g' }, unit: 'g', quantity: 300 },
-  { name: { PT: '500g', EN: '500g', ES: '500g', FR: '500g', DE: '500g', IT: '500g' }, unit: 'g', quantity: 500 },
-  { name: { PT: '1kg', EN: '1kg', ES: '1kg', FR: '1kg', DE: '1kg', IT: '1kg' }, unit: 'kg', quantity: 1 },
+  { name: { PT: '100g', EN: '100g', ES: '100g', FR: '100g', DE: '100g', IT: '100g' }, unit: UnitType.GRAM, quantity: 100 },
+  { name: { PT: '200g', EN: '200g', ES: '200g', FR: '200g', DE: '200g', IT: '200g' }, unit: UnitType.GRAM, quantity: 200 },
+  { name: { PT: '300g', EN: '300g', ES: '300g', FR: '300g', DE: '300g', IT: '300g' }, unit: UnitType.GRAM, quantity: 300 },
+  { name: { PT: '500g', EN: '500g', ES: '500g', FR: '500g', DE: '500g', IT: '500g' }, unit: UnitType.GRAM, quantity: 500 },
+  { name: { PT: '1kg', EN: '1kg', ES: '1kg', FR: '1kg', DE: '1kg', IT: '1kg' }, unit: UnitType.KILOGRAM, quantity: 1 },
 
   // --- QUANTIDADES (SIZE) ---
-  { name: { PT: '4 Unidades', EN: '4 Pieces', ES: '4 Piezas', FR: '4 Pièces', DE: '4 Stück', IT: '4 Pezzi' }, quantity: 4 },
-  { name: { PT: '6 Unidades', EN: '6 Pieces', ES: '6 Piezas', FR: '6 Pièces', DE: '6 Stück', IT: '6 Pezzi' }, quantity: 6 },
-  { name: { PT: '8 Unidades', EN: '8 Pieces', ES: '8 Piezas', FR: '8 Pièces', DE: '8 Stück', IT: '8 Pezzi' }, quantity: 8 },
-  { name: { PT: '10 Unidades', EN: '10 Pieces', ES: '10 Piezas', FR: '10 Pièces', DE: '10 Stück', IT: '10 Pezzi' }, quantity: 10 },
-  { name: { PT: '20 Unidades', EN: '20 Pieces', ES: '20 Piezas', FR: '20 Pièces', DE: '20 Stück', IT: '20 Pezzi' }, quantity: 20 },
+  { name: { PT: '4 Unidades', EN: '4 Pieces', ES: '4 Piezas', FR: '4 Pièces', DE: '4 Stück', IT: '4 Pezzi' }, unit: UnitType.UNIT, quantity: 4 },
+  { name: { PT: '6 Unidades', EN: '6 Pieces', ES: '6 Piezas', FR: '6 Pièces', DE: '6 Stück', IT: '6 Pezzi' }, unit: UnitType.UNIT, quantity: 6 },
+  { name: { PT: '8 Unidades', EN: '8 Pieces', ES: '8 Piezas', FR: '8 Pièces', DE: '8 Stück', IT: '8 Pezzi' }, unit: UnitType.UNIT, quantity: 8 },
+  { name: { PT: '10 Unidades', EN: '10 Pieces', ES: '10 Piezas', FR: '10 Pièces', DE: '10 Stück', IT: '10 Pezzi' }, unit: UnitType.UNIT, quantity: 10 },
+  { name: { PT: '20 Unidades', EN: '20 Pieces', ES: '20 Piezas', FR: '20 Pièces', DE: '20 Stück', IT: '20 Pezzi' }, unit: UnitType.UNIT, quantity: 20 },
 ];
 
 const GLOBAL_ADDONS: { name: MultiLangString }[] = [

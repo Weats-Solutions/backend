@@ -22,11 +22,9 @@ export class CreateVariantOptionDto {
     @IsBoolean()
     isActive?: boolean;
 
-    @IsOptional()
     @IsNumber()
-    quantity?: number;
+    quantity: number;
 
-    @IsOptional()
     @IsEnum(UnitType)
-    unit?: UnitType;
+    unit: UnitType;
 }
