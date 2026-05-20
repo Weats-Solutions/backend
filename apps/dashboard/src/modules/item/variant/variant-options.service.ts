@@ -64,6 +64,8 @@ export class VariantOptionsService {
         ],
       },
       orderBy: [
+        { createdAt: 'desc' },
+        { updatedAt: 'desc' },
         { isGlobal: 'desc' },
       ],
       select: {

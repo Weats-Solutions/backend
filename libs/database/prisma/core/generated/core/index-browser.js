@@ -530,7 +530,9 @@ exports.Prisma.VariantOptionScalarFieldEnum = {
   code: 'code',
   isActive: 'isActive',
   quantity: 'quantity',
-  unit: 'unit'
+  unit: 'unit',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.VariantOptionTranslationScalarFieldEnum = {

@@ -101,6 +101,8 @@ model VariantOption {
   itemVariants    ItemVariant[]
   establishment   Establishment?             @relation(fields: [establishmentId], references: [id])
   translations    VariantOptionTranslation[]
+  createdAt       DateTime                   @default(now())
+  updatedAt       DateTime                   @updatedAt
 
   @@index([establishmentId])
 }
@@ -288,7 +290,6 @@ enum AllergenCode {
   SOY
   SULFITES
 }
-
 
 enum ModifierDisplayMode {
   RADIO
