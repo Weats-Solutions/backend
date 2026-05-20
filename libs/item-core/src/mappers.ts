@@ -65,7 +65,6 @@ export function mapItemDetailResponse(item: ItemWithDetailIncludes): ItemDetailR
                 })),
                 nutritionalInfo: v.nutritionInfo ?? undefined,
                 variantOption: {
-                    type: v.variantOption.type,
                     translations: v.variantOption.translations.map(t => ({
                         locale: t.locale,
                         name: t.name,

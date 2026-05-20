@@ -114,7 +114,6 @@ export interface ItemVariantDetailResponse {
     allergens: AllergenResponse[];
     nutritionalInfo?: NutritionalInfoResponse;
     variantOption: {
-        type: string;
         translations: TranslationResponse[];
     };
 }
