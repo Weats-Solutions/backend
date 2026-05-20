@@ -98,7 +98,6 @@ model VariantOption {
   isActive        Boolean                    @default(true)
   quantity        Float?
   unit            UnitType?
-  type            VariantType                @default(OTHER)
   itemVariants    ItemVariant[]
   establishment   Establishment?             @relation(fields: [establishmentId], references: [id])
   translations    VariantOptionTranslation[]
@@ -290,13 +289,6 @@ enum AllergenCode {
   SULFITES
 }
 
-enum VariantType {
-  SIZE
-  FLAVOR
-  PREPARATION
-  COLOR
-  OTHER
-}
 
 enum ModifierDisplayMode {
   RADIO

@@ -1,6 +1,6 @@
 import { IsString, IsEnum, IsBoolean, IsOptional, IsInt, Min, ValidateNested, IsArray } from 'class-validator';
 import { Type } from 'class-transformer';
-import { EstablishmentLanguage, VariantType } from '@weats/database';
+import { EstablishmentLanguage } from '@weats/database';
 
 
 export class VariantGroupTranslationDto {
@@ -14,9 +14,6 @@ export class VariantGroupTranslationDto {
 export class CreateVariantGroupDto {
   @IsString()
   name: string;
-
-  @IsEnum(VariantType)
-  type: VariantType;
 
   @IsInt()
   @Min(0)

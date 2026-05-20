@@ -68,7 +68,6 @@ export class VariantOptionsService {
       ],
       select: {
         id: true,
-        type: true,
         unit: true,
         quantity: true,
         code: true,
@@ -92,7 +91,6 @@ export class VariantOptionsService {
       },
       select: {
         id: true,
-        type: true,
         unit: true,
         quantity: true,
         code: true,

@@ -1041,7 +1041,6 @@ model VariantOption {
   isActive        Boolean                    @default(true)
   quantity        Float?
   unit            UnitType?
-  type            VariantType                @default(OTHER)
   itemVariants    ItemVariant[]
   establishment   Establishment?             @relation(fields: [establishmentId], references: [id])
   translations    VariantOptionTranslation[]
@@ -1231,14 +1230,6 @@ enum AllergenCode {
   SHELLFISH
   SOY
   SULFITES
-}
-
-enum VariantType {
-  SIZE
-  FLAVOR
-  PREPARATION
-  COLOR
-  OTHER
 }
 
 enum ModifierDisplayMode {
@@ -2187,7 +2178,7 @@ model TaxTable {
 }
 
 model Theme {
-  id                   String          @id @default(cuid())
+  id                   String          @id @default(ulid())
   name                 String
   config               Json
   isDefault            Boolean         @default(false)

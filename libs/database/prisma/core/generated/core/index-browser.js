@@ -530,8 +530,7 @@ exports.Prisma.VariantOptionScalarFieldEnum = {
   code: 'code',
   isActive: 'isActive',
   quantity: 'quantity',
-  unit: 'unit',
-  type: 'type'
+  unit: 'unit'
 };
 
 exports.Prisma.VariantOptionTranslationScalarFieldEnum = {
@@ -1431,14 +1430,6 @@ exports.SpiceLevel = exports.$Enums.SpiceLevel = {
   MEDIUM: 'MEDIUM',
   HIGH: 'HIGH',
   EXTRA_HOT: 'EXTRA_HOT'
-};
-
-exports.VariantType = exports.$Enums.VariantType = {
-  SIZE: 'SIZE',
-  FLAVOR: 'FLAVOR',
-  PREPARATION: 'PREPARATION',
-  COLOR: 'COLOR',
-  OTHER: 'OTHER'
 };
 
 exports.ModifierDisplayMode = exports.$Enums.ModifierDisplayMode = {
