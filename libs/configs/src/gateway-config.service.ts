@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ClientOptions, Transport, RedisOptions } from '@nestjs/microservices';
 import { RedisConfigService } from './redis-config.service';
 
 @Injectable()
 export class GatewayConfigService {
+  private readonly logger = new Logger(GatewayConfigService.name);
   constructor(
     private configService: ConfigService,
     private redisConfig: RedisConfigService,
@@ -12,7 +13,7 @@ export class GatewayConfigService {
 
   getDashboardClientHost(): string {
     const isProd = this.configService.get('NODE_ENV') === 'production';
-    console.log("IS PROD", isProd);
+    this.logger.log("IS PROD", isProd);
     return isProd ? 'weats-prod-dashboard' : 'localhost';
   }
 
@@ -24,6 +25,8 @@ export class GatewayConfigService {
   }
 
   get dashboardClientOptions(): ClientOptions {
+    this.logger.log("HOST", this.getDashboardClientHost());
+    this.logger.log("PORT", this.getDashboardClientPort());
     return {
       transport: Transport.TCP,
       options: {
