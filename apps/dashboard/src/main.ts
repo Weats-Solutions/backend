@@ -13,8 +13,9 @@ async function bootstrap() {
     {
       transport: Transport.TCP,
       options: {
+        host: '0.0.0.0',
         port: configService.getDashboardClientPort(),
-        // sem host — escuta em 0.0.0.0 automaticamente
+
       },
     }
   );
