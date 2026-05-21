@@ -11,7 +11,7 @@ services:
     container_name: weats-dev-gateway
     restart: always
     ports:
-      - '4000:4000'
+      - '4100:4000'
     env_file:
       - .env
     networks:
@@ -29,7 +29,7 @@ services:
     container_name: weats-dev-realtime
     restart: always
     ports:
-      - '4005:4005'
+      - '4105:4005'
     env_file:
       - .env
     networks:
@@ -47,7 +47,7 @@ services:
     container_name: weats-dev-webhooks
     restart: always
     ports:
-      - '4003:4003'
+      - '4103:4003'
     env_file:
       - .env
     networks:
@@ -113,7 +113,7 @@ services:
     container_name: weats-dev-catalog
     restart: always
     ports:
-      - '4002:4002' # Usando 4002 para o Catalog
+      - '4102:4002' # Usando 4002 para o Catalog
     env_file:
       - .env
     networks:
