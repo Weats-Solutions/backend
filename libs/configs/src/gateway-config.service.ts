@@ -8,14 +8,11 @@ export class GatewayConfigService {
   constructor(
     private configService: ConfigService,
     private redisConfig: RedisConfigService,
-  ) {}
+  ) { }
 
   getDashboardClientHost(): string {
     const isProd = this.configService.get('NODE_ENV') === 'production';
-    return (
-      this.configService.get('DASHBOARD_HOST') ||
-      (isProd ? 'dashboard' : 'localhost')
-    );
+    return isProd ? 'weats-prod-dashboard' : 'localhost';
   }
 
   getDashboardClientPort(): number {
