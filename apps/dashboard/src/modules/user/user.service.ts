@@ -24,7 +24,7 @@ export class UserService {
                 name: true,
                 type: true,
                 slug: true,
-                isOnline: true,
+                isActive: true,
                 isDemo: true,
                 subscription: {
                     select: {
