@@ -8,7 +8,7 @@ services:
       args:
         CORE_DB_URL: ${CORE_DB_URL}
         ORDERS_DB_URL: ${ORDERS_DB_URL}
-    container_name: weats-gateway
+    container_name: weats-dev-gateway
     restart: always
     ports:
       - '4000:4000'
@@ -26,7 +26,7 @@ services:
       args:
         CORE_DB_URL: ${CORE_DB_URL}
         ORDERS_DB_URL: ${ORDERS_DB_URL}
-    container_name: weats-realtime
+    container_name: weats-dev-realtime
     restart: always
     ports:
       - '4005:4005'
@@ -44,7 +44,7 @@ services:
       args:
         CORE_DB_URL: ${CORE_DB_URL}
         ORDERS_DB_URL: ${ORDERS_DB_URL}
-    container_name: weats-webhooks
+    container_name: weats-dev-webhooks
     restart: always
     ports:
       - '4003:4003'
@@ -68,7 +68,7 @@ services:
       args:
         CORE_DB_URL: ${CORE_DB_URL}
         ORDERS_DB_URL: ${ORDERS_DB_URL}
-    container_name: weats-dashboard
+    container_name: weats-dev-dashboard
     restart: always
     env_file:
       - .env
@@ -88,7 +88,7 @@ services:
       args:
         CORE_DB_URL: ${CORE_DB_URL}
         ORDERS_DB_URL: ${ORDERS_DB_URL}
-    container_name: weats-workers
+    container_name: weats-dev-workers
     restart: always
     env_file:
       - .env
@@ -110,10 +110,10 @@ services:
       args:
         CORE_DB_URL: ${CORE_DB_URL}
         ORDERS_DB_URL: ${ORDERS_DB_URL}
-    container_name: weats-catalog
+    container_name: weats-dev-catalog
     restart: always
     ports:
-      - '4002:4002' # Usando 4006 para o Catalog
+      - '4002:4002' # Usando 4002 para o Catalog
     env_file:
       - .env
     networks:

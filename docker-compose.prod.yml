@@ -1,0 +1,132 @@
+version: '3.8'
+
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway
+      args:
+        CORE_DB_URL: ${CORE_DB_URL}
+        ORDERS_DB_URL: ${ORDERS_DB_URL}
+    container_name: weats-prod-gateway
+    restart: always
+    ports:
+      - '4000:4000'
+    env_file:
+      - .env
+    networks:
+      - weats-network
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+  realtime:
+    build:
+      context: .
+      dockerfile: Dockerfile.realtime
+      args:
+        CORE_DB_URL: ${CORE_DB_URL}
+        ORDERS_DB_URL: ${ORDERS_DB_URL}
+    container_name: weats-prod-realtime
+    restart: always
+    ports:
+      - '4005:4005'
+    env_file:
+      - .env
+    networks:
+      - weats-network
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+  webhooks:
+    build:
+      context: .
+      dockerfile: Dockerfile.webhooks
+      args:
+        CORE_DB_URL: ${CORE_DB_URL}
+        ORDERS_DB_URL: ${ORDERS_DB_URL}
+    container_name: weats-prod-webhooks
+    restart: always
+    ports:
+      - '4003:4003'
+    env_file:
+      - .env
+    networks:
+      - weats-network
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '3'
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+      args:
+        CORE_DB_URL: ${CORE_DB_URL}
+        ORDERS_DB_URL: ${ORDERS_DB_URL}
+    container_name: weats-prod-dashboard
+    restart: always
+    env_file:
+      - .env
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '3'
+
+  workers:
+    build:
+      context: .
+      dockerfile: Dockerfile.workers
+      args:
+        CORE_DB_URL: ${CORE_DB_URL}
+        ORDERS_DB_URL: ${ORDERS_DB_URL}
+    container_name: weats-prod-workers
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - weats-network
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '3'
+
+  catalog:
+    build:
+      context: .
+      dockerfile: Dockerfile.catalog
+      args:
+        CORE_DB_URL: ${CORE_DB_URL}
+        ORDERS_DB_URL: ${ORDERS_DB_URL}
+    container_name: weats-prod-catalog
+    restart: always
+    ports:
+      - '4002:4002' # Usando 4002 para o Catalog
+    env_file:
+      - .env
+    networks:
+      - weats-network
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '3'
+
+networks:
+  weats-network:
+    driver: bridge
