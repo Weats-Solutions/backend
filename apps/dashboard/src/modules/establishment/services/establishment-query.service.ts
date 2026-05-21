@@ -57,7 +57,6 @@ export class EstablishmentQueryService {
             name: establishment.name,
             type: establishment.type,
             slug: establishment.slug,
-            isOnline: establishment.isOnline,
             isDemo: establishment.isDemo,
             address: establishment.address,
             city: establishment.city,
