@@ -12,6 +12,7 @@ export class GatewayConfigService {
 
   getDashboardClientHost(): string {
     const isProd = this.configService.get('NODE_ENV') === 'production';
+    console.log("IS PROD", isProd);
     return isProd ? 'weats-prod-dashboard' : 'localhost';
   }
 
