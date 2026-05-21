@@ -1,13 +1,11 @@
-import { Injectable, BadRequestException, Inject } from '@nestjs/common';
-import { SubscriptionStatus } from '@weats/database';
+import { BadRequestException, Inject, Injectable, Logger } from '@nestjs/common';
 import { Stripe } from 'stripe';
-import { Logger } from '@nestjs/common';
-import { ClerkService } from '@weats/integrations';
-import { StripeService } from '@weats/integrations';
 import { CorePrismaService } from '@weats/database';
-import { SendEmailDto, EmailTemplate, ACCEPTED_LANGUAGES } from '@weats/types';
+import { ACCEPTED_LANGUAGES, EmailTemplate, SendEmailDto } from '@weats/types';
 import { EmailProducer } from '@weats/bull/producers/email.producer';
+import { StripeService } from '@weats/integrations';
 import { CacheService } from '@weats/cache';
+import { StripeWebhooksHelpers } from './stripe-helpers.service';
 
 @Injectable()
 export class HandleSubscriptionsService {
@@ -15,109 +13,32 @@ export class HandleSubscriptionsService {
 
   constructor(
     @Inject('APP_URL') private readonly appUrl: string,
-    private readonly stripeService: StripeService,
     private readonly prisma: CorePrismaService,
     private readonly emailProducer: EmailProducer,
-    private readonly clerkService: ClerkService,
+    private readonly stripeService: StripeService,
     private readonly cacheService: CacheService,
+    private readonly helpers: StripeWebhooksHelpers,
   ) { }
 
-  private async getEstablishmentAndPlan(subscription: Stripe.Subscription) {
-    const customerId =
-      typeof subscription.customer === 'string'
-        ? subscription.customer
-        : subscription.customer?.id;
-    if (!customerId) return null;
+  // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-    const establishment = await this.prisma.establishment.findUnique({
-      where: { stripeCustomerId: customerId },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        stripeCustomerId: true,
-        primaryLanguage: true,
-        owner: {
-          select: {
-            firstName: true,
-            lastName: true,
-          },
-        },
-      },
-    });
-    if (!establishment) return null;
-
-    const planCycle = await this.prisma.planCycle.findUnique({
-      where: { priceId: subscription.items.data[0].price.id },
-      include: {
-        plan: {
-          select: {
-            name: true,
-          },
-        },
-      },
-    });
-    if (!planCycle) return null;
-
-    return { customerId, establishment, planCycle };
+  private redirectUrl(lang: string, establishmentId: string): string {
+    return `${this.appUrl}/${lang}/establishment/${establishmentId}`;
   }
 
-  private toDate(timestamp?: number | null) {
-    if (timestamp === null) return null; // Retorna null explicitamente para limpar a DB
-    return timestamp ? new Date(timestamp * 1000) : undefined;
-  }
+  // ─── Handlers ─────────────────────────────────────────────────────────────────
 
-  private mapStatus(status: string): SubscriptionStatus {
-    switch (status) {
-      case 'active':
-        return SubscriptionStatus.ACTIVE;
-      case 'past_due':
-        return SubscriptionStatus.PAST_DUE;
-      case 'canceled':
-        return SubscriptionStatus.CANCELED;
-      case 'incomplete':
-        return SubscriptionStatus.INCOMPLETE;
-      case 'incomplete_expired':
-        return SubscriptionStatus.INCOMPLETE_EXPIRED;
-      case 'trialing':
-        return SubscriptionStatus.TRIALING;
-      default:
-        return SubscriptionStatus.INCOMPLETE;
-    }
-  }
-
-  private buildSubscriptionData(
-    subscription: Stripe.Subscription,
-    planCycleId: string,
-  ) {
-    return {
-      planCycleId,
-      status: this.mapStatus(subscription.status),
-      currentPeriodStart: this.toDate(
-        subscription.items.data[0].current_period_start,
-      ),
-      currentPeriodEnd: this.toDate(
-        subscription.items.data[0].current_period_end,
-      ),
-      cancelAtPeriodEnd: subscription.cancel_at_period_end,
-      cancelAt: this.toDate(subscription.cancel_at),
-      canceledAt: this.toDate(subscription.canceled_at),
-      trialEnd: this.toDate(subscription.trial_end),
-    };
-  }
-
-
-
-  async handleCustomerSubscriptionCreated(event: Stripe.Event) {
+  async handleCustomerSubscriptionCreated(event: Stripe.Event): Promise<void> {
     try {
       const subscription = event.data.object as Stripe.Subscription;
-      const data = await this.getEstablishmentAndPlan(subscription);
+      const data = await this.helpers.fetchEstablishmentAndPlan(subscription);
       if (!data) return;
 
       const { customerId, establishment, planCycle } = data;
-      const subData = this.buildSubscriptionData(subscription, planCycle.id);
+      const subData = this.helpers.buildSubscriptionData(subscription, planCycle.id);
+      const lang = this.helpers.resolveLang(establishment.primaryLanguage);
 
-      // Use establishmentId as unique key since one establishment = one subscription
+      // Upsert defensivo: o checkout flow pode ter chegado primeiro
       await this.prisma.subscription.upsert({
         where: { establishmentId: establishment.id },
         update: {
@@ -132,7 +53,7 @@ export class HandleSubscriptionsService {
           stripeCustomerId: customerId,
         },
       });
-      
+
       await this.cacheService.clearDashboardEstCache(establishment.id);
 
       if (subscription.status === 'trialing') {
@@ -143,68 +64,61 @@ export class HandleSubscriptionsService {
 
         const trialDays =
           trialStart && trialEnd
-            ? Math.round(
-              (trialEnd.getTime() - trialStart.getTime()) /
-              (1000 * 60 * 60 * 24),
-            )
+            ? Math.round((trialEnd.getTime() - trialStart.getTime()) / (1000 * 60 * 60 * 24))
             : 0;
 
         const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_TRIAL_STARTED> = {
           to: establishment.email,
           template: EmailTemplate.SUBSCRIPTION_TRIAL_STARTED,
-          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          lang,
           context: {
             firstName: establishment.owner.firstName,
             lastName: establishment.owner.lastName,
             establishmentName: establishment.name,
             planName: planCycle.plan.name,
-            trialDays: trialDays,
-            trialEndsAt: subData.trialEnd?.toLocaleDateString(
-              establishment.primaryLanguage.toLowerCase(),
-            ) ?? '',
-            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
+            trialDays,
+            trialEndsAt: subData.trialEnd?.toLocaleDateString(lang) ?? '',
+            redirectUrl: this.redirectUrl(lang, establishment.id),
           },
         };
 
         await this.emailProducer.send(payload);
+        this.logger.log(`📧 Trial-started email → ${establishment.email}`);
       } else {
         const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CREATED> = {
           to: establishment.email,
           template: EmailTemplate.SUBSCRIPTION_CREATED,
-          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          lang,
           context: {
             firstName: establishment.owner.firstName,
             lastName: establishment.owner.lastName,
             establishmentName: establishment.name,
             planName: planCycle.plan.name,
-            nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
-              establishment.primaryLanguage.toLowerCase(),
-            ) ?? '',
-            trialEndsAt: subData.trialEnd?.toLocaleDateString(
-              establishment.primaryLanguage.toLowerCase(),
-            ),
-            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
+            nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(lang) ?? '',
+            trialEndsAt: subData.trialEnd?.toLocaleDateString(lang),
+            redirectUrl: this.redirectUrl(lang, establishment.id),
           },
         };
 
         await this.emailProducer.send(payload);
+        this.logger.log(`📧 Subscription-created email → ${establishment.email}`);
       }
-
     } catch (error) {
-      this.logger.error('Erro em handleCustomerSubscriptionCreated', error);
-      throw new BadRequestException('Erro ao processar assinatura');
+      this.logger.error('handleCustomerSubscriptionCreated failed', error);
+      throw new BadRequestException('Erro ao processar criação de assinatura');
     }
   }
 
-  async handleCustomerSubscriptionUpdated(event: Stripe.Event) {
+  async handleCustomerSubscriptionUpdated(event: Stripe.Event): Promise<void> {
     try {
       const subscription = event.data.object as Stripe.Subscription;
-      const data = await this.getEstablishmentAndPlan(subscription);
+      const previous = event.data.previous_attributes as Partial<Stripe.Subscription> | undefined;
+      const data = await this.helpers.fetchEstablishmentAndPlan(subscription);
       if (!data) return;
 
       const { establishment, planCycle } = data;
-
-      const subData = this.buildSubscriptionData(subscription, planCycle.id);
+      const subData = this.helpers.buildSubscriptionData(subscription, planCycle.id);
+      const lang = this.helpers.resolveLang(establishment.primaryLanguage);
 
       await this.prisma.subscription.update({
         where: { stripeSubscriptionId: subscription.id },
@@ -213,82 +127,74 @@ export class HandleSubscriptionsService {
 
       await this.cacheService.clearDashboardEstCache(establishment.id);
 
-      const previousAttributes = event.data
-        .previous_attributes as Partial<Stripe.Subscription>;
-
+      // ── Transition detection ───────────────────────────────────────────────
       const justCanceled =
-        subscription.cancel_at !== null &&
-        previousAttributes?.cancel_at === null;
+        subscription.cancel_at !== null && previous?.cancel_at === null;
+
       const justReactivated =
         subscription.cancel_at === null &&
-        previousAttributes?.cancel_at !== undefined &&
-        previousAttributes?.cancel_at !== null;
-      const justStartedTrial =
-        (subscription.status === 'trialing' &&
-          previousAttributes?.status !== 'trialing') ||
-        (subscription.trial_end !== null &&
-          previousAttributes?.trial_end === null);
-      const justBecameActiveFromTrial =
-        subscription.status === 'active' &&
-        previousAttributes?.status === 'trialing';
+        previous?.cancel_at !== undefined &&
+        previous.cancel_at !== null;
 
+      const justStartedTrial =
+        (subscription.status === 'trialing' && previous?.status !== 'trialing') ||
+        (subscription.trial_end !== null && previous?.trial_end === null);
+
+      const justBecameActiveFromTrial =
+        subscription.status === 'active' && previous?.status === 'trialing';
+
+      // ── justCanceled ───────────────────────────────────────────────────────
       if (justCanceled) {
-        this.logger.log(
-          `Subscription ${subscription.id} scheduled for cancellation.`,
-        );
+        this.logger.log(`Subscription ${subscription.id} scheduled for cancellation`);
 
         const portalUrl = await this.stripeService.getPortalSession({
           customerId: establishment.stripeCustomerId,
-          returnUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
+          returnUrl: this.redirectUrl(lang, establishment.id),
         });
 
         const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CANCELLED> = {
           to: establishment.email,
           template: EmailTemplate.SUBSCRIPTION_CANCELLED,
-          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          lang,
           context: {
             firstName: establishment.owner.firstName,
             lastName: establishment.owner.lastName,
             establishmentName: establishment.name,
             planName: planCycle.plan.name,
-            accessUntil: subData.currentPeriodEnd?.toLocaleDateString(
-              establishment.primaryLanguage.toLowerCase(),
-            ) ?? '',
+            accessUntil: subData.currentPeriodEnd?.toLocaleDateString(lang) ?? '',
             redirectUrl: portalUrl,
           },
         };
 
         await this.emailProducer.send(payload);
+        this.logger.log(`📧 Subscription-cancelled email → ${establishment.email}`);
       }
 
+      // ── justReactivated ────────────────────────────────────────────────────
       if (justReactivated) {
-        this.logger.log(
-          `Subscription ${subscription.id} has been reactivated (uncanceled).`,
-        );
+        this.logger.log(`Subscription ${subscription.id} reactivated`);
 
         const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_REACTIVATED> = {
           to: establishment.email,
           template: EmailTemplate.SUBSCRIPTION_REACTIVATED,
-          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          lang,
           context: {
             firstName: establishment.owner.firstName,
             lastName: establishment.owner.lastName,
             establishmentName: establishment.name,
             planName: planCycle.plan.name,
-            nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
-              establishment.primaryLanguage.toLowerCase(),
-            ) ?? '',
-            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
+            nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(lang) ?? '',
+            redirectUrl: this.redirectUrl(lang, establishment.id),
           },
         };
 
         await this.emailProducer.send(payload);
+        this.logger.log(`📧 Subscription-reactivated email → ${establishment.email}`);
       }
 
+      // ── justStartedTrial ───────────────────────────────────────────────────
       if (justStartedTrial) {
-        this.logger.log(
-          `Subscription ${subscription.id} entered trial period.`,
-        );
+        this.logger.log(`Subscription ${subscription.id} entered trial`);
 
         const trialStart = subscription.trial_start
           ? new Date(subscription.trial_start * 1000)
@@ -297,107 +203,75 @@ export class HandleSubscriptionsService {
 
         const trialDays =
           trialStart && trialEnd
-            ? Math.round(
-              (trialEnd.getTime() - trialStart.getTime()) /
-              (1000 * 60 * 60 * 24),
-            )
+            ? Math.round((trialEnd.getTime() - trialStart.getTime()) / (1000 * 60 * 60 * 24))
             : 0;
 
         const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_TRIAL_STARTED> = {
           to: establishment.email,
           template: EmailTemplate.SUBSCRIPTION_TRIAL_STARTED,
-          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
-          context: {
-            firstName: establishment.owner.firstName,
-            lastName: establishment.owner.lastName,
-            establishmentName: establishment.name,
-            planName: data.planCycle.plan.name,
-            trialDays: trialDays,
-            trialEndsAt: subData.trialEnd?.toLocaleDateString(
-              establishment.primaryLanguage.toLowerCase(),
-            ) ?? '',
-            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
-          },
-        };
-
-        await this.emailProducer.send(payload);
-      }
-
-      if (justBecameActiveFromTrial) {
-        this.logger.log(
-          `Subscription ${subscription.id} transitioned from trialing to active.`,
-        );
-
-        const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CREATED> = {
-          to: establishment.email,
-          template: EmailTemplate.SUBSCRIPTION_CREATED,
-          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          lang,
           context: {
             firstName: establishment.owner.firstName,
             lastName: establishment.owner.lastName,
             establishmentName: establishment.name,
             planName: planCycle.plan.name,
-            nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
-              establishment.primaryLanguage.toLowerCase(),
-            ) ?? '',
-            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
+            trialDays,
+            trialEndsAt: subData.trialEnd?.toLocaleDateString(lang) ?? '',
+            redirectUrl: this.redirectUrl(lang, establishment.id),
           },
         };
 
         await this.emailProducer.send(payload);
+        this.logger.log(`📧 Trial-started email → ${establishment.email}`);
       }
 
+      // ── justBecameActiveFromTrial ──────────────────────────────────────────
       if (justBecameActiveFromTrial) {
-        this.logger.log(
-          `Subscription ${subscription.id} transitioned from trialing to active.`,
-        );
+        this.logger.log(`Subscription ${subscription.id} converted trial → active`);
 
         const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CREATED> = {
           to: establishment.email,
           template: EmailTemplate.SUBSCRIPTION_CREATED,
-          lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+          lang,
           context: {
             firstName: establishment.owner.firstName,
             lastName: establishment.owner.lastName,
             establishmentName: establishment.name,
             planName: planCycle.plan.name,
-            nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(
-              establishment.primaryLanguage.toLowerCase(),
-            ) ?? '',
-            redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
+            nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(lang) ?? '',
+            redirectUrl: this.redirectUrl(lang, establishment.id),
           },
         };
 
         await this.emailProducer.send(payload);
+        this.logger.log(`📧 Trial-converted email → ${establishment.email}`);
       }
     } catch (error) {
-      this.logger.error('Erro em handleCustomerSubscriptionUpdated', error);
-      throw new BadRequestException('Erro ao processar assinatura');
+      this.logger.error('handleCustomerSubscriptionUpdated failed', error);
+      throw new BadRequestException('Erro ao processar atualização de assinatura');
     }
   }
 
-  async handleCustomerSubscriptionDeleted(event: Stripe.Event) {
+  async handleCustomerSubscriptionDeleted(event: Stripe.Event): Promise<void> {
     try {
       const subscription = event.data.object as Stripe.Subscription;
-      const data = await this.getEstablishmentAndPlan(subscription);
+      const data = await this.helpers.fetchEstablishmentAndPlan(subscription);
       if (!data) return;
 
-      const { establishment } = data;
+      const { establishment, planCycle } = data;
+      const lang = this.helpers.resolveLang(establishment.primaryLanguage);
 
-      // For deletion, we only update status and cancellation fields
-      // Do NOT update planCycleId to avoid FK constraint violation
+      // Para deleção só atualizamos status e campos de cancelamento —
+      // não tocar no planCycleId para evitar FK violation
       const updateData = {
-        status: this.mapStatus(subscription.status),
+        status: this.helpers.mapStripeStatus(subscription.status),
         cancelAtPeriodEnd: subscription.cancel_at_period_end,
-        cancelAt: this.toDate(subscription.cancel_at || undefined),
-        canceledAt: this.toDate(subscription.canceled_at || undefined),
+        cancelAt: this.helpers.toDate(subscription.cancel_at),
+        canceledAt: this.helpers.toDate(subscription.canceled_at),
       };
 
-      // Use establishmentId since it's the stable unique key
       await this.prisma.subscription.update({
-        where: {
-          establishmentId: establishment.id,
-        },
+        where: { establishmentId: establishment.id },
         data: updateData,
       });
 
@@ -406,56 +280,133 @@ export class HandleSubscriptionsService {
       const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CANCELLED> = {
         to: establishment.email,
         template: EmailTemplate.SUBSCRIPTION_CANCELLED,
-        lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
-        context: {
-          firstName: establishment.owner.firstName,
-          lastName: establishment.owner.lastName,
-          establishmentName: establishment.name,
-          planName: data.planCycle.plan.name,
-          accessUntil: updateData.cancelAt?.toLocaleDateString(
-            establishment.primaryLanguage.toLowerCase(),
-          ) ?? '',
-          redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
-        },
-      };
-
-      await this.emailProducer.send(payload);
-
-    } catch (error) {
-      this.logger.error('Erro em handleCustomerSubscriptionDeleted', error);
-      throw new BadRequestException('Erro ao processar assinatura');
-    }
-  }
-
-  async handleCustomerSubscriptionTrialWillEnd(event: Stripe.Event) {
-    try {
-      const subscription = event.data.object as Stripe.Subscription;
-      const data = await this.getEstablishmentAndPlan(subscription);
-      if (!data) return;
-
-      const { establishment, planCycle } = data;
-      const subData = this.buildSubscriptionData(subscription, planCycle.id);
-
-      const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_TRIAL_ENDING> = {
-        to: establishment.email,
-        template: EmailTemplate.SUBSCRIPTION_TRIAL_ENDING,
-        lang: establishment.primaryLanguage.toLowerCase() as ACCEPTED_LANGUAGES,
+        lang,
         context: {
           firstName: establishment.owner.firstName,
           lastName: establishment.owner.lastName,
           establishmentName: establishment.name,
           planName: planCycle.plan.name,
-          trialEndsAt: subData.trialEnd?.toLocaleDateString(
-            establishment.primaryLanguage.toLowerCase(),
-          ) ?? '',
-          redirectUrl: `${this.appUrl}/${establishment.primaryLanguage.toLowerCase()}/establishment/${establishment.id}`,
+          accessUntil: updateData.cancelAt?.toLocaleDateString(lang) ?? '',
+          redirectUrl: this.redirectUrl(lang, establishment.id),
         },
       };
 
       await this.emailProducer.send(payload);
+      this.logger.log(`📧 Subscription-deleted email → ${establishment.email}`);
     } catch (error) {
-      this.logger.error('Erro em handleCustomerSubscriptionTrialWillEnd', error);
-      throw new BadRequestException('Erro ao processar assinatura');
+      this.logger.error('handleCustomerSubscriptionDeleted failed', error);
+      throw new BadRequestException('Erro ao processar cancelamento de assinatura');
+    }
+  }
+
+  async handleCustomerSubscriptionPaused(event: Stripe.Event): Promise<void> {
+    try {
+      const subscription = event.data.object as Stripe.Subscription;
+      const data = await this.helpers.fetchEstablishmentAndPlan(subscription);
+      if (!data) return;
+
+      const { establishment, planCycle } = data;
+      const lang = this.helpers.resolveLang(establishment.primaryLanguage);
+
+      await this.prisma.subscription.update({
+        where: { stripeSubscriptionId: subscription.id },
+        data: { status: this.helpers.mapStripeStatus(subscription.status) },
+      });
+
+      await this.cacheService.clearDashboardEstCache(establishment.id);
+
+      const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_PAUSED> = {
+        to: establishment.email,
+        template: EmailTemplate.SUBSCRIPTION_PAUSED,
+        lang,
+        context: {
+          firstName: establishment.owner.firstName,
+          lastName: establishment.owner.lastName,
+          establishmentName: establishment.name,
+          planName: planCycle.plan.name,
+          redirectUrl: this.redirectUrl(lang, establishment.id),
+        },
+      };
+
+      await this.emailProducer.send(payload);
+      this.logger.log(`📧 Subscription-paused email → ${establishment.email}`);
+    } catch (error) {
+      this.logger.error('handleCustomerSubscriptionPaused failed', error);
+      throw new BadRequestException('Erro ao processar pausa de assinatura');
+    }
+  }
+
+  async handleCustomerSubscriptionResumed(event: Stripe.Event): Promise<void> {
+    try {
+      const subscription = event.data.object as Stripe.Subscription;
+      const data = await this.helpers.fetchEstablishmentAndPlan(subscription);
+      if (!data) return;
+
+      const { establishment, planCycle } = data;
+      const subData = this.helpers.buildSubscriptionData(subscription, planCycle.id);
+      const lang = this.helpers.resolveLang(establishment.primaryLanguage);
+
+      await this.prisma.subscription.update({
+        where: { stripeSubscriptionId: subscription.id },
+        data: subData,
+      });
+
+      await this.cacheService.clearDashboardEstCache(establishment.id);
+
+      const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_REACTIVATED> = {
+        to: establishment.email,
+        template: EmailTemplate.SUBSCRIPTION_REACTIVATED,
+        lang,
+        context: {
+          firstName: establishment.owner.firstName,
+          lastName: establishment.owner.lastName,
+          establishmentName: establishment.name,
+          planName: planCycle.plan.name,
+          nextBillingDate: subData.currentPeriodEnd?.toLocaleDateString(lang) ?? '',
+          redirectUrl: this.redirectUrl(lang, establishment.id),
+        },
+      };
+
+      await this.emailProducer.send(payload);
+      this.logger.log(`📧 Subscription-resumed email → ${establishment.email}`);
+    } catch (error) {
+      this.logger.error('handleCustomerSubscriptionResumed failed', error);
+      throw new BadRequestException('Erro ao processar retoma de assinatura');
+    }
+  }
+
+  async handleCustomerSubscriptionTrialWillEnd(event: Stripe.Event): Promise<void> {
+    // Nota: a Stripe já envia o email de "trial a terminar" se tiveres
+    // Dashboard → Billing → Customer emails → "Send a reminder email 7 days before a trial ends" ativo.
+    // Este handler existe para sincronização DB / lógica interna adicional.
+    try {
+      const subscription = event.data.object as Stripe.Subscription;
+      const data = await this.helpers.fetchEstablishmentAndPlan(subscription);
+      if (!data) return;
+
+      const { establishment, planCycle } = data;
+      const subData = this.helpers.buildSubscriptionData(subscription, planCycle.id);
+      const lang = this.helpers.resolveLang(establishment.primaryLanguage);
+
+      const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_TRIAL_ENDING> = {
+        to: establishment.email,
+        template: EmailTemplate.SUBSCRIPTION_TRIAL_ENDING,
+        lang,
+        context: {
+          firstName: establishment.owner.firstName,
+          lastName: establishment.owner.lastName,
+          establishmentName: establishment.name,
+          planName: planCycle.plan.name,
+          trialEndsAt: subData.trialEnd?.toLocaleDateString(lang) ?? '',
+          redirectUrl: this.redirectUrl(lang, establishment.id),
+        },
+      };
+
+      await this.emailProducer.send(payload);
+      this.logger.log(`📧 Trial-ending email → ${establishment.email}`);
+    } catch (error) {
+      this.logger.error('handleCustomerSubscriptionTrialWillEnd failed', error);
+      throw new BadRequestException('Erro ao processar fim de trial');
     }
   }
 }

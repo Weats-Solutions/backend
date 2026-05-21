@@ -1,178 +1,151 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import Stripe from 'stripe';
+import { Stripe } from 'stripe';
+import { CorePrismaService } from '@weats/database';
+import { DiscordService } from '@weats/integrations';
 import { HandleCustomerService } from './stripe/handle-customer.service';
 import { HandleSubscriptionsService } from './stripe/handle-subscriptions.service';
 import { HandlePaymentsService } from './stripe/handle-payments.service';
-import { DiscordService } from '@weats/integrations/discord/discord.service';
-import { CorePrismaService } from '@weats/database';
+
+const IDEMPOTENCY_TTL_MS = 1000 * 60 * 60 * 24 * 7; // 7 dias
+const MAX_PROCESSING_MS = 1000 * 60 * 5; // 5 minutos
 
 @Injectable()
 export class WebhooksService {
   private readonly logger = new Logger(WebhooksService.name);
 
   constructor(
-    private readonly configService: ConfigService,
-    private readonly stripe: Stripe,
+    private readonly prisma: CorePrismaService,
+    private readonly discordService: DiscordService,
     private readonly handleCustomerService: HandleCustomerService,
     private readonly handleSubscriptionsService: HandleSubscriptionsService,
     private readonly handlePaymentsService: HandlePaymentsService,
-    private readonly discordService: DiscordService,
-    private readonly prisma: CorePrismaService,
   ) {
-    this.logger.log('Service initialized');
+    this.logger.log('WebhooksService initialized');
   }
 
-  async handleStripeWebhook(event: Stripe.Event) {
-    const requestId = `stripe-${event.id}-${Date.now()}`;
-    
-    this.logger.log(`[Stripe] Checking idempotency for event: ${event.id} (requestId: ${requestId})`);
+  async handleStripeWebhook(event: Stripe.Event): Promise<void> {
+    this.logger.log(`[Stripe] Event received: ${event.type} [${event.id}]`);
 
-    // 1. Usar UPSERT atomicamente para evitar race condition
-    // Se evento já existe com mesmo eventId, não faz nada (apenas retorna)
-    // Se não existe, cria com status PROCESSING
+    // ── 1. Idempotency guard ─────────────────────────────────────────────────
+    // Upsert atómico: se o evento já existe não faz nada (update: {}).
     const webhookEvent = await this.prisma.webhookEvent.upsert({
-      where: {
-        provider_eventId: {
-          provider: 'stripe',
-          eventId: event.id,
-        },
-      },
-      update: {}, // Não atualiza se já existe
+      where: { provider_eventId: { provider: 'stripe', eventId: event.id } },
+      update: {},
       create: {
         provider: 'stripe',
         eventId: event.id,
         eventType: event.type,
         status: 'PROCESSING',
-        requestId: requestId,
+        requestId: `stripe-${event.id}-${Date.now()}`,
         processedAt: new Date(),
-        expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // Expira em 7 dias
+        expiresAt: new Date(Date.now() + IDEMPOTENCY_TTL_MS),
       },
     });
 
-    // 2. Verificar se foi recém-criado ou já existia
-    // Se status não for PROCESSING (já foi processado), skip
     if (webhookEvent.status !== 'PROCESSING') {
-      this.logger.warn(`[Stripe] Event ${event.id} already processed (status: ${webhookEvent.status}). Skipping.`);
+      this.logger.warn(
+        `[Stripe] Event ${event.id} already processed (status: ${webhookEvent.status}). Skipping.`,
+      );
       return;
     }
 
-    // 3. Verificar se está muito tempo em PROCESSING (crashed/stuck)
-    const processingDuration = Date.now() - webhookEvent.processedAt.getTime();
-    const MAX_PROCESSING_TIME = 5 * 60 * 1000; // 5 minutos
-    
-    if (processingDuration > MAX_PROCESSING_TIME && webhookEvent.status === 'PROCESSING') {
-      this.logger.warn(`[Stripe] Event ${event.id} stuck in PROCESSING for ${processingDuration}ms. Resetting timestamp.`);
-      // Reset the timestamp but keep processing
-      await this.prisma.webhookEvent.update({
-        where: { id: webhookEvent.id },
-        data: { processedAt: new Date() },
-      }).catch((err) => {
-        this.logger.error(`[Stripe] Failed to reset stuck webhook timestamp: ${err.message}`);
-      });
+    // ── 2. Stuck-processing guard ────────────────────────────────────────────
+    const processingMs = Date.now() - webhookEvent.processedAt.getTime();
+    if (processingMs > MAX_PROCESSING_MS) {
+      this.logger.warn(
+        `[Stripe] Event ${event.id} stuck in PROCESSING for ${processingMs}ms. Resetting timestamp.`,
+      );
+      await this.prisma.webhookEvent
+        .update({
+          where: { id: webhookEvent.id },
+          data: { processedAt: new Date() },
+        })
+        .catch((err: Error) =>
+          this.logger.error(`[Stripe] Failed to reset stuck webhook: ${err.message}`),
+        );
     }
 
+    // ── 3. Process ───────────────────────────────────────────────────────────
     try {
-      this.logger.log(`Processing stripe webhook: ${event.type}`);
-      if (
-        event.type === 'customer.created' ||
-        event.type === 'customer.updated' ||
-        event.type === 'customer.deleted' ||
-        event.type === 'customer.subscription.created' ||
-        event.type === 'customer.subscription.updated' ||
-        event.type === 'customer.subscription.deleted' ||
-        event.type === 'customer.subscription.trial_will_end' ||
-        event.type === 'invoice.payment_succeeded' ||
-        event.type === 'invoice.payment_failed' ||
-        event.type === 'subscription_schedule.completed' ||
-        event.type === 'subscription_schedule.released'
-      ) {
-        try {
-          await this.discordService.sendToDiscord(
-            'Webhook received',
-            `Webhook received -> ${event.type}`,
-          );
-        } catch (discordError) {
-          this.logger.warn(`[Stripe] Failed to send Discord notification: ${discordError.message}`);
-          // Don't throw - webhook processing should continue even if Discord is down
-        }
+      // Discord notification — non-blocking, failure não interrompe o processamento
+      this.discordService
+        .sendToDiscord('Webhook received', `${event.type} [${event.id}]`)
+        .catch((err: Error) =>
+          this.logger.warn(`[Stripe] Discord notification failed: ${err.message}`),
+        );
 
-        switch (event.type) {
-          case 'customer.created':
-            await this.handleCustomerService.handleCustomerCreated(event);
-            break;
-          case 'customer.updated':
-            await this.handleCustomerService.handleCustomerUpdated(event);
-            break;
-          case 'customer.deleted':
-            await this.handleCustomerService.handleCustomerDeleted(event);
-            break;
-          case 'customer.subscription.created':
-            await this.handleSubscriptionsService.handleCustomerSubscriptionCreated(
-              event,
-            );
-            break;
-          case 'customer.subscription.updated':
-            await this.handleSubscriptionsService.handleCustomerSubscriptionUpdated(
-              event,
-            );
-            break;
-          case 'customer.subscription.deleted':
-            await this.handleSubscriptionsService.handleCustomerSubscriptionDeleted(
-              event,
-            );
-            break;
-          case 'customer.subscription.trial_will_end':
-            await this.handleSubscriptionsService.handleCustomerSubscriptionTrialWillEnd(
-              event,
-            );
-            break;
-          case 'invoice.payment_succeeded':
-            await this.handlePaymentsService.handleInvoicePaymentSucceeded(event);
-            break;
-          case 'invoice.payment_failed':
-            await this.handlePaymentsService.handleInvoicePaymentFailed(event);
-            break;
-          default:
-            this.logger.warn(`[Stripe] Event type not handled: ${event.type}`);
-            break;
-        }
-      }
+      await this.dispatch(event);
 
-      // 3. Marcar como processado com sucesso
+      // ── 4. Mark as processed ──────────────────────────────────────────────
       await this.prisma.webhookEvent.update({
-        where: {
-          provider_eventId: {
-            provider: 'stripe',
-            eventId: event.id,
-          },
-        },
+        where: { provider_eventId: { provider: 'stripe', eventId: event.id } },
         data: { status: 'PROCESSED' },
       });
+
       this.logger.log(`[Stripe] Event ${event.id} processed successfully`);
-
     } catch (error) {
-      this.logger.error(`[Stripe] Failed to process event ${event.id}: ${error.message}`);
+      this.logger.error(
+        `[Stripe] Failed to process event ${event.id}: ${(error as Error).message}`,
+      );
 
-      // Marcar como falha no banco - with proper error handling
-      try {
-        await this.prisma.webhookEvent.update({
-          where: {
-            provider_eventId: {
-              provider: 'stripe',
-              eventId: event.id,
-            },
-          },
+      await this.prisma.webhookEvent
+        .update({
+          where: { provider_eventId: { provider: 'stripe', eventId: event.id } },
           data: { status: 'FAILED' },
-        });
-      } catch (dbUpdateError) {
-        this.logger.error(
-          `[Stripe] Failed to update webhook status to FAILED: ${dbUpdateError.message}. Original error: ${error.message}`,
+        })
+        .catch((dbErr: Error) =>
+          this.logger.error(
+            `[Stripe] Failed to mark event as FAILED: ${dbErr.message}. ` +
+            `Original: ${(error as Error).message}`,
+          ),
         );
-        // Log both errors but don't swallow the original error
-      }
 
       throw error;
+    }
+  }
+
+  // ── Dispatch ───────────────────────────────────────────────────────────────
+
+  private async dispatch(event: Stripe.Event): Promise<void> {
+    switch (event.type) {
+      // Customers
+      case 'customer.created':
+        return this.handleCustomerService.handleCustomerCreated(event);
+      case 'customer.updated':
+        return this.handleCustomerService.handleCustomerUpdated(event);
+      case 'customer.deleted':
+        return this.handleCustomerService.handleCustomerDeleted(event);
+      case 'customer.tax_id.updated':
+        return this.handleCustomerService.handleTaxIdUpdated(event);
+
+      // Subscriptions
+      case 'customer.subscription.created':
+        return this.handleSubscriptionsService.handleCustomerSubscriptionCreated(event);
+      case 'customer.subscription.updated':
+        return this.handleSubscriptionsService.handleCustomerSubscriptionUpdated(event);
+      case 'customer.subscription.deleted':
+        return this.handleSubscriptionsService.handleCustomerSubscriptionDeleted(event);
+      case 'customer.subscription.paused':
+        return this.handleSubscriptionsService.handleCustomerSubscriptionPaused(event);
+      case 'customer.subscription.resumed':
+        return this.handleSubscriptionsService.handleCustomerSubscriptionResumed(event);
+
+      // Invoices
+      case 'invoice.paid':
+        return this.handlePaymentsService.onInvoicePaid(event);
+      case 'invoice.payment_failed':
+        return this.handlePaymentsService.onInvoicePaymentFailed(event);
+
+      // Disputes & refunds
+      case 'charge.dispute.created':
+        return this.handlePaymentsService.onDisputeCreated(event);
+      case 'charge.dispute.closed':
+        return this.handlePaymentsService.onDisputeClosed(event);
+      case 'charge.refunded':
+        return this.handlePaymentsService.onChargeRefunded(event);
+
+      default:
+        this.logger.debug(`[Stripe] Unhandled event type: ${event.type}`);
     }
   }
 }

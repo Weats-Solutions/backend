@@ -19,6 +19,7 @@ import {
     SubscriptionReactivatedSchema,
     SubscriptionTrialStartedSchema,
     SubscriptionTrialEndingSchema,
+    SubscriptionPausedSchema,
 } from "./subscription";
 
 export const EmailTemplateConfigs: Record<EmailTemplate, { category: EmailTemplateCategory; schema: ZodSchema<any> }> = {
@@ -39,6 +40,7 @@ export const EmailTemplateConfigs: Record<EmailTemplate, { category: EmailTempla
     [EmailTemplate.SUBSCRIPTION_REACTIVATED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionReactivatedSchema },
     [EmailTemplate.SUBSCRIPTION_TRIAL_STARTED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionTrialStartedSchema },
     [EmailTemplate.SUBSCRIPTION_TRIAL_ENDING]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionTrialEndingSchema },
+    [EmailTemplate.SUBSCRIPTION_PAUSED]: { category: EmailTemplateCategory.SUBSCRIPTION, schema: SubscriptionPausedSchema },
 };
 
 // Backwards-compatible export for TemplateRenderService

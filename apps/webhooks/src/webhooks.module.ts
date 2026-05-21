@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { WebhooksService } from './webhooks.service';
-import { AppConfigService, ConfigsModule, RedisConfigService } from '@weats/configs';
+import { AppConfigService, ConfigsModule } from '@weats/configs';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HandleCustomerService } from './stripe/handle-customer.service';
 import { HandlePaymentsService } from './stripe/handle-payments.service';
 import { HandleSubscriptionsService } from './stripe/handle-subscriptions.service';
-import { BullModule, BullModuleOptions } from '@nestjs/bull';
+import { StripeWebhooksHelpers } from './stripe/stripe-helpers.service';
 import { ClerkWebhookService } from './clerk/clerk-webhook.service';
-import { ClerkModule, DiscordModule, StripeModule } from '@weats/integrations';
+import { DiscordModule, StripeModule } from '@weats/integrations';
 import Stripe from 'stripe';
 import { WebhooksProcessor } from './webhooks.processor';
 import { DatabaseModule } from '@weats/database';
@@ -23,7 +23,6 @@ import { CacheModule } from '@weats/cache';
   imports: [
     DatabaseModule,
     ConfigsModule,
-    ClerkModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
@@ -42,6 +41,7 @@ import { CacheModule } from '@weats/cache';
     HandleCustomerService,
     HandlePaymentsService,
     HandleSubscriptionsService,
+    StripeWebhooksHelpers,
     {
       provide: 'APP_URL',
       useFactory: (appConfig: AppConfigService) => appConfig.getAppUrl(),

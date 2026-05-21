@@ -1,236 +1,262 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { CorePrismaService } from '@weats/database';
 import { Stripe } from 'stripe';
-import { ulid } from 'ulid';
 import { ACCEPTED_LANGUAGES, EmailTemplate, SendEmailDto } from '@weats/types';
 import { EmailProducer } from '@weats/bull/producers/email.producer';
+import { CacheService } from '@weats/cache';
+import { StripeWebhooksHelpers } from './stripe-helpers.service';
+import { DiscordService } from '@weats/integrations';
 
 @Injectable()
 export class HandlePaymentsService {
   private readonly logger = new Logger(HandlePaymentsService.name);
 
   constructor(
-    private readonly prisma: CorePrismaService,
     @Inject('APP_URL') private readonly appUrl: string,
+    private readonly prisma: CorePrismaService,
     private readonly emailProducer: EmailProducer,
+    private readonly cacheService: CacheService,
+    private readonly helpers: StripeWebhooksHelpers,
+    private readonly discordService: DiscordService,
   ) { }
 
-  async handleInvoicePaymentSucceeded(event: Stripe.Event) {
-    this.logger.log(`✅ Handling invoice payment succeeded: ${event.id}`);
+  // ─── Invoices ─────────────────────────────────────────────────────────────────
 
-    try {
-      const invoice = event.data.object as Stripe.Invoice;
-
-      let stripeCustomerId: string | undefined;
-
-      if (typeof invoice.customer === 'string') {
-        stripeCustomerId = invoice.customer;
-      } else if (
-        invoice.customer &&
-        typeof invoice.customer === 'object' &&
-        'id' in invoice.customer
-      ) {
-        stripeCustomerId = (invoice.customer as any).id;
-      }
-
-      if (stripeCustomerId) {
-        const subscriptionId = (invoice as any).subscription as string || 
-          invoice.lines.data[0]?.parent?.subscription_item_details?.subscription;
-
-        if (subscriptionId) {
-          const establishment = await this.prisma.establishment.findUnique({ 
-            where: { stripeCustomerId },
-            include: { owner: true }
-          });
-
-          const subscription = await this.prisma.subscription.findUnique({ 
-            where: { stripeSubscriptionId: subscriptionId },
-            include: { planCycle: { include: { plan: true } } }
-          });
-
-          if (establishment && establishment.owner && subscription) {
-            let lang = establishment.primaryLanguage?.toLowerCase() || 'pt';
-            if (!['pt', 'en', 'es'].includes(lang)) {
-                lang = 'pt';
-            }
-
-            const amountPaid = (invoice.amount_paid / 100).toFixed(2) + ' ' + (invoice.currency ? invoice.currency.toUpperCase() : 'EUR');
-            const periodStart = new Date(invoice.period_start * 1000).toLocaleDateString(lang);
-            const periodEnd = new Date(invoice.period_end * 1000).toLocaleDateString(lang);
-
-            const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_PAYMENT_SUCCEEDED> = {
-                to: establishment.owner.email,
-                template: EmailTemplate.SUBSCRIPTION_PAYMENT_SUCCEEDED,
-                lang: lang as ACCEPTED_LANGUAGES,
-                context: {
-                    firstName: establishment.owner.firstName || '',
-                    lastName: establishment.owner.lastName || '',
-                    establishmentName: establishment.name,
-                    planName: subscription.planCycle?.plan?.name || 'Plano',
-                    amountPaid: amountPaid,
-                    periodStart: periodStart,
-                    periodEnd: periodEnd,
-                    nextBillingDate: periodEnd,
-                    redirectUrl: `${this.appUrl}/settings/billing`,
-                },
-            };
-
-            await this.emailProducer.send(payload);
-            this.logger.log(`📧 Email de sucesso de pagamento enviado para ${establishment.owner.email}`);
-          }
-        }
-      }
-    } catch (error) {
-      this.logger.error(`Erro ao enviar email de sucesso de pagamento: ${(error as Error).message}`);
-    }
-
-    return this.processInvoice(event);
-  }
-
-  async handleInvoicePaymentFailed(event: Stripe.Event) {
-    this.logger.warn(`❌ Handling invoice payment failed: ${event.id}`);
-
-    try {
-      const invoice = event.data.object as Stripe.Invoice;
-
-      let stripeCustomerId: string | undefined;
-
-      if (typeof invoice.customer === 'string') {
-        stripeCustomerId = invoice.customer;
-      } else if (
-        invoice.customer &&
-        typeof invoice.customer === 'object' &&
-        'id' in invoice.customer
-      ) {
-        stripeCustomerId = (invoice.customer as any).id;
-      }
-
-      if (stripeCustomerId) {
-        const subscriptionId = (invoice as any).subscription as string || 
-          invoice.lines.data[0]?.parent?.subscription_item_details?.subscription;
-
-        if (subscriptionId) {
-          const establishment = await this.prisma.establishment.findUnique({ 
-            where: { stripeCustomerId },
-            include: { owner: true }
-          });
-
-          const subscription = await this.prisma.subscription.findUnique({ 
-            where: { stripeSubscriptionId: subscriptionId },
-            include: { planCycle: { include: { plan: true } } }
-          });
-
-          if (establishment && establishment.owner && subscription) {
-            let lang = establishment.primaryLanguage?.toLowerCase() || 'pt';
-            if (!['pt', 'en', 'es'].includes(lang)) {
-                lang = 'pt';
-            }
-
-            const amountToPay = (invoice.amount_due / 100).toFixed(2) + ' ' + (invoice.currency ? invoice.currency.toUpperCase() : 'EUR');
-            const periodStart = new Date(invoice.period_start * 1000).toLocaleDateString(lang);
-            const periodEnd = new Date(invoice.period_end * 1000).toLocaleDateString(lang);
-
-            const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_PAYMENT_FAILED> = {
-                to: establishment.owner.email,
-                template: EmailTemplate.SUBSCRIPTION_PAYMENT_FAILED,
-                lang: lang as ACCEPTED_LANGUAGES,
-                context: {
-                    firstName: establishment.owner.firstName || '',
-                    lastName: establishment.owner.lastName || '',
-                    establishmentName: establishment.name,
-                    planName: subscription.planCycle?.plan?.name || 'Plano',
-                    amountPaid: amountToPay,
-                    periodStart: periodStart,
-                    periodEnd: periodEnd,
-                    redirectUrl: `${this.appUrl}/settings/billing`,
-                },
-            };
-
-            await this.emailProducer.send(payload);
-            this.logger.log(`📧 Email de falha de pagamento enviado para ${establishment.owner.email}`);
-          }
-        }
-      }
-    } catch (error) {
-      this.logger.error(`Erro ao enviar email de falha de pagamento: ${(error as Error).message}`);
-    }
-
-    return this.processInvoice(event);
-  }
-
-  private async processInvoice(event: Stripe.Event) {
+  async onInvoicePaid(event: Stripe.Event): Promise<void> {
     const invoice = event.data.object as Stripe.Invoice;
+    const stripeCustomerId = this.helpers.resolveCustomerId(invoice.customer);
+    const subscriptionId = this.helpers.resolveSubscriptionIdFromInvoice(invoice);
 
-    let stripeCustomerId: string | undefined;
-
-    if (typeof invoice.customer === 'string') {
-      stripeCustomerId = invoice.customer;
-    } else if (
-      invoice.customer &&
-      typeof invoice.customer === 'object' &&
-      'id' in invoice.customer
-    ) {
-      stripeCustomerId = (invoice.customer as any).id;
+    if (!stripeCustomerId || !subscriptionId) {
+      this.logger.warn(
+        `invoice.paid ${invoice.id}: missing customerId or subscriptionId`,
+      );
+      return this.upsertInvoiceRecord(invoice, stripeCustomerId, subscriptionId);
     }
 
-    if (!stripeCustomerId) {
-      this.logger.warn(`stripeCustomerId não encontrado para fatura ${invoice.id}`);
+    try {
+      const { establishment, subscription } = await this.helpers.fetchContext(
+        stripeCustomerId,
+        subscriptionId,
+      );
+
+      if (establishment?.owner && subscription) {
+        const lang = this.helpers.resolveLang(establishment.primaryLanguage);
+        const line = invoice.lines.data[0];
+
+        // line.period.end é o fim do NOVO período de billing —
+        // ou seja, quando o próximo débito vai ocorrer.
+        // NÃO usar invoice.period_end aqui (é o período que acabou).
+        const nextBillingDate = line
+          ? this.helpers.formatDate(line.period.end, lang)
+          : this.helpers.formatDate(invoice.period_end, lang);
+
+        const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_PAYMENT_SUCCEEDED> = {
+          to: establishment.owner.email,
+          template: EmailTemplate.SUBSCRIPTION_PAYMENT_SUCCEEDED,
+          lang,
+          context: {
+            firstName: establishment.owner.firstName ?? '',
+            lastName: establishment.owner.lastName ?? '',
+            establishmentName: establishment.name,
+            planName: subscription.planCycle.plan.name,
+            amountPaid: this.helpers.formatAmount(invoice.amount_paid, invoice.currency),
+            periodStart: this.helpers.formatDate(invoice.period_start, lang),
+            periodEnd: this.helpers.formatDate(invoice.period_end, lang),
+            nextBillingDate,
+            redirectUrl: `${this.appUrl}/settings/billing`,
+          },
+        };
+
+        await this.emailProducer.send(payload);
+        await this.cacheService.clearDashboardEstCache(establishment.id);
+        this.logger.log(`📧 Payment-succeeded email → ${establishment.owner.email}`);
+      }
+    } catch (err) {
+      this.logger.error(`invoice.paid email error: ${(err as Error).message}`);
+    }
+
+    return this.upsertInvoiceRecord(invoice, stripeCustomerId, subscriptionId);
+  }
+
+  async onInvoicePaymentFailed(event: Stripe.Event): Promise<void> {
+    // A Stripe já envia o email de falha de pagamento se tiveres
+    // Dashboard → Billing → Customer emails → "Send emails when card payments fail" ativo.
+    // Este handler grava o registo na DB para histórico/analytics.
+    const invoice = event.data.object as Stripe.Invoice;
+    const stripeCustomerId = this.helpers.resolveCustomerId(invoice.customer);
+    const subscriptionId = this.helpers.resolveSubscriptionIdFromInvoice(invoice);
+
+    this.logger.warn(
+      `invoice.payment_failed ${invoice.id} | customer: ${stripeCustomerId} | attempt: ${invoice.attempt_count}`,
+    );
+
+    return this.upsertInvoiceRecord(invoice, stripeCustomerId, subscriptionId);
+  }
+
+  /**
+   * Upsert de um registo de fatura.
+   * Idempotente: seguro chamar várias vezes para a mesma fatura Stripe.
+   */
+  private async upsertInvoiceRecord(
+    invoice: Stripe.Invoice,
+    stripeCustomerId: string | undefined,
+    subscriptionId: string | undefined,
+  ): Promise<void> {
+    if (!invoice.id || !invoice.status || !stripeCustomerId || !subscriptionId) {
+      this.logger.warn(
+        `upsertInvoiceRecord: dados incompletos para fatura ${invoice.id ?? '(no id)'}. ` +
+        `customerId=${stripeCustomerId} subscriptionId=${subscriptionId}`,
+      );
       return;
     }
 
-    const subscriptionId = (invoice as any).subscription as string || 
-      invoice.lines.data[0]?.parent?.subscription_item_details?.subscription;
+    const [establishment, subscription] = await Promise.all([
+      this.prisma.establishment.findUnique({ where: { stripeCustomerId } }),
+      this.prisma.subscription.findUnique({ where: { stripeSubscriptionId: subscriptionId } }),
+    ]);
 
-    if (!subscriptionId) {
-      this.logger.warn(`subscriptionId não encontrado para fatura ${invoice.id}`);
+    if (!establishment || !subscription) {
+      this.logger.warn(
+        `upsertInvoiceRecord: sem registo local para fatura ${invoice.id}. ` +
+        `establishment=${!!establishment} subscription=${!!subscription}`,
+      );
       return;
     }
 
-    const establishment = await this.prisma.establishment.findUnique({ 
-      where: { stripeCustomerId } 
+    const invoiceData = {
+      amountPaid: invoice.amount_paid,
+      status: invoice.status as string,
+      customerId: stripeCustomerId,
+      establishmentId: establishment.id,
+      subscriptionId: subscription.id,
+    };
+
+    const existing = await this.prisma.invoice.findFirst({
+      where: { stripeInvoiceId: invoice.id },
     });
 
-    const subscription = await this.prisma.subscription.findUnique({ 
-      where: { stripeSubscriptionId: subscriptionId } 
-    });
-
-    if (!establishment || !subscription || !invoice.id || !invoice.status) {
-      this.logger.warn(`Dados incompletos para processar fatura ${invoice.id}. Estabelecimento: ${!!establishment}, Assinatura: ${!!subscription}`);
-      return;
-    }
-
-    const invoiceId = invoice.id;
-    const invoiceStatus = invoice.status as string;
-
-    const existingInvoice = await this.prisma.invoice.findFirst({ 
-      where: { stripeInvoiceId: invoiceId } 
-    });
-
-    if (existingInvoice) {
+    if (existing) {
       await this.prisma.invoice.update({
-        where: { id: existingInvoice.id },
-        data: {
-          amountPaid: invoice.amount_paid,
-          status: invoiceStatus,
-          customerId: stripeCustomerId,
-          establishmentId: establishment.id,
-          subscriptionId: subscriptionId,
-        },
+        where: { id: existing.id },
+        data: invoiceData,
       });
-      this.logger.log(`Invoice ${invoiceId} updated with status ${invoiceStatus}`);
+      this.logger.log(`Invoice ${invoice.id} updated → ${invoice.status}`);
     } else {
       await this.prisma.invoice.create({
-        data: {
-          id: ulid(),
-          establishmentId: establishment.id,
-          stripeInvoiceId: invoiceId,
-          subscriptionId: subscriptionId,
-          amountPaid: invoice.amount_paid,
-          status: invoiceStatus,
-          customerId: stripeCustomerId,
-        },
+        data: {  stripeInvoiceId: invoice.id, ...invoiceData },
       });
-      this.logger.log(`Invoice ${invoiceId} created with status ${invoiceStatus}`);
+      this.logger.log(`Invoice ${invoice.id} created → ${invoice.status}`);
     }
+  }
+
+  // ─── Disputes ─────────────────────────────────────────────────────────────────
+
+  async onDisputeCreated(event: Stripe.Event): Promise<void> {
+    const dispute = event.data.object as Stripe.Dispute;
+    const stripeCustomerId = this.helpers.resolveCustomerId(
+      (dispute as unknown as { customer?: string }).customer,
+    );
+
+    this.discordService.sendToDiscord(
+      '⚠️ Dispute created',
+      `Dispute: ${dispute.id} | ` +
+      `amount: ${this.helpers.formatAmount(dispute.amount, dispute.currency)} | ` +
+      `reason: ${dispute.reason} | ` +
+      `stripeCustomerId: ${stripeCustomerId}`,
+    ).catch((err: Error) => {
+      this.logger.error(`[Stripe] Discord notification failed: ${err.message}`);
+    });
+
+    // Revogar acesso imediatamente para proteger contra fraude.
+    // Acesso é reposto em onDisputeClosed se o dispute for ganho.
+    if (stripeCustomerId) {
+      const establishment = await this.prisma.establishment.findUnique({
+        where: { stripeCustomerId },
+        select: { id: true },
+      });
+
+      if (establishment) {
+        await this.prisma.establishment.update({
+          where: { id: establishment.id },
+          data: { isActive: false },
+        });
+        await this.cacheService.clearDashboardEstCache(establishment.id);
+        this.logger.warn(`🚫 Access revoked for establishment ${establishment.id} (dispute)`);
+      }
+    }
+
+    await this.prisma.dispute.upsert({
+      where: { stripeDisputeId: dispute.id },
+      create: {
+        stripeDisputeId: dispute.id,
+        amount: dispute.amount,
+        currency: dispute.currency,
+        reason: dispute.reason ?? null,
+        status: dispute.status,
+        stripeCustomerId: stripeCustomerId ?? null,
+      },
+      update: { status: dispute.status },
+    });
+  }
+
+  async onDisputeClosed(event: Stripe.Event): Promise<void> {
+    const dispute = event.data.object as Stripe.Dispute;
+    const stripeCustomerId = this.helpers.resolveCustomerId(
+      (dispute as unknown as { customer?: string }).customer,
+    );
+
+    this.logger.log(`🏛️ Dispute closed: ${dispute.id} → ${dispute.status}`);
+
+    await this.prisma.dispute.updateMany({
+      where: { stripeDisputeId: dispute.id },
+      data: { status: dispute.status },
+    });
+
+    // Só repor acesso se o dispute foi ganho
+    if (dispute.status === 'won' && stripeCustomerId) {
+      const establishment = await this.prisma.establishment.findUnique({
+        where: { stripeCustomerId },
+        select: { id: true },
+      });
+
+      if (establishment) {
+        await this.prisma.establishment.update({
+          where: { id: establishment.id },
+          data: { isActive: true },
+        });
+        await this.cacheService.clearDashboardEstCache(establishment.id);
+        this.logger.log(`✅ Access restored for establishment ${establishment.id} (dispute won)`);
+      }
+    }
+  }
+
+  // ─── Refunds ──────────────────────────────────────────────────────────────────
+
+  async onChargeRefunded(event: Stripe.Event): Promise<void> {
+    const charge = event.data.object as Stripe.Charge;
+    const stripeCustomerId = this.helpers.resolveCustomerId(charge.customer);
+
+    this.logger.log(
+      `💸 Charge refunded: ${charge.id} | ` +
+      `refunded: ${this.helpers.formatAmount(charge.amount_refunded, charge.currency)} | ` +
+      `full refund: ${charge.refunded}`,
+    );
+
+    const lastRefund = charge.refunds?.data?.[0];
+    if (!lastRefund) return;
+
+    await this.prisma.refund.upsert({
+      where: { stripeRefundId: lastRefund.id },
+      create: {
+        stripeRefundId: lastRefund.id,
+        stripeChargeId: charge.id,
+        amount: lastRefund.amount,
+        currency: lastRefund.currency,
+        status: lastRefund.status ?? 'succeeded',
+        stripeCustomerId: stripeCustomerId ?? null,
+      },
+      update: { status: lastRefund.status ?? 'succeeded' },
+    });
   }
 }

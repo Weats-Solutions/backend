@@ -311,8 +311,7 @@ exports.Prisma.EstablishmentScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
   type: 'type',
-  status: 'status',
-  isOnline: 'isOnline',
+  isActive: 'isActive',
   email: 'email',
   countryCode: 'countryCode',
   phoneNumber: 'phoneNumber',
@@ -1121,6 +1120,30 @@ exports.Prisma.InvoiceScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.DisputeScalarFieldEnum = {
+  id: 'id',
+  stripeDisputeId: 'stripeDisputeId',
+  amount: 'amount',
+  currency: 'currency',
+  reason: 'reason',
+  status: 'status',
+  stripeCustomerId: 'stripeCustomerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RefundScalarFieldEnum = {
+  id: 'id',
+  stripeRefundId: 'stripeRefundId',
+  stripeChargeId: 'stripeChargeId',
+  amount: 'amount',
+  currency: 'currency',
+  status: 'status',
+  stripeCustomerId: 'stripeCustomerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.TaxTableScalarFieldEnum = {
   id: 'id',
   countryCode: 'countryCode',
@@ -1362,13 +1385,6 @@ exports.EstablishmentType = exports.$Enums.EstablishmentType = {
   LOUNGE: 'LOUNGE',
   RESORT: 'RESORT',
   MOTEL: 'MOTEL'
-};
-
-exports.EstablishmentStatus = exports.$Enums.EstablishmentStatus = {
-  ACTIVE: 'ACTIVE',
-  PAYMENT_PENDING: 'PAYMENT_PENDING',
-  INACTIVE: 'INACTIVE',
-  SUSPENDED: 'SUSPENDED'
 };
 
 exports.EstablishmentLanguage = exports.$Enums.EstablishmentLanguage = {
@@ -1726,6 +1742,8 @@ exports.Prisma.ModelName = {
   Feature: 'Feature',
   PlanFeature: 'PlanFeature',
   Invoice: 'Invoice',
+  Dispute: 'Dispute',
+  Refund: 'Refund',
   TaxTable: 'TaxTable',
   Theme: 'Theme',
   User: 'User',

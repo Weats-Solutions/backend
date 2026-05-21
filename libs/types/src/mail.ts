@@ -13,6 +13,7 @@ export enum EmailTemplate {
     SUBSCRIPTION_PLAN_CHANGED = 'plan-changed',
     SUBSCRIPTION_CANCELLED = 'subscription-cancelled',
     SUBSCRIPTION_CREATED = 'subscription-created',
+    SUBSCRIPTION_PAUSED = 'subscription-paused',
     SUBSCRIPTION_REACTIVATED = 'subscription-reactivated',
     SUBSCRIPTION_TRIAL_STARTED = 'subscription-trial-started',
     SUBSCRIPTION_TRIAL_ENDING = 'trial-ending',
@@ -42,6 +43,7 @@ export type TemplateMap = {
     [EmailTemplate.SUBSCRIPTION_PLAN_CHANGED]: SubscriptionPlanChangedContext;
     [EmailTemplate.SUBSCRIPTION_CANCELLED]: SubscriptionCancelledContext;
     [EmailTemplate.SUBSCRIPTION_CREATED]: SubscriptionCreatedContext;
+    [EmailTemplate.SUBSCRIPTION_PAUSED]: SubscriptionPausedContext;
     [EmailTemplate.SUBSCRIPTION_REACTIVATED]: SubscriptionReactivatedContext;
     [EmailTemplate.SUBSCRIPTION_TRIAL_STARTED]: SubscriptionTrialStartedContext;
     [EmailTemplate.SUBSCRIPTION_TRIAL_ENDING]: SubscriptionTrialEndingContext;
@@ -231,5 +233,15 @@ export type SubscriptionTrialEndingContext = {
     establishmentName: string;
     planName: string;
     trialEndsAt: string;
+    redirectUrl: string;
+};
+
+// Template: pt/subscription/subscription-paused.hbs
+// Variables: {{firstName}}, {{lastName}}, {{establishmentName}}, {{planName}}, {{redirectUrl}}
+export type SubscriptionPausedContext = {
+    firstName: string;
+    lastName: string;
+    establishmentName: string;
+    planName: string;
     redirectUrl: string;
 };

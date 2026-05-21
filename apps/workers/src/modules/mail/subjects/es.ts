@@ -15,4 +15,5 @@ export const subjects = {
     [EmailTemplate.SUBSCRIPTION_PLAN_CHANGED]: 'Tu plan ha sido cambiado',
     [EmailTemplate.SUBSCRIPTION_TRIAL_STARTED]: 'Tu periodo de prueba ha comenzado',
     [EmailTemplate.SUBSCRIPTION_TRIAL_ENDING]: 'Tu periodo de prueba ha finalizado',
+    [EmailTemplate.SUBSCRIPTION_PAUSED]: 'Tu suscripción ha sido pausada',
 } as const;

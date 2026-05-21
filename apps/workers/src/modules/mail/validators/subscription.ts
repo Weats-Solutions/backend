@@ -110,3 +110,13 @@ export const SubscriptionTrialEndingSchema = z.object({
     trialEndsAt: z.string(),
     redirectUrl: z.string().url(),
 });
+
+// Template: subscription/subscription-paused.hbs
+// Variables: firstName, lastName, establishmentName, planName, redirectUrl
+export const SubscriptionPausedSchema = z.object({
+    firstName: z.string(),
+    lastName: z.string(),
+    establishmentName: z.string(),
+    planName: z.string(),
+    redirectUrl: z.string().url(),
+});

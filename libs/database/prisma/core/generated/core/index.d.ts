@@ -411,6 +411,16 @@ export type PlanFeature = $Result.DefaultSelection<Prisma.$PlanFeaturePayload>
  */
 export type Invoice = $Result.DefaultSelection<Prisma.$InvoicePayload>
 /**
+ * Model Dispute
+ * 
+ */
+export type Dispute = $Result.DefaultSelection<Prisma.$DisputePayload>
+/**
+ * Model Refund
+ * 
+ */
+export type Refund = $Result.DefaultSelection<Prisma.$RefundPayload>
+/**
  * Model TaxTable
  * 
  */
@@ -2070,6 +2080,26 @@ export class PrismaClient<
   get invoice(): Prisma.InvoiceDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.dispute`: Exposes CRUD operations for the **Dispute** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Disputes
+    * const disputes = await prisma.dispute.findMany()
+    * ```
+    */
+  get dispute(): Prisma.DisputeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.refund`: Exposes CRUD operations for the **Refund** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Refunds
+    * const refunds = await prisma.refund.findMany()
+    * ```
+    */
+  get refund(): Prisma.RefundDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.taxTable`: Exposes CRUD operations for the **TaxTable** model.
     * Example usage:
     * ```ts
@@ -2639,6 +2669,8 @@ export namespace Prisma {
     Feature: 'Feature',
     PlanFeature: 'PlanFeature',
     Invoice: 'Invoice',
+    Dispute: 'Dispute',
+    Refund: 'Refund',
     TaxTable: 'TaxTable',
     Theme: 'Theme',
     User: 'User',
@@ -2660,7 +2692,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "promotion" | "buyXGetYRule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "establishmentBookingSettings" | "establishmentMetadata" | "faviconAsset" | "expense" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "menu" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "qrCode" | "schedule" | "scheduleDay" | "timeInterval" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
+      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "promotion" | "buyXGetYRule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "establishmentBookingSettings" | "establishmentMetadata" | "faviconAsset" | "expense" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "menu" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "qrCode" | "schedule" | "scheduleDay" | "timeInterval" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "dispute" | "refund" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -8362,6 +8394,154 @@ export namespace Prisma {
           }
         }
       }
+      Dispute: {
+        payload: Prisma.$DisputePayload<ExtArgs>
+        fields: Prisma.DisputeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DisputeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DisputeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>
+          }
+          findFirst: {
+            args: Prisma.DisputeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DisputeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>
+          }
+          findMany: {
+            args: Prisma.DisputeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>[]
+          }
+          create: {
+            args: Prisma.DisputeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>
+          }
+          createMany: {
+            args: Prisma.DisputeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DisputeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>[]
+          }
+          delete: {
+            args: Prisma.DisputeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>
+          }
+          update: {
+            args: Prisma.DisputeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>
+          }
+          deleteMany: {
+            args: Prisma.DisputeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DisputeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DisputeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>[]
+          }
+          upsert: {
+            args: Prisma.DisputeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>
+          }
+          aggregate: {
+            args: Prisma.DisputeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDispute>
+          }
+          groupBy: {
+            args: Prisma.DisputeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DisputeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DisputeCountArgs<ExtArgs>
+            result: $Utils.Optional<DisputeCountAggregateOutputType> | number
+          }
+        }
+      }
+      Refund: {
+        payload: Prisma.$RefundPayload<ExtArgs>
+        fields: Prisma.RefundFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RefundFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RefundFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundPayload>
+          }
+          findFirst: {
+            args: Prisma.RefundFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RefundFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundPayload>
+          }
+          findMany: {
+            args: Prisma.RefundFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundPayload>[]
+          }
+          create: {
+            args: Prisma.RefundCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundPayload>
+          }
+          createMany: {
+            args: Prisma.RefundCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RefundCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundPayload>[]
+          }
+          delete: {
+            args: Prisma.RefundDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundPayload>
+          }
+          update: {
+            args: Prisma.RefundUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundPayload>
+          }
+          deleteMany: {
+            args: Prisma.RefundDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RefundUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RefundUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundPayload>[]
+          }
+          upsert: {
+            args: Prisma.RefundUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundPayload>
+          }
+          aggregate: {
+            args: Prisma.RefundAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRefund>
+          }
+          groupBy: {
+            args: Prisma.RefundGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RefundGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RefundCountArgs<ExtArgs>
+            result: $Utils.Optional<RefundCountAggregateOutputType> | number
+          }
+        }
+      }
       TaxTable: {
         payload: Prisma.$TaxTablePayload<ExtArgs>
         fields: Prisma.TaxTableFieldRefs
@@ -8991,6 +9171,8 @@ export namespace Prisma {
     feature?: FeatureOmit
     planFeature?: PlanFeatureOmit
     invoice?: InvoiceOmit
+    dispute?: DisputeOmit
+    refund?: RefundOmit
     taxTable?: TaxTableOmit
     theme?: ThemeOmit
     user?: UserOmit
@@ -26255,8 +26437,7 @@ export namespace Prisma {
     name: string | null
     slug: string | null
     type: $Enums.EstablishmentType | null
-    status: $Enums.EstablishmentStatus | null
-    isOnline: boolean | null
+    isActive: boolean | null
     email: string | null
     countryCode: string | null
     phoneNumber: string | null
@@ -26305,8 +26486,7 @@ export namespace Prisma {
     name: string | null
     slug: string | null
     type: $Enums.EstablishmentType | null
-    status: $Enums.EstablishmentStatus | null
-    isOnline: boolean | null
+    isActive: boolean | null
     email: string | null
     countryCode: string | null
     phoneNumber: string | null
@@ -26355,8 +26535,7 @@ export namespace Prisma {
     name: number
     slug: number
     type: number
-    status: number
-    isOnline: number
+    isActive: number
     email: number
     countryCode: number
     phoneNumber: number
@@ -26408,8 +26587,7 @@ export namespace Prisma {
     name?: true
     slug?: true
     type?: true
-    status?: true
-    isOnline?: true
+    isActive?: true
     email?: true
     countryCode?: true
     phoneNumber?: true
@@ -26458,8 +26636,7 @@ export namespace Prisma {
     name?: true
     slug?: true
     type?: true
-    status?: true
-    isOnline?: true
+    isActive?: true
     email?: true
     countryCode?: true
     phoneNumber?: true
@@ -26508,8 +26685,7 @@ export namespace Prisma {
     name?: true
     slug?: true
     type?: true
-    status?: true
-    isOnline?: true
+    isActive?: true
     email?: true
     countryCode?: true
     phoneNumber?: true
@@ -26632,8 +26808,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status: $Enums.EstablishmentStatus
-    isOnline: boolean
+    isActive: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -26700,8 +26875,7 @@ export namespace Prisma {
     name?: boolean
     slug?: boolean
     type?: boolean
-    status?: boolean
-    isOnline?: boolean
+    isActive?: boolean
     email?: boolean
     countryCode?: boolean
     phoneNumber?: boolean
@@ -26792,8 +26966,7 @@ export namespace Prisma {
     name?: boolean
     slug?: boolean
     type?: boolean
-    status?: boolean
-    isOnline?: boolean
+    isActive?: boolean
     email?: boolean
     countryCode?: boolean
     phoneNumber?: boolean
@@ -26848,8 +27021,7 @@ export namespace Prisma {
     name?: boolean
     slug?: boolean
     type?: boolean
-    status?: boolean
-    isOnline?: boolean
+    isActive?: boolean
     email?: boolean
     countryCode?: boolean
     phoneNumber?: boolean
@@ -26904,8 +27076,7 @@ export namespace Prisma {
     name?: boolean
     slug?: boolean
     type?: boolean
-    status?: boolean
-    isOnline?: boolean
+    isActive?: boolean
     email?: boolean
     countryCode?: boolean
     phoneNumber?: boolean
@@ -26950,7 +27121,7 @@ export namespace Prisma {
     ownerId?: boolean
   }
 
-  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "status" | "isOnline" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "myPageModule" | "menusModule" | "callStaffModule" | "takeAwayModule" | "reservationsModule" | "isDemo" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "googleAnalyticsId" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
+  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "isActive" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "myPageModule" | "menusModule" | "callStaffModule" | "takeAwayModule" | "reservationsModule" | "isDemo" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "googleAnalyticsId" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
   export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     metadata?: boolean | Establishment$metadataArgs<ExtArgs>
@@ -27058,8 +27229,7 @@ export namespace Prisma {
       name: string
       slug: string
       type: $Enums.EstablishmentType
-      status: $Enums.EstablishmentStatus
-      isOnline: boolean
+      isActive: boolean
       email: string
       countryCode: string
       phoneNumber: string
@@ -27569,8 +27739,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Establishment", 'String'>
     readonly slug: FieldRef<"Establishment", 'String'>
     readonly type: FieldRef<"Establishment", 'EstablishmentType'>
-    readonly status: FieldRef<"Establishment", 'EstablishmentStatus'>
-    readonly isOnline: FieldRef<"Establishment", 'Boolean'>
+    readonly isActive: FieldRef<"Establishment", 'Boolean'>
     readonly email: FieldRef<"Establishment", 'String'>
     readonly countryCode: FieldRef<"Establishment", 'String'>
     readonly phoneNumber: FieldRef<"Establishment", 'String'>
@@ -102763,6 +102932,2168 @@ export namespace Prisma {
 
 
   /**
+   * Model Dispute
+   */
+
+  export type AggregateDispute = {
+    _count: DisputeCountAggregateOutputType | null
+    _avg: DisputeAvgAggregateOutputType | null
+    _sum: DisputeSumAggregateOutputType | null
+    _min: DisputeMinAggregateOutputType | null
+    _max: DisputeMaxAggregateOutputType | null
+  }
+
+  export type DisputeAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type DisputeSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type DisputeMinAggregateOutputType = {
+    id: string | null
+    stripeDisputeId: string | null
+    amount: number | null
+    currency: string | null
+    reason: string | null
+    status: string | null
+    stripeCustomerId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DisputeMaxAggregateOutputType = {
+    id: string | null
+    stripeDisputeId: string | null
+    amount: number | null
+    currency: string | null
+    reason: string | null
+    status: string | null
+    stripeCustomerId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DisputeCountAggregateOutputType = {
+    id: number
+    stripeDisputeId: number
+    amount: number
+    currency: number
+    reason: number
+    status: number
+    stripeCustomerId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DisputeAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type DisputeSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type DisputeMinAggregateInputType = {
+    id?: true
+    stripeDisputeId?: true
+    amount?: true
+    currency?: true
+    reason?: true
+    status?: true
+    stripeCustomerId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DisputeMaxAggregateInputType = {
+    id?: true
+    stripeDisputeId?: true
+    amount?: true
+    currency?: true
+    reason?: true
+    status?: true
+    stripeCustomerId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DisputeCountAggregateInputType = {
+    id?: true
+    stripeDisputeId?: true
+    amount?: true
+    currency?: true
+    reason?: true
+    status?: true
+    stripeCustomerId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DisputeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Dispute to aggregate.
+     */
+    where?: DisputeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Disputes to fetch.
+     */
+    orderBy?: DisputeOrderByWithRelationInput | DisputeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DisputeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Disputes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Disputes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Disputes
+    **/
+    _count?: true | DisputeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DisputeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DisputeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DisputeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DisputeMaxAggregateInputType
+  }
+
+  export type GetDisputeAggregateType<T extends DisputeAggregateArgs> = {
+        [P in keyof T & keyof AggregateDispute]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDispute[P]>
+      : GetScalarType<T[P], AggregateDispute[P]>
+  }
+
+
+
+
+  export type DisputeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DisputeWhereInput
+    orderBy?: DisputeOrderByWithAggregationInput | DisputeOrderByWithAggregationInput[]
+    by: DisputeScalarFieldEnum[] | DisputeScalarFieldEnum
+    having?: DisputeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DisputeCountAggregateInputType | true
+    _avg?: DisputeAvgAggregateInputType
+    _sum?: DisputeSumAggregateInputType
+    _min?: DisputeMinAggregateInputType
+    _max?: DisputeMaxAggregateInputType
+  }
+
+  export type DisputeGroupByOutputType = {
+    id: string
+    stripeDisputeId: string
+    amount: number
+    currency: string
+    reason: string | null
+    status: string
+    stripeCustomerId: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: DisputeCountAggregateOutputType | null
+    _avg: DisputeAvgAggregateOutputType | null
+    _sum: DisputeSumAggregateOutputType | null
+    _min: DisputeMinAggregateOutputType | null
+    _max: DisputeMaxAggregateOutputType | null
+  }
+
+  type GetDisputeGroupByPayload<T extends DisputeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DisputeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DisputeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DisputeGroupByOutputType[P]>
+            : GetScalarType<T[P], DisputeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DisputeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    stripeDisputeId?: boolean
+    amount?: boolean
+    currency?: boolean
+    reason?: boolean
+    status?: boolean
+    stripeCustomerId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["dispute"]>
+
+  export type DisputeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    stripeDisputeId?: boolean
+    amount?: boolean
+    currency?: boolean
+    reason?: boolean
+    status?: boolean
+    stripeCustomerId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["dispute"]>
+
+  export type DisputeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    stripeDisputeId?: boolean
+    amount?: boolean
+    currency?: boolean
+    reason?: boolean
+    status?: boolean
+    stripeCustomerId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["dispute"]>
+
+  export type DisputeSelectScalar = {
+    id?: boolean
+    stripeDisputeId?: boolean
+    amount?: boolean
+    currency?: boolean
+    reason?: boolean
+    status?: boolean
+    stripeCustomerId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DisputeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "stripeDisputeId" | "amount" | "currency" | "reason" | "status" | "stripeCustomerId" | "createdAt" | "updatedAt", ExtArgs["result"]["dispute"]>
+
+  export type $DisputePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Dispute"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      stripeDisputeId: string
+      amount: number
+      currency: string
+      reason: string | null
+      status: string
+      stripeCustomerId: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["dispute"]>
+    composites: {}
+  }
+
+  type DisputeGetPayload<S extends boolean | null | undefined | DisputeDefaultArgs> = $Result.GetResult<Prisma.$DisputePayload, S>
+
+  type DisputeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DisputeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DisputeCountAggregateInputType | true
+    }
+
+  export interface DisputeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Dispute'], meta: { name: 'Dispute' } }
+    /**
+     * Find zero or one Dispute that matches the filter.
+     * @param {DisputeFindUniqueArgs} args - Arguments to find a Dispute
+     * @example
+     * // Get one Dispute
+     * const dispute = await prisma.dispute.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DisputeFindUniqueArgs>(args: SelectSubset<T, DisputeFindUniqueArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Dispute that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DisputeFindUniqueOrThrowArgs} args - Arguments to find a Dispute
+     * @example
+     * // Get one Dispute
+     * const dispute = await prisma.dispute.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DisputeFindUniqueOrThrowArgs>(args: SelectSubset<T, DisputeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Dispute that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeFindFirstArgs} args - Arguments to find a Dispute
+     * @example
+     * // Get one Dispute
+     * const dispute = await prisma.dispute.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DisputeFindFirstArgs>(args?: SelectSubset<T, DisputeFindFirstArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Dispute that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeFindFirstOrThrowArgs} args - Arguments to find a Dispute
+     * @example
+     * // Get one Dispute
+     * const dispute = await prisma.dispute.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DisputeFindFirstOrThrowArgs>(args?: SelectSubset<T, DisputeFindFirstOrThrowArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Disputes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Disputes
+     * const disputes = await prisma.dispute.findMany()
+     * 
+     * // Get first 10 Disputes
+     * const disputes = await prisma.dispute.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const disputeWithIdOnly = await prisma.dispute.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DisputeFindManyArgs>(args?: SelectSubset<T, DisputeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Dispute.
+     * @param {DisputeCreateArgs} args - Arguments to create a Dispute.
+     * @example
+     * // Create one Dispute
+     * const Dispute = await prisma.dispute.create({
+     *   data: {
+     *     // ... data to create a Dispute
+     *   }
+     * })
+     * 
+     */
+    create<T extends DisputeCreateArgs>(args: SelectSubset<T, DisputeCreateArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Disputes.
+     * @param {DisputeCreateManyArgs} args - Arguments to create many Disputes.
+     * @example
+     * // Create many Disputes
+     * const dispute = await prisma.dispute.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DisputeCreateManyArgs>(args?: SelectSubset<T, DisputeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Disputes and returns the data saved in the database.
+     * @param {DisputeCreateManyAndReturnArgs} args - Arguments to create many Disputes.
+     * @example
+     * // Create many Disputes
+     * const dispute = await prisma.dispute.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Disputes and only return the `id`
+     * const disputeWithIdOnly = await prisma.dispute.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DisputeCreateManyAndReturnArgs>(args?: SelectSubset<T, DisputeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Dispute.
+     * @param {DisputeDeleteArgs} args - Arguments to delete one Dispute.
+     * @example
+     * // Delete one Dispute
+     * const Dispute = await prisma.dispute.delete({
+     *   where: {
+     *     // ... filter to delete one Dispute
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DisputeDeleteArgs>(args: SelectSubset<T, DisputeDeleteArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Dispute.
+     * @param {DisputeUpdateArgs} args - Arguments to update one Dispute.
+     * @example
+     * // Update one Dispute
+     * const dispute = await prisma.dispute.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DisputeUpdateArgs>(args: SelectSubset<T, DisputeUpdateArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Disputes.
+     * @param {DisputeDeleteManyArgs} args - Arguments to filter Disputes to delete.
+     * @example
+     * // Delete a few Disputes
+     * const { count } = await prisma.dispute.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DisputeDeleteManyArgs>(args?: SelectSubset<T, DisputeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Disputes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Disputes
+     * const dispute = await prisma.dispute.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DisputeUpdateManyArgs>(args: SelectSubset<T, DisputeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Disputes and returns the data updated in the database.
+     * @param {DisputeUpdateManyAndReturnArgs} args - Arguments to update many Disputes.
+     * @example
+     * // Update many Disputes
+     * const dispute = await prisma.dispute.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Disputes and only return the `id`
+     * const disputeWithIdOnly = await prisma.dispute.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DisputeUpdateManyAndReturnArgs>(args: SelectSubset<T, DisputeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Dispute.
+     * @param {DisputeUpsertArgs} args - Arguments to update or create a Dispute.
+     * @example
+     * // Update or create a Dispute
+     * const dispute = await prisma.dispute.upsert({
+     *   create: {
+     *     // ... data to create a Dispute
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Dispute we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DisputeUpsertArgs>(args: SelectSubset<T, DisputeUpsertArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Disputes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeCountArgs} args - Arguments to filter Disputes to count.
+     * @example
+     * // Count the number of Disputes
+     * const count = await prisma.dispute.count({
+     *   where: {
+     *     // ... the filter for the Disputes we want to count
+     *   }
+     * })
+    **/
+    count<T extends DisputeCountArgs>(
+      args?: Subset<T, DisputeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DisputeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Dispute.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DisputeAggregateArgs>(args: Subset<T, DisputeAggregateArgs>): Prisma.PrismaPromise<GetDisputeAggregateType<T>>
+
+    /**
+     * Group by Dispute.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DisputeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DisputeGroupByArgs['orderBy'] }
+        : { orderBy?: DisputeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DisputeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDisputeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Dispute model
+   */
+  readonly fields: DisputeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Dispute.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DisputeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Dispute model
+   */
+  interface DisputeFieldRefs {
+    readonly id: FieldRef<"Dispute", 'String'>
+    readonly stripeDisputeId: FieldRef<"Dispute", 'String'>
+    readonly amount: FieldRef<"Dispute", 'Int'>
+    readonly currency: FieldRef<"Dispute", 'String'>
+    readonly reason: FieldRef<"Dispute", 'String'>
+    readonly status: FieldRef<"Dispute", 'String'>
+    readonly stripeCustomerId: FieldRef<"Dispute", 'String'>
+    readonly createdAt: FieldRef<"Dispute", 'DateTime'>
+    readonly updatedAt: FieldRef<"Dispute", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Dispute findUnique
+   */
+  export type DisputeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Dispute
+     */
+    omit?: DisputeOmit<ExtArgs> | null
+    /**
+     * Filter, which Dispute to fetch.
+     */
+    where: DisputeWhereUniqueInput
+  }
+
+  /**
+   * Dispute findUniqueOrThrow
+   */
+  export type DisputeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Dispute
+     */
+    omit?: DisputeOmit<ExtArgs> | null
+    /**
+     * Filter, which Dispute to fetch.
+     */
+    where: DisputeWhereUniqueInput
+  }
+
+  /**
+   * Dispute findFirst
+   */
+  export type DisputeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Dispute
+     */
+    omit?: DisputeOmit<ExtArgs> | null
+    /**
+     * Filter, which Dispute to fetch.
+     */
+    where?: DisputeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Disputes to fetch.
+     */
+    orderBy?: DisputeOrderByWithRelationInput | DisputeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Disputes.
+     */
+    cursor?: DisputeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Disputes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Disputes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Disputes.
+     */
+    distinct?: DisputeScalarFieldEnum | DisputeScalarFieldEnum[]
+  }
+
+  /**
+   * Dispute findFirstOrThrow
+   */
+  export type DisputeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Dispute
+     */
+    omit?: DisputeOmit<ExtArgs> | null
+    /**
+     * Filter, which Dispute to fetch.
+     */
+    where?: DisputeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Disputes to fetch.
+     */
+    orderBy?: DisputeOrderByWithRelationInput | DisputeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Disputes.
+     */
+    cursor?: DisputeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Disputes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Disputes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Disputes.
+     */
+    distinct?: DisputeScalarFieldEnum | DisputeScalarFieldEnum[]
+  }
+
+  /**
+   * Dispute findMany
+   */
+  export type DisputeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Dispute
+     */
+    omit?: DisputeOmit<ExtArgs> | null
+    /**
+     * Filter, which Disputes to fetch.
+     */
+    where?: DisputeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Disputes to fetch.
+     */
+    orderBy?: DisputeOrderByWithRelationInput | DisputeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Disputes.
+     */
+    cursor?: DisputeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Disputes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Disputes.
+     */
+    skip?: number
+    distinct?: DisputeScalarFieldEnum | DisputeScalarFieldEnum[]
+  }
+
+  /**
+   * Dispute create
+   */
+  export type DisputeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Dispute
+     */
+    omit?: DisputeOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Dispute.
+     */
+    data: XOR<DisputeCreateInput, DisputeUncheckedCreateInput>
+  }
+
+  /**
+   * Dispute createMany
+   */
+  export type DisputeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Disputes.
+     */
+    data: DisputeCreateManyInput | DisputeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Dispute createManyAndReturn
+   */
+  export type DisputeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Dispute
+     */
+    omit?: DisputeOmit<ExtArgs> | null
+    /**
+     * The data used to create many Disputes.
+     */
+    data: DisputeCreateManyInput | DisputeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Dispute update
+   */
+  export type DisputeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Dispute
+     */
+    omit?: DisputeOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Dispute.
+     */
+    data: XOR<DisputeUpdateInput, DisputeUncheckedUpdateInput>
+    /**
+     * Choose, which Dispute to update.
+     */
+    where: DisputeWhereUniqueInput
+  }
+
+  /**
+   * Dispute updateMany
+   */
+  export type DisputeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Disputes.
+     */
+    data: XOR<DisputeUpdateManyMutationInput, DisputeUncheckedUpdateManyInput>
+    /**
+     * Filter which Disputes to update
+     */
+    where?: DisputeWhereInput
+    /**
+     * Limit how many Disputes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Dispute updateManyAndReturn
+   */
+  export type DisputeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Dispute
+     */
+    omit?: DisputeOmit<ExtArgs> | null
+    /**
+     * The data used to update Disputes.
+     */
+    data: XOR<DisputeUpdateManyMutationInput, DisputeUncheckedUpdateManyInput>
+    /**
+     * Filter which Disputes to update
+     */
+    where?: DisputeWhereInput
+    /**
+     * Limit how many Disputes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Dispute upsert
+   */
+  export type DisputeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Dispute
+     */
+    omit?: DisputeOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Dispute to update in case it exists.
+     */
+    where: DisputeWhereUniqueInput
+    /**
+     * In case the Dispute found by the `where` argument doesn't exist, create a new Dispute with this data.
+     */
+    create: XOR<DisputeCreateInput, DisputeUncheckedCreateInput>
+    /**
+     * In case the Dispute was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DisputeUpdateInput, DisputeUncheckedUpdateInput>
+  }
+
+  /**
+   * Dispute delete
+   */
+  export type DisputeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Dispute
+     */
+    omit?: DisputeOmit<ExtArgs> | null
+    /**
+     * Filter which Dispute to delete.
+     */
+    where: DisputeWhereUniqueInput
+  }
+
+  /**
+   * Dispute deleteMany
+   */
+  export type DisputeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Disputes to delete
+     */
+    where?: DisputeWhereInput
+    /**
+     * Limit how many Disputes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Dispute without action
+   */
+  export type DisputeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Dispute
+     */
+    omit?: DisputeOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Refund
+   */
+
+  export type AggregateRefund = {
+    _count: RefundCountAggregateOutputType | null
+    _avg: RefundAvgAggregateOutputType | null
+    _sum: RefundSumAggregateOutputType | null
+    _min: RefundMinAggregateOutputType | null
+    _max: RefundMaxAggregateOutputType | null
+  }
+
+  export type RefundAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type RefundSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type RefundMinAggregateOutputType = {
+    id: string | null
+    stripeRefundId: string | null
+    stripeChargeId: string | null
+    amount: number | null
+    currency: string | null
+    status: string | null
+    stripeCustomerId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RefundMaxAggregateOutputType = {
+    id: string | null
+    stripeRefundId: string | null
+    stripeChargeId: string | null
+    amount: number | null
+    currency: string | null
+    status: string | null
+    stripeCustomerId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RefundCountAggregateOutputType = {
+    id: number
+    stripeRefundId: number
+    stripeChargeId: number
+    amount: number
+    currency: number
+    status: number
+    stripeCustomerId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type RefundAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type RefundSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type RefundMinAggregateInputType = {
+    id?: true
+    stripeRefundId?: true
+    stripeChargeId?: true
+    amount?: true
+    currency?: true
+    status?: true
+    stripeCustomerId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RefundMaxAggregateInputType = {
+    id?: true
+    stripeRefundId?: true
+    stripeChargeId?: true
+    amount?: true
+    currency?: true
+    status?: true
+    stripeCustomerId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RefundCountAggregateInputType = {
+    id?: true
+    stripeRefundId?: true
+    stripeChargeId?: true
+    amount?: true
+    currency?: true
+    status?: true
+    stripeCustomerId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type RefundAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Refund to aggregate.
+     */
+    where?: RefundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Refunds to fetch.
+     */
+    orderBy?: RefundOrderByWithRelationInput | RefundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RefundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Refunds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Refunds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Refunds
+    **/
+    _count?: true | RefundCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RefundAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RefundSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RefundMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RefundMaxAggregateInputType
+  }
+
+  export type GetRefundAggregateType<T extends RefundAggregateArgs> = {
+        [P in keyof T & keyof AggregateRefund]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRefund[P]>
+      : GetScalarType<T[P], AggregateRefund[P]>
+  }
+
+
+
+
+  export type RefundGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RefundWhereInput
+    orderBy?: RefundOrderByWithAggregationInput | RefundOrderByWithAggregationInput[]
+    by: RefundScalarFieldEnum[] | RefundScalarFieldEnum
+    having?: RefundScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RefundCountAggregateInputType | true
+    _avg?: RefundAvgAggregateInputType
+    _sum?: RefundSumAggregateInputType
+    _min?: RefundMinAggregateInputType
+    _max?: RefundMaxAggregateInputType
+  }
+
+  export type RefundGroupByOutputType = {
+    id: string
+    stripeRefundId: string
+    stripeChargeId: string
+    amount: number
+    currency: string
+    status: string
+    stripeCustomerId: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: RefundCountAggregateOutputType | null
+    _avg: RefundAvgAggregateOutputType | null
+    _sum: RefundSumAggregateOutputType | null
+    _min: RefundMinAggregateOutputType | null
+    _max: RefundMaxAggregateOutputType | null
+  }
+
+  type GetRefundGroupByPayload<T extends RefundGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RefundGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RefundGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RefundGroupByOutputType[P]>
+            : GetScalarType<T[P], RefundGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RefundSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    stripeRefundId?: boolean
+    stripeChargeId?: boolean
+    amount?: boolean
+    currency?: boolean
+    status?: boolean
+    stripeCustomerId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["refund"]>
+
+  export type RefundSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    stripeRefundId?: boolean
+    stripeChargeId?: boolean
+    amount?: boolean
+    currency?: boolean
+    status?: boolean
+    stripeCustomerId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["refund"]>
+
+  export type RefundSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    stripeRefundId?: boolean
+    stripeChargeId?: boolean
+    amount?: boolean
+    currency?: boolean
+    status?: boolean
+    stripeCustomerId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["refund"]>
+
+  export type RefundSelectScalar = {
+    id?: boolean
+    stripeRefundId?: boolean
+    stripeChargeId?: boolean
+    amount?: boolean
+    currency?: boolean
+    status?: boolean
+    stripeCustomerId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type RefundOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "stripeRefundId" | "stripeChargeId" | "amount" | "currency" | "status" | "stripeCustomerId" | "createdAt" | "updatedAt", ExtArgs["result"]["refund"]>
+
+  export type $RefundPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Refund"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      stripeRefundId: string
+      stripeChargeId: string
+      amount: number
+      currency: string
+      status: string
+      stripeCustomerId: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["refund"]>
+    composites: {}
+  }
+
+  type RefundGetPayload<S extends boolean | null | undefined | RefundDefaultArgs> = $Result.GetResult<Prisma.$RefundPayload, S>
+
+  type RefundCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RefundFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RefundCountAggregateInputType | true
+    }
+
+  export interface RefundDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Refund'], meta: { name: 'Refund' } }
+    /**
+     * Find zero or one Refund that matches the filter.
+     * @param {RefundFindUniqueArgs} args - Arguments to find a Refund
+     * @example
+     * // Get one Refund
+     * const refund = await prisma.refund.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RefundFindUniqueArgs>(args: SelectSubset<T, RefundFindUniqueArgs<ExtArgs>>): Prisma__RefundClient<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Refund that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RefundFindUniqueOrThrowArgs} args - Arguments to find a Refund
+     * @example
+     * // Get one Refund
+     * const refund = await prisma.refund.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RefundFindUniqueOrThrowArgs>(args: SelectSubset<T, RefundFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RefundClient<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Refund that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundFindFirstArgs} args - Arguments to find a Refund
+     * @example
+     * // Get one Refund
+     * const refund = await prisma.refund.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RefundFindFirstArgs>(args?: SelectSubset<T, RefundFindFirstArgs<ExtArgs>>): Prisma__RefundClient<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Refund that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundFindFirstOrThrowArgs} args - Arguments to find a Refund
+     * @example
+     * // Get one Refund
+     * const refund = await prisma.refund.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RefundFindFirstOrThrowArgs>(args?: SelectSubset<T, RefundFindFirstOrThrowArgs<ExtArgs>>): Prisma__RefundClient<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Refunds that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Refunds
+     * const refunds = await prisma.refund.findMany()
+     * 
+     * // Get first 10 Refunds
+     * const refunds = await prisma.refund.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const refundWithIdOnly = await prisma.refund.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RefundFindManyArgs>(args?: SelectSubset<T, RefundFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Refund.
+     * @param {RefundCreateArgs} args - Arguments to create a Refund.
+     * @example
+     * // Create one Refund
+     * const Refund = await prisma.refund.create({
+     *   data: {
+     *     // ... data to create a Refund
+     *   }
+     * })
+     * 
+     */
+    create<T extends RefundCreateArgs>(args: SelectSubset<T, RefundCreateArgs<ExtArgs>>): Prisma__RefundClient<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Refunds.
+     * @param {RefundCreateManyArgs} args - Arguments to create many Refunds.
+     * @example
+     * // Create many Refunds
+     * const refund = await prisma.refund.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RefundCreateManyArgs>(args?: SelectSubset<T, RefundCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Refunds and returns the data saved in the database.
+     * @param {RefundCreateManyAndReturnArgs} args - Arguments to create many Refunds.
+     * @example
+     * // Create many Refunds
+     * const refund = await prisma.refund.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Refunds and only return the `id`
+     * const refundWithIdOnly = await prisma.refund.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RefundCreateManyAndReturnArgs>(args?: SelectSubset<T, RefundCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Refund.
+     * @param {RefundDeleteArgs} args - Arguments to delete one Refund.
+     * @example
+     * // Delete one Refund
+     * const Refund = await prisma.refund.delete({
+     *   where: {
+     *     // ... filter to delete one Refund
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RefundDeleteArgs>(args: SelectSubset<T, RefundDeleteArgs<ExtArgs>>): Prisma__RefundClient<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Refund.
+     * @param {RefundUpdateArgs} args - Arguments to update one Refund.
+     * @example
+     * // Update one Refund
+     * const refund = await prisma.refund.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RefundUpdateArgs>(args: SelectSubset<T, RefundUpdateArgs<ExtArgs>>): Prisma__RefundClient<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Refunds.
+     * @param {RefundDeleteManyArgs} args - Arguments to filter Refunds to delete.
+     * @example
+     * // Delete a few Refunds
+     * const { count } = await prisma.refund.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RefundDeleteManyArgs>(args?: SelectSubset<T, RefundDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Refunds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Refunds
+     * const refund = await prisma.refund.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RefundUpdateManyArgs>(args: SelectSubset<T, RefundUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Refunds and returns the data updated in the database.
+     * @param {RefundUpdateManyAndReturnArgs} args - Arguments to update many Refunds.
+     * @example
+     * // Update many Refunds
+     * const refund = await prisma.refund.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Refunds and only return the `id`
+     * const refundWithIdOnly = await prisma.refund.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RefundUpdateManyAndReturnArgs>(args: SelectSubset<T, RefundUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Refund.
+     * @param {RefundUpsertArgs} args - Arguments to update or create a Refund.
+     * @example
+     * // Update or create a Refund
+     * const refund = await prisma.refund.upsert({
+     *   create: {
+     *     // ... data to create a Refund
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Refund we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RefundUpsertArgs>(args: SelectSubset<T, RefundUpsertArgs<ExtArgs>>): Prisma__RefundClient<$Result.GetResult<Prisma.$RefundPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Refunds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundCountArgs} args - Arguments to filter Refunds to count.
+     * @example
+     * // Count the number of Refunds
+     * const count = await prisma.refund.count({
+     *   where: {
+     *     // ... the filter for the Refunds we want to count
+     *   }
+     * })
+    **/
+    count<T extends RefundCountArgs>(
+      args?: Subset<T, RefundCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RefundCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Refund.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RefundAggregateArgs>(args: Subset<T, RefundAggregateArgs>): Prisma.PrismaPromise<GetRefundAggregateType<T>>
+
+    /**
+     * Group by Refund.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RefundGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RefundGroupByArgs['orderBy'] }
+        : { orderBy?: RefundGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RefundGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRefundGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Refund model
+   */
+  readonly fields: RefundFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Refund.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RefundClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Refund model
+   */
+  interface RefundFieldRefs {
+    readonly id: FieldRef<"Refund", 'String'>
+    readonly stripeRefundId: FieldRef<"Refund", 'String'>
+    readonly stripeChargeId: FieldRef<"Refund", 'String'>
+    readonly amount: FieldRef<"Refund", 'Int'>
+    readonly currency: FieldRef<"Refund", 'String'>
+    readonly status: FieldRef<"Refund", 'String'>
+    readonly stripeCustomerId: FieldRef<"Refund", 'String'>
+    readonly createdAt: FieldRef<"Refund", 'DateTime'>
+    readonly updatedAt: FieldRef<"Refund", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Refund findUnique
+   */
+  export type RefundFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Refund
+     */
+    select?: RefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Refund
+     */
+    omit?: RefundOmit<ExtArgs> | null
+    /**
+     * Filter, which Refund to fetch.
+     */
+    where: RefundWhereUniqueInput
+  }
+
+  /**
+   * Refund findUniqueOrThrow
+   */
+  export type RefundFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Refund
+     */
+    select?: RefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Refund
+     */
+    omit?: RefundOmit<ExtArgs> | null
+    /**
+     * Filter, which Refund to fetch.
+     */
+    where: RefundWhereUniqueInput
+  }
+
+  /**
+   * Refund findFirst
+   */
+  export type RefundFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Refund
+     */
+    select?: RefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Refund
+     */
+    omit?: RefundOmit<ExtArgs> | null
+    /**
+     * Filter, which Refund to fetch.
+     */
+    where?: RefundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Refunds to fetch.
+     */
+    orderBy?: RefundOrderByWithRelationInput | RefundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Refunds.
+     */
+    cursor?: RefundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Refunds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Refunds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Refunds.
+     */
+    distinct?: RefundScalarFieldEnum | RefundScalarFieldEnum[]
+  }
+
+  /**
+   * Refund findFirstOrThrow
+   */
+  export type RefundFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Refund
+     */
+    select?: RefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Refund
+     */
+    omit?: RefundOmit<ExtArgs> | null
+    /**
+     * Filter, which Refund to fetch.
+     */
+    where?: RefundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Refunds to fetch.
+     */
+    orderBy?: RefundOrderByWithRelationInput | RefundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Refunds.
+     */
+    cursor?: RefundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Refunds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Refunds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Refunds.
+     */
+    distinct?: RefundScalarFieldEnum | RefundScalarFieldEnum[]
+  }
+
+  /**
+   * Refund findMany
+   */
+  export type RefundFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Refund
+     */
+    select?: RefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Refund
+     */
+    omit?: RefundOmit<ExtArgs> | null
+    /**
+     * Filter, which Refunds to fetch.
+     */
+    where?: RefundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Refunds to fetch.
+     */
+    orderBy?: RefundOrderByWithRelationInput | RefundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Refunds.
+     */
+    cursor?: RefundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Refunds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Refunds.
+     */
+    skip?: number
+    distinct?: RefundScalarFieldEnum | RefundScalarFieldEnum[]
+  }
+
+  /**
+   * Refund create
+   */
+  export type RefundCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Refund
+     */
+    select?: RefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Refund
+     */
+    omit?: RefundOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Refund.
+     */
+    data: XOR<RefundCreateInput, RefundUncheckedCreateInput>
+  }
+
+  /**
+   * Refund createMany
+   */
+  export type RefundCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Refunds.
+     */
+    data: RefundCreateManyInput | RefundCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Refund createManyAndReturn
+   */
+  export type RefundCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Refund
+     */
+    select?: RefundSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Refund
+     */
+    omit?: RefundOmit<ExtArgs> | null
+    /**
+     * The data used to create many Refunds.
+     */
+    data: RefundCreateManyInput | RefundCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Refund update
+   */
+  export type RefundUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Refund
+     */
+    select?: RefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Refund
+     */
+    omit?: RefundOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Refund.
+     */
+    data: XOR<RefundUpdateInput, RefundUncheckedUpdateInput>
+    /**
+     * Choose, which Refund to update.
+     */
+    where: RefundWhereUniqueInput
+  }
+
+  /**
+   * Refund updateMany
+   */
+  export type RefundUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Refunds.
+     */
+    data: XOR<RefundUpdateManyMutationInput, RefundUncheckedUpdateManyInput>
+    /**
+     * Filter which Refunds to update
+     */
+    where?: RefundWhereInput
+    /**
+     * Limit how many Refunds to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Refund updateManyAndReturn
+   */
+  export type RefundUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Refund
+     */
+    select?: RefundSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Refund
+     */
+    omit?: RefundOmit<ExtArgs> | null
+    /**
+     * The data used to update Refunds.
+     */
+    data: XOR<RefundUpdateManyMutationInput, RefundUncheckedUpdateManyInput>
+    /**
+     * Filter which Refunds to update
+     */
+    where?: RefundWhereInput
+    /**
+     * Limit how many Refunds to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Refund upsert
+   */
+  export type RefundUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Refund
+     */
+    select?: RefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Refund
+     */
+    omit?: RefundOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Refund to update in case it exists.
+     */
+    where: RefundWhereUniqueInput
+    /**
+     * In case the Refund found by the `where` argument doesn't exist, create a new Refund with this data.
+     */
+    create: XOR<RefundCreateInput, RefundUncheckedCreateInput>
+    /**
+     * In case the Refund was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RefundUpdateInput, RefundUncheckedUpdateInput>
+  }
+
+  /**
+   * Refund delete
+   */
+  export type RefundDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Refund
+     */
+    select?: RefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Refund
+     */
+    omit?: RefundOmit<ExtArgs> | null
+    /**
+     * Filter which Refund to delete.
+     */
+    where: RefundWhereUniqueInput
+  }
+
+  /**
+   * Refund deleteMany
+   */
+  export type RefundDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Refunds to delete
+     */
+    where?: RefundWhereInput
+    /**
+     * Limit how many Refunds to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Refund without action
+   */
+  export type RefundDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Refund
+     */
+    select?: RefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Refund
+     */
+    omit?: RefundOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model TaxTable
    */
 
@@ -109950,8 +112281,7 @@ export namespace Prisma {
     name: 'name',
     slug: 'slug',
     type: 'type',
-    status: 'status',
-    isOnline: 'isOnline',
+    isActive: 'isActive',
     email: 'email',
     countryCode: 'countryCode',
     phoneNumber: 'phoneNumber',
@@ -110952,6 +113282,36 @@ export namespace Prisma {
   export type InvoiceScalarFieldEnum = (typeof InvoiceScalarFieldEnum)[keyof typeof InvoiceScalarFieldEnum]
 
 
+  export const DisputeScalarFieldEnum: {
+    id: 'id',
+    stripeDisputeId: 'stripeDisputeId',
+    amount: 'amount',
+    currency: 'currency',
+    reason: 'reason',
+    status: 'status',
+    stripeCustomerId: 'stripeCustomerId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DisputeScalarFieldEnum = (typeof DisputeScalarFieldEnum)[keyof typeof DisputeScalarFieldEnum]
+
+
+  export const RefundScalarFieldEnum: {
+    id: 'id',
+    stripeRefundId: 'stripeRefundId',
+    stripeChargeId: 'stripeChargeId',
+    amount: 'amount',
+    currency: 'currency',
+    status: 'status',
+    stripeCustomerId: 'stripeCustomerId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type RefundScalarFieldEnum = (typeof RefundScalarFieldEnum)[keyof typeof RefundScalarFieldEnum]
+
+
   export const TaxTableScalarFieldEnum: {
     id: 'id',
     countryCode: 'countryCode',
@@ -111367,20 +113727,6 @@ export namespace Prisma {
    * Reference to a field of type 'EstablishmentType[]'
    */
   export type ListEnumEstablishmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstablishmentType[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'EstablishmentStatus'
-   */
-  export type EnumEstablishmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstablishmentStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'EstablishmentStatus[]'
-   */
-  export type ListEnumEstablishmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstablishmentStatus[]'>
     
 
 
@@ -112995,8 +115341,7 @@ export namespace Prisma {
     name?: StringFilter<"Establishment"> | string
     slug?: StringFilter<"Establishment"> | string
     type?: EnumEstablishmentTypeFilter<"Establishment"> | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFilter<"Establishment"> | $Enums.EstablishmentStatus
-    isOnline?: BoolFilter<"Establishment"> | boolean
+    isActive?: BoolFilter<"Establishment"> | boolean
     email?: StringFilter<"Establishment"> | string
     countryCode?: StringFilter<"Establishment"> | string
     phoneNumber?: StringFilter<"Establishment"> | string
@@ -113086,8 +115431,7 @@ export namespace Prisma {
     name?: SortOrder
     slug?: SortOrder
     type?: SortOrder
-    status?: SortOrder
-    isOnline?: SortOrder
+    isActive?: SortOrder
     email?: SortOrder
     countryCode?: SortOrder
     phoneNumber?: SortOrder
@@ -113182,8 +115526,7 @@ export namespace Prisma {
     NOT?: EstablishmentWhereInput | EstablishmentWhereInput[]
     name?: StringFilter<"Establishment"> | string
     type?: EnumEstablishmentTypeFilter<"Establishment"> | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFilter<"Establishment"> | $Enums.EstablishmentStatus
-    isOnline?: BoolFilter<"Establishment"> | boolean
+    isActive?: BoolFilter<"Establishment"> | boolean
     email?: StringFilter<"Establishment"> | string
     countryCode?: StringFilter<"Establishment"> | string
     phoneNumber?: StringFilter<"Establishment"> | string
@@ -113271,8 +115614,7 @@ export namespace Prisma {
     name?: SortOrder
     slug?: SortOrder
     type?: SortOrder
-    status?: SortOrder
-    isOnline?: SortOrder
+    isActive?: SortOrder
     email?: SortOrder
     countryCode?: SortOrder
     phoneNumber?: SortOrder
@@ -113328,8 +115670,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Establishment"> | string
     slug?: StringWithAggregatesFilter<"Establishment"> | string
     type?: EnumEstablishmentTypeWithAggregatesFilter<"Establishment"> | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusWithAggregatesFilter<"Establishment"> | $Enums.EstablishmentStatus
-    isOnline?: BoolWithAggregatesFilter<"Establishment"> | boolean
+    isActive?: BoolWithAggregatesFilter<"Establishment"> | boolean
     email?: StringWithAggregatesFilter<"Establishment"> | string
     countryCode?: StringWithAggregatesFilter<"Establishment"> | string
     phoneNumber?: StringWithAggregatesFilter<"Establishment"> | string
@@ -118526,6 +120867,154 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
   }
 
+  export type DisputeWhereInput = {
+    AND?: DisputeWhereInput | DisputeWhereInput[]
+    OR?: DisputeWhereInput[]
+    NOT?: DisputeWhereInput | DisputeWhereInput[]
+    id?: StringFilter<"Dispute"> | string
+    stripeDisputeId?: StringFilter<"Dispute"> | string
+    amount?: IntFilter<"Dispute"> | number
+    currency?: StringFilter<"Dispute"> | string
+    reason?: StringNullableFilter<"Dispute"> | string | null
+    status?: StringFilter<"Dispute"> | string
+    stripeCustomerId?: StringNullableFilter<"Dispute"> | string | null
+    createdAt?: DateTimeFilter<"Dispute"> | Date | string
+    updatedAt?: DateTimeFilter<"Dispute"> | Date | string
+  }
+
+  export type DisputeOrderByWithRelationInput = {
+    id?: SortOrder
+    stripeDisputeId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    status?: SortOrder
+    stripeCustomerId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DisputeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    stripeDisputeId?: string
+    AND?: DisputeWhereInput | DisputeWhereInput[]
+    OR?: DisputeWhereInput[]
+    NOT?: DisputeWhereInput | DisputeWhereInput[]
+    amount?: IntFilter<"Dispute"> | number
+    currency?: StringFilter<"Dispute"> | string
+    reason?: StringNullableFilter<"Dispute"> | string | null
+    status?: StringFilter<"Dispute"> | string
+    stripeCustomerId?: StringNullableFilter<"Dispute"> | string | null
+    createdAt?: DateTimeFilter<"Dispute"> | Date | string
+    updatedAt?: DateTimeFilter<"Dispute"> | Date | string
+  }, "id" | "stripeDisputeId">
+
+  export type DisputeOrderByWithAggregationInput = {
+    id?: SortOrder
+    stripeDisputeId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    status?: SortOrder
+    stripeCustomerId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DisputeCountOrderByAggregateInput
+    _avg?: DisputeAvgOrderByAggregateInput
+    _max?: DisputeMaxOrderByAggregateInput
+    _min?: DisputeMinOrderByAggregateInput
+    _sum?: DisputeSumOrderByAggregateInput
+  }
+
+  export type DisputeScalarWhereWithAggregatesInput = {
+    AND?: DisputeScalarWhereWithAggregatesInput | DisputeScalarWhereWithAggregatesInput[]
+    OR?: DisputeScalarWhereWithAggregatesInput[]
+    NOT?: DisputeScalarWhereWithAggregatesInput | DisputeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Dispute"> | string
+    stripeDisputeId?: StringWithAggregatesFilter<"Dispute"> | string
+    amount?: IntWithAggregatesFilter<"Dispute"> | number
+    currency?: StringWithAggregatesFilter<"Dispute"> | string
+    reason?: StringNullableWithAggregatesFilter<"Dispute"> | string | null
+    status?: StringWithAggregatesFilter<"Dispute"> | string
+    stripeCustomerId?: StringNullableWithAggregatesFilter<"Dispute"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Dispute"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Dispute"> | Date | string
+  }
+
+  export type RefundWhereInput = {
+    AND?: RefundWhereInput | RefundWhereInput[]
+    OR?: RefundWhereInput[]
+    NOT?: RefundWhereInput | RefundWhereInput[]
+    id?: StringFilter<"Refund"> | string
+    stripeRefundId?: StringFilter<"Refund"> | string
+    stripeChargeId?: StringFilter<"Refund"> | string
+    amount?: IntFilter<"Refund"> | number
+    currency?: StringFilter<"Refund"> | string
+    status?: StringFilter<"Refund"> | string
+    stripeCustomerId?: StringNullableFilter<"Refund"> | string | null
+    createdAt?: DateTimeFilter<"Refund"> | Date | string
+    updatedAt?: DateTimeFilter<"Refund"> | Date | string
+  }
+
+  export type RefundOrderByWithRelationInput = {
+    id?: SortOrder
+    stripeRefundId?: SortOrder
+    stripeChargeId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    status?: SortOrder
+    stripeCustomerId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RefundWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    stripeRefundId?: string
+    AND?: RefundWhereInput | RefundWhereInput[]
+    OR?: RefundWhereInput[]
+    NOT?: RefundWhereInput | RefundWhereInput[]
+    stripeChargeId?: StringFilter<"Refund"> | string
+    amount?: IntFilter<"Refund"> | number
+    currency?: StringFilter<"Refund"> | string
+    status?: StringFilter<"Refund"> | string
+    stripeCustomerId?: StringNullableFilter<"Refund"> | string | null
+    createdAt?: DateTimeFilter<"Refund"> | Date | string
+    updatedAt?: DateTimeFilter<"Refund"> | Date | string
+  }, "id" | "stripeRefundId">
+
+  export type RefundOrderByWithAggregationInput = {
+    id?: SortOrder
+    stripeRefundId?: SortOrder
+    stripeChargeId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    status?: SortOrder
+    stripeCustomerId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: RefundCountOrderByAggregateInput
+    _avg?: RefundAvgOrderByAggregateInput
+    _max?: RefundMaxOrderByAggregateInput
+    _min?: RefundMinOrderByAggregateInput
+    _sum?: RefundSumOrderByAggregateInput
+  }
+
+  export type RefundScalarWhereWithAggregatesInput = {
+    AND?: RefundScalarWhereWithAggregatesInput | RefundScalarWhereWithAggregatesInput[]
+    OR?: RefundScalarWhereWithAggregatesInput[]
+    NOT?: RefundScalarWhereWithAggregatesInput | RefundScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Refund"> | string
+    stripeRefundId?: StringWithAggregatesFilter<"Refund"> | string
+    stripeChargeId?: StringWithAggregatesFilter<"Refund"> | string
+    amount?: IntWithAggregatesFilter<"Refund"> | number
+    currency?: StringWithAggregatesFilter<"Refund"> | string
+    status?: StringWithAggregatesFilter<"Refund"> | string
+    stripeCustomerId?: StringNullableWithAggregatesFilter<"Refund"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Refund"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Refund"> | Date | string
+  }
+
   export type TaxTableWhereInput = {
     AND?: TaxTableWhereInput | TaxTableWhereInput[]
     OR?: TaxTableWhereInput[]
@@ -120316,8 +122805,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -120402,8 +122890,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -120488,8 +122975,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -120574,8 +123060,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -120660,8 +123145,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -120711,8 +123195,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -120757,8 +123240,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -126348,6 +128830,174 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DisputeCreateInput = {
+    id?: string
+    stripeDisputeId: string
+    amount: number
+    currency: string
+    reason?: string | null
+    status: string
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DisputeUncheckedCreateInput = {
+    id?: string
+    stripeDisputeId: string
+    amount: number
+    currency: string
+    reason?: string | null
+    status: string
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DisputeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeDisputeId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeDisputeId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeCreateManyInput = {
+    id?: string
+    stripeDisputeId: string
+    amount: number
+    currency: string
+    reason?: string | null
+    status: string
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DisputeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeDisputeId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeDisputeId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefundCreateInput = {
+    id?: string
+    stripeRefundId: string
+    stripeChargeId: string
+    amount: number
+    currency: string
+    status: string
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RefundUncheckedCreateInput = {
+    id?: string
+    stripeRefundId: string
+    stripeChargeId: string
+    amount: number
+    currency: string
+    status: string
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RefundUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeRefundId?: StringFieldUpdateOperationsInput | string
+    stripeChargeId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefundUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeRefundId?: StringFieldUpdateOperationsInput | string
+    stripeChargeId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefundCreateManyInput = {
+    id?: string
+    stripeRefundId: string
+    stripeChargeId: string
+    amount: number
+    currency: string
+    status: string
+    stripeCustomerId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RefundUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeRefundId?: StringFieldUpdateOperationsInput | string
+    stripeChargeId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefundUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeRefundId?: StringFieldUpdateOperationsInput | string
+    stripeChargeId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type TaxTableCreateInput = {
     id?: string
     countryCode: string
@@ -128117,13 +130767,6 @@ export namespace Prisma {
     not?: NestedEnumEstablishmentTypeFilter<$PrismaModel> | $Enums.EstablishmentType
   }
 
-  export type EnumEstablishmentStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.EstablishmentStatus | EnumEstablishmentStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.EstablishmentStatus[] | ListEnumEstablishmentStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.EstablishmentStatus[] | ListEnumEstablishmentStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumEstablishmentStatusFilter<$PrismaModel> | $Enums.EstablishmentStatus
-  }
-
   export type EnumEstablishmentLanguageFilter<$PrismaModel = never> = {
     equals?: $Enums.EstablishmentLanguage | EnumEstablishmentLanguageFieldRefInput<$PrismaModel>
     in?: $Enums.EstablishmentLanguage[] | ListEnumEstablishmentLanguageFieldRefInput<$PrismaModel>
@@ -128481,8 +131124,7 @@ export namespace Prisma {
     name?: SortOrder
     slug?: SortOrder
     type?: SortOrder
-    status?: SortOrder
-    isOnline?: SortOrder
+    isActive?: SortOrder
     email?: SortOrder
     countryCode?: SortOrder
     phoneNumber?: SortOrder
@@ -128532,8 +131174,7 @@ export namespace Prisma {
     name?: SortOrder
     slug?: SortOrder
     type?: SortOrder
-    status?: SortOrder
-    isOnline?: SortOrder
+    isActive?: SortOrder
     email?: SortOrder
     countryCode?: SortOrder
     phoneNumber?: SortOrder
@@ -128582,8 +131223,7 @@ export namespace Prisma {
     name?: SortOrder
     slug?: SortOrder
     type?: SortOrder
-    status?: SortOrder
-    isOnline?: SortOrder
+    isActive?: SortOrder
     email?: SortOrder
     countryCode?: SortOrder
     phoneNumber?: SortOrder
@@ -128635,16 +131275,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumEstablishmentTypeFilter<$PrismaModel>
     _max?: NestedEnumEstablishmentTypeFilter<$PrismaModel>
-  }
-
-  export type EnumEstablishmentStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.EstablishmentStatus | EnumEstablishmentStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.EstablishmentStatus[] | ListEnumEstablishmentStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.EstablishmentStatus[] | ListEnumEstablishmentStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumEstablishmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.EstablishmentStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumEstablishmentStatusFilter<$PrismaModel>
-    _max?: NestedEnumEstablishmentStatusFilter<$PrismaModel>
   }
 
   export type EnumEstablishmentLanguageWithAggregatesFilter<$PrismaModel = never> = {
@@ -132511,6 +135141,94 @@ export namespace Prisma {
     amountPaid?: SortOrder
   }
 
+  export type DisputeCountOrderByAggregateInput = {
+    id?: SortOrder
+    stripeDisputeId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    stripeCustomerId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DisputeAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type DisputeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    stripeDisputeId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    stripeCustomerId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DisputeMinOrderByAggregateInput = {
+    id?: SortOrder
+    stripeDisputeId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    stripeCustomerId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DisputeSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type RefundCountOrderByAggregateInput = {
+    id?: SortOrder
+    stripeRefundId?: SortOrder
+    stripeChargeId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    status?: SortOrder
+    stripeCustomerId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RefundAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type RefundMaxOrderByAggregateInput = {
+    id?: SortOrder
+    stripeRefundId?: SortOrder
+    stripeChargeId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    status?: SortOrder
+    stripeCustomerId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RefundMinOrderByAggregateInput = {
+    id?: SortOrder
+    stripeRefundId?: SortOrder
+    stripeChargeId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    status?: SortOrder
+    stripeCustomerId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RefundSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
   export type TaxTableCountryCodeRegionFiscalCodeCompoundUniqueInput = {
     countryCode: string
     region: string
@@ -134011,10 +136729,6 @@ export namespace Prisma {
 
   export type EnumEstablishmentTypeFieldUpdateOperationsInput = {
     set?: $Enums.EstablishmentType
-  }
-
-  export type EnumEstablishmentStatusFieldUpdateOperationsInput = {
-    set?: $Enums.EstablishmentStatus
   }
 
   export type EnumEstablishmentLanguageFieldUpdateOperationsInput = {
@@ -140209,13 +142923,6 @@ export namespace Prisma {
     not?: NestedEnumEstablishmentTypeFilter<$PrismaModel> | $Enums.EstablishmentType
   }
 
-  export type NestedEnumEstablishmentStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.EstablishmentStatus | EnumEstablishmentStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.EstablishmentStatus[] | ListEnumEstablishmentStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.EstablishmentStatus[] | ListEnumEstablishmentStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumEstablishmentStatusFilter<$PrismaModel> | $Enums.EstablishmentStatus
-  }
-
   export type NestedEnumEstablishmentLanguageFilter<$PrismaModel = never> = {
     equals?: $Enums.EstablishmentLanguage | EnumEstablishmentLanguageFieldRefInput<$PrismaModel>
     in?: $Enums.EstablishmentLanguage[] | ListEnumEstablishmentLanguageFieldRefInput<$PrismaModel>
@@ -140238,16 +142945,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumEstablishmentTypeFilter<$PrismaModel>
     _max?: NestedEnumEstablishmentTypeFilter<$PrismaModel>
-  }
-
-  export type NestedEnumEstablishmentStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.EstablishmentStatus | EnumEstablishmentStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.EstablishmentStatus[] | ListEnumEstablishmentStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.EstablishmentStatus[] | ListEnumEstablishmentStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumEstablishmentStatusWithAggregatesFilter<$PrismaModel> | $Enums.EstablishmentStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumEstablishmentStatusFilter<$PrismaModel>
-    _max?: NestedEnumEstablishmentStatusFilter<$PrismaModel>
   }
 
   export type NestedEnumEstablishmentLanguageWithAggregatesFilter<$PrismaModel = never> = {
@@ -140829,8 +143526,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -140914,8 +143610,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -141015,8 +143710,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -141100,8 +143794,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -141185,8 +143878,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -141270,8 +143962,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -141371,8 +144062,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -141456,8 +144146,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -141571,8 +144260,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -141656,8 +144344,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -141786,8 +144473,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -141871,8 +144557,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -142107,8 +144792,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -142192,8 +144876,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -142377,8 +145060,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -142462,8 +145144,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -142746,8 +145427,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -142831,8 +145511,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -142981,8 +145660,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -143066,8 +145744,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -143434,8 +146111,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -143519,8 +146195,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -143670,8 +146345,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -143755,8 +146429,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -144286,8 +146959,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -144371,8 +147043,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -144499,8 +147170,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -144584,8 +147254,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -144809,8 +147478,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -144894,8 +147562,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -144995,8 +147662,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -145080,8 +147746,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -148148,8 +150813,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -148233,8 +150897,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -148334,8 +150997,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -148419,8 +151081,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -148545,8 +151206,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -148630,8 +151290,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -148778,8 +151437,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -148863,8 +151521,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -148948,8 +151605,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -149033,8 +151689,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -149175,8 +151830,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -149260,8 +151914,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -149392,8 +152045,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -149477,8 +152129,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -149578,8 +152229,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -149663,8 +152313,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -149748,8 +152397,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -149833,8 +152481,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -149928,8 +152575,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -150013,8 +152659,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -150108,8 +152753,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -150193,8 +152837,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -150495,8 +153138,7 @@ export namespace Prisma {
     name?: StringFilter<"Establishment"> | string
     slug?: StringFilter<"Establishment"> | string
     type?: EnumEstablishmentTypeFilter<"Establishment"> | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFilter<"Establishment"> | $Enums.EstablishmentStatus
-    isOnline?: BoolFilter<"Establishment"> | boolean
+    isActive?: BoolFilter<"Establishment"> | boolean
     email?: StringFilter<"Establishment"> | string
     countryCode?: StringFilter<"Establishment"> | string
     phoneNumber?: StringFilter<"Establishment"> | string
@@ -150573,8 +153215,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -150658,8 +153299,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -150866,8 +153506,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -150951,8 +153590,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -151052,8 +153690,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -151137,8 +153774,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -151222,8 +153858,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -151307,8 +153942,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -151408,8 +154042,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -151493,8 +154126,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -151578,8 +154210,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -151663,8 +154294,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -151764,8 +154394,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -151849,8 +154478,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -151954,8 +154582,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -152039,8 +154666,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -152567,8 +155193,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -152652,8 +155277,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -153532,8 +156156,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -153617,8 +156240,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -153756,8 +156378,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -153841,8 +156462,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -155126,8 +157746,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -155211,8 +157830,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -155368,8 +157986,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -155453,8 +158070,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -156484,8 +159100,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -156569,8 +159184,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -156759,8 +159373,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -156844,8 +159457,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -157945,8 +160557,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -158030,8 +160641,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -158161,8 +160771,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -158246,8 +160855,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -158425,8 +161033,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -158510,8 +161117,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -158662,8 +161268,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -158747,8 +161352,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -158917,8 +161521,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -159002,8 +161605,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -159240,8 +161842,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -159325,8 +161926,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -159703,8 +162303,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -159788,8 +162387,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -160015,8 +162613,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -160100,8 +162697,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -160490,8 +163086,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -160575,8 +163170,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -160762,8 +163356,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -160847,8 +163440,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -160978,8 +163570,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -161063,8 +163654,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -161313,8 +163903,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -161398,8 +163987,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -161550,8 +164138,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -161635,8 +164222,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -162097,8 +164683,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -162182,8 +164767,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -163175,8 +165759,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -163260,8 +165843,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -163500,8 +166082,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -163585,8 +166166,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -164125,8 +166705,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -164210,8 +166789,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -164387,8 +166965,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -164472,8 +167049,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -164933,8 +167509,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -165018,8 +167593,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -165292,8 +167866,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -165377,8 +167950,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -165653,8 +168225,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -165738,8 +168309,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -165920,8 +168490,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -166005,8 +168574,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -166177,8 +168745,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -166262,8 +168829,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -166397,8 +168963,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -166482,8 +169047,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -166819,8 +169383,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -166904,8 +169467,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -167030,8 +169592,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -167115,8 +169676,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -167621,8 +170181,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -167706,8 +170265,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -167807,8 +170365,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -167892,8 +170449,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -168067,8 +170623,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -168152,8 +170707,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -168247,8 +170801,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -168332,8 +170885,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -168449,8 +171001,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -168534,8 +171085,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -168673,8 +171223,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -168758,8 +171307,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -168941,8 +171489,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -169026,8 +171573,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -169169,8 +171715,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -169254,8 +171799,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -171469,8 +174013,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -171519,8 +174062,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -171617,8 +174159,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -171702,8 +174243,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -171787,8 +174327,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -171837,8 +174376,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -171922,8 +174460,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -172007,8 +174544,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -175259,8 +177795,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -175309,8 +177844,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -175394,8 +177928,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -175479,8 +178012,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -175550,8 +178082,7 @@ export namespace Prisma {
     name: string
     slug: string
     type: $Enums.EstablishmentType
-    status?: $Enums.EstablishmentStatus
-    isOnline?: boolean
+    isActive?: boolean
     email: string
     countryCode: string
     phoneNumber: string
@@ -175665,8 +178196,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -175750,8 +178280,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string
@@ -175835,8 +178364,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
-    status?: EnumEstablishmentStatusFieldUpdateOperationsInput | $Enums.EstablishmentStatus
-    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     email?: StringFieldUpdateOperationsInput | string
     countryCode?: StringFieldUpdateOperationsInput | string
     phoneNumber?: StringFieldUpdateOperationsInput | string

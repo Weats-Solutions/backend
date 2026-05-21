@@ -620,12 +620,11 @@ enum StockInventoryStatus {
 
 model Establishment {
   // ─── Identificação ─────────────────────────────────────────────────────────
-  id       String              @id @default(ulid())
+  id       String            @id @default(ulid())
   name     String
-  slug     String              @unique
+  slug     String            @unique
   type     EstablishmentType
-  status   EstablishmentStatus @default(ACTIVE)
-  isOnline Boolean             @default(false)
+  isActive Boolean           @default(true)
 
   // ─── Contactos & Localização ────────────────────────────────────────────────
   email       String
@@ -2163,6 +2162,30 @@ model Invoice {
   status          String
   createdAt       DateTime      @default(now())
   establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+}
+
+model Dispute {
+  id               String   @id @default(ulid())
+  stripeDisputeId  String   @unique
+  amount           Int
+  currency         String
+  reason           String?
+  status           String
+  stripeCustomerId String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Refund {
+  id               String   @id @default(ulid())
+  stripeRefundId   String   @unique
+  stripeChargeId   String
+  amount           Int
+  currency         String
+  status           String
+  stripeCustomerId String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
 
 model TaxTable {

@@ -1,11 +1,10 @@
 model Establishment {
   // ─── Identificação ─────────────────────────────────────────────────────────
-  id       String              @id @default(ulid())
+  id       String            @id @default(ulid())
   name     String
-  slug     String              @unique
+  slug     String            @unique
   type     EstablishmentType
-  status   EstablishmentStatus @default(ACTIVE)
-  isOnline Boolean             @default(false)
+  isActive Boolean           @default(true)
 
   // ─── Contactos & Localização ────────────────────────────────────────────────
   email       String
@@ -105,10 +104,10 @@ model Establishment {
   sumupReaders  SumupReader[]
 
   // ─── Relações: Marketing & Logs ────────────────────────────────────────────
-  emailLogs   EmailLog[]
-  auditLogs   AuditLog[]
-  discounts   Discount[]
-  promotions  Promotion[]
+  emailLogs  EmailLog[]
+  auditLogs  AuditLog[]
+  discounts  Discount[]
+  promotions Promotion[]
 
   // ─── Stock Management ──────────────────────────────────────────────────────
   suppliers            Supplier[]
