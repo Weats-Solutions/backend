@@ -7,7 +7,7 @@ import { HandlePaymentsService } from './stripe/handle-payments.service';
 import { HandleSubscriptionsService } from './stripe/handle-subscriptions.service';
 import { StripeWebhooksHelpers } from './stripe/stripe-helpers.service';
 import { ClerkWebhookService } from './clerk/clerk-webhook.service';
-import { DiscordModule, StripeModule } from '@weats/integrations';
+import { DiscordModule, StripeModule, ClerkModule } from '@weats/integrations';
 import Stripe from 'stripe';
 import { WebhooksProcessor } from './webhooks.processor';
 import { DatabaseModule } from '@weats/database';
@@ -29,6 +29,7 @@ import { CacheModule } from '@weats/cache';
     }),
     QueuesModule,
     StripeModule,
+    ClerkModule,
     DiscordModule,
     RateLimitModule,
     CacheModule,
