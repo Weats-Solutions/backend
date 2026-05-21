@@ -33,6 +33,10 @@ export class AppConfigService {
     return this.configService.getOrThrow<string>('NODE_ENV');
   }
 
+  getSendMail(): boolean {
+    return this.configService.getOrThrow<boolean>('SEND_MAIL');
+  }
+
   getRealtimePort(): string {
     return this.configService.getOrThrow<string>('REALTIME_PORT');
   }

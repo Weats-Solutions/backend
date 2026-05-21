@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { MailProcessor } from "./mail.processor";
 import { QueuesModule } from "@weats/bull";
 import { MailService } from "./mail.service";
-import { ConfigsModule } from "@weats/configs";
+import { AppConfigService, ConfigsModule } from "@weats/configs";
 import { ZeptoConfigService } from "@weats/configs/zepto-config.service";
 import { HttpModule } from "@nestjs/axios";
 import { IntegrationsModule } from "@weats/integrations";
@@ -30,6 +30,11 @@ import { TemplateRenderService } from "./template-render.service";
             useFactory: (zeptoConfig: ZeptoConfigService) => zeptoConfig.getSenderEmail(),
             inject: [ZeptoConfigService],
         },
+        {
+            provide: 'SEND_MAIL',
+            useFactory: (appConfig: AppConfigService) => appConfig.getSendMail(),
+            inject: [AppConfigService],
+        }
     ],
     exports: [MailService],
 })

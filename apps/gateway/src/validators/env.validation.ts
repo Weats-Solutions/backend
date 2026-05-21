@@ -6,6 +6,7 @@ import {
   IsOptional,
   IsIn,
   IsInt,
+  IsBoolean,
 } from 'class-validator';
 
 class EnvironmentVariables {
@@ -124,6 +125,9 @@ class EnvironmentVariables {
 
   @IsString()
   ZEPTO_SENDER_EMAIL: string;
+
+  @IsBoolean()
+  SEND_MAIL: boolean;
 }
 
 export function validate(config: Record<string, unknown>) {

@@ -59,9 +59,6 @@ CREATE TYPE "FeatureType" AS ENUM ('BOOLEAN', 'QUANTITY');
 CREATE TYPE "DayOfWeek" AS ENUM ('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY');
 
 -- CreateEnum
-CREATE TYPE "UnitType" AS ENUM ('CUP', 'DOSE', 'PEOPLE', 'PIECE', 'PORTION', 'SLICE', 'UNIT', 'GLASS', 'MILLILITRE', 'CENTILITRE', 'LITRE', 'GRAM', 'KILOGRAM');
-
--- CreateEnum
 CREATE TYPE "BookingStatus" AS ENUM ('PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED', 'NO_SHOW');
 
 -- CreateEnum
@@ -104,7 +101,7 @@ CREATE TYPE "StockAlertStatus" AS ENUM ('ACTIVE', 'ACKNOWLEDGED', 'RESOLVED', 'D
 CREATE TYPE "StockInventoryStatus" AS ENUM ('DRAFT', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED');
 
 -- CreateEnum
-CREATE TYPE "Currency" AS ENUM ('EUR', 'USD', 'GBP');
+CREATE TYPE "Currency" AS ENUM ('EUR', 'USD', 'GBP', 'JPY', 'CHF', 'AED', 'CNY');
 
 -- CreateEnum
 CREATE TYPE "ItemStatus" AS ENUM ('ACTIVE', 'DRAFT', 'INACTIVE');
@@ -113,13 +110,10 @@ CREATE TYPE "ItemStatus" AS ENUM ('ACTIVE', 'DRAFT', 'INACTIVE');
 CREATE TYPE "AllergenCode" AS ENUM ('CELERY', 'CRUSTACEAN', 'EGG', 'FISH', 'GLUTEN', 'LUPINS', 'MILK', 'MUSTARD', 'NUTS', 'PEANUTS', 'SESAME', 'SHELLFISH', 'SOY', 'SULFITES');
 
 -- CreateEnum
-CREATE TYPE "VariantType" AS ENUM ('SIZE', 'FLAVOR', 'PREPARATION', 'COLOR', 'OTHER');
-
--- CreateEnum
 CREATE TYPE "ModifierDisplayMode" AS ENUM ('RADIO', 'CHECKBOX', 'QUANTITY');
 
 -- CreateEnum
-CREATE TYPE "SpiceLevel" AS ENUM ('LOW', 'MEDIUM', 'HIGH');
+CREATE TYPE "SpiceLevel" AS ENUM ('LOW', 'MEDIUM', 'HIGH', 'EXTRA_HOT');
 
 -- CreateEnum
 CREATE TYPE "AttributeType" AS ENUM ('VEGAN', 'VEGETARIAN', 'GLUTEN_FREE', 'DAIRY_FREE', 'HALAL', 'KOSHER');
@@ -128,7 +122,13 @@ CREATE TYPE "AttributeType" AS ENUM ('VEGAN', 'VEGETARIAN', 'GLUTEN_FREE', 'DAIR
 CREATE TYPE "MarketingTag" AS ENUM ('BESTSELLER', 'NEW', 'POPULAR', 'LIMITED');
 
 -- CreateEnum
-CREATE TYPE "MenuType" AS ENUM ('DEFAULT', 'RODIZIO');
+CREATE TYPE "UnitType" AS ENUM ('PORTION', 'HALF', 'SLICE', 'PIECE', 'PLATE', 'BOWL', 'UNIT', 'GLASS', 'CUP', 'SHOT', 'MUG', 'BOTTLE', 'CAN', 'MILLILITER', 'CENTILITER', 'LITER', 'GRAM', 'KILOGRAM', 'OUNCE', 'POUND');
+
+-- CreateEnum
+CREATE TYPE "MenuType" AS ENUM ('LA_CARTE', 'RODIZIO');
+
+-- CreateEnum
+CREATE TYPE "QrCodeType" AS ENUM ('TABLE', 'MENU');
 
 -- CreateTable
 CREATE TABLE "audit_logs" (
@@ -361,30 +361,42 @@ CREATE TABLE "Establishment" (
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "type" "EstablishmentType" NOT NULL,
-    "status" "EstablishmentStatus" NOT NULL DEFAULT 'ACTIVE',
-    "isOnline" BOOLEAN NOT NULL DEFAULT false,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
     "email" TEXT NOT NULL,
-    "phoneNumber" TEXT NOT NULL,
-    "address" TEXT NOT NULL,
-    "city" TEXT NOT NULL,
-    "state" TEXT NOT NULL,
-    "zipCode" TEXT NOT NULL,
-    "country" TEXT NOT NULL,
     "countryCode" TEXT NOT NULL,
+    "phoneNumber" TEXT NOT NULL,
+    "address" TEXT,
+    "city" TEXT,
+    "state" TEXT,
+    "zipCode" TEXT,
+    "country" TEXT,
     "billingName" TEXT NOT NULL,
     "billingTaxId" TEXT NOT NULL,
+    "billingAddress" TEXT,
+    "billingCity" TEXT,
+    "billingState" TEXT,
+    "billingZipCode" TEXT,
+    "billingCountry" TEXT,
     "stripeCustomerId" TEXT NOT NULL,
     "instagramUrl" TEXT,
     "tiktokUrl" TEXT,
     "facebookUrl" TEXT,
     "googleReviewUrl" TEXT,
     "tripAdvisorUrl" TEXT,
+    "websiteUrl" TEXT,
+    "myPageModule" BOOLEAN NOT NULL DEFAULT false,
+    "menusModule" BOOLEAN NOT NULL DEFAULT false,
+    "callStaffModule" BOOLEAN NOT NULL DEFAULT false,
+    "takeAwayModule" BOOLEAN NOT NULL DEFAULT false,
+    "reservationsModule" BOOLEAN NOT NULL DEFAULT false,
+    "isDemo" BOOLEAN NOT NULL DEFAULT false,
     "primaryLanguage" "EstablishmentLanguage" NOT NULL DEFAULT 'PT',
     "availableLanguages" "EstablishmentLanguage"[] DEFAULT ARRAY['PT']::"EstablishmentLanguage"[],
     "currency" "Currency" NOT NULL DEFAULT 'EUR',
     "timezone" TEXT NOT NULL DEFAULT 'Europe/Lisbon',
-    "onlyMenu" BOOLEAN NOT NULL DEFAULT false,
-    "needSession" BOOLEAN NOT NULL DEFAULT true,
+    "wifiSsid" TEXT,
+    "wifiPassword" TEXT,
+    "googleAnalyticsId" TEXT,
     "logoImageId" TEXT,
     "bannerImageId" TEXT,
     "activeThemeId" TEXT,
@@ -410,6 +422,54 @@ CREATE TABLE "EstablishmentBookingSettings" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "EstablishmentBookingSettings_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "EstablishmentMetadata" (
+    "id" TEXT NOT NULL,
+    "title" TEXT,
+    "shortName" TEXT,
+    "description" TEXT,
+    "ogImageId" TEXT,
+    "establishmentId" TEXT NOT NULL,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "EstablishmentMetadata_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "FaviconAsset" (
+    "id" TEXT NOT NULL,
+    "establishmentId" TEXT NOT NULL,
+    "imageId" TEXT NOT NULL,
+    "role" TEXT NOT NULL,
+
+    CONSTRAINT "FaviconAsset_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Expense" (
+    "id" TEXT NOT NULL,
+    "issuerTaxId" TEXT NOT NULL,
+    "customerTaxId" TEXT,
+    "country" TEXT,
+    "documentType" TEXT NOT NULL,
+    "status" TEXT NOT NULL,
+    "documentDate" TIMESTAMP(3) NOT NULL,
+    "invoiceNumber" TEXT NOT NULL,
+    "totalAmount" DOUBLE PRECISION NOT NULL,
+    "taxableBase" DOUBLE PRECISION NOT NULL,
+    "taxAmount" DOUBLE PRECISION NOT NULL,
+    "atcud" TEXT,
+    "controlCode" TEXT,
+    "documentHash" TEXT,
+    "certificate" TEXT,
+    "establishmentId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "rawData" JSONB,
+
+    CONSTRAINT "Expense_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -488,14 +548,15 @@ CREATE TABLE "Item" (
     "basePrice" DECIMAL(10,2),
     "deletedAt" TIMESTAMP(3),
     "posCategoryId" TEXT,
-    "quantity" DOUBLE PRECISION,
     "sku" TEXT,
-    "unit" TEXT,
+    "unit" "UnitType" NOT NULL DEFAULT 'UNIT',
+    "quantity" DOUBLE PRECISION NOT NULL DEFAULT 1,
     "status" "ItemStatus" NOT NULL DEFAULT 'ACTIVE',
     "taxTableId" TEXT NOT NULL,
     "marketingTag" "MarketingTag",
     "spiceLevel" "SpiceLevel",
     "isFeatured" BOOLEAN NOT NULL DEFAULT false,
+    "hasAlcohol" BOOLEAN NOT NULL DEFAULT false,
     "vendusProductId" INTEGER,
 
     CONSTRAINT "Item_pkey" PRIMARY KEY ("id")
@@ -542,6 +603,7 @@ CREATE TABLE "ItemTranslation" (
     "id" TEXT NOT NULL,
     "locale" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "shortDescription" TEXT,
     "description" TEXT,
     "itemId" TEXT NOT NULL,
 
@@ -553,11 +615,11 @@ CREATE TABLE "VariantOption" (
     "id" TEXT NOT NULL,
     "establishmentId" TEXT,
     "isGlobal" BOOLEAN NOT NULL DEFAULT false,
-    "code" TEXT,
     "isActive" BOOLEAN NOT NULL DEFAULT true,
-    "quantity" DOUBLE PRECISION,
-    "unit" TEXT,
-    "type" "VariantType" NOT NULL DEFAULT 'OTHER',
+    "quantity" DOUBLE PRECISION NOT NULL,
+    "unit" "UnitType" NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "VariantOption_pkey" PRIMARY KEY ("id")
 );
@@ -705,31 +767,6 @@ CREATE TABLE "ItemAttribute" (
 );
 
 -- CreateTable
-CREATE TABLE "LandingPage" (
-    "id" TEXT NOT NULL,
-    "shortName" TEXT NOT NULL,
-    "themeId" TEXT,
-    "establishmentId" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "LandingPage_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "LandingPageTranslation" (
-    "id" TEXT NOT NULL,
-    "locale" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
-    "landingPageId" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "LandingPageTranslation_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Menu" (
     "id" TEXT NOT NULL,
     "position" INTEGER NOT NULL DEFAULT 0,
@@ -742,7 +779,8 @@ CREATE TABLE "Menu" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "maxItemsPerOrder" INTEGER,
     "price" DOUBLE PRECISION,
-    "type" "MenuType" NOT NULL DEFAULT 'DEFAULT',
+    "showImages" BOOLEAN NOT NULL DEFAULT true,
+    "type" "MenuType" NOT NULL DEFAULT 'LA_CARTE',
 
     CONSTRAINT "Menu_pkey" PRIMARY KEY ("id")
 );
@@ -899,9 +937,23 @@ CREATE TABLE "printers" (
 );
 
 -- CreateTable
+CREATE TABLE "QrCode" (
+    "id" TEXT NOT NULL,
+    "token" TEXT NOT NULL,
+    "establishmentId" TEXT NOT NULL,
+    "servicePointId" TEXT,
+    "type" "QrCodeType" NOT NULL DEFAULT 'TABLE',
+    "active" BOOLEAN NOT NULL DEFAULT true,
+    "config" JSONB,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "QrCode_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Schedule" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
     "type" "ScheduleType" NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -1310,6 +1362,36 @@ CREATE TABLE "Invoice" (
 );
 
 -- CreateTable
+CREATE TABLE "Dispute" (
+    "id" TEXT NOT NULL,
+    "stripeDisputeId" TEXT NOT NULL,
+    "amount" INTEGER NOT NULL,
+    "currency" TEXT NOT NULL,
+    "reason" TEXT,
+    "status" TEXT NOT NULL,
+    "stripeCustomerId" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Dispute_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Refund" (
+    "id" TEXT NOT NULL,
+    "stripeRefundId" TEXT NOT NULL,
+    "stripeChargeId" TEXT NOT NULL,
+    "amount" INTEGER NOT NULL,
+    "currency" TEXT NOT NULL,
+    "status" TEXT NOT NULL,
+    "stripeCustomerId" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Refund_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "TaxTable" (
     "id" TEXT NOT NULL,
     "countryCode" TEXT NOT NULL,
@@ -1462,6 +1544,9 @@ CREATE INDEX "booking_logs_bookingId_createdAt_idx" ON "booking_logs"("bookingId
 CREATE INDEX "booking_logs_bookingId_event_idx" ON "booking_logs"("bookingId", "event");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Discount_scheduleId_key" ON "Discount"("scheduleId");
+
+-- CreateIndex
 CREATE INDEX "Discount_establishmentId_isActive_idx" ON "Discount"("establishmentId", "isActive");
 
 -- CreateIndex
@@ -1469,6 +1554,9 @@ CREATE INDEX "Discount_scheduleId_idx" ON "Discount"("scheduleId");
 
 -- CreateIndex
 CREATE INDEX "DiscountTarget_discountId_idx" ON "DiscountTarget"("discountId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Promotion_scheduleId_key" ON "Promotion"("scheduleId");
 
 -- CreateIndex
 CREATE INDEX "Promotion_establishmentId_isActive_idx" ON "Promotion"("establishmentId", "isActive");
@@ -1549,6 +1637,21 @@ CREATE INDEX "Establishment_scheduleId_idx" ON "Establishment"("scheduleId");
 CREATE UNIQUE INDEX "EstablishmentBookingSettings_establishmentId_key" ON "EstablishmentBookingSettings"("establishmentId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "EstablishmentMetadata_ogImageId_key" ON "EstablishmentMetadata"("ogImageId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "EstablishmentMetadata_establishmentId_key" ON "EstablishmentMetadata"("establishmentId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "FaviconAsset_imageId_key" ON "FaviconAsset"("imageId");
+
+-- CreateIndex
+CREATE INDEX "FaviconAsset_establishmentId_idx" ON "FaviconAsset"("establishmentId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "FaviconAsset_establishmentId_role_key" ON "FaviconAsset"("establishmentId", "role");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Image_cloudflareImageId_key" ON "Image"("cloudflareImageId");
 
 -- CreateIndex
@@ -1580,9 +1683,6 @@ CREATE UNIQUE INDEX "VariantNutrionalInfo_itemVariantId_key" ON "VariantNutriona
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ItemTranslation_itemId_locale_key" ON "ItemTranslation"("itemId", "locale");
-
--- CreateIndex
-CREATE UNIQUE INDEX "VariantOption_code_key" ON "VariantOption"("code");
 
 -- CreateIndex
 CREATE INDEX "VariantOption_establishmentId_idx" ON "VariantOption"("establishmentId");
@@ -1639,7 +1739,7 @@ CREATE INDEX "ItemModifierOption_modifierGroupId_idx" ON "ItemModifierOption"("m
 CREATE UNIQUE INDEX "ItemAttribute_itemId_type_key" ON "ItemAttribute"("itemId", "type");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "LandingPage_establishmentId_key" ON "LandingPage"("establishmentId");
+CREATE UNIQUE INDEX "Menu_scheduleId_key" ON "Menu"("scheduleId");
 
 -- CreateIndex
 CREATE INDEX "Menu_establishmentId_idx" ON "Menu"("establishmentId");
@@ -1697,6 +1797,9 @@ CREATE UNIQUE INDEX "devices_deviceToken_key" ON "devices"("deviceToken");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "printers_deviceId_name_key" ON "printers"("deviceId", "name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "QrCode_token_key" ON "QrCode"("token");
 
 -- CreateIndex
 CREATE INDEX "ScheduleDay_scheduleId_idx" ON "ScheduleDay"("scheduleId");
@@ -1846,6 +1949,12 @@ CREATE INDEX "PlanFeature_featureId_idx" ON "PlanFeature"("featureId");
 CREATE UNIQUE INDEX "PlanFeature_planId_featureId_key" ON "PlanFeature"("planId", "featureId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Dispute_stripeDisputeId_key" ON "Dispute"("stripeDisputeId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Refund_stripeRefundId_key" ON "Refund"("stripeRefundId");
+
+-- CreateIndex
 CREATE INDEX "TaxTable_countryCode_idx" ON "TaxTable"("countryCode");
 
 -- CreateIndex
@@ -1963,6 +2072,21 @@ ALTER TABLE "Establishment" ADD CONSTRAINT "Establishment_bannerImageId_fkey" FO
 ALTER TABLE "EstablishmentBookingSettings" ADD CONSTRAINT "EstablishmentBookingSettings_establishmentId_fkey" FOREIGN KEY ("establishmentId") REFERENCES "Establishment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "EstablishmentMetadata" ADD CONSTRAINT "EstablishmentMetadata_ogImageId_fkey" FOREIGN KEY ("ogImageId") REFERENCES "Image"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "EstablishmentMetadata" ADD CONSTRAINT "EstablishmentMetadata_establishmentId_fkey" FOREIGN KEY ("establishmentId") REFERENCES "Establishment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FaviconAsset" ADD CONSTRAINT "FaviconAsset_establishmentId_fkey" FOREIGN KEY ("establishmentId") REFERENCES "Establishment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FaviconAsset" ADD CONSTRAINT "FaviconAsset_imageId_fkey" FOREIGN KEY ("imageId") REFERENCES "Image"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Expense" ADD CONSTRAINT "Expense_establishmentId_fkey" FOREIGN KEY ("establishmentId") REFERENCES "Establishment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Image" ADD CONSTRAINT "Image_establishmentId_fkey" FOREIGN KEY ("establishmentId") REFERENCES "Establishment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -2059,15 +2183,6 @@ ALTER TABLE "ItemModifierOption" ADD CONSTRAINT "ItemModifierOption_productId_fk
 ALTER TABLE "ItemAttribute" ADD CONSTRAINT "ItemAttribute_itemId_fkey" FOREIGN KEY ("itemId") REFERENCES "Item"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "LandingPage" ADD CONSTRAINT "LandingPage_establishmentId_fkey" FOREIGN KEY ("establishmentId") REFERENCES "Establishment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LandingPage" ADD CONSTRAINT "LandingPage_themeId_fkey" FOREIGN KEY ("themeId") REFERENCES "Theme"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "LandingPageTranslation" ADD CONSTRAINT "LandingPageTranslation_landingPageId_fkey" FOREIGN KEY ("landingPageId") REFERENCES "LandingPage"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "Menu" ADD CONSTRAINT "Menu_establishmentId_fkey" FOREIGN KEY ("establishmentId") REFERENCES "Establishment"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -2102,6 +2217,12 @@ ALTER TABLE "devices" ADD CONSTRAINT "devices_establishmentId_fkey" FOREIGN KEY 
 
 -- AddForeignKey
 ALTER TABLE "printers" ADD CONSTRAINT "printers_deviceId_fkey" FOREIGN KEY ("deviceId") REFERENCES "devices"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "QrCode" ADD CONSTRAINT "QrCode_establishmentId_fkey" FOREIGN KEY ("establishmentId") REFERENCES "Establishment"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "QrCode" ADD CONSTRAINT "QrCode_servicePointId_fkey" FOREIGN KEY ("servicePointId") REFERENCES "ServicePoint"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ScheduleDay" ADD CONSTRAINT "ScheduleDay_scheduleId_fkey" FOREIGN KEY ("scheduleId") REFERENCES "Schedule"("id") ON DELETE CASCADE ON UPDATE CASCADE;
