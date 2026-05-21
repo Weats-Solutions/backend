@@ -10,6 +10,7 @@ export const getCorsOptions = (appConfigService: AppConfigService): CorsOptions 
             'http://localhost:4000',
             'https://staff.weats.pro',
             'https://app.weats.pro',
+            'https://dash.weats.pro',
             'https://table-management.weats.pro',
         ];
         // Check if the origin matches our allowed list, or if it's an ngrok tunnel
