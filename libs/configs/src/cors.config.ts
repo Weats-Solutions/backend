@@ -5,6 +5,7 @@ export const getCorsOptions = (appConfigService: AppConfigService): CorsOptions 
     origin: (origin, callback) => {
         const allowedOrigins = [
             appConfigService.getAppUrl(),
+            'https://dev-dash.weats.pro',
             'http://localhost:3000',
             'http://localhost:3001',
             'http://localhost:4000',
