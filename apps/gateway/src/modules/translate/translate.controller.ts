@@ -3,7 +3,7 @@ import {
     Post,
     Body
 } from '@nestjs/common';
-import { TranslateService } from '@weats/translate';
+import { TranslateService } from './translate.service';
 import { EstablishmentLanguage } from '@weats/database';
 
 @Controller('translate')
