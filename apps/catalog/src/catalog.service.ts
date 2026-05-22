@@ -60,6 +60,10 @@ export class CatalogService {
    * Verifica Módulo Ativo + Subscrição Válida.
    */
   private validateEstablishment(establishment: any) {
+    if (establishment.isDemo) {
+      return;
+    }
+
     if (!establishment.myPageModule) {
       throw new NotFoundException(ERRORS.NOT_FOUND);
     }
