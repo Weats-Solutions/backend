@@ -126,12 +126,6 @@ export class EstablishmentController {
     @CurrentEstablishment() establishment: Establishment,
     @Param('id') id: string,
   ) {
-    if (establishment.id !== id) {
-      throw new ForbiddenException({
-        message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
-        code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
-      });
-    }
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_ACCESS, { id });
   }
 
