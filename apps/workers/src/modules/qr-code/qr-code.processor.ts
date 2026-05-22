@@ -24,7 +24,7 @@ export class QrCodeProcessor {
     private readonly emailProducer: EmailProducer,
     private readonly prisma: CorePrismaService,
     private readonly cloudflareR2Service: CloudflareR2Service,
-    @Inject('CATALOG_URL') private readonly catalogUrl: string,
+    @Inject('CATALOG_API_URL') private readonly catalogApiUrl: string,
   ) { }
 
   private async resolveLogoDataUri(
@@ -121,7 +121,7 @@ export class QrCodeProcessor {
         `Persisted ${pointsWithTokens.length} QR token records for ${establishment.id}`,
       );
 
-      const baseUrl = `${this.catalogUrl}/qr/`;
+      const baseUrl = `${this.catalogApiUrl}/qr/`;
 
       // 3. Generate batch
       const result = await this.qrGenerator.generateBatch(

@@ -20,7 +20,7 @@ export class QrCodeService {
   constructor(
     private readonly prisma: CorePrismaService,
     private readonly cache: CacheService,
-    @Inject('CATALOG_URL') private readonly catalogUrl: string,
+    @Inject('CATALOG_MENU_URL') private readonly catalogMenuUrL: string,
   ) { }
 
   /**
@@ -50,21 +50,23 @@ export class QrCodeService {
 
     if (!qrCode) {
       this.logger.error(`QR code token not found: ${token}`);
-      return `${this.catalogUrl}/404`;
+      return `${this.catalogMenuUrL}/404`;
     }
 
     // Função auxiliar para construir a URL com subdomínio
     const buildSubdomainUrl = (slug: string, path = '') => {
-      const normalizedCatalogUrl = this.catalogUrl.startsWith('http')
-        ? this.catalogUrl
-        : `https://${this.catalogUrl}`;
+      const normalizedCatalogUrl = this.catalogMenuUrL.startsWith('http')
+        ? this.catalogMenuUrL
+        : `https://${this.catalogMenuUrL}`;
+
       const parsedCatalogUrl = new URL(normalizedCatalogUrl);
+
       const hostParts = parsedCatalogUrl.hostname.split('.');
-      if (hostParts[0] === 'catalog') {
-        hostParts.shift();
-      }
-      const baseHost = hostParts.join('.');
-      const subdomainHost = `${slug}.${baseHost}`;
+
+      // substitui o primeiro subdomínio (ex: menu.weats.pt -> slug.weats.pt)
+      hostParts[0] = slug;
+
+      const subdomainHost = hostParts.join('.');
       const portPart = parsedCatalogUrl.port ? `:${parsedCatalogUrl.port}` : '';
 
       return `${parsedCatalogUrl.protocol}//${subdomainHost}${portPart}${path}`;
@@ -73,15 +75,15 @@ export class QrCodeService {
     // Case 1: TABLE (Menu com mesa pré-selecionada)
     if (qrCode.type === QrCodeType.TABLE) {
       if (!qrCode.servicePoint || !qrCode.servicePoint.isActive || !qrCode.servicePoint.zone?.isActive) {
-        return `${this.catalogUrl}/404`;
+        return `${this.catalogMenuUrL}/404`;
       }
 
       if (qrCode.establishment?.subscription?.status !== 'ACTIVE') {
-        return `${this.catalogUrl}/no-subscription`;
+        return `${this.catalogMenuUrL}/no-subscription`;
       }
 
       if (!qrCode.establishment?.slug) {
-        return `${this.catalogUrl}/404`;
+        return `${this.catalogMenuUrL}/404`;
       }
 
       return buildSubdomainUrl(qrCode.establishment.slug, `?table=${qrCode.servicePointId}`);
@@ -90,13 +92,13 @@ export class QrCodeService {
     // Case 2: MENU (Direto para o menu geral)
     if (qrCode.type === QrCodeType.MENU) {
       if (!qrCode.establishment || qrCode.establishment?.subscription?.status !== 'ACTIVE' || !qrCode.establishment?.slug) {
-        return qrCode.establishment?.subscription?.status !== 'ACTIVE' ? `${this.catalogUrl}/no-subscription` : `${this.catalogUrl}/404`;
+        return qrCode.establishment?.subscription?.status !== 'ACTIVE' ? `${this.catalogMenuUrL}/no-subscription` : `${this.catalogMenuUrL}/404`;
       }
 
       return buildSubdomainUrl(qrCode.establishment.slug);
     }
 
-    return `${this.catalogUrl}/404`;
+    return `${this.catalogMenuUrL}/404`;
   }
 
   /**

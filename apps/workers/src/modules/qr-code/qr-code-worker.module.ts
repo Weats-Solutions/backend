@@ -24,8 +24,8 @@ import { IntegrationsModule } from '@weats/integrations';
         QrCodeProcessor, 
         EmailProducer,
         {
-            provide: 'CATALOG_URL',
-            useFactory: (appConfig: AppConfigService) => appConfig.getCatalogUrl(),
+            provide: 'CATALOG_API_URL',
+            useFactory: (appConfig: AppConfigService) => appConfig.getCatalogApiUrl(),
             inject: [AppConfigService],
         },
     ],

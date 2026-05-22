@@ -26,8 +26,8 @@ import { ConfigsModule, AppConfigService } from '@weats/configs';
   providers: [
     QrCodeService,
     {
-      provide: 'CATALOG_URL',
-      useFactory: (appConfig: AppConfigService) => appConfig.getCatalogUrl(),
+      provide: 'CATALOG_MENU_URL',
+      useFactory: (appConfig: AppConfigService) => appConfig.getCatalogMenuUrl(),
       inject: [AppConfigService],
     },
   ],

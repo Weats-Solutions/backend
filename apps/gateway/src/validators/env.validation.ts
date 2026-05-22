@@ -44,7 +44,10 @@ class EnvironmentVariables {
   APP_URL: string;
 
   @IsString()
-  CATALOG_URL: string;
+  CATALOG_API_URL: string;
+
+  @IsString()
+  CATALOG_MENU_URL: string;
 
   @IsString()
   CLERK_SECRET_KEY: string;

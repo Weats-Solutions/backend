@@ -13,8 +13,12 @@ export class AppConfigService {
     return this.configService.getOrThrow<string>('CATALOG_PORT');
   }
 
-  getCatalogUrl(): string {
-    return this.configService.getOrThrow<string>('CATALOG_URL');
+  getCatalogApiUrl(): string {
+    return this.configService.getOrThrow<string>('CATALOG_API_URL');
+  }
+
+  getCatalogMenuUrl(): string {
+    return this.configService.getOrThrow<string>('CATALOG_MENU_URL');
   }
 
   getMenuCacheToken(): string {
