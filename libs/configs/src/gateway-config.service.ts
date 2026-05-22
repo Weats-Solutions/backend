@@ -12,9 +12,12 @@ export class GatewayConfigService {
   ) { }
 
   getDashboardClientHost(): string {
-    const isProd = this.configService.get('NODE_ENV') === 'production';
-    this.logger.log("IS PROD", isProd);
-    return isProd ? 'weats-dev-dashboard' : 'localhost';
+    const env = this.configService.get<string>('WEATS_ENV');
+    this.logger.log("WEATS_ENV", env);
+    if (env === 'local') {
+      return 'localhost';
+    }
+    return env === 'dev' ? 'weats-dev-dashboard' : 'weats-prod-dashboard';
   }
 
   getDashboardClientPort(): number {

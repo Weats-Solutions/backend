@@ -15,6 +15,10 @@ class EnvironmentVariables {
   @IsIn(['development', 'production', 'test', 'staging', 'local'])
   NODE_ENV: string;
 
+  @IsString()
+  @IsIn(['dev', 'prod', 'local'])
+  WEATS_ENV: string;
+
   @IsNumber()
   DASHBOARD_CLIENT_PORT: number;
 
