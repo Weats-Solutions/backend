@@ -53,8 +53,8 @@ async function main() {
         {
             name: 'Weats Start',
             cycles: [
-                { price: 49.99, priceId: 'price_1SOjZ1ELJnossyvmBHIJY1ii', cycle: 'MONTHLY' },
-                { price: 134.99, priceId: 'price_1SOjfGELJnossyvmMwuO154E', cycle: 'TIMESTRAL' },
+                { price: 49.99, priceId: 'price_1TZYLgCsiqCEyBVBlAjqQ6mE', cycle: 'MONTHLY' },
+                { price: 134.99, priceId: 'price_1TZYLgCsiqCEyBVBNO7ofcuh', cycle: 'TIMESTRAL' },
             ],
             features: {
                 menu: 1,
