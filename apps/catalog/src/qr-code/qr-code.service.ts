@@ -61,39 +61,43 @@ export class QrCodeService {
         : `https://${this.catalogMenuUrL}`;
 
       const parsedCatalogUrl = new URL(normalizedCatalogUrl);
-
-
       const portPart = parsedCatalogUrl.port ? `:${parsedCatalogUrl.port}` : '';
-
-      // remove query/path do "base"
       const cleanPath = path || '';
 
       // =========================
-      // PROD → slug.weats.pt
+      // DEV → dev.weats.pro/s/slug
       // =========================
-      if (this.weatsEnv === 'prod') {
-        const hostParts = parsedCatalogUrl.hostname.split('.');
-
-        // substitui primeiro subdomínio (menu -> slug)
-        hostParts[0] = slug;
-
-        const subdomainHost = hostParts.join('.');
-
-        return `${parsedCatalogUrl.protocol}//${subdomainHost}${portPart}${cleanPath}`;
+      if (this.weatsEnv === 'dev') {
+        return `${parsedCatalogUrl.protocol}//dev.weats.pro/s/${slug}${cleanPath}`;
       }
 
       // =========================
-      // DEV / LOCAL → dev.weats.pt/s/slug
+      // LOCAL → localhost/s/slug
       // =========================
-      const baseHost =
-        this.weatsEnv === 'local'
-          ? 'localhost'
-          : 'dev.weats.pt';
+      if (this.weatsEnv === 'local') {
+        return `${parsedCatalogUrl.protocol}//localhost${portPart}/s/${slug}${cleanPath}`;
+      }
 
-      const baseUrl = `${parsedCatalogUrl.protocol}//${baseHost}${portPart}`;
+      // =========================
+      // PROD → Subdomínio (slug.weats.pt)
+      // =========================
+      const hostname = parsedCatalogUrl.hostname;
+      let subdomainHost = '';
 
-      return `${baseUrl}/s/${slug}${cleanPath}`;
+      if (hostname.startsWith('menu.')) {
+        subdomainHost = hostname.replace(/^menu\./, `${slug}.`);
+      } else {
+        subdomainHost = `${slug}.${hostname}`;
+      }
+
+      return `${parsedCatalogUrl.protocol}//${subdomainHost}${portPart}${cleanPath}`;
     };
+
+    // Helper para verificar se o estabelecimento tem uma subscrição válida ou é Demo
+    const hasValidSubscription =
+      qrCode.establishment?.isDemo ||
+      qrCode.establishment?.subscription?.status === 'ACTIVE' ||
+      qrCode.establishment?.subscription?.status === 'TRIALING';
 
     // Case 1: TABLE (Menu com mesa pré-selecionada)
     if (qrCode.type === QrCodeType.TABLE) {
@@ -101,7 +105,7 @@ export class QrCodeService {
         return `${this.catalogMenuUrL}/404`;
       }
 
-      if (qrCode.establishment?.subscription?.status !== 'ACTIVE') {
+      if (!hasValidSubscription) {
         return `${this.catalogMenuUrL}/no-subscription`;
       }
 
@@ -114,8 +118,12 @@ export class QrCodeService {
 
     // Case 2: MENU (Direto para o menu geral)
     if (qrCode.type === QrCodeType.MENU) {
-      if (!qrCode.establishment || qrCode.establishment?.subscription?.status !== 'ACTIVE' || !qrCode.establishment?.slug) {
-        return qrCode.establishment?.subscription?.status !== 'ACTIVE' ? `${this.catalogMenuUrL}/no-subscription` : `${this.catalogMenuUrL}/404`;
+      if (!qrCode.establishment || !qrCode.establishment?.slug) {
+        return `${this.catalogMenuUrL}/404`;
+      }
+
+      if (!hasValidSubscription) {
+        return `${this.catalogMenuUrL}/no-subscription`;
       }
 
       return buildSubdomainUrl(qrCode.establishment.slug);
