@@ -63,12 +63,19 @@ export class QrCodeService {
       const parsedCatalogUrl = new URL(normalizedCatalogUrl);
       const portPart = parsedCatalogUrl.port ? `:${parsedCatalogUrl.port}` : '';
       const cleanPath = path || '';
+      const hostname = parsedCatalogUrl.hostname;
 
       // =========================
-      // DEV → dev.weats.pro/s/slug
+      // DEV → dev.[domínio]/s/slug
       // =========================
       if (this.weatsEnv === 'dev') {
-        return `${parsedCatalogUrl.protocol}//dev.weats.pro/s/${slug}${cleanPath}`;
+        let devHost = '';
+        if (hostname.startsWith('menu.')) {
+          devHost = hostname.replace(/^menu\./, 'dev.');
+        } else {
+          devHost = `dev.${hostname}`;
+        }
+        return `${parsedCatalogUrl.protocol}//${devHost}${portPart}/s/${slug}${cleanPath}`;
       }
 
       // =========================
@@ -79,9 +86,8 @@ export class QrCodeService {
       }
 
       // =========================
-      // PROD → Subdomínio (slug.weats.pt)
+      // PROD → Subdomínio (slug.[domínio])
       // =========================
-      const hostname = parsedCatalogUrl.hostname;
       let subdomainHost = '';
 
       if (hostname.startsWith('menu.')) {
