@@ -103,6 +103,20 @@ export class EstablishmentController {
   // Queries
   // -------------------------------------------------------------------------
 
+
+  @Get('verify-domain')
+  verifyDomain(
+    @Query('slug') slug: string,
+  ) {
+    if (!slug) {
+      throw new BadRequestException({
+        message: ERRORS.BAD_REQUEST,
+        code: ERRORS.BAD_REQUEST,
+      });
+    }
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_VERIFY_DOMAIN, { slug });
+  }
+
   @Roles()
   @SkipActiveSubscription()
   @Get(':id')
@@ -376,20 +390,6 @@ export class EstablishmentController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_DIGITAL, { establishment, updateEstablishmentDigitalSettingsDto });
   }
 
-  @SkipEstablishmentStaff()
-  @SkipActiveSubscription()
-  @Get('verify-domain')
-  verifyDomain(
-    @Query('slug') slug: string,
-  ) {
-    if (!slug) {
-      throw new BadRequestException({
-        message: ERRORS.BAD_REQUEST,
-        code: ERRORS.BAD_REQUEST,
-      });
-    }
-    return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_VERIFY_DOMAIN, { slug });
-  }
 
   // -------------------------------------------------------------------------
   // System Settings
