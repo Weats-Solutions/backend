@@ -83,12 +83,6 @@
       "@weats/rate-limit/*": [
         "libs/rate-limit/src/*"
       ],
-      "@weats/translate": [
-        "libs/translate/src"
-      ],
-      "@weats/translate/*": [
-        "libs/translate/src/*"
-      ],
       "@weats/types": [
         "libs/types/src"
       ],
