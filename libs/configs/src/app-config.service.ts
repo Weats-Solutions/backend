@@ -48,4 +48,8 @@ export class AppConfigService {
   getQrSessionSecret(): string {
     return this.configService.getOrThrow<string>('QR_SESSION_SECRET');
   }
+
+  getWeatsEnv(): string {
+    return this.configService.getOrThrow<string>('WEATS_ENV');
+  }
 }

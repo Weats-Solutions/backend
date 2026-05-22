@@ -30,6 +30,11 @@ import { ConfigsModule, AppConfigService } from '@weats/configs';
       useFactory: (appConfig: AppConfigService) => appConfig.getCatalogMenuUrl(),
       inject: [AppConfigService],
     },
+    {
+      provide: 'WEATS_ENV',
+      useFactory: (appConfig: AppConfigService) => appConfig.getWeatsEnv(),
+      inject: [AppConfigService],
+    },
   ],
 })
 export class QrCodeModule { }

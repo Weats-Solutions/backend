@@ -21,6 +21,7 @@ export class QrCodeService {
     private readonly prisma: CorePrismaService,
     private readonly cache: CacheService,
     @Inject('CATALOG_MENU_URL') private readonly catalogMenuUrL: string,
+    @Inject('WEATS_ENV') private readonly weatsEnv: string,
   ) { }
 
   /**
@@ -61,15 +62,37 @@ export class QrCodeService {
 
       const parsedCatalogUrl = new URL(normalizedCatalogUrl);
 
-      const hostParts = parsedCatalogUrl.hostname.split('.');
 
-      // substitui o primeiro subdomínio (ex: menu.weats.pt -> slug.weats.pt)
-      hostParts[0] = slug;
-
-      const subdomainHost = hostParts.join('.');
       const portPart = parsedCatalogUrl.port ? `:${parsedCatalogUrl.port}` : '';
 
-      return `${parsedCatalogUrl.protocol}//${subdomainHost}${portPart}${path}`;
+      // remove query/path do "base"
+      const cleanPath = path || '';
+
+      // =========================
+      // PROD → slug.weats.pt
+      // =========================
+      if (this.weatsEnv === 'prod') {
+        const hostParts = parsedCatalogUrl.hostname.split('.');
+
+        // substitui primeiro subdomínio (menu -> slug)
+        hostParts[0] = slug;
+
+        const subdomainHost = hostParts.join('.');
+
+        return `${parsedCatalogUrl.protocol}//${subdomainHost}${portPart}${cleanPath}`;
+      }
+
+      // =========================
+      // DEV / LOCAL → dev.weats.pt/s/slug
+      // =========================
+      const baseHost =
+        this.weatsEnv === 'local'
+          ? 'localhost'
+          : 'dev.weats.pt';
+
+      const baseUrl = `${parsedCatalogUrl.protocol}//${baseHost}${portPart}`;
+
+      return `${baseUrl}/s/${slug}${cleanPath}`;
     };
 
     // Case 1: TABLE (Menu com mesa pré-selecionada)
