@@ -44,6 +44,9 @@ class EnvironmentVariables {
   APP_URL: string;
 
   @IsString()
+  TRANSLATE_API_URL: string;
+
+  @IsString()
   CATALOG_API_URL: string;
 
   @IsString()

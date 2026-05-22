@@ -52,4 +52,8 @@ export class AppConfigService {
   getWeatsEnv(): string {
     return this.configService.getOrThrow<string>('WEATS_ENV');
   }
+
+  getTranslateApiUrl(): string {
+    return this.configService.getOrThrow<string>('TRANSLATE_API_URL');
+  }
 }

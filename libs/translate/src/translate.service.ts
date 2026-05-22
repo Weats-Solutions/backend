@@ -1,14 +1,14 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
 import { EstablishmentLanguage } from "@weats/database";
 import { lastValueFrom } from "rxjs";
 
 @Injectable()
 export class TranslateService {
-    private readonly translateUrl = 'https://translate.weats.pro/translate';
 
     constructor(
-        private readonly httpService: HttpService
+        private readonly httpService: HttpService,
+        @Inject('TRANSLATE_API_URL') private readonly translateApiUrl: string,
     ) { }
 
     async translate(
@@ -28,7 +28,7 @@ export class TranslateService {
             };
 
             const response = await lastValueFrom(
-                this.httpService.post(this.translateUrl, payload)
+                this.httpService.post(`${this.translateApiUrl}/translate`, payload)
             );
 
             console.log(`[TranslateService Response Status]:`, response.status);
