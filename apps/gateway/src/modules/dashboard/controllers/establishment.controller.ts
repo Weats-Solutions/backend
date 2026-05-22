@@ -17,7 +17,6 @@ import {
   CurrentUser,
   Roles,
   CurrentEstablishment,
-  EstablishmentStaffGuard,
   DASHBOARD_SERVICE,
   ERRORS, FeatureUsageService,
   SCHEDULE_VALIDATION_GROUPS,
@@ -383,6 +382,8 @@ export class EstablishmentController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_DIGITAL, { establishment, updateEstablishmentDigitalSettingsDto });
   }
 
+  @SkipEstablishmentStaff()
+  @SkipActiveSubscription()
   @Get('verify-domain')
   verifyDomain(
     @Query('slug') slug: string,
