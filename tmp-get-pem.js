@@ -3,7 +3,7 @@ const crypto = require('crypto');
 async function run() {
   try {
     //const r = await fetch('https://clerk.weats.pro/.well-known/jwks.json');
-    const r = await fetch('https://humorous-jaguar-12.clerk.accounts.dev/.well-known/jwks.json')
+    const r = await fetch('https://clerk.weats.app/.well-known/jwks.json')
     const jwks = await r.json();
     const key = jwks.keys[0];
     
