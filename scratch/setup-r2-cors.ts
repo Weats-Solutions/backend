@@ -37,7 +37,7 @@ async function setupR2Cors() {
     const corsConfiguration = {
         CORSRules: [
             {
-                AllowedOrigins: ["http://localhost:3000", "https://app.weats.pro", "https://*.weats.pro"],
+                AllowedOrigins: ["http://localhost:3000", "https://app.weats.app", "https://*.weats.app"],
                 AllowedMethods: ["GET", "PUT", "POST", "DELETE", "HEAD"],
                 AllowedHeaders: ["*"],
                 ExposeHeaders: ["ETag"],

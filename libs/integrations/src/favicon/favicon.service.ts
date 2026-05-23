@@ -68,7 +68,7 @@ export class FaviconService {
 
         // 2. Determinar a URL de download correta
         // Se for R2 (detetado por metadados ou URL), não adicionamos /public
-        const isR2 = (image.metadata as any)?.provider === 'r2' || image.url.includes('cdn.weats.pro') || image.url.includes('r2.cloudflarestorage.com');
+        const isR2 = (image.metadata as any)?.provider === 'r2' || image.url.includes('cdn.weats.app') || image.url.includes('r2.cloudflarestorage.com');
         const downloadUrl = isR2 ? image.url : `${image.url}/public`;
 
         try {

@@ -43,7 +43,7 @@ export class QrCodeController {
         httpOnly: false, // Permitir que o JS leia para mandar no auth do socket
         secure: !isDev,
         sameSite: isDev ? 'lax' : 'none',
-        ...(isDev ? {} : { domain: '.weats.pro' }),
+        ...(isDev ? {} : { domain: '.weats.app' }),
         maxAge: 4 * 60 * 60 * 1000, 
         path: '/',
       });

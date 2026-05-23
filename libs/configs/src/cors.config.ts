@@ -8,9 +8,9 @@ export const getCorsOptions = (appConfigService: AppConfigService): CorsOptions 
             'http://localhost:3000',
             'http://localhost:3001',
             'http://localhost:4000',
-            'https://staff.weats.pro',
-            'https://app.weats.pro',
-            'https://table-management.weats.pro',
+            'https://staff.weats.app',
+            'https://app.weats.app',
+            'https://table-management.weats.app',
         ];
         // Check if the origin matches our allowed list, or if it's an ngrok tunnel
         const isNgrok = origin && (origin.endsWith('.ngrok-free.dev') || origin.endsWith('.ngrok.io') || origin.endsWith('.loca.lt'));

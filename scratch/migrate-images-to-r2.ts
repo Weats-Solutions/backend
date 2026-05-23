@@ -35,7 +35,7 @@ async function migrateImages() {
     });
 
     const BUCKET_NAME = env.R2_IMAGES_BUCKET_NAME || "images";
-    const CDN_URL = "https://cdn.weats.pro"; // O teu novo domínio
+    const CDN_URL = "https://cdn.weats.app"; // O teu novo domínio
 
     console.log("🔍 À procura de imagens para migrar...");
 

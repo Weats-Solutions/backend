@@ -27,7 +27,7 @@ import {
 @WebSocketGateway({
   namespace: 'realtime-v2-client',
   cors: {
-    origin: ['http://localhost:3001', 'http://localhost:3002', 'http://localhost:4000', 'http://localhost:3000', 'https://*.weats.pro', 'https://table-management.weats.pro'],
+    origin: ['http://localhost:3001', 'http://localhost:3002', 'http://localhost:4000', 'http://localhost:3000', 'https://*.weats.app', 'https://table-management.weats.app'],
     credentials: true
   },
   pingInterval: 15000,
