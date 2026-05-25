@@ -5,13 +5,13 @@ import { CacheService } from '@weats/cache';
 export class MenuUtilsService {
     private readonly logger = new Logger(MenuUtilsService.name);
 
-    constructor(private readonly cacheService: CacheService) {}
+    constructor(private readonly cacheService: CacheService) { }
 
     /**
      * Limpa a cache de definições core (configurações, tema, etc)
      */
-    async clearCoreCache(slug: string) {
-        await this.cacheService.clearCoreCache(slug);
+    async clearAllEstablishmentCache(slug: string) {
+        await this.cacheService.clearEstablishmentCache(slug);
     }
 
     /**
@@ -43,7 +43,7 @@ export class MenuUtilsService {
 
         switch (type) {
             case 'settings':
-                void this.clearCoreCache(slug);
+                void this.clearAllEstablishmentCache(slug);
                 break;
             case 'menus':
                 void this.clearMenuListCache(slug);
@@ -60,4 +60,4 @@ export class MenuUtilsService {
     async clearAllCacheAsync(slug: string) {
         void this.clearEstablishmentCache(slug);
     }
-}
+}

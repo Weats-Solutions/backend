@@ -68,7 +68,7 @@ export class EstablishmentDigitalSettingsService {
                     establishment,
                     updateEstablishmentDigitalSettingsDto.wifi,
                 );
-                await this.cacheService.clearCoreCache(establishment.slug);
+                await this.cacheService.clearEstablishmentCache(establishment.slug)
 
                 break;
             case 'analytics':
@@ -76,7 +76,7 @@ export class EstablishmentDigitalSettingsService {
                     establishment,
                     updateEstablishmentDigitalSettingsDto.analytics,
                 );
-                await this.cacheService.clearCoreCache(establishment.slug);
+                await this.cacheService.clearEstablishmentCache(establishment.slug)
 
                 break;
             default:

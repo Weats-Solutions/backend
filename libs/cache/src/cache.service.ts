@@ -7,7 +7,7 @@ export class CacheService {
 
   constructor(
     @Inject('CACHE_REDIS_CLIENT') private readonly redis: Redis,
-  ) {}
+  ) { }
 
   /**
    * O "Santo Graal" do Cache: Tenta obter do Redis, se não existir executa o fetcher,
@@ -99,18 +99,12 @@ export class CacheService {
   // CATALOG SPECIFIC INVALIDATION
   // ═══════════════════════════════════════════
 
-async clearAllEstablishmentCache(slug: string) {
-  this.clearCoreCache(slug);
-  this.clearEstablishmentCache(slug);
-} 
-
-  /**
-   * Limpa a cache de definições core (configurações, tema, etc)
-   */
-  async clearCoreCache(slug: string) {
+  async clearEstablishmentCache(slug: string) {
     const key = `catalog:est:${slug}:core`;
     await this.invalidate(key);
-    this.logger.debug(`[Cache] Cache CORE limpa para: ${slug}`);
+    const pattern = `catalog:est:${slug}:*`;
+    await this.invalidatePattern(pattern);
+    this.logger.debug(`[Cache] Cache para: ${slug} limpa`);
   }
 
   /**
@@ -126,14 +120,6 @@ async clearAllEstablishmentCache(slug: string) {
    */
   async clearMenuContentCache(slug: string, menuId?: string) {
     const pattern = `catalog:est:${slug}:lang:*:menu:${menuId || '*'}:content`;
-    await this.invalidatePattern(pattern);
-  }
-
-  /**
-   * Limpa TODA a cache de um estabelecimento (definições, listas e conteúdos)
-   */
-  async clearEstablishmentCache(slug: string) {
-    const pattern = `catalog:est:${slug}:*`;
     await this.invalidatePattern(pattern);
   }
 }

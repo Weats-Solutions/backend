@@ -67,7 +67,7 @@ export class EstablishmentSystemSettingsService {
                     });
             }
 
-            this.cacheService.clearCoreCache(establishment.slug);
+            this.cacheService.clearEstablishmentCache(establishment.slug);
 
             return result;
         } catch (error) {

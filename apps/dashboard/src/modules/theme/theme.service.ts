@@ -164,7 +164,7 @@ export class ThemeService {
 
             if (updatedTheme.activeEstablishments.length > 0) {
                 const slug = updatedTheme.activeEstablishments[0].slug;
-                this.cacheService.clearCoreCache(slug);
+                this.cacheService.clearEstablishmentCache(slug);
             }
 
             return {
@@ -222,7 +222,7 @@ export class ThemeService {
             });
 
             // Clear menu cache
-            this.cacheService.clearCoreCache(establishment.slug);
+            this.cacheService.clearEstablishmentCache(theme.name);
             return theme;
         } catch (error) {
             if (error instanceof RpcException) throw error;
