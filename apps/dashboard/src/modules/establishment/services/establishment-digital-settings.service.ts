@@ -60,7 +60,7 @@ export class EstablishmentDigitalSettingsService {
                     updateEstablishmentDigitalSettingsDto.domain,
                 );
                 await this.cacheService.clearEstablishmentCache(establishment.slug);
-                await this.cacheService.clearDashboardEstCache(establishment.id);
+
 
                 break;
             case 'wifi':
@@ -69,7 +69,7 @@ export class EstablishmentDigitalSettingsService {
                     updateEstablishmentDigitalSettingsDto.wifi,
                 );
                 await this.cacheService.clearCoreCache(establishment.slug);
-                await this.cacheService.clearDashboardEstCache(establishment.id);
+
                 break;
             case 'analytics':
                 result = await this.updateAnalytics(
@@ -77,7 +77,7 @@ export class EstablishmentDigitalSettingsService {
                     updateEstablishmentDigitalSettingsDto.analytics,
                 );
                 await this.cacheService.clearCoreCache(establishment.slug);
-                await this.cacheService.clearDashboardEstCache(establishment.id);
+
                 break;
             default:
                 throw new RpcException({

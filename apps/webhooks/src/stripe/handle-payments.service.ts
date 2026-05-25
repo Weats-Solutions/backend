@@ -69,7 +69,7 @@ export class HandlePaymentsService {
         };
 
         await this.emailProducer.send(payload);
-        await this.cacheService.clearDashboardEstCache(establishment.id);
+
         this.logger.log(`📧 Payment-succeeded email → ${establishment.owner.email}`);
       }
     } catch (err) {
@@ -144,7 +144,7 @@ export class HandlePaymentsService {
       this.logger.log(`Invoice ${invoice.id} updated → ${invoice.status}`);
     } else {
       await this.prisma.invoice.create({
-        data: {  stripeInvoiceId: invoice.id, ...invoiceData },
+        data: { stripeInvoiceId: invoice.id, ...invoiceData },
       });
       this.logger.log(`Invoice ${invoice.id} created → ${invoice.status}`);
     }
@@ -181,7 +181,7 @@ export class HandlePaymentsService {
           where: { id: establishment.id },
           data: { isActive: false },
         });
-        await this.cacheService.clearDashboardEstCache(establishment.id);
+
         this.logger.warn(`🚫 Access revoked for establishment ${establishment.id} (dispute)`);
       }
     }
@@ -225,7 +225,7 @@ export class HandlePaymentsService {
           where: { id: establishment.id },
           data: { isActive: true },
         });
-        await this.cacheService.clearDashboardEstCache(establishment.id);
+
         this.logger.log(`✅ Access restored for establishment ${establishment.id} (dispute won)`);
       }
     }

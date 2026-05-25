@@ -54,7 +54,7 @@ export class HandleCustomerService {
 			data: { ...updateData, updatedAt: new Date() },
 		});
 
-		await this.cacheService.clearDashboardEstCache(establishment.id);
+
 
 		this.logger.log(
 			`Customer synced: ${establishment.name} (${establishment.id}) ← ${customer.id}`,
@@ -86,7 +86,7 @@ export class HandleCustomerService {
 				data: { stripeCustomerId: null, updatedAt: new Date() },
 			}); */
 
-		await this.cacheService.clearDashboardEstCache(establishment.id);
+
 
 		this.logger.warn(`Stripe customer deleted: ${customer.id} (${establishment.name})`);
 	}
@@ -117,7 +117,7 @@ export class HandleCustomerService {
 			},
 		});
 
-		await this.cacheService.clearDashboardEstCache(establishment.id);
+		
 
 		this.logger.log(
 			`🧾 Tax ID updated: ${establishment.name} → ${taxId.type}: ${taxId.value}`,

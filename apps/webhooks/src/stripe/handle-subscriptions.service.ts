@@ -54,7 +54,7 @@ export class HandleSubscriptionsService {
         },
       });
 
-      await this.cacheService.clearDashboardEstCache(establishment.id);
+
 
       if (subscription.status === 'trialing') {
         const trialStart = subscription.trial_start
@@ -125,7 +125,7 @@ export class HandleSubscriptionsService {
         data: subData,
       });
 
-      await this.cacheService.clearDashboardEstCache(establishment.id);
+
 
       // ── Transition detection ───────────────────────────────────────────────
       const justCanceled =
@@ -275,7 +275,7 @@ export class HandleSubscriptionsService {
         data: updateData,
       });
 
-      await this.cacheService.clearDashboardEstCache(establishment.id);
+
 
       const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CANCELLED> = {
         to: establishment.email,
@@ -313,7 +313,7 @@ export class HandleSubscriptionsService {
         data: { status: this.helpers.mapStripeStatus(subscription.status) },
       });
 
-      await this.cacheService.clearDashboardEstCache(establishment.id);
+
 
       const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_PAUSED> = {
         to: establishment.email,
@@ -351,7 +351,7 @@ export class HandleSubscriptionsService {
         data: subData,
       });
 
-      await this.cacheService.clearDashboardEstCache(establishment.id);
+
 
       const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_REACTIVATED> = {
         to: establishment.email,

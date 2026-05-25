@@ -20,7 +20,7 @@ export class EstablishmentGeneralSettingsService {
     private readonly prisma: CorePrismaService,
     private readonly stripeService: StripeService,
     private readonly cacheService: CacheService,
-  ) {}
+  ) { }
 
   async getEstablishmentGeneralSettings(id: string) {
     const establishment = await this.prisma.establishment.findUnique({
@@ -96,7 +96,7 @@ export class EstablishmentGeneralSettingsService {
     }
 
     await this.cacheService.clearCoreCache(establishment.slug);
-    await this.cacheService.clearDashboardEstCache(establishment.id);
+
 
     return result;
   }
