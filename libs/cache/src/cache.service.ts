@@ -99,6 +99,11 @@ export class CacheService {
   // CATALOG SPECIFIC INVALIDATION
   // ═══════════════════════════════════════════
 
+async clearAllEstablishmentCache(slug: string) {
+  this.clearCoreCache(slug);
+  this.clearEstablishmentCache(slug);
+} 
+
   /**
    * Limpa a cache de definições core (configurações, tema, etc)
    */
@@ -106,15 +111,6 @@ export class CacheService {
     const key = `catalog:est:${slug}:core`;
     await this.invalidate(key);
     this.logger.debug(`[Cache] Cache CORE limpa para: ${slug}`);
-  }
-
-  /**
-   * Limpa a cache de definições do dashboard
-   */
-  async clearDashboardEstCache(id: string) {
-    const key = `dashboard:est:${id}:core`;
-    await this.invalidate(key);
-    this.logger.debug(`[Cache] Cache Dashboard limpa para: ${id}`);
   }
 
   /**
