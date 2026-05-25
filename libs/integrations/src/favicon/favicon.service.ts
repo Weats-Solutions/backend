@@ -66,14 +66,9 @@ export class FaviconService {
             message: ERRORS.IMAGE_NOT_FOUND,
         });
 
-        // 2. Determinar a URL de download correta
-        // Se for R2 (detetado por metadados ou URL), não adicionamos /public
-        const isR2 = (image.metadata as any)?.provider === 'r2' || image.url.includes('cdn.weats.pro') || image.url.includes('r2.cloudflarestorage.com');
-        const downloadUrl = isR2 ? image.url : `${image.url}/public`;
-
         try {
             const response = await lastValueFrom(
-                this.httpService.get(downloadUrl, {
+                this.httpService.get(image.url, {
                     responseType: 'arraybuffer',
                     headers: {
                         'Accept': 'image/*'
@@ -87,7 +82,7 @@ export class FaviconService {
             return this.enqueueFaviconJob(buffer, establishmentId);
 
         } catch (error) {
-            console.error('Erro ao descarregar imagem para favicon:', error.message, 'URL:', downloadUrl);
+            console.error('Erro ao descarregar imagem para favicon:', error.message, 'URL:', image.url);
             throw new RpcException({
                 code: 500,
                 message: 'Não foi possível obter a imagem original para processar os favicons.',
