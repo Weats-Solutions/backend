@@ -3,6 +3,7 @@ import { ERRORS, isScheduleOpenNow, normalizeSchedule } from '@weats/common';
 import { CorePrismaService, EstablishmentLanguage } from '@weats/database';
 import { Logger } from '@nestjs/common';
 import { CacheService, coreCacheKey, menuItemsCacheKey, menuListCacheKey } from '@weats/cache';
+import { QrSessionTokenPayload } from './catalog.controller';
 
 @Injectable()
 export class CatalogService {
@@ -65,10 +66,12 @@ export class CatalogService {
     }
 
     if (!establishment.myPageModule) {
+      this.logger.debug(`Establishment ${establishment.id} has no myPageModule`);
       throw new NotFoundException(ERRORS.NOT_FOUND);
     }
 
     const validStatuses = ['ACTIVE', 'TRIALING'];
+    this.logger.debug(`Establishment ${establishment.id} subscription status: ${establishment.subscription?.status}`);
     if (!establishment.subscription || !validStatuses.includes(establishment.subscription.status)) {
       throw new NotFoundException(ERRORS.NO_ACTIVE_SUBSCRIPTION);
     }
@@ -156,12 +159,13 @@ export class CatalogService {
     }
   }
 
-  async getMenuList(slug: string, lang: string, targetId?: string) {
+  async getMenuList(slug: string, lang: string, qrSession?: QrSessionTokenPayload | null) {
     try {
       const establishment = await this.getEstablishmentCore(slug);
       this.validateEstablishment(establishment);
 
       if (!establishment.menusModule) {
+        this.logger.debug(`Establishment ${establishment.id} has no menusModule`);
         throw new NotFoundException(ERRORS.NOT_FOUND);
       }
 
@@ -171,10 +175,13 @@ export class CatalogService {
         currentLang = establishment.primaryLanguage;
       }
 
+      const isAtEstablishment = !!(qrSession && qrSession.eid === establishment.id);
+      const targetId = isAtEstablishment ? qrSession.spid : undefined;
+
       const menuCacheKey = menuListCacheKey(slug, currentLang, targetId);
 
       return await this.cache.wrap(menuCacheKey, 3600, async () => {
-        if (targetId) {
+        if (isAtEstablishment) {
           if (!establishment.schedule || !isScheduleOpenNow(establishment.schedule, establishment.timezone)) {
             throw new BadRequestException(ERRORS.ESTABLISHMENT_CLOSED);
           }
@@ -197,7 +204,7 @@ export class CatalogService {
           },
         });
 
-        const visibleAndOpenMenus = targetId
+        const visibleAndOpenMenus = isAtEstablishment
           ? menus.filter((menu) => {
             if (!menu.schedule) return false;
             return isScheduleOpenNow(menu.schedule, establishment.timezone);
@@ -213,12 +220,13 @@ export class CatalogService {
     }
   }
 
-  async getMenuContent(slug: string, menuId: string, lang: EstablishmentLanguage, targetId?: string) {
+  async getMenuContent(slug: string, menuId: string, lang: EstablishmentLanguage, qrSession?: QrSessionTokenPayload | null) {
     try {
       const establishment = await this.getEstablishmentCore(slug);
       this.validateEstablishment(establishment);
 
       if (!establishment.menusModule) {
+        this.logger.debug(`Establishment ${establishment.id} has no menusModule`);
         throw new NotFoundException(ERRORS.NOT_FOUND);
       }
 
@@ -228,10 +236,11 @@ export class CatalogService {
         currentLang = establishment.primaryLanguage;
       }
 
+      const isAtEstablishment = !!(qrSession && qrSession.eid === establishment.id);
       const cacheKey = menuItemsCacheKey(slug, currentLang, menuId);
 
-      return await this.cache.wrap(cacheKey, 3600, async () => {
-        const menu = await this.prisma.menu.findFirst({
+      const menu = await this.cache.wrap(cacheKey, 3600, async () => {
+        const menuData = await this.prisma.menu.findFirst({
           where: { id: menuId, establishmentId: establishment.id },
           select: {
             id: true,
@@ -239,6 +248,7 @@ export class CatalogService {
             showImages: true,
             color: true,
             isHighlighted: true,
+            schedule: { include: { days: { include: { intervals: true } } } },
             translations: {
               where: { locale: currentLang as any },
               select: {
@@ -398,15 +408,27 @@ export class CatalogService {
           },
         });
 
-        if (!menu) {
+        if (!menuData) {
           throw new NotFoundException(ERRORS.MENU_NOT_FOUND);
         }
 
-        return menu;
+        return menuData;
       });
+
+      if (isAtEstablishment) {
+        if (!establishment.schedule || !isScheduleOpenNow(establishment.schedule, establishment.timezone)) {
+          throw new BadRequestException(ERRORS.ESTABLISHMENT_CLOSED);
+        }
+        if (!menu.schedule || !isScheduleOpenNow(menu.schedule, establishment.timezone)) {
+          throw new BadRequestException(ERRORS.MENU_CLOSED);
+        }
+      }
+
+      const { schedule, ...responseMenu } = menu;
+      return responseMenu;
     } catch (error) {
       this.logger.error(`Erro ao buscar menu content para ${menuId} em ${slug}:`, error);
-      if (error instanceof NotFoundException) throw error;
+      if (error instanceof NotFoundException || error instanceof BadRequestException) throw error;
       throw new BadRequestException(ERRORS.BAD_REQUEST);
     }
   }

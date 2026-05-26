@@ -36,5 +36,6 @@ import { ConfigsModule, AppConfigService } from '@weats/configs';
       inject: [AppConfigService],
     },
   ],
+  exports: [QrCodeService, JwtModule],
 })
 export class QrCodeModule { }
