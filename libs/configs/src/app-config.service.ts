@@ -38,7 +38,8 @@ export class AppConfigService {
   }
 
   getSendMail(): boolean {
-    return this.configService.getOrThrow<boolean>('SEND_MAIL');
+    const value = this.configService.getOrThrow<any>('SEND_MAIL');
+    return value === true || value === 'true';
   }
 
   getRealtimePort(): string {

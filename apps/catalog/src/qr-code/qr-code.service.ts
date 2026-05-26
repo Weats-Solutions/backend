@@ -55,48 +55,17 @@ export class QrCodeService {
     }
 
     // Função auxiliar para construir a URL com subdomínio
-    const buildSubdomainUrl = (slug: string, path = '') => {
-      const normalizedCatalogUrl = this.catalogMenuUrL.startsWith('http')
-        ? this.catalogMenuUrL
-        : `https://${this.catalogMenuUrL}`;
-
-      const parsedCatalogUrl = new URL(normalizedCatalogUrl);
-      const portPart = parsedCatalogUrl.port ? `:${parsedCatalogUrl.port}` : '';
-      const cleanPath = path || '';
-      const hostname = parsedCatalogUrl.hostname;
-
-      // =========================
-      // DEV → dev.[domínio]/s/slug
-      // =========================
+    const buildSubdomainUrl = (slug: string) => {
       if (this.weatsEnv === 'dev') {
-        let devHost = '';
-        if (hostname.startsWith('menu.')) {
-          devHost = hostname.replace(/^menu\./, 'dev.');
-        } else {
-          devHost = `dev.${hostname}`;
-        }
-        return `${parsedCatalogUrl.protocol}//${devHost}${portPart}/s/${slug}${cleanPath}`;
+        return `https://dev-menu.weats.app/s/${slug}`;
       }
 
-      // =========================
-      // LOCAL → localhost/s/slug
-      // =========================
       if (this.weatsEnv === 'local') {
-        return `${parsedCatalogUrl.protocol}//localhost${portPart}/s/${slug}${cleanPath}`;
+        return `http://localhost/s/${slug}`;
       }
 
-      // =========================
-      // PROD → Subdomínio (slug.[domínio])
-      // =========================
-      let subdomainHost = '';
-
-      if (hostname.startsWith('menu.')) {
-        subdomainHost = hostname.replace(/^menu\./, `${slug}.`);
-      } else {
-        subdomainHost = `${slug}.${hostname}`;
-      }
-
-      return `${parsedCatalogUrl.protocol}//${subdomainHost}${portPart}${cleanPath}`;
+      // PROD
+      return `https://${slug}.weats.pt`;
     };
 
     // Helper para verificar se o estabelecimento tem uma subscrição válida ou é Demo
@@ -119,7 +88,7 @@ export class QrCodeService {
         return `${this.catalogMenuUrL}/404`;
       }
 
-      return buildSubdomainUrl(qrCode.establishment.slug, `?table=${qrCode.servicePointId}`);
+      return buildSubdomainUrl(qrCode.establishment.slug);
     }
 
     // Case 2: MENU (Direto para o menu geral)
