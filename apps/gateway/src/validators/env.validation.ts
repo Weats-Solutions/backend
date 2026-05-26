@@ -125,6 +125,9 @@ class EnvironmentVariables {
   DISCORD_EMAIL_WEBHOOK_URL: string;
 
   @IsString()
+  DISCORD_STRIPE_WEBHOOK_URL: string;
+
+  @IsString()
   EUPAGO_API_URL: string;
 
   @IsString()
