@@ -70,6 +70,8 @@ export class MailService {
             },
         );
 
+        this.logger.debug(JSON.stringify(response));
+
         return response.data;
     }
 }
