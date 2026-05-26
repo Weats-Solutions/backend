@@ -5,14 +5,7 @@ import { HttpModule } from '@nestjs/axios';
 
 @Module({
     providers: [
-        DiscordService,
-        {
-            provide: 'DISCORD_WEBHOOK_URL',
-            useFactory: async (discordConfig: DiscordConfigService) =>
-                discordConfig.getWebhookUrl(),
-            inject: [DiscordConfigService],
-        },
-
+        DiscordService
     ],
     imports: [HttpModule, ConfigsModule],
     exports: [DiscordService],
