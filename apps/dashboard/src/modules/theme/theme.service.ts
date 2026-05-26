@@ -222,7 +222,7 @@ export class ThemeService {
             });
 
             // Clear menu cache
-            this.cacheService.clearEstablishmentCache(theme.name);
+            this.cacheService.clearEstablishmentCache(establishment.slug);
             return theme;
         } catch (error) {
             if (error instanceof RpcException) throw error;
