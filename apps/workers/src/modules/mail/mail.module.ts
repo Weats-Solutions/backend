@@ -2,8 +2,7 @@ import { Module } from "@nestjs/common";
 import { MailProcessor } from "./mail.processor";
 import { QueuesModule } from "@weats/bull";
 import { MailService } from "./mail.service";
-import { AppConfigService, ConfigsModule } from "@weats/configs";
-import { ZeptoConfigService } from "@weats/configs/zepto-config.service";
+import { ConfigsModule } from "@weats/configs";
 import { HttpModule } from "@nestjs/axios";
 import { IntegrationsModule } from "@weats/integrations";
 import { TemplateRenderService } from "./template-render.service";
@@ -15,26 +14,6 @@ import { TemplateRenderService } from "./template-render.service";
         MailProcessor,
         MailService,
         TemplateRenderService,
-        {
-            provide: 'ZEPTO_API_URL',
-            useFactory: (zeptoConfig: ZeptoConfigService) => zeptoConfig.getZeptoApiUrl(),
-            inject: [ZeptoConfigService],
-        },
-        {
-            provide: 'ZEPTO_ZOHO_ENCZAPIKEY',
-            useFactory: (zeptoConfig: ZeptoConfigService) => zeptoConfig.getZeptoENCZAPIKEY(),
-            inject: [ZeptoConfigService],
-        },
-        {
-            provide: 'ZEPTO_SENDER_EMAIL',
-            useFactory: (zeptoConfig: ZeptoConfigService) => zeptoConfig.getSenderEmail(),
-            inject: [ZeptoConfigService],
-        },
-        {
-            provide: 'SEND_MAIL',
-            useFactory: (appConfig: AppConfigService) => appConfig.getSendMail(),
-            inject: [AppConfigService],
-        }
     ],
     exports: [MailService],
 })

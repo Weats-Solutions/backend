@@ -56,4 +56,12 @@ export class AppConfigService {
   getTranslateApiUrl(): string {
     return this.configService.getOrThrow<string>('TRANSLATE_API_URL');
   }
+
+  getMailProvider(): 'zepto' | 'resend' {
+    const provider = this.configService.get<string>('MAIL_PROVIDER');
+    if (provider === 'resend') {
+      return 'resend';
+    }
+    return 'zepto';
+  }
 }

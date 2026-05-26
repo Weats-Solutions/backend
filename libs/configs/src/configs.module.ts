@@ -10,6 +10,7 @@ import { CryptoConfigService } from './crypto-config.service';
 import { EupagoConfigService } from './eupago-config.service';
 import { DiscordConfigService } from './discord-config.service';
 import { ZeptoConfigService } from './zepto-config.service';
+import { ResendConfigService } from './resend-config.service';
 
 @Module({
   imports: [ConfigModule],
@@ -23,7 +24,8 @@ import { ZeptoConfigService } from './zepto-config.service';
     CryptoConfigService,
     EupagoConfigService,
     DiscordConfigService,
-    ZeptoConfigService
+    ZeptoConfigService,
+    ResendConfigService
   ],
   exports: [
     GatewayConfigService,
@@ -35,7 +37,8 @@ import { ZeptoConfigService } from './zepto-config.service';
     CryptoConfigService,
     EupagoConfigService,
     DiscordConfigService,
-    ZeptoConfigService
+    ZeptoConfigService,
+    ResendConfigService
   ],
 })
 export class ConfigsModule { }

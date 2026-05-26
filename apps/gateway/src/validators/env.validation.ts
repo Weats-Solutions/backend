@@ -7,6 +7,7 @@ import {
   IsIn,
   IsInt,
   IsBoolean,
+  ValidateIf,
 } from 'class-validator';
 
 class EnvironmentVariables {
@@ -133,17 +134,33 @@ class EnvironmentVariables {
   @IsString()
   EUPAGO_API_URL: string;
 
+  @ValidateIf((o) => !o.MAIL_PROVIDER || o.MAIL_PROVIDER === 'zepto')
   @IsString()
-  ZEPTO_API_URL: string;
+  ZEPTO_API_URL?: string;
 
+  @ValidateIf((o) => !o.MAIL_PROVIDER || o.MAIL_PROVIDER === 'zepto')
   @IsString()
-  ZEPTO_ZOHO_ENCZAPIKEY: string;
+  ZEPTO_ZOHO_ENCZAPIKEY?: string;
 
+  @ValidateIf((o) => !o.MAIL_PROVIDER || o.MAIL_PROVIDER === 'zepto')
   @IsString()
-  ZEPTO_SENDER_EMAIL: string;
+  ZEPTO_SENDER_EMAIL?: string;
 
   @IsBoolean()
   SEND_MAIL: boolean;
+
+  @IsString()
+  @IsOptional()
+  @IsIn(['zepto', 'resend'])
+  MAIL_PROVIDER?: string;
+
+  @ValidateIf((o) => o.MAIL_PROVIDER === 'resend')
+  @IsString()
+  RESEND_API_KEY?: string;
+
+  @ValidateIf((o) => o.MAIL_PROVIDER === 'resend')
+  @IsString()
+  RESEND_SENDER_EMAIL?: string;
 }
 
 export function validate(config: Record<string, unknown>) {
