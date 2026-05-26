@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ClerkService } from '@weats/integrations';
 import { CorePrismaService } from '@weats/database';
-import { CacheService } from '@weats/cache';
+import { CacheService, dashboardEstKey } from '@weats/cache';
 import { StaffValidationContext } from './realtime-v2.types';
 
 @Injectable()
@@ -44,41 +44,37 @@ export class RealtimeV2StaffAuthService {
   }
 
   private async validateEstablishmentAccess(id: string) {
-    const cacheKey = `est:access:${id}`;
+    const cacheKey = dashboardEstKey(id);
 
-    return this.cache.wrap<{
-      hasAccess: boolean;
-      hasActiveSubscription: boolean;
-      hasCallStaffModule: boolean;
-    } | null>(
+    const establishment = await this.cache.wrap<any>(
       cacheKey,
       RealtimeV2StaffAuthService.CACHE_TTL_SECONDS,
       async () => {
-        const establishment = await this.prisma.establishment.findUnique({
+        return this.prisma.establishment.findUnique({
           where: { id },
-          select: {
-            id: true,
-            callStaffModule: true,
-            subscription: {
-              select: {
-                status: true,
-              }
+          include: {
+            logoImage: { select: { id: true, url: true } },
+            bannerImage: { select: { id: true, url: true } },
+            subscription: true,
+            schedule: {
+              include: { days: { include: { intervals: true } } },
             },
           },
         });
-
-        if (!establishment) return null;
-
-        const hasActiveSubscription = 
-            establishment.subscription?.status === 'ACTIVE' || 
-            establishment.subscription?.status === 'TRIALING';
-
-        return { 
-          hasAccess: true, 
-          hasActiveSubscription, 
-          hasCallStaffModule: establishment.callStaffModule 
-        };
       }
     );
+
+    if (!establishment) return null;
+
+    const hasActiveSubscription =
+      establishment.subscription?.status === 'ACTIVE' ||
+      establishment.subscription?.status === 'TRIALING' ||
+      establishment.isDemo;
+
+    return {
+      hasAccess: true,
+      hasActiveSubscription,
+      hasCallStaffModule: establishment.callStaffModule,
+    };
   }
 }
