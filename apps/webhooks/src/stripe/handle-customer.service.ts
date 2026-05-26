@@ -75,7 +75,15 @@ export class HandleCustomerService {
 		}
 
 		this.discordService
-			.sendToDiscord('O estabelecimento ' + establishment.name + ' eliminou a conta na stripe id:', `${customer.id}`)
+			.sendEmbed('clerk', {
+				title: '🗑️ Customer Deleted on Stripe',
+				message: `An establishment has deleted their Stripe account.`,
+				color: 0xff4444,
+				fields: [
+					{ name: 'Establishment', value: establishment.name, inline: true },
+					{ name: 'Stripe Customer ID', value: customer.id, inline: true },
+				],
+			})
 			.catch((err: Error) =>
 				this.logger.warn(`[Stripe] Discord notification failed: ${err.message}`),
 			);

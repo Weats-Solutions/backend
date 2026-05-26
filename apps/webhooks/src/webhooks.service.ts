@@ -69,7 +69,15 @@ export class WebhooksService {
     try {
       // Discord notification — non-blocking, failure não interrompe o processamento
       this.discordService
-        .sendToDiscord('Webhook received', `${event.type} [${event.id}]`)
+        .sendEmbed('stripe', {
+          title: '📨 Webhook Received',
+          message: `Event **${event.type}** is being processed.`,
+          color: 0x5865f2,
+          fields: [
+            { name: 'Event Type', value: event.type, inline: true },
+            { name: 'Event ID', value: event.id, inline: true },
+          ],
+        })
         .catch((err: Error) =>
           this.logger.warn(`[Stripe] Discord notification failed: ${err.message}`),
         );
