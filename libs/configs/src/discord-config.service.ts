@@ -1,12 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
+export type DiscordWebhookType = 'email' | 'stripe';
+
+export const DISCORD_WEBHOOK_URL_MAP: Record<DiscordWebhookType, string> = {
+    email: 'DISCORD_EMAIL_WEBHOOK_URL',
+    stripe: 'DISCORD_STRIPE_WEBHOOK_URL',
+};
+
 @Injectable()
 export class DiscordConfigService {
     constructor(private configService: ConfigService) { }
 
-    getWebhookUrl(): string {
-        return this.configService.getOrThrow<string>('DISCORD_WEBHOOK_URL');
+
+    getWebhookUrl(type: DiscordWebhookType): string {
+        return this.configService.getOrThrow<string>(DISCORD_WEBHOOK_URL_MAP[type]);
     }
 }
-

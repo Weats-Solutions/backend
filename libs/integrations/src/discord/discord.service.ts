@@ -1,5 +1,6 @@
-import { Injectable, Inject } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
+import { DiscordConfigService, DiscordWebhookType } from "@weats/configs";
 
 type DiscordEmbedField = {
     name: string;
@@ -7,71 +8,35 @@ type DiscordEmbedField = {
     inline?: boolean;
 };
 
-
 @Injectable()
 export class DiscordService {
-    constructor(@Inject('DISCORD_WEBHOOK_URL') private readonly webhookUrl: string, private readonly httpService: HttpService) { }
+    constructor(
+        private readonly discordConfigService: DiscordConfigService,
+        private readonly httpService: HttpService,
+    ) { }
 
-    async sendToDiscord(
-        title: string,
-        message: string,
-    ): Promise<void> {
-        try {
-
-            const payload = {
-                embeds: [
-                    {
-                        title: title,
-                        description: message,
-                        timestamp: new Date().toISOString(),
-                        color: 0x00ff00,
-                        fields: [
-                            {
-                                name: 'Timestamp',
-                                value: new Date().toISOString(),
-                                inline: true,
-                            },
-                        ],
-                        footer: {
-                            text: 'WebHook Service',
-                        },
-                    },
-                ],
-            };
-
-            await this.httpService.post(this.webhookUrl, payload, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-        } catch (error) {
-            console.error(
-                `Error sending message to Discord via webhook ${this.webhookUrl}: ${error.message}`,
-            );
-        }
+    private getWebhookUrl(type: DiscordWebhookType): string {
+        return this.discordConfigService.getWebhookUrl(type);
     }
 
-    private async send(payload: any): Promise<void> {
+    private async send(webhookType: DiscordWebhookType, payload: any): Promise<void> {
+        const webhookUrl = this.getWebhookUrl(webhookType);
         try {
-            await this.httpService.axiosRef.post(this.webhookUrl, payload, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+            await this.httpService.axiosRef.post(webhookUrl, payload, {
+                headers: { 'Content-Type': 'application/json' },
             });
         } catch (error: any) {
-            console.error(
-                `Discord webhook error: ${error?.message ?? error}`,
-            );
+            console.error(`Discord webhook error [${webhookType}]: ${error?.message ?? error}`);
         }
     }
 
-    async sendEmbed(params: {
+    async sendEmbed(webhookType: DiscordWebhookType, params: {
         title: string;
         message: string;
         color?: number;
         fields?: DiscordEmbedField[];
     }): Promise<void> {
-        await this.send({
+        await this.send(webhookType, {
             embeds: [
                 {
                     title: params.title,
@@ -79,40 +44,28 @@ export class DiscordService {
                     timestamp: new Date().toISOString(),
                     color: params.color ?? 0x00ff00,
                     fields: params.fields ?? [],
-                    footer: {
-                        text: 'WebHook Service',
-                    },
+                    footer: { text: 'WebHook Service' },
                 },
             ],
         });
     }
 
-    async sendJobError(params: {
+    async sendJobError(webhookType: DiscordWebhookType, params: {
         jobName: string;
         template?: string;
         error: unknown;
         payload?: unknown;
     }): Promise<void> {
-        await this.sendEmbed({
+        await this.sendEmbed(webhookType, {
             title: `❌ Job Failed: ${params.jobName}`,
             message:
                 typeof params.error === 'string'
                     ? params.error
                     : (params.error as any)?.message ?? 'Unknown error',
-
             color: 0xff0000,
-
             fields: [
-                {
-                    name: 'Template',
-                    value: params.template ?? 'N/A',
-                    inline: true,
-                },
-                {
-                    name: 'Timestamp',
-                    value: new Date().toISOString(),
-                    inline: true,
-                },
+                { name: 'Template', value: params.template ?? 'N/A', inline: true },
+                { name: 'Timestamp', value: new Date().toISOString(), inline: true },
                 {
                     name: 'Payload',
                     value: `\`\`\`json\n${JSON.stringify(params.payload ?? {}, null, 2)}\n\`\`\``,
@@ -121,4 +74,3 @@ export class DiscordService {
         });
     }
 }
-

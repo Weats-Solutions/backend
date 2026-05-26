@@ -158,13 +158,33 @@ export class HandlePaymentsService {
       (dispute as unknown as { customer?: string }).customer,
     );
 
-    this.discordService.sendToDiscord(
-      '⚠️ Dispute created',
-      `Dispute: ${dispute.id} | ` +
-      `amount: ${this.helpers.formatAmount(dispute.amount, dispute.currency)} | ` +
-      `reason: ${dispute.reason} | ` +
-      `stripeCustomerId: ${stripeCustomerId}`,
-    ).catch((err: Error) => {
+    this.discordService.sendEmbed('stripe', {
+      title: '⚠️ Dispute Created',
+      message: `A new dispute has been opened and access has been revoked.`,
+      color: 0xff9900,
+      fields: [
+        {
+          name: 'Dispute ID',
+          value: dispute.id,
+          inline: true,
+        },
+        {
+          name: 'Amount',
+          value: this.helpers.formatAmount(dispute.amount, dispute.currency),
+          inline: true,
+        },
+        {
+          name: 'Reason',
+          value: dispute.reason ?? 'N/A',
+          inline: true,
+        },
+        {
+          name: 'Customer ID',
+          value: stripeCustomerId ?? 'N/A',
+          inline: true,
+        },
+      ],
+    }).catch((err: Error) => {
       this.logger.error(`[Stripe] Discord notification failed: ${err.message}`);
     });
 

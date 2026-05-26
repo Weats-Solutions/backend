@@ -122,7 +122,7 @@ class EnvironmentVariables {
   ENCRYPTION_IV: string;
 
   @IsString()
-  DISCORD_WEBHOOK_URL: string;
+  DISCORD_EMAIL_WEBHOOK_URL: string;
 
   @IsString()
   EUPAGO_API_URL: string;

@@ -49,13 +49,33 @@ export class WebhooksProcessor {
       this.logger.error(`[Queue] Job ${job.id} failed definitively: ${error.message}`);
 
       try {
-        await this.discordService.sendToDiscord(
-          'CRITICAL WEBHOOK ERROR',
-          `Event **${job.name}** failed after all attempts.\n\n` +
-          `**Job ID:** ${job.id}\n` +
-          `**Error:** ${error.message}\n` +
-          `**Payload:** \`\`\`json\n${JSON.stringify(job.data, null, 2).substring(0, 1000)}\n\`\`\``
-        );
+        await this.discordService.sendEmbed('stripe', {
+            title: '🚨 Critical Webhook Error',
+            message: `Event **${job.name}** failed after all attempts.`,
+            color: 0xff0000,
+            fields: [
+              {
+                name: 'Job ID',
+                value: String(job.id),
+                inline: true,
+              },
+              {
+                name: 'Event',
+                value: job.name,
+                inline: true,
+              },
+              {
+                name: 'Error',
+                value: error.message,
+                inline: false,
+              },
+              {
+                name: 'Payload',
+                value: `\`\`\`json\n${JSON.stringify(job.data, null, 2).substring(0, 800)}\n\`\`\``,
+                inline: false,
+              },
+            ],
+          });
       } catch (discordError) {
         this.logger.error(`[Queue] Failed to send failure alert to Discord: ${discordError.message}`);
         // Don't throw - notification failure shouldn't affect job failure handling
