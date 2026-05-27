@@ -23,14 +23,15 @@ async function main() {
 
         { name: 'custom_qrcodes', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 9 },
         { name: 'qrcode_rules', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 10 },
+        { name: 'call_staff', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 11 },
 
+        { name: 'livechat', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 12 },
+        { name: 'theme_builder', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 13 },
+        { name: 'expenses', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 14 },
+        { name: 'metadata', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 15 },
+        { name: 'google_analytics', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 16 },
+        { name: 'academy', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 17 },
 
-        { name: 'livechat', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 11 },
-        { name: 'theme_builder', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 12 },
-        { name: 'expenses', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 13 },
-        { name: 'metadata', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 14 },
-        { name: 'google_analytics', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 15 },
-        { name: 'academy', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 16 },
         //{ name: 'devices', type: 'BOOLEAN', showInPlans: true },
         //{ name: 'employees', type: 'BOOLEAN', showInPlans: true },
         //{ name: 'marketplace', type: 'BOOLEAN', showInPlans: true },
@@ -82,6 +83,8 @@ async function main() {
                 custom_qrcodes: true,
                 qrcode_rules: false,
 
+                call_staff: false,
+
 
                 livechat: true,
                 theme_builder: false,
@@ -110,6 +113,9 @@ async function main() {
 
                 custom_qrcodes: true,
                 qrcode_rules: true,
+
+                call_staff: true,
+
                 livechat: true,
                 theme_builder: true,
 
@@ -137,6 +143,9 @@ async function main() {
 
                 custom_qrcodes: true,
                 qrcode_rules: true,
+
+                call_staff: true,
+
                 livechat: true,
                 theme_builder: true,
                 expenses: true,
@@ -148,6 +157,99 @@ async function main() {
         },
     ];
 
+    /*  const plans = [
+         {
+             name: 'Weats Starter',
+             cycles: [
+                 { price: 25.99, priceId: 'price_1Tbp34AMnnKxWZm8hqLm36pM', cycle: 'MONTHLY' },
+                 { price: 74, priceId: 'price_1Tbp34AMnnKxWZm8OyM9AqSP', cycle: 'TIMESTRAL' },
+             ],
+             features: {
+                 menu: 1,
+                 languages: 1,
+                 points: 25,
+                 zones: 1,
+                 products: 65,
+                 custom_variants: 50,
+                 custom_addons: 50,
+                 images: 65,
+ 
+                 custom_qrcodes: true,
+                 qrcode_rules: false,
+ 
+                 call_staff: false,
+ 
+                 livechat: true,
+                 theme_builder: false,
+ 
+                 metadata: false,
+                 google_analytics: false,
+                 academy: false,
+             },
+         },
+ 
+         {
+             name: 'Weats Pro',
+             cycles: [
+                 { price: 50.99, priceId: "price_1Tbp33AMnnKxWZm8uZBQihDz", cycle: 'MONTHLY' },
+                 { price: 145.00, priceId: "price_1Tbp33AMnnKxWZm8nT7hjNXb", cycle: 'TIMESTRAL' },
+             ],
+             features: {
+                 menu: 3,
+                 languages: 3,
+                 points: 100,
+                 zones: 5,
+                 products: 250,
+                 custom_variants: 150,
+                 custom_addons: 150,
+                 images: 250,
+ 
+                 custom_qrcodes: true,
+                 qrcode_rules: true,
+ 
+                 call_staff: true,
+ 
+                 livechat: true,
+                 theme_builder: true,
+ 
+                 metadata: true,
+                 google_analytics: true,
+                 academy: true,
+             },
+         },
+ 
+         {
+             name: 'Weats Scale',
+             cycles: [
+                 { price: 80.99, priceId: "price_1Tbp31AMnnKxWZm8EuDLgqfM", cycle: 'MONTHLY' },
+                 { price: 230, priceId: "price_1Tbp31AMnnKxWZm8eLVPHeve", cycle: 'TIMESTRAL' },
+             ],
+             features: {
+                 menu: 10,
+                 languages: 6,
+                 points: 500,
+                 zones: 20,
+                 products: 500,
+                 custom_variants: 350,
+                 custom_addons: 350,
+                 images: 500,
+ 
+                 custom_qrcodes: true,
+                 qrcode_rules: true,
+ 
+                 call_staff: true,
+ 
+                 livechat: true,
+                 theme_builder: true,
+                 expenses: true,
+ 
+                 metadata: true,
+                 google_analytics: true,
+                 academy: true,
+             },
+         },
+     ];
+  */
     for (const p of plans) {
         // find or create plan
         let plan = await prisma.plan.findFirst({
