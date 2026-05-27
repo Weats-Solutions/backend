@@ -12,36 +12,49 @@ async function main() {
     // ======================
     const features = [
         // 
-        { name: 'menu', type: 'QUANTITY', showInPlans: false },
-        { name: 'languages', type: 'QUANTITY', showInPlans: false },
-        { name: 'menu_settings', type: 'BOOLEAN', showInPlans: false },
-        { name: 'points', type: 'QUANTITY', showInPlans: true },
-        { name: 'zones', type: 'QUANTITY', showInPlans: true },
-        { name: 'products', type: 'QUANTITY', showInPlans: true },
-        { name: 'custom_variants', type: 'QUANTITY', showInPlans: true },
-        { name: 'custom_addons', type: 'QUANTITY', showInPlans: true },
-        { name: 'livechat', type: 'BOOLEAN', showInPlans: true },
-        { name: 'templates_builder', type: 'BOOLEAN', showInPlans: true },
-        { name: 'metadata', type: 'BOOLEAN', showInPlans: true },
-        { name: 'devices', type: 'BOOLEAN', showInPlans: true },
-        { name: 'employees', type: 'BOOLEAN', showInPlans: true },
-        { name: 'marketplace', type: 'BOOLEAN', showInPlans: true },
-        { name: 'ai', type: 'BOOLEAN', showInPlans: true },
-        { name: 'images', type: 'QUANTITY', showInPlans: true },
-        { name: 'monthly_emails', type: 'QUANTITY', showInPlans: true },
-        // Functions
-        { name: 'takeaway', type: 'BOOLEAN', showInPlans: true },
-        { name: 'booking', type: 'BOOLEAN', showInPlans: true },
+        { name: 'menu', type: 'QUANTITY', showInPlans: false, showInDetailsOnly: false, position: 1 },
+        { name: 'languages', type: 'QUANTITY', showInPlans: false, showInDetailsOnly: false, position: 2 },
+        { name: 'products', type: 'QUANTITY', showInPlans: true, showInDetailsOnly: false, position: 3 },
+        { name: 'custom_variants', type: 'QUANTITY', showInPlans: true, showInDetailsOnly: false, position: 4 },
+        { name: 'custom_addons', type: 'QUANTITY', showInPlans: true, showInDetailsOnly: false, position: 5 },
+        { name: 'zones', type: 'QUANTITY', showInPlans: true, showInDetailsOnly: false, position: 6 },
+        { name: 'points', type: 'QUANTITY', showInPlans: true, showInDetailsOnly: false, position: 7 },
+        { name: 'images', type: 'QUANTITY', showInPlans: true, showInDetailsOnly: false, position: 8 },
+
+        { name: 'custom_qrcodes', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 9 },
+        { name: 'qrcode_rules', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 10 },
+
+
+        { name: 'livechat', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 11 },
+        { name: 'theme_builder', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 12 },
+        { name: 'expenses', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 13 },
+        { name: 'metadata', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 14 },
+        { name: 'google-analytics', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 15 },
+        { name: 'academy', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 16 },
+        //{ name: 'devices', type: 'BOOLEAN', showInPlans: true },
+        //{ name: 'employees', type: 'BOOLEAN', showInPlans: true },
+        //{ name: 'marketplace', type: 'BOOLEAN', showInPlans: true },
+        //{ name: 'ai', type: 'BOOLEAN', showInPlans: true },
+        //{ name: 'monthly_emails', type: 'QUANTITY', showInPlans: true },
+        //{ name: 'takeaway', type: 'BOOLEAN', showInPlans: true },
+        //{ name: 'booking', type: 'BOOLEAN', showInPlans: true },
     ];
 
     for (const f of features) {
         await prisma.feature.upsert({
             where: { name: f.name },
-            update: { showInPlans: f.showInPlans },
+            update: {
+                type: f.type as any,
+                showInPlans: f.showInPlans,
+                showInDetailsOnly: f.showInDetailsOnly,
+                position: f.position,
+            },
             create: {
                 name: f.name,
                 type: f.type as any,
                 showInPlans: f.showInPlans,
+                showInDetailsOnly: f.showInDetailsOnly,
+                position: f.position,
             },
         });
     }
@@ -51,63 +64,86 @@ async function main() {
     // ======================
     const plans = [
         {
-            name: 'Weats Start',
+            name: 'Weats Starter',
             cycles: [
-                { price: 49.99, priceId: 'price_1TZYLgCsiqCEyBVBlAjqQ6mE', cycle: 'MONTHLY' },
-                { price: 134.99, priceId: 'price_1TZYLgCsiqCEyBVBNO7ofcuh', cycle: 'TIMESTRAL' },
+                { price: 25.99, priceId: 'price_1TbnC5CsiqCEyBVBh80NnxYO', cycle: 'MONTHLY' },
+                { price: 74, priceId: 'price_1TbnC5CsiqCEyBVBHrIdHu2z', cycle: 'TIMESTRAL' },
             ],
             features: {
                 menu: 1,
                 languages: 1,
-                points: 100,
-                zones: 3,
-                products: 125,
-                custom_variants: 25,
-                custom_addons: 15,
-                images: 100,
-                templates_builder: true,
+                points: 25,
+                zones: 1,
+                products: 65,
+                custom_variants: 50,
+                custom_addons: 50,
+                images: 65,
+
+                custom_qrcodes: true,
+                qrcode_rules: false,
+
+
                 livechat: true,
+                theme_builder: false,
+
                 metadata: false,
+                google_analytics: false,
+                academy: false,
             },
         },
+
         {
-            name: 'Weats Plus',
+            name: 'Weats Pro',
             cycles: [
-                { price: 149.99, priceId: 'price_1SOjbgELJnossyvmruC7yY2r', cycle: 'MONTHLY' },
-                { price: 404.99, priceId: 'price_1SOjfnELJnossyvmB3wg7YZH', cycle: 'TIMESTRAL' },
+                { price: 50.99, priceId: "price_1TbnCnCsiqCEyBVBDjfX0Swh", cycle: 'MONTHLY' },
+                { price: 145.00, priceId: "price_1TbnCmCsiqCEyBVBww2nOa48", cycle: 'TIMESTRAL' },
             ],
             features: {
                 menu: 3,
                 languages: 3,
-                points: 250,
-                zones: 10,
-                products: 300,
-                custom_variants: 100,
-                custom_addons: 85,
+                points: 100,
+                zones: 5,
+                products: 250,
+                custom_variants: 150,
+                custom_addons: 150,
                 images: 250,
-                templates_builder: true,
+
+                custom_qrcodes: true,
+                qrcode_rules: true,
                 livechat: true,
+                theme_builder: true,
+
                 metadata: true,
+                google_analytics: true,
+                academy: true,
             },
         },
+
         {
-            name: 'Weats Pro',
+            name: 'Weats Scale',
             cycles: [
-                { price: 199.99, priceId: 'price_1SOjgnELJnossyvmGL2tjEFm', cycle: 'MONTHLY' },
-                { price: 539.99, priceId: 'price_1SOjhCELJnossyvmrlr5ecrC', cycle: 'TIMESTRAL' },
+                { price: 80.99, priceId: "price_1TbnDCCsiqCEyBVBpZu2Bhxk", cycle: 'MONTHLY' },
+                { price: 230, priceId: "price_1TbnDCCsiqCEyBVBfFPfFKA4", cycle: 'TIMESTRAL' },
             ],
             features: {
                 menu: 10,
                 languages: 6,
                 points: 500,
-                zones: 25,
-                products: 550,
-                custom_variants: 250,
-                custom_addons: 150,
+                zones: 20,
+                products: 500,
+                custom_variants: 350,
+                custom_addons: 350,
                 images: 500,
-                templates_builder: true,
+
+                custom_qrcodes: true,
+                qrcode_rules: true,
                 livechat: true,
+                theme_builder: true,
+                expenses: true,
+
                 metadata: true,
+                google_analytics: true,
+                academy: true,
             },
         },
     ];

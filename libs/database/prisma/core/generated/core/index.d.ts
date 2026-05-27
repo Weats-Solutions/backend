@@ -99623,8 +99623,18 @@ export namespace Prisma {
 
   export type AggregateFeature = {
     _count: FeatureCountAggregateOutputType | null
+    _avg: FeatureAvgAggregateOutputType | null
+    _sum: FeatureSumAggregateOutputType | null
     _min: FeatureMinAggregateOutputType | null
     _max: FeatureMaxAggregateOutputType | null
+  }
+
+  export type FeatureAvgAggregateOutputType = {
+    position: number | null
+  }
+
+  export type FeatureSumAggregateOutputType = {
+    position: number | null
   }
 
   export type FeatureMinAggregateOutputType = {
@@ -99632,6 +99642,8 @@ export namespace Prisma {
     name: string | null
     type: $Enums.FeatureType | null
     showInPlans: boolean | null
+    showInDetailsOnly: boolean | null
+    position: number | null
   }
 
   export type FeatureMaxAggregateOutputType = {
@@ -99639,6 +99651,8 @@ export namespace Prisma {
     name: string | null
     type: $Enums.FeatureType | null
     showInPlans: boolean | null
+    showInDetailsOnly: boolean | null
+    position: number | null
   }
 
   export type FeatureCountAggregateOutputType = {
@@ -99646,15 +99660,27 @@ export namespace Prisma {
     name: number
     type: number
     showInPlans: number
+    showInDetailsOnly: number
+    position: number
     _all: number
   }
 
+
+  export type FeatureAvgAggregateInputType = {
+    position?: true
+  }
+
+  export type FeatureSumAggregateInputType = {
+    position?: true
+  }
 
   export type FeatureMinAggregateInputType = {
     id?: true
     name?: true
     type?: true
     showInPlans?: true
+    showInDetailsOnly?: true
+    position?: true
   }
 
   export type FeatureMaxAggregateInputType = {
@@ -99662,6 +99688,8 @@ export namespace Prisma {
     name?: true
     type?: true
     showInPlans?: true
+    showInDetailsOnly?: true
+    position?: true
   }
 
   export type FeatureCountAggregateInputType = {
@@ -99669,6 +99697,8 @@ export namespace Prisma {
     name?: true
     type?: true
     showInPlans?: true
+    showInDetailsOnly?: true
+    position?: true
     _all?: true
   }
 
@@ -99710,6 +99740,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: FeatureAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FeatureSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: FeatureMinAggregateInputType
@@ -99740,6 +99782,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: FeatureCountAggregateInputType | true
+    _avg?: FeatureAvgAggregateInputType
+    _sum?: FeatureSumAggregateInputType
     _min?: FeatureMinAggregateInputType
     _max?: FeatureMaxAggregateInputType
   }
@@ -99749,7 +99793,11 @@ export namespace Prisma {
     name: string
     type: $Enums.FeatureType
     showInPlans: boolean
+    showInDetailsOnly: boolean
+    position: number | null
     _count: FeatureCountAggregateOutputType | null
+    _avg: FeatureAvgAggregateOutputType | null
+    _sum: FeatureSumAggregateOutputType | null
     _min: FeatureMinAggregateOutputType | null
     _max: FeatureMaxAggregateOutputType | null
   }
@@ -99773,6 +99821,8 @@ export namespace Prisma {
     name?: boolean
     type?: boolean
     showInPlans?: boolean
+    showInDetailsOnly?: boolean
+    position?: boolean
     planFeatures?: boolean | Feature$planFeaturesArgs<ExtArgs>
     _count?: boolean | FeatureCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["feature"]>
@@ -99782,6 +99832,8 @@ export namespace Prisma {
     name?: boolean
     type?: boolean
     showInPlans?: boolean
+    showInDetailsOnly?: boolean
+    position?: boolean
   }, ExtArgs["result"]["feature"]>
 
   export type FeatureSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -99789,6 +99841,8 @@ export namespace Prisma {
     name?: boolean
     type?: boolean
     showInPlans?: boolean
+    showInDetailsOnly?: boolean
+    position?: boolean
   }, ExtArgs["result"]["feature"]>
 
   export type FeatureSelectScalar = {
@@ -99796,9 +99850,11 @@ export namespace Prisma {
     name?: boolean
     type?: boolean
     showInPlans?: boolean
+    showInDetailsOnly?: boolean
+    position?: boolean
   }
 
-  export type FeatureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "type" | "showInPlans", ExtArgs["result"]["feature"]>
+  export type FeatureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "type" | "showInPlans" | "showInDetailsOnly" | "position", ExtArgs["result"]["feature"]>
   export type FeatureInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     planFeatures?: boolean | Feature$planFeaturesArgs<ExtArgs>
     _count?: boolean | FeatureCountOutputTypeDefaultArgs<ExtArgs>
@@ -99816,6 +99872,8 @@ export namespace Prisma {
       name: string
       type: $Enums.FeatureType
       showInPlans: boolean
+      showInDetailsOnly: boolean
+      position: number | null
     }, ExtArgs["result"]["feature"]>
     composites: {}
   }
@@ -100244,6 +100302,8 @@ export namespace Prisma {
     readonly name: FieldRef<"Feature", 'String'>
     readonly type: FieldRef<"Feature", 'FeatureType'>
     readonly showInPlans: FieldRef<"Feature", 'Boolean'>
+    readonly showInDetailsOnly: FieldRef<"Feature", 'Boolean'>
+    readonly position: FieldRef<"Feature", 'Int'>
   }
     
 
@@ -113249,7 +113309,9 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     type: 'type',
-    showInPlans: 'showInPlans'
+    showInPlans: 'showInPlans',
+    showInDetailsOnly: 'showInDetailsOnly',
+    position: 'position'
   };
 
   export type FeatureScalarFieldEnum = (typeof FeatureScalarFieldEnum)[keyof typeof FeatureScalarFieldEnum]
@@ -120682,6 +120744,8 @@ export namespace Prisma {
     name?: StringFilter<"Feature"> | string
     type?: EnumFeatureTypeFilter<"Feature"> | $Enums.FeatureType
     showInPlans?: BoolFilter<"Feature"> | boolean
+    showInDetailsOnly?: BoolFilter<"Feature"> | boolean
+    position?: IntNullableFilter<"Feature"> | number | null
     planFeatures?: PlanFeatureListRelationFilter
   }
 
@@ -120690,6 +120754,8 @@ export namespace Prisma {
     name?: SortOrder
     type?: SortOrder
     showInPlans?: SortOrder
+    showInDetailsOnly?: SortOrder
+    position?: SortOrderInput | SortOrder
     planFeatures?: PlanFeatureOrderByRelationAggregateInput
   }
 
@@ -120701,6 +120767,8 @@ export namespace Prisma {
     NOT?: FeatureWhereInput | FeatureWhereInput[]
     type?: EnumFeatureTypeFilter<"Feature"> | $Enums.FeatureType
     showInPlans?: BoolFilter<"Feature"> | boolean
+    showInDetailsOnly?: BoolFilter<"Feature"> | boolean
+    position?: IntNullableFilter<"Feature"> | number | null
     planFeatures?: PlanFeatureListRelationFilter
   }, "id" | "name">
 
@@ -120709,9 +120777,13 @@ export namespace Prisma {
     name?: SortOrder
     type?: SortOrder
     showInPlans?: SortOrder
+    showInDetailsOnly?: SortOrder
+    position?: SortOrderInput | SortOrder
     _count?: FeatureCountOrderByAggregateInput
+    _avg?: FeatureAvgOrderByAggregateInput
     _max?: FeatureMaxOrderByAggregateInput
     _min?: FeatureMinOrderByAggregateInput
+    _sum?: FeatureSumOrderByAggregateInput
   }
 
   export type FeatureScalarWhereWithAggregatesInput = {
@@ -120722,6 +120794,8 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Feature"> | string
     type?: EnumFeatureTypeWithAggregatesFilter<"Feature"> | $Enums.FeatureType
     showInPlans?: BoolWithAggregatesFilter<"Feature"> | boolean
+    showInDetailsOnly?: BoolWithAggregatesFilter<"Feature"> | boolean
+    position?: IntNullableWithAggregatesFilter<"Feature"> | number | null
   }
 
   export type PlanFeatureWhereInput = {
@@ -128638,6 +128712,8 @@ export namespace Prisma {
     name: string
     type: $Enums.FeatureType
     showInPlans?: boolean
+    showInDetailsOnly?: boolean
+    position?: number | null
     planFeatures?: PlanFeatureCreateNestedManyWithoutFeatureInput
   }
 
@@ -128646,6 +128722,8 @@ export namespace Prisma {
     name: string
     type: $Enums.FeatureType
     showInPlans?: boolean
+    showInDetailsOnly?: boolean
+    position?: number | null
     planFeatures?: PlanFeatureUncheckedCreateNestedManyWithoutFeatureInput
   }
 
@@ -128654,6 +128732,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumFeatureTypeFieldUpdateOperationsInput | $Enums.FeatureType
     showInPlans?: BoolFieldUpdateOperationsInput | boolean
+    showInDetailsOnly?: BoolFieldUpdateOperationsInput | boolean
+    position?: NullableIntFieldUpdateOperationsInput | number | null
     planFeatures?: PlanFeatureUpdateManyWithoutFeatureNestedInput
   }
 
@@ -128662,6 +128742,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumFeatureTypeFieldUpdateOperationsInput | $Enums.FeatureType
     showInPlans?: BoolFieldUpdateOperationsInput | boolean
+    showInDetailsOnly?: BoolFieldUpdateOperationsInput | boolean
+    position?: NullableIntFieldUpdateOperationsInput | number | null
     planFeatures?: PlanFeatureUncheckedUpdateManyWithoutFeatureNestedInput
   }
 
@@ -128670,6 +128752,8 @@ export namespace Prisma {
     name: string
     type: $Enums.FeatureType
     showInPlans?: boolean
+    showInDetailsOnly?: boolean
+    position?: number | null
   }
 
   export type FeatureUpdateManyMutationInput = {
@@ -128677,6 +128761,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumFeatureTypeFieldUpdateOperationsInput | $Enums.FeatureType
     showInPlans?: BoolFieldUpdateOperationsInput | boolean
+    showInDetailsOnly?: BoolFieldUpdateOperationsInput | boolean
+    position?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FeatureUncheckedUpdateManyInput = {
@@ -128684,6 +128770,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumFeatureTypeFieldUpdateOperationsInput | $Enums.FeatureType
     showInPlans?: BoolFieldUpdateOperationsInput | boolean
+    showInDetailsOnly?: BoolFieldUpdateOperationsInput | boolean
+    position?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PlanFeatureCreateInput = {
@@ -135013,6 +135101,12 @@ export namespace Prisma {
     name?: SortOrder
     type?: SortOrder
     showInPlans?: SortOrder
+    showInDetailsOnly?: SortOrder
+    position?: SortOrder
+  }
+
+  export type FeatureAvgOrderByAggregateInput = {
+    position?: SortOrder
   }
 
   export type FeatureMaxOrderByAggregateInput = {
@@ -135020,6 +135114,8 @@ export namespace Prisma {
     name?: SortOrder
     type?: SortOrder
     showInPlans?: SortOrder
+    showInDetailsOnly?: SortOrder
+    position?: SortOrder
   }
 
   export type FeatureMinOrderByAggregateInput = {
@@ -135027,6 +135123,12 @@ export namespace Prisma {
     name?: SortOrder
     type?: SortOrder
     showInPlans?: SortOrder
+    showInDetailsOnly?: SortOrder
+    position?: SortOrder
+  }
+
+  export type FeatureSumOrderByAggregateInput = {
+    position?: SortOrder
   }
 
   export type EnumFeatureTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -170089,6 +170191,8 @@ export namespace Prisma {
     name: string
     type: $Enums.FeatureType
     showInPlans?: boolean
+    showInDetailsOnly?: boolean
+    position?: number | null
   }
 
   export type FeatureUncheckedCreateWithoutPlanFeaturesInput = {
@@ -170096,6 +170200,8 @@ export namespace Prisma {
     name: string
     type: $Enums.FeatureType
     showInPlans?: boolean
+    showInDetailsOnly?: boolean
+    position?: number | null
   }
 
   export type FeatureCreateOrConnectWithoutPlanFeaturesInput = {
@@ -170140,6 +170246,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumFeatureTypeFieldUpdateOperationsInput | $Enums.FeatureType
     showInPlans?: BoolFieldUpdateOperationsInput | boolean
+    showInDetailsOnly?: BoolFieldUpdateOperationsInput | boolean
+    position?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FeatureUncheckedUpdateWithoutPlanFeaturesInput = {
@@ -170147,6 +170255,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumFeatureTypeFieldUpdateOperationsInput | $Enums.FeatureType
     showInPlans?: BoolFieldUpdateOperationsInput | boolean
+    showInDetailsOnly?: BoolFieldUpdateOperationsInput | boolean
+    position?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PlanUpsertWithoutFeaturesInput = {

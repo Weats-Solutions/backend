@@ -50,11 +50,14 @@ model PlanCycle {
 }
 
 model Feature {
-  id           String        @id @default(ulid())
-  name         String        @unique
-  type         FeatureType
-  showInPlans  Boolean       @default(true)
-  planFeatures PlanFeature[]
+  id                String        @id @default(ulid())
+  name              String        @unique
+  type              FeatureType
+  showInPlans       Boolean       @default(true)
+  showInDetailsOnly Boolean       @default(false)
+  planFeatures      PlanFeature[]
+  position          Int?          @default(0)
+
 }
 
 model PlanFeature {

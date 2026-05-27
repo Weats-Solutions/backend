@@ -20,6 +20,12 @@ export class PlanService {
                     },
                 },
                 features: {
+                    orderBy: { feature: { position: 'asc' } },
+                    where: {
+                        feature: {
+                            showInPlans: true,
+                        }
+                    },
                     select: {
                         valueBoolean: true,
                         valueQuantity: true,

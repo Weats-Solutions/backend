@@ -1096,7 +1096,9 @@ exports.Prisma.FeatureScalarFieldEnum = {
   id: 'id',
   name: 'name',
   type: 'type',
-  showInPlans: 'showInPlans'
+  showInPlans: 'showInPlans',
+  showInDetailsOnly: 'showInDetailsOnly',
+  position: 'position'
 };
 
 exports.Prisma.PlanFeatureScalarFieldEnum = {
