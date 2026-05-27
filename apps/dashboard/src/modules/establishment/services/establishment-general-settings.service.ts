@@ -95,8 +95,8 @@ export class EstablishmentGeneralSettingsService {
         });
     }
 
-    await this.cacheService.clearEstablishmentCache(establishment.slug)
-
+    await this.cacheService.clearCatalogEstablishmentCache(establishment.slug);
+    await this.cacheService.clearDashboardEstablishmentCache(establishment.id);
 
     return result;
   }

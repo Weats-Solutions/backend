@@ -99,12 +99,35 @@ export class CacheService {
   // CATALOG SPECIFIC INVALIDATION
   // ═══════════════════════════════════════════
 
-  async clearEstablishmentCache(slug: string) {
-    const key = `catalog:est:${slug}:core`;
+  /**
+   * Limpa a cache core do dashboard (usando o ID do estabelecimento)
+   */
+  async clearDashboardEstablishmentCache(id: string) {
+    const key = `dashboard:est:${id}:core`;
     await this.invalidate(key);
+    this.logger.debug(`[Cache] Cache do Dashboard para ID: ${id} limpa`);
+  }
+
+  /**
+   * Limpa todas as caches do catálogo (core e dinâmicas, usando o slug)
+   */
+  async clearCatalogEstablishmentCache(slug: string) {
+    const catalogKey = `catalog:est:${slug}:core`;
+    await this.invalidate(catalogKey);
+
     const pattern = `catalog:est:${slug}:*`;
     await this.invalidatePattern(pattern);
-    this.logger.debug(`[Cache] Cache para: ${slug} limpa`);
+    this.logger.debug(`[Cache] Cache do Catálogo para: ${slug} limpa`);
+  }
+
+  /**
+   * Helper unificado para limpar ambas as caches (útil nas atualizações de definições do dashboard)
+   */
+  async clearEstablishmentCache(slug: string, id?: string) {
+    await this.clearCatalogEstablishmentCache(slug);
+    if (id) {
+      await this.clearDashboardEstablishmentCache(id);
+    }
   }
 
   /**

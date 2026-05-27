@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Controller,
   Get,
+  Inject,
   Param,
   Res,
 } from '@nestjs/common';
@@ -15,6 +16,8 @@ export class QrCodeController {
   constructor(
     private readonly qrCodeService: QrCodeService,
     private readonly jwtService: JwtService,
+    @Inject('WEATS_ENV') private readonly weatsEnv: string,
+
   ) { }
 
   @Get(':token')
@@ -37,16 +40,17 @@ export class QrCodeController {
         type: session.type,
       });
 
-      const isDev = process.env.NODE_ENV !== 'production';
+      const isDev = this.weatsEnv === 'dev';
 
       res.cookie('qr_session', sessionToken, {
-        httpOnly: false, // Permitir que o JS leia para mandar no auth do socket
-        secure: !isDev,
-        sameSite: isDev ? 'lax' : 'none',
-        ...(isDev ? {} : { domain: '.weats.pro' }),
-        maxAge: 4 * 60 * 60 * 1000, 
+        httpOnly: true, 
+        secure: true,    // Sempre true já que ambos os ambientes usam HTTPS
+        sameSite: 'lax', // Lax funciona perfeitamente para redirects cross-subdomain
+        domain: isDev ? '.weats.app' : '.weats.pt', // Domínio correto para cada ambiente
+        maxAge: 4 * 60 * 60 * 1000,
         path: '/',
       });
+
     }
 
     return res.redirect(302, url);

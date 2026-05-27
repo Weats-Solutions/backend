@@ -59,8 +59,8 @@ export class EstablishmentDigitalSettingsService {
                     establishment,
                     updateEstablishmentDigitalSettingsDto.domain,
                 );
-                await this.cacheService.clearEstablishmentCache(establishment.slug);
-
+                await this.cacheService.clearCatalogEstablishmentCache(establishment.slug);
+                await this.cacheService.clearDashboardEstablishmentCache(establishment.id);
 
                 break;
             case 'wifi':
@@ -68,7 +68,8 @@ export class EstablishmentDigitalSettingsService {
                     establishment,
                     updateEstablishmentDigitalSettingsDto.wifi,
                 );
-                await this.cacheService.clearEstablishmentCache(establishment.slug)
+                await this.cacheService.clearCatalogEstablishmentCache(establishment.slug);
+                await this.cacheService.clearDashboardEstablishmentCache(establishment.id);
 
                 break;
             case 'analytics':
@@ -76,7 +77,8 @@ export class EstablishmentDigitalSettingsService {
                     establishment,
                     updateEstablishmentDigitalSettingsDto.analytics,
                 );
-                await this.cacheService.clearEstablishmentCache(establishment.slug)
+                await this.cacheService.clearCatalogEstablishmentCache(establishment.slug);
+                await this.cacheService.clearDashboardEstablishmentCache(establishment.id);
 
                 break;
             default:

@@ -67,7 +67,8 @@ export class EstablishmentSystemSettingsService {
                     });
             }
 
-            this.cacheService.clearEstablishmentCache(establishment.slug);
+            this.cacheService.clearCatalogEstablishmentCache(establishment.slug);
+            this.cacheService.clearDashboardEstablishmentCache(establishment.id);
 
             return result;
         } catch (error) {

@@ -157,7 +157,7 @@ export class EstablishmentLifeCycleService {
             });
         }
 
-        return this.cacheService.clearEstablishmentCache(establishment.slug);
+        return this.cacheService.clearCatalogEstablishmentCache(establishment.slug);
     }
 
 

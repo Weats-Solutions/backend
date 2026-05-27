@@ -138,7 +138,9 @@ export class EstablishmentLanguageSyncService {
         }
       });
 
-      await this.cacheService.clearEstablishmentCache(establishment.slug);
+
+      await this.cacheService.clearCatalogEstablishmentCache(establishment.slug);
+      await this.cacheService.clearDashboardEstablishmentCache(establishmentId);
 
     } catch (error) {
       this.logger.error(`Failed to update establishment languages after sync: ${error.message}`);

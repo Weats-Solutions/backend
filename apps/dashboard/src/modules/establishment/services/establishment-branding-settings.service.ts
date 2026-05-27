@@ -113,18 +113,21 @@ export class EstablishmentBrandingSettingsService {
             switch (dto.section) {
                 case 'branding':
                     result = await this.updateBranding(establishment.id, dto.branding);
-                    await this.cacheService.clearEstablishmentCache(establishment.slug)
+                    await this.cacheService.clearCatalogEstablishmentCache(establishment.slug);
+                    await this.cacheService.clearDashboardEstablishmentCache(establishment.id);
 
                     break;
 
                 case 'socials':
                     result = await this.updateSocials(establishment.id, dto.socials);
-                    await this.cacheService.clearEstablishmentCache(establishment.slug)
+                    await this.cacheService.clearCatalogEstablishmentCache(establishment.slug);
+                    await this.cacheService.clearDashboardEstablishmentCache(establishment.id);
 
                     break;
                 case 'metadata':
                     result = await this.updateMetadata(establishment.id, dto.metadata);
-                    await this.cacheService.clearEstablishmentCache(establishment.slug);
+                    await this.cacheService.clearCatalogEstablishmentCache(establishment.slug);
+                    await this.cacheService.clearDashboardEstablishmentCache(establishment.id);
 
                     break;
                 default:

@@ -164,7 +164,8 @@ export class ThemeService {
 
             if (updatedTheme.activeEstablishments.length > 0) {
                 const slug = updatedTheme.activeEstablishments[0].slug;
-                this.cacheService.clearEstablishmentCache(slug);
+                await this.cacheService.clearCatalogEstablishmentCache(slug);
+                await this.cacheService.clearDashboardEstablishmentCache(establishment.id);
             }
 
             return {
@@ -221,8 +222,8 @@ export class ThemeService {
                 select: { slug: true }
             });
 
-            // Clear menu cache
-            this.cacheService.clearEstablishmentCache(establishment.slug);
+            await this.cacheService.clearCatalogEstablishmentCache(establishment.slug);
+            await this.cacheService.clearDashboardEstablishmentCache(establishmentId);
             return theme;
         } catch (error) {
             if (error instanceof RpcException) throw error;
