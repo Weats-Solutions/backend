@@ -63,14 +63,16 @@ export class PlanService {
                 {} as Record<string, { id: string; price: number }>,
             );
 
-            const features = plan.features.map((pf) => ({
-                name: pf.feature.name,
-                type: pf.feature.type,
-                valueBoolean: pf.valueBoolean,
-                valueQuantity: pf.valueQuantity,
-                position: pf.feature.position,
-                showInDetailsOnly: pf.feature.showInDetailsOnly,
-            }));
+            const features = plan.features
+                .map((pf) => ({
+                    name: pf.feature.name,
+                    type: pf.feature.type,
+                    valueBoolean: pf.valueBoolean,
+                    valueQuantity: pf.valueQuantity,
+                    position: pf.feature.position,
+                    showInDetailsOnly: pf.feature.showInDetailsOnly,
+                }))
+                .sort((a, b) => (a.position ?? 0) - (b.position ?? 0));
 
             return {
                 id: plan.id,

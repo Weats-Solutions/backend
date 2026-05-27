@@ -29,7 +29,7 @@ async function main() {
         { name: 'theme_builder', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 12 },
         { name: 'expenses', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 13 },
         { name: 'metadata', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 14 },
-        { name: 'google-analytics', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 15 },
+        { name: 'google_analytics', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 15 },
         { name: 'academy', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 16 },
         //{ name: 'devices', type: 'BOOLEAN', showInPlans: true },
         //{ name: 'employees', type: 'BOOLEAN', showInPlans: true },
