@@ -203,7 +203,7 @@ export class StripeService {
     const baseSessionData: Stripe.Checkout.SessionCreateParams = {
       billing_address_collection: 'required',
       mode: 'subscription',
-      payment_method_types: ['card', 'revolut_pay', 'paypal'],
+      payment_method_types: ['card', 'revolut_pay'],
       allow_promotion_codes: true,
       customer: params.customerId,
       phone_number_collection: {
@@ -211,7 +211,7 @@ export class StripeService {
       },
 
       automatic_tax: {
-        enabled: true,
+        enabled: false,
       },
 
       customer_update: {
