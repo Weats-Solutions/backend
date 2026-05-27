@@ -12,8 +12,8 @@ async function main() {
     // ======================
     const features = [
         // 
-        { name: 'menu', type: 'QUANTITY', showInPlans: false, showInDetailsOnly: false, position: 1 },
-        { name: 'languages', type: 'QUANTITY', showInPlans: false, showInDetailsOnly: false, position: 2 },
+        { name: 'menu', type: 'QUANTITY', showInPlans: true, showInDetailsOnly: false, position: 1 },
+        { name: 'languages', type: 'QUANTITY', showInPlans: true, showInDetailsOnly: false, position: 2 },
         { name: 'products', type: 'QUANTITY', showInPlans: true, showInDetailsOnly: false, position: 3 },
         { name: 'custom_variants', type: 'QUANTITY', showInPlans: true, showInDetailsOnly: false, position: 4 },
         { name: 'custom_addons', type: 'QUANTITY', showInPlans: true, showInDetailsOnly: false, position: 5 },
