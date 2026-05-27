@@ -68,6 +68,8 @@ export class PlanService {
                 type: pf.feature.type,
                 valueBoolean: pf.valueBoolean,
                 valueQuantity: pf.valueQuantity,
+                position: pf.feature.position,
+                showInDetailsOnly: pf.feature.showInDetailsOnly,
             }));
 
             return {
