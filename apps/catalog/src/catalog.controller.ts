@@ -4,6 +4,7 @@ import { ToUpperCasePipe } from '@weats/common';
 import { EstablishmentLanguage } from '@weats/database';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
+import { DiscordService } from '@weats/integrations';
 
 export interface QrSessionTokenPayload {
   sub: string;      // service point ID
@@ -17,11 +18,26 @@ export class CatalogController {
   constructor(
     private readonly catalogService: CatalogService,
     private readonly jwtService: JwtService,
+    private readonly discordService: DiscordService,
   ) { }
 
   @Get()
   getHello(): string {
     return "ola";
+  }
+
+  @Get('test-discord')
+  async testDiscord() {
+    await this.discordService.sendEmbed('clerk', {
+      title: '🔔 Teste de Notificação Discord',
+      message: 'Esta é uma notificação de teste enviada a partir da rota /catalog/test-discord!',
+      color: 0x00ff00,
+      fields: [
+        { name: 'Ambiente', value: 'Desenvolvimento', inline: true },
+        { name: 'Status', value: 'Sucesso ✅', inline: true },
+      ],
+    });
+    return { success: true, message: 'Notificação enviada com sucesso!' };
   }
 
   @Get(":slug/theme")
