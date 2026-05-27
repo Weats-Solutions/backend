@@ -8,14 +8,12 @@ import { RateLimitModule } from '@weats/rate-limit';
 import { APP_GUARD } from '@nestjs/core';
 import { RateLimitGuard } from '@weats/common';
 import { DatabaseModule } from '@weats/database';
-import { DiscordModule } from '@weats/integrations';
 
 @Module({
   imports: [
     CacheModule,
     QrCodeModule,
     DatabaseModule,
-    DiscordModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
