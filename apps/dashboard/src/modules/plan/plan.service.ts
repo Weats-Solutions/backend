@@ -33,6 +33,8 @@ export class PlanService {
                             select: {
                                 name: true,
                                 type: true,
+                                showInDetailsOnly: true,
+                                position: true,
                             },
                         },
                     },
