@@ -92,6 +92,7 @@ export class StripeWebhooksHelpers {
         id: true,
         name: true,
         email: true,
+        slug: true,
         stripeCustomerId: true,
         primaryLanguage: true,
         owner: {

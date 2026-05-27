@@ -54,8 +54,7 @@ export class HandleSubscriptionsService {
         },
       });
 
-
-
+      await this.cacheService.clearEstablishmentCache(establishment.slug, establishment.id);
       if (subscription.status === 'trialing') {
         const trialStart = subscription.trial_start
           ? new Date(subscription.trial_start * 1000)
@@ -125,8 +124,7 @@ export class HandleSubscriptionsService {
         data: subData,
       });
 
-
-
+      await this.cacheService.clearEstablishmentCache(establishment.slug, establishment.id);
       // ── Transition detection ───────────────────────────────────────────────
       const justCanceled =
         subscription.cancel_at !== null && previous?.cancel_at === null;
@@ -275,8 +273,7 @@ export class HandleSubscriptionsService {
         data: updateData,
       });
 
-
-
+      await this.cacheService.clearEstablishmentCache(establishment.slug, establishment.id);
       const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_CANCELLED> = {
         to: establishment.email,
         template: EmailTemplate.SUBSCRIPTION_CANCELLED,
@@ -313,8 +310,7 @@ export class HandleSubscriptionsService {
         data: { status: this.helpers.mapStripeStatus(subscription.status) },
       });
 
-
-
+      await this.cacheService.clearEstablishmentCache(establishment.slug, establishment.id);
       const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_PAUSED> = {
         to: establishment.email,
         template: EmailTemplate.SUBSCRIPTION_PAUSED,
@@ -351,8 +347,7 @@ export class HandleSubscriptionsService {
         data: subData,
       });
 
-
-
+      await this.cacheService.clearEstablishmentCache(establishment.slug, establishment.id);
       const payload: SendEmailDto<EmailTemplate.SUBSCRIPTION_REACTIVATED> = {
         to: establishment.email,
         template: EmailTemplate.SUBSCRIPTION_REACTIVATED,
