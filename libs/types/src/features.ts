@@ -8,6 +8,8 @@ export const feature = {
   images: 'images',
   products: 'products',
   items: 'items',
+  custom_qrcodes: 'custom_qrcodes',
+  qrcode_rules: 'qrcode_rules',
 } as const;
 
 //bloquear 10 categorias

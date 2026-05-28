@@ -1340,6 +1340,7 @@ model Menu {
   schedule      Schedule?         @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
   categories    MenuCategory[]
   translations  MenuTranslation[]
+  qrCodes       QrCode[]          @relation("QrCodeMenus")
 
   @@index([establishmentId])
   @@index([establishmentId, position])
@@ -1591,12 +1592,16 @@ model QrCode {
   token           String        @unique
   establishmentId String
   establishment   Establishment @relation(fields: [establishmentId], references: [id])
-  servicePointId  String?
+  servicePointId  String?       @unique
   servicePoint    ServicePoint? @relation(fields: [servicePointId], references: [id])
   type            QrCodeType    @default(TABLE)
 
   active Boolean @default(true)
   config Json?
+
+  // Relações e Regras
+  menus            Menu[]  @relation("QrCodeMenus")
+  requireOpenMenus Boolean @default(true)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -2280,7 +2285,7 @@ model ServicePoint {
   x            Float            @default(0)
   y            Float            @default(0)
   z            Float            @default(0)
-  qrCodes      QrCode[]
+  qrCode       QrCode?
   zone         ServiceZone      @relation(fields: [zoneId], references: [id], onDelete: Cascade)
 
   @@index([zoneId])

@@ -778,6 +778,7 @@ exports.Prisma.QrCodeScalarFieldEnum = {
   type: 'type',
   active: 'active',
   config: 'config',
+  requireOpenMenus: 'requireOpenMenus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

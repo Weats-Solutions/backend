@@ -127,7 +127,17 @@ export class CacheService {
     await this.clearCatalogEstablishmentCache(slug);
     if (id) {
       await this.clearDashboardEstablishmentCache(id);
+      await this.clearPlanLimitsCache(id);
     }
+  }
+
+  /**
+   * Limpa a cache de limites do plano do estabelecimento
+   */
+  async clearPlanLimitsCache(id: string) {
+    const key = `est:plan-limits:${id}`;
+    await this.invalidate(key);
+    this.logger.debug(`[Cache] Cache de limites do plano para ID: ${id} limpa`);
   }
 
   /**

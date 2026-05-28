@@ -103,18 +103,25 @@ export class QrCodeProcessor {
 
       // Keep old QR codes untouched and append fresh tokenized records.
       await this.prisma.$transaction(async (tx) => {
-        await tx.qrCode.createMany({
-          data: pointsWithTokens.map((point) => ({
-            token: point.token,
-            establishmentId: establishment.id,
-            servicePointId: point.isMenuOnly ? null : point.id,
-            type: point.isMenuOnly ? QrCodeType.MENU : QrCodeType.TABLE,
-            config: {
-              ...persistedConfig,
-              frameText: point.frameText || dto.frameText,
+        for (const point of pointsWithTokens) {
+          await tx.qrCode.create({
+            data: {
+              token: point.token,
+              establishmentId: establishment.id,
+              servicePointId: point.isMenuOnly ? null : point.id,
+              type: point.isMenuOnly ? QrCodeType.MENU : QrCodeType.TABLE,
+              active: true,
+              requireOpenMenus: dto.requireOpenMenus ?? true,
+              config: {
+                ...persistedConfig,
+                frameText: point.frameText || dto.frameText,
+              },
+              menus: dto.menuIds && dto.menuIds.length > 0 ? {
+                connect: dto.menuIds.map((id) => ({ id })),
+              } : undefined,
             },
-          })),
-        });
+          });
+        }
       });
 
       this.logger.log(

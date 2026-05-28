@@ -26,6 +26,7 @@ export * from './dashboard/dtos/theme/create-theme.dto';
 export * from './dashboard/dtos/zone/create-service-point.dto';
 export * from './dashboard/dtos/zone/create-service-zone.dto';
 export * from './dashboard/dtos/zone/generate-qr-codes.dto';
+export * from './dashboard/dtos/zone/update-qr-code.dto';
 export * from './dashboard/dtos/zone/service-zone-response.dto';
 export * from './dashboard/dtos/zone/update-service-point.dto';
 export * from './dashboard/dtos/zone/update-service-zone.dto';

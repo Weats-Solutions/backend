@@ -10145,11 +10145,13 @@ export namespace Prisma {
   export type MenuCountOutputType = {
     categories: number
     translations: number
+    qrCodes: number
   }
 
   export type MenuCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     categories?: boolean | MenuCountOutputTypeCountCategoriesArgs
     translations?: boolean | MenuCountOutputTypeCountTranslationsArgs
+    qrCodes?: boolean | MenuCountOutputTypeCountQrCodesArgs
   }
 
   // Custom InputTypes
@@ -10175,6 +10177,13 @@ export namespace Prisma {
    */
   export type MenuCountOutputTypeCountTranslationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MenuTranslationWhereInput
+  }
+
+  /**
+   * MenuCountOutputType without action
+   */
+  export type MenuCountOutputTypeCountQrCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QrCodeWhereInput
   }
 
 
@@ -10317,6 +10326,37 @@ export namespace Prisma {
    */
   export type DeviceCountOutputTypeCountPrintersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PrinterWhereInput
+  }
+
+
+  /**
+   * Count Type QrCodeCountOutputType
+   */
+
+  export type QrCodeCountOutputType = {
+    menus: number
+  }
+
+  export type QrCodeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    menus?: boolean | QrCodeCountOutputTypeCountMenusArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * QrCodeCountOutputType without action
+   */
+  export type QrCodeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCodeCountOutputType
+     */
+    select?: QrCodeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * QrCodeCountOutputType without action
+   */
+  export type QrCodeCountOutputTypeCountMenusArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MenuWhereInput
   }
 
 
@@ -11010,37 +11050,6 @@ export namespace Prisma {
    */
   export type ServiceZoneCountOutputTypeCountServicePointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ServicePointWhereInput
-  }
-
-
-  /**
-   * Count Type ServicePointCountOutputType
-   */
-
-  export type ServicePointCountOutputType = {
-    qrCodes: number
-  }
-
-  export type ServicePointCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    qrCodes?: boolean | ServicePointCountOutputTypeCountQrCodesArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * ServicePointCountOutputType without action
-   */
-  export type ServicePointCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ServicePointCountOutputType
-     */
-    select?: ServicePointCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * ServicePointCountOutputType without action
-   */
-  export type ServicePointCountOutputTypeCountQrCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: QrCodeWhereInput
   }
 
 
@@ -59451,6 +59460,7 @@ export namespace Prisma {
     schedule?: boolean | Menu$scheduleArgs<ExtArgs>
     categories?: boolean | Menu$categoriesArgs<ExtArgs>
     translations?: boolean | Menu$translationsArgs<ExtArgs>
+    qrCodes?: boolean | Menu$qrCodesArgs<ExtArgs>
     _count?: boolean | MenuCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["menu"]>
 
@@ -59512,6 +59522,7 @@ export namespace Prisma {
     schedule?: boolean | Menu$scheduleArgs<ExtArgs>
     categories?: boolean | Menu$categoriesArgs<ExtArgs>
     translations?: boolean | Menu$translationsArgs<ExtArgs>
+    qrCodes?: boolean | Menu$qrCodesArgs<ExtArgs>
     _count?: boolean | MenuCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MenuIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -59530,6 +59541,7 @@ export namespace Prisma {
       schedule: Prisma.$SchedulePayload<ExtArgs> | null
       categories: Prisma.$MenuCategoryPayload<ExtArgs>[]
       translations: Prisma.$MenuTranslationPayload<ExtArgs>[]
+      qrCodes: Prisma.$QrCodePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -59943,6 +59955,7 @@ export namespace Prisma {
     schedule<T extends Menu$scheduleArgs<ExtArgs> = {}>(args?: Subset<T, Menu$scheduleArgs<ExtArgs>>): Prisma__ScheduleClient<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     categories<T extends Menu$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, Menu$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     translations<T extends Menu$translationsArgs<ExtArgs> = {}>(args?: Subset<T, Menu$translationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuTranslationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    qrCodes<T extends Menu$qrCodesArgs<ExtArgs> = {}>(args?: Subset<T, Menu$qrCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -60445,6 +60458,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MenuTranslationScalarFieldEnum | MenuTranslationScalarFieldEnum[]
+  }
+
+  /**
+   * Menu.qrCodes
+   */
+  export type Menu$qrCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QrCode
+     */
+    select?: QrCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QrCode
+     */
+    omit?: QrCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QrCodeInclude<ExtArgs> | null
+    where?: QrCodeWhereInput
+    orderBy?: QrCodeOrderByWithRelationInput | QrCodeOrderByWithRelationInput[]
+    cursor?: QrCodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QrCodeScalarFieldEnum | QrCodeScalarFieldEnum[]
   }
 
   /**
@@ -72757,6 +72794,7 @@ export namespace Prisma {
     servicePointId: string | null
     type: $Enums.QrCodeType | null
     active: boolean | null
+    requireOpenMenus: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -72768,6 +72806,7 @@ export namespace Prisma {
     servicePointId: string | null
     type: $Enums.QrCodeType | null
     active: boolean | null
+    requireOpenMenus: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -72780,6 +72819,7 @@ export namespace Prisma {
     type: number
     active: number
     config: number
+    requireOpenMenus: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -72793,6 +72833,7 @@ export namespace Prisma {
     servicePointId?: true
     type?: true
     active?: true
+    requireOpenMenus?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -72804,6 +72845,7 @@ export namespace Prisma {
     servicePointId?: true
     type?: true
     active?: true
+    requireOpenMenus?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -72816,6 +72858,7 @@ export namespace Prisma {
     type?: true
     active?: true
     config?: true
+    requireOpenMenus?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -72901,6 +72944,7 @@ export namespace Prisma {
     type: $Enums.QrCodeType
     active: boolean
     config: JsonValue | null
+    requireOpenMenus: boolean
     createdAt: Date
     updatedAt: Date
     _count: QrCodeCountAggregateOutputType | null
@@ -72930,10 +72974,13 @@ export namespace Prisma {
     type?: boolean
     active?: boolean
     config?: boolean
+    requireOpenMenus?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
     servicePoint?: boolean | QrCode$servicePointArgs<ExtArgs>
+    menus?: boolean | QrCode$menusArgs<ExtArgs>
+    _count?: boolean | QrCodeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["qrCode"]>
 
   export type QrCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -72944,6 +72991,7 @@ export namespace Prisma {
     type?: boolean
     active?: boolean
     config?: boolean
+    requireOpenMenus?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
@@ -72958,6 +73006,7 @@ export namespace Prisma {
     type?: boolean
     active?: boolean
     config?: boolean
+    requireOpenMenus?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
@@ -72972,14 +73021,17 @@ export namespace Prisma {
     type?: boolean
     active?: boolean
     config?: boolean
+    requireOpenMenus?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type QrCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "establishmentId" | "servicePointId" | "type" | "active" | "config" | "createdAt" | "updatedAt", ExtArgs["result"]["qrCode"]>
+  export type QrCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "establishmentId" | "servicePointId" | "type" | "active" | "config" | "requireOpenMenus" | "createdAt" | "updatedAt", ExtArgs["result"]["qrCode"]>
   export type QrCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
     servicePoint?: boolean | QrCode$servicePointArgs<ExtArgs>
+    menus?: boolean | QrCode$menusArgs<ExtArgs>
+    _count?: boolean | QrCodeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type QrCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
@@ -72995,6 +73047,7 @@ export namespace Prisma {
     objects: {
       establishment: Prisma.$EstablishmentPayload<ExtArgs>
       servicePoint: Prisma.$ServicePointPayload<ExtArgs> | null
+      menus: Prisma.$MenuPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -73004,6 +73057,7 @@ export namespace Prisma {
       type: $Enums.QrCodeType
       active: boolean
       config: Prisma.JsonValue | null
+      requireOpenMenus: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["qrCode"]>
@@ -73402,6 +73456,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     establishment<T extends EstablishmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EstablishmentDefaultArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     servicePoint<T extends QrCode$servicePointArgs<ExtArgs> = {}>(args?: Subset<T, QrCode$servicePointArgs<ExtArgs>>): Prisma__ServicePointClient<$Result.GetResult<Prisma.$ServicePointPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    menus<T extends QrCode$menusArgs<ExtArgs> = {}>(args?: Subset<T, QrCode$menusArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -73438,6 +73493,7 @@ export namespace Prisma {
     readonly type: FieldRef<"QrCode", 'QrCodeType'>
     readonly active: FieldRef<"QrCode", 'Boolean'>
     readonly config: FieldRef<"QrCode", 'Json'>
+    readonly requireOpenMenus: FieldRef<"QrCode", 'Boolean'>
     readonly createdAt: FieldRef<"QrCode", 'DateTime'>
     readonly updatedAt: FieldRef<"QrCode", 'DateTime'>
   }
@@ -73852,6 +73908,30 @@ export namespace Prisma {
      */
     include?: ServicePointInclude<ExtArgs> | null
     where?: ServicePointWhereInput
+  }
+
+  /**
+   * QrCode.menus
+   */
+  export type QrCode$menusArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Menu
+     */
+    select?: MenuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Menu
+     */
+    omit?: MenuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuInclude<ExtArgs> | null
+    where?: MenuWhereInput
+    orderBy?: MenuOrderByWithRelationInput | MenuOrderByWithRelationInput[]
+    cursor?: MenuWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MenuScalarFieldEnum | MenuScalarFieldEnum[]
   }
 
   /**
@@ -111098,9 +111178,8 @@ export namespace Prisma {
     x?: boolean
     y?: boolean
     z?: boolean
-    qrCodes?: boolean | ServicePoint$qrCodesArgs<ExtArgs>
+    qrCode?: boolean | ServicePoint$qrCodeArgs<ExtArgs>
     zone?: boolean | ServiceZoneDefaultArgs<ExtArgs>
-    _count?: boolean | ServicePointCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["servicePoint"]>
 
   export type ServicePointSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -111176,9 +111255,8 @@ export namespace Prisma {
 
   export type ServicePointOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "type" | "maxCapacity" | "minCapacity" | "isReservable" | "isPriority" | "isActive" | "token" | "zoneId" | "createdAt" | "updatedAt" | "color" | "height" | "rotation" | "shape" | "width" | "x" | "y" | "z", ExtArgs["result"]["servicePoint"]>
   export type ServicePointInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    qrCodes?: boolean | ServicePoint$qrCodesArgs<ExtArgs>
+    qrCode?: boolean | ServicePoint$qrCodeArgs<ExtArgs>
     zone?: boolean | ServiceZoneDefaultArgs<ExtArgs>
-    _count?: boolean | ServicePointCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ServicePointIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     zone?: boolean | ServiceZoneDefaultArgs<ExtArgs>
@@ -111190,7 +111268,7 @@ export namespace Prisma {
   export type $ServicePointPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ServicePoint"
     objects: {
-      qrCodes: Prisma.$QrCodePayload<ExtArgs>[]
+      qrCode: Prisma.$QrCodePayload<ExtArgs> | null
       zone: Prisma.$ServiceZonePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -111608,7 +111686,7 @@ export namespace Prisma {
    */
   export interface Prisma__ServicePointClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    qrCodes<T extends ServicePoint$qrCodesArgs<ExtArgs> = {}>(args?: Subset<T, ServicePoint$qrCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    qrCode<T extends ServicePoint$qrCodeArgs<ExtArgs> = {}>(args?: Subset<T, ServicePoint$qrCodeArgs<ExtArgs>>): Prisma__QrCodeClient<$Result.GetResult<Prisma.$QrCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     zone<T extends ServiceZoneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ServiceZoneDefaultArgs<ExtArgs>>): Prisma__ServiceZoneClient<$Result.GetResult<Prisma.$ServiceZonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -112055,9 +112133,9 @@ export namespace Prisma {
   }
 
   /**
-   * ServicePoint.qrCodes
+   * ServicePoint.qrCode
    */
-  export type ServicePoint$qrCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ServicePoint$qrCodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the QrCode
      */
@@ -112071,11 +112149,6 @@ export namespace Prisma {
      */
     include?: QrCodeInclude<ExtArgs> | null
     where?: QrCodeWhereInput
-    orderBy?: QrCodeOrderByWithRelationInput | QrCodeOrderByWithRelationInput[]
-    cursor?: QrCodeWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: QrCodeScalarFieldEnum | QrCodeScalarFieldEnum[]
   }
 
   /**
@@ -112925,6 +112998,7 @@ export namespace Prisma {
     type: 'type',
     active: 'active',
     config: 'config',
+    requireOpenMenus: 'requireOpenMenus',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -117754,6 +117828,7 @@ export namespace Prisma {
     schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     categories?: MenuCategoryListRelationFilter
     translations?: MenuTranslationListRelationFilter
+    qrCodes?: QrCodeListRelationFilter
   }
 
   export type MenuOrderByWithRelationInput = {
@@ -117774,6 +117849,7 @@ export namespace Prisma {
     schedule?: ScheduleOrderByWithRelationInput
     categories?: MenuCategoryOrderByRelationAggregateInput
     translations?: MenuTranslationOrderByRelationAggregateInput
+    qrCodes?: QrCodeOrderByRelationAggregateInput
   }
 
   export type MenuWhereUniqueInput = Prisma.AtLeast<{
@@ -117797,6 +117873,7 @@ export namespace Prisma {
     schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     categories?: MenuCategoryListRelationFilter
     translations?: MenuTranslationListRelationFilter
+    qrCodes?: QrCodeListRelationFilter
   }, "id" | "scheduleId">
 
   export type MenuOrderByWithAggregationInput = {
@@ -118633,10 +118710,12 @@ export namespace Prisma {
     type?: EnumQrCodeTypeFilter<"QrCode"> | $Enums.QrCodeType
     active?: BoolFilter<"QrCode"> | boolean
     config?: JsonNullableFilter<"QrCode">
+    requireOpenMenus?: BoolFilter<"QrCode"> | boolean
     createdAt?: DateTimeFilter<"QrCode"> | Date | string
     updatedAt?: DateTimeFilter<"QrCode"> | Date | string
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
     servicePoint?: XOR<ServicePointNullableScalarRelationFilter, ServicePointWhereInput> | null
+    menus?: MenuListRelationFilter
   }
 
   export type QrCodeOrderByWithRelationInput = {
@@ -118647,28 +118726,32 @@ export namespace Prisma {
     type?: SortOrder
     active?: SortOrder
     config?: SortOrderInput | SortOrder
+    requireOpenMenus?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     establishment?: EstablishmentOrderByWithRelationInput
     servicePoint?: ServicePointOrderByWithRelationInput
+    menus?: MenuOrderByRelationAggregateInput
   }
 
   export type QrCodeWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     token?: string
+    servicePointId?: string
     AND?: QrCodeWhereInput | QrCodeWhereInput[]
     OR?: QrCodeWhereInput[]
     NOT?: QrCodeWhereInput | QrCodeWhereInput[]
     establishmentId?: StringFilter<"QrCode"> | string
-    servicePointId?: StringNullableFilter<"QrCode"> | string | null
     type?: EnumQrCodeTypeFilter<"QrCode"> | $Enums.QrCodeType
     active?: BoolFilter<"QrCode"> | boolean
     config?: JsonNullableFilter<"QrCode">
+    requireOpenMenus?: BoolFilter<"QrCode"> | boolean
     createdAt?: DateTimeFilter<"QrCode"> | Date | string
     updatedAt?: DateTimeFilter<"QrCode"> | Date | string
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
     servicePoint?: XOR<ServicePointNullableScalarRelationFilter, ServicePointWhereInput> | null
-  }, "id" | "token">
+    menus?: MenuListRelationFilter
+  }, "id" | "token" | "servicePointId">
 
   export type QrCodeOrderByWithAggregationInput = {
     id?: SortOrder
@@ -118678,6 +118761,7 @@ export namespace Prisma {
     type?: SortOrder
     active?: SortOrder
     config?: SortOrderInput | SortOrder
+    requireOpenMenus?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: QrCodeCountOrderByAggregateInput
@@ -118696,6 +118780,7 @@ export namespace Prisma {
     type?: EnumQrCodeTypeWithAggregatesFilter<"QrCode"> | $Enums.QrCodeType
     active?: BoolWithAggregatesFilter<"QrCode"> | boolean
     config?: JsonNullableWithAggregatesFilter<"QrCode">
+    requireOpenMenus?: BoolWithAggregatesFilter<"QrCode"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"QrCode"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"QrCode"> | Date | string
   }
@@ -121457,7 +121542,7 @@ export namespace Prisma {
     x?: FloatFilter<"ServicePoint"> | number
     y?: FloatFilter<"ServicePoint"> | number
     z?: FloatFilter<"ServicePoint"> | number
-    qrCodes?: QrCodeListRelationFilter
+    qrCode?: XOR<QrCodeNullableScalarRelationFilter, QrCodeWhereInput> | null
     zone?: XOR<ServiceZoneScalarRelationFilter, ServiceZoneWhereInput>
   }
 
@@ -121482,7 +121567,7 @@ export namespace Prisma {
     x?: SortOrder
     y?: SortOrder
     z?: SortOrder
-    qrCodes?: QrCodeOrderByRelationAggregateInput
+    qrCode?: QrCodeOrderByWithRelationInput
     zone?: ServiceZoneOrderByWithRelationInput
   }
 
@@ -121510,7 +121595,7 @@ export namespace Prisma {
     x?: FloatFilter<"ServicePoint"> | number
     y?: FloatFilter<"ServicePoint"> | number
     z?: FloatFilter<"ServicePoint"> | number
-    qrCodes?: QrCodeListRelationFilter
+    qrCode?: XOR<QrCodeNullableScalarRelationFilter, QrCodeWhereInput> | null
     zone?: XOR<ServiceZoneScalarRelationFilter, ServiceZoneWhereInput>
   }, "id" | "token">
 
@@ -125425,6 +125510,7 @@ export namespace Prisma {
     schedule?: ScheduleCreateNestedOneWithoutMenusInput
     categories?: MenuCategoryCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationCreateNestedManyWithoutMenuInput
+    qrCodes?: QrCodeCreateNestedManyWithoutMenusInput
   }
 
   export type MenuUncheckedCreateInput = {
@@ -125443,6 +125529,7 @@ export namespace Prisma {
     type?: $Enums.MenuType
     categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutMenusInput
   }
 
   export type MenuUpdateInput = {
@@ -125461,6 +125548,7 @@ export namespace Prisma {
     schedule?: ScheduleUpdateOneWithoutMenusNestedInput
     categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUpdateManyWithoutMenuNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutMenusNestedInput
   }
 
   export type MenuUncheckedUpdateInput = {
@@ -125479,6 +125567,7 @@ export namespace Prisma {
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutMenusNestedInput
   }
 
   export type MenuCreateManyInput = {
@@ -126373,10 +126462,12 @@ export namespace Prisma {
     type?: $Enums.QrCodeType
     active?: boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     establishment: EstablishmentCreateNestedOneWithoutQrCodesInput
-    servicePoint?: ServicePointCreateNestedOneWithoutQrCodesInput
+    servicePoint?: ServicePointCreateNestedOneWithoutQrCodeInput
+    menus?: MenuCreateNestedManyWithoutQrCodesInput
   }
 
   export type QrCodeUncheckedCreateInput = {
@@ -126387,8 +126478,10 @@ export namespace Prisma {
     type?: $Enums.QrCodeType
     active?: boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    menus?: MenuUncheckedCreateNestedManyWithoutQrCodesInput
   }
 
   export type QrCodeUpdateInput = {
@@ -126397,10 +126490,12 @@ export namespace Prisma {
     type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
     active?: BoolFieldUpdateOperationsInput | boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     establishment?: EstablishmentUpdateOneRequiredWithoutQrCodesNestedInput
-    servicePoint?: ServicePointUpdateOneWithoutQrCodesNestedInput
+    servicePoint?: ServicePointUpdateOneWithoutQrCodeNestedInput
+    menus?: MenuUpdateManyWithoutQrCodesNestedInput
   }
 
   export type QrCodeUncheckedUpdateInput = {
@@ -126411,8 +126506,10 @@ export namespace Prisma {
     type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
     active?: BoolFieldUpdateOperationsInput | boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menus?: MenuUncheckedUpdateManyWithoutQrCodesNestedInput
   }
 
   export type QrCodeCreateManyInput = {
@@ -126423,6 +126520,7 @@ export namespace Prisma {
     type?: $Enums.QrCodeType
     active?: boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -126433,6 +126531,7 @@ export namespace Prisma {
     type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
     active?: BoolFieldUpdateOperationsInput | boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -126445,6 +126544,7 @@ export namespace Prisma {
     type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
     active?: BoolFieldUpdateOperationsInput | boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -129481,7 +129581,7 @@ export namespace Prisma {
     x?: number
     y?: number
     z?: number
-    qrCodes?: QrCodeCreateNestedManyWithoutServicePointInput
+    qrCode?: QrCodeCreateNestedOneWithoutServicePointInput
     zone: ServiceZoneCreateNestedOneWithoutServicePointsInput
   }
 
@@ -129506,7 +129606,7 @@ export namespace Prisma {
     x?: number
     y?: number
     z?: number
-    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutServicePointInput
+    qrCode?: QrCodeUncheckedCreateNestedOneWithoutServicePointInput
   }
 
   export type ServicePointUpdateInput = {
@@ -129529,7 +129629,7 @@ export namespace Prisma {
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
     z?: FloatFieldUpdateOperationsInput | number
-    qrCodes?: QrCodeUpdateManyWithoutServicePointNestedInput
+    qrCode?: QrCodeUpdateOneWithoutServicePointNestedInput
     zone?: ServiceZoneUpdateOneRequiredWithoutServicePointsNestedInput
   }
 
@@ -129554,7 +129654,7 @@ export namespace Prisma {
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
     z?: FloatFieldUpdateOperationsInput | number
-    qrCodes?: QrCodeUncheckedUpdateManyWithoutServicePointNestedInput
+    qrCode?: QrCodeUncheckedUpdateOneWithoutServicePointNestedInput
   }
 
   export type ServicePointCreateManyInput = {
@@ -133446,6 +133546,7 @@ export namespace Prisma {
     type?: SortOrder
     active?: SortOrder
     config?: SortOrder
+    requireOpenMenus?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -133457,6 +133558,7 @@ export namespace Prisma {
     servicePointId?: SortOrder
     type?: SortOrder
     active?: SortOrder
+    requireOpenMenus?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -133468,6 +133570,7 @@ export namespace Prisma {
     servicePointId?: SortOrder
     type?: SortOrder
     active?: SortOrder
+    requireOpenMenus?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -135581,6 +135684,11 @@ export namespace Prisma {
     in?: $Enums.ServicePointType[] | ListEnumServicePointTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.ServicePointType[] | ListEnumServicePointTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumServicePointTypeFilter<$PrismaModel> | $Enums.ServicePointType
+  }
+
+  export type QrCodeNullableScalarRelationFilter = {
+    is?: QrCodeWhereInput | null
+    isNot?: QrCodeWhereInput | null
   }
 
   export type ServiceZoneScalarRelationFilter = {
@@ -139782,6 +139890,12 @@ export namespace Prisma {
     connect?: MenuTranslationWhereUniqueInput | MenuTranslationWhereUniqueInput[]
   }
 
+  export type QrCodeCreateNestedManyWithoutMenusInput = {
+    create?: XOR<QrCodeCreateWithoutMenusInput, QrCodeUncheckedCreateWithoutMenusInput> | QrCodeCreateWithoutMenusInput[] | QrCodeUncheckedCreateWithoutMenusInput[]
+    connectOrCreate?: QrCodeCreateOrConnectWithoutMenusInput | QrCodeCreateOrConnectWithoutMenusInput[]
+    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+  }
+
   export type MenuCategoryUncheckedCreateNestedManyWithoutMenuInput = {
     create?: XOR<MenuCategoryCreateWithoutMenuInput, MenuCategoryUncheckedCreateWithoutMenuInput> | MenuCategoryCreateWithoutMenuInput[] | MenuCategoryUncheckedCreateWithoutMenuInput[]
     connectOrCreate?: MenuCategoryCreateOrConnectWithoutMenuInput | MenuCategoryCreateOrConnectWithoutMenuInput[]
@@ -139794,6 +139908,12 @@ export namespace Prisma {
     connectOrCreate?: MenuTranslationCreateOrConnectWithoutMenuInput | MenuTranslationCreateOrConnectWithoutMenuInput[]
     createMany?: MenuTranslationCreateManyMenuInputEnvelope
     connect?: MenuTranslationWhereUniqueInput | MenuTranslationWhereUniqueInput[]
+  }
+
+  export type QrCodeUncheckedCreateNestedManyWithoutMenusInput = {
+    create?: XOR<QrCodeCreateWithoutMenusInput, QrCodeUncheckedCreateWithoutMenusInput> | QrCodeCreateWithoutMenusInput[] | QrCodeUncheckedCreateWithoutMenusInput[]
+    connectOrCreate?: QrCodeCreateOrConnectWithoutMenusInput | QrCodeCreateOrConnectWithoutMenusInput[]
+    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
   }
 
   export type EnumMenuTypeFieldUpdateOperationsInput = {
@@ -139846,6 +139966,19 @@ export namespace Prisma {
     deleteMany?: MenuTranslationScalarWhereInput | MenuTranslationScalarWhereInput[]
   }
 
+  export type QrCodeUpdateManyWithoutMenusNestedInput = {
+    create?: XOR<QrCodeCreateWithoutMenusInput, QrCodeUncheckedCreateWithoutMenusInput> | QrCodeCreateWithoutMenusInput[] | QrCodeUncheckedCreateWithoutMenusInput[]
+    connectOrCreate?: QrCodeCreateOrConnectWithoutMenusInput | QrCodeCreateOrConnectWithoutMenusInput[]
+    upsert?: QrCodeUpsertWithWhereUniqueWithoutMenusInput | QrCodeUpsertWithWhereUniqueWithoutMenusInput[]
+    set?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    disconnect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    delete?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    update?: QrCodeUpdateWithWhereUniqueWithoutMenusInput | QrCodeUpdateWithWhereUniqueWithoutMenusInput[]
+    updateMany?: QrCodeUpdateManyWithWhereWithoutMenusInput | QrCodeUpdateManyWithWhereWithoutMenusInput[]
+    deleteMany?: QrCodeScalarWhereInput | QrCodeScalarWhereInput[]
+  }
+
   export type MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput = {
     create?: XOR<MenuCategoryCreateWithoutMenuInput, MenuCategoryUncheckedCreateWithoutMenuInput> | MenuCategoryCreateWithoutMenuInput[] | MenuCategoryUncheckedCreateWithoutMenuInput[]
     connectOrCreate?: MenuCategoryCreateOrConnectWithoutMenuInput | MenuCategoryCreateOrConnectWithoutMenuInput[]
@@ -139872,6 +140005,19 @@ export namespace Prisma {
     update?: MenuTranslationUpdateWithWhereUniqueWithoutMenuInput | MenuTranslationUpdateWithWhereUniqueWithoutMenuInput[]
     updateMany?: MenuTranslationUpdateManyWithWhereWithoutMenuInput | MenuTranslationUpdateManyWithWhereWithoutMenuInput[]
     deleteMany?: MenuTranslationScalarWhereInput | MenuTranslationScalarWhereInput[]
+  }
+
+  export type QrCodeUncheckedUpdateManyWithoutMenusNestedInput = {
+    create?: XOR<QrCodeCreateWithoutMenusInput, QrCodeUncheckedCreateWithoutMenusInput> | QrCodeCreateWithoutMenusInput[] | QrCodeUncheckedCreateWithoutMenusInput[]
+    connectOrCreate?: QrCodeCreateOrConnectWithoutMenusInput | QrCodeCreateOrConnectWithoutMenusInput[]
+    upsert?: QrCodeUpsertWithWhereUniqueWithoutMenusInput | QrCodeUpsertWithWhereUniqueWithoutMenusInput[]
+    set?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    disconnect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    delete?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+    update?: QrCodeUpdateWithWhereUniqueWithoutMenusInput | QrCodeUpdateWithWhereUniqueWithoutMenusInput[]
+    updateMany?: QrCodeUpdateManyWithWhereWithoutMenusInput | QrCodeUpdateManyWithWhereWithoutMenusInput[]
+    deleteMany?: QrCodeScalarWhereInput | QrCodeScalarWhereInput[]
   }
 
   export type MenuCreateNestedOneWithoutTranslationsInput = {
@@ -140276,10 +140422,22 @@ export namespace Prisma {
     connect?: EstablishmentWhereUniqueInput
   }
 
-  export type ServicePointCreateNestedOneWithoutQrCodesInput = {
-    create?: XOR<ServicePointCreateWithoutQrCodesInput, ServicePointUncheckedCreateWithoutQrCodesInput>
-    connectOrCreate?: ServicePointCreateOrConnectWithoutQrCodesInput
+  export type ServicePointCreateNestedOneWithoutQrCodeInput = {
+    create?: XOR<ServicePointCreateWithoutQrCodeInput, ServicePointUncheckedCreateWithoutQrCodeInput>
+    connectOrCreate?: ServicePointCreateOrConnectWithoutQrCodeInput
     connect?: ServicePointWhereUniqueInput
+  }
+
+  export type MenuCreateNestedManyWithoutQrCodesInput = {
+    create?: XOR<MenuCreateWithoutQrCodesInput, MenuUncheckedCreateWithoutQrCodesInput> | MenuCreateWithoutQrCodesInput[] | MenuUncheckedCreateWithoutQrCodesInput[]
+    connectOrCreate?: MenuCreateOrConnectWithoutQrCodesInput | MenuCreateOrConnectWithoutQrCodesInput[]
+    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+  }
+
+  export type MenuUncheckedCreateNestedManyWithoutQrCodesInput = {
+    create?: XOR<MenuCreateWithoutQrCodesInput, MenuUncheckedCreateWithoutQrCodesInput> | MenuCreateWithoutQrCodesInput[] | MenuUncheckedCreateWithoutQrCodesInput[]
+    connectOrCreate?: MenuCreateOrConnectWithoutQrCodesInput | MenuCreateOrConnectWithoutQrCodesInput[]
+    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
   }
 
   export type EnumQrCodeTypeFieldUpdateOperationsInput = {
@@ -140294,14 +140452,40 @@ export namespace Prisma {
     update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutQrCodesInput, EstablishmentUpdateWithoutQrCodesInput>, EstablishmentUncheckedUpdateWithoutQrCodesInput>
   }
 
-  export type ServicePointUpdateOneWithoutQrCodesNestedInput = {
-    create?: XOR<ServicePointCreateWithoutQrCodesInput, ServicePointUncheckedCreateWithoutQrCodesInput>
-    connectOrCreate?: ServicePointCreateOrConnectWithoutQrCodesInput
-    upsert?: ServicePointUpsertWithoutQrCodesInput
+  export type ServicePointUpdateOneWithoutQrCodeNestedInput = {
+    create?: XOR<ServicePointCreateWithoutQrCodeInput, ServicePointUncheckedCreateWithoutQrCodeInput>
+    connectOrCreate?: ServicePointCreateOrConnectWithoutQrCodeInput
+    upsert?: ServicePointUpsertWithoutQrCodeInput
     disconnect?: ServicePointWhereInput | boolean
     delete?: ServicePointWhereInput | boolean
     connect?: ServicePointWhereUniqueInput
-    update?: XOR<XOR<ServicePointUpdateToOneWithWhereWithoutQrCodesInput, ServicePointUpdateWithoutQrCodesInput>, ServicePointUncheckedUpdateWithoutQrCodesInput>
+    update?: XOR<XOR<ServicePointUpdateToOneWithWhereWithoutQrCodeInput, ServicePointUpdateWithoutQrCodeInput>, ServicePointUncheckedUpdateWithoutQrCodeInput>
+  }
+
+  export type MenuUpdateManyWithoutQrCodesNestedInput = {
+    create?: XOR<MenuCreateWithoutQrCodesInput, MenuUncheckedCreateWithoutQrCodesInput> | MenuCreateWithoutQrCodesInput[] | MenuUncheckedCreateWithoutQrCodesInput[]
+    connectOrCreate?: MenuCreateOrConnectWithoutQrCodesInput | MenuCreateOrConnectWithoutQrCodesInput[]
+    upsert?: MenuUpsertWithWhereUniqueWithoutQrCodesInput | MenuUpsertWithWhereUniqueWithoutQrCodesInput[]
+    set?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    disconnect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    delete?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    update?: MenuUpdateWithWhereUniqueWithoutQrCodesInput | MenuUpdateWithWhereUniqueWithoutQrCodesInput[]
+    updateMany?: MenuUpdateManyWithWhereWithoutQrCodesInput | MenuUpdateManyWithWhereWithoutQrCodesInput[]
+    deleteMany?: MenuScalarWhereInput | MenuScalarWhereInput[]
+  }
+
+  export type MenuUncheckedUpdateManyWithoutQrCodesNestedInput = {
+    create?: XOR<MenuCreateWithoutQrCodesInput, MenuUncheckedCreateWithoutQrCodesInput> | MenuCreateWithoutQrCodesInput[] | MenuUncheckedCreateWithoutQrCodesInput[]
+    connectOrCreate?: MenuCreateOrConnectWithoutQrCodesInput | MenuCreateOrConnectWithoutQrCodesInput[]
+    upsert?: MenuUpsertWithWhereUniqueWithoutQrCodesInput | MenuUpsertWithWhereUniqueWithoutQrCodesInput[]
+    set?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    disconnect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    delete?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    update?: MenuUpdateWithWhereUniqueWithoutQrCodesInput | MenuUpdateWithWhereUniqueWithoutQrCodesInput[]
+    updateMany?: MenuUpdateManyWithWhereWithoutQrCodesInput | MenuUpdateManyWithWhereWithoutQrCodesInput[]
+    deleteMany?: MenuScalarWhereInput | MenuScalarWhereInput[]
   }
 
   export type ScheduleDayCreateNestedManyWithoutScheduleInput = {
@@ -142486,11 +142670,10 @@ export namespace Prisma {
     deleteMany?: ServicePointScalarWhereInput | ServicePointScalarWhereInput[]
   }
 
-  export type QrCodeCreateNestedManyWithoutServicePointInput = {
-    create?: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput> | QrCodeCreateWithoutServicePointInput[] | QrCodeUncheckedCreateWithoutServicePointInput[]
-    connectOrCreate?: QrCodeCreateOrConnectWithoutServicePointInput | QrCodeCreateOrConnectWithoutServicePointInput[]
-    createMany?: QrCodeCreateManyServicePointInputEnvelope
-    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+  export type QrCodeCreateNestedOneWithoutServicePointInput = {
+    create?: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput>
+    connectOrCreate?: QrCodeCreateOrConnectWithoutServicePointInput
+    connect?: QrCodeWhereUniqueInput
   }
 
   export type ServiceZoneCreateNestedOneWithoutServicePointsInput = {
@@ -142499,29 +142682,24 @@ export namespace Prisma {
     connect?: ServiceZoneWhereUniqueInput
   }
 
-  export type QrCodeUncheckedCreateNestedManyWithoutServicePointInput = {
-    create?: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput> | QrCodeCreateWithoutServicePointInput[] | QrCodeUncheckedCreateWithoutServicePointInput[]
-    connectOrCreate?: QrCodeCreateOrConnectWithoutServicePointInput | QrCodeCreateOrConnectWithoutServicePointInput[]
-    createMany?: QrCodeCreateManyServicePointInputEnvelope
-    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
+  export type QrCodeUncheckedCreateNestedOneWithoutServicePointInput = {
+    create?: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput>
+    connectOrCreate?: QrCodeCreateOrConnectWithoutServicePointInput
+    connect?: QrCodeWhereUniqueInput
   }
 
   export type EnumServicePointTypeFieldUpdateOperationsInput = {
     set?: $Enums.ServicePointType
   }
 
-  export type QrCodeUpdateManyWithoutServicePointNestedInput = {
-    create?: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput> | QrCodeCreateWithoutServicePointInput[] | QrCodeUncheckedCreateWithoutServicePointInput[]
-    connectOrCreate?: QrCodeCreateOrConnectWithoutServicePointInput | QrCodeCreateOrConnectWithoutServicePointInput[]
-    upsert?: QrCodeUpsertWithWhereUniqueWithoutServicePointInput | QrCodeUpsertWithWhereUniqueWithoutServicePointInput[]
-    createMany?: QrCodeCreateManyServicePointInputEnvelope
-    set?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
-    disconnect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
-    delete?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
-    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
-    update?: QrCodeUpdateWithWhereUniqueWithoutServicePointInput | QrCodeUpdateWithWhereUniqueWithoutServicePointInput[]
-    updateMany?: QrCodeUpdateManyWithWhereWithoutServicePointInput | QrCodeUpdateManyWithWhereWithoutServicePointInput[]
-    deleteMany?: QrCodeScalarWhereInput | QrCodeScalarWhereInput[]
+  export type QrCodeUpdateOneWithoutServicePointNestedInput = {
+    create?: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput>
+    connectOrCreate?: QrCodeCreateOrConnectWithoutServicePointInput
+    upsert?: QrCodeUpsertWithoutServicePointInput
+    disconnect?: QrCodeWhereInput | boolean
+    delete?: QrCodeWhereInput | boolean
+    connect?: QrCodeWhereUniqueInput
+    update?: XOR<XOR<QrCodeUpdateToOneWithWhereWithoutServicePointInput, QrCodeUpdateWithoutServicePointInput>, QrCodeUncheckedUpdateWithoutServicePointInput>
   }
 
   export type ServiceZoneUpdateOneRequiredWithoutServicePointsNestedInput = {
@@ -142532,18 +142710,14 @@ export namespace Prisma {
     update?: XOR<XOR<ServiceZoneUpdateToOneWithWhereWithoutServicePointsInput, ServiceZoneUpdateWithoutServicePointsInput>, ServiceZoneUncheckedUpdateWithoutServicePointsInput>
   }
 
-  export type QrCodeUncheckedUpdateManyWithoutServicePointNestedInput = {
-    create?: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput> | QrCodeCreateWithoutServicePointInput[] | QrCodeUncheckedCreateWithoutServicePointInput[]
-    connectOrCreate?: QrCodeCreateOrConnectWithoutServicePointInput | QrCodeCreateOrConnectWithoutServicePointInput[]
-    upsert?: QrCodeUpsertWithWhereUniqueWithoutServicePointInput | QrCodeUpsertWithWhereUniqueWithoutServicePointInput[]
-    createMany?: QrCodeCreateManyServicePointInputEnvelope
-    set?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
-    disconnect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
-    delete?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
-    connect?: QrCodeWhereUniqueInput | QrCodeWhereUniqueInput[]
-    update?: QrCodeUpdateWithWhereUniqueWithoutServicePointInput | QrCodeUpdateWithWhereUniqueWithoutServicePointInput[]
-    updateMany?: QrCodeUpdateManyWithWhereWithoutServicePointInput | QrCodeUpdateManyWithWhereWithoutServicePointInput[]
-    deleteMany?: QrCodeScalarWhereInput | QrCodeScalarWhereInput[]
+  export type QrCodeUncheckedUpdateOneWithoutServicePointNestedInput = {
+    create?: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput>
+    connectOrCreate?: QrCodeCreateOrConnectWithoutServicePointInput
+    upsert?: QrCodeUpsertWithoutServicePointInput
+    disconnect?: QrCodeWhereInput | boolean
+    delete?: QrCodeWhereInput | boolean
+    connect?: QrCodeWhereUniqueInput
+    update?: XOR<XOR<QrCodeUpdateToOneWithWhereWithoutServicePointInput, QrCodeUpdateWithoutServicePointInput>, QrCodeUncheckedUpdateWithoutServicePointInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -148327,9 +148501,11 @@ export namespace Prisma {
     type?: $Enums.QrCodeType
     active?: boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    servicePoint?: ServicePointCreateNestedOneWithoutQrCodesInput
+    servicePoint?: ServicePointCreateNestedOneWithoutQrCodeInput
+    menus?: MenuCreateNestedManyWithoutQrCodesInput
   }
 
   export type QrCodeUncheckedCreateWithoutEstablishmentInput = {
@@ -148339,8 +148515,10 @@ export namespace Prisma {
     type?: $Enums.QrCodeType
     active?: boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    menus?: MenuUncheckedCreateNestedManyWithoutQrCodesInput
   }
 
   export type QrCodeCreateOrConnectWithoutEstablishmentInput = {
@@ -148368,6 +148546,7 @@ export namespace Prisma {
     schedule?: ScheduleCreateNestedOneWithoutMenusInput
     categories?: MenuCategoryCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationCreateNestedManyWithoutMenuInput
+    qrCodes?: QrCodeCreateNestedManyWithoutMenusInput
   }
 
   export type MenuUncheckedCreateWithoutEstablishmentInput = {
@@ -148385,6 +148564,7 @@ export namespace Prisma {
     type?: $Enums.MenuType
     categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutMenusInput
   }
 
   export type MenuCreateOrConnectWithoutEstablishmentInput = {
@@ -149946,6 +150126,7 @@ export namespace Prisma {
     type?: EnumQrCodeTypeFilter<"QrCode"> | $Enums.QrCodeType
     active?: BoolFilter<"QrCode"> | boolean
     config?: JsonNullableFilter<"QrCode">
+    requireOpenMenus?: BoolFilter<"QrCode"> | boolean
     createdAt?: DateTimeFilter<"QrCode"> | Date | string
     updatedAt?: DateTimeFilter<"QrCode"> | Date | string
   }
@@ -159459,6 +159640,37 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type QrCodeCreateWithoutMenusInput = {
+    id?: string
+    token: string
+    type?: $Enums.QrCodeType
+    active?: boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    establishment: EstablishmentCreateNestedOneWithoutQrCodesInput
+    servicePoint?: ServicePointCreateNestedOneWithoutQrCodeInput
+  }
+
+  export type QrCodeUncheckedCreateWithoutMenusInput = {
+    id?: string
+    token: string
+    establishmentId: string
+    servicePointId?: string | null
+    type?: $Enums.QrCodeType
+    active?: boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QrCodeCreateOrConnectWithoutMenusInput = {
+    where: QrCodeWhereUniqueInput
+    create: XOR<QrCodeCreateWithoutMenusInput, QrCodeUncheckedCreateWithoutMenusInput>
+  }
+
   export type EstablishmentUpsertWithoutMenusInput = {
     update: XOR<EstablishmentUpdateWithoutMenusInput, EstablishmentUncheckedUpdateWithoutMenusInput>
     create: XOR<EstablishmentCreateWithoutMenusInput, EstablishmentUncheckedCreateWithoutMenusInput>
@@ -159717,6 +159929,22 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"MenuTranslation"> | Date | string
   }
 
+  export type QrCodeUpsertWithWhereUniqueWithoutMenusInput = {
+    where: QrCodeWhereUniqueInput
+    update: XOR<QrCodeUpdateWithoutMenusInput, QrCodeUncheckedUpdateWithoutMenusInput>
+    create: XOR<QrCodeCreateWithoutMenusInput, QrCodeUncheckedCreateWithoutMenusInput>
+  }
+
+  export type QrCodeUpdateWithWhereUniqueWithoutMenusInput = {
+    where: QrCodeWhereUniqueInput
+    data: XOR<QrCodeUpdateWithoutMenusInput, QrCodeUncheckedUpdateWithoutMenusInput>
+  }
+
+  export type QrCodeUpdateManyWithWhereWithoutMenusInput = {
+    where: QrCodeScalarWhereInput
+    data: XOR<QrCodeUpdateManyMutationInput, QrCodeUncheckedUpdateManyWithoutMenusInput>
+  }
+
   export type MenuCreateWithoutTranslationsInput = {
     id?: string
     position?: number
@@ -159732,6 +159960,7 @@ export namespace Prisma {
     establishment: EstablishmentCreateNestedOneWithoutMenusInput
     schedule?: ScheduleCreateNestedOneWithoutMenusInput
     categories?: MenuCategoryCreateNestedManyWithoutMenuInput
+    qrCodes?: QrCodeCreateNestedManyWithoutMenusInput
   }
 
   export type MenuUncheckedCreateWithoutTranslationsInput = {
@@ -159749,6 +159978,7 @@ export namespace Prisma {
     showImages?: boolean
     type?: $Enums.MenuType
     categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutMenusInput
   }
 
   export type MenuCreateOrConnectWithoutTranslationsInput = {
@@ -159782,6 +160012,7 @@ export namespace Prisma {
     establishment?: EstablishmentUpdateOneRequiredWithoutMenusNestedInput
     schedule?: ScheduleUpdateOneWithoutMenusNestedInput
     categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutMenusNestedInput
   }
 
   export type MenuUncheckedUpdateWithoutTranslationsInput = {
@@ -159799,6 +160030,7 @@ export namespace Prisma {
     showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutMenusNestedInput
   }
 
   export type ImageCreateWithoutMenuCategoryInput = {
@@ -159857,6 +160089,7 @@ export namespace Prisma {
     establishment: EstablishmentCreateNestedOneWithoutMenusInput
     schedule?: ScheduleCreateNestedOneWithoutMenusInput
     translations?: MenuTranslationCreateNestedManyWithoutMenuInput
+    qrCodes?: QrCodeCreateNestedManyWithoutMenusInput
   }
 
   export type MenuUncheckedCreateWithoutCategoriesInput = {
@@ -159874,6 +160107,7 @@ export namespace Prisma {
     showImages?: boolean
     type?: $Enums.MenuType
     translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutMenusInput
   }
 
   export type MenuCreateOrConnectWithoutCategoriesInput = {
@@ -160010,6 +160244,7 @@ export namespace Prisma {
     establishment?: EstablishmentUpdateOneRequiredWithoutMenusNestedInput
     schedule?: ScheduleUpdateOneWithoutMenusNestedInput
     translations?: MenuTranslationUpdateManyWithoutMenuNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutMenusNestedInput
   }
 
   export type MenuUncheckedUpdateWithoutCategoriesInput = {
@@ -160027,6 +160262,7 @@ export namespace Prisma {
     showImages?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutMenusNestedInput
   }
 
   export type MenuCategoryTranslationUpsertWithWhereUniqueWithoutCategoryInput = {
@@ -161303,7 +161539,7 @@ export namespace Prisma {
     create: XOR<EstablishmentCreateWithoutQrCodesInput, EstablishmentUncheckedCreateWithoutQrCodesInput>
   }
 
-  export type ServicePointCreateWithoutQrCodesInput = {
+  export type ServicePointCreateWithoutQrCodeInput = {
     id?: string
     name: string
     type?: $Enums.ServicePointType
@@ -161326,7 +161562,7 @@ export namespace Prisma {
     zone: ServiceZoneCreateNestedOneWithoutServicePointsInput
   }
 
-  export type ServicePointUncheckedCreateWithoutQrCodesInput = {
+  export type ServicePointUncheckedCreateWithoutQrCodeInput = {
     id?: string
     name: string
     type?: $Enums.ServicePointType
@@ -161349,9 +161585,50 @@ export namespace Prisma {
     z?: number
   }
 
-  export type ServicePointCreateOrConnectWithoutQrCodesInput = {
+  export type ServicePointCreateOrConnectWithoutQrCodeInput = {
     where: ServicePointWhereUniqueInput
-    create: XOR<ServicePointCreateWithoutQrCodesInput, ServicePointUncheckedCreateWithoutQrCodesInput>
+    create: XOR<ServicePointCreateWithoutQrCodeInput, ServicePointUncheckedCreateWithoutQrCodeInput>
+  }
+
+  export type MenuCreateWithoutQrCodesInput = {
+    id?: string
+    position?: number
+    isVisible?: boolean
+    isHighlighted?: boolean
+    color?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    maxItemsPerOrder?: number | null
+    price?: number | null
+    showImages?: boolean
+    type?: $Enums.MenuType
+    establishment: EstablishmentCreateNestedOneWithoutMenusInput
+    schedule?: ScheduleCreateNestedOneWithoutMenusInput
+    categories?: MenuCategoryCreateNestedManyWithoutMenuInput
+    translations?: MenuTranslationCreateNestedManyWithoutMenuInput
+  }
+
+  export type MenuUncheckedCreateWithoutQrCodesInput = {
+    id?: string
+    position?: number
+    isVisible?: boolean
+    isHighlighted?: boolean
+    color?: string | null
+    establishmentId: string
+    scheduleId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    maxItemsPerOrder?: number | null
+    price?: number | null
+    showImages?: boolean
+    type?: $Enums.MenuType
+    categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
+    translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
+  }
+
+  export type MenuCreateOrConnectWithoutQrCodesInput = {
+    where: MenuWhereUniqueInput
+    create: XOR<MenuCreateWithoutQrCodesInput, MenuUncheckedCreateWithoutQrCodesInput>
   }
 
   export type EstablishmentUpsertWithoutQrCodesInput = {
@@ -161533,18 +161810,18 @@ export namespace Prisma {
     stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
   }
 
-  export type ServicePointUpsertWithoutQrCodesInput = {
-    update: XOR<ServicePointUpdateWithoutQrCodesInput, ServicePointUncheckedUpdateWithoutQrCodesInput>
-    create: XOR<ServicePointCreateWithoutQrCodesInput, ServicePointUncheckedCreateWithoutQrCodesInput>
+  export type ServicePointUpsertWithoutQrCodeInput = {
+    update: XOR<ServicePointUpdateWithoutQrCodeInput, ServicePointUncheckedUpdateWithoutQrCodeInput>
+    create: XOR<ServicePointCreateWithoutQrCodeInput, ServicePointUncheckedCreateWithoutQrCodeInput>
     where?: ServicePointWhereInput
   }
 
-  export type ServicePointUpdateToOneWithWhereWithoutQrCodesInput = {
+  export type ServicePointUpdateToOneWithWhereWithoutQrCodeInput = {
     where?: ServicePointWhereInput
-    data: XOR<ServicePointUpdateWithoutQrCodesInput, ServicePointUncheckedUpdateWithoutQrCodesInput>
+    data: XOR<ServicePointUpdateWithoutQrCodeInput, ServicePointUncheckedUpdateWithoutQrCodeInput>
   }
 
-  export type ServicePointUpdateWithoutQrCodesInput = {
+  export type ServicePointUpdateWithoutQrCodeInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumServicePointTypeFieldUpdateOperationsInput | $Enums.ServicePointType
@@ -161567,7 +161844,7 @@ export namespace Prisma {
     zone?: ServiceZoneUpdateOneRequiredWithoutServicePointsNestedInput
   }
 
-  export type ServicePointUncheckedUpdateWithoutQrCodesInput = {
+  export type ServicePointUncheckedUpdateWithoutQrCodeInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumServicePointTypeFieldUpdateOperationsInput | $Enums.ServicePointType
@@ -161588,6 +161865,22 @@ export namespace Prisma {
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
     z?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type MenuUpsertWithWhereUniqueWithoutQrCodesInput = {
+    where: MenuWhereUniqueInput
+    update: XOR<MenuUpdateWithoutQrCodesInput, MenuUncheckedUpdateWithoutQrCodesInput>
+    create: XOR<MenuCreateWithoutQrCodesInput, MenuUncheckedCreateWithoutQrCodesInput>
+  }
+
+  export type MenuUpdateWithWhereUniqueWithoutQrCodesInput = {
+    where: MenuWhereUniqueInput
+    data: XOR<MenuUpdateWithoutQrCodesInput, MenuUncheckedUpdateWithoutQrCodesInput>
+  }
+
+  export type MenuUpdateManyWithWhereWithoutQrCodesInput = {
+    where: MenuScalarWhereInput
+    data: XOR<MenuUpdateManyMutationInput, MenuUncheckedUpdateManyWithoutQrCodesInput>
   }
 
   export type ScheduleDayCreateWithoutScheduleInput = {
@@ -161806,6 +162099,7 @@ export namespace Prisma {
     establishment: EstablishmentCreateNestedOneWithoutMenusInput
     categories?: MenuCategoryCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationCreateNestedManyWithoutMenuInput
+    qrCodes?: QrCodeCreateNestedManyWithoutMenusInput
   }
 
   export type MenuUncheckedCreateWithoutScheduleInput = {
@@ -161823,6 +162117,7 @@ export namespace Prisma {
     type?: $Enums.MenuType
     categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
     translations?: MenuTranslationUncheckedCreateNestedManyWithoutMenuInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutMenusInput
   }
 
   export type MenuCreateOrConnectWithoutScheduleInput = {
@@ -162133,6 +162428,7 @@ export namespace Prisma {
     establishment?: EstablishmentUpdateOneRequiredWithoutMenusNestedInput
     categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUpdateManyWithoutMenuNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutMenusNestedInput
   }
 
   export type MenuUncheckedUpdateWithoutScheduleInput = {
@@ -162150,6 +162446,7 @@ export namespace Prisma {
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutMenusNestedInput
   }
 
   export type DiscountUpsertWithoutScheduleInput = {
@@ -171558,7 +171855,7 @@ export namespace Prisma {
     x?: number
     y?: number
     z?: number
-    qrCodes?: QrCodeCreateNestedManyWithoutServicePointInput
+    qrCode?: QrCodeCreateNestedOneWithoutServicePointInput
   }
 
   export type ServicePointUncheckedCreateWithoutZoneInput = {
@@ -171581,7 +171878,7 @@ export namespace Prisma {
     x?: number
     y?: number
     z?: number
-    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutServicePointInput
+    qrCode?: QrCodeUncheckedCreateNestedOneWithoutServicePointInput
   }
 
   export type ServicePointCreateOrConnectWithoutZoneInput = {
@@ -171994,9 +172291,11 @@ export namespace Prisma {
     type?: $Enums.QrCodeType
     active?: boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     establishment: EstablishmentCreateNestedOneWithoutQrCodesInput
+    menus?: MenuCreateNestedManyWithoutQrCodesInput
   }
 
   export type QrCodeUncheckedCreateWithoutServicePointInput = {
@@ -172006,18 +172305,15 @@ export namespace Prisma {
     type?: $Enums.QrCodeType
     active?: boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    menus?: MenuUncheckedCreateNestedManyWithoutQrCodesInput
   }
 
   export type QrCodeCreateOrConnectWithoutServicePointInput = {
     where: QrCodeWhereUniqueInput
     create: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput>
-  }
-
-  export type QrCodeCreateManyServicePointInputEnvelope = {
-    data: QrCodeCreateManyServicePointInput | QrCodeCreateManyServicePointInput[]
-    skipDuplicates?: boolean
   }
 
   export type ServiceZoneCreateWithoutServicePointsInput = {
@@ -172045,20 +172341,41 @@ export namespace Prisma {
     create: XOR<ServiceZoneCreateWithoutServicePointsInput, ServiceZoneUncheckedCreateWithoutServicePointsInput>
   }
 
-  export type QrCodeUpsertWithWhereUniqueWithoutServicePointInput = {
-    where: QrCodeWhereUniqueInput
+  export type QrCodeUpsertWithoutServicePointInput = {
     update: XOR<QrCodeUpdateWithoutServicePointInput, QrCodeUncheckedUpdateWithoutServicePointInput>
     create: XOR<QrCodeCreateWithoutServicePointInput, QrCodeUncheckedCreateWithoutServicePointInput>
+    where?: QrCodeWhereInput
   }
 
-  export type QrCodeUpdateWithWhereUniqueWithoutServicePointInput = {
-    where: QrCodeWhereUniqueInput
+  export type QrCodeUpdateToOneWithWhereWithoutServicePointInput = {
+    where?: QrCodeWhereInput
     data: XOR<QrCodeUpdateWithoutServicePointInput, QrCodeUncheckedUpdateWithoutServicePointInput>
   }
 
-  export type QrCodeUpdateManyWithWhereWithoutServicePointInput = {
-    where: QrCodeScalarWhereInput
-    data: XOR<QrCodeUpdateManyMutationInput, QrCodeUncheckedUpdateManyWithoutServicePointInput>
+  export type QrCodeUpdateWithoutServicePointInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    establishment?: EstablishmentUpdateOneRequiredWithoutQrCodesNestedInput
+    menus?: MenuUpdateManyWithoutQrCodesNestedInput
+  }
+
+  export type QrCodeUncheckedUpdateWithoutServicePointInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menus?: MenuUncheckedUpdateManyWithoutQrCodesNestedInput
   }
 
   export type ServiceZoneUpsertWithoutServicePointsInput = {
@@ -172387,6 +172704,7 @@ export namespace Prisma {
     type?: $Enums.QrCodeType
     active?: boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -172966,9 +173284,11 @@ export namespace Prisma {
     type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
     active?: BoolFieldUpdateOperationsInput | boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    servicePoint?: ServicePointUpdateOneWithoutQrCodesNestedInput
+    servicePoint?: ServicePointUpdateOneWithoutQrCodeNestedInput
+    menus?: MenuUpdateManyWithoutQrCodesNestedInput
   }
 
   export type QrCodeUncheckedUpdateWithoutEstablishmentInput = {
@@ -172978,8 +173298,10 @@ export namespace Prisma {
     type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
     active?: BoolFieldUpdateOperationsInput | boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menus?: MenuUncheckedUpdateManyWithoutQrCodesNestedInput
   }
 
   export type QrCodeUncheckedUpdateManyWithoutEstablishmentInput = {
@@ -172989,6 +173311,7 @@ export namespace Prisma {
     type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
     active?: BoolFieldUpdateOperationsInput | boolean
     config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -173008,6 +173331,7 @@ export namespace Prisma {
     schedule?: ScheduleUpdateOneWithoutMenusNestedInput
     categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUpdateManyWithoutMenuNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutMenusNestedInput
   }
 
   export type MenuUncheckedUpdateWithoutEstablishmentInput = {
@@ -173025,6 +173349,7 @@ export namespace Prisma {
     type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
     categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
     translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutMenusNestedInput
   }
 
   export type MenuUncheckedUpdateManyWithoutEstablishmentInput = {
@@ -175758,6 +176083,45 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type QrCodeUpdateWithoutMenusInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    establishment?: EstablishmentUpdateOneRequiredWithoutQrCodesNestedInput
+    servicePoint?: ServicePointUpdateOneWithoutQrCodeNestedInput
+  }
+
+  export type QrCodeUncheckedUpdateWithoutMenusInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    servicePointId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QrCodeUncheckedUpdateManyWithoutMenusInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    servicePointId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
+    active?: BoolFieldUpdateOperationsInput | boolean
+    config?: NullableJsonNullValueInput | InputJsonValue
+    requireOpenMenus?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type MenuCategoryTranslationCreateManyCategoryInput = {
     id?: string
     locale: string
@@ -176044,6 +176408,58 @@ export namespace Prisma {
     isEnabled?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MenuUpdateWithoutQrCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    isVisible?: BoolFieldUpdateOperationsInput | boolean
+    isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
+    establishment?: EstablishmentUpdateOneRequiredWithoutMenusNestedInput
+    schedule?: ScheduleUpdateOneWithoutMenusNestedInput
+    categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
+    translations?: MenuTranslationUpdateManyWithoutMenuNestedInput
+  }
+
+  export type MenuUncheckedUpdateWithoutQrCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    isVisible?: BoolFieldUpdateOperationsInput | boolean
+    isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
+    categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
+    translations?: MenuTranslationUncheckedUpdateManyWithoutMenuNestedInput
+  }
+
+  export type MenuUncheckedUpdateManyWithoutQrCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    isVisible?: BoolFieldUpdateOperationsInput | boolean
+    isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    maxItemsPerOrder?: NullableIntFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    showImages?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumMenuTypeFieldUpdateOperationsInput | $Enums.MenuType
   }
 
   export type ScheduleDayCreateManyScheduleInput = {
@@ -178560,7 +178976,7 @@ export namespace Prisma {
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
     z?: FloatFieldUpdateOperationsInput | number
-    qrCodes?: QrCodeUpdateManyWithoutServicePointNestedInput
+    qrCode?: QrCodeUpdateOneWithoutServicePointNestedInput
   }
 
   export type ServicePointUncheckedUpdateWithoutZoneInput = {
@@ -178583,7 +178999,7 @@ export namespace Prisma {
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
     z?: FloatFieldUpdateOperationsInput | number
-    qrCodes?: QrCodeUncheckedUpdateManyWithoutServicePointNestedInput
+    qrCode?: QrCodeUncheckedUpdateOneWithoutServicePointNestedInput
   }
 
   export type ServicePointUncheckedUpdateManyWithoutZoneInput = {
@@ -178606,50 +179022,6 @@ export namespace Prisma {
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
     z?: FloatFieldUpdateOperationsInput | number
-  }
-
-  export type QrCodeCreateManyServicePointInput = {
-    id?: string
-    token: string
-    establishmentId: string
-    type?: $Enums.QrCodeType
-    active?: boolean
-    config?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type QrCodeUpdateWithoutServicePointInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
-    active?: BoolFieldUpdateOperationsInput | boolean
-    config?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    establishment?: EstablishmentUpdateOneRequiredWithoutQrCodesNestedInput
-  }
-
-  export type QrCodeUncheckedUpdateWithoutServicePointInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
-    active?: BoolFieldUpdateOperationsInput | boolean
-    config?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type QrCodeUncheckedUpdateManyWithoutServicePointInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-    establishmentId?: StringFieldUpdateOperationsInput | string
-    type?: EnumQrCodeTypeFieldUpdateOperationsInput | $Enums.QrCodeType
-    active?: BoolFieldUpdateOperationsInput | boolean
-    config?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

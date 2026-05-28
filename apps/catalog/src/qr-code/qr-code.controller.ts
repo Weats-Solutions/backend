@@ -38,6 +38,7 @@ export class QrCodeController {
         eid: session.establishmentId,
         spid: session.servicePointId,
         type: session.type,
+        qrid: session.id, // Pass the QR Code ID to verify rules
       });
 
       const isDev = this.weatsEnv === 'dev';
@@ -50,7 +51,6 @@ export class QrCodeController {
         maxAge: 4 * 60 * 60 * 1000,
         path: '/',
       });
-
     }
 
     return res.redirect(302, url);

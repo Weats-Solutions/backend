@@ -18,6 +18,7 @@ model Menu {
   schedule      Schedule?         @relation(fields: [scheduleId], references: [id], onDelete: SetNull)
   categories    MenuCategory[]
   translations  MenuTranslation[]
+  qrCodes       QrCode[]          @relation("QrCodeMenus")
 
   @@index([establishmentId])
   @@index([establishmentId, position])

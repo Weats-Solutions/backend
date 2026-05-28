@@ -3,6 +3,7 @@ import { CorePrismaService, QrCodeType } from '@weats/database';
 import { CacheService } from '@weats/cache';
 
 export interface QrSessionPayload {
+  id: string;
   servicePointId: string | null;
   establishmentId: string;
   type: QrCodeType;
@@ -117,6 +118,7 @@ export class QrCodeService {
     const qrCode = await this.prisma.qrCode.findUnique({
       where: { token },
       select: {
+        id: true,
         type: true,
         servicePointId: true,
         establishmentId: true,
@@ -130,6 +132,7 @@ export class QrCodeService {
     return {
       url,
       session: {
+        id: qrCode.id,
         type: qrCode.type,
         servicePointId: qrCode.servicePointId,
         establishmentId: qrCode.establishmentId,

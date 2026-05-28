@@ -8,8 +8,9 @@ import { Request } from 'express';
 export interface QrSessionTokenPayload {
   sub: string;      // service point ID
   eid: string;      // establishment ID
-  spid: string;     // service point ID
+  spid?: string;    // service point ID
   type: string;     // QR code type
+  qrid?: string;    // QR code ID
 }
 
 @Controller('catalog')

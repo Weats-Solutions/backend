@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { CorePrismaService } from '@weats/database';
+import { CacheService } from '@weats/cache';
 import { feature } from '@weats/types';
 
 export type FeatureUsageHandler = (
@@ -12,28 +13,31 @@ export class FeatureUsageService {
   private readonly handlers = new Map<string, FeatureUsageHandler>();
   private readonly logger = new Logger(FeatureUsageService.name);
 
-  constructor(private corePirismaService: CorePrismaService) {
+  constructor(
+    private corePrismaService: CorePrismaService,
+    private cache: CacheService,
+  ) {
     // register built-in handlers
     this.register(feature.menu, async (establishmentId: string) => {
-      return this.corePirismaService.menu.count({ where: { establishmentId } });
+      return this.corePrismaService.menu.count({ where: { establishmentId } });
     });
 
     this.register(feature.languages, async (establishmentId: string) => {
       const est =
-        await this.corePirismaService.establishment.findUnique({
+        await this.corePrismaService.establishment.findUnique({
           where: { id: establishmentId },
         });
       return (est?.availableLanguages || []).length;
     });
 
     this.register(feature.points, async (establishmentId: string) => {
-      return this.corePirismaService.servicePoint.count({
+      return this.corePrismaService.servicePoint.count({
         where: { zone: { establishmentId } },
       });
     });
 
     this.register(feature.images, async (establishmentId: string) => {
-      return this.corePirismaService.image.count({
+      return this.corePrismaService.image.count({
         where: {
           establishmentId,
           faviconAssets: {
@@ -44,18 +48,16 @@ export class FeatureUsageService {
     });
 
     this.register(feature.products, async (establishmentId: string) => {
-      return this.corePirismaService.item.count({
+      return this.corePrismaService.item.count({
         where: { establishmentId, deletedAt: null },
       });
     });
 
-
     this.register(feature.zones, async (establishmentId: string) => {
-      return this.corePirismaService.serviceZone.count({
+      return this.corePrismaService.serviceZone.count({
         where: { establishmentId },
       });
     });
-
   }
 
   register(featureName: feature, handler: FeatureUsageHandler) {
@@ -68,85 +70,97 @@ export class FeatureUsageService {
   async getUsage(featureName: feature, establishmentId: string, request?: any) {
     const handler = this.handlers.get(featureName);
     if (!handler) {
-      throw new Error(
-        `No usage handler registered for feature: ${featureName}`,
-      );
+      // Default usage for unregistered features (such as pure boolean features) is 0
+      return 0;
     }
     return handler(establishmentId, request);
   }
 
   /**
    * Returns both usage and plan-derived limit/enabled flag for a feature.
-   * { usage, limit, enabled }
-   * - limit: number | null (null means no quantity limit)
-   * - enabled: boolean | null (null means not a boolean-controlled feature)
+   * Uses Redis caching to avoid repeatedly querying the database for establishment/plan limits.
    */
   async getUsageAndLimit(featureName: feature, establishmentId: string) {
-    // compute usage first (may be fast)
+    // compute usage first (dynamic data, keep real-time)
     const usage = await this.getUsage(featureName, establishmentId);
 
-    // find planFeature for this establishment
-    const est = await this.corePirismaService.establishment.findUnique({
-      where: { id: establishmentId },
-      select: {
-        isDemo: true,
-        subscription: {
-          select: {
-            planCycle: {
-              select: {
-                planId: true,
+    // Cache key for this establishment's plan limits
+    const cacheKey = `est:plan-limits:${establishmentId}`;
+
+    const planLimits = await this.cache.wrap(cacheKey, 3600, async () => {
+      const est = await this.corePrismaService.establishment.findUnique({
+        where: { id: establishmentId },
+        select: {
+          isDemo: true,
+          subscription: {
+            select: {
+              planCycle: {
+                select: {
+                  planId: true,
+                },
               },
             },
           },
         },
-      },
+      });
+
+      if (est?.isDemo) {
+        return {
+          isDemo: true,
+          features: {} as Record<string, { limit: number | null; enabled: boolean | null }>,
+        };
+      }
+
+      const featuresMap: Record<string, { limit: number | null; enabled: boolean | null }> = {};
+
+      if (est?.subscription?.planCycle?.planId) {
+        const plan = await this.corePrismaService.plan.findFirst({
+          where: { id: est.subscription.planCycle.planId },
+          include: { features: { include: { feature: true } } },
+        });
+
+        if (plan) {
+          for (const pf of plan.features) {
+            let limit: number | null = null;
+            let enabled: boolean | null = null;
+
+            if (pf.valueQuantity !== null && pf.valueQuantity !== undefined) {
+              limit = pf.valueQuantity;
+            }
+            if (pf.valueBoolean !== null && pf.valueBoolean !== undefined) {
+              if (pf.feature.type === 'BOOLEAN') {
+                enabled = pf.valueBoolean;
+              } else if (pf.feature.type === 'QUANTITY') {
+                if (pf.valueBoolean === false) {
+                  enabled = false;
+                }
+              }
+            }
+            featuresMap[pf.feature.name] = { limit, enabled };
+          }
+        }
+      }
+
+      return {
+        isDemo: false,
+        features: featuresMap,
+      };
     });
 
-    if (est?.isDemo) {
+    if (planLimits.isDemo) {
       return {
         usage,
         limit: null,
         enabled: true,
-      } as {
-        usage: number;
-        limit: number | null;
-        enabled: boolean | null;
       };
     }
 
-    let limit: number | null = null;
-    let enabled: boolean | null = null;
+    const featureRules = planLimits.features[featureName];
 
-    if (est?.subscription?.planCycle?.planId) {
-      const plan = await this.corePirismaService.plan.findFirst({
-        where: { id: est.subscription.planCycle.planId },
-        include: { features: { include: { feature: true } } },
-      });
-
-      if (plan) {
-        const pf = plan.features.find((p) => p.feature.name === featureName);
-        if (pf) {
-          if (pf.valueQuantity !== null && pf.valueQuantity !== undefined) {
-            limit = pf.valueQuantity;
-          }
-          if (pf.valueBoolean !== null && pf.valueBoolean !== undefined) {
-            if (pf.feature.type === 'BOOLEAN') {
-              enabled = pf.valueBoolean;
-            } else if (pf.feature.type === 'QUANTITY') {
-              // If explicit false, disable it. If true, ignore (let limit control)
-              if (pf.valueBoolean === false) {
-                enabled = false;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    return { usage, limit, enabled } as {
-      usage: number;
-      limit: number | null;
-      enabled: boolean | null;
+    return {
+      usage,
+      limit: featureRules?.limit ?? null,
+      enabled: featureRules?.enabled ?? null,
     };
   }
 }

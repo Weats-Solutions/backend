@@ -6,7 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CacheModule } from '@weats/cache';
 import { RateLimitModule } from '@weats/rate-limit';
 import { APP_GUARD } from '@nestjs/core';
-import { RateLimitGuard } from '@weats/common';
+import { FeatureUsageModule, RateLimitGuard } from '@weats/common';
 import { DatabaseModule } from '@weats/database';
 
 @Module({
@@ -14,6 +14,7 @@ import { DatabaseModule } from '@weats/database';
     CacheModule,
     QrCodeModule,
     DatabaseModule,
+    FeatureUsageModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],

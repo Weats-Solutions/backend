@@ -75,4 +75,13 @@ export class GenerateQrCodesDto {
   @IsOptional()
   @IsEmail()
   recipientEmail?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  requireOpenMenus?: boolean;
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  menuIds?: string[];
 }

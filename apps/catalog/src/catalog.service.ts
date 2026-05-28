@@ -1,8 +1,9 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { ERRORS, isScheduleOpenNow, normalizeSchedule } from '@weats/common';
+import { ERRORS, FeatureUsageService, isScheduleOpenNow, normalizeSchedule } from '@weats/common';
 import { CorePrismaService, EstablishmentLanguage } from '@weats/database';
 import { Logger } from '@nestjs/common';
 import { CacheService, coreCacheKey, menuItemsCacheKey, menuListCacheKey } from '@weats/cache';
+import { feature } from '@weats/types';
 import { QrSessionTokenPayload } from './catalog.controller';
 
 @Injectable()
@@ -12,6 +13,7 @@ export class CatalogService {
   constructor(
     private readonly prisma: CorePrismaService,
     private readonly cache: CacheService,
+    private readonly featureUsageService: FeatureUsageService,
   ) { }
 
   /**
@@ -75,6 +77,20 @@ export class CatalogService {
     if (!establishment.subscription || !validStatuses.includes(establishment.subscription.status)) {
       throw new NotFoundException(ERRORS.NO_ACTIVE_SUBSCRIPTION);
     }
+  }
+
+  /**
+   * Obtém as regras e menus associados a um QR Code.
+   */
+  private async getQrCodeRules(qrid: string) {
+    return this.prisma.qrCode.findUnique({
+      where: { id: qrid },
+      select: {
+        active: true,
+        requireOpenMenus: true,
+        menus: { select: { id: true } },
+      },
+    });
   }
 
   async getTheme(slug: string) {
@@ -176,18 +192,12 @@ export class CatalogService {
       }
 
       const isAtEstablishment = !!(qrSession && qrSession.eid === establishment.id);
-      const targetId = isAtEstablishment ? qrSession.spid : undefined;
 
-      const menuCacheKey = menuListCacheKey(slug, currentLang, targetId);
+      // Chave de cache estática e genérica baseada apenas no estabelecimento e na língua
+      const menuCacheKey = menuListCacheKey(slug, currentLang, undefined);
 
-      return await this.cache.wrap(menuCacheKey, 3600, async () => {
-        if (isAtEstablishment) {
-          if (!establishment.schedule || !isScheduleOpenNow(establishment.schedule, establishment.timezone)) {
-            throw new BadRequestException(ERRORS.ESTABLISHMENT_CLOSED);
-          }
-        }
-
-        const menus = await this.prisma.menu.findMany({
+      const { menus } = await this.cache.wrap(menuCacheKey, 3600, async () => {
+        const dbMenus = await this.prisma.menu.findMany({
           where: {
             establishmentId: establishment.id,
             isVisible: true,
@@ -204,15 +214,44 @@ export class CatalogService {
           },
         });
 
-        const visibleAndOpenMenus = isAtEstablishment
-          ? menus.filter((menu) => {
-            if (!menu.schedule) return false;
-            return isScheduleOpenNow(menu.schedule, establishment.timezone);
-          })
-          : menus;
-
-        return { menus: visibleAndOpenMenus || [] };
+        return { menus: dbMenus || [] };
       });
+
+      // 3. Aplicar a filtragem relacional do QR Code e horários em memória (fora da cache)
+      let filteredMenus = menus;
+
+      if (isAtEstablishment && qrSession?.qrid) {
+        const qrCode = await this.getQrCodeRules(qrSession.qrid);
+
+        if (!qrCode || !qrCode.active) {
+          throw new NotFoundException(ERRORS.NOT_FOUND);
+        }
+
+        // Verificar se a feature qrcode_rules está ativa no plano
+        const { enabled } = await this.featureUsageService.getUsageAndLimit(
+          feature.qrcode_rules,
+          establishment.id,
+        );
+
+        if (enabled) {
+          const allowedMenuIds = qrCode.menus.map((m) => m.id);
+
+          // 1. Filtrar por menus associados especificamente a este QR Code
+          if (allowedMenuIds.length > 0) {
+            filteredMenus = menus.filter((menu) => allowedMenuIds.includes(menu.id));
+          }
+
+          // 2. Filtrar por horário (se a regra exigi-lo)
+          if (qrCode.requireOpenMenus) {
+            filteredMenus = filteredMenus.filter((menu) => {
+              if (!menu.schedule) return false;
+              return isScheduleOpenNow(menu.schedule, establishment.timezone);
+            });
+          }
+        }
+      }
+
+      return { menus: filteredMenus || [] };
     } catch (error) {
       this.logger.error(`Erro ao buscar menu list para ${slug} (${lang}):`, error);
       if (error instanceof NotFoundException || error instanceof BadRequestException) throw error;
@@ -415,12 +454,33 @@ export class CatalogService {
         return menuData;
       });
 
-      if (isAtEstablishment) {
-        if (!establishment.schedule || !isScheduleOpenNow(establishment.schedule, establishment.timezone)) {
-          throw new BadRequestException(ERRORS.ESTABLISHMENT_CLOSED);
+      if (isAtEstablishment && qrSession?.qrid) {
+        const qrCode = await this.getQrCodeRules(qrSession.qrid);
+
+        if (!qrCode || !qrCode.active) {
+          throw new NotFoundException(ERRORS.NOT_FOUND);
         }
-        if (!menu.schedule || !isScheduleOpenNow(menu.schedule, establishment.timezone)) {
-          throw new BadRequestException(ERRORS.MENU_CLOSED);
+
+        // Verificar se a feature qrcode_rules está ativa no plano
+        const { enabled } = await this.featureUsageService.getUsageAndLimit(
+          feature.qrcode_rules,
+          establishment.id,
+        );
+
+        if (enabled) {
+          const allowedMenuIds = qrCode.menus.map((m) => m.id);
+
+          // 1. Validar se o menu está na lista dos permitidos para este QR
+          if (allowedMenuIds.length > 0 && !allowedMenuIds.includes(menuId)) {
+            throw new NotFoundException(ERRORS.MENU_NOT_FOUND);
+          }
+
+          // 2. Validar se o menu tem de estar aberto
+          if (qrCode.requireOpenMenus) {
+            if (!menu.schedule || !isScheduleOpenNow(menu.schedule, establishment.timezone)) {
+              throw new BadRequestException(ERRORS.MENU_CLOSED);
+            }
+          }
         }
       }
 

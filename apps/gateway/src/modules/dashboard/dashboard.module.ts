@@ -69,9 +69,9 @@ import { ClerkGuard, EstablishmentStaffGuard, ActiveSubscriptionGuard } from '@w
     MenuController,
 
     //Zones
+    QrCodesController,
     ZonesController,
     ZonePointController,
-    QrCodesController,
 
     //Items
     AddonController,
