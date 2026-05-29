@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { ClerkGuard, EstablishmentStaffGuard, CurrentEstablishment, CurrentUser, Roles, DASHBOARD_SERVICE, DASHBOARD_PATTERNS, RateLimit } from '@weats/common';
 import { Establishment, User } from '@weats/types';
-import { GenerateQrCodesDto, UpdateQrCodeDto } from '@weats/contracts';
+import { GenerateQrCodesDto, UpdateQrCodeDto, BulkUpdateQrCodesDto, BulkDeleteQrCodesDto, ResendQrCodesDto } from '@weats/contracts';
 import { EmployeeRoles } from '@weats/database';
 import { ClientProxy } from '@nestjs/microservices';
 
@@ -40,6 +40,45 @@ export class QrCodesController {
             dto,
             establishment,
             userEmail: user.email,
+        });
+    }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @Post('resend')
+    @RateLimit('STRICT') // job pesado
+    async resendQrCodes(
+        @CurrentEstablishment() establishment: Establishment,
+        @CurrentUser() user: User,
+        @Body() dto: ResendQrCodesDto,
+    ) {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.QR_RESEND, {
+            dto,
+            establishment,
+            userEmail: user.email,
+        });
+    }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @Patch('bulk')
+    async bulkUpdateQrCodes(
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: BulkUpdateQrCodesDto,
+    ) {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.QR_BULK_UPDATE, {
+            dto,
+            establishment,
+        });
+    }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @Delete('bulk')
+    async bulkDeleteQrCodes(
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: BulkDeleteQrCodesDto,
+    ) {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.QR_BULK_DELETE, {
+            dto,
+            establishment,
         });
     }
 

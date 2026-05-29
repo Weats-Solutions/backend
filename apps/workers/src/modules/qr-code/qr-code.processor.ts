@@ -14,6 +14,17 @@ import { GenerateQrCodesDto } from '@weats/contracts';
 import { CorePrismaService, EstablishmentLanguage, QrCodeType } from '@weats/database';
 import { CloudflareR2Service } from '@weats/integrations/cloudflare/cloudflare-r2.service';
 import crypto from 'crypto';
+import pLimit from 'p-limit';
+import archiver from 'archiver';
+
+function slugify(str: string): string {
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '_');
+}
 
 @Processor(QUEUES.QRCODE)
 export class QrCodeProcessor {
@@ -191,6 +202,140 @@ export class QrCodeProcessor {
         `Error processing QR Code batch job ${job.id}:`,
         errorStack,
       );
+      throw error;
+    }
+  }
+
+  @Process('resend-batch')
+  async handleResendBatch(
+    job: Job<{
+      establishment: Establishment;
+      userEmail: string;
+      recipientEmail: string;
+      qrCodes: Array<{
+        id: string;
+        token: string;
+        type: string;
+        servicePointName: string;
+        zoneName: string;
+        config: any;
+      }>;
+    }>,
+  ) {
+    const { establishment, userEmail, recipientEmail, qrCodes } = job.data;
+    this.logger.log(
+      `Processing resend QR Code batch job ${job.id} for ${establishment.id} to ${recipientEmail}`,
+    );
+
+    try {
+      const baseUrl = `${this.catalogApiUrl}/qr/`;
+      const limit = pLimit(5);
+      const results: { zoneName: string; fileName: string; svg: string }[] = [];
+
+      await Promise.all(
+        qrCodes.map((qr) =>
+          limit(async () => {
+            const config = qr.config || {};
+            let logoDataUri = '';
+            if (config.imageId) {
+              try {
+                logoDataUri = await this.resolveLogoDataUri(
+                  establishment.id,
+                  config.imageId,
+                );
+              } catch (logoErr) {
+                this.logger.error(`Failed to resolve logo for QR ${qr.id}:`, logoErr);
+              }
+            }
+
+            const styleConfig: QrStyleConfig = {
+              dotColor: config.dotColor || '#000000',
+              bgColor: config.bgColor || '#ffffff',
+              errorLevel: config.errorLevel || 'M',
+              frameId: typeof config.frameId === 'number' ? config.frameId : 0,
+              frameColor: config.frameColor || '#000000',
+              frameText: config.frameText || '',
+              frameTextColor: config.frameTextColor || '#ffffff',
+              logoBase64: logoDataUri,
+            };
+
+            const url = `${baseUrl}${qr.token}`;
+            const svg = await this.qrGenerator.generateSingleSvg(
+              url,
+              styleConfig,
+              qr.servicePointName,
+            );
+
+            results.push({
+              zoneName: slugify(qr.zoneName),
+              fileName: `${slugify(qr.servicePointName)}.svg`,
+              svg,
+            });
+          }),
+        ),
+      );
+
+      // Build ZIP
+      const archive = archiver('zip', { zlib: { level: 9 } });
+      const chunks: Buffer[] = [];
+
+      const zipBuffer = await new Promise<Buffer>((resolve, reject) => {
+        archive.on('data', (chunk) => chunks.push(chunk));
+        archive.on('end', () => resolve(Buffer.concat(chunks)));
+        archive.on('error', (err) => reject(err));
+
+        for (const entry of results) {
+          const filePath = `${entry.zoneName}/${entry.fileName}`;
+          archive.append(entry.svg, { name: filePath });
+        }
+
+        archive.finalize();
+      });
+
+      const isSharedEmail = recipientEmail !== userEmail;
+      const template = isSharedEmail
+        ? EmailTemplate.QRCODES_SHARED
+        : EmailTemplate.QRCODES;
+
+      const zonesMap = new Map<string, number>();
+      qrCodes.forEach((q) => {
+        zonesMap.set(q.zoneName, (zonesMap.get(q.zoneName) || 0) + 1);
+      });
+      const serviceZones = Array.from(zonesMap.entries()).map(([zoneName, count]) => ({
+        zoneName,
+        count,
+      }));
+
+      const emailContext = isSharedEmail
+        ? {
+            establishmentName: establishment.name,
+            qrCodesCount: qrCodes.length,
+            serviceZones,
+            senderName: userEmail,
+          }
+        : {
+            establishmentName: establishment.name,
+            qrCodesCount: qrCodes.length,
+            serviceZones,
+          };
+
+      await this.emailProducer.send({
+        to: recipientEmail,
+        lang: establishment.primaryLanguage.toLowerCase() as 'pt' | 'en' | 'es',
+        template,
+        context: emailContext,
+        attachments: [
+          {
+            name: 'qr-codes-reenvio.zip',
+            content: zipBuffer.toString('base64'),
+            contentType: 'application/zip',
+          },
+        ],
+      });
+
+      this.logger.log(`Resend batch job ${job.id} completed successfully`);
+    } catch (error) {
+      this.logger.error(`Error processing resend batch job ${job.id}:`, error);
       throw error;
     }
   }

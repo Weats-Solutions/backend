@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
 import { CorePrismaService } from '@weats/database';
 import { ERRORS } from '@weats/common';
-import { GenerateQrCodesDto, UpdateQrCodeDto } from '@weats/contracts';
+import { GenerateQrCodesDto, UpdateQrCodeDto, ResendQrCodesDto } from '@weats/contracts';
 import { InjectQueue } from '@nestjs/bull';
 import type { Queue } from 'bull';
 import { QUEUES } from '@weats/bull';
@@ -223,5 +223,134 @@ export class QrCodesService {
     await this.cache.clearMenuListCache(establishment.slug);
 
     return { success: true };
+  }
+
+  async bulkUpdate(
+    ids: string[],
+    dto: UpdateQrCodeDto,
+    establishment: Establishment,
+  ) {
+    if (!ids || ids.length === 0) return { success: true, count: 0 };
+
+    const validQrCodes = await this.prisma.qrCode.findMany({
+      where: {
+        id: { in: ids },
+        establishmentId: establishment.id,
+      },
+      select: { id: true },
+    });
+
+    const validIds = validQrCodes.map((q) => q.id);
+    if (validIds.length === 0) return { success: true, count: 0 };
+
+    const updateData: any = {};
+    if (dto.active !== undefined) updateData.active = dto.active;
+    if (dto.requireOpenMenus !== undefined) updateData.requireOpenMenus = dto.requireOpenMenus;
+
+    await this.prisma.$transaction(async (tx) => {
+      if (dto.menuIds !== undefined) {
+        for (const id of validIds) {
+          await tx.qrCode.update({
+            where: { id },
+            data: {
+              ...updateData,
+              menus: {
+                set: dto.menuIds.map((menuId) => ({ id: menuId })),
+              },
+            },
+          });
+        }
+      } else if (Object.keys(updateData).length > 0) {
+        await tx.qrCode.updateMany({
+          where: { id: { in: validIds } },
+          data: updateData,
+        });
+      }
+    });
+
+    await this.cache.clearMenuListCache(establishment.slug);
+
+    return { success: true, count: validIds.length };
+  }
+
+  async bulkDelete(ids: string[], establishment: Establishment) {
+    if (!ids || ids.length === 0) return { success: true, count: 0 };
+
+    const validQrCodes = await this.prisma.qrCode.findMany({
+      where: {
+        id: { in: ids },
+        establishmentId: establishment.id,
+      },
+      select: { id: true },
+    });
+
+    const validIds = validQrCodes.map((q) => q.id);
+    if (validIds.length === 0) return { success: true, count: 0 };
+
+    await this.prisma.qrCode.deleteMany({
+      where: { id: { in: validIds } },
+    });
+
+    await this.cache.clearMenuListCache(establishment.slug);
+
+    return { success: true, count: validIds.length };
+  }
+
+  async resendQrCodes(
+    dto: ResendQrCodesDto,
+    establishment: Establishment,
+    userEmail: string,
+  ) {
+    const ids = dto.ids || [];
+    if (ids.length === 0) {
+      throw new RpcException({
+        message: 'Nenhum QR Code selecionado para reenvio.',
+        code: 400,
+      });
+    }
+
+    const qrCodes = await this.prisma.qrCode.findMany({
+      where: {
+        id: { in: ids },
+        establishmentId: establishment.id,
+      },
+      include: {
+        servicePoint: {
+          select: {
+            name: true,
+            zone: { select: { name: true } },
+          },
+        },
+      },
+    });
+
+    if (qrCodes.length === 0) {
+      throw new RpcException({
+        message: 'Nenhum QR Code válido encontrado para reenvio.',
+        code: 404,
+      });
+    }
+
+    const mappedQrCodes = qrCodes.map((qr) => ({
+      id: qr.id,
+      token: qr.token,
+      type: qr.type,
+      servicePointName: qr.type === 'MENU' ? 'menu_digital' : qr.servicePoint?.name || 'Mesa',
+      zoneName: qr.type === 'MENU' ? 'Menu_Digital' : qr.servicePoint?.zone?.name || 'Geral',
+      config: qr.config,
+    }));
+
+    const job = await this.qrCodeQueue.add('resend-batch', {
+      establishment,
+      userEmail,
+      recipientEmail: dto.recipientEmail || userEmail,
+      qrCodes: mappedQrCodes,
+    });
+
+    this.logger.log(
+      `Job QRCODE resend-batch created: ${job.id} for establishment ${establishment.id}`,
+    );
+
+    return { jobId: job.id, status: 'queued' };
   }
 }

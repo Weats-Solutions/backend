@@ -2,7 +2,7 @@ import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common';
 import { QrCodesService } from './qr-codes.service';
-import { GenerateQrCodesDto, UpdateQrCodeDto } from '@weats/contracts';
+import { GenerateQrCodesDto, UpdateQrCodeDto, BulkUpdateQrCodesDto, BulkDeleteQrCodesDto, ResendQrCodesDto } from '@weats/contracts';
 import { Establishment } from '@weats/types';
 
 @Controller()
@@ -58,6 +58,48 @@ export class QrCodesController {
         return this.qrCodesService.delete(
             payload.id,
             payload.establishment,
+        );
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.QR_BULK_UPDATE)
+    async bulkUpdateQrCodes(
+        @Payload() payload: {
+            dto: BulkUpdateQrCodesDto;
+            establishment: Establishment;
+        },
+    ) {
+        return this.qrCodesService.bulkUpdate(
+            payload.dto.ids,
+            payload.dto.data,
+            payload.establishment,
+        );
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.QR_BULK_DELETE)
+    async bulkDeleteQrCodes(
+        @Payload() payload: {
+            dto: BulkDeleteQrCodesDto;
+            establishment: Establishment;
+        },
+    ) {
+        return this.qrCodesService.bulkDelete(
+            payload.dto.ids,
+            payload.establishment,
+        );
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.QR_RESEND)
+    async resendQrCodes(
+        @Payload() payload: {
+            dto: ResendQrCodesDto;
+            establishment: Establishment;
+            userEmail: string;
+        },
+    ) {
+        return this.qrCodesService.resendQrCodes(
+            payload.dto,
+            payload.establishment,
+            payload.userEmail,
         );
     }
 }
