@@ -58,7 +58,32 @@ export class FeatureUsageService {
         where: { establishmentId },
       });
     });
+
+    this.register(feature.menu_categories, async (establishmentId: string) => {
+      return this.corePrismaService.menuCategory.count({
+        where: { menu: { establishmentId } },
+      });
+    });
+
+    this.register(feature.menu_subcategories, async (establishmentId: string) => {
+      return this.corePrismaService.menuSubcategory.count({
+        where: { category: { menu: { establishmentId } } },
+      });
+    });
+
+    this.register(feature.custom_addons, async (establishmentId: string) => {
+      return this.corePrismaService.addon.count({
+        where: { establishmentId },
+      });
+    });
+
+    this.register(feature.custom_variants, async (establishmentId: string) => {
+      return this.corePrismaService.variantOption.count({
+        where: { establishmentId },
+      });
+    });
   }
+
 
   register(featureName: feature, handler: FeatureUsageHandler) {
     if (this.handlers.has(featureName)) {

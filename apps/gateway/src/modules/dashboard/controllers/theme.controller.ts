@@ -2,10 +2,10 @@ import { Body, Controller, Get, Param, Patch, Post, UseGuards } from "@nestjs/co
 import { ClerkGuard } from "@weats/common/guards/clerk.guard";
 import { EstablishmentStaffGuard } from "@weats/common/guards/establishment-staff.guard";
 import { CurrentEstablishment } from "@weats/common/decorators/current-establishment.decorator";
-import { Establishment } from "@weats/types";
+import { Establishment, feature } from "@weats/types";
 import { ClientProxy } from "@nestjs/microservices";
 import { Inject } from "@nestjs/common";
-import { DASHBOARD_SERVICE } from "@weats/common";
+import { DASHBOARD_SERVICE, FeatureLimitGuard, RequiresFeature } from "@weats/common";
 import { DASHBOARD_PATTERNS } from "@weats/common/patterns/dashboard.patterns";
 import { CreateThemeDto } from "@weats/contracts";
 
@@ -39,6 +39,8 @@ export class ThemeController {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.THEME_GET_BY_ID, { themeId, establishmentId: establishment.id });
     }
 
+    @RequiresFeature(feature.theme_builder)
+    @UseGuards(FeatureLimitGuard)
     @Post()
     async createTheme(
         @Body() createThemeDto: CreateThemeDto,
@@ -47,6 +49,8 @@ export class ThemeController {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.THEME_CREATE, { createThemeDto, establishment });
     }
 
+    @RequiresFeature(feature.theme_builder)
+    @UseGuards(FeatureLimitGuard)
     @Patch(':themeId')
     async updateTheme(
         @Param('themeId') themeId: string,

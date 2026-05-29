@@ -1434,6 +1434,7 @@ exports.UnitType = exports.$Enums.UnitType = {
 
 exports.ItemStatus = exports.$Enums.ItemStatus = {
   ACTIVE: 'ACTIVE',
+  UNAVAILABLE: 'UNAVAILABLE',
   DRAFT: 'DRAFT',
   INACTIVE: 'INACTIVE'
 };

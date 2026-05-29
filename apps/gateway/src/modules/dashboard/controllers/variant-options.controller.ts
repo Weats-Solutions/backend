@@ -8,9 +8,9 @@ import {
   Body,
 } from '@nestjs/common';
 import { CreateVariantOptionDto, UpdateVariantOptionDto } from '@weats/contracts';
-import { Establishment } from '@weats/types';
+import { Establishment, feature } from '@weats/types';
 import { UseGuards } from '@nestjs/common';
-import { ClerkGuard, EstablishmentStaffGuard, CurrentEstablishment } from '@weats/common';
+import { ClerkGuard, EstablishmentStaffGuard, CurrentEstablishment, RequiresFeature, FeatureLimitGuard } from '@weats/common';
 import { Inject } from '@nestjs/common';
 import { DASHBOARD_SERVICE, DASHBOARD_PATTERNS } from '@weats/common';
 import { ClientProxy } from '@nestjs/microservices';
@@ -20,6 +20,8 @@ import { ClientProxy } from '@nestjs/microservices';
 export class VariantOptionsController {
   constructor(@Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy) { }
 
+  @RequiresFeature(feature.custom_variants)
+  @UseGuards(FeatureLimitGuard)
   @Post()
   async create(
     @CurrentEstablishment() establishment: Establishment,

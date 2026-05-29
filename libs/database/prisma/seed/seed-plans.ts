@@ -32,6 +32,9 @@ async function main() {
         { name: 'google_analytics', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 16 },
         { name: 'academy', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 17 },
 
+        { name: 'menu_categories', type: 'QUANTITY', showInPlans: false, showInDetailsOnly: false, position: 18 },
+        { name: 'menu_subcategories', type: 'QUANTITY', showInPlans: false, showInDetailsOnly: false, position: 19 },
+
         //{ name: 'devices', type: 'BOOLEAN', showInPlans: true },
         //{ name: 'employees', type: 'BOOLEAN', showInPlans: true },
         //{ name: 'marketplace', type: 'BOOLEAN', showInPlans: true },
@@ -41,6 +44,8 @@ async function main() {
         //{ name: 'booking', type: 'BOOLEAN', showInPlans: true },
     ];
 
+    //bloquear 10 categorias
+    //bloquear 25 subcategorias
     for (const f of features) {
         await prisma.feature.upsert({
             where: { name: f.name },
@@ -92,6 +97,9 @@ async function main() {
                 metadata: false,
                 google_analytics: false,
                 academy: false,
+
+                menu_categories: 10,
+                menu_subcategories: 25,
             },
         },
 
@@ -122,6 +130,9 @@ async function main() {
                 metadata: true,
                 google_analytics: true,
                 academy: true,
+
+                menu_categories: 10,
+                menu_subcategories: 25,
             },
         },
 
@@ -153,6 +164,9 @@ async function main() {
                 metadata: true,
                 google_analytics: true,
                 academy: true,
+
+                menu_categories: 10,
+                menu_subcategories: 25,
             },
         },
     ];

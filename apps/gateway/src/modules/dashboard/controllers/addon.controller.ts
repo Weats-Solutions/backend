@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Patch, Post, UseGuards, Inject } from '@nestjs/common';
-import { ClerkGuard, CurrentEstablishment, EstablishmentStaffGuard, Roles } from '@weats/common';
+import { ClerkGuard, CurrentEstablishment, EstablishmentStaffGuard, FeatureLimitGuard, RequiresFeature, Roles } from '@weats/common';
 import { EmployeeRoles } from '@weats/database';
 import { CreateAddonDto, UpdateAddonDto } from '@weats/contracts';
-import { Establishment } from '@weats/types';
+import { Establishment, feature } from '@weats/types';
 import { DASHBOARD_SERVICE, DASHBOARD_PATTERNS } from '@weats/common';
 import { ClientProxy } from '@nestjs/microservices';
 
@@ -11,6 +11,8 @@ import { ClientProxy } from '@nestjs/microservices';
 export class AddonController {
     constructor(@Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy) { }
 
+    @RequiresFeature(feature.custom_addons)
+    @UseGuards(FeatureLimitGuard)
     @Roles(EmployeeRoles.MANAGER)
     @Post()
     create(

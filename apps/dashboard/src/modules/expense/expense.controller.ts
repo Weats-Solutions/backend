@@ -6,7 +6,7 @@ import { ExpenseService } from './expense.service';
 
 @Controller()
 export class ExpenseController {
-  constructor(private readonly expenseService: ExpenseService) {}
+  constructor(private readonly expenseService: ExpenseService) { }
 
   @MessagePattern(DASHBOARD_PATTERNS.EXPENSE_CREATE)
   async createExpense(

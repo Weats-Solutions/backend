@@ -901,6 +901,7 @@ export type Currency = (typeof Currency)[keyof typeof Currency]
 
 export const ItemStatus: {
   ACTIVE: 'ACTIVE',
+  UNAVAILABLE: 'UNAVAILABLE',
   DRAFT: 'DRAFT',
   INACTIVE: 'INACTIVE'
 };

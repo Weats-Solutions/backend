@@ -5,9 +5,9 @@ import {
     Put,
     UseGuards
 } from '@nestjs/common';
-import { ClerkGuard, EstablishmentStaffGuard, CurrentEstablishment, Roles } from '@weats/common';
+import { ClerkGuard, EstablishmentStaffGuard, CurrentEstablishment, Roles, RequiresFeature, FeatureLimitGuard } from '@weats/common';
 import { EmployeeRoles } from '@weats/database';
-import { Establishment } from '@weats/types';
+import { Establishment, feature } from '@weats/types';
 import { CreateCategoryDto, UpdateCategoryPositionsDto } from '@weats/contracts';
 import { DASHBOARD_SERVICE, DASHBOARD_PATTERNS } from '@weats/common';
 import { ClientProxy } from '@nestjs/microservices';
@@ -35,6 +35,8 @@ export class MenuCategoryController {
 
     @Roles(EmployeeRoles.MANAGER)
 
+    @RequiresFeature(feature.menu_categories)
+    @UseGuards(FeatureLimitGuard)
     @Post()
     createCategory(
         @Param('menuId') menuId: string,

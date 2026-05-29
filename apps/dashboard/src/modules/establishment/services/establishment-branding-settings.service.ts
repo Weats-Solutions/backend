@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
 import { ERRORS } from '@weats/common';
+import { FeatureUsageService } from '@weats/common/feature/feature-usage.service';
 import {
     EstablishmentBrandingDto, EstablishmentMetadataDto,
     EstablishmentSocialMediaDto,
@@ -8,7 +9,7 @@ import {
 } from '@weats/contracts';
 import { CorePrismaService } from '@weats/database';
 import { CacheService } from '@weats/cache';
-import { Establishment } from '@weats/types';
+import { Establishment, feature } from '@weats/types';
 
 @Injectable()
 export class EstablishmentBrandingSettingsService {
@@ -17,6 +18,7 @@ export class EstablishmentBrandingSettingsService {
     constructor(
         private readonly prisma: CorePrismaService,
         private readonly cacheService: CacheService,
+        private readonly featureUsageService: FeatureUsageService,
     ) { }
 
     async getEstablishmentBrandingSettings(id: string) {
@@ -125,6 +127,17 @@ export class EstablishmentBrandingSettingsService {
 
                     break;
                 case 'metadata':
+                    const { enabled } = await this.featureUsageService.getUsageAndLimit(
+                        feature.metadata,
+                        establishment.id,
+                    );
+                    if (!enabled) {
+                        throw new RpcException({
+                            status: 403,
+                            code: 403,
+                            message: ERRORS.FEATURE_NOT_ENABLED,
+                        });
+                    }
                     result = await this.updateMetadata(establishment.id, dto.metadata);
                     await this.cacheService.clearCatalogEstablishmentCache(establishment.slug);
                     await this.cacheService.clearDashboardEstablishmentCache(establishment.id);

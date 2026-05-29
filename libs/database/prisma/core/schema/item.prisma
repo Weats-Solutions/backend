@@ -269,6 +269,7 @@ model ItemModifierOption {
 
 enum ItemStatus {
   ACTIVE
+  UNAVAILABLE
   DRAFT
   INACTIVE
 }

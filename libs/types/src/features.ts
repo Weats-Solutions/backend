@@ -1,15 +1,25 @@
 export const feature = {
   menu: 'menu',
   languages: 'languages',
-  menu_settings: 'menu_settings',
-  booking: 'booking',
-  points: 'points',
-  zones: 'zones',
-  images: 'images',
   products: 'products',
-  items: 'items',
+  custom_variants: 'custom_variants',
+  custom_addons: 'custom_addons',
+  zones: 'zones',
+  points: 'points',
+  images: 'images',
   custom_qrcodes: 'custom_qrcodes',
   qrcode_rules: 'qrcode_rules',
+
+  call_staff: 'call_staff',
+
+  theme_builder: 'theme_builder',
+
+  expenses: 'expenses',
+  metadata: 'metadata',
+  google_analytics: 'google_analytics',
+
+  menu_categories: 'menu_categories',
+  menu_subcategories: 'menu_subcategories',
 } as const;
 
 //bloquear 10 categorias

@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
 import { ERRORS, RESERVED_DOMAINS } from '@weats/common';
+import { FeatureUsageService } from '@weats/common/feature/feature-usage.service';
 import {
     EstablishmentAnalyticsDto,
     EstablishmentDomainDto, EstablishmentWifiDto,
@@ -8,7 +9,7 @@ import {
 } from '@weats/contracts';
 import { CorePrismaService } from '@weats/database';
 import { CacheService } from '@weats/cache';
-import { Establishment } from '@weats/types';
+import { Establishment, feature } from '@weats/types';
 
 @Injectable()
 export class EstablishmentDigitalSettingsService {
@@ -17,6 +18,7 @@ export class EstablishmentDigitalSettingsService {
     constructor(
         private readonly prisma: CorePrismaService,
         private readonly cacheService: CacheService,
+        private readonly featureUsageService: FeatureUsageService,
     ) { }
 
 
@@ -73,6 +75,17 @@ export class EstablishmentDigitalSettingsService {
 
                 break;
             case 'analytics':
+                const { enabled } = await this.featureUsageService.getUsageAndLimit(
+                    feature.google_analytics,
+                    establishment.id,
+                );
+                if (!enabled) {
+                    throw new RpcException({
+                        status: 403,
+                        code: 403,
+                        message: ERRORS.FEATURE_NOT_ENABLED,
+                    });
+                }
                 result = await this.updateAnalytics(
                     establishment,
                     updateEstablishmentDigitalSettingsDto.analytics,

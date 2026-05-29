@@ -11,16 +11,17 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { DASHBOARD_SERVICE } from '@weats/common';
+import { DASHBOARD_SERVICE, FeatureLimitGuard, RequiresFeature } from '@weats/common';
 import { CurrentEstablishment } from '@weats/common/decorators/current-establishment.decorator';
 import { ClerkGuard } from '@weats/common/guards/clerk.guard';
 import { EstablishmentStaffGuard } from '@weats/common/guards/establishment-staff.guard';
 import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { CreateExpenseDto } from '@weats/contracts';
-import { Establishment } from '@weats/types';
+import { Establishment, feature } from '@weats/types';
 
 @Controller('expenses')
-
+@RequiresFeature(feature.expenses)
+@UseGuards(FeatureLimitGuard)
 export class ExpenseController {
   constructor(
     @Inject(DASHBOARD_SERVICE) private readonly dashboardClient: ClientProxy,
