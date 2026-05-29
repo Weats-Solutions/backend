@@ -148,22 +148,7 @@ export class EstablishmentGeneralSettingsService {
       },
     });
 
-    if (establishment.stripeCustomerId) {
-      try {
-        await this.stripeService.updateCustomer(establishment.stripeCustomerId, {
-          address: {
-            line1: data.address,
-            city: data.city,
-            state: data.state,
-            postal_code: data.zipCode,
-            country: data.country,
-          },
-        });
-      } catch (error) {
-        this.logger.error('Failed to sync location to Stripe', error);
-      }
-    }
-
+   
     return establishment;
   }
 
