@@ -166,6 +166,7 @@ export class CatalogService {
           takeaway: establishment.takeAwayModule,
           reservations: establishment.reservationsModule,
           callStaff: establishment.callStaffModule,
+          callStaffOptions: establishment.callStaffOptions,
         }
       };
     } catch (error) {

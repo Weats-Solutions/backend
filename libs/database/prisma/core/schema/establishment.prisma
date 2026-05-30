@@ -39,6 +39,7 @@ model Establishment {
   myPageModule       Boolean @default(false)
   menusModule        Boolean @default(false)
   callStaffModule    Boolean @default(false)
+  callStaffOptions   CallStaffOption[] @default([HELP, CLEAN, BILL, ORDER])
   takeAwayModule     Boolean @default(false)
   reservationsModule Boolean @default(false)
 

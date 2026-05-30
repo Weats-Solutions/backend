@@ -221,3 +221,11 @@ enum StockInventoryStatus {
   COMPLETED
   CANCELLED
 }
+
+enum CallStaffOption {
+  HELP
+  CLEAN
+  BILL
+  ORDER
+}
+

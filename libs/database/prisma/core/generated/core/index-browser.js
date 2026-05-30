@@ -337,6 +337,7 @@ exports.Prisma.EstablishmentScalarFieldEnum = {
   myPageModule: 'myPageModule',
   menusModule: 'menusModule',
   callStaffModule: 'callStaffModule',
+  callStaffOptions: 'callStaffOptions',
   takeAwayModule: 'takeAwayModule',
   reservationsModule: 'reservationsModule',
   isDemo: 'isDemo',
@@ -1407,6 +1408,13 @@ exports.Currency = exports.$Enums.Currency = {
   CHF: 'CHF',
   AED: 'AED',
   CNY: 'CNY'
+};
+
+exports.CallStaffOption = exports.$Enums.CallStaffOption = {
+  HELP: 'HELP',
+  CLEAN: 'CLEAN',
+  BILL: 'BILL',
+  ORDER: 'ORDER'
 };
 
 exports.UnitType = exports.$Enums.UnitType = {

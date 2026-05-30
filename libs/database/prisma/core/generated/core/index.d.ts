@@ -886,6 +886,16 @@ export const StockInventoryStatus: {
 export type StockInventoryStatus = (typeof StockInventoryStatus)[keyof typeof StockInventoryStatus]
 
 
+export const CallStaffOption: {
+  HELP: 'HELP',
+  CLEAN: 'CLEAN',
+  BILL: 'BILL',
+  ORDER: 'ORDER'
+};
+
+export type CallStaffOption = (typeof CallStaffOption)[keyof typeof CallStaffOption]
+
+
 export const Currency: {
   EUR: 'EUR',
   USD: 'USD',
@@ -1148,6 +1158,10 @@ export const StockAlertStatus: typeof $Enums.StockAlertStatus
 export type StockInventoryStatus = $Enums.StockInventoryStatus
 
 export const StockInventoryStatus: typeof $Enums.StockInventoryStatus
+
+export type CallStaffOption = $Enums.CallStaffOption
+
+export const CallStaffOption: typeof $Enums.CallStaffOption
 
 export type Currency = $Enums.Currency
 
@@ -26571,6 +26585,7 @@ export namespace Prisma {
     myPageModule: number
     menusModule: number
     callStaffModule: number
+    callStaffOptions: number
     takeAwayModule: number
     reservationsModule: number
     isDemo: number
@@ -26721,6 +26736,7 @@ export namespace Prisma {
     myPageModule?: true
     menusModule?: true
     callStaffModule?: true
+    callStaffOptions?: true
     takeAwayModule?: true
     reservationsModule?: true
     isDemo?: true
@@ -26844,6 +26860,7 @@ export namespace Prisma {
     myPageModule: boolean
     menusModule: boolean
     callStaffModule: boolean
+    callStaffOptions: $Enums.CallStaffOption[]
     takeAwayModule: boolean
     reservationsModule: boolean
     isDemo: boolean
@@ -26911,6 +26928,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -27002,6 +27020,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -27057,6 +27076,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -27112,6 +27132,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: boolean
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -27131,7 +27152,7 @@ export namespace Prisma {
     ownerId?: boolean
   }
 
-  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "isActive" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "myPageModule" | "menusModule" | "callStaffModule" | "takeAwayModule" | "reservationsModule" | "isDemo" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "googleAnalyticsId" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
+  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "isActive" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "myPageModule" | "menusModule" | "callStaffModule" | "callStaffOptions" | "takeAwayModule" | "reservationsModule" | "isDemo" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "googleAnalyticsId" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
   export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     metadata?: boolean | Establishment$metadataArgs<ExtArgs>
@@ -27265,6 +27286,7 @@ export namespace Prisma {
       myPageModule: boolean
       menusModule: boolean
       callStaffModule: boolean
+      callStaffOptions: $Enums.CallStaffOption[]
       takeAwayModule: boolean
       reservationsModule: boolean
       isDemo: boolean
@@ -27775,6 +27797,7 @@ export namespace Prisma {
     readonly myPageModule: FieldRef<"Establishment", 'Boolean'>
     readonly menusModule: FieldRef<"Establishment", 'Boolean'>
     readonly callStaffModule: FieldRef<"Establishment", 'Boolean'>
+    readonly callStaffOptions: FieldRef<"Establishment", 'CallStaffOption[]'>
     readonly takeAwayModule: FieldRef<"Establishment", 'Boolean'>
     readonly reservationsModule: FieldRef<"Establishment", 'Boolean'>
     readonly isDemo: FieldRef<"Establishment", 'Boolean'>
@@ -112441,6 +112464,7 @@ export namespace Prisma {
     myPageModule: 'myPageModule',
     menusModule: 'menusModule',
     callStaffModule: 'callStaffModule',
+    callStaffOptions: 'callStaffOptions',
     takeAwayModule: 'takeAwayModule',
     reservationsModule: 'reservationsModule',
     isDemo: 'isDemo',
@@ -113864,6 +113888,20 @@ export namespace Prisma {
    * Reference to a field of type 'EstablishmentType[]'
    */
   export type ListEnumEstablishmentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstablishmentType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'CallStaffOption[]'
+   */
+  export type ListEnumCallStaffOptionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CallStaffOption[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'CallStaffOption'
+   */
+  export type EnumCallStaffOptionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CallStaffOption'>
     
 
 
@@ -115504,6 +115542,7 @@ export namespace Prisma {
     myPageModule?: BoolFilter<"Establishment"> | boolean
     menusModule?: BoolFilter<"Establishment"> | boolean
     callStaffModule?: BoolFilter<"Establishment"> | boolean
+    callStaffOptions?: EnumCallStaffOptionNullableListFilter<"Establishment">
     takeAwayModule?: BoolFilter<"Establishment"> | boolean
     reservationsModule?: BoolFilter<"Establishment"> | boolean
     isDemo?: BoolFilter<"Establishment"> | boolean
@@ -115594,6 +115633,7 @@ export namespace Prisma {
     myPageModule?: SortOrder
     menusModule?: SortOrder
     callStaffModule?: SortOrder
+    callStaffOptions?: SortOrder
     takeAwayModule?: SortOrder
     reservationsModule?: SortOrder
     isDemo?: SortOrder
@@ -115688,6 +115728,7 @@ export namespace Prisma {
     myPageModule?: BoolFilter<"Establishment"> | boolean
     menusModule?: BoolFilter<"Establishment"> | boolean
     callStaffModule?: BoolFilter<"Establishment"> | boolean
+    callStaffOptions?: EnumCallStaffOptionNullableListFilter<"Establishment">
     takeAwayModule?: BoolFilter<"Establishment"> | boolean
     reservationsModule?: BoolFilter<"Establishment"> | boolean
     isDemo?: BoolFilter<"Establishment"> | boolean
@@ -115777,6 +115818,7 @@ export namespace Prisma {
     myPageModule?: SortOrder
     menusModule?: SortOrder
     callStaffModule?: SortOrder
+    callStaffOptions?: SortOrder
     takeAwayModule?: SortOrder
     reservationsModule?: SortOrder
     isDemo?: SortOrder
@@ -115833,6 +115875,7 @@ export namespace Prisma {
     myPageModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     menusModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     callStaffModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
+    callStaffOptions?: EnumCallStaffOptionNullableListFilter<"Establishment">
     takeAwayModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     reservationsModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     isDemo?: BoolWithAggregatesFilter<"Establishment"> | boolean
@@ -122991,6 +123034,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -123076,6 +123120,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -123161,6 +123206,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -123246,6 +123292,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -123331,6 +123378,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -123381,6 +123429,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -123426,6 +123475,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -130956,6 +131006,14 @@ export namespace Prisma {
     not?: NestedEnumEstablishmentTypeFilter<$PrismaModel> | $Enums.EstablishmentType
   }
 
+  export type EnumCallStaffOptionNullableListFilter<$PrismaModel = never> = {
+    equals?: $Enums.CallStaffOption[] | ListEnumCallStaffOptionFieldRefInput<$PrismaModel> | null
+    has?: $Enums.CallStaffOption | EnumCallStaffOptionFieldRefInput<$PrismaModel> | null
+    hasEvery?: $Enums.CallStaffOption[] | ListEnumCallStaffOptionFieldRefInput<$PrismaModel>
+    hasSome?: $Enums.CallStaffOption[] | ListEnumCallStaffOptionFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type EnumEstablishmentLanguageFilter<$PrismaModel = never> = {
     equals?: $Enums.EstablishmentLanguage | EnumEstablishmentLanguageFieldRefInput<$PrismaModel>
     in?: $Enums.EstablishmentLanguage[] | ListEnumEstablishmentLanguageFieldRefInput<$PrismaModel>
@@ -131339,6 +131397,7 @@ export namespace Prisma {
     myPageModule?: SortOrder
     menusModule?: SortOrder
     callStaffModule?: SortOrder
+    callStaffOptions?: SortOrder
     takeAwayModule?: SortOrder
     reservationsModule?: SortOrder
     isDemo?: SortOrder
@@ -136424,6 +136483,10 @@ export namespace Prisma {
     update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutEmployeesInput, EstablishmentUpdateWithoutEmployeesInput>, EstablishmentUncheckedUpdateWithoutEmployeesInput>
   }
 
+  export type EstablishmentCreatecallStaffOptionsInput = {
+    set: $Enums.CallStaffOption[]
+  }
+
   export type EstablishmentCreateavailableLanguagesInput = {
     set: $Enums.EstablishmentLanguage[]
   }
@@ -136940,6 +137003,11 @@ export namespace Prisma {
 
   export type EnumEstablishmentTypeFieldUpdateOperationsInput = {
     set?: $Enums.EstablishmentType
+  }
+
+  export type EstablishmentUpdatecallStaffOptionsInput = {
+    set?: $Enums.CallStaffOption[]
+    push?: $Enums.CallStaffOption | $Enums.CallStaffOption[]
   }
 
   export type EnumEstablishmentLanguageFieldUpdateOperationsInput = {
@@ -143829,6 +143897,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -143913,6 +143982,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -144013,6 +144083,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -144097,6 +144168,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -144181,6 +144253,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -144265,6 +144338,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -144365,6 +144439,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -144449,6 +144524,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -144563,6 +144639,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -144647,6 +144724,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -144776,6 +144854,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -144860,6 +144939,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -145095,6 +145175,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -145179,6 +145260,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -145363,6 +145445,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -145447,6 +145530,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -145730,6 +145814,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -145814,6 +145899,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -145963,6 +146049,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -146047,6 +146134,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -146414,6 +146502,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -146498,6 +146587,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -146648,6 +146738,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -146732,6 +146823,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -147262,6 +147354,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -147346,6 +147439,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -147473,6 +147567,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -147557,6 +147652,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -147781,6 +147877,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -147865,6 +147962,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -147965,6 +148063,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -148049,6 +148148,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -151123,6 +151223,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -151207,6 +151308,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -151307,6 +151409,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -151391,6 +151494,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -151516,6 +151620,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -151600,6 +151705,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -151747,6 +151853,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -151831,6 +151938,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -151915,6 +152023,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -151999,6 +152108,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -152140,6 +152250,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -152224,6 +152335,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -152355,6 +152467,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -152439,6 +152552,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -152539,6 +152653,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -152623,6 +152738,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -152707,6 +152823,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -152791,6 +152908,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -152885,6 +153003,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -152969,6 +153088,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -153063,6 +153183,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -153147,6 +153268,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -153448,6 +153570,7 @@ export namespace Prisma {
     myPageModule?: BoolFilter<"Establishment"> | boolean
     menusModule?: BoolFilter<"Establishment"> | boolean
     callStaffModule?: BoolFilter<"Establishment"> | boolean
+    callStaffOptions?: EnumCallStaffOptionNullableListFilter<"Establishment">
     takeAwayModule?: BoolFilter<"Establishment"> | boolean
     reservationsModule?: BoolFilter<"Establishment"> | boolean
     isDemo?: BoolFilter<"Establishment"> | boolean
@@ -153525,6 +153648,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -153609,6 +153733,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -153816,6 +153941,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -153900,6 +154026,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -154000,6 +154127,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -154084,6 +154212,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -154168,6 +154297,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -154252,6 +154382,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -154352,6 +154483,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -154436,6 +154568,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -154520,6 +154653,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -154604,6 +154738,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -154704,6 +154839,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -154788,6 +154924,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -154892,6 +155029,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -154976,6 +155114,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -155503,6 +155642,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -155587,6 +155727,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -156466,6 +156607,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -156550,6 +156692,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -156688,6 +156831,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -156772,6 +156916,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -158056,6 +158201,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -158140,6 +158286,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -158296,6 +158443,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -158380,6 +158528,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -159410,6 +159559,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -159494,6 +159644,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -159714,6 +159865,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -159798,6 +159950,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -160922,6 +161075,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -161006,6 +161160,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -161136,6 +161291,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -161220,6 +161376,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -161398,6 +161555,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -161482,6 +161640,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -161674,6 +161833,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -161758,6 +161918,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -161943,6 +162104,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -162027,6 +162189,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -162266,6 +162429,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -162350,6 +162514,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -162729,6 +162894,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -162813,6 +162979,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -163039,6 +163206,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -163123,6 +163291,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -163512,6 +163681,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -163596,6 +163766,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -163782,6 +163953,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -163866,6 +164038,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -163996,6 +164169,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -164080,6 +164254,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -164329,6 +164504,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -164413,6 +164589,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -164564,6 +164741,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -164648,6 +164826,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -165109,6 +165288,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -165193,6 +165373,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -166185,6 +166366,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -166269,6 +166451,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -166508,6 +166691,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -166592,6 +166776,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -167131,6 +167316,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -167215,6 +167401,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -167391,6 +167578,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -167475,6 +167663,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -167935,6 +168124,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -168019,6 +168209,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -168292,6 +168483,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -168376,6 +168568,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -168651,6 +168844,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -168735,6 +168929,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -168916,6 +169111,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -169000,6 +169196,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -169171,6 +169368,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -169255,6 +169453,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -169389,6 +169588,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -169473,6 +169673,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -169809,6 +170010,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -169893,6 +170095,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -170018,6 +170221,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -170102,6 +170306,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -170615,6 +170820,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -170699,6 +170905,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -170799,6 +171006,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -170883,6 +171091,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -171057,6 +171266,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -171141,6 +171351,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -171235,6 +171446,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -171319,6 +171531,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -171435,6 +171648,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -171519,6 +171733,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -171657,6 +171872,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -171741,6 +171957,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -171923,6 +172140,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -172007,6 +172225,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -172149,6 +172368,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -172233,6 +172453,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -174475,6 +174696,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -174524,6 +174746,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -174621,6 +174844,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -174705,6 +174929,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -174789,6 +175014,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -174838,6 +175064,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -174922,6 +175149,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -175006,6 +175234,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -178348,6 +178577,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -178397,6 +178627,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -178481,6 +178712,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -178565,6 +178797,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -178635,6 +178868,7 @@ export namespace Prisma {
     myPageModule?: boolean
     menusModule?: boolean
     callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: boolean
     reservationsModule?: boolean
     isDemo?: boolean
@@ -178749,6 +178983,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -178833,6 +179068,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -178917,6 +179153,7 @@ export namespace Prisma {
     myPageModule?: BoolFieldUpdateOperationsInput | boolean
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean

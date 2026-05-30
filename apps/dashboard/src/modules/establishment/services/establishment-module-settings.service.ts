@@ -23,6 +23,7 @@ export class EstablishmentModuleSettingsService {
                 myPageModule: true,
                 menusModule: true,
                 callStaffModule: true,
+                callStaffOptions: true,
             }
         })
     }
@@ -48,12 +49,16 @@ export class EstablishmentModuleSettingsService {
                     myPageModule: updateEstablishmentModuleSettingsDto.myPageModule,
                     menusModule: updateEstablishmentModuleSettingsDto.menusModule,
                     callStaffModule: updateEstablishmentModuleSettingsDto.callStaffModule,
+                    ...(updateEstablishmentModuleSettingsDto.callStaffOptions !== undefined && {
+                        callStaffOptions: updateEstablishmentModuleSettingsDto.callStaffOptions,
+                    }),
                 },
                 select: {
                     slug: true,
                     myPageModule: true,
                     menusModule: true,
                     callStaffModule: true,
+                    callStaffOptions: true,
                 }
             })
 
@@ -64,6 +69,7 @@ export class EstablishmentModuleSettingsService {
                 myPageModule: establishment.myPageModule,
                 menusModule: establishment.menusModule,
                 callStaffModule: establishment.callStaffModule,
+                callStaffOptions: establishment.callStaffOptions,
             }
         } catch (error) {
             this.logger.error(`Failed to update establishment module settings: ${error}`);

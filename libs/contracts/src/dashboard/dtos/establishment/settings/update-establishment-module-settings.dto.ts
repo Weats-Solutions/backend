@@ -1,4 +1,5 @@
-import { IsBoolean, IsNotEmpty } from "class-validator";
+import { CallStaffOption } from "@weats/database";
+import { IsBoolean, IsNotEmpty, IsArray, IsEnum, IsOptional } from "class-validator";
 
 export class UpdateEstablishmentModuleSettingsDto {
     @IsBoolean()
@@ -12,4 +13,9 @@ export class UpdateEstablishmentModuleSettingsDto {
     @IsBoolean()
     @IsNotEmpty()
     callStaffModule: boolean;
+
+    @IsArray()
+    @IsEnum(CallStaffOption, { each: true })
+    @IsOptional()
+    callStaffOptions?: CallStaffOption[];
 }

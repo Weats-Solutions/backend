@@ -618,6 +618,13 @@ enum StockInventoryStatus {
   CANCELLED
 }
 
+enum CallStaffOption {
+  HELP
+  CLEAN
+  BILL
+  ORDER
+}
+
 model Establishment {
   // ─── Identificação ─────────────────────────────────────────────────────────
   id       String            @id @default(ulid())
@@ -656,11 +663,12 @@ model Establishment {
   websiteUrl      String?
 
   // ─── Configurações de Módulos ──────────────────────────────────────────────
-  myPageModule       Boolean @default(false)
-  menusModule        Boolean @default(false)
-  callStaffModule    Boolean @default(false)
-  takeAwayModule     Boolean @default(false)
-  reservationsModule Boolean @default(false)
+  myPageModule       Boolean           @default(false)
+  menusModule        Boolean           @default(false)
+  callStaffModule    Boolean           @default(false)
+  callStaffOptions   CallStaffOption[] @default([HELP, CLEAN, BILL, ORDER])
+  takeAwayModule     Boolean           @default(false)
+  reservationsModule Boolean           @default(false)
 
   // ─── Configurações ─────────────────────────────────────────────────────────
   isDemo             Boolean                 @default(false)
