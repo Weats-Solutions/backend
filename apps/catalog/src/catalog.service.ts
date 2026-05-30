@@ -177,6 +177,7 @@ export class CatalogService {
 
   async getMenuList(slug: string, lang: string, qrSession?: QrSessionTokenPayload | null) {
     try {
+      this.logger.debug("Qr session", qrSession);
       const establishment = await this.getEstablishmentCore(slug);
       this.validateEstablishment(establishment);
 
