@@ -59,6 +59,8 @@ export class QrCodeService {
       });
     });
 
+    this.logger.error(`QR code: ${JSON.stringify(qrCode)}`);
+
     if (!qrCode || !qrCode.active) {
       this.logger.error(`QR code token not found or inactive: ${token}`);
       return { url: `${this.catalogMenuUrL}/404`, session: null };

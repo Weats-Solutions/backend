@@ -321,7 +321,7 @@ export class CatalogService {
                       orderBy: { position: 'asc' },
                       where: {
                         isVisible: true,
-                        item: { status: 'ACTIVE' },
+                        item: { status: { in: ['ACTIVE', 'UNAVAILABLE'] } },
                       },
                       select: {
                         id: true,
@@ -333,6 +333,7 @@ export class CatalogService {
                             basePrice: true,
                             spiceLevel: true,
                             marketingTag: true,
+                            status: true,
                             isFeatured: true,
                             hasAlcohol: true,
                             unit: true,
