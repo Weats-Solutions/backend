@@ -27,9 +27,18 @@ export class QrCodeService {
 
   /**
    * Resolves a QR token and returns the final destination URL.
-   * Uses CacheService.wrap for sub-millisecond response times.
+   * Leverages resolveQrCode to avoid duplicate database hits.
    */
   async getRedirectUrl(token: string): Promise<string> {
+    const { url } = await this.resolveQrCode(token);
+    return url;
+  }
+
+  /**
+   * Resolves a QR token and returns both the redirect URL and session metadata.
+   * Fetches the QR code only once (using CacheService.wrap) and builds the redirect URL.
+   */
+  async resolveQrCode(token: string): Promise<ResolvedQrCode> {
     const cacheKey = `qr:data:${token}`;
 
     const qrCode = await this.cache.wrap(cacheKey, 3600, async () => {
@@ -50,9 +59,9 @@ export class QrCodeService {
       });
     });
 
-    if (!qrCode) {
-      this.logger.error(`QR code token not found: ${token}`);
-      return `${this.catalogMenuUrL}/404`;
+    if (!qrCode || !qrCode.active) {
+      this.logger.error(`QR code token not found or inactive: ${token}`);
+      return { url: `${this.catalogMenuUrL}/404`, session: null };
     }
 
     // Função auxiliar para construir a URL com subdomínio
@@ -75,58 +84,30 @@ export class QrCodeService {
       qrCode.establishment?.subscription?.status === 'ACTIVE' ||
       qrCode.establishment?.subscription?.status === 'TRIALING';
 
+    let url = `${this.catalogMenuUrL}/404`;
+
     // Case 1: TABLE (Menu com mesa pré-selecionada)
     if (qrCode.type === QrCodeType.TABLE) {
       if (!qrCode.servicePoint || !qrCode.servicePoint.isActive || !qrCode.servicePoint.zone?.isActive) {
-        return `${this.catalogMenuUrL}/404`;
+        url = `${this.catalogMenuUrL}/404`;
+      } else if (!hasValidSubscription) {
+        url = `${this.catalogMenuUrL}/no-subscription`;
+      } else if (!qrCode.establishment?.slug) {
+        url = `${this.catalogMenuUrL}/404`;
+      } else {
+        url = buildSubdomainUrl(qrCode.establishment.slug);
       }
-
-      if (!hasValidSubscription) {
-        return `${this.catalogMenuUrL}/no-subscription`;
-      }
-
-      if (!qrCode.establishment?.slug) {
-        return `${this.catalogMenuUrL}/404`;
-      }
-
-      return buildSubdomainUrl(qrCode.establishment.slug);
     }
 
     // Case 2: MENU (Direto para o menu geral)
-    if (qrCode.type === QrCodeType.MENU) {
+    else if (qrCode.type === QrCodeType.MENU) {
       if (!qrCode.establishment || !qrCode.establishment?.slug) {
-        return `${this.catalogMenuUrL}/404`;
+        url = `${this.catalogMenuUrL}/404`;
+      } else if (!hasValidSubscription) {
+        url = `${this.catalogMenuUrL}/no-subscription`;
+      } else {
+        url = buildSubdomainUrl(qrCode.establishment.slug);
       }
-
-      if (!hasValidSubscription) {
-        return `${this.catalogMenuUrL}/no-subscription`;
-      }
-
-      return buildSubdomainUrl(qrCode.establishment.slug);
-    }
-
-    return `${this.catalogMenuUrL}/404`;
-  }
-
-  /**
-   * Resolves a QR token and returns both the redirect URL and session metadata.
-   * Does NOT use cache for the session payload — always reads fresh from DB.
-   */
-  async resolveQrCode(token: string): Promise<ResolvedQrCode> {
-    const url = await this.getRedirectUrl(token);
-
-    const qrCode = await this.prisma.qrCode.findUnique({
-      where: { token },
-      select: {
-        id: true,
-        type: true,
-        servicePointId: true,
-        establishmentId: true,
-      },
-    });
-
-    if (!qrCode) {
-      return { url, session: null };
     }
 
     return {
