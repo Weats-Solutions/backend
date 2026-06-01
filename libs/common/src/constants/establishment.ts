@@ -5,5 +5,4 @@ export const RESERVED_DOMAINS = [
     'payments', 'account', 'user', 'users', 'blog',
     'store', 'shop', 'checkout', 'cart', 'search',
     'status', 'terms', 'privacy', 'about', 'contact',
-    'gateway', 'backend', 'frontend', 'mobile'
-];
+    'gateway', 'backend', 'frontend', 'mobile', 'dash', 'dev-dash', 'realtime', 'dev-realtime', 'catalog', 'dev-catalog', 'dev-webhooks', 'webhooks']

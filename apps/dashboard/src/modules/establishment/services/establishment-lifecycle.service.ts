@@ -199,11 +199,11 @@ export class EstablishmentLifeCycleService {
 
     private generateSlug(name: string): string {
         return name
-            .normalize('NFD') // Decompõe caracteres acentuados (ex: á -> a + ´)
+            .normalize('NFD') // Decompõe caracteres acentuados
             .replace(/[\u0300-\u036f]/g, '') // Remove os acentos
             .toLowerCase()
             .trim()
-            .replace(/[^a-z0-9\s-]/g, '') // Remove caracteres especiais que sobraram
+            .replace(/[^a-z0-9\s-]/g, '') // Remove caracteres especiais
             .replace(/\s+/g, '-') // Espaços para hífens
             .replace(/-+/g, '-') // Remove hífens duplicados
             .replace(/^-+|-+$/g, ''); // Remove hífens no início e fim
@@ -212,9 +212,9 @@ export class EstablishmentLifeCycleService {
     private async generateUniqueSlug(name: string): Promise<string> {
         let baseSlug = this.generateSlug(name);
 
-        // Tratamento de domínios reservados logo no início
+        // Tratamento de domínios reservados (com sufixo em minúsculas)
         if (RESERVED_DOMAINS.includes(baseSlug)) {
-            baseSlug = `${baseSlug}-${ulid().slice(-4)}`;
+            baseSlug = `${baseSlug}-${ulid().slice(-4).toLowerCase()}`;
         }
 
         let currentSlug = baseSlug;
@@ -224,14 +224,14 @@ export class EstablishmentLifeCycleService {
         while (!isUnique && attempts < 5) {
             const exists = await this.prisma.establishment.findUnique({
                 where: { slug: currentSlug },
-                select: { id: true }, // Seleciona apenas o ID para ser mais rápido
+                select: { id: true },
             });
 
             if (!exists) {
                 isUnique = true;
             } else {
-                // Gera um novo sufixo a cada tentativa falhada
-                currentSlug = `${baseSlug}-${ulid().slice(-4)}`;
+                // Força o novo sufixo do ULID a ser minúsculo
+                currentSlug = `${baseSlug}-${ulid().slice(-4).toLowerCase()}`;
                 attempts++;
             }
         }
