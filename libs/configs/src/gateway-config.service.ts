@@ -39,6 +39,35 @@ export class GatewayConfigService {
     };
   }
 
+  getLandingClientHost(): string {
+    const env = this.configService.get<string>('WEATS_ENV');
+    this.logger.log("WEATS_ENV", env);
+    if (env === 'local') {
+      return 'localhost';
+    }
+    return env === 'dev' ? 'weats-dev-landing' : 'weats-prod-landing';
+  }
+
+  getLandingClientPort(): number {
+    return parseInt(
+      this.configService.getOrThrow<string>('LANDING_CLIENT_PORT'),
+      10,
+    );
+  }
+
+  get landingClientOptions(): ClientOptions {
+    this.logger.log("HOST", this.getLandingClientHost());
+    this.logger.log("PORT", this.getLandingClientPort());
+    return {
+      transport: Transport.TCP,
+      options: {
+        host: this.getLandingClientHost(),
+        port: this.getLandingClientPort(),
+      },
+    };
+  }
+
+
   get webhooksClientOptions(): ClientOptions {
     return {
       transport: Transport.REDIS,

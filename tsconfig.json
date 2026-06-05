@@ -23,17 +23,17 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@weats/cache": [
-        "libs/cache/src"
-      ],
-      "@weats/cache/*": [
-        "libs/cache/src/*"
-      ],
       "@weats/bull": [
         "libs/bull/src"
       ],
       "@weats/bull/*": [
         "libs/bull/src/*"
+      ],
+      "@weats/cache": [
+        "libs/cache/src"
+      ],
+      "@weats/cache/*": [
+        "libs/cache/src/*"
       ],
       "@weats/common": [
         "libs/common/src"

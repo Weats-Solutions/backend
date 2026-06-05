@@ -13,6 +13,7 @@ import { QueuesModule } from '@weats/bull';
 import { RateLimitModule } from '@weats/rate-limit';
 import { RateLimitGuard } from '@weats/common';
 import { CacheModule } from '@weats/cache';
+import { LandingModule } from './modules/landing/landing.module';
 
 
 @Module({
@@ -26,6 +27,7 @@ import { CacheModule } from '@weats/cache';
     IntegrationsModule,
     DatabaseModule,
     DashboardModule,
+    LandingModule,
     TranslateModule,
     QueuesModule,
     RateLimitModule,

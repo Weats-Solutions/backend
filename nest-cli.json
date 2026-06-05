@@ -118,6 +118,15 @@
         "tsConfigPath": "libs/item-core/tsconfig.lib.json"
       }
     },
+    "landing": {
+      "type": "application",
+      "root": "apps/landing",
+      "entryFile": "main",
+      "sourceRoot": "apps/landing/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/landing/tsconfig.app.json"
+      }
+    },
     "rate-limit": {
       "type": "library",
       "root": "libs/rate-limit",

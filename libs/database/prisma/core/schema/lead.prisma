@@ -1,0 +1,10 @@
+model Lead {
+  id        String   @id @default(ulid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

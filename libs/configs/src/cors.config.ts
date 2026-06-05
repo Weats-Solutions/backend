@@ -20,6 +20,7 @@ export const getCorsOptions = (appConfigService: AppConfigService): CorsOptions 
                     'https://dev-dash.weats.app',
                     'https://dev-tm.weats.app',
                     'https://dev-menu.weats.app',
+                    'https://weats.pt',
                 ];
                 break;
             case 'prod':
@@ -27,6 +28,7 @@ export const getCorsOptions = (appConfigService: AppConfigService): CorsOptions 
                     'https://dash.weats.app',
                     'https://*.weats.pt',
                     'https://tm.weats.app',
+                    'https://weats.pt',
                 ];
                 break;
             default:

@@ -23,6 +23,9 @@ class EnvironmentVariables {
   @IsNumber()
   DASHBOARD_CLIENT_PORT: number;
 
+  @IsNumber()
+  LANDING_CLIENT_PORT: number;
+
   @IsString()
   ORDERS_DB_URL: string;
 

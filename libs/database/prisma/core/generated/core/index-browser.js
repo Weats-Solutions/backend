@@ -637,6 +637,17 @@ exports.Prisma.ItemAttributeScalarFieldEnum = {
   itemId: 'itemId'
 };
 
+exports.Prisma.LeadScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  subject: 'subject',
+  message: 'message',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.MenuScalarFieldEnum = {
   id: 'id',
   position: 'position',
@@ -1717,6 +1728,7 @@ exports.Prisma.ModelName = {
   ItemVariantAllergen: 'ItemVariantAllergen',
   ItemModifierOption: 'ItemModifierOption',
   ItemAttribute: 'ItemAttribute',
+  Lead: 'Lead',
   Menu: 'Menu',
   MenuTranslation: 'MenuTranslation',
   MenuCategory: 'MenuCategory',
