@@ -1,0 +1,58 @@
+# Build stage
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm@9
+
+# Copy project files
+COPY package.json pnpm-lock.yaml ./
+COPY nest-cli.json tsconfig.json tsconfig.build.json prisma.config.ts ./
+
+# Install all dependencies (frozen lockfile)
+RUN pnpm install --frozen-lockfile
+
+# Copy source code
+COPY apps/landing ./apps/landing
+COPY libs ./libs
+
+# Generate Prisma Client
+ARG CORE_DB_URL
+ARG ORDERS_DB_URL
+ENV CORE_DB_URL=${CORE_DB_URL}
+ENV ORDERS_DB_URL=${ORDERS_DB_URL}
+
+RUN pnpm prisma:core:gen && pnpm prisma:orders:gen
+
+# Build project
+RUN pnpm exec nest build landing
+
+# Production stage
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm@9
+
+# Copy package.json and install production dependencies
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --prod --frozen-lockfile
+
+# Copy built application
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/libs/database/prisma/core/generated ./libs/database/prisma/core/generated
+COPY --from=builder /app/libs/database/prisma/orders/generated ./libs/database/prisma/orders/generated
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001
+
+USER nodejs
+
+# Expose port (internal only, for TCP communication)
+EXPOSE 4006
+
+# Start landing microservice
+CMD ["node", "dist/apps/landing/main"]
