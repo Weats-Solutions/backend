@@ -10,6 +10,8 @@ import { FeatureUsageService } from '@weats/common/feature/feature-usage.service
 import type { feature } from '@weats/types';
 import { ERRORS } from '@weats/common';
 
+import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
+
 @Injectable()
 export class FeatureLimitGuard implements CanActivate {
   constructor(
@@ -18,6 +20,15 @@ export class FeatureLimitGuard implements CanActivate {
   ) { }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+
+    if (isPublic) {
+      return true;
+    }
+
     const feature = this.reflector.get<feature>(
       FEATURE_KEY,
       context.getHandler(),

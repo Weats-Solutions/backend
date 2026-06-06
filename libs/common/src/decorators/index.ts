@@ -6,3 +6,5 @@ export * from './rate-limit.decorator';
 export * from './roles.decorator';
 export * from './skip-active-subscription.decorator';
 export * from './skip-establishment-staff.decorator';
+export * from './public.decorator';
+

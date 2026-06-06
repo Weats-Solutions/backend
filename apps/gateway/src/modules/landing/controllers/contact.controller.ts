@@ -1,6 +1,6 @@
 import { Body, Controller, Inject, Post } from "@nestjs/common";
 import { ClientProxy } from "@nestjs/microservices";
-import { LANDING_SERVICE, RateLimit } from "@weats/common";
+import { LANDING_SERVICE, Public, RateLimit } from "@weats/common";
 import { LANDING_PATTERNS } from "@weats/common/patterns/landing.patterns";
 import { ContactDto } from "@weats/contracts";
 
@@ -11,6 +11,7 @@ export class ContactController {
     ) { }
 
     @Post()
+    @Public()
     @RateLimit('STRICT')
     createLead(
         @Body() contactDto: ContactDto,

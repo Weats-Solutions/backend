@@ -8,6 +8,8 @@ import {
 import { CorePrismaService } from '@weats/database';
 import { ERRORS } from '@weats/common';
 import { EncryptionService } from '@weats/encryption';
+import { Reflector } from '@nestjs/core';
+import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
 
 /**
  * Guard that validates if the establishment has a valid EuPago configuration.
@@ -24,9 +26,19 @@ export class EupagoConfigGuard implements CanActivate {
   constructor(
     private readonly corePrismaService: CorePrismaService,
     private readonly encryption: EncryptionService,
+    private readonly reflector: Reflector,
   ) { }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+
+    if (isPublic) {
+      return true;
+    }
+
     const request = context.switchToHttp().getRequest();
     const establishment = request.establishment;
 

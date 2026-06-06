@@ -14,6 +14,7 @@ import { CorePrismaService } from '@weats/database';
 import { BadRequestException } from '@nestjs/common';
 import { CacheService, dashboardEstKey } from '@weats/cache';
 import { SKIP_ESTABLISHMENT_STAFF_KEY } from '../decorators/skip-establishment-staff.decorator';
+import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
 
 @Injectable()
 export class EstablishmentStaffGuard implements CanActivate {
@@ -25,6 +26,15 @@ export class EstablishmentStaffGuard implements CanActivate {
   private readonly logger = new Logger(EstablishmentStaffGuard.name);
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+
+    if (isPublic) {
+      return true;
+    }
+
     const skipEstablishmentStaff = this.reflector.getAllAndOverride<boolean>(
       SKIP_ESTABLISHMENT_STAFF_KEY,
       [context.getHandler(), context.getClass()],
