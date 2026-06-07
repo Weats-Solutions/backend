@@ -28,6 +28,7 @@ export function buildVariantGroupData(
                 price: opt.price,
                 sku: opt.sku || null,
                 isDefault: opt.isDefault ?? false,
+                isActive: opt.isActive ?? true,
                 position: opt.position ?? 0,
                 imageId: opt.imageId || null,
                 nutritionInfo: opt.nutritionalInfo

@@ -95,6 +95,18 @@ export class ItemController {
     return this.dashboardClient.send(DASHBOARD_PATTERNS.ITEM_GET_BY_ID, { id });
   }
 
+  @Delete('bulk')
+  @HttpCode(HttpStatus.OK)
+  async bulkDelete(
+    @CurrentEstablishment() establishment: Establishment,
+    @Body() bulkDeleteDto: BulkDeleteDto,
+  ) {
+    return this.dashboardClient.send(DASHBOARD_PATTERNS.ITEM_BULK_DELETE, {
+      establishmentId: establishment.id,
+      bulkDeleteDto,
+    });
+  }
+
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async deleteItem(
@@ -129,18 +141,6 @@ export class ItemController {
       DASHBOARD_PATTERNS.ITEM_BULK_UPDATE_STATUS,
       { establishmentId: establishment.id, bulkStatusDto },
     );
-  }
-
-  @Delete('bulk')
-  @HttpCode(HttpStatus.OK)
-  async bulkDelete(
-    @CurrentEstablishment() establishment: Establishment,
-    @Body() bulkDeleteDto: BulkDeleteDto,
-  ) {
-    return this.dashboardClient.send(DASHBOARD_PATTERNS.ITEM_BULK_DELETE, {
-      establishmentId: establishment.id,
-      bulkDeleteDto,
-    });
   }
 
   @Get(':id/placements')

@@ -71,6 +71,10 @@ class CreateItemVariantDto {
   isDefault?: boolean; // Se for true, é o preço "Desde X€" que aparece na listagem
 
   @IsOptional()
+  @IsBoolean()
+  isActive?: boolean;
+
+  @IsOptional()
   @IsNumber()
   position?: number;
 

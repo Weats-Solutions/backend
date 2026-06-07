@@ -36,7 +36,7 @@ export class ItemService {
   constructor(
     private readonly prisma: CorePrismaService,
     private readonly cacheService: CacheService,
-  ) {}
+  ) { }
 
   private async getEstablishmentSlug(establishmentId: string) {
     const establishment = await this.prisma.establishment.findUnique({
@@ -247,13 +247,13 @@ export class ItemService {
           hasAlcohol: dto.hasAlcohol !== undefined ? dto.hasAlcohol : false,
           translations: dto.translations
             ? {
-                create: dto.translations.map((t) => ({
-                  locale: t.locale,
-                  name: t.name,
-                  shortDescription: t.shortDescription,
-                  description: t.description,
-                })),
-              }
+              create: dto.translations.map((t) => ({
+                locale: t.locale,
+                name: t.name,
+                shortDescription: t.shortDescription,
+                description: t.description,
+              })),
+            }
             : undefined,
           nutritionInfo:
             dto.nutritionalInfo && !hasVariants
@@ -352,13 +352,13 @@ export class ItemService {
     };
 
     const orderByMap: Record<ItemSortBy, Prisma.ItemOrderByWithRelationInput> =
-      {
-        [ItemSortBy.CREATED_AT]: { createdAt: sortOrder },
-        [ItemSortBy.UPDATED_AT]: { updatedAt: sortOrder },
-        [ItemSortBy.STATUS]: { status: sortOrder },
-        [ItemSortBy.PRICE]: { basePrice: sortOrder },
-        [ItemSortBy.NAME]: { translations: { _count: sortOrder } },
-      };
+    {
+      [ItemSortBy.CREATED_AT]: { createdAt: sortOrder },
+      [ItemSortBy.UPDATED_AT]: { updatedAt: sortOrder },
+      [ItemSortBy.STATUS]: { status: sortOrder },
+      [ItemSortBy.PRICE]: { basePrice: sortOrder },
+      [ItemSortBy.NAME]: { translations: { _count: sortOrder } },
+    };
 
     const [total, items] = await this.prisma.$transaction([
       this.prisma.item.count({ where }),
@@ -403,7 +403,10 @@ export class ItemService {
   ): Promise<ItemListResponse> {
     const source = await this.prisma.item.findFirst({
       where: { id: itemId, establishmentId: establishment.id, deletedAt: null },
-      include: ITEM_DETAIL_INCLUDE,
+      include: {
+        ...ITEM_DETAIL_INCLUDE,
+        attributes: true,
+      },
     });
     if (!source)
       throw new RpcException({ message: ERRORS.ITEM_NOT_FOUND, code: 404 });
@@ -423,25 +426,45 @@ export class ItemService {
           marketingTag: source.marketingTag,
           spiceLevel: source.spiceLevel,
           isFeatured: false,
+          unit: source.unit,
+          quantity: source.quantity,
+          hasAlcohol: source.hasAlcohol,
           translations: {
             create: source.translations.map((t) => ({
               locale: t.locale,
               name: `${t.name} (Copy)`,
+              shortDescription: t.shortDescription,
               description: t.description,
             })),
           },
           nutritionInfo:
             source.nutritionInfo && !hasVariants
-              ? { create: { ...source.nutritionInfo, id: undefined } }
+              ? {
+                create: {
+                  energyKcal: source.nutritionInfo.energyKcal,
+                  fat: source.nutritionInfo.fat,
+                  saturatedFat: source.nutritionInfo.saturatedFat,
+                  carbohydrates: source.nutritionInfo.carbohydrates,
+                  sugars: source.nutritionInfo.sugars,
+                  fiber: source.nutritionInfo.fiber,
+                  protein: source.nutritionInfo.protein,
+                  salt: source.nutritionInfo.salt,
+                },
+              }
               : undefined,
           allergens:
             source.allergens?.length && !hasVariants
               ? {
-                  create: source.allergens.map((a) => ({
-                    allergenId: a.allergenId,
-                  })),
-                }
+                create: source.allergens.map((a) => ({
+                  allergenId: a.allergenId,
+                })),
+              }
               : undefined,
+          attributes: {
+            create: source.attributes.map((attr) => ({
+              type: attr.type,
+            })),
+          },
         },
       });
 
@@ -463,23 +486,29 @@ export class ItemService {
                 price: v.price,
                 sku: v.sku ? `${v.sku}-copy` : null,
                 isDefault: v.isDefault,
+                isActive: v.isActive,
                 position: v.position,
                 imageId: v.imageId,
                 nutritionInfo: v.nutritionInfo
                   ? {
-                      create: {
-                        ...v.nutritionInfo,
-                        id: undefined,
-                        itemVariantId: undefined,
-                      },
-                    }
+                    create: {
+                      energyKcal: v.nutritionInfo.energyKcal,
+                      fat: v.nutritionInfo.fat,
+                      saturatedFat: v.nutritionInfo.saturatedFat,
+                      carbohydrates: v.nutritionInfo.carbohydrates,
+                      sugars: v.nutritionInfo.sugars,
+                      fiber: v.nutritionInfo.fiber,
+                      protein: v.nutritionInfo.protein,
+                      salt: v.nutritionInfo.salt,
+                    },
+                  }
                   : undefined,
                 allergens: v.allergens?.length
                   ? {
-                      create: v.allergens.map((a) => ({
-                        allergenId: a.allergenId,
-                      })),
-                    }
+                    create: v.allergens.map((a) => ({
+                      allergenId: a.allergenId,
+                    })),
+                  }
                   : undefined,
               })),
             },
@@ -495,6 +524,7 @@ export class ItemService {
             displayMode: mg.displayMode,
             minSelection: mg.minSelection,
             maxSelection: mg.maxSelection,
+            isActive: mg.isActive,
             translations: {
               create: mg.translations.map((t) => ({
                 locale: t.locale,
@@ -531,35 +561,69 @@ export class ItemService {
     bulkStatusDto: BulkStatusDto,
     establishmentId: string,
   ) {
-    const slug = await this.getEstablishmentSlug(establishmentId);
-    const result = await this.prisma.item.updateMany({
-      where: {
-        id: { in: bulkStatusDto.ids },
-        establishmentId,
-        deletedAt: null,
-      },
-      data: { status: bulkStatusDto.status },
-    });
-    for (const id of bulkStatusDto.ids) {
-      await this.invalidateItemCache(slug, id);
+    try {
+      const slug = await this.getEstablishmentSlug(establishmentId);
+      const result = await this.prisma.$transaction(async (tx) => {
+        return tx.item.updateMany({
+          where: {
+            id: { in: bulkStatusDto.ids },
+            establishmentId,
+            deletedAt: null,
+          },
+          data: { status: bulkStatusDto.status },
+        });
+      });
+
+      if (bulkStatusDto.ids && Array.isArray(bulkStatusDto.ids)) {
+        for (const id of bulkStatusDto.ids) {
+          try {
+            await this.invalidateItemCache(slug, id);
+          } catch (cacheError) {
+            console.error(`[bulkUpdateStatus] Failed to invalidate cache for item ${id}:`, cacheError);
+          }
+        }
+      }
+
+      return { updated: result.count };
+    } catch (error) {
+      throw new RpcException({
+        message: error.message || 'Error updating items status',
+        code: error.status || 500,
+      });
     }
-    return { updated: result.count };
   }
 
   async bulkDelete(bulkDeleteDto: BulkDeleteDto, establishmentId: string) {
-    const slug = await this.getEstablishmentSlug(establishmentId);
-    const result = await this.prisma.item.updateMany({
-      where: {
-        id: { in: bulkDeleteDto.ids },
-        establishmentId,
-        deletedAt: null,
-      },
-      data: { deletedAt: new Date() },
-    });
-    for (const id of bulkDeleteDto.ids) {
-      await this.invalidateItemCache(slug, id);
+    try {
+      const slug = await this.getEstablishmentSlug(establishmentId);
+      const result = await this.prisma.$transaction(async (tx) => {
+        return tx.item.updateMany({
+          where: {
+            id: { in: bulkDeleteDto.ids },
+            establishmentId,
+            deletedAt: null,
+          },
+          data: { deletedAt: new Date() },
+        });
+      });
+
+      if (bulkDeleteDto.ids && Array.isArray(bulkDeleteDto.ids)) {
+        for (const id of bulkDeleteDto.ids) {
+          try {
+            await this.invalidateItemCache(slug, id);
+          } catch (cacheError) {
+            console.error(`[bulkDelete] Failed to invalidate cache for item ${id}:`, cacheError);
+          }
+        }
+      }
+
+      return { deleted: result.count };
+    } catch (error) {
+      throw new RpcException({
+        message: error.message || 'Error deleting items',
+        code: error.status || 500,
+      });
     }
-    return { deleted: result.count };
   }
 
   /**
@@ -567,7 +631,9 @@ export class ItemService {
    * plus which subcategories this item is currently placed in.
    */
   async getItemPlacements(itemId: string, establishment: Establishment) {
-    await this.assertItemBelongsToEstablishment(itemId, establishment.id);
+    if (itemId !== 'create') {
+      await this.assertItemBelongsToEstablishment(itemId, establishment.id);
+    }
 
     const [placements, menus] = await Promise.all([
       this.prisma.menuItemPosition.findMany({
