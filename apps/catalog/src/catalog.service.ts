@@ -368,6 +368,8 @@ export class CatalogService {
                                     variantOption: {
                                       select: {
                                         id: true,
+                                        unit: true,
+                                        quantity: true,
                                         translations: {
                                           where: { locale: currentLang as any },
                                           select: { name: true },
@@ -416,6 +418,8 @@ export class CatalogService {
                                         price: true,
                                         variantOption: {
                                           select: {
+                                            unit: true,
+                                            quantity: true,
                                             translations: {
                                               where: { locale: currentLang as any },
                                               select: { name: true },
