@@ -68,22 +68,139 @@ async function main() {
     // ======================
     // PLANS
     // ======================
+    //dev
+    /*     const plans = [
+            {
+                name: 'Weats Starter',
+                cycles: [
+                    { price: 14.99, priceId: 'price_1Tg4RWCsiqCEyBVBA0aDXa6w', cycle: 'MONTHLY' },
+                    { price: 39.99, priceId: 'price_1TbnC5CsiqCEyBVBHrIdHu2z', cycle: 'TIMESTRAL' },
+                ],
+                features: {
+                    menu: 1,
+                    languages: 2,
+    
+                    products: 125,
+                    images: 125,
+    
+                    custom_variants: 100,
+                    custom_addons: 100,
+    
+                    zones: 2,
+                    points: 50,
+    
+                    custom_qrcodes: true,
+                    qrcode_rules: false,
+    
+                    call_staff: false,
+    
+    
+                    livechat: true,
+                    theme_builder: false,
+    
+                    metadata: false,
+                    google_analytics: false,
+                    academy: false,
+    
+                    menu_categories: 10,
+                    menu_subcategories: 25,
+                },
+            },
+    
+            {
+                name: 'Weats Pro',
+                cycles: [
+                    { price: 29.99, priceId: "price_1TbnCnCsiqCEyBVBDjfX0Swh", cycle: 'MONTHLY' },
+                    { price: 79.99, priceId: "price_1TbnCmCsiqCEyBVBww2nOa48", cycle: 'TIMESTRAL' },
+                ],
+                features: {
+                    menu: 3,
+                    languages: 4,
+    
+                    products: 250,
+                    images: 250,
+    
+                    custom_variants: 200,
+                    custom_addons: 200,
+    
+                    zones: 5,
+                    points: 150,
+    
+                    custom_qrcodes: true,
+                    qrcode_rules: true,
+    
+                    call_staff: true,
+    
+                    livechat: true,
+                    theme_builder: true,
+    
+                    metadata: true,
+                    google_analytics: true,
+                    academy: true,
+    
+                    menu_categories: 10,
+                    menu_subcategories: 25,
+                },
+            },
+    
+            {
+                name: 'Weats Scale',
+                cycles: [
+                    { price: 59.99, priceId: "price_1Tg4T1CsiqCEyBVBk3ao89CZ", cycle: 'MONTHLY' },
+                    { price: 159.99, priceId: "price_1TbnDCCsiqCEyBVBfFPfFKA4", cycle: 'TIMESTRAL' },
+                ],
+                features: {
+                    menu: 10,
+                    languages: 6,
+    
+                    products: 500,
+                    images: 500,
+    
+                    custom_variants: 350,
+                    custom_addons: 350,
+    
+                    zones: 20,
+                    points: 300,
+    
+                    custom_qrcodes: true,
+                    qrcode_rules: true,
+    
+                    call_staff: true,
+    
+                    livechat: true,
+                    theme_builder: true,
+                    expenses: true,
+    
+                    metadata: true,
+                    google_analytics: true,
+                    academy: true,
+    
+                    menu_categories: 10,
+                    menu_subcategories: 25,
+                },
+            },
+        ]; */
+
+    //prod
     const plans = [
         {
             name: 'Weats Starter',
             cycles: [
-                { price: 25.99, priceId: 'price_1TbnC5CsiqCEyBVBh80NnxYO', cycle: 'MONTHLY' },
-                { price: 74, priceId: 'price_1TbnC5CsiqCEyBVBHrIdHu2z', cycle: 'TIMESTRAL' },
+                { price: 14.99, priceId: 'price_1Tg4YFAMnnKxWZm8Xxh9lSKq', cycle: 'MONTHLY' },
+                { price: 39.99, priceId: 'price_1Tg4YkAMnnKxWZm8RPVhIXuc', cycle: 'TIMESTRAL' },
             ],
             features: {
                 menu: 1,
-                languages: 1,
-                points: 25,
-                zones: 1,
-                products: 65,
-                custom_variants: 50,
-                custom_addons: 50,
-                images: 65,
+                languages: 2,
+
+                products: 125,
+                images: 125,
+
+                custom_variants: 100,
+                custom_addons: 100,
+
+                zones: 2,
+                points: 50,
 
                 custom_qrcodes: true,
                 qrcode_rules: false,
@@ -106,18 +223,21 @@ async function main() {
         {
             name: 'Weats Pro',
             cycles: [
-                { price: 50.99, priceId: "price_1TbnCnCsiqCEyBVBDjfX0Swh", cycle: 'MONTHLY' },
-                { price: 145.00, priceId: "price_1TbnCmCsiqCEyBVBww2nOa48", cycle: 'TIMESTRAL' },
+                { price: 29.99, priceId: "price_1Tg4ZjAMnnKxWZm8WfYnd0El", cycle: 'MONTHLY' },
+                { price: 79.99, priceId: "price_1Tbp33AMnnKxWZm8nT7hjNXb", cycle: 'TIMESTRAL' },
             ],
             features: {
                 menu: 3,
-                languages: 3,
-                points: 100,
-                zones: 5,
+                languages: 4,
+
                 products: 250,
-                custom_variants: 150,
-                custom_addons: 150,
                 images: 250,
+
+                custom_variants: 200,
+                custom_addons: 200,
+
+                zones: 5,
+                points: 150,
 
                 custom_qrcodes: true,
                 qrcode_rules: true,
@@ -139,18 +259,21 @@ async function main() {
         {
             name: 'Weats Scale',
             cycles: [
-                { price: 80.99, priceId: "price_1TbnDCCsiqCEyBVBpZu2Bhxk", cycle: 'MONTHLY' },
-                { price: 230, priceId: "price_1TbnDCCsiqCEyBVBfFPfFKA4", cycle: 'TIMESTRAL' },
+                { price: 59.99, priceId: "price_1Tg4bOAMnnKxWZm8WyP6KG2i", cycle: 'MONTHLY' },
+                { price: 159.99, priceId: "price_1Tg4bjAMnnKxWZm81GwYE4zM", cycle: 'TIMESTRAL' },
             ],
             features: {
                 menu: 10,
                 languages: 6,
-                points: 500,
-                zones: 20,
+
                 products: 500,
+                images: 500,
+
                 custom_variants: 350,
                 custom_addons: 350,
-                images: 500,
+
+                zones: 20,
+                points: 300,
 
                 custom_qrcodes: true,
                 qrcode_rules: true,
@@ -171,99 +294,6 @@ async function main() {
         },
     ];
 
-    /*  const plans = [
-         {
-             name: 'Weats Starter',
-             cycles: [
-                 { price: 25.99, priceId: 'price_1Tbp34AMnnKxWZm8hqLm36pM', cycle: 'MONTHLY' },
-                 { price: 74, priceId: 'price_1Tbp34AMnnKxWZm8OyM9AqSP', cycle: 'TIMESTRAL' },
-             ],
-             features: {
-                 menu: 1,
-                 languages: 1,
-                 points: 25,
-                 zones: 1,
-                 products: 65,
-                 custom_variants: 50,
-                 custom_addons: 50,
-                 images: 65,
- 
-                 custom_qrcodes: true,
-                 qrcode_rules: false,
- 
-                 call_staff: false,
- 
-                 livechat: true,
-                 theme_builder: false,
- 
-                 metadata: false,
-                 google_analytics: false,
-                 academy: false,
-             },
-         },
- 
-         {
-             name: 'Weats Pro',
-             cycles: [
-                 { price: 50.99, priceId: "price_1Tbp33AMnnKxWZm8uZBQihDz", cycle: 'MONTHLY' },
-                 { price: 145.00, priceId: "price_1Tbp33AMnnKxWZm8nT7hjNXb", cycle: 'TIMESTRAL' },
-             ],
-             features: {
-                 menu: 3,
-                 languages: 3,
-                 points: 100,
-                 zones: 5,
-                 products: 250,
-                 custom_variants: 150,
-                 custom_addons: 150,
-                 images: 250,
- 
-                 custom_qrcodes: true,
-                 qrcode_rules: true,
- 
-                 call_staff: true,
- 
-                 livechat: true,
-                 theme_builder: true,
- 
-                 metadata: true,
-                 google_analytics: true,
-                 academy: true,
-             },
-         },
- 
-         {
-             name: 'Weats Scale',
-             cycles: [
-                 { price: 80.99, priceId: "price_1Tbp31AMnnKxWZm8EuDLgqfM", cycle: 'MONTHLY' },
-                 { price: 230, priceId: "price_1Tbp31AMnnKxWZm8eLVPHeve", cycle: 'TIMESTRAL' },
-             ],
-             features: {
-                 menu: 10,
-                 languages: 6,
-                 points: 500,
-                 zones: 20,
-                 products: 500,
-                 custom_variants: 350,
-                 custom_addons: 350,
-                 images: 500,
- 
-                 custom_qrcodes: true,
-                 qrcode_rules: true,
- 
-                 call_staff: true,
- 
-                 livechat: true,
-                 theme_builder: true,
-                 expenses: true,
- 
-                 metadata: true,
-                 google_analytics: true,
-                 academy: true,
-             },
-         },
-     ];
-  */
     for (const p of plans) {
         // find or create plan
         let plan = await prisma.plan.findFirst({
@@ -316,20 +346,31 @@ async function main() {
         // NÃO apagar (há subscriptions)
         // ======================
         for (const cycle of p.cycles) {
-            await prisma.planCycle.upsert({
-                where: { priceId: cycle.priceId },
-                update: {
-                    price: cycle.price,
-                    cycle: cycle.cycle as any,
-                    planId: plan.id, // garante ligação correta
-                },
-                create: {
+            const existingCycle = await prisma.planCycle.findFirst({
+                where: {
                     planId: plan.id,
-                    price: cycle.price,
-                    priceId: cycle.priceId,
                     cycle: cycle.cycle as any,
                 },
             });
+
+            if (existingCycle) {
+                await prisma.planCycle.update({
+                    where: { id: existingCycle.id },
+                    data: {
+                        price: cycle.price,
+                        priceId: cycle.priceId,
+                    },
+                });
+            } else {
+                await prisma.planCycle.create({
+                    data: {
+                        planId: plan.id,
+                        price: cycle.price,
+                        priceId: cycle.priceId,
+                        cycle: cycle.cycle as any,
+                    },
+                });
+            }
         }
     }
 

@@ -28,7 +28,7 @@ export class MenuCategoryService {
             const categoryCount = await this.prisma.menuCategory.count({
                 where: { menuId },
             })
-            if (categoryCount >= 5) {
+            if (categoryCount >= 10) {
                 throw new RpcException({
                     code: 403,
                     message: ERRORS.MAX_CATEGORIES_REACHED,
