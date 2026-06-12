@@ -339,6 +339,8 @@ enum UnitType {
   PLATE
   BOWL
   UNIT
+  PAX
+  BALL //Bolas de Gelado
 
   // --- Drinks ---
   GLASS

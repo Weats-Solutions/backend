@@ -1,9 +1,9 @@
-import { Controller, Get, Param, Query, Req } from '@nestjs/common';
+import { Controller, Get, Param, Query, Req, Res } from '@nestjs/common';
 import { CatalogService } from './catalog.service';
 import { ToUpperCasePipe } from '@weats/common';
 import { EstablishmentLanguage } from '@weats/database';
 import { JwtService } from '@nestjs/jwt';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 
 export interface QrSessionTokenPayload {
   sub: string;      // service point ID
@@ -26,13 +26,20 @@ export class CatalogController {
   }
 
   @Get(":slug/theme")
-  getLandingpageTheme(@Param('slug') slug: string,
+  getLandingpageTheme(
+    @Param('slug') slug: string,
+    @Res({ passthrough: true }) res: Response,
   ) {
+    res.setHeader('Cache-Control', 'public, max-age=30, stale-while-revalidate=60');
     return this.catalogService.getTheme(slug);
   }
 
   @Get(":slug/settings")
-  getEstablishmentSettings(@Param('slug') slug: string) {
+  getEstablishmentSettings(
+    @Param('slug') slug: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    res.setHeader('Cache-Control', 'public, max-age=30, stale-while-revalidate=60');
     return this.catalogService.getEstablishmentSettings(slug);
   }
 
@@ -41,8 +48,14 @@ export class CatalogController {
     @Param('slug') slug: string,
     @Query('lang', ToUpperCasePipe) lang: EstablishmentLanguage,
     @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
   ) {
     const qrSession = this.getQrSession(req);
+    if (!qrSession) {
+      res.setHeader('Cache-Control', 'public, max-age=30, stale-while-revalidate=60');
+    } else {
+      res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    }
     return this.catalogService.getMenuList(slug, lang, qrSession);
   }
 
@@ -52,8 +65,14 @@ export class CatalogController {
     @Param('menuId') menuId: string,
     @Query('lang', ToUpperCasePipe) lang: EstablishmentLanguage,
     @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
   ) {
     const qrSession = this.getQrSession(req);
+    if (!qrSession) {
+      res.setHeader('Cache-Control', 'public, max-age=30, stale-while-revalidate=60');
+    } else {
+      res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    }
     return this.catalogService.getMenuContent(slug, menuId, lang, qrSession);
   }
 
