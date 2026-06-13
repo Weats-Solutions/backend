@@ -9,7 +9,6 @@ import { ConfigModule } from '@nestjs/config';
 import { RoomsService } from './rooms/rooms.service';
 import { RealtimeStateService } from './websocket-v2/state.service';
 import { RealtimeV2Controller } from './realtime-v2.controller';
-import { RealtimeV2ClientGateway } from './websocket-v2/client.gateway';
 import { RealtimeV2StaffGateway } from './websocket-v2/staff.gateway';
 import { RealtimeV2ClientAuthService } from './websocket-v2/client-auth.service';
 import { RealtimeV2StaffAuthService } from './websocket-v2/staff-auth.service';
@@ -40,7 +39,6 @@ import { RealtimeV2AdminController } from './websocket-v2/admin.controller';
   providers: [
     RoomsService,
     RealtimeStateService,
-    RealtimeV2ClientGateway,
     RealtimeV2StaffGateway,
     RealtimeV2ClientAuthService,
     RealtimeV2StaffAuthService,

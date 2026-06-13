@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ClerkService } from '@weats/integrations';
 import { CorePrismaService } from '@weats/database';
-import { CacheService, dashboardEstKey } from '@weats/cache';
+import { CacheService } from '@weats/cache';
 import { StaffValidationContext } from './realtime-v2.types';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class RealtimeV2StaffAuthService {
       const user = await this.clerkService.verifyJwtToken(token);
       if (!user) return null;
 
-      // 2. Verificar se o estabelecimento tem acesso ao módulo e subscrição ativa (com cache)
+      // 2. Verificar se o estabelecimento tem acesso ao módulo e subscrição ativa
       const access = await this.validateEstablishmentAccess(establishmentId);
       
       if (!access || !access.hasCallStaffModule || !access.hasActiveSubscription) {
@@ -29,12 +29,17 @@ export class RealtimeV2StaffAuthService {
         return null;
       }
 
-      // TODO: No futuro, se quiseres verificar se este user específico pertence ao staff 
-      // deste estabelecimento via DB, seria aqui. Por agora, deixamos passar se o módulo estiver ativo.
+      // 3. Verificar se o utilizador é o dono do estabelecimento
+      const isOwner = access.ownerId === user.id;
+
+      if (!isOwner) {
+        this.logger.warn(`User ${user.email} (ID: ${user.id}) is not the owner of establishment ${establishmentId}`);
+        return null;
+      }
       
       return {
         user,
-        role: 'STAFF', // Default para staff que se liga via KDS
+        role: 'OWNER',
         establishmentId,
       };
     } catch (error: any) {
@@ -44,7 +49,7 @@ export class RealtimeV2StaffAuthService {
   }
 
   private async validateEstablishmentAccess(id: string) {
-    const cacheKey = dashboardEstKey(id);
+    const cacheKey = `realtime:est:access:${id}`;
 
     const establishment = await this.cache.wrap<any>(
       cacheKey,
@@ -52,12 +57,14 @@ export class RealtimeV2StaffAuthService {
       async () => {
         return this.prisma.establishment.findUnique({
           where: { id },
-          include: {
-            logoImage: { select: { id: true, url: true } },
-            bannerImage: { select: { id: true, url: true } },
-            subscription: true,
-            schedule: {
-              include: { days: { include: { intervals: true } } },
+          select: {
+            ownerId: true,
+            callStaffModule: true,
+            isDemo: true,
+            subscription: {
+              select: {
+                status: true,
+              },
             },
           },
         });
@@ -72,7 +79,7 @@ export class RealtimeV2StaffAuthService {
       establishment.isDemo;
 
     return {
-      hasAccess: true,
+      ownerId: establishment.ownerId,
       hasActiveSubscription,
       hasCallStaffModule: establishment.callStaffModule,
     };

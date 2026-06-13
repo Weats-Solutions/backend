@@ -109,21 +109,10 @@ export class RealtimeV2StaffGateway implements OnGatewayInit {
       return { error: 'servicePointId e clientId são obrigatórios' };
     }
 
-    // 1. Avisar TODOS na mesa que o staff está a caminho
-    this.dispatchService.emitClientStatus(
-      establishmentId,
-      payload.servicePointId,
-      RealtimeCallStatus.RESPONDED,
-      payload.message || RealtimeMessageCode.STAFF_ON_WAY,
-      {
-        staffName: socket.data.user.firstName || 'Staff',
-      },
-    );
-
-    // 2. Limpar TODOS os pedidos desta mesa no Redis
+    // 1. Limpar TODOS os pedidos desta mesa no Redis
     await this.stateService.removeActiveCall(establishmentId, payload.servicePointId);
 
-    // 3. Avisar todos os KDS para removerem os alertas desta mesa
+    // 2. Avisar todos os KDS para removerem os alertas desta mesa
     this.dispatchService.emitCallRemoved(establishmentId, payload.servicePointId);
 
     return { success: true };
@@ -156,7 +145,7 @@ export class RealtimeV2StaffGateway implements OnGatewayInit {
       expiresAt
     );
 
-    return { success: true, expiresAt: new Date(Date.now() + durationMs).toISOString() };
+    return { success: true, expiresAt };
   }
 
   @UsePipes(new ValidationPipe({ transform: true }))
@@ -176,21 +165,9 @@ export class RealtimeV2StaffGateway implements OnGatewayInit {
     }
 
     const durationMs = (durationMinutes || 60) * 60 * 1000;
+    const expiresAt = new Date(Date.now() + durationMs).toISOString();
     this.securityService.blockClientId(clientId, durationMs);
 
-    const sockets = await this.dispatchService.fetchClientSocketsInEstablishment(establishmentId);
-    sockets.forEach(s => {
-      if ((s.data as RealtimeV2SocketData).clientId !== clientId) {
-        return;
-      }
-
-      const servicePointId = (s.data as RealtimeV2SocketData).servicePointId;
-      const clientIp = this.securityService.resolveClientIp(s);
-      this.securityService.blockIp(clientIp, durationMs);
-
-      s.disconnect(true);
-    });
-
-    return { success: true, expiresAt: new Date(Date.now() + durationMs).toISOString() };
+    return { success: true, expiresAt };
   }
 }

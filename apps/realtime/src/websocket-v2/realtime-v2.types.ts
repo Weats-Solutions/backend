@@ -2,21 +2,18 @@ import { User } from '@weats/types';
 import { Server } from 'socket.io';
 
 export const RealtimeV2Error = {
-  // Erros de Handshake / Conexão
   THROTTLE: 'REALTIME_ERR_THROTTLE',
   IP_BAN: 'REALTIME_ERR_IP_BAN',
   SP_BLOCKED: 'REALTIME_ERR_SP_BLOCKED',
   INVALID_QR: 'REALTIME_ERR_INVALID_QR',
   INVALID_SP: 'REALTIME_ERR_INVALID_SP',
-  CAPACITY_EXCEEDED: 'REALTIME_ERR_CAPACITY_EXCEEDED',
-  ALREADY_CONNECTED: 'REALTIME_ERR_ALREADY_CONNECTED',
   
   // Erros de Pedido
   SPAM_PROTECTION: 'REALTIME_ERR_SPAM_PROTECTION',
   UNAUTHORIZED: 'REALTIME_ERR_UNAUTHORIZED',
   MISSING_AUTH: 'REALTIME_ERR_MISSING_AUTH',
-  CONNECTING_LOCK: 'REALTIME_ERR_CONNECTING_LOCK',
   INTERNAL_ERROR: 'REALTIME_ERR_INTERNAL_ERROR',
+  GRACE_EXPIRED: 'REALTIME_ERR_GRACE_EXPIRED',
 } as const;
 
 export interface AdminBlockTablePayload {
@@ -63,12 +60,6 @@ export interface RealtimeV2SocketData {
   user?: User;
   role?: string;
   establishmentId?: string;
-  servicePointId?: string;
-  servicePointName?: string;
-  zoneId?: string;
-  zoneName?: string;
-  maxCapacity?: number;
-  clientId?: string;
 }
 
 export interface ClientValidationContext {
@@ -84,11 +75,6 @@ export interface StaffValidationContext {
   user: User;
   role: string;
   establishmentId: string;
-}
-
-export interface ClientCallPayload {
-  type: RealtimeStaffCallType;
-  message?: string;
 }
 
 export interface StaffCallResponsePayload {
@@ -115,13 +101,6 @@ export interface CallRemovedPayload {
   clientId?: string;
 }
 
-export interface CallStatusPayload {
-  status: RealtimeCallStatus;
-  message: RealtimeMessageCode | string;
-  timestamp: string;
-  staffName?: string;
-}
-
 export interface StaffServerToClientEvents {
   'call:snapshot': (calls: CallRequestedPayload[]) => void;
   'call:requested': (payload: CallRequestedPayload) => void;
@@ -136,24 +115,9 @@ export interface StaffClientToServerEvents {
   'admin:block:client': (payload: { clientId: string; durationMinutes?: number }) => void;
 }
 
-export interface ClientServerToClientEvents {
-  'call:status': (payload: CallStatusPayload) => void;
-}
-
-export interface ClientClientToServerEvents {
-  'call:request': (payload: ClientCallPayload) => void;
-}
-
 export type RealtimeV2StaffServer = Server<
   StaffClientToServerEvents,
   StaffServerToClientEvents,
-  Record<string, never>,
-  RealtimeV2SocketData
->;
-
-export type RealtimeV2ClientServer = Server<
-  ClientClientToServerEvents,
-  ClientServerToClientEvents,
   Record<string, never>,
   RealtimeV2SocketData
 >;

@@ -3,24 +3,19 @@ import { RealtimeCallStatus, RealtimeMessageCode } from '@weats/contracts';
 import { RoomsService } from '../rooms/rooms.service';
 import {
   CallRequestedPayload,
-  RealtimeV2ClientServer,
   RealtimeV2StaffServer,
+  RealtimeV2SocketData,
 } from './realtime-v2.types';
 
 @Injectable()
 export class RealtimeV2DispatchService {
-  public staffServer?: RealtimeV2StaffServer;
-  public clientServer?: RealtimeV2ClientServer;
+  private staffServer?: RealtimeV2StaffServer;
   private readonly logger = new Logger(RealtimeV2DispatchService.name);
 
   constructor(private readonly rooms: RoomsService) { }
 
   registerStaffServer(server: RealtimeV2StaffServer) {
     this.staffServer = server;
-  }
-
-  registerClientServer(server: RealtimeV2ClientServer) {
-    this.clientServer = server;
   }
 
   emitCallRequested(establishmentId: string, payload: CallRequestedPayload) {
@@ -34,22 +29,6 @@ export class RealtimeV2DispatchService {
       clientId,
     });
     this.logger.log(`[V2 DISPATCH] call:removed est=${establishmentId} sp=${servicePointId}${clientId ? ` client=${clientId}` : ''}`);
-  }
-
-  emitClientStatus(
-    establishmentId: string,
-    servicePointId: string,
-    status: RealtimeCallStatus,
-    message: RealtimeMessageCode | string,
-    extra: Record<string, unknown> = {},
-  ) {
-    this.clientServer?.to(this.rooms.servicePoint(establishmentId, servicePointId)).emit('call:status', {
-      status,
-      message,
-      timestamp: new Date().toISOString(),
-      ...extra,
-    });
-    this.logger.log(`[V2 DISPATCH] call:status est=${establishmentId} sp=${servicePointId} status=${status}`);
   }
 
   emitTableStatus(
@@ -66,13 +45,19 @@ export class RealtimeV2DispatchService {
     this.logger.log(`[V2 DISPATCH] table:status est=${establishmentId} sp=${servicePointId} status=${status}${expiresAt ? ` expires=${expiresAt}` : ''}`);
   }
 
-  async fetchClientSocketsInServicePoint(establishmentId: string, servicePointId: string) {
-    if (!this.clientServer) return [];
-    return this.clientServer.in(this.rooms.servicePoint(establishmentId, servicePointId)).fetchSockets();
-  }
+  // Métodos encapsulados para consulta de conexões de forma segura (Desacoplado de Socket.io)
 
-  async fetchClientSocketsInEstablishment(establishmentId: string) {
-    if (!this.clientServer) return [];
-    return this.clientServer.in(this.rooms.est(establishmentId)).fetchSockets();
+  async getConnectedStaffsInfo() {
+    if (!this.staffServer) return [];
+    const sockets = await this.staffServer.fetchSockets();
+    return sockets.map(s => {
+      const d = s.data as RealtimeV2SocketData;
+      return {
+        id: s.id,
+        email: d.user?.email,
+        establishmentId: d.establishmentId,
+        connectedAt: s.handshake.issued,
+      };
+    });
   }
 }

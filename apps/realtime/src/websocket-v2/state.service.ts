@@ -1,9 +1,11 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, OnModuleInit, Logger } from '@nestjs/common';
 import { RedisConfigService } from '@weats/configs/redis-config.service';
 import Redis from 'ioredis';
+import { CallRequestedPayload } from './realtime-v2.types';
 
 @Injectable()
 export class RealtimeStateService implements OnModuleInit {
+    private readonly logger = new Logger(RealtimeStateService.name);
     private redis: Redis;
 
     constructor(private readonly redisConfig: RedisConfigService) {}
@@ -13,11 +15,11 @@ export class RealtimeStateService implements OnModuleInit {
         this.redis = new Redis(options);
 
         this.redis.on('connect', () => {
-            console.log(`✅ REDIS: Ligado com sucesso à DB ${options.db} para Estado Realtime.`);
+            this.logger.log(`✅ REDIS: Ligado com sucesso à DB ${options.db} para Estado Realtime.`);
         });
 
         this.redis.on('error', (err) => {
-            console.error('❌ REDIS ERROR:', err);
+            this.logger.error('❌ REDIS ERROR:', err);
         });
     }
 
@@ -25,54 +27,63 @@ export class RealtimeStateService implements OnModuleInit {
         return `realtime:active:est:${estId}`;
     }
 
-    // Guardar um novo pedido
-    async saveActiveCall(estId: string, spId: string, clientId: string, payload: any) {
+    // Guardar um novo pedido com tipo estrito
+    async saveActiveCall(estId: string, spId: string, clientId: string, payload: CallRequestedPayload) {
         const key = this.getEstKey(estId);
         const field = `${spId}:${clientId}`;
-        console.log(`[REDIS] Salvando pedido ativo em: ${key} -> ${field} (DB: ${this.redis.options.db})`);
+        this.logger.log(`[REDIS] Salvando pedido ativo em: ${key} -> ${field} (DB: ${this.redis.options.db})`);
         await this.redis.hset(key, field, JSON.stringify(payload));
         // Expiração de segurança (24h) para não acumular lixo se ninguém aceitar
         await this.redis.expire(key, 86400); 
     }
 
     // Buscar um pedido ativo específico
-    async getActiveCall(estId: string, spId: string, clientId: string): Promise<any | null> {
+    async getActiveCall(estId: string, spId: string, clientId: string): Promise<CallRequestedPayload | null> {
         const key = this.getEstKey(estId);
         const field = `${spId}:${clientId}`;
         const data = await this.redis.hget(key, field);
         if (!data) return null;
         try {
-            return JSON.parse(data);
-        } catch {
+            return JSON.parse(data) as CallRequestedPayload;
+        } catch (err) {
+            this.logger.error(`Failed to parse active call: ${data}`, err);
             return null;
         }
     }
 
-    // Remover um pedido (quando aceite ou cancelado)
+    // Remover um pedido (quando aceite ou cancelado) com hdel em lote
     async removeActiveCall(estId: string, spId: string, clientId?: string) {
         const key = this.getEstKey(estId);
         
         if (clientId && clientId !== 'ALL') {
             await this.redis.hdel(key, `${spId}:${clientId}`);
         } else {
-            // Se for 'ALL' ou undefined, removemos todos daquela mesa (cleanup em massa)
-            console.log(`[REDIS] Limpeza em massa para Mesa: ${spId} no Est: ${estId}`);
+            // Se for 'ALL' ou undefined, removemos todos daquela mesa (cleanup em lote)
+            this.logger.log(`[REDIS] Limpeza em lote para Mesa: ${spId} no Est: ${estId}`);
             const all = await this.redis.hgetall(key);
-            for (const field of Object.keys(all)) {
-                if (field.startsWith(`${spId}:`)) {
-                    await this.redis.hdel(key, field);
-                }
+            const toDelete = Object.keys(all).filter(field => field.startsWith(`${spId}:`));
+            if (toDelete.length > 0) {
+                await this.redis.hdel(key, ...toDelete);
             }
         }
     }
 
-    // Buscar todos os pedidos pendentes de um estabelecimento
-    async getActiveCalls(estId: string): Promise<any[]> {
+    // Buscar todos os pedidos pendentes de um estabelecimento com try/catch robusto
+    async getActiveCalls(estId: string): Promise<CallRequestedPayload[]> {
         const key = this.getEstKey(estId);
-        console.log(`[REDIS] Lendo pedidos pendentes para estabelecimento: ${estId} (DB: ${this.redis.options.db})`);
+        this.logger.log(`[REDIS] Lendo pedidos pendentes para estabelecimento: ${estId} (DB: ${this.redis.options.db})`);
         const data = await this.redis.hgetall(key);
-        const results = Object.values(data).map(v => JSON.parse(v as string));
-        console.log(`[REDIS] Encontrados ${results.length} pedidos em cache.`);
+        
+        const results: CallRequestedPayload[] = [];
+        for (const val of Object.values(data)) {
+            try {
+                results.push(JSON.parse(val) as CallRequestedPayload);
+            } catch (err) {
+                this.logger.error(`Failed to parse active call payload from list: ${val}`, err);
+            }
+        }
+
+        this.logger.log(`[REDIS] Encontrados ${results.length} pedidos em cache.`);
         return results;
     }
 
@@ -91,14 +102,14 @@ export class RealtimeStateService implements OnModuleInit {
         const expiresAt = Date.now() + durationMs;
         await this.redis.zadd(key, expiresAt, spId);
         await this.redis.expire(key, 86400); // 24h cleanup
-        console.log(`[REDIS] Mesa ${spId} bloqueada até ${new Date(expiresAt).toISOString()}`);
+        this.logger.log(`[REDIS] Mesa ${spId} bloqueada até ${new Date(expiresAt).toISOString()}`);
     }
 
     async getBlockedTablesSnapshot(estId: string): Promise<Record<string, string>> {
         const key = this.getBlockKey(estId);
         const now = Date.now();
         
-        console.log(`[REDIS] Gerando snapshot de mesas bloqueadas para Est: ${estId} (DB: ${this.redis.options.db})`);
+        this.logger.log(`[REDIS] Gerando snapshot de mesas bloqueadas para Est: ${estId} (DB: ${this.redis.options.db})`);
 
         // 1. Limpar bloqueios expirados no Redis
         await this.redis.zremrangebyscore(key, '-inf', now);
@@ -114,7 +125,7 @@ export class RealtimeStateService implements OnModuleInit {
             snapshot[spId] = new Date(expiresAt).toISOString();
         }
 
-        console.log(`[REDIS] Encontradas ${Object.keys(snapshot).length} mesas bloqueadas ativas.`);
+        this.logger.log(`[REDIS] Encontradas ${Object.keys(snapshot).length} mesas bloqueadas ativas.`);
         return snapshot;
     }
 
@@ -128,6 +139,6 @@ export class RealtimeStateService implements OnModuleInit {
     async removeTableBlock(estId: string, spId: string) {
         const key = this.getBlockKey(estId);
         await this.redis.zrem(key, spId);
-        console.log(`[REDIS] Mesa ${spId} DESBLOQUEADA manualmente.`);
+        this.logger.log(`[REDIS] Mesa ${spId} DESBLOQUEADA manualmente.`);
     }
 }
