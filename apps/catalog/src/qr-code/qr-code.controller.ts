@@ -44,7 +44,7 @@ export class QrCodeController {
       const isDev = this.weatsEnv === 'dev';
 
       res.cookie('qr_session', sessionToken, {
-        httpOnly: true, 
+        httpOnly: true,
         secure: true,    // Sempre true já que ambos os ambientes usam HTTPS
         sameSite: 'lax', // Lax funciona perfeitamente para redirects cross-subdomain
         domain: isDev ? '.weats.app' : '.weats.pt', // Domínio correto para cada ambiente
