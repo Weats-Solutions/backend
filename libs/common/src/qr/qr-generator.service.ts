@@ -163,6 +163,7 @@ export class QrGeneratorService {
     return qrSvg.replace('</svg>', `${logoElement}\n</svg>`);
   }
 
+  
   /**
    * Compose a QR SVG inside a frame SVG.
    * Returns a full SVG string with the frame wrapping the QR.
