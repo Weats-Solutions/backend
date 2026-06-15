@@ -24,6 +24,8 @@ export class EstablishmentModuleSettingsService {
                 menusModule: true,
                 callStaffModule: true,
                 callStaffOptions: true,
+                reservationsModule: true,
+                reservationsLink: true,
             }
         })
     }
@@ -42,6 +44,19 @@ export class EstablishmentModuleSettingsService {
             }
         }
 
+        if (updateEstablishmentModuleSettingsDto.reservationsModule) {
+            const { enabled } = await this.featureUsageService.getUsageAndLimit(
+                feature.reservations,
+                id,
+            );
+            if (!enabled) {
+                throw new BadRequestException({
+                    message: 'Feature reservations not enabled for your plan',
+                    code: ERRORS.FEATURE_NOT_ENABLED,
+                });
+            }
+        }
+
         try {
             const establishment = await this.prisma.establishment.update({
                 where: { id },
@@ -49,6 +64,8 @@ export class EstablishmentModuleSettingsService {
                     myPageModule: updateEstablishmentModuleSettingsDto.myPageModule,
                     menusModule: updateEstablishmentModuleSettingsDto.menusModule,
                     callStaffModule: updateEstablishmentModuleSettingsDto.callStaffModule,
+                    reservationsModule: updateEstablishmentModuleSettingsDto.reservationsModule,
+                    reservationsLink: updateEstablishmentModuleSettingsDto.reservationsLink,
                     ...(updateEstablishmentModuleSettingsDto.callStaffOptions !== undefined && {
                         callStaffOptions: updateEstablishmentModuleSettingsDto.callStaffOptions,
                     }),
@@ -59,6 +76,8 @@ export class EstablishmentModuleSettingsService {
                     menusModule: true,
                     callStaffModule: true,
                     callStaffOptions: true,
+                    reservationsModule: true,
+                    reservationsLink: true,
                 }
             })
 
@@ -70,6 +89,8 @@ export class EstablishmentModuleSettingsService {
                 menusModule: establishment.menusModule,
                 callStaffModule: establishment.callStaffModule,
                 callStaffOptions: establishment.callStaffOptions,
+                reservationsModule: establishment.reservationsModule,
+                reservationsLink: establishment.reservationsLink,
             }
         } catch (error) {
             this.logger.error(`Failed to update establishment module settings: ${error}`);

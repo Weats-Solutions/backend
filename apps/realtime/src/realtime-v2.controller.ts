@@ -4,7 +4,8 @@ import { RealtimeV2DispatchService } from './websocket-v2/dispatch.service';
 import { RealtimeStaffCallType, RealtimeV2Error, CallRequestedPayload } from './websocket-v2/realtime-v2.types';
 import { RealtimeV2SecurityService } from './websocket-v2/security.service';
 import { RealtimeV2ClientAuthService } from './websocket-v2/client-auth.service';
-import { ClerkGuard, EstablishmentStaffGuard } from '@weats/common';
+import { ClerkGuard, EstablishmentStaffGuard, isScheduleOpenNow } from '@weats/common';
+import { CorePrismaService } from '@weats/database';
 import { Request } from 'express';
 
 @Controller('realtime-v2')
@@ -14,6 +15,7 @@ export class RealtimeV2Controller {
     private readonly securityService: RealtimeV2SecurityService,
     private readonly dispatchService: RealtimeV2DispatchService,
     private readonly authService: RealtimeV2ClientAuthService,
+    private readonly prisma: CorePrismaService,
   ) { }
 
   private checkSystemAdminSecret(req: Request) {
@@ -48,6 +50,31 @@ export class RealtimeV2Controller {
         authError = RealtimeV2Error.INVALID_SP;
       }
       throw new HttpException(authError, HttpStatus.UNAUTHORIZED);
+    }
+
+    // Verify if the establishment is open based on its schedule
+    const establishment = await this.prisma.establishment.findUnique({
+      where: { id: context.establishmentId },
+      select: {
+        timezone: true,
+        schedule: {
+          include: {
+            days: {
+              include: {
+                intervals: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (establishment?.schedule) {
+      const timezone = establishment.timezone || 'Europe/Lisbon';
+      const isOpen = isScheduleOpenNow(establishment.schedule as any, timezone);
+      if (!isOpen) {
+        throw new HttpException(RealtimeV2Error.ESTABLISHMENT_CLOSED, HttpStatus.FORBIDDEN);
+      }
     }
 
     if (!body.clientId) {

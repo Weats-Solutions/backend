@@ -11,6 +11,7 @@ export const feature = {
   qrcode_rules: 'qrcode_rules',
 
   call_staff: 'call_staff',
+  reservations: 'reservations',
 
   theme_builder: 'theme_builder',
 

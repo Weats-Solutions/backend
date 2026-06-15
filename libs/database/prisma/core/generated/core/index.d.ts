@@ -993,6 +993,8 @@ export const UnitType: {
   PLATE: 'PLATE',
   BOWL: 'BOWL',
   UNIT: 'UNIT',
+  PAX: 'PAX',
+  BALL: 'BALL',
   GLASS: 'GLASS',
   CUP: 'CUP',
   SHOT: 'SHOT',
@@ -26578,8 +26580,9 @@ export namespace Prisma {
     myPageModule: boolean | null
     menusModule: boolean | null
     callStaffModule: boolean | null
-    takeAwayModule: boolean | null
     reservationsModule: boolean | null
+    reservationsLink: string | null
+    takeAwayModule: boolean | null
     isDemo: boolean | null
     primaryLanguage: $Enums.EstablishmentLanguage | null
     currency: $Enums.Currency | null
@@ -26627,8 +26630,9 @@ export namespace Prisma {
     myPageModule: boolean | null
     menusModule: boolean | null
     callStaffModule: boolean | null
-    takeAwayModule: boolean | null
     reservationsModule: boolean | null
+    reservationsLink: string | null
+    takeAwayModule: boolean | null
     isDemo: boolean | null
     primaryLanguage: $Enums.EstablishmentLanguage | null
     currency: $Enums.Currency | null
@@ -26677,8 +26681,9 @@ export namespace Prisma {
     menusModule: number
     callStaffModule: number
     callStaffOptions: number
-    takeAwayModule: number
     reservationsModule: number
+    reservationsLink: number
+    takeAwayModule: number
     isDemo: number
     primaryLanguage: number
     availableLanguages: number
@@ -26729,8 +26734,9 @@ export namespace Prisma {
     myPageModule?: true
     menusModule?: true
     callStaffModule?: true
-    takeAwayModule?: true
     reservationsModule?: true
+    reservationsLink?: true
+    takeAwayModule?: true
     isDemo?: true
     primaryLanguage?: true
     currency?: true
@@ -26778,8 +26784,9 @@ export namespace Prisma {
     myPageModule?: true
     menusModule?: true
     callStaffModule?: true
-    takeAwayModule?: true
     reservationsModule?: true
+    reservationsLink?: true
+    takeAwayModule?: true
     isDemo?: true
     primaryLanguage?: true
     currency?: true
@@ -26828,8 +26835,9 @@ export namespace Prisma {
     menusModule?: true
     callStaffModule?: true
     callStaffOptions?: true
-    takeAwayModule?: true
     reservationsModule?: true
+    reservationsLink?: true
+    takeAwayModule?: true
     isDemo?: true
     primaryLanguage?: true
     availableLanguages?: true
@@ -26952,8 +26960,9 @@ export namespace Prisma {
     menusModule: boolean
     callStaffModule: boolean
     callStaffOptions: $Enums.CallStaffOption[]
-    takeAwayModule: boolean
     reservationsModule: boolean
+    reservationsLink: string | null
+    takeAwayModule: boolean
     isDemo: boolean
     primaryLanguage: $Enums.EstablishmentLanguage
     availableLanguages: $Enums.EstablishmentLanguage[]
@@ -27020,8 +27029,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: boolean
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: boolean
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: boolean
     availableLanguages?: boolean
@@ -27112,8 +27122,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: boolean
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: boolean
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: boolean
     availableLanguages?: boolean
@@ -27168,8 +27179,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: boolean
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: boolean
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: boolean
     availableLanguages?: boolean
@@ -27224,8 +27236,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: boolean
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: boolean
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: boolean
     availableLanguages?: boolean
@@ -27243,7 +27256,7 @@ export namespace Prisma {
     ownerId?: boolean
   }
 
-  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "isActive" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "myPageModule" | "menusModule" | "callStaffModule" | "callStaffOptions" | "takeAwayModule" | "reservationsModule" | "isDemo" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "googleAnalyticsId" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
+  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "isActive" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "myPageModule" | "menusModule" | "callStaffModule" | "callStaffOptions" | "reservationsModule" | "reservationsLink" | "takeAwayModule" | "isDemo" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "googleAnalyticsId" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
   export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     metadata?: boolean | Establishment$metadataArgs<ExtArgs>
@@ -27378,8 +27391,9 @@ export namespace Prisma {
       menusModule: boolean
       callStaffModule: boolean
       callStaffOptions: $Enums.CallStaffOption[]
-      takeAwayModule: boolean
       reservationsModule: boolean
+      reservationsLink: string | null
+      takeAwayModule: boolean
       isDemo: boolean
       primaryLanguage: $Enums.EstablishmentLanguage
       availableLanguages: $Enums.EstablishmentLanguage[]
@@ -27889,8 +27903,9 @@ export namespace Prisma {
     readonly menusModule: FieldRef<"Establishment", 'Boolean'>
     readonly callStaffModule: FieldRef<"Establishment", 'Boolean'>
     readonly callStaffOptions: FieldRef<"Establishment", 'CallStaffOption[]'>
-    readonly takeAwayModule: FieldRef<"Establishment", 'Boolean'>
     readonly reservationsModule: FieldRef<"Establishment", 'Boolean'>
+    readonly reservationsLink: FieldRef<"Establishment", 'String'>
+    readonly takeAwayModule: FieldRef<"Establishment", 'Boolean'>
     readonly isDemo: FieldRef<"Establishment", 'Boolean'>
     readonly primaryLanguage: FieldRef<"Establishment", 'EstablishmentLanguage'>
     readonly availableLanguages: FieldRef<"Establishment", 'EstablishmentLanguage[]'>
@@ -113590,8 +113605,9 @@ export namespace Prisma {
     menusModule: 'menusModule',
     callStaffModule: 'callStaffModule',
     callStaffOptions: 'callStaffOptions',
-    takeAwayModule: 'takeAwayModule',
     reservationsModule: 'reservationsModule',
+    reservationsLink: 'reservationsLink',
+    takeAwayModule: 'takeAwayModule',
     isDemo: 'isDemo',
     primaryLanguage: 'primaryLanguage',
     availableLanguages: 'availableLanguages',
@@ -116682,8 +116698,9 @@ export namespace Prisma {
     menusModule?: BoolFilter<"Establishment"> | boolean
     callStaffModule?: BoolFilter<"Establishment"> | boolean
     callStaffOptions?: EnumCallStaffOptionNullableListFilter<"Establishment">
-    takeAwayModule?: BoolFilter<"Establishment"> | boolean
     reservationsModule?: BoolFilter<"Establishment"> | boolean
+    reservationsLink?: StringNullableFilter<"Establishment"> | string | null
+    takeAwayModule?: BoolFilter<"Establishment"> | boolean
     isDemo?: BoolFilter<"Establishment"> | boolean
     primaryLanguage?: EnumEstablishmentLanguageFilter<"Establishment"> | $Enums.EstablishmentLanguage
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
@@ -116773,8 +116790,9 @@ export namespace Prisma {
     menusModule?: SortOrder
     callStaffModule?: SortOrder
     callStaffOptions?: SortOrder
-    takeAwayModule?: SortOrder
     reservationsModule?: SortOrder
+    reservationsLink?: SortOrderInput | SortOrder
+    takeAwayModule?: SortOrder
     isDemo?: SortOrder
     primaryLanguage?: SortOrder
     availableLanguages?: SortOrder
@@ -116868,8 +116886,9 @@ export namespace Prisma {
     menusModule?: BoolFilter<"Establishment"> | boolean
     callStaffModule?: BoolFilter<"Establishment"> | boolean
     callStaffOptions?: EnumCallStaffOptionNullableListFilter<"Establishment">
-    takeAwayModule?: BoolFilter<"Establishment"> | boolean
     reservationsModule?: BoolFilter<"Establishment"> | boolean
+    reservationsLink?: StringNullableFilter<"Establishment"> | string | null
+    takeAwayModule?: BoolFilter<"Establishment"> | boolean
     isDemo?: BoolFilter<"Establishment"> | boolean
     primaryLanguage?: EnumEstablishmentLanguageFilter<"Establishment"> | $Enums.EstablishmentLanguage
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
@@ -116958,8 +116977,9 @@ export namespace Prisma {
     menusModule?: SortOrder
     callStaffModule?: SortOrder
     callStaffOptions?: SortOrder
-    takeAwayModule?: SortOrder
     reservationsModule?: SortOrder
+    reservationsLink?: SortOrderInput | SortOrder
+    takeAwayModule?: SortOrder
     isDemo?: SortOrder
     primaryLanguage?: SortOrder
     availableLanguages?: SortOrder
@@ -117015,8 +117035,9 @@ export namespace Prisma {
     menusModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     callStaffModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     callStaffOptions?: EnumCallStaffOptionNullableListFilter<"Establishment">
-    takeAwayModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     reservationsModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
+    reservationsLink?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    takeAwayModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     isDemo?: BoolWithAggregatesFilter<"Establishment"> | boolean
     primaryLanguage?: EnumEstablishmentLanguageWithAggregatesFilter<"Establishment"> | $Enums.EstablishmentLanguage
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
@@ -124241,8 +124262,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -124327,8 +124349,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -124413,8 +124436,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -124499,8 +124523,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -124585,8 +124610,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -124636,8 +124662,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -124682,8 +124709,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -132681,8 +132709,9 @@ export namespace Prisma {
     menusModule?: SortOrder
     callStaffModule?: SortOrder
     callStaffOptions?: SortOrder
-    takeAwayModule?: SortOrder
     reservationsModule?: SortOrder
+    reservationsLink?: SortOrder
+    takeAwayModule?: SortOrder
     isDemo?: SortOrder
     primaryLanguage?: SortOrder
     availableLanguages?: SortOrder
@@ -132731,8 +132760,9 @@ export namespace Prisma {
     myPageModule?: SortOrder
     menusModule?: SortOrder
     callStaffModule?: SortOrder
-    takeAwayModule?: SortOrder
     reservationsModule?: SortOrder
+    reservationsLink?: SortOrder
+    takeAwayModule?: SortOrder
     isDemo?: SortOrder
     primaryLanguage?: SortOrder
     currency?: SortOrder
@@ -132780,8 +132810,9 @@ export namespace Prisma {
     myPageModule?: SortOrder
     menusModule?: SortOrder
     callStaffModule?: SortOrder
-    takeAwayModule?: SortOrder
     reservationsModule?: SortOrder
+    reservationsLink?: SortOrder
+    takeAwayModule?: SortOrder
     isDemo?: SortOrder
     primaryLanguage?: SortOrder
     currency?: SortOrder
@@ -145214,8 +145245,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -145299,8 +145331,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -145400,8 +145433,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -145485,8 +145519,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -145570,8 +145605,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -145655,8 +145691,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -145756,8 +145793,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -145841,8 +145879,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -145956,8 +145995,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -146041,8 +146081,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -146171,8 +146212,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -146256,8 +146298,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -146492,8 +146535,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -146577,8 +146621,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -146762,8 +146807,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -146847,8 +146893,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -147131,8 +147178,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -147216,8 +147264,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -147366,8 +147415,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -147451,8 +147501,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -147819,8 +147870,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -147904,8 +147956,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -148055,8 +148108,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -148140,8 +148194,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -148671,8 +148726,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -148756,8 +148812,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -148884,8 +148941,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -148969,8 +149027,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -149194,8 +149253,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -149279,8 +149339,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -149380,8 +149441,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -149465,8 +149527,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -152540,8 +152603,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -152625,8 +152689,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -152726,8 +152791,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -152811,8 +152877,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -152937,8 +153004,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -153022,8 +153090,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -153170,8 +153239,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -153255,8 +153325,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -153340,8 +153411,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -153425,8 +153497,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -153567,8 +153640,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -153652,8 +153726,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -153784,8 +153859,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -153869,8 +153945,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -153970,8 +154047,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -154055,8 +154133,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -154140,8 +154219,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -154225,8 +154305,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -154320,8 +154401,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -154405,8 +154487,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -154500,8 +154583,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -154585,8 +154669,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -154887,8 +154972,9 @@ export namespace Prisma {
     menusModule?: BoolFilter<"Establishment"> | boolean
     callStaffModule?: BoolFilter<"Establishment"> | boolean
     callStaffOptions?: EnumCallStaffOptionNullableListFilter<"Establishment">
-    takeAwayModule?: BoolFilter<"Establishment"> | boolean
     reservationsModule?: BoolFilter<"Establishment"> | boolean
+    reservationsLink?: StringNullableFilter<"Establishment"> | string | null
+    takeAwayModule?: BoolFilter<"Establishment"> | boolean
     isDemo?: BoolFilter<"Establishment"> | boolean
     primaryLanguage?: EnumEstablishmentLanguageFilter<"Establishment"> | $Enums.EstablishmentLanguage
     availableLanguages?: EnumEstablishmentLanguageNullableListFilter<"Establishment">
@@ -154965,8 +155051,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -155050,8 +155137,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -155258,8 +155346,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -155343,8 +155432,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -155444,8 +155534,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -155529,8 +155620,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -155614,8 +155706,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -155699,8 +155792,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -155800,8 +155894,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -155885,8 +155980,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -155970,8 +156066,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -156055,8 +156152,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -156156,8 +156254,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -156241,8 +156340,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -156346,8 +156446,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -156431,8 +156532,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -156959,8 +157061,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -157044,8 +157147,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -157924,8 +158028,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -158009,8 +158114,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -158148,8 +158254,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -158233,8 +158340,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -159518,8 +159626,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -159603,8 +159712,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -159760,8 +159870,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -159845,8 +159956,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -160876,8 +160988,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -160961,8 +161074,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -161182,8 +161296,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -161267,8 +161382,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -162392,8 +162508,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -162477,8 +162594,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -162608,8 +162726,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -162693,8 +162812,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -162872,8 +162992,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -162957,8 +163078,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -163150,8 +163272,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -163235,8 +163358,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -163421,8 +163545,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -163506,8 +163631,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -163746,8 +163872,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -163831,8 +163958,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -164211,8 +164339,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -164296,8 +164425,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -164523,8 +164653,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -164608,8 +164739,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -164998,8 +165130,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -165083,8 +165216,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -165270,8 +165404,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -165355,8 +165490,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -165486,8 +165622,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -165571,8 +165708,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -165821,8 +165959,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -165906,8 +166045,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -166058,8 +166198,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -166143,8 +166284,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -166605,8 +166747,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -166690,8 +166833,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -167683,8 +167827,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -167768,8 +167913,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -168008,8 +168154,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -168093,8 +168240,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -168633,8 +168781,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -168718,8 +168867,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -168895,8 +169045,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -168980,8 +169131,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -169441,8 +169593,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -169526,8 +169679,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -169800,8 +169954,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -169885,8 +170040,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -170161,8 +170317,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -170246,8 +170403,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -170428,8 +170586,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -170513,8 +170672,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -170685,8 +170845,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -170770,8 +170931,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -170905,8 +171067,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -170990,8 +171153,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -171327,8 +171491,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -171412,8 +171577,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -171538,8 +171704,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -171623,8 +171790,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -172137,8 +172305,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -172222,8 +172391,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -172323,8 +172493,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -172408,8 +172579,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -172583,8 +172755,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -172668,8 +172841,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -172763,8 +172937,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -172848,8 +173023,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -172965,8 +173141,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -173050,8 +173227,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -173189,8 +173367,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -173274,8 +173453,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -173457,8 +173637,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -173542,8 +173723,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -173685,8 +173867,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -173770,8 +173953,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -176013,8 +176197,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -176063,8 +176248,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -176161,8 +176347,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -176246,8 +176433,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -176331,8 +176519,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -176381,8 +176570,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -176466,8 +176656,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -176551,8 +176742,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -179894,8 +180086,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -179944,8 +180137,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -180029,8 +180223,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -180114,8 +180309,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -180185,8 +180381,9 @@ export namespace Prisma {
     menusModule?: boolean
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: boolean
     reservationsModule?: boolean
+    reservationsLink?: string | null
+    takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -180300,8 +180497,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -180385,8 +180583,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
@@ -180470,8 +180669,9 @@ export namespace Prisma {
     menusModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
-    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
     availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]

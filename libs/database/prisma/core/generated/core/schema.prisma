@@ -667,8 +667,10 @@ model Establishment {
   menusModule        Boolean           @default(false)
   callStaffModule    Boolean           @default(false)
   callStaffOptions   CallStaffOption[] @default([HELP, CLEAN, BILL, ORDER])
-  takeAwayModule     Boolean           @default(false)
   reservationsModule Boolean           @default(false)
+  reservationsLink   String?
+
+  takeAwayModule Boolean @default(false)
 
   // ─── Configurações ─────────────────────────────────────────────────────────
   isDemo             Boolean                 @default(false)
@@ -1289,6 +1291,8 @@ enum UnitType {
   PLATE
   BOWL
   UNIT
+  PAX
+  BALL //Bolas de Gelado
 
   // --- Drinks ---
   GLASS
