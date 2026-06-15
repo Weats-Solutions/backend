@@ -77,7 +77,7 @@ export class QrCodeService {
       }
 
       // PROD
-      return `https://${slug}.weats.pt`;
+      return `https://${slug}.weats.app`;
     };
 
     // Helper para verificar se o estabelecimento tem uma subscrição válida ou é Demo
