@@ -25,6 +25,7 @@ export const getCorsOptions = (appConfigService: AppConfigService): CorsOptions 
                 break;
             case 'prod':
                 allowedOrigins = [
+                    'https://dev-menu.weats.app',
                     'https://dash.weats.app',
                     'https://*.weats.pt',
                     'https://tm.weats.app',
