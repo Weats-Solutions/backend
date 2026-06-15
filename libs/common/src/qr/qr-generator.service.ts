@@ -138,18 +138,26 @@ export class QrGeneratorService {
     const parts = viewBoxMatch[1].split(/\s+/).map(Number);
     const qrViewSize = parts[2] || 100; // width from viewBox
 
-    const ratio = LOGO_MAX_RATIO[errorLevel] || 0.2;
-    const logoSize = Math.floor(qrViewSize * ratio);
-    const logoX = Math.floor((qrViewSize - logoSize) / 2);
-    const logoY = Math.floor((qrViewSize - logoSize) / 2);
-    const logoPadding = Math.max(Math.floor(logoSize * 0.015), 0);
+    // The default margin in the qrcode package is 4 units on each side.
+    // So the actual QR code grid size is qrViewSize - 8.
+    const qrCodeSize = qrViewSize > 8 ? qrViewSize - 8 : qrViewSize;
+
+    // Use 0.35 ratio to match the frontend's imageSize: 0.35 config
+    const logoSize = qrCodeSize * 0.35;
+    // Match the frontend's logo margin: 8px on a 1000px canvas (with 60px padding, making 880px actual QR grid size)
+    // 8px margin relative to 308px logo is 8 / 308 ~= 0.026 of logo size.
+    const logoPadding = logoSize * (8 / 308);
     const shieldSize = logoSize + logoPadding * 2;
-    const shieldX = Math.floor((qrViewSize - shieldSize) / 2);
-    const shieldY = Math.floor((qrViewSize - shieldSize) / 2);
+
+    // Calculate coordinates as floats for sub-pixel precision and perfect centering in SVG
+    const logoX = (qrViewSize - logoSize) / 2;
+    const logoY = (qrViewSize - logoSize) / 2;
+    const shieldX = (qrViewSize - shieldSize) / 2;
+    const shieldY = (qrViewSize - shieldSize) / 2;
 
     const logoElement = `
-<rect x="${shieldX}" y="${shieldY}" width="${shieldSize}" height="${shieldSize}" fill="${bgColor}" />
-<image x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" href="${logoBase64}" preserveAspectRatio="xMidYMid meet" />`;
+<rect x="${shieldX.toFixed(4)}" y="${shieldY.toFixed(4)}" width="${shieldSize.toFixed(4)}" height="${shieldSize.toFixed(4)}" fill="${bgColor}" />
+<image x="${logoX.toFixed(4)}" y="${logoY.toFixed(4)}" width="${logoSize.toFixed(4)}" height="${logoSize.toFixed(4)}" href="${logoBase64}" preserveAspectRatio="xMidYMid meet" />`;
 
     // Insert before closing </svg>
     return qrSvg.replace('</svg>', `${logoElement}\n</svg>`);

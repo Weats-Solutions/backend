@@ -86,6 +86,8 @@ export class EstablishmentQueryService {
             establishment.subscription?.status === 'ACTIVE' ||
             establishment.subscription?.status === 'TRIALING' ||
             establishment.isDemo;
+        
+            
 
         return {
             hasAccess: true,
