@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { RedisIoAdapter } from './redis-io.adapter';
 import { RedisConfigService } from '@weats/configs/redis-config.service';
 import { Logger, ValidationError } from '@nestjs/common';
-import { AppConfigService } from '@weats/configs';
+import { AppConfigService, getCorsOptions } from '@weats/configs';
 import { RealtimeModule } from './realtime.module';
 
 async function bootstrap() {
@@ -11,10 +11,7 @@ async function bootstrap() {
   const apiPort = appConfigService.getRealtimePort();
   const nodeEnv = appConfigService.getNodeEnv();
 
-  app.enableCors({
-    origin: '*',
-    credentials: true,
-  });
+  app.enableCors(getCorsOptions(appConfigService));
 
 
   const logger = new Logger('Realtime');

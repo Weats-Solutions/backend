@@ -36,10 +36,21 @@ export const getCorsOptions = (appConfigService: AppConfigService): CorsOptions 
                 allowedOrigins = [];
         }
 
+        const matchesAllowedPattern = (origin: string, pattern: string): boolean => {
+            if (pattern.includes('*')) {
+                const regexPattern = '^' + pattern
+                    .replace(/[.+^${}()|[\]\\]/g, '\\$&')
+                    .replace(/\*/g, '[^/]+')
+                    + '$';
+                return new RegExp(regexPattern).test(origin);
+            }
+            return origin === pattern;
+        };
+
         // Check if the origin matches our allowed list, or if it's an ngrok tunnel
         const isNgrok = origin && (origin.endsWith('.ngrok-free.dev') || origin.endsWith('.ngrok.io') || origin.endsWith('.loca.lt'));
 
-        if (!origin || allowedOrigins.includes(origin) || isNgrok) {
+        if (!origin || allowedOrigins.some(pattern => matchesAllowedPattern(origin, pattern)) || isNgrok) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
