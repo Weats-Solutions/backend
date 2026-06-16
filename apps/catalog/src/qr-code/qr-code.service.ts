@@ -71,15 +71,15 @@ export class QrCodeService {
     // Função auxiliar para construir a URL com subdomínio
     const buildSubdomainUrl = (slug: string) => {
       if (this.weatsEnv === 'dev') {
-        return `https://dev-menu.weats.app/s/${slug}`;
+        return `https://dev-menu.weats.app/s/${slug}/menus`;
       }
 
       if (this.weatsEnv === 'local') {
-        return `http://localhost/s/${slug}`;
+        return `http://localhost/s/${slug}/menus`;
       }
 
       // PROD
-      return `https://${slug}.weats.app`;
+      return `https://${slug}.weats.app/menus`;
     };
 
     // Helper para verificar se o estabelecimento tem uma subscrição válida ou é Demo
