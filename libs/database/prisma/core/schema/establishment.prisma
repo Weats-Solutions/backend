@@ -41,6 +41,7 @@ model Establishment {
   callStaffModule    Boolean           @default(false)
   callStaffOptions   CallStaffOption[] @default([HELP, CLEAN, BILL, ORDER])
   reservationsModule Boolean           @default(false)
+  reservationsPlatform ReservationsPlataform?
   reservationsLink   String?
 
   takeAwayModule Boolean @default(false)
@@ -126,6 +127,11 @@ model Establishment {
   @@index([name])
   @@index([ownerId])
   @@index([scheduleId])
+}
+
+enum ReservationsPlataform {
+  THEFORK
+  THREECKET
 }
 
 enum Currency {

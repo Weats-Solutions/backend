@@ -663,12 +663,13 @@ model Establishment {
   websiteUrl      String?
 
   // ─── Configurações de Módulos ──────────────────────────────────────────────
-  myPageModule       Boolean           @default(false)
-  menusModule        Boolean           @default(false)
-  callStaffModule    Boolean           @default(false)
-  callStaffOptions   CallStaffOption[] @default([HELP, CLEAN, BILL, ORDER])
-  reservationsModule Boolean           @default(false)
-  reservationsLink   String?
+  myPageModule         Boolean                @default(false)
+  menusModule          Boolean                @default(false)
+  callStaffModule      Boolean                @default(false)
+  callStaffOptions     CallStaffOption[]      @default([HELP, CLEAN, BILL, ORDER])
+  reservationsModule   Boolean                @default(false)
+  reservationsPlatform ReservationsPlataform?
+  reservationsLink     String?
 
   takeAwayModule Boolean @default(false)
 
@@ -753,6 +754,11 @@ model Establishment {
   @@index([name])
   @@index([ownerId])
   @@index([scheduleId])
+}
+
+enum ReservationsPlataform {
+  THEFORK
+  THREECKET
 }
 
 enum Currency {

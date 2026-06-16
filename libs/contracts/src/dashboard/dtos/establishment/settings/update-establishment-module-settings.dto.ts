@@ -1,5 +1,5 @@
-import { CallStaffOption } from "@weats/database";
-import { IsBoolean, IsNotEmpty, IsArray, IsEnum, IsOptional, IsString } from "class-validator";
+import { CallStaffOption, ReservationsPlataform } from "@weats/database";
+import { IsBoolean, IsNotEmpty, IsArray, IsEnum, IsOptional, IsString, ValidateIf, IsUrl } from "class-validator";
 
 export class UpdateEstablishmentModuleSettingsDto {
     @IsBoolean()
@@ -23,7 +23,14 @@ export class UpdateEstablishmentModuleSettingsDto {
     @IsNotEmpty()
     reservationsModule: boolean;
 
+    @ValidateIf(o => o.reservationsModule === true)
+    @IsEnum(ReservationsPlataform)
+    @IsNotEmpty({ message: 'Reservations platform is required when reservations module is active' })
+    reservationsPlatform?: ReservationsPlataform;
+
+    @ValidateIf(o => o.reservationsModule === true)
     @IsString()
-    @IsOptional()
+    @IsNotEmpty({ message: 'Reservations link is required when reservations module is active' })
+    @IsUrl({}, { message: 'Reservations link must be a valid URL' })
     reservationsLink?: string;
 }

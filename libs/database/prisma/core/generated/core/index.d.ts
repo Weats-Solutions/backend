@@ -901,6 +901,14 @@ export const CallStaffOption: {
 export type CallStaffOption = (typeof CallStaffOption)[keyof typeof CallStaffOption]
 
 
+export const ReservationsPlataform: {
+  THEFORK: 'THEFORK',
+  THREECKET: 'THREECKET'
+};
+
+export type ReservationsPlataform = (typeof ReservationsPlataform)[keyof typeof ReservationsPlataform]
+
+
 export const Currency: {
   EUR: 'EUR',
   USD: 'USD',
@@ -1169,6 +1177,10 @@ export const StockInventoryStatus: typeof $Enums.StockInventoryStatus
 export type CallStaffOption = $Enums.CallStaffOption
 
 export const CallStaffOption: typeof $Enums.CallStaffOption
+
+export type ReservationsPlataform = $Enums.ReservationsPlataform
+
+export const ReservationsPlataform: typeof $Enums.ReservationsPlataform
 
 export type Currency = $Enums.Currency
 
@@ -26581,6 +26593,7 @@ export namespace Prisma {
     menusModule: boolean | null
     callStaffModule: boolean | null
     reservationsModule: boolean | null
+    reservationsPlatform: $Enums.ReservationsPlataform | null
     reservationsLink: string | null
     takeAwayModule: boolean | null
     isDemo: boolean | null
@@ -26631,6 +26644,7 @@ export namespace Prisma {
     menusModule: boolean | null
     callStaffModule: boolean | null
     reservationsModule: boolean | null
+    reservationsPlatform: $Enums.ReservationsPlataform | null
     reservationsLink: string | null
     takeAwayModule: boolean | null
     isDemo: boolean | null
@@ -26682,6 +26696,7 @@ export namespace Prisma {
     callStaffModule: number
     callStaffOptions: number
     reservationsModule: number
+    reservationsPlatform: number
     reservationsLink: number
     takeAwayModule: number
     isDemo: number
@@ -26735,6 +26750,7 @@ export namespace Prisma {
     menusModule?: true
     callStaffModule?: true
     reservationsModule?: true
+    reservationsPlatform?: true
     reservationsLink?: true
     takeAwayModule?: true
     isDemo?: true
@@ -26785,6 +26801,7 @@ export namespace Prisma {
     menusModule?: true
     callStaffModule?: true
     reservationsModule?: true
+    reservationsPlatform?: true
     reservationsLink?: true
     takeAwayModule?: true
     isDemo?: true
@@ -26836,6 +26853,7 @@ export namespace Prisma {
     callStaffModule?: true
     callStaffOptions?: true
     reservationsModule?: true
+    reservationsPlatform?: true
     reservationsLink?: true
     takeAwayModule?: true
     isDemo?: true
@@ -26961,6 +26979,7 @@ export namespace Prisma {
     callStaffModule: boolean
     callStaffOptions: $Enums.CallStaffOption[]
     reservationsModule: boolean
+    reservationsPlatform: $Enums.ReservationsPlataform | null
     reservationsLink: string | null
     takeAwayModule: boolean
     isDemo: boolean
@@ -27030,6 +27049,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: boolean
     reservationsModule?: boolean
+    reservationsPlatform?: boolean
     reservationsLink?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -27123,6 +27143,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: boolean
     reservationsModule?: boolean
+    reservationsPlatform?: boolean
     reservationsLink?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -27180,6 +27201,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: boolean
     reservationsModule?: boolean
+    reservationsPlatform?: boolean
     reservationsLink?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -27237,6 +27259,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: boolean
     reservationsModule?: boolean
+    reservationsPlatform?: boolean
     reservationsLink?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -27256,7 +27279,7 @@ export namespace Prisma {
     ownerId?: boolean
   }
 
-  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "isActive" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "myPageModule" | "menusModule" | "callStaffModule" | "callStaffOptions" | "reservationsModule" | "reservationsLink" | "takeAwayModule" | "isDemo" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "googleAnalyticsId" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
+  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "isActive" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "myPageModule" | "menusModule" | "callStaffModule" | "callStaffOptions" | "reservationsModule" | "reservationsPlatform" | "reservationsLink" | "takeAwayModule" | "isDemo" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "googleAnalyticsId" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
   export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     metadata?: boolean | Establishment$metadataArgs<ExtArgs>
@@ -27392,6 +27415,7 @@ export namespace Prisma {
       callStaffModule: boolean
       callStaffOptions: $Enums.CallStaffOption[]
       reservationsModule: boolean
+      reservationsPlatform: $Enums.ReservationsPlataform | null
       reservationsLink: string | null
       takeAwayModule: boolean
       isDemo: boolean
@@ -27904,6 +27928,7 @@ export namespace Prisma {
     readonly callStaffModule: FieldRef<"Establishment", 'Boolean'>
     readonly callStaffOptions: FieldRef<"Establishment", 'CallStaffOption[]'>
     readonly reservationsModule: FieldRef<"Establishment", 'Boolean'>
+    readonly reservationsPlatform: FieldRef<"Establishment", 'ReservationsPlataform'>
     readonly reservationsLink: FieldRef<"Establishment", 'String'>
     readonly takeAwayModule: FieldRef<"Establishment", 'Boolean'>
     readonly isDemo: FieldRef<"Establishment", 'Boolean'>
@@ -113606,6 +113631,7 @@ export namespace Prisma {
     callStaffModule: 'callStaffModule',
     callStaffOptions: 'callStaffOptions',
     reservationsModule: 'reservationsModule',
+    reservationsPlatform: 'reservationsPlatform',
     reservationsLink: 'reservationsLink',
     takeAwayModule: 'takeAwayModule',
     isDemo: 'isDemo',
@@ -115057,6 +115083,20 @@ export namespace Prisma {
    * Reference to a field of type 'CallStaffOption'
    */
   export type EnumCallStaffOptionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CallStaffOption'>
+    
+
+
+  /**
+   * Reference to a field of type 'ReservationsPlataform'
+   */
+  export type EnumReservationsPlataformFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReservationsPlataform'>
+    
+
+
+  /**
+   * Reference to a field of type 'ReservationsPlataform[]'
+   */
+  export type ListEnumReservationsPlataformFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReservationsPlataform[]'>
     
 
 
@@ -116699,6 +116739,7 @@ export namespace Prisma {
     callStaffModule?: BoolFilter<"Establishment"> | boolean
     callStaffOptions?: EnumCallStaffOptionNullableListFilter<"Establishment">
     reservationsModule?: BoolFilter<"Establishment"> | boolean
+    reservationsPlatform?: EnumReservationsPlataformNullableFilter<"Establishment"> | $Enums.ReservationsPlataform | null
     reservationsLink?: StringNullableFilter<"Establishment"> | string | null
     takeAwayModule?: BoolFilter<"Establishment"> | boolean
     isDemo?: BoolFilter<"Establishment"> | boolean
@@ -116791,6 +116832,7 @@ export namespace Prisma {
     callStaffModule?: SortOrder
     callStaffOptions?: SortOrder
     reservationsModule?: SortOrder
+    reservationsPlatform?: SortOrderInput | SortOrder
     reservationsLink?: SortOrderInput | SortOrder
     takeAwayModule?: SortOrder
     isDemo?: SortOrder
@@ -116887,6 +116929,7 @@ export namespace Prisma {
     callStaffModule?: BoolFilter<"Establishment"> | boolean
     callStaffOptions?: EnumCallStaffOptionNullableListFilter<"Establishment">
     reservationsModule?: BoolFilter<"Establishment"> | boolean
+    reservationsPlatform?: EnumReservationsPlataformNullableFilter<"Establishment"> | $Enums.ReservationsPlataform | null
     reservationsLink?: StringNullableFilter<"Establishment"> | string | null
     takeAwayModule?: BoolFilter<"Establishment"> | boolean
     isDemo?: BoolFilter<"Establishment"> | boolean
@@ -116978,6 +117021,7 @@ export namespace Prisma {
     callStaffModule?: SortOrder
     callStaffOptions?: SortOrder
     reservationsModule?: SortOrder
+    reservationsPlatform?: SortOrderInput | SortOrder
     reservationsLink?: SortOrderInput | SortOrder
     takeAwayModule?: SortOrder
     isDemo?: SortOrder
@@ -117036,6 +117080,7 @@ export namespace Prisma {
     callStaffModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     callStaffOptions?: EnumCallStaffOptionNullableListFilter<"Establishment">
     reservationsModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
+    reservationsPlatform?: EnumReservationsPlataformNullableWithAggregatesFilter<"Establishment"> | $Enums.ReservationsPlataform | null
     reservationsLink?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
     takeAwayModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     isDemo?: BoolWithAggregatesFilter<"Establishment"> | boolean
@@ -124263,6 +124308,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -124350,6 +124396,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -124437,6 +124484,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -124524,6 +124572,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -124611,6 +124660,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -124663,6 +124713,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -124710,6 +124761,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -132325,6 +132377,13 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
+  export type EnumReservationsPlataformNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReservationsPlataform | EnumReservationsPlataformFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ReservationsPlataform[] | ListEnumReservationsPlataformFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ReservationsPlataform[] | ListEnumReservationsPlataformFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumReservationsPlataformNullableFilter<$PrismaModel> | $Enums.ReservationsPlataform | null
+  }
+
   export type EnumEstablishmentLanguageFilter<$PrismaModel = never> = {
     equals?: $Enums.EstablishmentLanguage | EnumEstablishmentLanguageFieldRefInput<$PrismaModel>
     in?: $Enums.EstablishmentLanguage[] | ListEnumEstablishmentLanguageFieldRefInput<$PrismaModel>
@@ -132710,6 +132769,7 @@ export namespace Prisma {
     callStaffModule?: SortOrder
     callStaffOptions?: SortOrder
     reservationsModule?: SortOrder
+    reservationsPlatform?: SortOrder
     reservationsLink?: SortOrder
     takeAwayModule?: SortOrder
     isDemo?: SortOrder
@@ -132761,6 +132821,7 @@ export namespace Prisma {
     menusModule?: SortOrder
     callStaffModule?: SortOrder
     reservationsModule?: SortOrder
+    reservationsPlatform?: SortOrder
     reservationsLink?: SortOrder
     takeAwayModule?: SortOrder
     isDemo?: SortOrder
@@ -132811,6 +132872,7 @@ export namespace Prisma {
     menusModule?: SortOrder
     callStaffModule?: SortOrder
     reservationsModule?: SortOrder
+    reservationsPlatform?: SortOrder
     reservationsLink?: SortOrder
     takeAwayModule?: SortOrder
     isDemo?: SortOrder
@@ -132837,6 +132899,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumEstablishmentTypeFilter<$PrismaModel>
     _max?: NestedEnumEstablishmentTypeFilter<$PrismaModel>
+  }
+
+  export type EnumReservationsPlataformNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReservationsPlataform | EnumReservationsPlataformFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ReservationsPlataform[] | ListEnumReservationsPlataformFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ReservationsPlataform[] | ListEnumReservationsPlataformFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumReservationsPlataformNullableWithAggregatesFilter<$PrismaModel> | $Enums.ReservationsPlataform | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumReservationsPlataformNullableFilter<$PrismaModel>
+    _max?: NestedEnumReservationsPlataformNullableFilter<$PrismaModel>
   }
 
   export type EnumEstablishmentLanguageWithAggregatesFilter<$PrismaModel = never> = {
@@ -138355,6 +138427,10 @@ export namespace Prisma {
   export type EstablishmentUpdatecallStaffOptionsInput = {
     set?: $Enums.CallStaffOption[]
     push?: $Enums.CallStaffOption | $Enums.CallStaffOption[]
+  }
+
+  export type NullableEnumReservationsPlataformFieldUpdateOperationsInput = {
+    set?: $Enums.ReservationsPlataform | null
   }
 
   export type EnumEstablishmentLanguageFieldUpdateOperationsInput = {
@@ -144615,6 +144691,13 @@ export namespace Prisma {
     not?: NestedEnumEstablishmentTypeFilter<$PrismaModel> | $Enums.EstablishmentType
   }
 
+  export type NestedEnumReservationsPlataformNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReservationsPlataform | EnumReservationsPlataformFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ReservationsPlataform[] | ListEnumReservationsPlataformFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ReservationsPlataform[] | ListEnumReservationsPlataformFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumReservationsPlataformNullableFilter<$PrismaModel> | $Enums.ReservationsPlataform | null
+  }
+
   export type NestedEnumEstablishmentLanguageFilter<$PrismaModel = never> = {
     equals?: $Enums.EstablishmentLanguage | EnumEstablishmentLanguageFieldRefInput<$PrismaModel>
     in?: $Enums.EstablishmentLanguage[] | ListEnumEstablishmentLanguageFieldRefInput<$PrismaModel>
@@ -144637,6 +144720,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumEstablishmentTypeFilter<$PrismaModel>
     _max?: NestedEnumEstablishmentTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumReservationsPlataformNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReservationsPlataform | EnumReservationsPlataformFieldRefInput<$PrismaModel> | null
+    in?: $Enums.ReservationsPlataform[] | ListEnumReservationsPlataformFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.ReservationsPlataform[] | ListEnumReservationsPlataformFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumReservationsPlataformNullableWithAggregatesFilter<$PrismaModel> | $Enums.ReservationsPlataform | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumReservationsPlataformNullableFilter<$PrismaModel>
+    _max?: NestedEnumReservationsPlataformNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumEstablishmentLanguageWithAggregatesFilter<$PrismaModel = never> = {
@@ -145246,6 +145339,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -145332,6 +145426,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -145434,6 +145529,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -145520,6 +145616,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -145606,6 +145703,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -145692,6 +145790,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -145794,6 +145893,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -145880,6 +145980,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -145996,6 +146097,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -146082,6 +146184,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -146213,6 +146316,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -146299,6 +146403,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -146536,6 +146641,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -146622,6 +146728,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -146808,6 +146915,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -146894,6 +147002,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -147179,6 +147288,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -147265,6 +147375,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -147416,6 +147527,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -147502,6 +147614,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -147871,6 +147984,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -147957,6 +148071,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -148109,6 +148224,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -148195,6 +148311,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -148727,6 +148844,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -148813,6 +148931,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -148942,6 +149061,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -149028,6 +149148,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -149254,6 +149375,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -149340,6 +149462,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -149442,6 +149565,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -149528,6 +149652,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -152604,6 +152729,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -152690,6 +152816,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -152792,6 +152919,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -152878,6 +153006,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -153005,6 +153134,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -153091,6 +153221,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -153240,6 +153371,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -153326,6 +153458,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -153412,6 +153545,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -153498,6 +153632,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -153641,6 +153776,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -153727,6 +153863,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -153860,6 +153997,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -153946,6 +154084,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -154048,6 +154187,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -154134,6 +154274,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -154220,6 +154361,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -154306,6 +154448,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -154402,6 +154545,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -154488,6 +154632,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -154584,6 +154729,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -154670,6 +154816,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -154973,6 +155120,7 @@ export namespace Prisma {
     callStaffModule?: BoolFilter<"Establishment"> | boolean
     callStaffOptions?: EnumCallStaffOptionNullableListFilter<"Establishment">
     reservationsModule?: BoolFilter<"Establishment"> | boolean
+    reservationsPlatform?: EnumReservationsPlataformNullableFilter<"Establishment"> | $Enums.ReservationsPlataform | null
     reservationsLink?: StringNullableFilter<"Establishment"> | string | null
     takeAwayModule?: BoolFilter<"Establishment"> | boolean
     isDemo?: BoolFilter<"Establishment"> | boolean
@@ -155052,6 +155200,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -155138,6 +155287,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -155347,6 +155497,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -155433,6 +155584,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -155535,6 +155687,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -155621,6 +155774,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -155707,6 +155861,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -155793,6 +155948,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -155895,6 +156051,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -155981,6 +156138,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -156067,6 +156225,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -156153,6 +156312,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -156255,6 +156415,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -156341,6 +156502,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -156447,6 +156609,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -156533,6 +156696,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -157062,6 +157226,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -157148,6 +157313,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -158029,6 +158195,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -158115,6 +158282,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -158255,6 +158423,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -158341,6 +158510,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -159627,6 +159797,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -159713,6 +159884,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -159871,6 +160043,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -159957,6 +160130,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -160989,6 +161163,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -161075,6 +161250,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -161297,6 +161473,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -161383,6 +161560,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -162509,6 +162687,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -162595,6 +162774,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -162727,6 +162907,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -162813,6 +162994,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -162993,6 +163175,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -163079,6 +163262,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -163273,6 +163457,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -163359,6 +163544,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -163546,6 +163732,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -163632,6 +163819,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -163873,6 +164061,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -163959,6 +164148,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -164340,6 +164530,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -164426,6 +164617,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -164654,6 +164846,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -164740,6 +164933,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -165131,6 +165325,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -165217,6 +165412,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -165405,6 +165601,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -165491,6 +165688,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -165623,6 +165821,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -165709,6 +165908,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -165960,6 +166160,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -166046,6 +166247,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -166199,6 +166401,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -166285,6 +166488,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -166748,6 +166952,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -166834,6 +167039,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -167828,6 +168034,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -167914,6 +168121,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -168155,6 +168363,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -168241,6 +168450,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -168782,6 +168992,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -168868,6 +169079,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -169046,6 +169258,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -169132,6 +169345,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -169594,6 +169808,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -169680,6 +169895,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -169955,6 +170171,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -170041,6 +170258,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -170318,6 +170536,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -170404,6 +170623,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -170587,6 +170807,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -170673,6 +170894,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -170846,6 +171068,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -170932,6 +171155,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -171068,6 +171292,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -171154,6 +171379,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -171492,6 +171718,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -171578,6 +171805,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -171705,6 +171933,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -171791,6 +172020,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -172306,6 +172536,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -172392,6 +172623,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -172494,6 +172726,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -172580,6 +172813,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -172756,6 +172990,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -172842,6 +173077,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -172938,6 +173174,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -173024,6 +173261,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -173142,6 +173380,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -173228,6 +173467,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -173368,6 +173608,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -173454,6 +173695,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -173638,6 +173880,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -173724,6 +173967,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -173868,6 +174112,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -173954,6 +174199,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -176198,6 +176444,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -176249,6 +176496,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -176348,6 +176596,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -176434,6 +176683,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -176520,6 +176770,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -176571,6 +176822,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -176657,6 +176909,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -176743,6 +176996,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -180087,6 +180341,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -180138,6 +180393,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -180224,6 +180480,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -180310,6 +180567,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -180382,6 +180640,7 @@ export namespace Prisma {
     callStaffModule?: boolean
     callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
     takeAwayModule?: boolean
     isDemo?: boolean
@@ -180498,6 +180757,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -180584,6 +180844,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
@@ -180670,6 +180931,7 @@ export namespace Prisma {
     callStaffModule?: BoolFieldUpdateOperationsInput | boolean
     callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean

@@ -168,6 +168,7 @@ export class CatalogService {
           callStaff: establishment.callStaffModule,
           callStaffOptions: establishment.callStaffOptions,
           reservationsModule: establishment.reservationsModule,
+          reservationsPlatform: establishment.reservationsPlatform,
           reservationsLink: establishment.reservationsLink,
         }
       };

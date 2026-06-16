@@ -25,6 +25,7 @@ export class EstablishmentModuleSettingsService {
                 callStaffModule: true,
                 callStaffOptions: true,
                 reservationsModule: true,
+                reservationsPlatform: true,
                 reservationsLink: true,
             }
         })
@@ -65,6 +66,7 @@ export class EstablishmentModuleSettingsService {
                     menusModule: updateEstablishmentModuleSettingsDto.menusModule,
                     callStaffModule: updateEstablishmentModuleSettingsDto.callStaffModule,
                     reservationsModule: updateEstablishmentModuleSettingsDto.reservationsModule,
+                    reservationsPlatform: updateEstablishmentModuleSettingsDto.reservationsPlatform,
                     reservationsLink: updateEstablishmentModuleSettingsDto.reservationsLink,
                     ...(updateEstablishmentModuleSettingsDto.callStaffOptions !== undefined && {
                         callStaffOptions: updateEstablishmentModuleSettingsDto.callStaffOptions,
@@ -77,6 +79,7 @@ export class EstablishmentModuleSettingsService {
                     callStaffModule: true,
                     callStaffOptions: true,
                     reservationsModule: true,
+                    reservationsPlatform: true,
                     reservationsLink: true,
                 }
             })
@@ -90,6 +93,7 @@ export class EstablishmentModuleSettingsService {
                 callStaffModule: establishment.callStaffModule,
                 callStaffOptions: establishment.callStaffOptions,
                 reservationsModule: establishment.reservationsModule,
+                reservationsPlatform: establishment.reservationsPlatform,
                 reservationsLink: establishment.reservationsLink,
             }
         } catch (error) {

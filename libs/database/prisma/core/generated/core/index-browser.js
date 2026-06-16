@@ -339,6 +339,7 @@ exports.Prisma.EstablishmentScalarFieldEnum = {
   callStaffModule: 'callStaffModule',
   callStaffOptions: 'callStaffOptions',
   reservationsModule: 'reservationsModule',
+  reservationsPlatform: 'reservationsPlatform',
   reservationsLink: 'reservationsLink',
   takeAwayModule: 'takeAwayModule',
   isDemo: 'isDemo',
@@ -1401,6 +1402,11 @@ exports.EstablishmentType = exports.$Enums.EstablishmentType = {
   LOUNGE: 'LOUNGE',
   RESORT: 'RESORT',
   MOTEL: 'MOTEL'
+};
+
+exports.ReservationsPlataform = exports.$Enums.ReservationsPlataform = {
+  THEFORK: 'THEFORK',
+  THREECKET: 'THREECKET'
 };
 
 exports.EstablishmentLanguage = exports.$Enums.EstablishmentLanguage = {
