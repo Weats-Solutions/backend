@@ -38,14 +38,15 @@ export class QrCodeController {
         eid: session.establishmentId,
         spid: session.servicePointId,
         type: session.type,
-        qrid: session.id, // Pass the QR Code ID to verify rules
+        qrid: session.id,
+        slug: session.slug,
       });
 
-      res.cookie('qr_session', sessionToken, {
+      res.cookie(`qr_session`, sessionToken, {
         httpOnly: true,
-        secure: true,    // Sempre true já que ambos os ambientes usam HTTPS
-        sameSite: 'lax', // Lax funciona perfeitamente para redirects cross-subdomain
-        domain: '.weats.app', // Domínio correto para cada ambiente
+        secure: true,
+        sameSite: 'lax',
+        domain: '.weats.app', // <-- domínio pai, não o do estabelecimento
         maxAge: 4 * 60 * 60 * 1000,
         path: '/',
       });

@@ -7,11 +7,13 @@ export interface QrSessionPayload {
   servicePointId: string | null;
   establishmentId: string;
   type: QrCodeType;
+  slug: string;
 }
 
 export interface ResolvedQrCode {
   url: string;
   session: QrSessionPayload | null;
+
 }
 
 @Injectable()
@@ -119,6 +121,7 @@ export class QrCodeService {
         type: qrCode.type,
         servicePointId: qrCode.servicePointId,
         establishmentId: qrCode.establishmentId,
+        slug: qrCode.establishment.slug,
       },
     };
   }
