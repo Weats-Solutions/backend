@@ -27,6 +27,7 @@ export class MenuService {
                 select: {
                     id: true,
                     isVisible: true,
+                    isVisibleOnMenuPage: true,
                     position: true,
                     type: true,
                     color: true,
@@ -57,6 +58,7 @@ export class MenuService {
                 return {
                     id: menu.id,
                     isVisible: menu.isVisible,
+                    isVisibleOnMenuPage: menu.isVisibleOnMenuPage,
                     position: menu.position,
                     type: menu.type,
                     color: menu.color,
@@ -104,6 +106,7 @@ export class MenuService {
             return {
                 id: menu.id,
                 isVisible: menu.isVisible,
+                isVisibleOnMenuPage: menu.isVisibleOnMenuPage,
                 position: menu.position,
                 type: menu.type,
                 color: menu.color,
@@ -161,6 +164,7 @@ export class MenuService {
                     select: {
                         id: true,
                         isVisible: true,
+                        isVisibleOnMenuPage: true,
                         position: true,
                         color: true,
                         isHighlighted: true,
@@ -258,17 +262,19 @@ export class MenuService {
         establishment: Establishment,
     ) {
         try {
-            const { isVisible, color, isHighlighted } = updateMenuDto;
+            const { isVisible, color, isHighlighted, isVisibleOnMenuPage } = updateMenuDto;
             const menu = await this.prisma.menu.update({
                 where: { id: menuId },
                 data: {
                     isVisible,
                     color,
                     isHighlighted,
+                    isVisibleOnMenuPage,
                 },
                 select: {
                     id: true,
                     isVisible: true,
+                    isVisibleOnMenuPage: true,
                     position: true,
                     color: true,
                     isHighlighted: true,
@@ -290,6 +296,7 @@ export class MenuService {
             return {
                 id: menu.id,
                 isVisible: menu.isVisible,
+                isVisibleOnMenuPage: menu.isVisibleOnMenuPage,
                 position: menu.position,
                 color: menu.color,
                 isHighlighted: menu.isHighlighted,
@@ -445,6 +452,7 @@ export class MenuService {
                         position: menuCount,
                         color: sourceMenu.color,
                         isVisible: false,
+                        isVisibleOnMenuPage: sourceMenu.isVisibleOnMenuPage,
                         isHighlighted: sourceMenu.isHighlighted,
                         type: sourceMenu.type,
                         price: sourceMenu.price,
@@ -516,6 +524,7 @@ export class MenuService {
                     select: {
                         id: true,
                         isVisible: true,
+                        isVisibleOnMenuPage: true,
                         position: true,
                         color: true,
                         isHighlighted: true,

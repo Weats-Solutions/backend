@@ -655,6 +655,7 @@ exports.Prisma.MenuScalarFieldEnum = {
   position: 'position',
   isVisible: 'isVisible',
   isHighlighted: 'isHighlighted',
+  isVisibleOnMenuPage: 'isVisibleOnMenuPage',
   color: 'color',
   establishmentId: 'establishmentId',
   scheduleId: 'scheduleId',

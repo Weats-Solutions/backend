@@ -1351,17 +1351,18 @@ model Lead {
 }
 
 model Menu {
-  id               String   @id @default(ulid())
-  position         Int      @default(0)
-  isVisible        Boolean  @default(false)
-  isHighlighted    Boolean  @default(false)
-  color            String?
-  establishmentId  String
-  scheduleId       String?  @unique
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  maxItemsPerOrder Int?
-  price            Float?
+  id                  String   @id @default(ulid())
+  position            Int      @default(0)
+  isVisible           Boolean  @default(false)
+  isHighlighted       Boolean  @default(false)
+  isVisibleOnMenuPage Boolean  @default(true)
+  color               String?
+  establishmentId     String
+  scheduleId          String?  @unique
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  maxItemsPerOrder    Int?
+  price               Float?
 
   showImages Boolean  @default(true)
   type       MenuType @default(LA_CARTE)

@@ -15,4 +15,8 @@ export class UpdateMenuDto {
   @IsBoolean()
   @IsNotEmpty()
   isHighlighted: boolean;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  isVisibleOnMenuPage: boolean;
 }

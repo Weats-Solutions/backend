@@ -60404,6 +60404,7 @@ export namespace Prisma {
     position: number | null
     isVisible: boolean | null
     isHighlighted: boolean | null
+    isVisibleOnMenuPage: boolean | null
     color: string | null
     establishmentId: string | null
     scheduleId: string | null
@@ -60420,6 +60421,7 @@ export namespace Prisma {
     position: number | null
     isVisible: boolean | null
     isHighlighted: boolean | null
+    isVisibleOnMenuPage: boolean | null
     color: string | null
     establishmentId: string | null
     scheduleId: string | null
@@ -60436,6 +60438,7 @@ export namespace Prisma {
     position: number
     isVisible: number
     isHighlighted: number
+    isVisibleOnMenuPage: number
     color: number
     establishmentId: number
     scheduleId: number
@@ -60466,6 +60469,7 @@ export namespace Prisma {
     position?: true
     isVisible?: true
     isHighlighted?: true
+    isVisibleOnMenuPage?: true
     color?: true
     establishmentId?: true
     scheduleId?: true
@@ -60482,6 +60486,7 @@ export namespace Prisma {
     position?: true
     isVisible?: true
     isHighlighted?: true
+    isVisibleOnMenuPage?: true
     color?: true
     establishmentId?: true
     scheduleId?: true
@@ -60498,6 +60503,7 @@ export namespace Prisma {
     position?: true
     isVisible?: true
     isHighlighted?: true
+    isVisibleOnMenuPage?: true
     color?: true
     establishmentId?: true
     scheduleId?: true
@@ -60601,6 +60607,7 @@ export namespace Prisma {
     position: number
     isVisible: boolean
     isHighlighted: boolean
+    isVisibleOnMenuPage: boolean
     color: string | null
     establishmentId: string
     scheduleId: string | null
@@ -60636,6 +60643,7 @@ export namespace Prisma {
     position?: boolean
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: boolean
     establishmentId?: boolean
     scheduleId?: boolean
@@ -60658,6 +60666,7 @@ export namespace Prisma {
     position?: boolean
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: boolean
     establishmentId?: boolean
     scheduleId?: boolean
@@ -60676,6 +60685,7 @@ export namespace Prisma {
     position?: boolean
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: boolean
     establishmentId?: boolean
     scheduleId?: boolean
@@ -60694,6 +60704,7 @@ export namespace Prisma {
     position?: boolean
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: boolean
     establishmentId?: boolean
     scheduleId?: boolean
@@ -60705,7 +60716,7 @@ export namespace Prisma {
     type?: boolean
   }
 
-  export type MenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "position" | "isVisible" | "isHighlighted" | "color" | "establishmentId" | "scheduleId" | "createdAt" | "updatedAt" | "maxItemsPerOrder" | "price" | "showImages" | "type", ExtArgs["result"]["menu"]>
+  export type MenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "position" | "isVisible" | "isHighlighted" | "isVisibleOnMenuPage" | "color" | "establishmentId" | "scheduleId" | "createdAt" | "updatedAt" | "maxItemsPerOrder" | "price" | "showImages" | "type", ExtArgs["result"]["menu"]>
   export type MenuInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
     schedule?: boolean | Menu$scheduleArgs<ExtArgs>
@@ -60737,6 +60748,7 @@ export namespace Prisma {
       position: number
       isVisible: boolean
       isHighlighted: boolean
+      isVisibleOnMenuPage: boolean
       color: string | null
       establishmentId: string
       scheduleId: string | null
@@ -61178,6 +61190,7 @@ export namespace Prisma {
     readonly position: FieldRef<"Menu", 'Int'>
     readonly isVisible: FieldRef<"Menu", 'Boolean'>
     readonly isHighlighted: FieldRef<"Menu", 'Boolean'>
+    readonly isVisibleOnMenuPage: FieldRef<"Menu", 'Boolean'>
     readonly color: FieldRef<"Menu", 'String'>
     readonly establishmentId: FieldRef<"Menu", 'String'>
     readonly scheduleId: FieldRef<"Menu", 'String'>
@@ -114031,6 +114044,7 @@ export namespace Prisma {
     position: 'position',
     isVisible: 'isVisible',
     isHighlighted: 'isHighlighted',
+    isVisibleOnMenuPage: 'isVisibleOnMenuPage',
     color: 'color',
     establishmentId: 'establishmentId',
     scheduleId: 'scheduleId',
@@ -119131,6 +119145,7 @@ export namespace Prisma {
     position?: IntFilter<"Menu"> | number
     isVisible?: BoolFilter<"Menu"> | boolean
     isHighlighted?: BoolFilter<"Menu"> | boolean
+    isVisibleOnMenuPage?: BoolFilter<"Menu"> | boolean
     color?: StringNullableFilter<"Menu"> | string | null
     establishmentId?: StringFilter<"Menu"> | string
     scheduleId?: StringNullableFilter<"Menu"> | string | null
@@ -119152,6 +119167,7 @@ export namespace Prisma {
     position?: SortOrder
     isVisible?: SortOrder
     isHighlighted?: SortOrder
+    isVisibleOnMenuPage?: SortOrder
     color?: SortOrderInput | SortOrder
     establishmentId?: SortOrder
     scheduleId?: SortOrderInput | SortOrder
@@ -119177,6 +119193,7 @@ export namespace Prisma {
     position?: IntFilter<"Menu"> | number
     isVisible?: BoolFilter<"Menu"> | boolean
     isHighlighted?: BoolFilter<"Menu"> | boolean
+    isVisibleOnMenuPage?: BoolFilter<"Menu"> | boolean
     color?: StringNullableFilter<"Menu"> | string | null
     establishmentId?: StringFilter<"Menu"> | string
     createdAt?: DateTimeFilter<"Menu"> | Date | string
@@ -119197,6 +119214,7 @@ export namespace Prisma {
     position?: SortOrder
     isVisible?: SortOrder
     isHighlighted?: SortOrder
+    isVisibleOnMenuPage?: SortOrder
     color?: SortOrderInput | SortOrder
     establishmentId?: SortOrder
     scheduleId?: SortOrderInput | SortOrder
@@ -119221,6 +119239,7 @@ export namespace Prisma {
     position?: IntWithAggregatesFilter<"Menu"> | number
     isVisible?: BoolWithAggregatesFilter<"Menu"> | boolean
     isHighlighted?: BoolWithAggregatesFilter<"Menu"> | boolean
+    isVisibleOnMenuPage?: BoolWithAggregatesFilter<"Menu"> | boolean
     color?: StringNullableWithAggregatesFilter<"Menu"> | string | null
     establishmentId?: StringWithAggregatesFilter<"Menu"> | string
     scheduleId?: StringNullableWithAggregatesFilter<"Menu"> | string | null
@@ -126913,6 +126932,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -126932,6 +126952,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     establishmentId: string
     scheduleId?: string | null
@@ -126951,6 +126972,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -126970,6 +126992,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     establishmentId?: StringFieldUpdateOperationsInput | string
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -126989,6 +127012,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     establishmentId: string
     scheduleId?: string | null
@@ -127005,6 +127029,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -127019,6 +127044,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     establishmentId?: StringFieldUpdateOperationsInput | string
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -134452,6 +134478,7 @@ export namespace Prisma {
     position?: SortOrder
     isVisible?: SortOrder
     isHighlighted?: SortOrder
+    isVisibleOnMenuPage?: SortOrder
     color?: SortOrder
     establishmentId?: SortOrder
     scheduleId?: SortOrder
@@ -134474,6 +134501,7 @@ export namespace Prisma {
     position?: SortOrder
     isVisible?: SortOrder
     isHighlighted?: SortOrder
+    isVisibleOnMenuPage?: SortOrder
     color?: SortOrder
     establishmentId?: SortOrder
     scheduleId?: SortOrder
@@ -134490,6 +134518,7 @@ export namespace Prisma {
     position?: SortOrder
     isVisible?: SortOrder
     isHighlighted?: SortOrder
+    isVisibleOnMenuPage?: SortOrder
     color?: SortOrder
     establishmentId?: SortOrder
     scheduleId?: SortOrder
@@ -150141,6 +150170,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -150159,6 +150189,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     scheduleId?: string | null
     createdAt?: Date | string
@@ -151760,6 +151791,7 @@ export namespace Prisma {
     position?: IntFilter<"Menu"> | number
     isVisible?: BoolFilter<"Menu"> | boolean
     isHighlighted?: BoolFilter<"Menu"> | boolean
+    isVisibleOnMenuPage?: BoolFilter<"Menu"> | boolean
     color?: StringNullableFilter<"Menu"> | string | null
     establishmentId?: StringFilter<"Menu"> | string
     scheduleId?: StringNullableFilter<"Menu"> | string | null
@@ -161714,6 +161746,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -161732,6 +161765,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     establishmentId: string
     scheduleId?: string | null
@@ -161766,6 +161800,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -161784,6 +161819,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     establishmentId?: StringFieldUpdateOperationsInput | string
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -161843,6 +161879,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -161861,6 +161898,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     establishmentId: string
     scheduleId?: string | null
@@ -161998,6 +162036,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -162016,6 +162055,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     establishmentId?: StringFieldUpdateOperationsInput | string
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -163377,6 +163417,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -163395,6 +163436,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     establishmentId: string
     scheduleId?: string | null
@@ -163883,6 +163925,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -163901,6 +163944,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     establishmentId: string
     createdAt?: Date | string
@@ -164218,6 +164262,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -164236,6 +164281,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     establishmentId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -174682,6 +174728,7 @@ export namespace Prisma {
     position?: number
     isVisible?: boolean
     isHighlighted?: boolean
+    isVisibleOnMenuPage?: boolean
     color?: string | null
     scheduleId?: string | null
     createdAt?: Date | string
@@ -175289,6 +175336,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -175307,6 +175355,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -175325,6 +175374,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -178407,6 +178457,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -178425,6 +178476,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     establishmentId?: StringFieldUpdateOperationsInput | string
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -178443,6 +178495,7 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     isVisible?: BoolFieldUpdateOperationsInput | boolean
     isHighlighted?: BoolFieldUpdateOperationsInput | boolean
+    isVisibleOnMenuPage?: BoolFieldUpdateOperationsInput | boolean
     color?: NullableStringFieldUpdateOperationsInput | string | null
     establishmentId?: StringFieldUpdateOperationsInput | string
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null

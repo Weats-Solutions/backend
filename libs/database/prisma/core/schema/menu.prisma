@@ -3,6 +3,7 @@ model Menu {
   position         Int      @default(0)
   isVisible        Boolean  @default(false)
   isHighlighted    Boolean  @default(false)
+  isVisibleOnMenuPage Boolean @default(true)
   color            String?
   establishmentId  String
   scheduleId       String?  @unique

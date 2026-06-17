@@ -206,6 +206,7 @@ export class CatalogService {
           where: {
             establishmentId: establishment.id,
             isVisible: true,
+            isVisibleOnMenuPage: true,
           },
           orderBy: { position: 'asc' },
           select: {
