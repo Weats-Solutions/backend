@@ -258,7 +258,9 @@ export class CatalogService {
         filteredMenus = menus.filter((menu) => menu.isVisibleOnMenuPage);
       }
 
-      return { menus: filteredMenus || [] };
+      return { 
+        menus: filteredMenus.map(({ isVisibleOnMenuPage, ...menu }) => menu) 
+      };
     } catch (error) {
       this.logger.error(`Erro ao buscar menu list para ${slug} (${lang}):`, error);
       if (error instanceof NotFoundException || error instanceof BadRequestException) throw error;
