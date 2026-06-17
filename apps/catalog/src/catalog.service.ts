@@ -206,13 +206,13 @@ export class CatalogService {
           where: {
             establishmentId: establishment.id,
             isVisible: true,
-            isVisibleOnMenuPage: true,
           },
           orderBy: { position: 'asc' },
           select: {
             id: true,
             isHighlighted: true,
             isVisible: true,
+            isVisibleOnMenuPage: true,
             position: true,
             type: true,
             schedule: { include: { days: { include: { intervals: true } } } },
@@ -223,7 +223,6 @@ export class CatalogService {
         return { menus: dbMenus || [] };
       });
 
-      // 3. Aplicar a filtragem relacional do QR Code e horários em memória (fora da cache)
       let filteredMenus = menus;
 
       if (isAtEstablishment && qrSession?.qrid) {
@@ -255,6 +254,8 @@ export class CatalogService {
             });
           }
         }
+      } else {
+        filteredMenus = menus.filter((menu) => menu.isVisibleOnMenuPage);
       }
 
       return { menus: filteredMenus || [] };
