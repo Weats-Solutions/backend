@@ -224,6 +224,7 @@ export class CatalogService {
       });
 
       let filteredMenus = menus;
+      let qrRulesApplied = false;
 
       if (isAtEstablishment && qrSession?.qrid) {
         const qrCode = await this.getQrCodeRules(qrSession.qrid);
@@ -239,6 +240,7 @@ export class CatalogService {
         );
 
         if (enabled) {
+          qrRulesApplied = true;
           const allowedMenuIds = qrCode.menus.map((m) => m.id);
 
           // 1. Filtrar por menus associados especificamente a este QR Code
@@ -254,12 +256,14 @@ export class CatalogService {
             });
           }
         }
-      } else {
-        filteredMenus = menus.filter((menu) => menu.isVisibleOnMenuPage);
       }
 
-      return { 
-        menus: filteredMenus.map(({ isVisibleOnMenuPage, ...menu }) => menu) 
+      if (!qrRulesApplied) {
+        filteredMenus = filteredMenus.filter((menu) => menu.isVisibleOnMenuPage);
+      }
+
+      return {
+        menus: filteredMenus.map(({ isVisibleOnMenuPage, ...menu }) => menu)
       };
     } catch (error) {
       this.logger.error(`Erro ao buscar menu list para ${slug} (${lang}):`, error);
