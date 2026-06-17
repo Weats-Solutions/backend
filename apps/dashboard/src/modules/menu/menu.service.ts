@@ -292,7 +292,7 @@ export class MenuService {
                 },
             });
 
-            this.cacheService.clearMenuListCache(establishment.slug);
+            await this.cacheService.clearMenuListCache(establishment.slug);
             return {
                 id: menu.id,
                 isVisible: menu.isVisible,
@@ -328,7 +328,7 @@ export class MenuService {
             await this.prisma.$transaction(updates);
 
             // Clean Next.JS cache to reflect changes immediately on the frontend
-            this.cacheService.clearMenuListCache(establishment.slug);
+            await this.cacheService.clearMenuListCache(establishment.slug);
 
             return { success: true };
         } catch (error) {
@@ -544,7 +544,7 @@ export class MenuService {
                 });
             });
 
-            this.cacheService.clearMenuListCache(establishment.slug);
+            await this.cacheService.clearMenuListCache(establishment.slug);
 
             return {
                 ...newMenu,
