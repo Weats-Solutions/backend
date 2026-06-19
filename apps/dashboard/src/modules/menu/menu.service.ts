@@ -1124,7 +1124,9 @@ export class MenuService {
 
             const successResponse = {
                 success: true,
-                newMenuId: duplicationResult.id,
+                data: {
+                    newMenuId: duplicationResult.id,
+                },
                 message: `Menu successfully duplicated.`,
             };
 
