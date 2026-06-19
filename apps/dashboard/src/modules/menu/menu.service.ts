@@ -4,7 +4,7 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 import { CreateMenuDto, UpdateMenuPositionsDto, UpdateMenuDto } from '@weats/contracts';
-import { Establishment } from '@weats/types';
+import { Establishment, User, feature } from '@weats/types';
 import { FeatureUsageService } from '@weats/common/feature/feature-usage.service';
 import { ERRORS, MENU_COLOR_PALETTE, normalizeSchedule } from '@weats/common';
 import { CorePrismaService, EstablishmentLanguage, MenuType, ScheduleType } from '@weats/database';
@@ -785,4 +785,973 @@ export class MenuService {
         }
     }
 
+    async duplicateMenuPrecheck(
+        menuId: string,
+        targetEstablishmentId: string,
+        reuseExistingItemsBySku: boolean,
+        user: User,
+    ) {
+        try {
+            const sourceMenu = await this.prisma.menu.findUnique({
+                where: { id: menuId },
+                include: {
+                    establishment: true,
+                    translations: true,
+                    schedule: {
+                        include: {
+                            days: {
+                                include: {
+                                    intervals: true,
+                                },
+                            },
+                        },
+                    },
+                    categories: {
+                        include: {
+                            translations: true,
+                            subcategories: {
+                                include: {
+                                    translations: true,
+                                    items: {
+                                        include: {
+                                            item: {
+                                                include: {
+                                                    translations: true,
+                                                    image: true,
+                                                    attributes: true,
+                                                    allergens: {
+                                                        include: { allergen: true }
+                                                    },
+                                                    nutritionInfo: true,
+                                                    itemVariantGroups: {
+                                                        include: {
+                                                            translations: true,
+                                                            variants: {
+                                                                include: {
+                                                                    image: true,
+                                                                    allergens: {
+                                                                        include: { allergen: true }
+                                                                    },
+                                                                    nutritionInfo: true,
+                                                                    variantOption: {
+                                                                        include: {
+                                                                            translations: true,
+                                                                        },
+                                                                    },
+                                                                },
+                                                            },
+                                                        },
+                                                    },
+                                                    modifierGroups: {
+                                                        include: {
+                                                            translations: true,
+                                                            options: {
+                                                                include: {
+                                                                    addon: {
+                                                                        include: {
+                                                                            translations: true,
+                                                                        },
+                                                                    },
+                                                                    itemVariant: {
+                                                                        include: {
+                                                                            variantOption: {
+                                                                                include: {
+                                                                                    translations: true,
+                                                                                },
+                                                                            },
+                                                                        },
+                                                                    },
+                                                                    product: {
+                                                                        include: {
+                                                                            translations: true,
+                                                                        },
+                                                                    },
+                                                                },
+                                                            },
+                                                        },
+                                                    },
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+
+            if (!sourceMenu) {
+                throw new RpcException({
+                    status: 404,
+                    message: ERRORS.MENU_NOT_FOUND,
+                    code: ERRORS.MENU_NOT_FOUND,
+                });
+            }
+
+            if (sourceMenu.establishment.ownerId !== user.id) {
+                throw new RpcException({
+                    status: 403,
+                    message: ERRORS.ACCESS_DENIED,
+                    code: ERRORS.ACCESS_DENIED,
+                });
+            }
+
+            const targetEstablishment = await this.prisma.establishment.findUnique({
+                where: { id: targetEstablishmentId },
+            });
+
+            if (!targetEstablishment) {
+                throw new RpcException({
+                    status: 404,
+                    message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+                    code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+                });
+            }
+
+            if (targetEstablishment.ownerId !== user.id) {
+                throw new RpcException({
+                    status: 403,
+                    message: ERRORS.ACCESS_DENIED,
+                    code: ERRORS.ACCESS_DENIED,
+                });
+            }
+
+            return await this.calculateDuplicationCost(
+                sourceMenu,
+                targetEstablishment,
+                reuseExistingItemsBySku,
+            );
+        } catch (error) {
+            console.error('Error in duplicateMenuPrecheck:', error);
+            throw error;
+        }
+    }
+
+    async duplicateMenuToEstablishment(
+        menuId: string,
+        targetEstablishmentId: string,
+        idempotencyKey: string,
+        reuseExistingItemsBySku: boolean,
+        user: User,
+    ) {
+        const cacheKey = `idempotency:menu-dup:${idempotencyKey}`;
+        try {
+            const cachedValue = await this.cacheService.get<{
+                status: 'processing' | 'completed';
+                startedAt: number;
+                result: any;
+            }>(cacheKey);
+
+            if (cachedValue) {
+                if (cachedValue.status === 'processing') {
+                    const elapsed = Date.now() - cachedValue.startedAt;
+                    if (elapsed < 120000) {
+                        throw new RpcException({
+                            status: 202,
+                            message: 'Duplicate request is still processing. Please try again shortly.',
+                            code: 'PROCESSING',
+                        });
+                    }
+                } else if (cachedValue.status === 'completed') {
+                    return cachedValue.result;
+                }
+            }
+
+            await this.cacheService.set(cacheKey, {
+                status: 'processing',
+                startedAt: Date.now(),
+                result: null,
+            }, 86400);
+
+            const sourceMenu = await this.prisma.menu.findUnique({
+                where: { id: menuId },
+                include: {
+                    establishment: true,
+                    translations: true,
+                    schedule: {
+                        include: {
+                            days: {
+                                include: {
+                                    intervals: true,
+                                },
+                            },
+                        },
+                    },
+                    categories: {
+                        include: {
+                            translations: true,
+                            subcategories: {
+                                include: {
+                                    translations: true,
+                                    items: {
+                                        include: {
+                                            item: {
+                                                include: {
+                                                    translations: true,
+                                                    image: true,
+                                                    attributes: true,
+                                                    allergens: {
+                                                        include: { allergen: true }
+                                                    },
+                                                    nutritionInfo: true,
+                                                    itemVariantGroups: {
+                                                        include: {
+                                                            translations: true,
+                                                            variants: {
+                                                                include: {
+                                                                    image: true,
+                                                                    allergens: {
+                                                                        include: { allergen: true }
+                                                                    },
+                                                                    nutritionInfo: true,
+                                                                    variantOption: {
+                                                                        include: {
+                                                                            translations: true,
+                                                                        },
+                                                                    },
+                                                                },
+                                                            },
+                                                        },
+                                                    },
+                                                    modifierGroups: {
+                                                        include: {
+                                                            translations: true,
+                                                            options: {
+                                                                include: {
+                                                                    addon: {
+                                                                        include: {
+                                                                            translations: true,
+                                                                        },
+                                                                    },
+                                                                    itemVariant: {
+                                                                        include: {
+                                                                            variantOption: {
+                                                                                include: {
+                                                                                    translations: true,
+                                                                                },
+                                                                            },
+                                                                        },
+                                                                    },
+                                                                    product: {
+                                                                        include: {
+                                                                            translations: true,
+                                                                        },
+                                                                    },
+                                                                },
+                                                            },
+                                                        },
+                                                    },
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+
+            if (!sourceMenu) {
+                await this.cacheService.invalidate(cacheKey);
+                throw new RpcException({
+                    status: 404,
+                    message: ERRORS.MENU_NOT_FOUND,
+                    code: ERRORS.MENU_NOT_FOUND,
+                });
+            }
+
+            if (sourceMenu.establishment.ownerId !== user.id) {
+                await this.cacheService.invalidate(cacheKey);
+                throw new RpcException({
+                    status: 403,
+                    message: ERRORS.ACCESS_DENIED,
+                    code: ERRORS.ACCESS_DENIED,
+                });
+            }
+
+            const targetEstablishment = await this.prisma.establishment.findUnique({
+                where: { id: targetEstablishmentId },
+            });
+
+            if (!targetEstablishment) {
+                await this.cacheService.invalidate(cacheKey);
+                throw new RpcException({
+                    status: 404,
+                    message: ERRORS.ESTABLISHMENT_NOT_FOUND,
+                    code: ERRORS.ESTABLISHMENT_NOT_FOUND,
+                });
+            }
+
+            if (targetEstablishment.ownerId !== user.id) {
+                await this.cacheService.invalidate(cacheKey);
+                throw new RpcException({
+                    status: 403,
+                    message: ERRORS.ACCESS_DENIED,
+                    code: ERRORS.ACCESS_DENIED,
+                });
+            }
+
+            const duplicationResult = await this.prisma.$transaction(
+                async (tx) => {
+                    const costReport = await this.calculateDuplicationCost(
+                        sourceMenu,
+                        targetEstablishment,
+                        reuseExistingItemsBySku,
+                        tx,
+                    );
+
+                    if (!costReport.isPossible) {
+                        const failedCheck = costReport.checks.find((c) => !c.passed);
+                        throw new BadRequestException(
+                            failedCheck?.error || 'Target establishment plan limits exceeded.',
+                        );
+                    }
+
+                    return this.executeCloning(
+                        tx,
+                        sourceMenu,
+                        targetEstablishment,
+                        reuseExistingItemsBySku,
+                        costReport.missingLocales,
+                    );
+                },
+                { timeout: 30000 },
+            );
+
+            const successResponse = {
+                success: true,
+                newMenuId: duplicationResult.id,
+                message: `Menu successfully duplicated.`,
+            };
+
+            await this.cacheService.set(cacheKey, {
+                status: 'completed',
+                startedAt: Date.now(),
+                result: successResponse,
+            }, 86400);
+
+            await this.cacheService.clearMenuListCache(targetEstablishment.slug);
+
+            return successResponse;
+        } catch (error) {
+            console.error('Error duplicating menu to establishment:', error);
+            await this.cacheService.invalidate(cacheKey);
+            throw error;
+        }
+    }
+
+    private async calculateDuplicationCost(
+        sourceMenu: any,
+        targetEstablishment: any,
+        reuseExistingItemsBySku: boolean,
+        tx?: any,
+    ) {
+        const targetId = targetEstablishment.id;
+
+        const menuCost = 1;
+        const categoriesCost = sourceMenu.categories.length;
+        const subcategoriesCost = sourceMenu.categories.reduce(
+            (acc: number, cat: any) => acc + (cat.subcategories || []).length,
+            0,
+        );
+
+        const uniqueItemsMap = new Map<string, any>();
+        const uniqueImages = new Set<string>();
+        const uniqueLocales = new Set<string>();
+
+        for (const t of sourceMenu.translations || []) {
+            uniqueLocales.add(t.locale);
+        }
+
+        for (const cat of sourceMenu.categories || []) {
+            if (cat.imageId) uniqueImages.add(cat.imageId);
+            for (const t of cat.translations || []) {
+                uniqueLocales.add(t.locale);
+            }
+
+            for (const sub of cat.subcategories || []) {
+                for (const t of sub.translations || []) {
+                    uniqueLocales.add(t.locale);
+                }
+
+                for (const pos of sub.items || []) {
+                    if (pos.item && !uniqueItemsMap.has(pos.item.id)) {
+                        uniqueItemsMap.set(pos.item.id, pos.item);
+                    }
+                }
+            }
+        }
+
+        const uniqueItems = Array.from(uniqueItemsMap.values());
+
+        const client = tx || this.prisma;
+        const targetItems = await client.item.findMany({
+            where: { establishmentId: targetId, deletedAt: null },
+            select: { sku: true },
+        });
+        const targetSkus = new Set(
+            targetItems
+                .map((ti) => ti.sku?.trim().toLowerCase())
+                .filter(Boolean),
+        );
+
+        const newItemsToCopy: any[] = [];
+        for (const item of uniqueItems) {
+            const hasMatchingSku =
+                item.sku && targetSkus.has(item.sku.trim().toLowerCase());
+            if (reuseExistingItemsBySku && hasMatchingSku) {
+                continue;
+            }
+            newItemsToCopy.push(item);
+        }
+
+        const productsCost = newItemsToCopy.length;
+
+        const uniqueVariantOptionIds = new Set<string>();
+        const uniqueAddonIds = new Set<string>();
+
+        for (const item of newItemsToCopy) {
+            if (item.imageId) uniqueImages.add(item.imageId);
+            for (const t of item.translations || []) {
+                uniqueLocales.add(t.locale);
+            }
+
+            for (const vg of item.itemVariantGroups || []) {
+                for (const t of vg.translations || []) {
+                    uniqueLocales.add(t.locale);
+                }
+
+                for (const v of vg.variants || []) {
+                    if (v.imageId) uniqueImages.add(v.imageId);
+
+                    const vo = v.variantOption;
+                    if (vo) {
+                        for (const t of vo.translations || []) {
+                            uniqueLocales.add(t.locale);
+                        }
+                        if (!vo.isGlobal) {
+                            uniqueVariantOptionIds.add(vo.id);
+                        }
+                    }
+                }
+            }
+
+            for (const mg of item.modifierGroups || []) {
+                for (const t of mg.translations || []) {
+                    uniqueLocales.add(t.locale);
+                }
+
+                for (const opt of mg.options || []) {
+                    if (opt.addon) {
+                        for (const t of opt.addon.translations || []) {
+                            uniqueLocales.add(t.locale);
+                        }
+                        if (!opt.addon.isGlobal) {
+                            uniqueAddonIds.add(opt.addon.id);
+                        }
+                    }
+                }
+            }
+        }
+
+        const customVariantsCost = uniqueVariantOptionIds.size;
+        const customAddonsCost = uniqueAddonIds.size;
+        const imagesCost = uniqueImages.size;
+
+        const targetLanguages = targetEstablishment.availableLanguages || [];
+        const missingLocales = Array.from(uniqueLocales).filter(
+            (locale) => !targetLanguages.includes(locale),
+        );
+        const languagesCost = missingLocales.length;
+
+        const checks = await Promise.all([
+            this.checkLimit(feature.menu, targetId, menuCost, 'Menus', tx),
+            this.checkLimit(feature.menu_categories, targetId, categoriesCost, 'Categories', tx),
+            this.checkLimit(feature.menu_subcategories, targetId, subcategoriesCost, 'Subcategories', tx),
+            this.checkLimit(feature.products, targetId, productsCost, 'Items', tx),
+            this.checkLimit(feature.custom_variants, targetId, customVariantsCost, 'Variant Options', tx),
+            this.checkLimit(feature.custom_addons, targetId, customAddonsCost, 'Addons', tx),
+            this.checkLimit(feature.images, targetId, imagesCost, 'Images', tx),
+            this.checkLimit(feature.languages, targetId, languagesCost, 'Languages', tx),
+        ]);
+
+        const isPossible = checks.every((c) => c.passed);
+
+        return {
+            isPossible,
+            checks,
+            missingLocales,
+        };
+    }
+
+    private async checkLimit(
+        featureName: feature,
+        establishmentId: string,
+        cost: number,
+        label: string,
+        tx?: any,
+    ) {
+        const { usage, limit } = await this.usageService.getUsageAndLimit(
+            featureName,
+            establishmentId,
+            tx,
+        );
+
+        const passed = limit === null || usage + cost <= limit;
+        let error: string | null = null;
+        if (!passed) {
+            error = `Target establishment plan only allows ${limit} ${label.toLowerCase()} (currently used: ${usage}, requested new: +${cost}).`;
+        }
+
+        return {
+            feature: featureName,
+            label,
+            currentUsage: usage,
+            cost,
+            limit,
+            passed,
+            error,
+        };
+    }
+
+    private async executeCloning(
+        tx: any,
+        sourceMenu: any,
+        targetEstablishment: any,
+        reuseExistingItemsBySku: boolean,
+        missingLocales: string[],
+    ) {
+        const targetId = targetEstablishment.id;
+
+        if (missingLocales.length > 0) {
+            const updatedLanguages = [
+                ...new Set([...(targetEstablishment.availableLanguages || []), ...missingLocales]),
+            ];
+            await tx.establishment.update({
+                where: { id: targetId },
+                data: { availableLanguages: updatedLanguages },
+            });
+        }
+
+        const imageIdMap = new Map<string, string>();
+        const uniqueImageIds = new Set<string>();
+
+        for (const cat of sourceMenu.categories || []) {
+            if (cat.imageId) uniqueImageIds.add(cat.imageId);
+            for (const sub of cat.subcategories || []) {
+                for (const pos of sub.items || []) {
+                    if (pos.item) {
+                        if (pos.item.imageId) uniqueImageIds.add(pos.item.imageId);
+                        for (const vg of pos.item.itemVariantGroups || []) {
+                            for (const v of vg.variants || []) {
+                                if (v.imageId) uniqueImageIds.add(v.imageId);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        const sourceImages = await tx.image.findMany({
+            where: { id: { in: Array.from(uniqueImageIds) } },
+        });
+
+        for (const sourceImg of sourceImages) {
+            const targetImg = await tx.image.create({
+                data: {
+                    cloudflareImageId: sourceImg.cloudflareImageId,
+                    fileName: sourceImg.fileName,
+                    url: sourceImg.url,
+                    fileSize: sourceImg.fileSize,
+                    metadata: sourceImg.metadata || undefined,
+                    establishmentId: targetId,
+                },
+            });
+            imageIdMap.set(sourceImg.id, targetImg.id);
+        }
+
+
+        const mapImageId = (id: string | null) => {
+            if (!id) return null;
+            return imageIdMap.get(id) || null;
+        };
+
+        const targetItems = await tx.item.findMany({
+            where: { establishmentId: targetId, deletedAt: null },
+        });
+        const targetItemsBySku = new Map<string, any>();
+        for (const ti of targetItems) {
+            if (ti.sku) {
+                targetItemsBySku.set(ti.sku.trim().toLowerCase(), ti);
+            }
+        }
+
+        const uniqueSourceItemsMap = new Map<string, any>();
+        for (const cat of sourceMenu.categories || []) {
+            for (const sub of cat.subcategories || []) {
+                for (const pos of sub.items || []) {
+                    if (pos.item && !uniqueSourceItemsMap.has(pos.item.id)) {
+                        uniqueSourceItemsMap.set(pos.item.id, pos.item);
+                    }
+                }
+            }
+        }
+        const uniqueSourceItems = Array.from(uniqueSourceItemsMap.values());
+
+        const itemIdMap = new Map<string, string>();
+        const variantOptionIdMap = new Map<string, string>();
+        const addonIdMap = new Map<string, string>();
+        const itemVariantIdMap = new Map<string, string>();
+
+        const itemsToCopy: any[] = [];
+        for (const item of uniqueSourceItems) {
+            const matchingSkuItem = item.sku ? targetItemsBySku.get(item.sku.trim().toLowerCase()) : null;
+            if (reuseExistingItemsBySku && matchingSkuItem) {
+                itemIdMap.set(item.id, matchingSkuItem.id);
+
+                const targetVariants = await tx.itemVariant.findMany({
+                    where: { itemVariantGroup: { itemId: matchingSkuItem.id } },
+                    include: { variantOption: true },
+                });
+
+                for (const sourceVg of item.itemVariantGroups || []) {
+                    for (const sourceV of sourceVg.variants || []) {
+                        const sourceVoName = sourceV.variantOption?.translations?.[0]?.name;
+                        const matchingTargetV = targetVariants.find((tv: any) => {
+                            return tv.variantOption?.translations?.some(
+                                (t: any) => t.name === sourceVoName,
+                            ) || tv.variantOption?.id === sourceV.variantOption?.id;
+                        });
+                        if (matchingTargetV) {
+                            itemVariantIdMap.set(sourceV.id, matchingTargetV.id);
+                        }
+                    }
+                }
+            } else {
+                itemsToCopy.push(item);
+            }
+        }
+
+        const uniqueVariantOptions = new Map<string, any>();
+        const uniqueAddons = new Map<string, any>();
+
+        for (const item of itemsToCopy) {
+            for (const vg of item.itemVariantGroups || []) {
+                for (const v of vg.variants || []) {
+                    if (v.variantOption) {
+                        uniqueVariantOptions.set(v.variantOption.id, v.variantOption);
+                    }
+                }
+            }
+            for (const mg of item.modifierGroups || []) {
+                for (const opt of mg.options || []) {
+                    if (opt.addon) {
+                        uniqueAddons.set(opt.addon.id, opt.addon);
+                    }
+                }
+            }
+        }
+
+        for (const vo of uniqueVariantOptions.values()) {
+            if (vo.isGlobal) {
+                variantOptionIdMap.set(vo.id, vo.id);
+            } else {
+                const newVo = await tx.variantOption.create({
+                    data: {
+                        establishmentId: targetId,
+                        isGlobal: false,
+                        isActive: vo.isActive,
+                        quantity: vo.quantity,
+                        unit: vo.unit,
+                        translations: {
+                            create: (vo.translations || []).map((t: any) => ({
+                                locale: t.locale,
+                                name: t.name,
+                            })),
+                        },
+                    },
+                });
+                variantOptionIdMap.set(vo.id, newVo.id);
+            }
+        }
+
+        for (const addon of uniqueAddons.values()) {
+            if (addon.isGlobal) {
+                addonIdMap.set(addon.id, addon.id);
+            } else {
+                const newAddon = await tx.addon.create({
+                    data: {
+                        establishmentId: targetId,
+                        isGlobal: false,
+                        isActive: addon.isActive,
+                        translations: {
+                            create: (addon.translations || []).map((t: any) => ({
+                                locale: t.locale,
+                                name: t.name,
+                            })),
+                        },
+                    },
+                });
+                addonIdMap.set(addon.id, newAddon.id);
+            }
+        }
+
+        for (const item of itemsToCopy) {
+            const newItem = await tx.item.create({
+                data: {
+                    establishmentId: targetId,
+                    basePrice: item.basePrice,
+                    spiceLevel: item.spiceLevel,
+                    marketingTag: item.marketingTag,
+                    isFeatured: item.isFeatured,
+                    hasAlcohol: item.hasAlcohol,
+                    unit: item.unit,
+                    quantity: item.quantity,
+                    sku: item.sku,
+                    status: item.status,
+                    imageId: mapImageId(item.imageId),
+                    taxTableId: item.taxTableId,
+                    translations: {
+                        create: (item.translations || []).map((t: any) => ({
+                            locale: t.locale,
+                            name: t.name,
+                            shortDescription: t.shortDescription,
+                            description: t.description,
+                        })),
+                    },
+                    attributes: {
+                        create: (item.attributes || []).map((attr: any) => ({
+                            type: attr.type,
+                        })),
+                    },
+                    allergens: {
+                        create: (item.allergens || []).map((all: any) => ({
+                            allergenId: all.allergenId,
+                        })),
+                    },
+                    ...(item.nutritionInfo && {
+                        nutritionInfo: {
+                            create: {
+                                calories: item.nutritionInfo.calories,
+                                protein: item.nutritionInfo.protein,
+                                fat: item.nutritionInfo.fat,
+                                carbs: item.nutritionInfo.carbs,
+                            },
+                        },
+                    }),
+                },
+            });
+            itemIdMap.set(item.id, newItem.id);
+
+            for (const vg of item.itemVariantGroups || []) {
+                const newVg = await tx.itemVariantGroup.create({
+                    data: {
+                        itemId: newItem.id,
+                        position: vg.position,
+                        translations: {
+                            create: (vg.translations || []).map((t: any) => ({
+                                locale: t.locale,
+                                name: t.name,
+                            })),
+                        },
+                    },
+                });
+
+                for (const v of vg.variants || []) {
+                    const mappedVoId = variantOptionIdMap.get(v.variantOption.id);
+                    if (!mappedVoId) {
+                        throw new Error(`VariantOption ${v.variantOption.id} not mapped`);
+                    }
+
+                    const newV = await tx.itemVariant.create({
+                        data: {
+                            itemId: newItem.id,
+                            itemVariantGroupId: newVg.id,
+                            price: v.price,
+                            position: v.position,
+                            isActive: v.isActive,
+                            isDefault: v.isDefault,
+                            imageId: mapImageId(v.imageId),
+                            variantOptionId: mappedVoId,
+                            allergens: {
+                                create: (v.allergens || []).map((all: any) => ({
+                                    allergenId: all.allergenId,
+                                })),
+                            },
+                            ...(v.nutritionInfo && {
+                                nutritionInfo: {
+                                    create: {
+                                        calories: v.nutritionInfo.calories,
+                                        protein: v.nutritionInfo.protein,
+                                        fat: v.nutritionInfo.fat,
+                                        carbs: v.nutritionInfo.carbs,
+                                    },
+                                },
+                            }),
+                        },
+                    });
+                    itemVariantIdMap.set(v.id, newV.id);
+                }
+            }
+        }
+
+        for (const item of itemsToCopy) {
+            const newItemId = itemIdMap.get(item.id)!;
+            for (const mg of item.modifierGroups || []) {
+                const newMg = await tx.itemModifierGroup.create({
+                    data: {
+                        itemId: newItemId,
+                        position: mg.position,
+                        minSelection: mg.minSelection,
+                        maxSelection: mg.maxSelection,
+                        displayMode: mg.displayMode,
+                        isActive: mg.isActive,
+                        translations: {
+                            create: (mg.translations || []).map((t: any) => ({
+                                locale: t.locale,
+                                name: t.name,
+                            })),
+                        },
+                    },
+                });
+
+                for (const opt of mg.options || []) {
+                    let targetAddonId: string | null = null;
+                    let targetItemVariantId: string | null = null;
+                    let targetProductId: string | null = null;
+
+                    if (opt.addon) {
+                        targetAddonId = addonIdMap.get(opt.addon.id) || null;
+                    }
+                    if (opt.itemVariant) {
+                        targetItemVariantId = itemVariantIdMap.get(opt.itemVariant.id) || null;
+                    }
+                    if (opt.product) {
+                        targetProductId = itemIdMap.get(opt.product.id) || null;
+                    }
+
+                    await tx.itemModifierOption.create({
+                        data: {
+                            modifierGroupId: newMg.id,
+                            price: opt.price,
+                            position: opt.position,
+                            defaultQuantity: opt.defaultQuantity,
+                            minQuantity: opt.minQuantity,
+                            maxQuantity: opt.maxQuantity,
+                            addonId: targetAddonId,
+                            itemVariantId: targetItemVariantId,
+                            productId: targetProductId,
+                        },
+                    });
+                }
+            }
+        }
+
+        let newScheduleId: string | undefined;
+        if (sourceMenu.schedule) {
+            const createdSchedule = await tx.schedule.create({
+                data: {
+                    type: ScheduleType.MENU,
+                    days: {
+                        create: sourceMenu.schedule.days.map((day: any) => ({
+                            dayOfWeek: day.dayOfWeek,
+                            isOpen: day.isOpen,
+                            intervals: {
+                                create: day.intervals.map((interval: any) => ({
+                                    startTime: interval.startTime,
+                                    endTime: interval.endTime,
+                                })),
+                            },
+                        })),
+                    },
+                },
+            });
+            newScheduleId = createdSchedule.id;
+        }
+
+        const targetMenuCount = await tx.menu.count({
+            where: { establishmentId: targetId },
+        });
+
+        const duplicatedMenu = await tx.menu.create({
+            data: {
+                establishmentId: targetId,
+                position: targetMenuCount,
+                color: sourceMenu.color,
+                isVisible: false,
+                isVisibleOnMenuPage: sourceMenu.isVisibleOnMenuPage,
+                isHighlighted: sourceMenu.isHighlighted,
+                type: sourceMenu.type,
+                price: sourceMenu.price,
+                showImages: sourceMenu.showImages,
+                maxItemsPerOrder: sourceMenu.maxItemsPerOrder,
+                translations: {
+                    create: sourceMenu.translations.map((t: any) => ({
+                        locale: t.locale,
+                        name: `${t.name} (Cópia)`,
+                        description: t.description,
+                        observations: t.observations,
+                    })),
+                },
+                ...(newScheduleId && { scheduleId: newScheduleId }),
+            },
+        });
+
+        for (const category of sourceMenu.categories || []) {
+            const newCategory = await tx.menuCategory.create({
+                data: {
+                    menuId: duplicatedMenu.id,
+                    position: category.position,
+                    isVisible: category.isVisible,
+                    imageId: mapImageId(category.imageId),
+                    translations: {
+                        create: (category.translations || []).map((t: any) => ({
+                            locale: t.locale,
+                            name: t.name,
+                        })),
+                    },
+                },
+            });
+
+            for (const subcategory of category.subcategories || []) {
+                const newSubcategory = await tx.menuSubcategory.create({
+                    data: {
+                        categoryId: newCategory.id,
+                        position: subcategory.position,
+                        isVisible: subcategory.isVisible,
+                        translations: {
+                            create: (subcategory.translations || []).map((t: any) => ({
+                                locale: t.locale,
+                                name: t.name,
+                                description: t.description,
+                            })),
+                        },
+                    },
+                });
+
+                const menuItemPositions = (subcategory.items || []).map((item: any) => {
+                    const resolvedItemId = itemIdMap.get(item.itemId);
+                    return resolvedItemId
+                        ? {
+                              itemId: resolvedItemId,
+                              subcategoryId: newSubcategory.id,
+                              position: item.position,
+                              isVisible: item.isVisible,
+                              isIncluded: item.isIncluded,
+                          }
+                        : null;
+                }).filter(Boolean);
+
+                if (menuItemPositions.length > 0) {
+                    await tx.menuItemPosition.createMany({
+                        data: menuItemPositions as any[],
+                    });
+                }
+            }
+        }
+
+        return duplicatedMenu;
+    }
 }

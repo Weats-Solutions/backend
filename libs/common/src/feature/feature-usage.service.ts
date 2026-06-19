@@ -6,6 +6,7 @@ import { feature } from '@weats/types';
 export type FeatureUsageHandler = (
   establishmentId: string,
   request?: any,
+  tx?: any,
 ) => Promise<number>;
 
 @Injectable()
@@ -18,26 +19,30 @@ export class FeatureUsageService {
     private cache: CacheService,
   ) {
     // register built-in handlers
-    this.register(feature.menu, async (establishmentId: string) => {
-      return this.corePrismaService.menu.count({ where: { establishmentId } });
+    this.register(feature.menu, async (establishmentId: string, req, tx) => {
+      const client = tx || this.corePrismaService;
+      return client.menu.count({ where: { establishmentId } });
     });
 
-    this.register(feature.languages, async (establishmentId: string) => {
+    this.register(feature.languages, async (establishmentId: string, req, tx) => {
+      const client = tx || this.corePrismaService;
       const est =
-        await this.corePrismaService.establishment.findUnique({
+        await client.establishment.findUnique({
           where: { id: establishmentId },
         });
       return (est?.availableLanguages || []).length;
     });
 
-    this.register(feature.points, async (establishmentId: string) => {
-      return this.corePrismaService.servicePoint.count({
+    this.register(feature.points, async (establishmentId: string, req, tx) => {
+      const client = tx || this.corePrismaService;
+      return client.servicePoint.count({
         where: { zone: { establishmentId } },
       });
     });
 
-    this.register(feature.images, async (establishmentId: string) => {
-      return this.corePrismaService.image.count({
+    this.register(feature.images, async (establishmentId: string, req, tx) => {
+      const client = tx || this.corePrismaService;
+      return client.image.count({
         where: {
           establishmentId,
           faviconAssets: {
@@ -47,38 +52,44 @@ export class FeatureUsageService {
       });
     });
 
-    this.register(feature.products, async (establishmentId: string) => {
-      return this.corePrismaService.item.count({
+    this.register(feature.products, async (establishmentId: string, req, tx) => {
+      const client = tx || this.corePrismaService;
+      return client.item.count({
         where: { establishmentId, deletedAt: null },
       });
     });
 
-    this.register(feature.zones, async (establishmentId: string) => {
-      return this.corePrismaService.serviceZone.count({
+    this.register(feature.zones, async (establishmentId: string, req, tx) => {
+      const client = tx || this.corePrismaService;
+      return client.serviceZone.count({
         where: { establishmentId },
       });
     });
 
-    this.register(feature.menu_categories, async (establishmentId: string) => {
-      return this.corePrismaService.menuCategory.count({
+    this.register(feature.menu_categories, async (establishmentId: string, req, tx) => {
+      const client = tx || this.corePrismaService;
+      return client.menuCategory.count({
         where: { menu: { establishmentId } },
       });
     });
 
-    this.register(feature.menu_subcategories, async (establishmentId: string) => {
-      return this.corePrismaService.menuSubcategory.count({
+    this.register(feature.menu_subcategories, async (establishmentId: string, req, tx) => {
+      const client = tx || this.corePrismaService;
+      return client.menuSubcategory.count({
         where: { category: { menu: { establishmentId } } },
       });
     });
 
-    this.register(feature.custom_addons, async (establishmentId: string) => {
-      return this.corePrismaService.addon.count({
+    this.register(feature.custom_addons, async (establishmentId: string, req, tx) => {
+      const client = tx || this.corePrismaService;
+      return client.addon.count({
         where: { establishmentId },
       });
     });
 
-    this.register(feature.custom_variants, async (establishmentId: string) => {
-      return this.corePrismaService.variantOption.count({
+    this.register(feature.custom_variants, async (establishmentId: string, req, tx) => {
+      const client = tx || this.corePrismaService;
+      return client.variantOption.count({
         where: { establishmentId },
       });
     });
@@ -92,28 +103,29 @@ export class FeatureUsageService {
     this.handlers.set(featureName, handler);
   }
 
-  async getUsage(featureName: feature, establishmentId: string, request?: any) {
+  async getUsage(featureName: feature, establishmentId: string, request?: any, tx?: any) {
     const handler = this.handlers.get(featureName);
     if (!handler) {
       // Default usage for unregistered features (such as pure boolean features) is 0
       return 0;
     }
-    return handler(establishmentId, request);
+    return handler(establishmentId, request, tx);
   }
 
   /**
    * Returns both usage and plan-derived limit/enabled flag for a feature.
    * Uses Redis caching to avoid repeatedly querying the database for establishment/plan limits.
    */
-  async getUsageAndLimit(featureName: feature, establishmentId: string) {
+  async getUsageAndLimit(featureName: feature, establishmentId: string, tx?: any) {
     // compute usage first (dynamic data, keep real-time)
-    const usage = await this.getUsage(featureName, establishmentId);
+    const usage = await this.getUsage(featureName, establishmentId, undefined, tx);
 
     // Cache key for this establishment's plan limits
     const cacheKey = `est:plan-limits:${establishmentId}`;
 
     const planLimits = await this.cache.wrap(cacheKey, 3600, async () => {
-      const est = await this.corePrismaService.establishment.findUnique({
+      const client = tx || this.corePrismaService;
+      const est = await client.establishment.findUnique({
         where: { id: establishmentId },
         select: {
           isDemo: true,
@@ -139,7 +151,7 @@ export class FeatureUsageService {
       const featuresMap: Record<string, { limit: number | null; enabled: boolean | null }> = {};
 
       if (est?.subscription?.planCycle?.planId) {
-        const plan = await this.corePrismaService.plan.findFirst({
+        const plan = await client.plan.findFirst({
           where: { id: est.subscription.planCycle.planId },
           include: { features: { include: { feature: true } } },
         });

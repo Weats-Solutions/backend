@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { CreateMenuDto, UpdateMenuDto, UpdateMenuPositionsDto } from '@weats/contracts';
 import { EmployeeRoles } from '@weats/database';
-import { Establishment } from '@weats/types';
+import { Establishment, User } from '@weats/types';
 import { ClientProxy } from '@nestjs/microservices';
 import {
     EstablishmentStaffGuard,
@@ -23,7 +23,8 @@ import {
     FeatureLimitGuard,
     DASHBOARD_PATTERNS,
     CurrentEstablishment,
-    DASHBOARD_SERVICE
+    DASHBOARD_SERVICE,
+    CurrentUser
 } from '@weats/common';
 
 @Controller('menus')
@@ -112,5 +113,46 @@ export class MenuController {
         @CurrentEstablishment() currentEstablishment: Establishment,
     ) {
         return this.dashboardClient.send(DASHBOARD_PATTERNS.MENU_DUPLICATE, { menuId, establishment: currentEstablishment });
+    }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @UseGuards(
+        ClerkGuard,
+        EstablishmentStaffGuard,
+        ActiveSubscriptionGuard,
+    )
+    @Post('/:menuId/duplicate-precheck')
+    duplicateMenuPrecheck(
+        @Param('menuId') menuId: string,
+        @Body() body: { targetEstablishmentId: string; reuseExistingItemsBySku?: boolean },
+        @CurrentUser() user: User,
+    ) {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.MENU_DUPLICATE_PRECHECK, {
+            menuId,
+            targetEstablishmentId: body.targetEstablishmentId,
+            reuseExistingItemsBySku: body.reuseExistingItemsBySku ?? true,
+            user,
+        });
+    }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @UseGuards(
+        ClerkGuard,
+        EstablishmentStaffGuard,
+        ActiveSubscriptionGuard,
+    )
+    @Post('/:menuId/duplicate-to-establishment')
+    duplicateMenuToEstablishment(
+        @Param('menuId') menuId: string,
+        @Body() body: { targetEstablishmentId: string; idempotencyKey: string; reuseExistingItemsBySku?: boolean },
+        @CurrentUser() user: User,
+    ) {
+        return this.dashboardClient.send(DASHBOARD_PATTERNS.MENU_DUPLICATE_TO_ESTABLISHMENT, {
+            menuId,
+            targetEstablishmentId: body.targetEstablishmentId,
+            idempotencyKey: body.idempotencyKey,
+            reuseExistingItemsBySku: body.reuseExistingItemsBySku ?? true,
+            user,
+        });
     }
 }

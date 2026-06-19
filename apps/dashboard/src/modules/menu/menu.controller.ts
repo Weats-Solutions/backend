@@ -3,9 +3,9 @@ import {
 } from '@nestjs/common';
 import { CreateMenuDto, UpdateMenuDto, UpdateMenuPositionsDto } from '@weats/contracts';
 import { MenuService } from './menu.service';
+import { Establishment, User } from '@weats/types';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { DASHBOARD_PATTERNS } from '@weats/common';
-import { Establishment } from '@weats/types';
 
 @Controller()
 export class MenuController {
@@ -70,5 +70,30 @@ export class MenuController {
     @MessagePattern(DASHBOARD_PATTERNS.MENU_DUPLICATE)
     duplicateMenu(@Payload() payload: { menuId: string, establishment: Establishment }) {
         return this.menuService.duplicateMenu(payload.menuId, payload.establishment);
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.MENU_DUPLICATE_PRECHECK)
+    duplicateMenuPrecheck(
+        @Payload() payload: { menuId: string; targetEstablishmentId: string; reuseExistingItemsBySku: boolean; user: User },
+    ) {
+        return this.menuService.duplicateMenuPrecheck(
+            payload.menuId,
+            payload.targetEstablishmentId,
+            payload.reuseExistingItemsBySku,
+            payload.user,
+        );
+    }
+
+    @MessagePattern(DASHBOARD_PATTERNS.MENU_DUPLICATE_TO_ESTABLISHMENT)
+    duplicateMenuToEstablishment(
+        @Payload() payload: { menuId: string; targetEstablishmentId: string; idempotencyKey: string; reuseExistingItemsBySku: boolean; user: User },
+    ) {
+        return this.menuService.duplicateMenuToEstablishment(
+            payload.menuId,
+            payload.targetEstablishmentId,
+            payload.idempotencyKey,
+            payload.reuseExistingItemsBySku,
+            payload.user,
+        );
     }
 }
