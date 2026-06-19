@@ -10,6 +10,7 @@ import { ERRORS, MENU_COLOR_PALETTE, normalizeSchedule } from '@weats/common';
 import { CorePrismaService, EstablishmentLanguage, MenuType, ScheduleType } from '@weats/database';
 import { RpcException } from '@nestjs/microservices';
 import { CacheService } from '@weats/cache';
+import { CloudflareR2Service } from '@weats/integrations/cloudflare/cloudflare-r2.service';
 
 @Injectable()
 export class MenuService {
@@ -17,6 +18,7 @@ export class MenuService {
         private readonly prisma: CorePrismaService,
         private usageService: FeatureUsageService,
         private readonly cacheService: CacheService,
+        private readonly cloudflareR2Service: CloudflareR2Service,
     ) { }
 
     async listMenus(establishment: Establishment) {
@@ -1371,11 +1373,17 @@ export class MenuService {
         });
 
         for (const sourceImg of sourceImages) {
+            // Copia o ficheiro fisicamente no R2 para garantir isolamento
+            const copiedFile = await this.cloudflareR2Service.copyImage(
+                sourceImg.cloudflareImageId,
+                targetId,
+            );
+
             const targetImg = await tx.image.create({
                 data: {
-                    cloudflareImageId: sourceImg.cloudflareImageId,
+                    cloudflareImageId: copiedFile.id,
                     fileName: sourceImg.fileName,
-                    url: sourceImg.url,
+                    url: copiedFile.url,
                     fileSize: sourceImg.fileSize,
                     metadata: sourceImg.metadata || undefined,
                     establishmentId: targetId,

@@ -7,6 +7,7 @@ import {
     DeleteObjectCommand,
     PutObjectCommand,
     GetObjectCommand,
+    CopyObjectCommand,
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { RpcException } from '@nestjs/microservices';
@@ -130,6 +131,31 @@ export class CloudflareR2Service {
         } catch (error) {
             console.error(`Erro ao obter ficheiro ${key} do R2:`, error);
             throw new RpcException({ message: 'Falha ao obter ficheiro do R2' });
+        }
+    }
+
+    async copyImage(sourceKey: string, targetEstablishmentId: string) {
+        try {
+            const fileId = crypto.randomUUID();
+            const ext = path.extname(sourceKey);
+            const targetKey = `establishments/${targetEstablishmentId}/${fileId}${ext}`;
+
+            const command = new CopyObjectCommand({
+                Bucket: this.bucketName,
+                CopySource: `${this.bucketName}/${sourceKey}`,
+                Key: targetKey,
+                CacheControl: "public, max-age=31536000, immutable",
+            });
+
+            await this.s3Client.send(command);
+
+            return {
+                id: targetKey,
+                url: `${this.cdnUrl}/${targetKey}`,
+            };
+        } catch (error) {
+            console.error(`Erro ao copiar imagem de ${sourceKey} para ${targetEstablishmentId}:`, error);
+            throw new RpcException({ message: 'Falha ao duplicar ficheiro no R2' });
         }
     }
 }
