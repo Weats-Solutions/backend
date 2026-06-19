@@ -1114,7 +1114,7 @@ export class MenuService {
                         sourceMenu,
                         targetEstablishment,
                         reuseExistingItemsBySku,
-                        costReport.missingLocales,
+                        costReport.targetLanguages,
                     );
                 },
                 { timeout: 30000 },
@@ -1261,10 +1261,25 @@ export class MenuService {
         const imagesCost = uniqueImages.size;
 
         const targetLanguages = targetEstablishment.availableLanguages || [];
-        const missingLocales = Array.from(uniqueLocales).filter(
-            (locale) => !targetLanguages.includes(locale),
+        const sourceLanguages = new Set(sourceMenu.establishment?.availableLanguages || []);
+        const missingLanguagesInSource = targetLanguages.filter(
+            (lang: string) => !sourceLanguages.has(lang),
         );
-        const languagesCost = missingLocales.length;
+
+        const languagesMatchPassed = missingLanguagesInSource.length === 0;
+        const languagesMatchError = languagesMatchPassed
+            ? null
+            : `O menu de origem não possui as seguintes traduções necessárias para o restaurante de destino: ${missingLanguagesInSource.map((l) => l.toUpperCase()).join(', ')}.`;
+
+        const languagesMatchCheck = {
+            feature: 'languages_match' as any,
+            label: 'Idiomas do Menu',
+            currentUsage: sourceLanguages.size,
+            cost: targetLanguages.length,
+            limit: null,
+            passed: languagesMatchPassed,
+            error: languagesMatchError,
+        };
 
         const checks = await Promise.all([
             this.checkLimit(feature.menu, targetId, menuCost, 'Menus', tx),
@@ -1274,15 +1289,17 @@ export class MenuService {
             this.checkLimit(feature.custom_variants, targetId, customVariantsCost, 'Variant Options', tx),
             this.checkLimit(feature.custom_addons, targetId, customAddonsCost, 'Addons', tx),
             this.checkLimit(feature.images, targetId, imagesCost, 'Images', tx),
-            this.checkLimit(feature.languages, targetId, languagesCost, 'Languages', tx),
+            this.checkLimit(feature.languages, targetId, 0, 'Languages', tx),
         ]);
+
+        checks.push(languagesMatchCheck);
 
         const isPossible = checks.every((c) => c.passed);
 
         return {
             isPossible,
             checks,
-            missingLocales,
+            targetLanguages,
         };
     }
 
@@ -1293,16 +1310,20 @@ export class MenuService {
         label: string,
         tx?: any,
     ) {
-        const { usage, limit } = await this.usageService.getUsageAndLimit(
+        const { usage, limit, hasPlan } = await this.usageService.getUsageAndLimit(
             featureName,
             establishmentId,
             tx,
         );
 
-        const passed = limit === null || usage + cost <= limit;
+        const passed = !!hasPlan && (limit === null || usage + cost <= limit);
         let error: string | null = null;
         if (!passed) {
-            error = `Target establishment plan only allows ${limit} ${label.toLowerCase()} (currently used: ${usage}, requested new: +${cost}).`;
+            if (!hasPlan) {
+                error = `O restaurante de destino não possui uma subscrição ativa.`;
+            } else {
+                error = `O plano do restaurante de destino permite apenas ${limit} ${label.toLowerCase()} (em uso: ${usage}, novos: +${cost}).`;
+            }
         }
 
         return {
@@ -1321,19 +1342,10 @@ export class MenuService {
         sourceMenu: any,
         targetEstablishment: any,
         reuseExistingItemsBySku: boolean,
-        missingLocales: string[],
+        targetLanguages: string[],
     ) {
         const targetId = targetEstablishment.id;
 
-        if (missingLocales.length > 0) {
-            const updatedLanguages = [
-                ...new Set([...(targetEstablishment.availableLanguages || []), ...missingLocales]),
-            ];
-            await tx.establishment.update({
-                where: { id: targetId },
-                data: { availableLanguages: updatedLanguages },
-            });
-        }
 
         const imageIdMap = new Map<string, string>();
         const uniqueImageIds = new Set<string>();
@@ -1466,10 +1478,12 @@ export class MenuService {
                         quantity: vo.quantity,
                         unit: vo.unit,
                         translations: {
-                            create: (vo.translations || []).map((t: any) => ({
-                                locale: t.locale,
-                                name: t.name,
-                            })),
+                            create: (vo.translations || [])
+                                .filter((t: any) => targetLanguages.includes(t.locale))
+                                .map((t: any) => ({
+                                    locale: t.locale,
+                                    name: t.name,
+                                })),
                         },
                     },
                 });
@@ -1487,10 +1501,12 @@ export class MenuService {
                         isGlobal: false,
                         isActive: addon.isActive,
                         translations: {
-                            create: (addon.translations || []).map((t: any) => ({
-                                locale: t.locale,
-                                name: t.name,
-                            })),
+                            create: (addon.translations || [])
+                                .filter((t: any) => targetLanguages.includes(t.locale))
+                                .map((t: any) => ({
+                                    locale: t.locale,
+                                    name: t.name,
+                                })),
                         },
                     },
                 });
@@ -1514,12 +1530,14 @@ export class MenuService {
                     imageId: mapImageId(item.imageId),
                     taxTableId: item.taxTableId,
                     translations: {
-                        create: (item.translations || []).map((t: any) => ({
-                            locale: t.locale,
-                            name: t.name,
-                            shortDescription: t.shortDescription,
-                            description: t.description,
-                        })),
+                        create: (item.translations || [])
+                            .filter((t: any) => targetLanguages.includes(t.locale))
+                            .map((t: any) => ({
+                                locale: t.locale,
+                                name: t.name,
+                                shortDescription: t.shortDescription,
+                                description: t.description,
+                            })),
                     },
                     attributes: {
                         create: (item.attributes || []).map((attr: any) => ({
@@ -1551,10 +1569,12 @@ export class MenuService {
                         itemId: newItem.id,
                         position: vg.position,
                         translations: {
-                            create: (vg.translations || []).map((t: any) => ({
-                                locale: t.locale,
-                                name: t.name,
-                            })),
+                            create: (vg.translations || [])
+                                .filter((t: any) => targetLanguages.includes(t.locale))
+                                .map((t: any) => ({
+                                    locale: t.locale,
+                                    name: t.name,
+                                })),
                         },
                     },
                 });
@@ -1609,10 +1629,12 @@ export class MenuService {
                         displayMode: mg.displayMode,
                         isActive: mg.isActive,
                         translations: {
-                            create: (mg.translations || []).map((t: any) => ({
-                                locale: t.locale,
-                                name: t.name,
-                            })),
+                            create: (mg.translations || [])
+                                .filter((t: any) => targetLanguages.includes(t.locale))
+                                .map((t: any) => ({
+                                    locale: t.locale,
+                                    name: t.name,
+                                })),
                         },
                     },
                 });
@@ -1688,12 +1710,14 @@ export class MenuService {
                 showImages: sourceMenu.showImages,
                 maxItemsPerOrder: sourceMenu.maxItemsPerOrder,
                 translations: {
-                    create: sourceMenu.translations.map((t: any) => ({
-                        locale: t.locale,
-                        name: `${t.name} (Cópia)`,
-                        description: t.description,
-                        observations: t.observations,
-                    })),
+                    create: sourceMenu.translations
+                        .filter((t: any) => targetLanguages.includes(t.locale))
+                        .map((t: any) => ({
+                            locale: t.locale,
+                            name: `${t.name} (Cópia)`,
+                            description: t.description,
+                            observations: t.observations,
+                        })),
                 },
                 ...(newScheduleId && { scheduleId: newScheduleId }),
             },
@@ -1707,10 +1731,12 @@ export class MenuService {
                     isVisible: category.isVisible,
                     imageId: mapImageId(category.imageId),
                     translations: {
-                        create: (category.translations || []).map((t: any) => ({
-                            locale: t.locale,
-                            name: t.name,
-                        })),
+                        create: (category.translations || [])
+                            .filter((t: any) => targetLanguages.includes(t.locale))
+                            .map((t: any) => ({
+                                locale: t.locale,
+                                name: t.name,
+                            })),
                     },
                 },
             });
@@ -1722,11 +1748,13 @@ export class MenuService {
                         position: subcategory.position,
                         isVisible: subcategory.isVisible,
                         translations: {
-                            create: (subcategory.translations || []).map((t: any) => ({
-                                locale: t.locale,
-                                name: t.name,
-                                description: t.description,
-                            })),
+                            create: (subcategory.translations || [])
+                                .filter((t: any) => targetLanguages.includes(t.locale))
+                                .map((t: any) => ({
+                                    locale: t.locale,
+                                    name: t.name,
+                                    description: t.description,
+                                })),
                         },
                     },
                 });

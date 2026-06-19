@@ -144,42 +144,50 @@ export class FeatureUsageService {
       if (est?.isDemo) {
         return {
           isDemo: true,
+          hasPlan: true,
+          features: {} as Record<string, { limit: number | null; enabled: boolean | null }>,
+        };
+      }
+
+      if (!est?.subscription?.planCycle?.planId) {
+        return {
+          isDemo: false,
+          hasPlan: false,
           features: {} as Record<string, { limit: number | null; enabled: boolean | null }>,
         };
       }
 
       const featuresMap: Record<string, { limit: number | null; enabled: boolean | null }> = {};
 
-      if (est?.subscription?.planCycle?.planId) {
-        const plan = await client.plan.findFirst({
-          where: { id: est.subscription.planCycle.planId },
-          include: { features: { include: { feature: true } } },
-        });
+      const plan = await client.plan.findFirst({
+        where: { id: est.subscription.planCycle.planId },
+        include: { features: { include: { feature: true } } },
+      });
 
-        if (plan) {
-          for (const pf of plan.features) {
-            let limit: number | null = null;
-            let enabled: boolean | null = null;
+      if (plan) {
+        for (const pf of plan.features) {
+          let limit: number | null = null;
+          let enabled: boolean | null = null;
 
-            if (pf.valueQuantity !== null && pf.valueQuantity !== undefined) {
-              limit = pf.valueQuantity;
-            }
-            if (pf.valueBoolean !== null && pf.valueBoolean !== undefined) {
-              if (pf.feature.type === 'BOOLEAN') {
-                enabled = pf.valueBoolean;
-              } else if (pf.feature.type === 'QUANTITY') {
-                if (pf.valueBoolean === false) {
-                  enabled = false;
-                }
+          if (pf.valueQuantity !== null && pf.valueQuantity !== undefined) {
+            limit = pf.valueQuantity;
+          }
+          if (pf.valueBoolean !== null && pf.valueBoolean !== undefined) {
+            if (pf.feature.type === 'BOOLEAN') {
+              enabled = pf.valueBoolean;
+            } else if (pf.feature.type === 'QUANTITY') {
+              if (pf.valueBoolean === false) {
+                enabled = false;
               }
             }
-            featuresMap[pf.feature.name] = { limit, enabled };
           }
+          featuresMap[pf.feature.name] = { limit, enabled };
         }
       }
 
       return {
         isDemo: false,
+        hasPlan: true,
         features: featuresMap,
       };
     });
@@ -189,6 +197,16 @@ export class FeatureUsageService {
         usage,
         limit: null,
         enabled: true,
+        hasPlan: true,
+      };
+    }
+
+    if (!planLimits.hasPlan) {
+      return {
+        usage,
+        limit: 0,
+        enabled: false,
+        hasPlan: false,
       };
     }
 
@@ -198,6 +216,7 @@ export class FeatureUsageService {
       usage,
       limit: featureRules?.limit ?? null,
       enabled: featureRules?.enabled ?? null,
+      hasPlan: true,
     };
   }
 }
