@@ -64,6 +64,7 @@ export class EstablishmentQueryService {
             zipCode: establishment.zipCode,
             country: establishment.country,
             countryCode: establishment.countryCode,
+            billingCountry: establishment.billingCountry,
             phoneNumber: establishment.phoneNumber,
             primaryLanguage: establishment.primaryLanguage,
             availableLanguages: establishment.availableLanguages,
