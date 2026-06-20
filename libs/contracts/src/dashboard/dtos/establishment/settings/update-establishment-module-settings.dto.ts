@@ -4,6 +4,10 @@ import { Type } from "class-transformer";
 
 export class ExternalLinkTranslationDto {
     @IsString()
+    @IsOptional()
+    id?: string;
+
+    @IsString()
     @IsNotEmpty()
     locale: string;
 
