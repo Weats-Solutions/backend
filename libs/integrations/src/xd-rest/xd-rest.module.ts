@@ -4,8 +4,10 @@ import { DatabaseModule } from '@weats/database';
 import { EncryptionModule } from '@weats/encryption';
 import { XdRestService } from './xd-rest.service';
 
+import { IntegrationsValidationModule } from '../validation/integrations-validation.module';
+
 @Module({
-    imports: [HttpModule, DatabaseModule, EncryptionModule],
+    imports: [HttpModule, DatabaseModule, EncryptionModule, IntegrationsValidationModule],
     providers: [XdRestService],
     exports: [XdRestService],
 })

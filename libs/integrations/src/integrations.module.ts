@@ -7,8 +7,10 @@ import { FaviconModule } from './favicon/favicon.module';
 import { DiscordModule } from './discord/discord.module';
 import { XdRestModule } from './xd-rest/xd-rest.module';
 
+import { IntegrationsValidationModule } from './validation/integrations-validation.module';
+
 @Module({
-  imports: [ClerkModule, StripeModule, CloudflareModule, EupagoModule, FaviconModule, DiscordModule, XdRestModule],
-  exports: [ClerkModule, StripeModule, CloudflareModule, EupagoModule, FaviconModule, DiscordModule, XdRestModule],
+  imports: [ClerkModule, StripeModule, CloudflareModule, EupagoModule, FaviconModule, DiscordModule, XdRestModule, IntegrationsValidationModule],
+  exports: [ClerkModule, StripeModule, CloudflareModule, EupagoModule, FaviconModule, DiscordModule, XdRestModule, IntegrationsValidationModule],
 })
 export class IntegrationsModule { }

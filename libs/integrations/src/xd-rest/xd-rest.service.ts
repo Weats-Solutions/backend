@@ -8,6 +8,8 @@ import { firstValueFrom } from 'rxjs';
 import { CorePrismaService } from '@weats/database';
 import { EncryptionService } from '@weats/encryption';
 import { RpcException } from '@nestjs/microservices';
+import { IntegrationCategory } from '@weats/types';
+import { IntegrationsValidationService } from '../validation/integrations-validation.service';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -42,6 +44,7 @@ export class XdRestService {
         private readonly http: HttpService,
         private readonly corePrismaService: CorePrismaService,
         private readonly encryption: EncryptionService,
+        private readonly validationService: IntegrationsValidationService,
     ) { }
 
     // ─── Credential Management ──────────────────────────────────────────────
@@ -58,6 +61,9 @@ export class XdRestService {
     ): Promise<XdRestStatus> {
         // 1. Validate by calling the login endpoint
         const loginResult = await this.login(baseUrl, username, password);
+
+        // 1.5. Validate category exclusivity
+        await this.validationService.validateExclusivity(establishmentId, IntegrationCategory.POS, 'xdRestEnabled');
 
         // 2. Encrypt credentials
         const encryptedUsername = this.encryption.encrypt(username);
@@ -150,6 +156,10 @@ export class XdRestService {
                 message: 'XD Rest integration not configured. Please save credentials first.',
                 code: 'XD_REST_INTEGRATION_NOT_CONFIGURED',
             });
+        }
+
+        if (enabled) {
+            await this.validationService.validateExclusivity(establishmentId, IntegrationCategory.POS, 'xdRestEnabled');
         }
 
         await this.corePrismaService.establishmentIntegrations.update({

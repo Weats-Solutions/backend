@@ -8,3 +8,4 @@ export * from './plan';
 export * from './subscription';
 export * from './user';
 export * from './mail';
+export * from './integration';
