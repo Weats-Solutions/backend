@@ -248,21 +248,21 @@ export class XdRestService {
 
     /**
      * Calls the XD Rest login endpoint to authenticate.
-     * POST {baseUrl}/api/Authentication/Login
-     * Body: { username, password }
+     * POST {baseUrl}/gateway/AccountLogin
+     * Body: { user, password }
      */
     private async login(
         baseUrl: string,
         username: string,
         password: string,
     ): Promise<{ token: string | null; expiration: Date | null }> {
-        const url = `${baseUrl.replace(/\/+$/, '')}/api/Authentication/Login`;
+        const url = `${baseUrl.replace(/\/+$/, '')}/gateway/AccountLogin`;
 
         try {
             this.logger.debug(`[XD Rest] POST ${url}`);
 
             const { data } = await firstValueFrom(
-                this.http.post(url, { username, password }, {
+                this.http.post(url, { user: username, password }, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
