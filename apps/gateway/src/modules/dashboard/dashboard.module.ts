@@ -10,6 +10,7 @@ import { UserController } from './controllers/user.controller';
 import { ImageController } from './controllers/image.controller';
 import { PlanController } from './controllers/plan.controller';
 import { EupagoIntegrationController } from './controllers/integrations/eupago.controller';
+import { XdRestIntegrationController } from './controllers/integrations/xd-rest.controller';
 import { EncryptionModule } from '@weats/encryption';
 import { FeatureUsageModule } from '@weats/common/feature/feature-usage.module';
 import { MenuController } from './controllers/menu.controller';
@@ -80,6 +81,7 @@ import { ClerkGuard, EstablishmentStaffGuard, ActiveSubscriptionGuard } from '@w
 
     //Integrations
     EupagoIntegrationController,
+    XdRestIntegrationController,
 
     //Expenses
     ExpenseController,

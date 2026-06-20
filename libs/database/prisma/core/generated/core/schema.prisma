@@ -917,6 +917,20 @@ model EstablishmentIntegrations {
   vendusEnabled Boolean @default(false)
   vendusApiKey  String?
 
+  // ─── XD Rest ────────────────────────────────────────────────────────────────
+  // ERP integration (Portuguese invoicing / POS) via REST API.
+  // xdRestBaseUrl  — the base URL for the XD Rest API instance
+  // xdRestUsername — encrypted username for API authentication
+  // xdRestPassword — encrypted password for API authentication
+  // xdRestToken    — encrypted JWT token from last successful login (cached)
+  // xdRestTokenExp — expiration timestamp of the cached token
+  xdRestEnabled  Boolean   @default(false)
+  xdRestBaseUrl  String?
+  xdRestUsername String?
+  xdRestPassword String?
+  xdRestToken    String?
+  xdRestTokenExp DateTime?
+
   establishment Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
 }
 

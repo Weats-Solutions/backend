@@ -442,7 +442,13 @@ exports.Prisma.EstablishmentIntegrationsScalarFieldEnum = {
   sumupApiKey: 'sumupApiKey',
   sumupMerchantCode: 'sumupMerchantCode',
   vendusEnabled: 'vendusEnabled',
-  vendusApiKey: 'vendusApiKey'
+  vendusApiKey: 'vendusApiKey',
+  xdRestEnabled: 'xdRestEnabled',
+  xdRestBaseUrl: 'xdRestBaseUrl',
+  xdRestUsername: 'xdRestUsername',
+  xdRestPassword: 'xdRestPassword',
+  xdRestToken: 'xdRestToken',
+  xdRestTokenExp: 'xdRestTokenExp'
 };
 
 exports.Prisma.SumupReaderScalarFieldEnum = {

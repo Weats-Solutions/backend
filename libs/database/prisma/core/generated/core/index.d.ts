@@ -35198,6 +35198,12 @@ export namespace Prisma {
     sumupMerchantCode: string | null
     vendusEnabled: boolean | null
     vendusApiKey: string | null
+    xdRestEnabled: boolean | null
+    xdRestBaseUrl: string | null
+    xdRestUsername: string | null
+    xdRestPassword: string | null
+    xdRestToken: string | null
+    xdRestTokenExp: Date | null
   }
 
   export type EstablishmentIntegrationsMaxAggregateOutputType = {
@@ -35220,6 +35226,12 @@ export namespace Prisma {
     sumupMerchantCode: string | null
     vendusEnabled: boolean | null
     vendusApiKey: string | null
+    xdRestEnabled: boolean | null
+    xdRestBaseUrl: string | null
+    xdRestUsername: string | null
+    xdRestPassword: string | null
+    xdRestToken: string | null
+    xdRestTokenExp: Date | null
   }
 
   export type EstablishmentIntegrationsCountAggregateOutputType = {
@@ -35242,6 +35254,12 @@ export namespace Prisma {
     sumupMerchantCode: number
     vendusEnabled: number
     vendusApiKey: number
+    xdRestEnabled: number
+    xdRestBaseUrl: number
+    xdRestUsername: number
+    xdRestPassword: number
+    xdRestToken: number
+    xdRestTokenExp: number
     _all: number
   }
 
@@ -35266,6 +35284,12 @@ export namespace Prisma {
     sumupMerchantCode?: true
     vendusEnabled?: true
     vendusApiKey?: true
+    xdRestEnabled?: true
+    xdRestBaseUrl?: true
+    xdRestUsername?: true
+    xdRestPassword?: true
+    xdRestToken?: true
+    xdRestTokenExp?: true
   }
 
   export type EstablishmentIntegrationsMaxAggregateInputType = {
@@ -35288,6 +35312,12 @@ export namespace Prisma {
     sumupMerchantCode?: true
     vendusEnabled?: true
     vendusApiKey?: true
+    xdRestEnabled?: true
+    xdRestBaseUrl?: true
+    xdRestUsername?: true
+    xdRestPassword?: true
+    xdRestToken?: true
+    xdRestTokenExp?: true
   }
 
   export type EstablishmentIntegrationsCountAggregateInputType = {
@@ -35310,6 +35340,12 @@ export namespace Prisma {
     sumupMerchantCode?: true
     vendusEnabled?: true
     vendusApiKey?: true
+    xdRestEnabled?: true
+    xdRestBaseUrl?: true
+    xdRestUsername?: true
+    xdRestPassword?: true
+    xdRestToken?: true
+    xdRestTokenExp?: true
     _all?: true
   }
 
@@ -35405,6 +35441,12 @@ export namespace Prisma {
     sumupMerchantCode: string | null
     vendusEnabled: boolean
     vendusApiKey: string | null
+    xdRestEnabled: boolean
+    xdRestBaseUrl: string | null
+    xdRestUsername: string | null
+    xdRestPassword: string | null
+    xdRestToken: string | null
+    xdRestTokenExp: Date | null
     _count: EstablishmentIntegrationsCountAggregateOutputType | null
     _min: EstablishmentIntegrationsMinAggregateOutputType | null
     _max: EstablishmentIntegrationsMaxAggregateOutputType | null
@@ -35444,6 +35486,12 @@ export namespace Prisma {
     sumupMerchantCode?: boolean
     vendusEnabled?: boolean
     vendusApiKey?: boolean
+    xdRestEnabled?: boolean
+    xdRestBaseUrl?: boolean
+    xdRestUsername?: boolean
+    xdRestPassword?: boolean
+    xdRestToken?: boolean
+    xdRestTokenExp?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["establishmentIntegrations"]>
 
@@ -35467,6 +35515,12 @@ export namespace Prisma {
     sumupMerchantCode?: boolean
     vendusEnabled?: boolean
     vendusApiKey?: boolean
+    xdRestEnabled?: boolean
+    xdRestBaseUrl?: boolean
+    xdRestUsername?: boolean
+    xdRestPassword?: boolean
+    xdRestToken?: boolean
+    xdRestTokenExp?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["establishmentIntegrations"]>
 
@@ -35490,6 +35544,12 @@ export namespace Prisma {
     sumupMerchantCode?: boolean
     vendusEnabled?: boolean
     vendusApiKey?: boolean
+    xdRestEnabled?: boolean
+    xdRestBaseUrl?: boolean
+    xdRestUsername?: boolean
+    xdRestPassword?: boolean
+    xdRestToken?: boolean
+    xdRestTokenExp?: boolean
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["establishmentIntegrations"]>
 
@@ -35513,9 +35573,15 @@ export namespace Prisma {
     sumupMerchantCode?: boolean
     vendusEnabled?: boolean
     vendusApiKey?: boolean
+    xdRestEnabled?: boolean
+    xdRestBaseUrl?: boolean
+    xdRestUsername?: boolean
+    xdRestPassword?: boolean
+    xdRestToken?: boolean
+    xdRestTokenExp?: boolean
   }
 
-  export type EstablishmentIntegrationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "createdAt" | "updatedAt" | "eupagoEnabled" | "eupagoApiKey" | "eupagoCryptoKey" | "biziqEnabled" | "biziqAccountId" | "biziqApiKey" | "biziqCompanyVat" | "vivaEnabled" | "vivaClientId" | "vivaClientSecret" | "sumupEnabled" | "sumupApiKey" | "sumupMerchantCode" | "vendusEnabled" | "vendusApiKey", ExtArgs["result"]["establishmentIntegrations"]>
+  export type EstablishmentIntegrationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "createdAt" | "updatedAt" | "eupagoEnabled" | "eupagoApiKey" | "eupagoCryptoKey" | "biziqEnabled" | "biziqAccountId" | "biziqApiKey" | "biziqCompanyVat" | "vivaEnabled" | "vivaClientId" | "vivaClientSecret" | "sumupEnabled" | "sumupApiKey" | "sumupMerchantCode" | "vendusEnabled" | "vendusApiKey" | "xdRestEnabled" | "xdRestBaseUrl" | "xdRestUsername" | "xdRestPassword" | "xdRestToken" | "xdRestTokenExp", ExtArgs["result"]["establishmentIntegrations"]>
   export type EstablishmentIntegrationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
   }
@@ -35551,6 +35617,12 @@ export namespace Prisma {
       sumupMerchantCode: string | null
       vendusEnabled: boolean
       vendusApiKey: string | null
+      xdRestEnabled: boolean
+      xdRestBaseUrl: string | null
+      xdRestUsername: string | null
+      xdRestPassword: string | null
+      xdRestToken: string | null
+      xdRestTokenExp: Date | null
     }, ExtArgs["result"]["establishmentIntegrations"]>
     composites: {}
   }
@@ -35994,6 +36066,12 @@ export namespace Prisma {
     readonly sumupMerchantCode: FieldRef<"EstablishmentIntegrations", 'String'>
     readonly vendusEnabled: FieldRef<"EstablishmentIntegrations", 'Boolean'>
     readonly vendusApiKey: FieldRef<"EstablishmentIntegrations", 'String'>
+    readonly xdRestEnabled: FieldRef<"EstablishmentIntegrations", 'Boolean'>
+    readonly xdRestBaseUrl: FieldRef<"EstablishmentIntegrations", 'String'>
+    readonly xdRestUsername: FieldRef<"EstablishmentIntegrations", 'String'>
+    readonly xdRestPassword: FieldRef<"EstablishmentIntegrations", 'String'>
+    readonly xdRestToken: FieldRef<"EstablishmentIntegrations", 'String'>
+    readonly xdRestTokenExp: FieldRef<"EstablishmentIntegrations", 'DateTime'>
   }
     
 
@@ -113765,7 +113843,13 @@ export namespace Prisma {
     sumupApiKey: 'sumupApiKey',
     sumupMerchantCode: 'sumupMerchantCode',
     vendusEnabled: 'vendusEnabled',
-    vendusApiKey: 'vendusApiKey'
+    vendusApiKey: 'vendusApiKey',
+    xdRestEnabled: 'xdRestEnabled',
+    xdRestBaseUrl: 'xdRestBaseUrl',
+    xdRestUsername: 'xdRestUsername',
+    xdRestPassword: 'xdRestPassword',
+    xdRestToken: 'xdRestToken',
+    xdRestTokenExp: 'xdRestTokenExp'
   };
 
   export type EstablishmentIntegrationsScalarFieldEnum = (typeof EstablishmentIntegrationsScalarFieldEnum)[keyof typeof EstablishmentIntegrationsScalarFieldEnum]
@@ -117564,6 +117648,12 @@ export namespace Prisma {
     sumupMerchantCode?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
     vendusEnabled?: BoolFilter<"EstablishmentIntegrations"> | boolean
     vendusApiKey?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
+    xdRestEnabled?: BoolFilter<"EstablishmentIntegrations"> | boolean
+    xdRestBaseUrl?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
+    xdRestUsername?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
+    xdRestPassword?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
+    xdRestToken?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
+    xdRestTokenExp?: DateTimeNullableFilter<"EstablishmentIntegrations"> | Date | string | null
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
   }
 
@@ -117587,6 +117677,12 @@ export namespace Prisma {
     sumupMerchantCode?: SortOrderInput | SortOrder
     vendusEnabled?: SortOrder
     vendusApiKey?: SortOrderInput | SortOrder
+    xdRestEnabled?: SortOrder
+    xdRestBaseUrl?: SortOrderInput | SortOrder
+    xdRestUsername?: SortOrderInput | SortOrder
+    xdRestPassword?: SortOrderInput | SortOrder
+    xdRestToken?: SortOrderInput | SortOrder
+    xdRestTokenExp?: SortOrderInput | SortOrder
     establishment?: EstablishmentOrderByWithRelationInput
   }
 
@@ -117613,6 +117709,12 @@ export namespace Prisma {
     sumupMerchantCode?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
     vendusEnabled?: BoolFilter<"EstablishmentIntegrations"> | boolean
     vendusApiKey?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
+    xdRestEnabled?: BoolFilter<"EstablishmentIntegrations"> | boolean
+    xdRestBaseUrl?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
+    xdRestUsername?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
+    xdRestPassword?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
+    xdRestToken?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
+    xdRestTokenExp?: DateTimeNullableFilter<"EstablishmentIntegrations"> | Date | string | null
     establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
   }, "id" | "establishmentId">
 
@@ -117636,6 +117738,12 @@ export namespace Prisma {
     sumupMerchantCode?: SortOrderInput | SortOrder
     vendusEnabled?: SortOrder
     vendusApiKey?: SortOrderInput | SortOrder
+    xdRestEnabled?: SortOrder
+    xdRestBaseUrl?: SortOrderInput | SortOrder
+    xdRestUsername?: SortOrderInput | SortOrder
+    xdRestPassword?: SortOrderInput | SortOrder
+    xdRestToken?: SortOrderInput | SortOrder
+    xdRestTokenExp?: SortOrderInput | SortOrder
     _count?: EstablishmentIntegrationsCountOrderByAggregateInput
     _max?: EstablishmentIntegrationsMaxOrderByAggregateInput
     _min?: EstablishmentIntegrationsMinOrderByAggregateInput
@@ -117664,6 +117772,12 @@ export namespace Prisma {
     sumupMerchantCode?: StringNullableWithAggregatesFilter<"EstablishmentIntegrations"> | string | null
     vendusEnabled?: BoolWithAggregatesFilter<"EstablishmentIntegrations"> | boolean
     vendusApiKey?: StringNullableWithAggregatesFilter<"EstablishmentIntegrations"> | string | null
+    xdRestEnabled?: BoolWithAggregatesFilter<"EstablishmentIntegrations"> | boolean
+    xdRestBaseUrl?: StringNullableWithAggregatesFilter<"EstablishmentIntegrations"> | string | null
+    xdRestUsername?: StringNullableWithAggregatesFilter<"EstablishmentIntegrations"> | string | null
+    xdRestPassword?: StringNullableWithAggregatesFilter<"EstablishmentIntegrations"> | string | null
+    xdRestToken?: StringNullableWithAggregatesFilter<"EstablishmentIntegrations"> | string | null
+    xdRestTokenExp?: DateTimeNullableWithAggregatesFilter<"EstablishmentIntegrations"> | Date | string | null
   }
 
   export type SumupReaderWhereInput = {
@@ -125288,6 +125402,12 @@ export namespace Prisma {
     sumupMerchantCode?: string | null
     vendusEnabled?: boolean
     vendusApiKey?: string | null
+    xdRestEnabled?: boolean
+    xdRestBaseUrl?: string | null
+    xdRestUsername?: string | null
+    xdRestPassword?: string | null
+    xdRestToken?: string | null
+    xdRestTokenExp?: Date | string | null
     establishment: EstablishmentCreateNestedOneWithoutIntegrationsInput
   }
 
@@ -125311,6 +125431,12 @@ export namespace Prisma {
     sumupMerchantCode?: string | null
     vendusEnabled?: boolean
     vendusApiKey?: string | null
+    xdRestEnabled?: boolean
+    xdRestBaseUrl?: string | null
+    xdRestUsername?: string | null
+    xdRestPassword?: string | null
+    xdRestToken?: string | null
+    xdRestTokenExp?: Date | string | null
   }
 
   export type EstablishmentIntegrationsUpdateInput = {
@@ -125332,6 +125458,12 @@ export namespace Prisma {
     sumupMerchantCode?: NullableStringFieldUpdateOperationsInput | string | null
     vendusEnabled?: BoolFieldUpdateOperationsInput | boolean
     vendusApiKey?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestEnabled?: BoolFieldUpdateOperationsInput | boolean
+    xdRestBaseUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestToken?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestTokenExp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     establishment?: EstablishmentUpdateOneRequiredWithoutIntegrationsNestedInput
   }
 
@@ -125355,6 +125487,12 @@ export namespace Prisma {
     sumupMerchantCode?: NullableStringFieldUpdateOperationsInput | string | null
     vendusEnabled?: BoolFieldUpdateOperationsInput | boolean
     vendusApiKey?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestEnabled?: BoolFieldUpdateOperationsInput | boolean
+    xdRestBaseUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestToken?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestTokenExp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type EstablishmentIntegrationsCreateManyInput = {
@@ -125377,6 +125515,12 @@ export namespace Prisma {
     sumupMerchantCode?: string | null
     vendusEnabled?: boolean
     vendusApiKey?: string | null
+    xdRestEnabled?: boolean
+    xdRestBaseUrl?: string | null
+    xdRestUsername?: string | null
+    xdRestPassword?: string | null
+    xdRestToken?: string | null
+    xdRestTokenExp?: Date | string | null
   }
 
   export type EstablishmentIntegrationsUpdateManyMutationInput = {
@@ -125398,6 +125542,12 @@ export namespace Prisma {
     sumupMerchantCode?: NullableStringFieldUpdateOperationsInput | string | null
     vendusEnabled?: BoolFieldUpdateOperationsInput | boolean
     vendusApiKey?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestEnabled?: BoolFieldUpdateOperationsInput | boolean
+    xdRestBaseUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestToken?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestTokenExp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type EstablishmentIntegrationsUncheckedUpdateManyInput = {
@@ -125420,6 +125570,12 @@ export namespace Prisma {
     sumupMerchantCode?: NullableStringFieldUpdateOperationsInput | string | null
     vendusEnabled?: BoolFieldUpdateOperationsInput | boolean
     vendusApiKey?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestEnabled?: BoolFieldUpdateOperationsInput | boolean
+    xdRestBaseUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestToken?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestTokenExp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SumupReaderCreateInput = {
@@ -133257,6 +133413,12 @@ export namespace Prisma {
     sumupMerchantCode?: SortOrder
     vendusEnabled?: SortOrder
     vendusApiKey?: SortOrder
+    xdRestEnabled?: SortOrder
+    xdRestBaseUrl?: SortOrder
+    xdRestUsername?: SortOrder
+    xdRestPassword?: SortOrder
+    xdRestToken?: SortOrder
+    xdRestTokenExp?: SortOrder
   }
 
   export type EstablishmentIntegrationsMaxOrderByAggregateInput = {
@@ -133279,6 +133441,12 @@ export namespace Prisma {
     sumupMerchantCode?: SortOrder
     vendusEnabled?: SortOrder
     vendusApiKey?: SortOrder
+    xdRestEnabled?: SortOrder
+    xdRestBaseUrl?: SortOrder
+    xdRestUsername?: SortOrder
+    xdRestPassword?: SortOrder
+    xdRestToken?: SortOrder
+    xdRestTokenExp?: SortOrder
   }
 
   export type EstablishmentIntegrationsMinOrderByAggregateInput = {
@@ -133301,6 +133469,12 @@ export namespace Prisma {
     sumupMerchantCode?: SortOrder
     vendusEnabled?: SortOrder
     vendusApiKey?: SortOrder
+    xdRestEnabled?: SortOrder
+    xdRestBaseUrl?: SortOrder
+    xdRestUsername?: SortOrder
+    xdRestPassword?: SortOrder
+    xdRestToken?: SortOrder
+    xdRestTokenExp?: SortOrder
   }
 
   export type SumupReaderEstablishmentIdReaderIdCompoundUniqueInput = {
@@ -150512,6 +150686,12 @@ export namespace Prisma {
     sumupMerchantCode?: string | null
     vendusEnabled?: boolean
     vendusApiKey?: string | null
+    xdRestEnabled?: boolean
+    xdRestBaseUrl?: string | null
+    xdRestUsername?: string | null
+    xdRestPassword?: string | null
+    xdRestToken?: string | null
+    xdRestTokenExp?: Date | string | null
   }
 
   export type EstablishmentIntegrationsUncheckedCreateWithoutEstablishmentInput = {
@@ -150533,6 +150713,12 @@ export namespace Prisma {
     sumupMerchantCode?: string | null
     vendusEnabled?: boolean
     vendusApiKey?: string | null
+    xdRestEnabled?: boolean
+    xdRestBaseUrl?: string | null
+    xdRestUsername?: string | null
+    xdRestPassword?: string | null
+    xdRestToken?: string | null
+    xdRestTokenExp?: Date | string | null
   }
 
   export type EstablishmentIntegrationsCreateOrConnectWithoutEstablishmentInput = {
@@ -152048,6 +152234,12 @@ export namespace Prisma {
     sumupMerchantCode?: NullableStringFieldUpdateOperationsInput | string | null
     vendusEnabled?: BoolFieldUpdateOperationsInput | boolean
     vendusApiKey?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestEnabled?: BoolFieldUpdateOperationsInput | boolean
+    xdRestBaseUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestToken?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestTokenExp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type EstablishmentIntegrationsUncheckedUpdateWithoutEstablishmentInput = {
@@ -152069,6 +152261,12 @@ export namespace Prisma {
     sumupMerchantCode?: NullableStringFieldUpdateOperationsInput | string | null
     vendusEnabled?: BoolFieldUpdateOperationsInput | boolean
     vendusApiKey?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestEnabled?: BoolFieldUpdateOperationsInput | boolean
+    xdRestBaseUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestToken?: NullableStringFieldUpdateOperationsInput | string | null
+    xdRestTokenExp?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SubscriptionUpsertWithoutEstablishmentInput = {

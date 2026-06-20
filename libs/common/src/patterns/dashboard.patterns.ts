@@ -140,6 +140,13 @@ export const DASHBOARD_PATTERNS = {
   EUPAGO_GENERATE_HOSTED_PAYMENT: 'dashboard.eupago.generate_hosted_payment',
   EUPAGO_GENERATE_MBWAY_PAYMENT: 'dashboard.eupago.generate_mbway_payment',
 
+  // ─── XD Rest ───────────────────────────────────────────────────────────────
+  XD_REST_GET_STATUS: 'dashboard.xd_rest.get_status',
+  XD_REST_SAVE_CREDENTIALS: 'dashboard.xd_rest.save_credentials',
+  XD_REST_DELETE_CREDENTIALS: 'dashboard.xd_rest.delete_credentials',
+  XD_REST_TOGGLE: 'dashboard.xd_rest.toggle',
+  XD_REST_TEST_CONNECTION: 'dashboard.xd_rest.test_connection',
+
   THEME_GET_ACTIVE: 'dashboard.theme.get_active',
   THEME_CREATE: 'dashboard.theme.create',
   THEME_UPDATE: 'dashboard.theme.update',

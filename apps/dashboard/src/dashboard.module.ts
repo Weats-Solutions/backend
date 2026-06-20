@@ -9,6 +9,7 @@ import { ImageModule } from './modules/image/image.module';
 import { ConfigsModule } from '@weats/configs';
 import { ConfigModule } from '@nestjs/config';
 import { EupagoModule } from './modules/integrations/eupago/eupago.module';
+import { XdRestModule as XdRestDashboardModule } from './modules/integrations/xd-rest/xd-rest.module';
 import { MenuModule } from './modules/menu/menu.module';
 import { ItemModule } from './modules/item/item.module';
 import { ExpenseModule } from './modules/expense/expense.module';
@@ -32,6 +33,7 @@ import { CacheModule } from '@weats/cache';
     PlanModule,
     ImageModule,
     EupagoModule,
+    XdRestDashboardModule,
     MenuModule,
     ItemModule,
     ExpenseModule,
