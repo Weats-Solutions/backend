@@ -46,6 +46,14 @@ export class CatalogService {
           subscription: true,
           schedule: {
             include: { days: { include: { intervals: true } } }
+          },
+          externalLinks: {
+            orderBy: {
+              position: 'asc'
+            },
+            include: {
+              translations: true
+            }
           }
         },
       });
@@ -170,6 +178,8 @@ export class CatalogService {
           reservationsModule: establishment.reservationsModule,
           reservationsPlatform: establishment.reservationsPlatform,
           reservationsLink: establishment.reservationsLink,
+          externalLinksModule: establishment.externalLinksModule,
+          externalLinks: establishment.externalLinks || [],
         }
       };
     } catch (error) {
