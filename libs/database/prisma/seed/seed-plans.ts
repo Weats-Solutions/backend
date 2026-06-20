@@ -25,16 +25,17 @@ async function main() {
         { name: 'qrcode_rules', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 10 },
         { name: 'call_staff', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 11 },
         { name: 'reservations', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 12 },
+        { name: 'external_links', type: 'QUANTITY', showInPlans: true, showInDetailsOnly: false, position: 13 },
 
-        { name: 'livechat', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 13 },
-        { name: 'theme_builder', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 14 },
-        { name: 'expenses', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 15 },
-        { name: 'metadata', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 16 },
-        { name: 'google_analytics', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 17 },
-        { name: 'academy', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 18 },
+        { name: 'livechat', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 14 },
+        { name: 'theme_builder', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 15 },
+        { name: 'expenses', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 16 },
+        { name: 'metadata', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 17 },
+        { name: 'google_analytics', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 18 },
+        { name: 'academy', type: 'BOOLEAN', showInPlans: true, showInDetailsOnly: false, position: 19 },
 
-        { name: 'menu_categories', type: 'QUANTITY', showInPlans: false, showInDetailsOnly: false, position: 19 },
-        { name: 'menu_subcategories', type: 'QUANTITY', showInPlans: false, showInDetailsOnly: false, position: 20 },
+        { name: 'menu_categories', type: 'QUANTITY', showInPlans: false, showInDetailsOnly: false, position: 20 },
+        { name: 'menu_subcategories', type: 'QUANTITY', showInPlans: false, showInDetailsOnly: false, position: 21 },
 
         //{ name: 'devices', type: 'BOOLEAN', showInPlans: true },
         //{ name: 'employees', type: 'BOOLEAN', showInPlans: true },
@@ -95,6 +96,7 @@ async function main() {
 
                 call_staff: false,
                 reservations: false,
+                external_links: 0,
 
 
                 livechat: true,
@@ -130,6 +132,7 @@ async function main() {
 
                 custom_qrcodes: true,
                 qrcode_rules: true,
+                external_links: 5,
 
                 call_staff: true,
                 reservations: true,
@@ -167,6 +170,7 @@ async function main() {
 
                 custom_qrcodes: true,
                 qrcode_rules: true,
+                external_links: 10,
 
                 call_staff: true,
                 reservations: true,

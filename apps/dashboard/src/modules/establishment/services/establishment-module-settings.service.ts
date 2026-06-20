@@ -27,6 +27,15 @@ export class EstablishmentModuleSettingsService {
                 reservationsModule: true,
                 reservationsPlatform: true,
                 reservationsLink: true,
+                externalLinksModule: true,
+                externalLinks: {
+                    orderBy: {
+                        position: 'asc',
+                    },
+                    include: {
+                        translations: true,
+                    },
+                },
             }
         })
     }
@@ -58,43 +67,133 @@ export class EstablishmentModuleSettingsService {
             }
         }
 
-        try {
-            const establishment = await this.prisma.establishment.update({
-                where: { id },
-                data: {
-                    myPageModule: updateEstablishmentModuleSettingsDto.myPageModule,
-                    menusModule: updateEstablishmentModuleSettingsDto.menusModule,
-                    callStaffModule: updateEstablishmentModuleSettingsDto.callStaffModule,
-                    reservationsModule: updateEstablishmentModuleSettingsDto.reservationsModule,
-                    reservationsPlatform: updateEstablishmentModuleSettingsDto.reservationsPlatform,
-                    reservationsLink: updateEstablishmentModuleSettingsDto.reservationsLink,
-                    ...(updateEstablishmentModuleSettingsDto.callStaffOptions !== undefined && {
-                        callStaffOptions: updateEstablishmentModuleSettingsDto.callStaffOptions,
-                    }),
-                },
-                select: {
-                    slug: true,
-                    myPageModule: true,
-                    menusModule: true,
-                    callStaffModule: true,
-                    callStaffOptions: true,
-                    reservationsModule: true,
-                    reservationsPlatform: true,
-                    reservationsLink: true,
-                }
-            })
+        if (updateEstablishmentModuleSettingsDto.externalLinksModule) {
+            const { enabled, limit } = await this.featureUsageService.getUsageAndLimit(
+                feature.external_links,
+                id,
+            );
+            if (enabled === false || (limit !== null && limit <= 0)) {
+                throw new BadRequestException({
+                    message: 'Feature external links not enabled for your plan',
+                    code: ERRORS.FEATURE_NOT_ENABLED,
+                });
+            }
+            if (updateEstablishmentModuleSettingsDto.externalLinks && limit !== null && updateEstablishmentModuleSettingsDto.externalLinks.length > limit) {
+                throw new BadRequestException({
+                    message: `You cannot have more than ${limit} external links`,
+                    code: ERRORS.FEATURE_LIMIT_REACHED,
+                });
+            }
+        }
 
-            await this.cacheService.clearCatalogEstablishmentCache(establishment.slug);
+        try {
+            const result = await this.prisma.$transaction(async (tx) => {
+                if (updateEstablishmentModuleSettingsDto.externalLinks !== undefined) {
+                    const incomingLinks = updateEstablishmentModuleSettingsDto.externalLinks;
+                    const incomingIds = incomingLinks.map(l => l.id).filter(Boolean) as string[];
+
+                    // Delete links not in incoming links
+                    await tx.externalLink.deleteMany({
+                        where: {
+                            establishmentId: id,
+                            id: { notIn: incomingIds }
+                        }
+                    });
+
+                    // Upsert each incoming link
+                    let position = 0;
+                    for (const link of incomingLinks) {
+                        if (link.id) {
+                            // Update
+                            await tx.externalLink.update({
+                                where: { id: link.id },
+                                data: {
+                                    icon: link.icon,
+                                    url: link.url,
+                                    position,
+                                    translations: {
+                                        deleteMany: {},
+                                        create: link.translations.map(t => ({
+                                            locale: t.locale,
+                                            name: t.name,
+                                            description: t.description,
+                                        }))
+                                    }
+                                }
+                            });
+                        } else {
+                            // Create
+                            await tx.externalLink.create({
+                                data: {
+                                    establishmentId: id,
+                                    icon: link.icon,
+                                    url: link.url,
+                                    position,
+                                    translations: {
+                                        create: link.translations.map(t => ({
+                                            locale: t.locale,
+                                            name: t.name,
+                                            description: t.description,
+                                        }))
+                                    }
+                                }
+                            });
+                        }
+                        position++;
+                    }
+                }
+
+                const establishment = await tx.establishment.update({
+                    where: { id },
+                    data: {
+                        myPageModule: updateEstablishmentModuleSettingsDto.myPageModule,
+                        menusModule: updateEstablishmentModuleSettingsDto.menusModule,
+                        callStaffModule: updateEstablishmentModuleSettingsDto.callStaffModule,
+                        reservationsModule: updateEstablishmentModuleSettingsDto.reservationsModule,
+                        reservationsPlatform: updateEstablishmentModuleSettingsDto.reservationsPlatform,
+                        reservationsLink: updateEstablishmentModuleSettingsDto.reservationsLink,
+                        externalLinksModule: updateEstablishmentModuleSettingsDto.externalLinksModule,
+                        ...(updateEstablishmentModuleSettingsDto.callStaffOptions !== undefined && {
+                            callStaffOptions: updateEstablishmentModuleSettingsDto.callStaffOptions,
+                        }),
+                    },
+                    select: {
+                        slug: true,
+                        myPageModule: true,
+                        menusModule: true,
+                        callStaffModule: true,
+                        callStaffOptions: true,
+                        reservationsModule: true,
+                        reservationsPlatform: true,
+                        reservationsLink: true,
+                        externalLinksModule: true,
+                        externalLinks: {
+                            orderBy: {
+                                position: 'asc',
+                            },
+                            include: {
+                                translations: true,
+                            }
+                        }
+                    }
+                });
+
+                return establishment;
+            });
+
+            await this.cacheService.clearCatalogEstablishmentCache(result.slug);
             await this.cacheService.clearDashboardEstablishmentCache(id);
 
             return {
-                myPageModule: establishment.myPageModule,
-                menusModule: establishment.menusModule,
-                callStaffModule: establishment.callStaffModule,
-                callStaffOptions: establishment.callStaffOptions,
-                reservationsModule: establishment.reservationsModule,
-                reservationsPlatform: establishment.reservationsPlatform,
-                reservationsLink: establishment.reservationsLink,
+                myPageModule: result.myPageModule,
+                menusModule: result.menusModule,
+                callStaffModule: result.callStaffModule,
+                callStaffOptions: result.callStaffOptions,
+                reservationsModule: result.reservationsModule,
+                reservationsPlatform: result.reservationsPlatform,
+                reservationsLink: result.reservationsLink,
+                externalLinksModule: result.externalLinksModule,
+                externalLinks: result.externalLinks,
             }
         } catch (error) {
             this.logger.error(`Failed to update establishment module settings: ${error}`);

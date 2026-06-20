@@ -88,6 +88,16 @@ export type Employee = $Result.DefaultSelection<Prisma.$EmployeePayload>
  */
 export type Establishment = $Result.DefaultSelection<Prisma.$EstablishmentPayload>
 /**
+ * Model ExternalLink
+ * 
+ */
+export type ExternalLink = $Result.DefaultSelection<Prisma.$ExternalLinkPayload>
+/**
+ * Model ExternalLinkTranslation
+ * 
+ */
+export type ExternalLinkTranslation = $Result.DefaultSelection<Prisma.$ExternalLinkTranslationPayload>
+/**
  * Model EstablishmentBookingSettings
  * 
  */
@@ -1484,6 +1494,26 @@ export class PrismaClient<
   get establishment(): Prisma.EstablishmentDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.externalLink`: Exposes CRUD operations for the **ExternalLink** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ExternalLinks
+    * const externalLinks = await prisma.externalLink.findMany()
+    * ```
+    */
+  get externalLink(): Prisma.ExternalLinkDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.externalLinkTranslation`: Exposes CRUD operations for the **ExternalLinkTranslation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ExternalLinkTranslations
+    * const externalLinkTranslations = await prisma.externalLinkTranslation.findMany()
+    * ```
+    */
+  get externalLinkTranslation(): Prisma.ExternalLinkTranslationDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.establishmentBookingSettings`: Exposes CRUD operations for the **EstablishmentBookingSettings** model.
     * Example usage:
     * ```ts
@@ -2650,6 +2680,8 @@ export namespace Prisma {
     EmailEvent: 'EmailEvent',
     Employee: 'Employee',
     Establishment: 'Establishment',
+    ExternalLink: 'ExternalLink',
+    ExternalLinkTranslation: 'ExternalLinkTranslation',
     EstablishmentBookingSettings: 'EstablishmentBookingSettings',
     EstablishmentMetadata: 'EstablishmentMetadata',
     FaviconAsset: 'FaviconAsset',
@@ -2737,7 +2769,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "promotion" | "buyXGetYRule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "establishmentBookingSettings" | "establishmentMetadata" | "faviconAsset" | "expense" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "lead" | "menu" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "qrCode" | "schedule" | "scheduleDay" | "timeInterval" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "dispute" | "refund" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
+      modelProps: "auditLog" | "bookingRules" | "establishmentAvailability" | "availabilityTimeSlot" | "booking" | "bookingLog" | "discount" | "discountTarget" | "promotion" | "buyXGetYRule" | "emailLog" | "emailEvent" | "employee" | "establishment" | "externalLink" | "externalLinkTranslation" | "establishmentBookingSettings" | "establishmentMetadata" | "faviconAsset" | "expense" | "image" | "establishmentIntegrations" | "sumupReader" | "vivaTerminal" | "item" | "itemNutritionInfo" | "variantNutrionalInfo" | "itemTranslation" | "variantOption" | "variantOptionTranslation" | "itemVariantGroup" | "itemVariantGroupTranslation" | "itemVariant" | "itemModifierGroup" | "itemModifierGroupTranslation" | "addon" | "addonTranslation" | "allergen" | "itemAllergen" | "itemVariantAllergen" | "itemModifierOption" | "itemAttribute" | "lead" | "menu" | "menuTranslation" | "menuCategory" | "menuCategoryTranslation" | "menuSubcategory" | "menuSubcategoryTranslation" | "menuItemPosition" | "moloniToken" | "orderItem" | "pOSCategory" | "device" | "printer" | "qrCode" | "schedule" | "scheduleDay" | "timeInterval" | "stockWarehouse" | "stockLocation" | "supplier" | "stockCategory" | "stockItem" | "stockItemSupplier" | "stockBatch" | "stockEntry" | "stockEntryItem" | "stockExit" | "stockExitItem" | "stockMovement" | "stockAlert" | "stockInventoryCount" | "stockInventoryCountItem" | "subscription" | "plan" | "planCycle" | "feature" | "planFeature" | "invoice" | "dispute" | "refund" | "taxTable" | "theme" | "user" | "webhookEvent" | "serviceZone" | "servicePoint"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3774,6 +3806,154 @@ export namespace Prisma {
           count: {
             args: Prisma.EstablishmentCountArgs<ExtArgs>
             result: $Utils.Optional<EstablishmentCountAggregateOutputType> | number
+          }
+        }
+      }
+      ExternalLink: {
+        payload: Prisma.$ExternalLinkPayload<ExtArgs>
+        fields: Prisma.ExternalLinkFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ExternalLinkFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ExternalLinkFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkPayload>
+          }
+          findFirst: {
+            args: Prisma.ExternalLinkFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ExternalLinkFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkPayload>
+          }
+          findMany: {
+            args: Prisma.ExternalLinkFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkPayload>[]
+          }
+          create: {
+            args: Prisma.ExternalLinkCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkPayload>
+          }
+          createMany: {
+            args: Prisma.ExternalLinkCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ExternalLinkCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkPayload>[]
+          }
+          delete: {
+            args: Prisma.ExternalLinkDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkPayload>
+          }
+          update: {
+            args: Prisma.ExternalLinkUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkPayload>
+          }
+          deleteMany: {
+            args: Prisma.ExternalLinkDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ExternalLinkUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ExternalLinkUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkPayload>[]
+          }
+          upsert: {
+            args: Prisma.ExternalLinkUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkPayload>
+          }
+          aggregate: {
+            args: Prisma.ExternalLinkAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateExternalLink>
+          }
+          groupBy: {
+            args: Prisma.ExternalLinkGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ExternalLinkGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ExternalLinkCountArgs<ExtArgs>
+            result: $Utils.Optional<ExternalLinkCountAggregateOutputType> | number
+          }
+        }
+      }
+      ExternalLinkTranslation: {
+        payload: Prisma.$ExternalLinkTranslationPayload<ExtArgs>
+        fields: Prisma.ExternalLinkTranslationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ExternalLinkTranslationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkTranslationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ExternalLinkTranslationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkTranslationPayload>
+          }
+          findFirst: {
+            args: Prisma.ExternalLinkTranslationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkTranslationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ExternalLinkTranslationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkTranslationPayload>
+          }
+          findMany: {
+            args: Prisma.ExternalLinkTranslationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkTranslationPayload>[]
+          }
+          create: {
+            args: Prisma.ExternalLinkTranslationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkTranslationPayload>
+          }
+          createMany: {
+            args: Prisma.ExternalLinkTranslationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ExternalLinkTranslationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkTranslationPayload>[]
+          }
+          delete: {
+            args: Prisma.ExternalLinkTranslationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkTranslationPayload>
+          }
+          update: {
+            args: Prisma.ExternalLinkTranslationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkTranslationPayload>
+          }
+          deleteMany: {
+            args: Prisma.ExternalLinkTranslationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ExternalLinkTranslationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ExternalLinkTranslationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkTranslationPayload>[]
+          }
+          upsert: {
+            args: Prisma.ExternalLinkTranslationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExternalLinkTranslationPayload>
+          }
+          aggregate: {
+            args: Prisma.ExternalLinkTranslationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateExternalLinkTranslation>
+          }
+          groupBy: {
+            args: Prisma.ExternalLinkTranslationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ExternalLinkTranslationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ExternalLinkTranslationCountArgs<ExtArgs>
+            result: $Utils.Optional<ExternalLinkTranslationCountAggregateOutputType> | number
           }
         }
       }
@@ -9227,6 +9407,8 @@ export namespace Prisma {
     emailEvent?: EmailEventOmit
     employee?: EmployeeOmit
     establishment?: EstablishmentOmit
+    externalLink?: ExternalLinkOmit
+    externalLinkTranslation?: ExternalLinkTranslationOmit
     establishmentBookingSettings?: EstablishmentBookingSettingsOmit
     establishmentMetadata?: EstablishmentMetadataOmit
     faviconAsset?: FaviconAssetOmit
@@ -9534,6 +9716,7 @@ export namespace Prisma {
    */
 
   export type EstablishmentCountOutputType = {
+    externalLinks: number
     favicons: number
     expenses: number
     images: number
@@ -9567,6 +9750,7 @@ export namespace Prisma {
   }
 
   export type EstablishmentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    externalLinks?: boolean | EstablishmentCountOutputTypeCountExternalLinksArgs
     favicons?: boolean | EstablishmentCountOutputTypeCountFaviconsArgs
     expenses?: boolean | EstablishmentCountOutputTypeCountExpensesArgs
     images?: boolean | EstablishmentCountOutputTypeCountImagesArgs
@@ -9608,6 +9792,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the EstablishmentCountOutputType
      */
     select?: EstablishmentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EstablishmentCountOutputType without action
+   */
+  export type EstablishmentCountOutputTypeCountExternalLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExternalLinkWhereInput
   }
 
   /**
@@ -9818,6 +10009,37 @@ export namespace Prisma {
    */
   export type EstablishmentCountOutputTypeCountStockWarehousesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: StockWarehouseWhereInput
+  }
+
+
+  /**
+   * Count Type ExternalLinkCountOutputType
+   */
+
+  export type ExternalLinkCountOutputType = {
+    translations: number
+  }
+
+  export type ExternalLinkCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    translations?: boolean | ExternalLinkCountOutputTypeCountTranslationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ExternalLinkCountOutputType without action
+   */
+  export type ExternalLinkCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkCountOutputType
+     */
+    select?: ExternalLinkCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ExternalLinkCountOutputType without action
+   */
+  export type ExternalLinkCountOutputTypeCountTranslationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExternalLinkTranslationWhereInput
   }
 
 
@@ -26595,6 +26817,7 @@ export namespace Prisma {
     reservationsModule: boolean | null
     reservationsPlatform: $Enums.ReservationsPlataform | null
     reservationsLink: string | null
+    externalLinksModule: boolean | null
     takeAwayModule: boolean | null
     isDemo: boolean | null
     primaryLanguage: $Enums.EstablishmentLanguage | null
@@ -26646,6 +26869,7 @@ export namespace Prisma {
     reservationsModule: boolean | null
     reservationsPlatform: $Enums.ReservationsPlataform | null
     reservationsLink: string | null
+    externalLinksModule: boolean | null
     takeAwayModule: boolean | null
     isDemo: boolean | null
     primaryLanguage: $Enums.EstablishmentLanguage | null
@@ -26698,6 +26922,7 @@ export namespace Prisma {
     reservationsModule: number
     reservationsPlatform: number
     reservationsLink: number
+    externalLinksModule: number
     takeAwayModule: number
     isDemo: number
     primaryLanguage: number
@@ -26752,6 +26977,7 @@ export namespace Prisma {
     reservationsModule?: true
     reservationsPlatform?: true
     reservationsLink?: true
+    externalLinksModule?: true
     takeAwayModule?: true
     isDemo?: true
     primaryLanguage?: true
@@ -26803,6 +27029,7 @@ export namespace Prisma {
     reservationsModule?: true
     reservationsPlatform?: true
     reservationsLink?: true
+    externalLinksModule?: true
     takeAwayModule?: true
     isDemo?: true
     primaryLanguage?: true
@@ -26855,6 +27082,7 @@ export namespace Prisma {
     reservationsModule?: true
     reservationsPlatform?: true
     reservationsLink?: true
+    externalLinksModule?: true
     takeAwayModule?: true
     isDemo?: true
     primaryLanguage?: true
@@ -26981,6 +27209,7 @@ export namespace Prisma {
     reservationsModule: boolean
     reservationsPlatform: $Enums.ReservationsPlataform | null
     reservationsLink: string | null
+    externalLinksModule: boolean
     takeAwayModule: boolean
     isDemo: boolean
     primaryLanguage: $Enums.EstablishmentLanguage
@@ -27051,6 +27280,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: boolean
     reservationsLink?: boolean
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: boolean
@@ -27067,6 +27297,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
+    externalLinks?: boolean | Establishment$externalLinksArgs<ExtArgs>
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     metadata?: boolean | Establishment$metadataArgs<ExtArgs>
     favicons?: boolean | Establishment$faviconsArgs<ExtArgs>
@@ -27145,6 +27376,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: boolean
     reservationsLink?: boolean
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: boolean
@@ -27203,6 +27435,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: boolean
     reservationsLink?: boolean
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: boolean
@@ -27261,6 +27494,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: boolean
     reservationsLink?: boolean
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: boolean
@@ -27279,8 +27513,9 @@ export namespace Prisma {
     ownerId?: boolean
   }
 
-  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "isActive" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "myPageModule" | "menusModule" | "callStaffModule" | "callStaffOptions" | "reservationsModule" | "reservationsPlatform" | "reservationsLink" | "takeAwayModule" | "isDemo" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "googleAnalyticsId" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
+  export type EstablishmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "type" | "isActive" | "email" | "countryCode" | "phoneNumber" | "address" | "city" | "state" | "zipCode" | "country" | "billingName" | "billingTaxId" | "billingAddress" | "billingCity" | "billingState" | "billingZipCode" | "billingCountry" | "stripeCustomerId" | "instagramUrl" | "tiktokUrl" | "facebookUrl" | "googleReviewUrl" | "tripAdvisorUrl" | "websiteUrl" | "myPageModule" | "menusModule" | "callStaffModule" | "callStaffOptions" | "reservationsModule" | "reservationsPlatform" | "reservationsLink" | "externalLinksModule" | "takeAwayModule" | "isDemo" | "primaryLanguage" | "availableLanguages" | "currency" | "timezone" | "wifiSsid" | "wifiPassword" | "googleAnalyticsId" | "logoImageId" | "bannerImageId" | "activeThemeId" | "scheduleId" | "createdAt" | "updatedAt" | "ownerId", ExtArgs["result"]["establishment"]>
   export type EstablishmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    externalLinks?: boolean | Establishment$externalLinksArgs<ExtArgs>
     schedule?: boolean | Establishment$scheduleArgs<ExtArgs>
     metadata?: boolean | Establishment$metadataArgs<ExtArgs>
     favicons?: boolean | Establishment$faviconsArgs<ExtArgs>
@@ -27341,6 +27576,7 @@ export namespace Prisma {
   export type $EstablishmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Establishment"
     objects: {
+      externalLinks: Prisma.$ExternalLinkPayload<ExtArgs>[]
       schedule: Prisma.$SchedulePayload<ExtArgs> | null
       metadata: Prisma.$EstablishmentMetadataPayload<ExtArgs> | null
       favicons: Prisma.$FaviconAssetPayload<ExtArgs>[]
@@ -27417,6 +27653,7 @@ export namespace Prisma {
       reservationsModule: boolean
       reservationsPlatform: $Enums.ReservationsPlataform | null
       reservationsLink: string | null
+      externalLinksModule: boolean
       takeAwayModule: boolean
       isDemo: boolean
       primaryLanguage: $Enums.EstablishmentLanguage
@@ -27827,6 +28064,7 @@ export namespace Prisma {
    */
   export interface Prisma__EstablishmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    externalLinks<T extends Establishment$externalLinksArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$externalLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     schedule<T extends Establishment$scheduleArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$scheduleArgs<ExtArgs>>): Prisma__ScheduleClient<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     metadata<T extends Establishment$metadataArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$metadataArgs<ExtArgs>>): Prisma__EstablishmentMetadataClient<$Result.GetResult<Prisma.$EstablishmentMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     favicons<T extends Establishment$faviconsArgs<ExtArgs> = {}>(args?: Subset<T, Establishment$faviconsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FaviconAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -27930,6 +28168,7 @@ export namespace Prisma {
     readonly reservationsModule: FieldRef<"Establishment", 'Boolean'>
     readonly reservationsPlatform: FieldRef<"Establishment", 'ReservationsPlataform'>
     readonly reservationsLink: FieldRef<"Establishment", 'String'>
+    readonly externalLinksModule: FieldRef<"Establishment", 'Boolean'>
     readonly takeAwayModule: FieldRef<"Establishment", 'Boolean'>
     readonly isDemo: FieldRef<"Establishment", 'Boolean'>
     readonly primaryLanguage: FieldRef<"Establishment", 'EstablishmentLanguage'>
@@ -28339,6 +28578,30 @@ export namespace Prisma {
      * Limit how many Establishments to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Establishment.externalLinks
+   */
+  export type Establishment$externalLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLink
+     */
+    select?: ExternalLinkSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLink
+     */
+    omit?: ExternalLinkOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkInclude<ExtArgs> | null
+    where?: ExternalLinkWhereInput
+    orderBy?: ExternalLinkOrderByWithRelationInput | ExternalLinkOrderByWithRelationInput[]
+    cursor?: ExternalLinkWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExternalLinkScalarFieldEnum | ExternalLinkScalarFieldEnum[]
   }
 
   /**
@@ -29248,6 +29511,2186 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EstablishmentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ExternalLink
+   */
+
+  export type AggregateExternalLink = {
+    _count: ExternalLinkCountAggregateOutputType | null
+    _avg: ExternalLinkAvgAggregateOutputType | null
+    _sum: ExternalLinkSumAggregateOutputType | null
+    _min: ExternalLinkMinAggregateOutputType | null
+    _max: ExternalLinkMaxAggregateOutputType | null
+  }
+
+  export type ExternalLinkAvgAggregateOutputType = {
+    position: number | null
+  }
+
+  export type ExternalLinkSumAggregateOutputType = {
+    position: number | null
+  }
+
+  export type ExternalLinkMinAggregateOutputType = {
+    id: string | null
+    establishmentId: string | null
+    icon: string | null
+    url: string | null
+    position: number | null
+  }
+
+  export type ExternalLinkMaxAggregateOutputType = {
+    id: string | null
+    establishmentId: string | null
+    icon: string | null
+    url: string | null
+    position: number | null
+  }
+
+  export type ExternalLinkCountAggregateOutputType = {
+    id: number
+    establishmentId: number
+    icon: number
+    url: number
+    position: number
+    _all: number
+  }
+
+
+  export type ExternalLinkAvgAggregateInputType = {
+    position?: true
+  }
+
+  export type ExternalLinkSumAggregateInputType = {
+    position?: true
+  }
+
+  export type ExternalLinkMinAggregateInputType = {
+    id?: true
+    establishmentId?: true
+    icon?: true
+    url?: true
+    position?: true
+  }
+
+  export type ExternalLinkMaxAggregateInputType = {
+    id?: true
+    establishmentId?: true
+    icon?: true
+    url?: true
+    position?: true
+  }
+
+  export type ExternalLinkCountAggregateInputType = {
+    id?: true
+    establishmentId?: true
+    icon?: true
+    url?: true
+    position?: true
+    _all?: true
+  }
+
+  export type ExternalLinkAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExternalLink to aggregate.
+     */
+    where?: ExternalLinkWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExternalLinks to fetch.
+     */
+    orderBy?: ExternalLinkOrderByWithRelationInput | ExternalLinkOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExternalLinkWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExternalLinks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExternalLinks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ExternalLinks
+    **/
+    _count?: true | ExternalLinkCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ExternalLinkAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ExternalLinkSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExternalLinkMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExternalLinkMaxAggregateInputType
+  }
+
+  export type GetExternalLinkAggregateType<T extends ExternalLinkAggregateArgs> = {
+        [P in keyof T & keyof AggregateExternalLink]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExternalLink[P]>
+      : GetScalarType<T[P], AggregateExternalLink[P]>
+  }
+
+
+
+
+  export type ExternalLinkGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExternalLinkWhereInput
+    orderBy?: ExternalLinkOrderByWithAggregationInput | ExternalLinkOrderByWithAggregationInput[]
+    by: ExternalLinkScalarFieldEnum[] | ExternalLinkScalarFieldEnum
+    having?: ExternalLinkScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExternalLinkCountAggregateInputType | true
+    _avg?: ExternalLinkAvgAggregateInputType
+    _sum?: ExternalLinkSumAggregateInputType
+    _min?: ExternalLinkMinAggregateInputType
+    _max?: ExternalLinkMaxAggregateInputType
+  }
+
+  export type ExternalLinkGroupByOutputType = {
+    id: string
+    establishmentId: string
+    icon: string
+    url: string
+    position: number
+    _count: ExternalLinkCountAggregateOutputType | null
+    _avg: ExternalLinkAvgAggregateOutputType | null
+    _sum: ExternalLinkSumAggregateOutputType | null
+    _min: ExternalLinkMinAggregateOutputType | null
+    _max: ExternalLinkMaxAggregateOutputType | null
+  }
+
+  type GetExternalLinkGroupByPayload<T extends ExternalLinkGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ExternalLinkGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExternalLinkGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExternalLinkGroupByOutputType[P]>
+            : GetScalarType<T[P], ExternalLinkGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExternalLinkSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    establishmentId?: boolean
+    icon?: boolean
+    url?: boolean
+    position?: boolean
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    translations?: boolean | ExternalLink$translationsArgs<ExtArgs>
+    _count?: boolean | ExternalLinkCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["externalLink"]>
+
+  export type ExternalLinkSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    establishmentId?: boolean
+    icon?: boolean
+    url?: boolean
+    position?: boolean
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["externalLink"]>
+
+  export type ExternalLinkSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    establishmentId?: boolean
+    icon?: boolean
+    url?: boolean
+    position?: boolean
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["externalLink"]>
+
+  export type ExternalLinkSelectScalar = {
+    id?: boolean
+    establishmentId?: boolean
+    icon?: boolean
+    url?: boolean
+    position?: boolean
+  }
+
+  export type ExternalLinkOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "icon" | "url" | "position", ExtArgs["result"]["externalLink"]>
+  export type ExternalLinkInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+    translations?: boolean | ExternalLink$translationsArgs<ExtArgs>
+    _count?: boolean | ExternalLinkCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ExternalLinkIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+  }
+  export type ExternalLinkIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
+  }
+
+  export type $ExternalLinkPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ExternalLink"
+    objects: {
+      establishment: Prisma.$EstablishmentPayload<ExtArgs>
+      translations: Prisma.$ExternalLinkTranslationPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      establishmentId: string
+      icon: string
+      url: string
+      position: number
+    }, ExtArgs["result"]["externalLink"]>
+    composites: {}
+  }
+
+  type ExternalLinkGetPayload<S extends boolean | null | undefined | ExternalLinkDefaultArgs> = $Result.GetResult<Prisma.$ExternalLinkPayload, S>
+
+  type ExternalLinkCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ExternalLinkFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ExternalLinkCountAggregateInputType | true
+    }
+
+  export interface ExternalLinkDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ExternalLink'], meta: { name: 'ExternalLink' } }
+    /**
+     * Find zero or one ExternalLink that matches the filter.
+     * @param {ExternalLinkFindUniqueArgs} args - Arguments to find a ExternalLink
+     * @example
+     * // Get one ExternalLink
+     * const externalLink = await prisma.externalLink.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ExternalLinkFindUniqueArgs>(args: SelectSubset<T, ExternalLinkFindUniqueArgs<ExtArgs>>): Prisma__ExternalLinkClient<$Result.GetResult<Prisma.$ExternalLinkPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ExternalLink that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ExternalLinkFindUniqueOrThrowArgs} args - Arguments to find a ExternalLink
+     * @example
+     * // Get one ExternalLink
+     * const externalLink = await prisma.externalLink.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ExternalLinkFindUniqueOrThrowArgs>(args: SelectSubset<T, ExternalLinkFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ExternalLinkClient<$Result.GetResult<Prisma.$ExternalLinkPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExternalLink that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkFindFirstArgs} args - Arguments to find a ExternalLink
+     * @example
+     * // Get one ExternalLink
+     * const externalLink = await prisma.externalLink.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ExternalLinkFindFirstArgs>(args?: SelectSubset<T, ExternalLinkFindFirstArgs<ExtArgs>>): Prisma__ExternalLinkClient<$Result.GetResult<Prisma.$ExternalLinkPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExternalLink that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkFindFirstOrThrowArgs} args - Arguments to find a ExternalLink
+     * @example
+     * // Get one ExternalLink
+     * const externalLink = await prisma.externalLink.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ExternalLinkFindFirstOrThrowArgs>(args?: SelectSubset<T, ExternalLinkFindFirstOrThrowArgs<ExtArgs>>): Prisma__ExternalLinkClient<$Result.GetResult<Prisma.$ExternalLinkPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ExternalLinks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ExternalLinks
+     * const externalLinks = await prisma.externalLink.findMany()
+     * 
+     * // Get first 10 ExternalLinks
+     * const externalLinks = await prisma.externalLink.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const externalLinkWithIdOnly = await prisma.externalLink.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ExternalLinkFindManyArgs>(args?: SelectSubset<T, ExternalLinkFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ExternalLink.
+     * @param {ExternalLinkCreateArgs} args - Arguments to create a ExternalLink.
+     * @example
+     * // Create one ExternalLink
+     * const ExternalLink = await prisma.externalLink.create({
+     *   data: {
+     *     // ... data to create a ExternalLink
+     *   }
+     * })
+     * 
+     */
+    create<T extends ExternalLinkCreateArgs>(args: SelectSubset<T, ExternalLinkCreateArgs<ExtArgs>>): Prisma__ExternalLinkClient<$Result.GetResult<Prisma.$ExternalLinkPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ExternalLinks.
+     * @param {ExternalLinkCreateManyArgs} args - Arguments to create many ExternalLinks.
+     * @example
+     * // Create many ExternalLinks
+     * const externalLink = await prisma.externalLink.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ExternalLinkCreateManyArgs>(args?: SelectSubset<T, ExternalLinkCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ExternalLinks and returns the data saved in the database.
+     * @param {ExternalLinkCreateManyAndReturnArgs} args - Arguments to create many ExternalLinks.
+     * @example
+     * // Create many ExternalLinks
+     * const externalLink = await prisma.externalLink.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ExternalLinks and only return the `id`
+     * const externalLinkWithIdOnly = await prisma.externalLink.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ExternalLinkCreateManyAndReturnArgs>(args?: SelectSubset<T, ExternalLinkCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalLinkPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ExternalLink.
+     * @param {ExternalLinkDeleteArgs} args - Arguments to delete one ExternalLink.
+     * @example
+     * // Delete one ExternalLink
+     * const ExternalLink = await prisma.externalLink.delete({
+     *   where: {
+     *     // ... filter to delete one ExternalLink
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ExternalLinkDeleteArgs>(args: SelectSubset<T, ExternalLinkDeleteArgs<ExtArgs>>): Prisma__ExternalLinkClient<$Result.GetResult<Prisma.$ExternalLinkPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ExternalLink.
+     * @param {ExternalLinkUpdateArgs} args - Arguments to update one ExternalLink.
+     * @example
+     * // Update one ExternalLink
+     * const externalLink = await prisma.externalLink.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ExternalLinkUpdateArgs>(args: SelectSubset<T, ExternalLinkUpdateArgs<ExtArgs>>): Prisma__ExternalLinkClient<$Result.GetResult<Prisma.$ExternalLinkPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ExternalLinks.
+     * @param {ExternalLinkDeleteManyArgs} args - Arguments to filter ExternalLinks to delete.
+     * @example
+     * // Delete a few ExternalLinks
+     * const { count } = await prisma.externalLink.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ExternalLinkDeleteManyArgs>(args?: SelectSubset<T, ExternalLinkDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExternalLinks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ExternalLinks
+     * const externalLink = await prisma.externalLink.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ExternalLinkUpdateManyArgs>(args: SelectSubset<T, ExternalLinkUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExternalLinks and returns the data updated in the database.
+     * @param {ExternalLinkUpdateManyAndReturnArgs} args - Arguments to update many ExternalLinks.
+     * @example
+     * // Update many ExternalLinks
+     * const externalLink = await prisma.externalLink.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ExternalLinks and only return the `id`
+     * const externalLinkWithIdOnly = await prisma.externalLink.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ExternalLinkUpdateManyAndReturnArgs>(args: SelectSubset<T, ExternalLinkUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalLinkPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ExternalLink.
+     * @param {ExternalLinkUpsertArgs} args - Arguments to update or create a ExternalLink.
+     * @example
+     * // Update or create a ExternalLink
+     * const externalLink = await prisma.externalLink.upsert({
+     *   create: {
+     *     // ... data to create a ExternalLink
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ExternalLink we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ExternalLinkUpsertArgs>(args: SelectSubset<T, ExternalLinkUpsertArgs<ExtArgs>>): Prisma__ExternalLinkClient<$Result.GetResult<Prisma.$ExternalLinkPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ExternalLinks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkCountArgs} args - Arguments to filter ExternalLinks to count.
+     * @example
+     * // Count the number of ExternalLinks
+     * const count = await prisma.externalLink.count({
+     *   where: {
+     *     // ... the filter for the ExternalLinks we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExternalLinkCountArgs>(
+      args?: Subset<T, ExternalLinkCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExternalLinkCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ExternalLink.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExternalLinkAggregateArgs>(args: Subset<T, ExternalLinkAggregateArgs>): Prisma.PrismaPromise<GetExternalLinkAggregateType<T>>
+
+    /**
+     * Group by ExternalLink.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExternalLinkGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExternalLinkGroupByArgs['orderBy'] }
+        : { orderBy?: ExternalLinkGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExternalLinkGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExternalLinkGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ExternalLink model
+   */
+  readonly fields: ExternalLinkFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ExternalLink.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ExternalLinkClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    establishment<T extends EstablishmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EstablishmentDefaultArgs<ExtArgs>>): Prisma__EstablishmentClient<$Result.GetResult<Prisma.$EstablishmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    translations<T extends ExternalLink$translationsArgs<ExtArgs> = {}>(args?: Subset<T, ExternalLink$translationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalLinkTranslationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ExternalLink model
+   */
+  interface ExternalLinkFieldRefs {
+    readonly id: FieldRef<"ExternalLink", 'String'>
+    readonly establishmentId: FieldRef<"ExternalLink", 'String'>
+    readonly icon: FieldRef<"ExternalLink", 'String'>
+    readonly url: FieldRef<"ExternalLink", 'String'>
+    readonly position: FieldRef<"ExternalLink", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ExternalLink findUnique
+   */
+  export type ExternalLinkFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLink
+     */
+    select?: ExternalLinkSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLink
+     */
+    omit?: ExternalLinkOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalLink to fetch.
+     */
+    where: ExternalLinkWhereUniqueInput
+  }
+
+  /**
+   * ExternalLink findUniqueOrThrow
+   */
+  export type ExternalLinkFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLink
+     */
+    select?: ExternalLinkSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLink
+     */
+    omit?: ExternalLinkOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalLink to fetch.
+     */
+    where: ExternalLinkWhereUniqueInput
+  }
+
+  /**
+   * ExternalLink findFirst
+   */
+  export type ExternalLinkFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLink
+     */
+    select?: ExternalLinkSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLink
+     */
+    omit?: ExternalLinkOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalLink to fetch.
+     */
+    where?: ExternalLinkWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExternalLinks to fetch.
+     */
+    orderBy?: ExternalLinkOrderByWithRelationInput | ExternalLinkOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExternalLinks.
+     */
+    cursor?: ExternalLinkWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExternalLinks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExternalLinks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExternalLinks.
+     */
+    distinct?: ExternalLinkScalarFieldEnum | ExternalLinkScalarFieldEnum[]
+  }
+
+  /**
+   * ExternalLink findFirstOrThrow
+   */
+  export type ExternalLinkFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLink
+     */
+    select?: ExternalLinkSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLink
+     */
+    omit?: ExternalLinkOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalLink to fetch.
+     */
+    where?: ExternalLinkWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExternalLinks to fetch.
+     */
+    orderBy?: ExternalLinkOrderByWithRelationInput | ExternalLinkOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExternalLinks.
+     */
+    cursor?: ExternalLinkWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExternalLinks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExternalLinks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExternalLinks.
+     */
+    distinct?: ExternalLinkScalarFieldEnum | ExternalLinkScalarFieldEnum[]
+  }
+
+  /**
+   * ExternalLink findMany
+   */
+  export type ExternalLinkFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLink
+     */
+    select?: ExternalLinkSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLink
+     */
+    omit?: ExternalLinkOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalLinks to fetch.
+     */
+    where?: ExternalLinkWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExternalLinks to fetch.
+     */
+    orderBy?: ExternalLinkOrderByWithRelationInput | ExternalLinkOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ExternalLinks.
+     */
+    cursor?: ExternalLinkWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExternalLinks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExternalLinks.
+     */
+    skip?: number
+    distinct?: ExternalLinkScalarFieldEnum | ExternalLinkScalarFieldEnum[]
+  }
+
+  /**
+   * ExternalLink create
+   */
+  export type ExternalLinkCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLink
+     */
+    select?: ExternalLinkSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLink
+     */
+    omit?: ExternalLinkOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ExternalLink.
+     */
+    data: XOR<ExternalLinkCreateInput, ExternalLinkUncheckedCreateInput>
+  }
+
+  /**
+   * ExternalLink createMany
+   */
+  export type ExternalLinkCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ExternalLinks.
+     */
+    data: ExternalLinkCreateManyInput | ExternalLinkCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ExternalLink createManyAndReturn
+   */
+  export type ExternalLinkCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLink
+     */
+    select?: ExternalLinkSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLink
+     */
+    omit?: ExternalLinkOmit<ExtArgs> | null
+    /**
+     * The data used to create many ExternalLinks.
+     */
+    data: ExternalLinkCreateManyInput | ExternalLinkCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExternalLink update
+   */
+  export type ExternalLinkUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLink
+     */
+    select?: ExternalLinkSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLink
+     */
+    omit?: ExternalLinkOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ExternalLink.
+     */
+    data: XOR<ExternalLinkUpdateInput, ExternalLinkUncheckedUpdateInput>
+    /**
+     * Choose, which ExternalLink to update.
+     */
+    where: ExternalLinkWhereUniqueInput
+  }
+
+  /**
+   * ExternalLink updateMany
+   */
+  export type ExternalLinkUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ExternalLinks.
+     */
+    data: XOR<ExternalLinkUpdateManyMutationInput, ExternalLinkUncheckedUpdateManyInput>
+    /**
+     * Filter which ExternalLinks to update
+     */
+    where?: ExternalLinkWhereInput
+    /**
+     * Limit how many ExternalLinks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExternalLink updateManyAndReturn
+   */
+  export type ExternalLinkUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLink
+     */
+    select?: ExternalLinkSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLink
+     */
+    omit?: ExternalLinkOmit<ExtArgs> | null
+    /**
+     * The data used to update ExternalLinks.
+     */
+    data: XOR<ExternalLinkUpdateManyMutationInput, ExternalLinkUncheckedUpdateManyInput>
+    /**
+     * Filter which ExternalLinks to update
+     */
+    where?: ExternalLinkWhereInput
+    /**
+     * Limit how many ExternalLinks to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExternalLink upsert
+   */
+  export type ExternalLinkUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLink
+     */
+    select?: ExternalLinkSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLink
+     */
+    omit?: ExternalLinkOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ExternalLink to update in case it exists.
+     */
+    where: ExternalLinkWhereUniqueInput
+    /**
+     * In case the ExternalLink found by the `where` argument doesn't exist, create a new ExternalLink with this data.
+     */
+    create: XOR<ExternalLinkCreateInput, ExternalLinkUncheckedCreateInput>
+    /**
+     * In case the ExternalLink was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExternalLinkUpdateInput, ExternalLinkUncheckedUpdateInput>
+  }
+
+  /**
+   * ExternalLink delete
+   */
+  export type ExternalLinkDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLink
+     */
+    select?: ExternalLinkSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLink
+     */
+    omit?: ExternalLinkOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkInclude<ExtArgs> | null
+    /**
+     * Filter which ExternalLink to delete.
+     */
+    where: ExternalLinkWhereUniqueInput
+  }
+
+  /**
+   * ExternalLink deleteMany
+   */
+  export type ExternalLinkDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExternalLinks to delete
+     */
+    where?: ExternalLinkWhereInput
+    /**
+     * Limit how many ExternalLinks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExternalLink.translations
+   */
+  export type ExternalLink$translationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkTranslation
+     */
+    select?: ExternalLinkTranslationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLinkTranslation
+     */
+    omit?: ExternalLinkTranslationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkTranslationInclude<ExtArgs> | null
+    where?: ExternalLinkTranslationWhereInput
+    orderBy?: ExternalLinkTranslationOrderByWithRelationInput | ExternalLinkTranslationOrderByWithRelationInput[]
+    cursor?: ExternalLinkTranslationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ExternalLinkTranslationScalarFieldEnum | ExternalLinkTranslationScalarFieldEnum[]
+  }
+
+  /**
+   * ExternalLink without action
+   */
+  export type ExternalLinkDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLink
+     */
+    select?: ExternalLinkSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLink
+     */
+    omit?: ExternalLinkOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ExternalLinkTranslation
+   */
+
+  export type AggregateExternalLinkTranslation = {
+    _count: ExternalLinkTranslationCountAggregateOutputType | null
+    _min: ExternalLinkTranslationMinAggregateOutputType | null
+    _max: ExternalLinkTranslationMaxAggregateOutputType | null
+  }
+
+  export type ExternalLinkTranslationMinAggregateOutputType = {
+    id: string | null
+    locale: string | null
+    name: string | null
+    description: string | null
+    externalLinkId: string | null
+  }
+
+  export type ExternalLinkTranslationMaxAggregateOutputType = {
+    id: string | null
+    locale: string | null
+    name: string | null
+    description: string | null
+    externalLinkId: string | null
+  }
+
+  export type ExternalLinkTranslationCountAggregateOutputType = {
+    id: number
+    locale: number
+    name: number
+    description: number
+    externalLinkId: number
+    _all: number
+  }
+
+
+  export type ExternalLinkTranslationMinAggregateInputType = {
+    id?: true
+    locale?: true
+    name?: true
+    description?: true
+    externalLinkId?: true
+  }
+
+  export type ExternalLinkTranslationMaxAggregateInputType = {
+    id?: true
+    locale?: true
+    name?: true
+    description?: true
+    externalLinkId?: true
+  }
+
+  export type ExternalLinkTranslationCountAggregateInputType = {
+    id?: true
+    locale?: true
+    name?: true
+    description?: true
+    externalLinkId?: true
+    _all?: true
+  }
+
+  export type ExternalLinkTranslationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExternalLinkTranslation to aggregate.
+     */
+    where?: ExternalLinkTranslationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExternalLinkTranslations to fetch.
+     */
+    orderBy?: ExternalLinkTranslationOrderByWithRelationInput | ExternalLinkTranslationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExternalLinkTranslationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExternalLinkTranslations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExternalLinkTranslations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ExternalLinkTranslations
+    **/
+    _count?: true | ExternalLinkTranslationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExternalLinkTranslationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExternalLinkTranslationMaxAggregateInputType
+  }
+
+  export type GetExternalLinkTranslationAggregateType<T extends ExternalLinkTranslationAggregateArgs> = {
+        [P in keyof T & keyof AggregateExternalLinkTranslation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExternalLinkTranslation[P]>
+      : GetScalarType<T[P], AggregateExternalLinkTranslation[P]>
+  }
+
+
+
+
+  export type ExternalLinkTranslationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExternalLinkTranslationWhereInput
+    orderBy?: ExternalLinkTranslationOrderByWithAggregationInput | ExternalLinkTranslationOrderByWithAggregationInput[]
+    by: ExternalLinkTranslationScalarFieldEnum[] | ExternalLinkTranslationScalarFieldEnum
+    having?: ExternalLinkTranslationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExternalLinkTranslationCountAggregateInputType | true
+    _min?: ExternalLinkTranslationMinAggregateInputType
+    _max?: ExternalLinkTranslationMaxAggregateInputType
+  }
+
+  export type ExternalLinkTranslationGroupByOutputType = {
+    id: string
+    locale: string
+    name: string
+    description: string | null
+    externalLinkId: string
+    _count: ExternalLinkTranslationCountAggregateOutputType | null
+    _min: ExternalLinkTranslationMinAggregateOutputType | null
+    _max: ExternalLinkTranslationMaxAggregateOutputType | null
+  }
+
+  type GetExternalLinkTranslationGroupByPayload<T extends ExternalLinkTranslationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ExternalLinkTranslationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExternalLinkTranslationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExternalLinkTranslationGroupByOutputType[P]>
+            : GetScalarType<T[P], ExternalLinkTranslationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExternalLinkTranslationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    locale?: boolean
+    name?: boolean
+    description?: boolean
+    externalLinkId?: boolean
+    externalLink?: boolean | ExternalLinkDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["externalLinkTranslation"]>
+
+  export type ExternalLinkTranslationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    locale?: boolean
+    name?: boolean
+    description?: boolean
+    externalLinkId?: boolean
+    externalLink?: boolean | ExternalLinkDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["externalLinkTranslation"]>
+
+  export type ExternalLinkTranslationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    locale?: boolean
+    name?: boolean
+    description?: boolean
+    externalLinkId?: boolean
+    externalLink?: boolean | ExternalLinkDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["externalLinkTranslation"]>
+
+  export type ExternalLinkTranslationSelectScalar = {
+    id?: boolean
+    locale?: boolean
+    name?: boolean
+    description?: boolean
+    externalLinkId?: boolean
+  }
+
+  export type ExternalLinkTranslationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "locale" | "name" | "description" | "externalLinkId", ExtArgs["result"]["externalLinkTranslation"]>
+  export type ExternalLinkTranslationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    externalLink?: boolean | ExternalLinkDefaultArgs<ExtArgs>
+  }
+  export type ExternalLinkTranslationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    externalLink?: boolean | ExternalLinkDefaultArgs<ExtArgs>
+  }
+  export type ExternalLinkTranslationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    externalLink?: boolean | ExternalLinkDefaultArgs<ExtArgs>
+  }
+
+  export type $ExternalLinkTranslationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ExternalLinkTranslation"
+    objects: {
+      externalLink: Prisma.$ExternalLinkPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      locale: string
+      name: string
+      description: string | null
+      externalLinkId: string
+    }, ExtArgs["result"]["externalLinkTranslation"]>
+    composites: {}
+  }
+
+  type ExternalLinkTranslationGetPayload<S extends boolean | null | undefined | ExternalLinkTranslationDefaultArgs> = $Result.GetResult<Prisma.$ExternalLinkTranslationPayload, S>
+
+  type ExternalLinkTranslationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ExternalLinkTranslationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ExternalLinkTranslationCountAggregateInputType | true
+    }
+
+  export interface ExternalLinkTranslationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ExternalLinkTranslation'], meta: { name: 'ExternalLinkTranslation' } }
+    /**
+     * Find zero or one ExternalLinkTranslation that matches the filter.
+     * @param {ExternalLinkTranslationFindUniqueArgs} args - Arguments to find a ExternalLinkTranslation
+     * @example
+     * // Get one ExternalLinkTranslation
+     * const externalLinkTranslation = await prisma.externalLinkTranslation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ExternalLinkTranslationFindUniqueArgs>(args: SelectSubset<T, ExternalLinkTranslationFindUniqueArgs<ExtArgs>>): Prisma__ExternalLinkTranslationClient<$Result.GetResult<Prisma.$ExternalLinkTranslationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ExternalLinkTranslation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ExternalLinkTranslationFindUniqueOrThrowArgs} args - Arguments to find a ExternalLinkTranslation
+     * @example
+     * // Get one ExternalLinkTranslation
+     * const externalLinkTranslation = await prisma.externalLinkTranslation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ExternalLinkTranslationFindUniqueOrThrowArgs>(args: SelectSubset<T, ExternalLinkTranslationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ExternalLinkTranslationClient<$Result.GetResult<Prisma.$ExternalLinkTranslationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExternalLinkTranslation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkTranslationFindFirstArgs} args - Arguments to find a ExternalLinkTranslation
+     * @example
+     * // Get one ExternalLinkTranslation
+     * const externalLinkTranslation = await prisma.externalLinkTranslation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ExternalLinkTranslationFindFirstArgs>(args?: SelectSubset<T, ExternalLinkTranslationFindFirstArgs<ExtArgs>>): Prisma__ExternalLinkTranslationClient<$Result.GetResult<Prisma.$ExternalLinkTranslationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ExternalLinkTranslation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkTranslationFindFirstOrThrowArgs} args - Arguments to find a ExternalLinkTranslation
+     * @example
+     * // Get one ExternalLinkTranslation
+     * const externalLinkTranslation = await prisma.externalLinkTranslation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ExternalLinkTranslationFindFirstOrThrowArgs>(args?: SelectSubset<T, ExternalLinkTranslationFindFirstOrThrowArgs<ExtArgs>>): Prisma__ExternalLinkTranslationClient<$Result.GetResult<Prisma.$ExternalLinkTranslationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ExternalLinkTranslations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkTranslationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ExternalLinkTranslations
+     * const externalLinkTranslations = await prisma.externalLinkTranslation.findMany()
+     * 
+     * // Get first 10 ExternalLinkTranslations
+     * const externalLinkTranslations = await prisma.externalLinkTranslation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const externalLinkTranslationWithIdOnly = await prisma.externalLinkTranslation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ExternalLinkTranslationFindManyArgs>(args?: SelectSubset<T, ExternalLinkTranslationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalLinkTranslationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ExternalLinkTranslation.
+     * @param {ExternalLinkTranslationCreateArgs} args - Arguments to create a ExternalLinkTranslation.
+     * @example
+     * // Create one ExternalLinkTranslation
+     * const ExternalLinkTranslation = await prisma.externalLinkTranslation.create({
+     *   data: {
+     *     // ... data to create a ExternalLinkTranslation
+     *   }
+     * })
+     * 
+     */
+    create<T extends ExternalLinkTranslationCreateArgs>(args: SelectSubset<T, ExternalLinkTranslationCreateArgs<ExtArgs>>): Prisma__ExternalLinkTranslationClient<$Result.GetResult<Prisma.$ExternalLinkTranslationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ExternalLinkTranslations.
+     * @param {ExternalLinkTranslationCreateManyArgs} args - Arguments to create many ExternalLinkTranslations.
+     * @example
+     * // Create many ExternalLinkTranslations
+     * const externalLinkTranslation = await prisma.externalLinkTranslation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ExternalLinkTranslationCreateManyArgs>(args?: SelectSubset<T, ExternalLinkTranslationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ExternalLinkTranslations and returns the data saved in the database.
+     * @param {ExternalLinkTranslationCreateManyAndReturnArgs} args - Arguments to create many ExternalLinkTranslations.
+     * @example
+     * // Create many ExternalLinkTranslations
+     * const externalLinkTranslation = await prisma.externalLinkTranslation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ExternalLinkTranslations and only return the `id`
+     * const externalLinkTranslationWithIdOnly = await prisma.externalLinkTranslation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ExternalLinkTranslationCreateManyAndReturnArgs>(args?: SelectSubset<T, ExternalLinkTranslationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalLinkTranslationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ExternalLinkTranslation.
+     * @param {ExternalLinkTranslationDeleteArgs} args - Arguments to delete one ExternalLinkTranslation.
+     * @example
+     * // Delete one ExternalLinkTranslation
+     * const ExternalLinkTranslation = await prisma.externalLinkTranslation.delete({
+     *   where: {
+     *     // ... filter to delete one ExternalLinkTranslation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ExternalLinkTranslationDeleteArgs>(args: SelectSubset<T, ExternalLinkTranslationDeleteArgs<ExtArgs>>): Prisma__ExternalLinkTranslationClient<$Result.GetResult<Prisma.$ExternalLinkTranslationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ExternalLinkTranslation.
+     * @param {ExternalLinkTranslationUpdateArgs} args - Arguments to update one ExternalLinkTranslation.
+     * @example
+     * // Update one ExternalLinkTranslation
+     * const externalLinkTranslation = await prisma.externalLinkTranslation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ExternalLinkTranslationUpdateArgs>(args: SelectSubset<T, ExternalLinkTranslationUpdateArgs<ExtArgs>>): Prisma__ExternalLinkTranslationClient<$Result.GetResult<Prisma.$ExternalLinkTranslationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ExternalLinkTranslations.
+     * @param {ExternalLinkTranslationDeleteManyArgs} args - Arguments to filter ExternalLinkTranslations to delete.
+     * @example
+     * // Delete a few ExternalLinkTranslations
+     * const { count } = await prisma.externalLinkTranslation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ExternalLinkTranslationDeleteManyArgs>(args?: SelectSubset<T, ExternalLinkTranslationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExternalLinkTranslations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkTranslationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ExternalLinkTranslations
+     * const externalLinkTranslation = await prisma.externalLinkTranslation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ExternalLinkTranslationUpdateManyArgs>(args: SelectSubset<T, ExternalLinkTranslationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ExternalLinkTranslations and returns the data updated in the database.
+     * @param {ExternalLinkTranslationUpdateManyAndReturnArgs} args - Arguments to update many ExternalLinkTranslations.
+     * @example
+     * // Update many ExternalLinkTranslations
+     * const externalLinkTranslation = await prisma.externalLinkTranslation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ExternalLinkTranslations and only return the `id`
+     * const externalLinkTranslationWithIdOnly = await prisma.externalLinkTranslation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ExternalLinkTranslationUpdateManyAndReturnArgs>(args: SelectSubset<T, ExternalLinkTranslationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExternalLinkTranslationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ExternalLinkTranslation.
+     * @param {ExternalLinkTranslationUpsertArgs} args - Arguments to update or create a ExternalLinkTranslation.
+     * @example
+     * // Update or create a ExternalLinkTranslation
+     * const externalLinkTranslation = await prisma.externalLinkTranslation.upsert({
+     *   create: {
+     *     // ... data to create a ExternalLinkTranslation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ExternalLinkTranslation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ExternalLinkTranslationUpsertArgs>(args: SelectSubset<T, ExternalLinkTranslationUpsertArgs<ExtArgs>>): Prisma__ExternalLinkTranslationClient<$Result.GetResult<Prisma.$ExternalLinkTranslationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ExternalLinkTranslations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkTranslationCountArgs} args - Arguments to filter ExternalLinkTranslations to count.
+     * @example
+     * // Count the number of ExternalLinkTranslations
+     * const count = await prisma.externalLinkTranslation.count({
+     *   where: {
+     *     // ... the filter for the ExternalLinkTranslations we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExternalLinkTranslationCountArgs>(
+      args?: Subset<T, ExternalLinkTranslationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExternalLinkTranslationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ExternalLinkTranslation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkTranslationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExternalLinkTranslationAggregateArgs>(args: Subset<T, ExternalLinkTranslationAggregateArgs>): Prisma.PrismaPromise<GetExternalLinkTranslationAggregateType<T>>
+
+    /**
+     * Group by ExternalLinkTranslation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExternalLinkTranslationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExternalLinkTranslationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExternalLinkTranslationGroupByArgs['orderBy'] }
+        : { orderBy?: ExternalLinkTranslationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExternalLinkTranslationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExternalLinkTranslationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ExternalLinkTranslation model
+   */
+  readonly fields: ExternalLinkTranslationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ExternalLinkTranslation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ExternalLinkTranslationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    externalLink<T extends ExternalLinkDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ExternalLinkDefaultArgs<ExtArgs>>): Prisma__ExternalLinkClient<$Result.GetResult<Prisma.$ExternalLinkPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ExternalLinkTranslation model
+   */
+  interface ExternalLinkTranslationFieldRefs {
+    readonly id: FieldRef<"ExternalLinkTranslation", 'String'>
+    readonly locale: FieldRef<"ExternalLinkTranslation", 'String'>
+    readonly name: FieldRef<"ExternalLinkTranslation", 'String'>
+    readonly description: FieldRef<"ExternalLinkTranslation", 'String'>
+    readonly externalLinkId: FieldRef<"ExternalLinkTranslation", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ExternalLinkTranslation findUnique
+   */
+  export type ExternalLinkTranslationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkTranslation
+     */
+    select?: ExternalLinkTranslationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLinkTranslation
+     */
+    omit?: ExternalLinkTranslationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkTranslationInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalLinkTranslation to fetch.
+     */
+    where: ExternalLinkTranslationWhereUniqueInput
+  }
+
+  /**
+   * ExternalLinkTranslation findUniqueOrThrow
+   */
+  export type ExternalLinkTranslationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkTranslation
+     */
+    select?: ExternalLinkTranslationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLinkTranslation
+     */
+    omit?: ExternalLinkTranslationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkTranslationInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalLinkTranslation to fetch.
+     */
+    where: ExternalLinkTranslationWhereUniqueInput
+  }
+
+  /**
+   * ExternalLinkTranslation findFirst
+   */
+  export type ExternalLinkTranslationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkTranslation
+     */
+    select?: ExternalLinkTranslationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLinkTranslation
+     */
+    omit?: ExternalLinkTranslationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkTranslationInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalLinkTranslation to fetch.
+     */
+    where?: ExternalLinkTranslationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExternalLinkTranslations to fetch.
+     */
+    orderBy?: ExternalLinkTranslationOrderByWithRelationInput | ExternalLinkTranslationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExternalLinkTranslations.
+     */
+    cursor?: ExternalLinkTranslationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExternalLinkTranslations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExternalLinkTranslations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExternalLinkTranslations.
+     */
+    distinct?: ExternalLinkTranslationScalarFieldEnum | ExternalLinkTranslationScalarFieldEnum[]
+  }
+
+  /**
+   * ExternalLinkTranslation findFirstOrThrow
+   */
+  export type ExternalLinkTranslationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkTranslation
+     */
+    select?: ExternalLinkTranslationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLinkTranslation
+     */
+    omit?: ExternalLinkTranslationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkTranslationInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalLinkTranslation to fetch.
+     */
+    where?: ExternalLinkTranslationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExternalLinkTranslations to fetch.
+     */
+    orderBy?: ExternalLinkTranslationOrderByWithRelationInput | ExternalLinkTranslationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ExternalLinkTranslations.
+     */
+    cursor?: ExternalLinkTranslationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExternalLinkTranslations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExternalLinkTranslations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ExternalLinkTranslations.
+     */
+    distinct?: ExternalLinkTranslationScalarFieldEnum | ExternalLinkTranslationScalarFieldEnum[]
+  }
+
+  /**
+   * ExternalLinkTranslation findMany
+   */
+  export type ExternalLinkTranslationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkTranslation
+     */
+    select?: ExternalLinkTranslationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLinkTranslation
+     */
+    omit?: ExternalLinkTranslationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkTranslationInclude<ExtArgs> | null
+    /**
+     * Filter, which ExternalLinkTranslations to fetch.
+     */
+    where?: ExternalLinkTranslationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ExternalLinkTranslations to fetch.
+     */
+    orderBy?: ExternalLinkTranslationOrderByWithRelationInput | ExternalLinkTranslationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ExternalLinkTranslations.
+     */
+    cursor?: ExternalLinkTranslationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ExternalLinkTranslations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ExternalLinkTranslations.
+     */
+    skip?: number
+    distinct?: ExternalLinkTranslationScalarFieldEnum | ExternalLinkTranslationScalarFieldEnum[]
+  }
+
+  /**
+   * ExternalLinkTranslation create
+   */
+  export type ExternalLinkTranslationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkTranslation
+     */
+    select?: ExternalLinkTranslationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLinkTranslation
+     */
+    omit?: ExternalLinkTranslationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkTranslationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ExternalLinkTranslation.
+     */
+    data: XOR<ExternalLinkTranslationCreateInput, ExternalLinkTranslationUncheckedCreateInput>
+  }
+
+  /**
+   * ExternalLinkTranslation createMany
+   */
+  export type ExternalLinkTranslationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ExternalLinkTranslations.
+     */
+    data: ExternalLinkTranslationCreateManyInput | ExternalLinkTranslationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ExternalLinkTranslation createManyAndReturn
+   */
+  export type ExternalLinkTranslationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkTranslation
+     */
+    select?: ExternalLinkTranslationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLinkTranslation
+     */
+    omit?: ExternalLinkTranslationOmit<ExtArgs> | null
+    /**
+     * The data used to create many ExternalLinkTranslations.
+     */
+    data: ExternalLinkTranslationCreateManyInput | ExternalLinkTranslationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkTranslationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExternalLinkTranslation update
+   */
+  export type ExternalLinkTranslationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkTranslation
+     */
+    select?: ExternalLinkTranslationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLinkTranslation
+     */
+    omit?: ExternalLinkTranslationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkTranslationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ExternalLinkTranslation.
+     */
+    data: XOR<ExternalLinkTranslationUpdateInput, ExternalLinkTranslationUncheckedUpdateInput>
+    /**
+     * Choose, which ExternalLinkTranslation to update.
+     */
+    where: ExternalLinkTranslationWhereUniqueInput
+  }
+
+  /**
+   * ExternalLinkTranslation updateMany
+   */
+  export type ExternalLinkTranslationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ExternalLinkTranslations.
+     */
+    data: XOR<ExternalLinkTranslationUpdateManyMutationInput, ExternalLinkTranslationUncheckedUpdateManyInput>
+    /**
+     * Filter which ExternalLinkTranslations to update
+     */
+    where?: ExternalLinkTranslationWhereInput
+    /**
+     * Limit how many ExternalLinkTranslations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExternalLinkTranslation updateManyAndReturn
+   */
+  export type ExternalLinkTranslationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkTranslation
+     */
+    select?: ExternalLinkTranslationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLinkTranslation
+     */
+    omit?: ExternalLinkTranslationOmit<ExtArgs> | null
+    /**
+     * The data used to update ExternalLinkTranslations.
+     */
+    data: XOR<ExternalLinkTranslationUpdateManyMutationInput, ExternalLinkTranslationUncheckedUpdateManyInput>
+    /**
+     * Filter which ExternalLinkTranslations to update
+     */
+    where?: ExternalLinkTranslationWhereInput
+    /**
+     * Limit how many ExternalLinkTranslations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkTranslationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ExternalLinkTranslation upsert
+   */
+  export type ExternalLinkTranslationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkTranslation
+     */
+    select?: ExternalLinkTranslationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLinkTranslation
+     */
+    omit?: ExternalLinkTranslationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkTranslationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ExternalLinkTranslation to update in case it exists.
+     */
+    where: ExternalLinkTranslationWhereUniqueInput
+    /**
+     * In case the ExternalLinkTranslation found by the `where` argument doesn't exist, create a new ExternalLinkTranslation with this data.
+     */
+    create: XOR<ExternalLinkTranslationCreateInput, ExternalLinkTranslationUncheckedCreateInput>
+    /**
+     * In case the ExternalLinkTranslation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExternalLinkTranslationUpdateInput, ExternalLinkTranslationUncheckedUpdateInput>
+  }
+
+  /**
+   * ExternalLinkTranslation delete
+   */
+  export type ExternalLinkTranslationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkTranslation
+     */
+    select?: ExternalLinkTranslationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLinkTranslation
+     */
+    omit?: ExternalLinkTranslationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkTranslationInclude<ExtArgs> | null
+    /**
+     * Filter which ExternalLinkTranslation to delete.
+     */
+    where: ExternalLinkTranslationWhereUniqueInput
+  }
+
+  /**
+   * ExternalLinkTranslation deleteMany
+   */
+  export type ExternalLinkTranslationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ExternalLinkTranslations to delete
+     */
+    where?: ExternalLinkTranslationWhereInput
+    /**
+     * Limit how many ExternalLinkTranslations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ExternalLinkTranslation without action
+   */
+  export type ExternalLinkTranslationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ExternalLinkTranslation
+     */
+    select?: ExternalLinkTranslationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ExternalLinkTranslation
+     */
+    omit?: ExternalLinkTranslationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ExternalLinkTranslationInclude<ExtArgs> | null
   }
 
 
@@ -113724,6 +116167,7 @@ export namespace Prisma {
     reservationsModule: 'reservationsModule',
     reservationsPlatform: 'reservationsPlatform',
     reservationsLink: 'reservationsLink',
+    externalLinksModule: 'externalLinksModule',
     takeAwayModule: 'takeAwayModule',
     isDemo: 'isDemo',
     primaryLanguage: 'primaryLanguage',
@@ -113743,6 +116187,28 @@ export namespace Prisma {
   };
 
   export type EstablishmentScalarFieldEnum = (typeof EstablishmentScalarFieldEnum)[keyof typeof EstablishmentScalarFieldEnum]
+
+
+  export const ExternalLinkScalarFieldEnum: {
+    id: 'id',
+    establishmentId: 'establishmentId',
+    icon: 'icon',
+    url: 'url',
+    position: 'position'
+  };
+
+  export type ExternalLinkScalarFieldEnum = (typeof ExternalLinkScalarFieldEnum)[keyof typeof ExternalLinkScalarFieldEnum]
+
+
+  export const ExternalLinkTranslationScalarFieldEnum: {
+    id: 'id',
+    locale: 'locale',
+    name: 'name',
+    description: 'description',
+    externalLinkId: 'externalLinkId'
+  };
+
+  export type ExternalLinkTranslationScalarFieldEnum = (typeof ExternalLinkTranslationScalarFieldEnum)[keyof typeof ExternalLinkTranslationScalarFieldEnum]
 
 
   export const EstablishmentBookingSettingsScalarFieldEnum: {
@@ -116839,6 +119305,7 @@ export namespace Prisma {
     reservationsModule?: BoolFilter<"Establishment"> | boolean
     reservationsPlatform?: EnumReservationsPlataformNullableFilter<"Establishment"> | $Enums.ReservationsPlataform | null
     reservationsLink?: StringNullableFilter<"Establishment"> | string | null
+    externalLinksModule?: BoolFilter<"Establishment"> | boolean
     takeAwayModule?: BoolFilter<"Establishment"> | boolean
     isDemo?: BoolFilter<"Establishment"> | boolean
     primaryLanguage?: EnumEstablishmentLanguageFilter<"Establishment"> | $Enums.EstablishmentLanguage
@@ -116855,6 +119322,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Establishment"> | Date | string
     updatedAt?: DateTimeFilter<"Establishment"> | Date | string
     ownerId?: StringFilter<"Establishment"> | string
+    externalLinks?: ExternalLinkListRelationFilter
     schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     metadata?: XOR<EstablishmentMetadataNullableScalarRelationFilter, EstablishmentMetadataWhereInput> | null
     favicons?: FaviconAssetListRelationFilter
@@ -116932,6 +119400,7 @@ export namespace Prisma {
     reservationsModule?: SortOrder
     reservationsPlatform?: SortOrderInput | SortOrder
     reservationsLink?: SortOrderInput | SortOrder
+    externalLinksModule?: SortOrder
     takeAwayModule?: SortOrder
     isDemo?: SortOrder
     primaryLanguage?: SortOrder
@@ -116948,6 +119417,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
+    externalLinks?: ExternalLinkOrderByRelationAggregateInput
     schedule?: ScheduleOrderByWithRelationInput
     metadata?: EstablishmentMetadataOrderByWithRelationInput
     favicons?: FaviconAssetOrderByRelationAggregateInput
@@ -117029,6 +119499,7 @@ export namespace Prisma {
     reservationsModule?: BoolFilter<"Establishment"> | boolean
     reservationsPlatform?: EnumReservationsPlataformNullableFilter<"Establishment"> | $Enums.ReservationsPlataform | null
     reservationsLink?: StringNullableFilter<"Establishment"> | string | null
+    externalLinksModule?: BoolFilter<"Establishment"> | boolean
     takeAwayModule?: BoolFilter<"Establishment"> | boolean
     isDemo?: BoolFilter<"Establishment"> | boolean
     primaryLanguage?: EnumEstablishmentLanguageFilter<"Establishment"> | $Enums.EstablishmentLanguage
@@ -117044,6 +119515,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Establishment"> | Date | string
     updatedAt?: DateTimeFilter<"Establishment"> | Date | string
     ownerId?: StringFilter<"Establishment"> | string
+    externalLinks?: ExternalLinkListRelationFilter
     schedule?: XOR<ScheduleNullableScalarRelationFilter, ScheduleWhereInput> | null
     metadata?: XOR<EstablishmentMetadataNullableScalarRelationFilter, EstablishmentMetadataWhereInput> | null
     favicons?: FaviconAssetListRelationFilter
@@ -117121,6 +119593,7 @@ export namespace Prisma {
     reservationsModule?: SortOrder
     reservationsPlatform?: SortOrderInput | SortOrder
     reservationsLink?: SortOrderInput | SortOrder
+    externalLinksModule?: SortOrder
     takeAwayModule?: SortOrder
     isDemo?: SortOrder
     primaryLanguage?: SortOrder
@@ -117180,6 +119653,7 @@ export namespace Prisma {
     reservationsModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     reservationsPlatform?: EnumReservationsPlataformNullableWithAggregatesFilter<"Establishment"> | $Enums.ReservationsPlataform | null
     reservationsLink?: StringNullableWithAggregatesFilter<"Establishment"> | string | null
+    externalLinksModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     takeAwayModule?: BoolWithAggregatesFilter<"Establishment"> | boolean
     isDemo?: BoolWithAggregatesFilter<"Establishment"> | boolean
     primaryLanguage?: EnumEstablishmentLanguageWithAggregatesFilter<"Establishment"> | $Enums.EstablishmentLanguage
@@ -117196,6 +119670,122 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Establishment"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Establishment"> | Date | string
     ownerId?: StringWithAggregatesFilter<"Establishment"> | string
+  }
+
+  export type ExternalLinkWhereInput = {
+    AND?: ExternalLinkWhereInput | ExternalLinkWhereInput[]
+    OR?: ExternalLinkWhereInput[]
+    NOT?: ExternalLinkWhereInput | ExternalLinkWhereInput[]
+    id?: StringFilter<"ExternalLink"> | string
+    establishmentId?: StringFilter<"ExternalLink"> | string
+    icon?: StringFilter<"ExternalLink"> | string
+    url?: StringFilter<"ExternalLink"> | string
+    position?: IntFilter<"ExternalLink"> | number
+    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+    translations?: ExternalLinkTranslationListRelationFilter
+  }
+
+  export type ExternalLinkOrderByWithRelationInput = {
+    id?: SortOrder
+    establishmentId?: SortOrder
+    icon?: SortOrder
+    url?: SortOrder
+    position?: SortOrder
+    establishment?: EstablishmentOrderByWithRelationInput
+    translations?: ExternalLinkTranslationOrderByRelationAggregateInput
+  }
+
+  export type ExternalLinkWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ExternalLinkWhereInput | ExternalLinkWhereInput[]
+    OR?: ExternalLinkWhereInput[]
+    NOT?: ExternalLinkWhereInput | ExternalLinkWhereInput[]
+    establishmentId?: StringFilter<"ExternalLink"> | string
+    icon?: StringFilter<"ExternalLink"> | string
+    url?: StringFilter<"ExternalLink"> | string
+    position?: IntFilter<"ExternalLink"> | number
+    establishment?: XOR<EstablishmentScalarRelationFilter, EstablishmentWhereInput>
+    translations?: ExternalLinkTranslationListRelationFilter
+  }, "id">
+
+  export type ExternalLinkOrderByWithAggregationInput = {
+    id?: SortOrder
+    establishmentId?: SortOrder
+    icon?: SortOrder
+    url?: SortOrder
+    position?: SortOrder
+    _count?: ExternalLinkCountOrderByAggregateInput
+    _avg?: ExternalLinkAvgOrderByAggregateInput
+    _max?: ExternalLinkMaxOrderByAggregateInput
+    _min?: ExternalLinkMinOrderByAggregateInput
+    _sum?: ExternalLinkSumOrderByAggregateInput
+  }
+
+  export type ExternalLinkScalarWhereWithAggregatesInput = {
+    AND?: ExternalLinkScalarWhereWithAggregatesInput | ExternalLinkScalarWhereWithAggregatesInput[]
+    OR?: ExternalLinkScalarWhereWithAggregatesInput[]
+    NOT?: ExternalLinkScalarWhereWithAggregatesInput | ExternalLinkScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ExternalLink"> | string
+    establishmentId?: StringWithAggregatesFilter<"ExternalLink"> | string
+    icon?: StringWithAggregatesFilter<"ExternalLink"> | string
+    url?: StringWithAggregatesFilter<"ExternalLink"> | string
+    position?: IntWithAggregatesFilter<"ExternalLink"> | number
+  }
+
+  export type ExternalLinkTranslationWhereInput = {
+    AND?: ExternalLinkTranslationWhereInput | ExternalLinkTranslationWhereInput[]
+    OR?: ExternalLinkTranslationWhereInput[]
+    NOT?: ExternalLinkTranslationWhereInput | ExternalLinkTranslationWhereInput[]
+    id?: StringFilter<"ExternalLinkTranslation"> | string
+    locale?: StringFilter<"ExternalLinkTranslation"> | string
+    name?: StringFilter<"ExternalLinkTranslation"> | string
+    description?: StringNullableFilter<"ExternalLinkTranslation"> | string | null
+    externalLinkId?: StringFilter<"ExternalLinkTranslation"> | string
+    externalLink?: XOR<ExternalLinkScalarRelationFilter, ExternalLinkWhereInput>
+  }
+
+  export type ExternalLinkTranslationOrderByWithRelationInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    externalLinkId?: SortOrder
+    externalLink?: ExternalLinkOrderByWithRelationInput
+  }
+
+  export type ExternalLinkTranslationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    externalLinkId_locale?: ExternalLinkTranslationExternalLinkIdLocaleCompoundUniqueInput
+    AND?: ExternalLinkTranslationWhereInput | ExternalLinkTranslationWhereInput[]
+    OR?: ExternalLinkTranslationWhereInput[]
+    NOT?: ExternalLinkTranslationWhereInput | ExternalLinkTranslationWhereInput[]
+    locale?: StringFilter<"ExternalLinkTranslation"> | string
+    name?: StringFilter<"ExternalLinkTranslation"> | string
+    description?: StringNullableFilter<"ExternalLinkTranslation"> | string | null
+    externalLinkId?: StringFilter<"ExternalLinkTranslation"> | string
+    externalLink?: XOR<ExternalLinkScalarRelationFilter, ExternalLinkWhereInput>
+  }, "id" | "externalLinkId_locale">
+
+  export type ExternalLinkTranslationOrderByWithAggregationInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    externalLinkId?: SortOrder
+    _count?: ExternalLinkTranslationCountOrderByAggregateInput
+    _max?: ExternalLinkTranslationMaxOrderByAggregateInput
+    _min?: ExternalLinkTranslationMinOrderByAggregateInput
+  }
+
+  export type ExternalLinkTranslationScalarWhereWithAggregatesInput = {
+    AND?: ExternalLinkTranslationScalarWhereWithAggregatesInput | ExternalLinkTranslationScalarWhereWithAggregatesInput[]
+    OR?: ExternalLinkTranslationScalarWhereWithAggregatesInput[]
+    NOT?: ExternalLinkTranslationScalarWhereWithAggregatesInput | ExternalLinkTranslationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ExternalLinkTranslation"> | string
+    locale?: StringWithAggregatesFilter<"ExternalLinkTranslation"> | string
+    name?: StringWithAggregatesFilter<"ExternalLinkTranslation"> | string
+    description?: StringNullableWithAggregatesFilter<"ExternalLinkTranslation"> | string | null
+    externalLinkId?: StringWithAggregatesFilter<"ExternalLinkTranslation"> | string
   }
 
   export type EstablishmentBookingSettingsWhereInput = {
@@ -124443,6 +127033,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -124454,6 +127045,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -124531,6 +127123,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -124547,6 +127140,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -124619,6 +127213,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -124630,6 +127225,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -124707,6 +127303,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -124723,6 +127320,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -124795,6 +127393,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -124848,6 +127447,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -124896,6 +127496,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -124912,6 +127513,120 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ExternalLinkCreateInput = {
+    id?: string
+    icon: string
+    url: string
+    position?: number
+    establishment: EstablishmentCreateNestedOneWithoutExternalLinksInput
+    translations?: ExternalLinkTranslationCreateNestedManyWithoutExternalLinkInput
+  }
+
+  export type ExternalLinkUncheckedCreateInput = {
+    id?: string
+    establishmentId: string
+    icon: string
+    url: string
+    position?: number
+    translations?: ExternalLinkTranslationUncheckedCreateNestedManyWithoutExternalLinkInput
+  }
+
+  export type ExternalLinkUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    establishment?: EstablishmentUpdateOneRequiredWithoutExternalLinksNestedInput
+    translations?: ExternalLinkTranslationUpdateManyWithoutExternalLinkNestedInput
+  }
+
+  export type ExternalLinkUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    translations?: ExternalLinkTranslationUncheckedUpdateManyWithoutExternalLinkNestedInput
+  }
+
+  export type ExternalLinkCreateManyInput = {
+    id?: string
+    establishmentId: string
+    icon: string
+    url: string
+    position?: number
+  }
+
+  export type ExternalLinkUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ExternalLinkUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ExternalLinkTranslationCreateInput = {
+    id?: string
+    locale: string
+    name: string
+    description?: string | null
+    externalLink: ExternalLinkCreateNestedOneWithoutTranslationsInput
+  }
+
+  export type ExternalLinkTranslationUncheckedCreateInput = {
+    id?: string
+    locale: string
+    name: string
+    description?: string | null
+    externalLinkId: string
+  }
+
+  export type ExternalLinkTranslationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLink?: ExternalLinkUpdateOneRequiredWithoutTranslationsNestedInput
+  }
+
+  export type ExternalLinkTranslationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinkId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ExternalLinkTranslationCreateManyInput = {
+    id?: string
+    locale: string
+    name: string
+    description?: string | null
+    externalLinkId: string
+  }
+
+  export type ExternalLinkTranslationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ExternalLinkTranslationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinkId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EstablishmentBookingSettingsCreateInput = {
@@ -132588,6 +135303,12 @@ export namespace Prisma {
     not?: NestedEnumCurrencyFilter<$PrismaModel> | $Enums.Currency
   }
 
+  export type ExternalLinkListRelationFilter = {
+    every?: ExternalLinkWhereInput
+    some?: ExternalLinkWhereInput
+    none?: ExternalLinkWhereInput
+  }
+
   export type EstablishmentMetadataNullableScalarRelationFilter = {
     is?: EstablishmentMetadataWhereInput | null
     isNot?: EstablishmentMetadataWhereInput | null
@@ -132802,6 +135523,10 @@ export namespace Prisma {
     none?: StockWarehouseWhereInput
   }
 
+  export type ExternalLinkOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type FaviconAssetOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -132953,6 +135678,7 @@ export namespace Prisma {
     reservationsModule?: SortOrder
     reservationsPlatform?: SortOrder
     reservationsLink?: SortOrder
+    externalLinksModule?: SortOrder
     takeAwayModule?: SortOrder
     isDemo?: SortOrder
     primaryLanguage?: SortOrder
@@ -133005,6 +135731,7 @@ export namespace Prisma {
     reservationsModule?: SortOrder
     reservationsPlatform?: SortOrder
     reservationsLink?: SortOrder
+    externalLinksModule?: SortOrder
     takeAwayModule?: SortOrder
     isDemo?: SortOrder
     primaryLanguage?: SortOrder
@@ -133056,6 +135783,7 @@ export namespace Prisma {
     reservationsModule?: SortOrder
     reservationsPlatform?: SortOrder
     reservationsLink?: SortOrder
+    externalLinksModule?: SortOrder
     takeAwayModule?: SortOrder
     isDemo?: SortOrder
     primaryLanguage?: SortOrder
@@ -133111,6 +135839,82 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumCurrencyFilter<$PrismaModel>
     _max?: NestedEnumCurrencyFilter<$PrismaModel>
+  }
+
+  export type ExternalLinkTranslationListRelationFilter = {
+    every?: ExternalLinkTranslationWhereInput
+    some?: ExternalLinkTranslationWhereInput
+    none?: ExternalLinkTranslationWhereInput
+  }
+
+  export type ExternalLinkTranslationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ExternalLinkCountOrderByAggregateInput = {
+    id?: SortOrder
+    establishmentId?: SortOrder
+    icon?: SortOrder
+    url?: SortOrder
+    position?: SortOrder
+  }
+
+  export type ExternalLinkAvgOrderByAggregateInput = {
+    position?: SortOrder
+  }
+
+  export type ExternalLinkMaxOrderByAggregateInput = {
+    id?: SortOrder
+    establishmentId?: SortOrder
+    icon?: SortOrder
+    url?: SortOrder
+    position?: SortOrder
+  }
+
+  export type ExternalLinkMinOrderByAggregateInput = {
+    id?: SortOrder
+    establishmentId?: SortOrder
+    icon?: SortOrder
+    url?: SortOrder
+    position?: SortOrder
+  }
+
+  export type ExternalLinkSumOrderByAggregateInput = {
+    position?: SortOrder
+  }
+
+  export type ExternalLinkScalarRelationFilter = {
+    is?: ExternalLinkWhereInput
+    isNot?: ExternalLinkWhereInput
+  }
+
+  export type ExternalLinkTranslationExternalLinkIdLocaleCompoundUniqueInput = {
+    externalLinkId: string
+    locale: string
+  }
+
+  export type ExternalLinkTranslationCountOrderByAggregateInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    externalLinkId?: SortOrder
+  }
+
+  export type ExternalLinkTranslationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    externalLinkId?: SortOrder
+  }
+
+  export type ExternalLinkTranslationMinOrderByAggregateInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    externalLinkId?: SortOrder
   }
 
   export type EstablishmentBookingSettingsCountOrderByAggregateInput = {
@@ -138113,6 +140917,13 @@ export namespace Prisma {
     set: $Enums.EstablishmentLanguage[]
   }
 
+  export type ExternalLinkCreateNestedManyWithoutEstablishmentInput = {
+    create?: XOR<ExternalLinkCreateWithoutEstablishmentInput, ExternalLinkUncheckedCreateWithoutEstablishmentInput> | ExternalLinkCreateWithoutEstablishmentInput[] | ExternalLinkUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: ExternalLinkCreateOrConnectWithoutEstablishmentInput | ExternalLinkCreateOrConnectWithoutEstablishmentInput[]
+    createMany?: ExternalLinkCreateManyEstablishmentInputEnvelope
+    connect?: ExternalLinkWhereUniqueInput | ExternalLinkWhereUniqueInput[]
+  }
+
   export type ScheduleCreateNestedOneWithoutEstablishmentInput = {
     create?: XOR<ScheduleCreateWithoutEstablishmentInput, ScheduleUncheckedCreateWithoutEstablishmentInput>
     connectOrCreate?: ScheduleCreateOrConnectWithoutEstablishmentInput
@@ -138383,6 +141194,13 @@ export namespace Prisma {
     connect?: StockWarehouseWhereUniqueInput | StockWarehouseWhereUniqueInput[]
   }
 
+  export type ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput = {
+    create?: XOR<ExternalLinkCreateWithoutEstablishmentInput, ExternalLinkUncheckedCreateWithoutEstablishmentInput> | ExternalLinkCreateWithoutEstablishmentInput[] | ExternalLinkUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: ExternalLinkCreateOrConnectWithoutEstablishmentInput | ExternalLinkCreateOrConnectWithoutEstablishmentInput[]
+    createMany?: ExternalLinkCreateManyEstablishmentInputEnvelope
+    connect?: ExternalLinkWhereUniqueInput | ExternalLinkWhereUniqueInput[]
+  }
+
   export type EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput = {
     create?: XOR<EstablishmentMetadataCreateWithoutEstablishmentInput, EstablishmentMetadataUncheckedCreateWithoutEstablishmentInput>
     connectOrCreate?: EstablishmentMetadataCreateOrConnectWithoutEstablishmentInput
@@ -138647,6 +141465,20 @@ export namespace Prisma {
 
   export type EnumCurrencyFieldUpdateOperationsInput = {
     set?: $Enums.Currency
+  }
+
+  export type ExternalLinkUpdateManyWithoutEstablishmentNestedInput = {
+    create?: XOR<ExternalLinkCreateWithoutEstablishmentInput, ExternalLinkUncheckedCreateWithoutEstablishmentInput> | ExternalLinkCreateWithoutEstablishmentInput[] | ExternalLinkUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: ExternalLinkCreateOrConnectWithoutEstablishmentInput | ExternalLinkCreateOrConnectWithoutEstablishmentInput[]
+    upsert?: ExternalLinkUpsertWithWhereUniqueWithoutEstablishmentInput | ExternalLinkUpsertWithWhereUniqueWithoutEstablishmentInput[]
+    createMany?: ExternalLinkCreateManyEstablishmentInputEnvelope
+    set?: ExternalLinkWhereUniqueInput | ExternalLinkWhereUniqueInput[]
+    disconnect?: ExternalLinkWhereUniqueInput | ExternalLinkWhereUniqueInput[]
+    delete?: ExternalLinkWhereUniqueInput | ExternalLinkWhereUniqueInput[]
+    connect?: ExternalLinkWhereUniqueInput | ExternalLinkWhereUniqueInput[]
+    update?: ExternalLinkUpdateWithWhereUniqueWithoutEstablishmentInput | ExternalLinkUpdateWithWhereUniqueWithoutEstablishmentInput[]
+    updateMany?: ExternalLinkUpdateManyWithWhereWithoutEstablishmentInput | ExternalLinkUpdateManyWithWhereWithoutEstablishmentInput[]
+    deleteMany?: ExternalLinkScalarWhereInput | ExternalLinkScalarWhereInput[]
   }
 
   export type ScheduleUpdateOneWithoutEstablishmentNestedInput = {
@@ -139167,6 +141999,20 @@ export namespace Prisma {
     deleteMany?: StockWarehouseScalarWhereInput | StockWarehouseScalarWhereInput[]
   }
 
+  export type ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput = {
+    create?: XOR<ExternalLinkCreateWithoutEstablishmentInput, ExternalLinkUncheckedCreateWithoutEstablishmentInput> | ExternalLinkCreateWithoutEstablishmentInput[] | ExternalLinkUncheckedCreateWithoutEstablishmentInput[]
+    connectOrCreate?: ExternalLinkCreateOrConnectWithoutEstablishmentInput | ExternalLinkCreateOrConnectWithoutEstablishmentInput[]
+    upsert?: ExternalLinkUpsertWithWhereUniqueWithoutEstablishmentInput | ExternalLinkUpsertWithWhereUniqueWithoutEstablishmentInput[]
+    createMany?: ExternalLinkCreateManyEstablishmentInputEnvelope
+    set?: ExternalLinkWhereUniqueInput | ExternalLinkWhereUniqueInput[]
+    disconnect?: ExternalLinkWhereUniqueInput | ExternalLinkWhereUniqueInput[]
+    delete?: ExternalLinkWhereUniqueInput | ExternalLinkWhereUniqueInput[]
+    connect?: ExternalLinkWhereUniqueInput | ExternalLinkWhereUniqueInput[]
+    update?: ExternalLinkUpdateWithWhereUniqueWithoutEstablishmentInput | ExternalLinkUpdateWithWhereUniqueWithoutEstablishmentInput[]
+    updateMany?: ExternalLinkUpdateManyWithWhereWithoutEstablishmentInput | ExternalLinkUpdateManyWithWhereWithoutEstablishmentInput[]
+    deleteMany?: ExternalLinkScalarWhereInput | ExternalLinkScalarWhereInput[]
+  }
+
   export type EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput = {
     create?: XOR<EstablishmentMetadataCreateWithoutEstablishmentInput, EstablishmentMetadataUncheckedCreateWithoutEstablishmentInput>
     connectOrCreate?: EstablishmentMetadataCreateOrConnectWithoutEstablishmentInput
@@ -139635,6 +142481,76 @@ export namespace Prisma {
     update?: StockWarehouseUpdateWithWhereUniqueWithoutEstablishmentInput | StockWarehouseUpdateWithWhereUniqueWithoutEstablishmentInput[]
     updateMany?: StockWarehouseUpdateManyWithWhereWithoutEstablishmentInput | StockWarehouseUpdateManyWithWhereWithoutEstablishmentInput[]
     deleteMany?: StockWarehouseScalarWhereInput | StockWarehouseScalarWhereInput[]
+  }
+
+  export type EstablishmentCreateNestedOneWithoutExternalLinksInput = {
+    create?: XOR<EstablishmentCreateWithoutExternalLinksInput, EstablishmentUncheckedCreateWithoutExternalLinksInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutExternalLinksInput
+    connect?: EstablishmentWhereUniqueInput
+  }
+
+  export type ExternalLinkTranslationCreateNestedManyWithoutExternalLinkInput = {
+    create?: XOR<ExternalLinkTranslationCreateWithoutExternalLinkInput, ExternalLinkTranslationUncheckedCreateWithoutExternalLinkInput> | ExternalLinkTranslationCreateWithoutExternalLinkInput[] | ExternalLinkTranslationUncheckedCreateWithoutExternalLinkInput[]
+    connectOrCreate?: ExternalLinkTranslationCreateOrConnectWithoutExternalLinkInput | ExternalLinkTranslationCreateOrConnectWithoutExternalLinkInput[]
+    createMany?: ExternalLinkTranslationCreateManyExternalLinkInputEnvelope
+    connect?: ExternalLinkTranslationWhereUniqueInput | ExternalLinkTranslationWhereUniqueInput[]
+  }
+
+  export type ExternalLinkTranslationUncheckedCreateNestedManyWithoutExternalLinkInput = {
+    create?: XOR<ExternalLinkTranslationCreateWithoutExternalLinkInput, ExternalLinkTranslationUncheckedCreateWithoutExternalLinkInput> | ExternalLinkTranslationCreateWithoutExternalLinkInput[] | ExternalLinkTranslationUncheckedCreateWithoutExternalLinkInput[]
+    connectOrCreate?: ExternalLinkTranslationCreateOrConnectWithoutExternalLinkInput | ExternalLinkTranslationCreateOrConnectWithoutExternalLinkInput[]
+    createMany?: ExternalLinkTranslationCreateManyExternalLinkInputEnvelope
+    connect?: ExternalLinkTranslationWhereUniqueInput | ExternalLinkTranslationWhereUniqueInput[]
+  }
+
+  export type EstablishmentUpdateOneRequiredWithoutExternalLinksNestedInput = {
+    create?: XOR<EstablishmentCreateWithoutExternalLinksInput, EstablishmentUncheckedCreateWithoutExternalLinksInput>
+    connectOrCreate?: EstablishmentCreateOrConnectWithoutExternalLinksInput
+    upsert?: EstablishmentUpsertWithoutExternalLinksInput
+    connect?: EstablishmentWhereUniqueInput
+    update?: XOR<XOR<EstablishmentUpdateToOneWithWhereWithoutExternalLinksInput, EstablishmentUpdateWithoutExternalLinksInput>, EstablishmentUncheckedUpdateWithoutExternalLinksInput>
+  }
+
+  export type ExternalLinkTranslationUpdateManyWithoutExternalLinkNestedInput = {
+    create?: XOR<ExternalLinkTranslationCreateWithoutExternalLinkInput, ExternalLinkTranslationUncheckedCreateWithoutExternalLinkInput> | ExternalLinkTranslationCreateWithoutExternalLinkInput[] | ExternalLinkTranslationUncheckedCreateWithoutExternalLinkInput[]
+    connectOrCreate?: ExternalLinkTranslationCreateOrConnectWithoutExternalLinkInput | ExternalLinkTranslationCreateOrConnectWithoutExternalLinkInput[]
+    upsert?: ExternalLinkTranslationUpsertWithWhereUniqueWithoutExternalLinkInput | ExternalLinkTranslationUpsertWithWhereUniqueWithoutExternalLinkInput[]
+    createMany?: ExternalLinkTranslationCreateManyExternalLinkInputEnvelope
+    set?: ExternalLinkTranslationWhereUniqueInput | ExternalLinkTranslationWhereUniqueInput[]
+    disconnect?: ExternalLinkTranslationWhereUniqueInput | ExternalLinkTranslationWhereUniqueInput[]
+    delete?: ExternalLinkTranslationWhereUniqueInput | ExternalLinkTranslationWhereUniqueInput[]
+    connect?: ExternalLinkTranslationWhereUniqueInput | ExternalLinkTranslationWhereUniqueInput[]
+    update?: ExternalLinkTranslationUpdateWithWhereUniqueWithoutExternalLinkInput | ExternalLinkTranslationUpdateWithWhereUniqueWithoutExternalLinkInput[]
+    updateMany?: ExternalLinkTranslationUpdateManyWithWhereWithoutExternalLinkInput | ExternalLinkTranslationUpdateManyWithWhereWithoutExternalLinkInput[]
+    deleteMany?: ExternalLinkTranslationScalarWhereInput | ExternalLinkTranslationScalarWhereInput[]
+  }
+
+  export type ExternalLinkTranslationUncheckedUpdateManyWithoutExternalLinkNestedInput = {
+    create?: XOR<ExternalLinkTranslationCreateWithoutExternalLinkInput, ExternalLinkTranslationUncheckedCreateWithoutExternalLinkInput> | ExternalLinkTranslationCreateWithoutExternalLinkInput[] | ExternalLinkTranslationUncheckedCreateWithoutExternalLinkInput[]
+    connectOrCreate?: ExternalLinkTranslationCreateOrConnectWithoutExternalLinkInput | ExternalLinkTranslationCreateOrConnectWithoutExternalLinkInput[]
+    upsert?: ExternalLinkTranslationUpsertWithWhereUniqueWithoutExternalLinkInput | ExternalLinkTranslationUpsertWithWhereUniqueWithoutExternalLinkInput[]
+    createMany?: ExternalLinkTranslationCreateManyExternalLinkInputEnvelope
+    set?: ExternalLinkTranslationWhereUniqueInput | ExternalLinkTranslationWhereUniqueInput[]
+    disconnect?: ExternalLinkTranslationWhereUniqueInput | ExternalLinkTranslationWhereUniqueInput[]
+    delete?: ExternalLinkTranslationWhereUniqueInput | ExternalLinkTranslationWhereUniqueInput[]
+    connect?: ExternalLinkTranslationWhereUniqueInput | ExternalLinkTranslationWhereUniqueInput[]
+    update?: ExternalLinkTranslationUpdateWithWhereUniqueWithoutExternalLinkInput | ExternalLinkTranslationUpdateWithWhereUniqueWithoutExternalLinkInput[]
+    updateMany?: ExternalLinkTranslationUpdateManyWithWhereWithoutExternalLinkInput | ExternalLinkTranslationUpdateManyWithWhereWithoutExternalLinkInput[]
+    deleteMany?: ExternalLinkTranslationScalarWhereInput | ExternalLinkTranslationScalarWhereInput[]
+  }
+
+  export type ExternalLinkCreateNestedOneWithoutTranslationsInput = {
+    create?: XOR<ExternalLinkCreateWithoutTranslationsInput, ExternalLinkUncheckedCreateWithoutTranslationsInput>
+    connectOrCreate?: ExternalLinkCreateOrConnectWithoutTranslationsInput
+    connect?: ExternalLinkWhereUniqueInput
+  }
+
+  export type ExternalLinkUpdateOneRequiredWithoutTranslationsNestedInput = {
+    create?: XOR<ExternalLinkCreateWithoutTranslationsInput, ExternalLinkUncheckedCreateWithoutTranslationsInput>
+    connectOrCreate?: ExternalLinkCreateOrConnectWithoutTranslationsInput
+    upsert?: ExternalLinkUpsertWithoutTranslationsInput
+    connect?: ExternalLinkWhereUniqueInput
+    update?: XOR<XOR<ExternalLinkUpdateToOneWithWhereWithoutTranslationsInput, ExternalLinkUpdateWithoutTranslationsInput>, ExternalLinkUncheckedUpdateWithoutTranslationsInput>
   }
 
   export type EstablishmentCreateNestedOneWithoutEstablishmentBookingSettingsInput = {
@@ -145544,6 +148460,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -145555,6 +148472,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -145631,6 +148549,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -145647,6 +148566,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -145734,6 +148654,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -145745,6 +148666,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -145821,6 +148743,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -145837,6 +148760,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -145908,6 +148832,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -145919,6 +148844,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -145995,6 +148921,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -146011,6 +148938,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -146098,6 +149026,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -146109,6 +149038,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -146185,6 +149115,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -146201,6 +149132,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -146302,6 +149234,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -146313,6 +149246,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -146389,6 +149323,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -146405,6 +149340,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -146521,6 +149457,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -146532,6 +149469,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -146608,6 +149546,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -146624,6 +149563,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -146846,6 +149786,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -146857,6 +149798,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -146933,6 +149875,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -146949,6 +149892,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -147120,6 +150064,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -147131,6 +150076,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -147207,6 +150153,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -147223,6 +150170,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -147493,6 +150441,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -147504,6 +150453,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -147580,6 +150530,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -147596,6 +150547,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -147732,6 +150684,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -147743,6 +150696,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -147819,6 +150773,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -147835,6 +150790,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -148189,6 +151145,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -148200,6 +151157,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -148276,6 +151234,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -148292,6 +151251,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -148429,6 +151389,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -148440,6 +151401,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -148516,6 +151478,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -148532,6 +151495,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -149049,6 +152013,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -149060,6 +152025,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -149136,6 +152102,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -149152,6 +152119,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -149266,6 +152234,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -149277,6 +152246,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -149353,6 +152323,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -149369,6 +152340,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -149580,6 +152552,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -149591,6 +152564,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -149667,6 +152641,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -149683,6 +152658,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -149770,6 +152746,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -149781,6 +152758,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -149857,6 +152835,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -149873,6 +152852,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -149907,6 +152887,32 @@ export namespace Prisma {
     stockAlerts?: StockAlertUncheckedUpdateManyWithoutEstablishmentNestedInput
     stockInventoryCounts?: StockInventoryCountUncheckedUpdateManyWithoutEstablishmentNestedInput
     stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type ExternalLinkCreateWithoutEstablishmentInput = {
+    id?: string
+    icon: string
+    url: string
+    position?: number
+    translations?: ExternalLinkTranslationCreateNestedManyWithoutExternalLinkInput
+  }
+
+  export type ExternalLinkUncheckedCreateWithoutEstablishmentInput = {
+    id?: string
+    icon: string
+    url: string
+    position?: number
+    translations?: ExternalLinkTranslationUncheckedCreateNestedManyWithoutExternalLinkInput
+  }
+
+  export type ExternalLinkCreateOrConnectWithoutEstablishmentInput = {
+    where: ExternalLinkWhereUniqueInput
+    create: XOR<ExternalLinkCreateWithoutEstablishmentInput, ExternalLinkUncheckedCreateWithoutEstablishmentInput>
+  }
+
+  export type ExternalLinkCreateManyEstablishmentInputEnvelope = {
+    data: ExternalLinkCreateManyEstablishmentInput | ExternalLinkCreateManyEstablishmentInput[]
+    skipDuplicates?: boolean
   }
 
   export type ScheduleCreateWithoutEstablishmentInput = {
@@ -151517,6 +154523,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ExternalLinkUpsertWithWhereUniqueWithoutEstablishmentInput = {
+    where: ExternalLinkWhereUniqueInput
+    update: XOR<ExternalLinkUpdateWithoutEstablishmentInput, ExternalLinkUncheckedUpdateWithoutEstablishmentInput>
+    create: XOR<ExternalLinkCreateWithoutEstablishmentInput, ExternalLinkUncheckedCreateWithoutEstablishmentInput>
+  }
+
+  export type ExternalLinkUpdateWithWhereUniqueWithoutEstablishmentInput = {
+    where: ExternalLinkWhereUniqueInput
+    data: XOR<ExternalLinkUpdateWithoutEstablishmentInput, ExternalLinkUncheckedUpdateWithoutEstablishmentInput>
+  }
+
+  export type ExternalLinkUpdateManyWithWhereWithoutEstablishmentInput = {
+    where: ExternalLinkScalarWhereInput
+    data: XOR<ExternalLinkUpdateManyMutationInput, ExternalLinkUncheckedUpdateManyWithoutEstablishmentInput>
+  }
+
+  export type ExternalLinkScalarWhereInput = {
+    AND?: ExternalLinkScalarWhereInput | ExternalLinkScalarWhereInput[]
+    OR?: ExternalLinkScalarWhereInput[]
+    NOT?: ExternalLinkScalarWhereInput | ExternalLinkScalarWhereInput[]
+    id?: StringFilter<"ExternalLink"> | string
+    establishmentId?: StringFilter<"ExternalLink"> | string
+    icon?: StringFilter<"ExternalLink"> | string
+    url?: StringFilter<"ExternalLink"> | string
+    position?: IntFilter<"ExternalLink"> | number
+  }
+
   export type ScheduleUpsertWithoutEstablishmentInput = {
     update: XOR<ScheduleUpdateWithoutEstablishmentInput, ScheduleUncheckedUpdateWithoutEstablishmentInput>
     create: XOR<ScheduleCreateWithoutEstablishmentInput, ScheduleUncheckedCreateWithoutEstablishmentInput>
@@ -152926,6 +155959,477 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"StockWarehouse"> | Date | string | null
   }
 
+  export type EstablishmentCreateWithoutExternalLinksInput = {
+    id?: string
+    name: string
+    slug: string
+    type: $Enums.EstablishmentType
+    isActive?: boolean
+    email: string
+    countryCode: string
+    phoneNumber: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
+    billingName: string
+    billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
+    stripeCustomerId: string
+    instagramUrl?: string | null
+    tiktokUrl?: string | null
+    facebookUrl?: string | null
+    googleReviewUrl?: string | null
+    tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
+    myPageModule?: boolean
+    menusModule?: boolean
+    callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
+    reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
+    reservationsLink?: string | null
+    externalLinksModule?: boolean
+    takeAwayModule?: boolean
+    isDemo?: boolean
+    primaryLanguage?: $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: $Enums.Currency
+    timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
+    googleAnalyticsId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
+    metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
+    owner: UserCreateNestedOneWithoutEstablishmentsInput
+    activeTheme?: ThemeCreateNestedOneWithoutActiveEstablishmentsInput
+    logoImage?: ImageCreateNestedOneWithoutLogoUsedInBrandsInput
+    bannerImage?: ImageCreateNestedOneWithoutBannerUsedInBrandsInput
+    expenses?: ExpenseCreateNestedManyWithoutEstablishmentInput
+    images?: ImageCreateNestedManyWithoutEstablishmentInput
+    themes?: ThemeCreateNestedManyWithoutEstablishmentInput
+    employees?: EmployeeCreateNestedManyWithoutEstablishmentInput
+    serviceZones?: ServiceZoneCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeCreateNestedManyWithoutEstablishmentInput
+    menus?: MenuCreateNestedManyWithoutEstablishmentInput
+    Item?: ItemCreateNestedManyWithoutEstablishmentInput
+    addons?: AddonCreateNestedManyWithoutEstablishmentInput
+    variantOptions?: VariantOptionCreateNestedManyWithoutEstablishmentInput
+    bookings?: BookingCreateNestedManyWithoutEstablishmentInput
+    bookingRules?: BookingRulesCreateNestedOneWithoutEstablishmentInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsCreateNestedOneWithoutEstablishmentInput
+    establishmentAvailabilities?: EstablishmentAvailabilityCreateNestedManyWithoutEstablishmentInput
+    integrations?: EstablishmentIntegrationsCreateNestedOneWithoutEstablishmentInput
+    subscription?: SubscriptionCreateNestedOneWithoutEstablishmentInput
+    invoices?: InvoiceCreateNestedManyWithoutEstablishmentInput
+    devices?: DeviceCreateNestedManyWithoutEstablishmentInput
+    vivaTerminals?: VivaTerminalCreateNestedManyWithoutEstablishmentInput
+    sumupReaders?: SumupReaderCreateNestedManyWithoutEstablishmentInput
+    emailLogs?: EmailLogCreateNestedManyWithoutEstablishmentInput
+    auditLogs?: AuditLogCreateNestedManyWithoutEstablishmentInput
+    discounts?: DiscountCreateNestedManyWithoutEstablishmentInput
+    promotions?: PromotionCreateNestedManyWithoutEstablishmentInput
+    suppliers?: SupplierCreateNestedManyWithoutEstablishmentInput
+    stockCategories?: StockCategoryCreateNestedManyWithoutEstablishmentInput
+    stockItems?: StockItemCreateNestedManyWithoutEstablishmentInput
+    stockEntries?: StockEntryCreateNestedManyWithoutEstablishmentInput
+    stockExits?: StockExitCreateNestedManyWithoutEstablishmentInput
+    stockMovements?: StockMovementCreateNestedManyWithoutEstablishmentInput
+    stockAlerts?: StockAlertCreateNestedManyWithoutEstablishmentInput
+    stockInventoryCounts?: StockInventoryCountCreateNestedManyWithoutEstablishmentInput
+    stockWarehouses?: StockWarehouseCreateNestedManyWithoutEstablishmentInput
+  }
+
+  export type EstablishmentUncheckedCreateWithoutExternalLinksInput = {
+    id?: string
+    name: string
+    slug: string
+    type: $Enums.EstablishmentType
+    isActive?: boolean
+    email: string
+    countryCode: string
+    phoneNumber: string
+    address?: string | null
+    city?: string | null
+    state?: string | null
+    zipCode?: string | null
+    country?: string | null
+    billingName: string
+    billingTaxId: string
+    billingAddress?: string | null
+    billingCity?: string | null
+    billingState?: string | null
+    billingZipCode?: string | null
+    billingCountry?: string | null
+    stripeCustomerId: string
+    instagramUrl?: string | null
+    tiktokUrl?: string | null
+    facebookUrl?: string | null
+    googleReviewUrl?: string | null
+    tripAdvisorUrl?: string | null
+    websiteUrl?: string | null
+    myPageModule?: boolean
+    menusModule?: boolean
+    callStaffModule?: boolean
+    callStaffOptions?: EstablishmentCreatecallStaffOptionsInput | $Enums.CallStaffOption[]
+    reservationsModule?: boolean
+    reservationsPlatform?: $Enums.ReservationsPlataform | null
+    reservationsLink?: string | null
+    externalLinksModule?: boolean
+    takeAwayModule?: boolean
+    isDemo?: boolean
+    primaryLanguage?: $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentCreateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: $Enums.Currency
+    timezone?: string
+    wifiSsid?: string | null
+    wifiPassword?: string | null
+    googleAnalyticsId?: string | null
+    logoImageId?: string | null
+    bannerImageId?: string | null
+    activeThemeId?: string | null
+    scheduleId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: string
+    metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
+    favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
+    expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
+    images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
+    themes?: ThemeUncheckedCreateNestedManyWithoutEstablishmentInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutEstablishmentInput
+    serviceZones?: ServiceZoneUncheckedCreateNestedManyWithoutEstablishmentInput
+    qrCodes?: QrCodeUncheckedCreateNestedManyWithoutEstablishmentInput
+    menus?: MenuUncheckedCreateNestedManyWithoutEstablishmentInput
+    Item?: ItemUncheckedCreateNestedManyWithoutEstablishmentInput
+    addons?: AddonUncheckedCreateNestedManyWithoutEstablishmentInput
+    variantOptions?: VariantOptionUncheckedCreateNestedManyWithoutEstablishmentInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutEstablishmentInput
+    bookingRules?: BookingRulesUncheckedCreateNestedOneWithoutEstablishmentInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedCreateNestedOneWithoutEstablishmentInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedCreateNestedManyWithoutEstablishmentInput
+    integrations?: EstablishmentIntegrationsUncheckedCreateNestedOneWithoutEstablishmentInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutEstablishmentInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutEstablishmentInput
+    devices?: DeviceUncheckedCreateNestedManyWithoutEstablishmentInput
+    vivaTerminals?: VivaTerminalUncheckedCreateNestedManyWithoutEstablishmentInput
+    sumupReaders?: SumupReaderUncheckedCreateNestedManyWithoutEstablishmentInput
+    emailLogs?: EmailLogUncheckedCreateNestedManyWithoutEstablishmentInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutEstablishmentInput
+    discounts?: DiscountUncheckedCreateNestedManyWithoutEstablishmentInput
+    promotions?: PromotionUncheckedCreateNestedManyWithoutEstablishmentInput
+    suppliers?: SupplierUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockCategories?: StockCategoryUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockItems?: StockItemUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockEntries?: StockEntryUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockExits?: StockExitUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockMovements?: StockMovementUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockAlerts?: StockAlertUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockInventoryCounts?: StockInventoryCountUncheckedCreateNestedManyWithoutEstablishmentInput
+    stockWarehouses?: StockWarehouseUncheckedCreateNestedManyWithoutEstablishmentInput
+  }
+
+  export type EstablishmentCreateOrConnectWithoutExternalLinksInput = {
+    where: EstablishmentWhereUniqueInput
+    create: XOR<EstablishmentCreateWithoutExternalLinksInput, EstablishmentUncheckedCreateWithoutExternalLinksInput>
+  }
+
+  export type ExternalLinkTranslationCreateWithoutExternalLinkInput = {
+    id?: string
+    locale: string
+    name: string
+    description?: string | null
+  }
+
+  export type ExternalLinkTranslationUncheckedCreateWithoutExternalLinkInput = {
+    id?: string
+    locale: string
+    name: string
+    description?: string | null
+  }
+
+  export type ExternalLinkTranslationCreateOrConnectWithoutExternalLinkInput = {
+    where: ExternalLinkTranslationWhereUniqueInput
+    create: XOR<ExternalLinkTranslationCreateWithoutExternalLinkInput, ExternalLinkTranslationUncheckedCreateWithoutExternalLinkInput>
+  }
+
+  export type ExternalLinkTranslationCreateManyExternalLinkInputEnvelope = {
+    data: ExternalLinkTranslationCreateManyExternalLinkInput | ExternalLinkTranslationCreateManyExternalLinkInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EstablishmentUpsertWithoutExternalLinksInput = {
+    update: XOR<EstablishmentUpdateWithoutExternalLinksInput, EstablishmentUncheckedUpdateWithoutExternalLinksInput>
+    create: XOR<EstablishmentCreateWithoutExternalLinksInput, EstablishmentUncheckedCreateWithoutExternalLinksInput>
+    where?: EstablishmentWhereInput
+  }
+
+  export type EstablishmentUpdateToOneWithWhereWithoutExternalLinksInput = {
+    where?: EstablishmentWhereInput
+    data: XOR<EstablishmentUpdateWithoutExternalLinksInput, EstablishmentUncheckedUpdateWithoutExternalLinksInput>
+  }
+
+  export type EstablishmentUpdateWithoutExternalLinksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    billingName?: StringFieldUpdateOperationsInput | string
+    billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
+    reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
+    isDemo?: BoolFieldUpdateOperationsInput | boolean
+    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
+    metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
+    owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
+    activeTheme?: ThemeUpdateOneWithoutActiveEstablishmentsNestedInput
+    logoImage?: ImageUpdateOneWithoutLogoUsedInBrandsNestedInput
+    bannerImage?: ImageUpdateOneWithoutBannerUsedInBrandsNestedInput
+    expenses?: ExpenseUpdateManyWithoutEstablishmentNestedInput
+    images?: ImageUpdateManyWithoutEstablishmentNestedInput
+    themes?: ThemeUpdateManyWithoutEstablishmentNestedInput
+    employees?: EmployeeUpdateManyWithoutEstablishmentNestedInput
+    serviceZones?: ServiceZoneUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUpdateManyWithoutEstablishmentNestedInput
+    menus?: MenuUpdateManyWithoutEstablishmentNestedInput
+    Item?: ItemUpdateManyWithoutEstablishmentNestedInput
+    addons?: AddonUpdateManyWithoutEstablishmentNestedInput
+    variantOptions?: VariantOptionUpdateManyWithoutEstablishmentNestedInput
+    bookings?: BookingUpdateManyWithoutEstablishmentNestedInput
+    bookingRules?: BookingRulesUpdateOneWithoutEstablishmentNestedInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUpdateOneWithoutEstablishmentNestedInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUpdateManyWithoutEstablishmentNestedInput
+    integrations?: EstablishmentIntegrationsUpdateOneWithoutEstablishmentNestedInput
+    subscription?: SubscriptionUpdateOneWithoutEstablishmentNestedInput
+    invoices?: InvoiceUpdateManyWithoutEstablishmentNestedInput
+    devices?: DeviceUpdateManyWithoutEstablishmentNestedInput
+    vivaTerminals?: VivaTerminalUpdateManyWithoutEstablishmentNestedInput
+    sumupReaders?: SumupReaderUpdateManyWithoutEstablishmentNestedInput
+    emailLogs?: EmailLogUpdateManyWithoutEstablishmentNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutEstablishmentNestedInput
+    discounts?: DiscountUpdateManyWithoutEstablishmentNestedInput
+    promotions?: PromotionUpdateManyWithoutEstablishmentNestedInput
+    suppliers?: SupplierUpdateManyWithoutEstablishmentNestedInput
+    stockCategories?: StockCategoryUpdateManyWithoutEstablishmentNestedInput
+    stockItems?: StockItemUpdateManyWithoutEstablishmentNestedInput
+    stockEntries?: StockEntryUpdateManyWithoutEstablishmentNestedInput
+    stockExits?: StockExitUpdateManyWithoutEstablishmentNestedInput
+    stockMovements?: StockMovementUpdateManyWithoutEstablishmentNestedInput
+    stockAlerts?: StockAlertUpdateManyWithoutEstablishmentNestedInput
+    stockInventoryCounts?: StockInventoryCountUpdateManyWithoutEstablishmentNestedInput
+    stockWarehouses?: StockWarehouseUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type EstablishmentUncheckedUpdateWithoutExternalLinksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    type?: EnumEstablishmentTypeFieldUpdateOperationsInput | $Enums.EstablishmentType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    email?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    billingName?: StringFieldUpdateOperationsInput | string
+    billingTaxId?: StringFieldUpdateOperationsInput | string
+    billingAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCity?: NullableStringFieldUpdateOperationsInput | string | null
+    billingState?: NullableStringFieldUpdateOperationsInput | string | null
+    billingZipCode?: NullableStringFieldUpdateOperationsInput | string | null
+    billingCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    instagramUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tiktokUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    facebookUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    googleReviewUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    tripAdvisorUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    myPageModule?: BoolFieldUpdateOperationsInput | boolean
+    menusModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffModule?: BoolFieldUpdateOperationsInput | boolean
+    callStaffOptions?: EstablishmentUpdatecallStaffOptionsInput | $Enums.CallStaffOption[]
+    reservationsModule?: BoolFieldUpdateOperationsInput | boolean
+    reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
+    reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
+    takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
+    isDemo?: BoolFieldUpdateOperationsInput | boolean
+    primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
+    availableLanguages?: EstablishmentUpdateavailableLanguagesInput | $Enums.EstablishmentLanguage[]
+    currency?: EnumCurrencyFieldUpdateOperationsInput | $Enums.Currency
+    timezone?: StringFieldUpdateOperationsInput | string
+    wifiSsid?: NullableStringFieldUpdateOperationsInput | string | null
+    wifiPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
+    logoImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    bannerImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    activeThemeId?: NullableStringFieldUpdateOperationsInput | string | null
+    scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
+    favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
+    expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
+    images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
+    themes?: ThemeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    serviceZones?: ServiceZoneUncheckedUpdateManyWithoutEstablishmentNestedInput
+    qrCodes?: QrCodeUncheckedUpdateManyWithoutEstablishmentNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutEstablishmentNestedInput
+    Item?: ItemUncheckedUpdateManyWithoutEstablishmentNestedInput
+    addons?: AddonUncheckedUpdateManyWithoutEstablishmentNestedInput
+    variantOptions?: VariantOptionUncheckedUpdateManyWithoutEstablishmentNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutEstablishmentNestedInput
+    bookingRules?: BookingRulesUncheckedUpdateOneWithoutEstablishmentNestedInput
+    establishmentBookingSettings?: EstablishmentBookingSettingsUncheckedUpdateOneWithoutEstablishmentNestedInput
+    establishmentAvailabilities?: EstablishmentAvailabilityUncheckedUpdateManyWithoutEstablishmentNestedInput
+    integrations?: EstablishmentIntegrationsUncheckedUpdateOneWithoutEstablishmentNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutEstablishmentNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutEstablishmentNestedInput
+    devices?: DeviceUncheckedUpdateManyWithoutEstablishmentNestedInput
+    vivaTerminals?: VivaTerminalUncheckedUpdateManyWithoutEstablishmentNestedInput
+    sumupReaders?: SumupReaderUncheckedUpdateManyWithoutEstablishmentNestedInput
+    emailLogs?: EmailLogUncheckedUpdateManyWithoutEstablishmentNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutEstablishmentNestedInput
+    discounts?: DiscountUncheckedUpdateManyWithoutEstablishmentNestedInput
+    promotions?: PromotionUncheckedUpdateManyWithoutEstablishmentNestedInput
+    suppliers?: SupplierUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockCategories?: StockCategoryUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockItems?: StockItemUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockEntries?: StockEntryUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockExits?: StockExitUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockMovements?: StockMovementUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockAlerts?: StockAlertUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockInventoryCounts?: StockInventoryCountUncheckedUpdateManyWithoutEstablishmentNestedInput
+    stockWarehouses?: StockWarehouseUncheckedUpdateManyWithoutEstablishmentNestedInput
+  }
+
+  export type ExternalLinkTranslationUpsertWithWhereUniqueWithoutExternalLinkInput = {
+    where: ExternalLinkTranslationWhereUniqueInput
+    update: XOR<ExternalLinkTranslationUpdateWithoutExternalLinkInput, ExternalLinkTranslationUncheckedUpdateWithoutExternalLinkInput>
+    create: XOR<ExternalLinkTranslationCreateWithoutExternalLinkInput, ExternalLinkTranslationUncheckedCreateWithoutExternalLinkInput>
+  }
+
+  export type ExternalLinkTranslationUpdateWithWhereUniqueWithoutExternalLinkInput = {
+    where: ExternalLinkTranslationWhereUniqueInput
+    data: XOR<ExternalLinkTranslationUpdateWithoutExternalLinkInput, ExternalLinkTranslationUncheckedUpdateWithoutExternalLinkInput>
+  }
+
+  export type ExternalLinkTranslationUpdateManyWithWhereWithoutExternalLinkInput = {
+    where: ExternalLinkTranslationScalarWhereInput
+    data: XOR<ExternalLinkTranslationUpdateManyMutationInput, ExternalLinkTranslationUncheckedUpdateManyWithoutExternalLinkInput>
+  }
+
+  export type ExternalLinkTranslationScalarWhereInput = {
+    AND?: ExternalLinkTranslationScalarWhereInput | ExternalLinkTranslationScalarWhereInput[]
+    OR?: ExternalLinkTranslationScalarWhereInput[]
+    NOT?: ExternalLinkTranslationScalarWhereInput | ExternalLinkTranslationScalarWhereInput[]
+    id?: StringFilter<"ExternalLinkTranslation"> | string
+    locale?: StringFilter<"ExternalLinkTranslation"> | string
+    name?: StringFilter<"ExternalLinkTranslation"> | string
+    description?: StringNullableFilter<"ExternalLinkTranslation"> | string | null
+    externalLinkId?: StringFilter<"ExternalLinkTranslation"> | string
+  }
+
+  export type ExternalLinkCreateWithoutTranslationsInput = {
+    id?: string
+    icon: string
+    url: string
+    position?: number
+    establishment: EstablishmentCreateNestedOneWithoutExternalLinksInput
+  }
+
+  export type ExternalLinkUncheckedCreateWithoutTranslationsInput = {
+    id?: string
+    establishmentId: string
+    icon: string
+    url: string
+    position?: number
+  }
+
+  export type ExternalLinkCreateOrConnectWithoutTranslationsInput = {
+    where: ExternalLinkWhereUniqueInput
+    create: XOR<ExternalLinkCreateWithoutTranslationsInput, ExternalLinkUncheckedCreateWithoutTranslationsInput>
+  }
+
+  export type ExternalLinkUpsertWithoutTranslationsInput = {
+    update: XOR<ExternalLinkUpdateWithoutTranslationsInput, ExternalLinkUncheckedUpdateWithoutTranslationsInput>
+    create: XOR<ExternalLinkCreateWithoutTranslationsInput, ExternalLinkUncheckedCreateWithoutTranslationsInput>
+    where?: ExternalLinkWhereInput
+  }
+
+  export type ExternalLinkUpdateToOneWithWhereWithoutTranslationsInput = {
+    where?: ExternalLinkWhereInput
+    data: XOR<ExternalLinkUpdateWithoutTranslationsInput, ExternalLinkUncheckedUpdateWithoutTranslationsInput>
+  }
+
+  export type ExternalLinkUpdateWithoutTranslationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    establishment?: EstablishmentUpdateOneRequiredWithoutExternalLinksNestedInput
+  }
+
+  export type ExternalLinkUncheckedUpdateWithoutTranslationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    establishmentId?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+  }
+
   export type EstablishmentCreateWithoutEstablishmentBookingSettingsInput = {
     id?: string
     name: string
@@ -152961,6 +156465,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -152972,6 +156477,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -153048,6 +156554,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -153064,6 +156571,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -153151,6 +156659,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -153162,6 +156671,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -153238,6 +156748,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -153254,6 +156765,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -153366,6 +156878,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -153377,6 +156890,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
@@ -153453,6 +156967,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -153469,6 +156984,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -153603,6 +157119,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -153614,6 +157131,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
@@ -153690,6 +157208,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -153706,6 +157225,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -153777,6 +157297,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -153788,6 +157309,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
@@ -153864,6 +157386,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -153880,6 +157403,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -154008,6 +157532,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -154019,6 +157544,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
@@ -154095,6 +157621,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -154111,6 +157638,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -154229,6 +157757,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -154240,6 +157769,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -154316,6 +157846,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -154332,6 +157863,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     images?: ImageUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -154419,6 +157951,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -154430,6 +157963,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -154506,6 +158040,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -154522,6 +158057,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     images?: ImageUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -154593,6 +158129,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -154604,6 +158141,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -154680,6 +158218,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -154695,6 +158234,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -154777,6 +158317,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -154788,6 +158329,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -154864,6 +158406,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -154879,6 +158422,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -154961,6 +158505,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -154972,6 +158517,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -155048,6 +158594,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -155064,6 +158611,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -155352,6 +158900,7 @@ export namespace Prisma {
     reservationsModule?: BoolFilter<"Establishment"> | boolean
     reservationsPlatform?: EnumReservationsPlataformNullableFilter<"Establishment"> | $Enums.ReservationsPlataform | null
     reservationsLink?: StringNullableFilter<"Establishment"> | string | null
+    externalLinksModule?: BoolFilter<"Establishment"> | boolean
     takeAwayModule?: BoolFilter<"Establishment"> | boolean
     isDemo?: BoolFilter<"Establishment"> | boolean
     primaryLanguage?: EnumEstablishmentLanguageFilter<"Establishment"> | $Enums.EstablishmentLanguage
@@ -155432,6 +158981,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -155443,6 +158993,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -155519,6 +159070,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -155535,6 +159087,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -155729,6 +159282,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -155740,6 +159294,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -155816,6 +159371,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -155832,6 +159388,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -155919,6 +159476,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -155930,6 +159488,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -156006,6 +159565,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -156022,6 +159582,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -156093,6 +159654,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -156104,6 +159666,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -156180,6 +159743,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -156196,6 +159760,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -156283,6 +159848,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -156294,6 +159860,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -156370,6 +159937,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -156386,6 +159954,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -156457,6 +160026,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -156468,6 +160038,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -156544,6 +160115,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -156560,6 +160132,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -156647,6 +160220,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -156658,6 +160232,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -156734,6 +160309,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -156750,6 +160326,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -156841,6 +160418,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -156852,6 +160430,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -156928,6 +160507,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -156944,6 +160524,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -157458,6 +161039,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -157469,6 +161051,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -157545,6 +161128,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -157561,6 +161145,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -158427,6 +162012,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -158438,6 +162024,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -158514,6 +162101,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -158530,6 +162118,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -158655,6 +162244,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -158666,6 +162256,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -158742,6 +162333,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -158758,6 +162350,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -160029,6 +163622,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -160040,6 +163634,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -160116,6 +163711,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -160132,6 +163728,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -160275,6 +163872,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -160286,6 +163884,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -160362,6 +163961,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -160378,6 +163978,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -161395,6 +164996,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -161406,6 +165008,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -161482,6 +165085,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -161498,6 +165102,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -161705,6 +165310,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -161716,6 +165322,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -161792,6 +165399,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -161808,6 +165416,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -162927,6 +166536,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -162938,6 +166548,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -163014,6 +166625,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -163030,6 +166642,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -163147,6 +166760,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -163158,6 +166772,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -163234,6 +166849,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -163250,6 +166866,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -163415,6 +167032,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -163426,6 +167044,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -163502,6 +167121,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -163518,6 +167138,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -163699,6 +167320,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -163710,6 +167332,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -163786,6 +167409,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -163802,6 +167426,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -163974,6 +167599,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -163985,6 +167611,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
     owner: UserCreateNestedOneWithoutEstablishmentsInput
@@ -164061,6 +167688,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -164076,6 +167704,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -164305,6 +167934,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -164316,6 +167946,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
     owner?: UserUpdateOneRequiredWithoutEstablishmentsNestedInput
@@ -164392,6 +168023,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -164407,6 +168039,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -164776,6 +168409,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -164787,6 +168421,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -164863,6 +168498,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -164879,6 +168515,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -165092,6 +168729,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -165103,6 +168741,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -165179,6 +168818,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -165195,6 +168835,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -165571,6 +169212,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -165582,6 +169224,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -165658,6 +169301,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -165674,6 +169318,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -165847,6 +169492,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -165858,6 +169504,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -165934,6 +169581,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -165950,6 +169598,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -166067,6 +169716,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -166078,6 +169728,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -166154,6 +169805,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -166170,6 +169822,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -166406,6 +170059,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -166417,6 +170071,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -166493,6 +170148,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -166509,6 +170165,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -166647,6 +170304,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -166658,6 +170316,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -166734,6 +170393,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -166750,6 +170410,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -167198,6 +170859,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -167209,6 +170871,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -167285,6 +170948,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -167301,6 +170965,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -168280,6 +171945,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -168291,6 +171957,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -168367,6 +172034,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -168383,6 +172051,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -168609,6 +172278,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -168620,6 +172290,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -168696,6 +172367,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -168712,6 +172384,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -169238,6 +172911,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -169249,6 +172923,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -169325,6 +173000,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -169341,6 +173017,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -169504,6 +173181,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -169515,6 +173193,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -169591,6 +173270,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -169607,6 +173287,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -170054,6 +173735,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -170065,6 +173747,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -170141,6 +173824,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -170157,6 +173841,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -170417,6 +174102,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -170428,6 +174114,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -170504,6 +174191,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -170520,6 +174208,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -170782,6 +174471,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -170793,6 +174483,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -170869,6 +174560,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -170885,6 +174577,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -171053,6 +174746,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -171064,6 +174758,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -171140,6 +174835,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -171156,6 +174852,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -171314,6 +175011,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -171325,6 +175023,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -171401,6 +175100,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -171417,6 +175117,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -171538,6 +175239,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -171549,6 +175251,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -171625,6 +175328,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -171641,6 +175345,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -171964,6 +175669,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -171975,6 +175681,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -172051,6 +175758,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -172067,6 +175775,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -172179,6 +175888,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -172190,6 +175900,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -172266,6 +175977,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -172282,6 +175994,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -172782,6 +176495,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -172793,6 +176507,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -172869,6 +176584,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -172885,6 +176601,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -172972,6 +176689,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -172983,6 +176701,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -173059,6 +176778,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -173075,6 +176795,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -173236,6 +176957,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -173247,6 +176969,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -173323,6 +177046,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -173338,6 +177062,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -173420,6 +177145,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -173431,6 +177157,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -173507,6 +177234,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -173523,6 +177251,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -173626,6 +177355,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -173637,6 +177367,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -173713,6 +177444,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -173729,6 +177461,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -173854,6 +177587,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -173865,6 +177599,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -173941,6 +177676,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -173956,6 +177692,7 @@ export namespace Prisma {
     scheduleId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -174126,6 +177863,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -174137,6 +177875,7 @@ export namespace Prisma {
     googleAnalyticsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    externalLinks?: ExternalLinkCreateNestedManyWithoutEstablishmentInput
     schedule?: ScheduleCreateNestedOneWithoutEstablishmentInput
     metadata?: EstablishmentMetadataCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetCreateNestedManyWithoutEstablishmentInput
@@ -174213,6 +177952,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -174229,6 +177969,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: string
+    externalLinks?: ExternalLinkUncheckedCreateNestedManyWithoutEstablishmentInput
     metadata?: EstablishmentMetadataUncheckedCreateNestedOneWithoutEstablishmentInput
     favicons?: FaviconAssetUncheckedCreateNestedManyWithoutEstablishmentInput
     expenses?: ExpenseUncheckedCreateNestedManyWithoutEstablishmentInput
@@ -174358,6 +178099,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -174369,6 +178111,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -174445,6 +178188,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -174461,6 +178205,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -174839,6 +178584,13 @@ export namespace Prisma {
     event?: EnumEmailEventTypeFieldUpdateOperationsInput | $Enums.EmailEventType
     occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     payload?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type ExternalLinkCreateManyEstablishmentInput = {
+    id?: string
+    icon: string
+    url: string
+    position?: number
   }
 
   export type FaviconAssetCreateManyEstablishmentInput = {
@@ -175267,6 +179019,29 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+  }
+
+  export type ExternalLinkUpdateWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    translations?: ExternalLinkTranslationUpdateManyWithoutExternalLinkNestedInput
+  }
+
+  export type ExternalLinkUncheckedUpdateWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    translations?: ExternalLinkTranslationUncheckedUpdateManyWithoutExternalLinkNestedInput
+  }
+
+  export type ExternalLinkUncheckedUpdateManyWithoutEstablishmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
   }
 
   export type FaviconAssetUpdateWithoutEstablishmentInput = {
@@ -176659,6 +180434,34 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type ExternalLinkTranslationCreateManyExternalLinkInput = {
+    id?: string
+    locale: string
+    name: string
+    description?: string | null
+  }
+
+  export type ExternalLinkTranslationUpdateWithoutExternalLinkInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ExternalLinkTranslationUncheckedUpdateWithoutExternalLinkInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ExternalLinkTranslationUncheckedUpdateManyWithoutExternalLinkInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    locale?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type EstablishmentCreateManyBannerImageInput = {
     id?: string
     name: string
@@ -176694,6 +180497,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -176746,6 +180550,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -176846,6 +180651,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -176857,6 +180663,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -176933,6 +180740,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -176948,6 +180756,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -177020,6 +180829,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -177072,6 +180882,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -177083,6 +180894,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -177159,6 +180971,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -177174,6 +180987,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -177246,6 +181060,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -180594,6 +184409,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -180646,6 +184462,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -180657,6 +184474,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -180733,6 +184551,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -180748,6 +184567,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: StringFieldUpdateOperationsInput | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -180820,6 +184640,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -180893,6 +184714,7 @@ export namespace Prisma {
     reservationsModule?: boolean
     reservationsPlatform?: $Enums.ReservationsPlataform | null
     reservationsLink?: string | null
+    externalLinksModule?: boolean
     takeAwayModule?: boolean
     isDemo?: boolean
     primaryLanguage?: $Enums.EstablishmentLanguage
@@ -181010,6 +184832,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -181021,6 +184844,7 @@ export namespace Prisma {
     googleAnalyticsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUpdateManyWithoutEstablishmentNestedInput
     schedule?: ScheduleUpdateOneWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUpdateManyWithoutEstablishmentNestedInput
@@ -181097,6 +184921,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage
@@ -181112,6 +184937,7 @@ export namespace Prisma {
     scheduleId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    externalLinks?: ExternalLinkUncheckedUpdateManyWithoutEstablishmentNestedInput
     metadata?: EstablishmentMetadataUncheckedUpdateOneWithoutEstablishmentNestedInput
     favicons?: FaviconAssetUncheckedUpdateManyWithoutEstablishmentNestedInput
     expenses?: ExpenseUncheckedUpdateManyWithoutEstablishmentNestedInput
@@ -181184,6 +185010,7 @@ export namespace Prisma {
     reservationsModule?: BoolFieldUpdateOperationsInput | boolean
     reservationsPlatform?: NullableEnumReservationsPlataformFieldUpdateOperationsInput | $Enums.ReservationsPlataform | null
     reservationsLink?: NullableStringFieldUpdateOperationsInput | string | null
+    externalLinksModule?: BoolFieldUpdateOperationsInput | boolean
     takeAwayModule?: BoolFieldUpdateOperationsInput | boolean
     isDemo?: BoolFieldUpdateOperationsInput | boolean
     primaryLanguage?: EnumEstablishmentLanguageFieldUpdateOperationsInput | $Enums.EstablishmentLanguage

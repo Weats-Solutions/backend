@@ -12,6 +12,7 @@ export const feature = {
 
   call_staff: 'call_staff',
   reservations: 'reservations',
+  external_links: 'external_links',
 
   theme_builder: 'theme_builder',
 

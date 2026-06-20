@@ -341,6 +341,7 @@ exports.Prisma.EstablishmentScalarFieldEnum = {
   reservationsModule: 'reservationsModule',
   reservationsPlatform: 'reservationsPlatform',
   reservationsLink: 'reservationsLink',
+  externalLinksModule: 'externalLinksModule',
   takeAwayModule: 'takeAwayModule',
   isDemo: 'isDemo',
   primaryLanguage: 'primaryLanguage',
@@ -357,6 +358,22 @@ exports.Prisma.EstablishmentScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   ownerId: 'ownerId'
+};
+
+exports.Prisma.ExternalLinkScalarFieldEnum = {
+  id: 'id',
+  establishmentId: 'establishmentId',
+  icon: 'icon',
+  url: 'url',
+  position: 'position'
+};
+
+exports.Prisma.ExternalLinkTranslationScalarFieldEnum = {
+  id: 'id',
+  locale: 'locale',
+  name: 'name',
+  description: 'description',
+  externalLinkId: 'externalLinkId'
 };
 
 exports.Prisma.EstablishmentBookingSettingsScalarFieldEnum = {
@@ -1718,6 +1735,8 @@ exports.Prisma.ModelName = {
   EmailEvent: 'EmailEvent',
   Employee: 'Employee',
   Establishment: 'Establishment',
+  ExternalLink: 'ExternalLink',
+  ExternalLinkTranslation: 'ExternalLinkTranslation',
   EstablishmentBookingSettings: 'EstablishmentBookingSettings',
   EstablishmentMetadata: 'EstablishmentMetadata',
   FaviconAsset: 'FaviconAsset',

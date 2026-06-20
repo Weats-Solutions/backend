@@ -1,5 +1,40 @@
 import { CallStaffOption, ReservationsPlataform } from "@weats/database";
-import { IsBoolean, IsNotEmpty, IsArray, IsEnum, IsOptional, IsString, ValidateIf, IsUrl } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsArray, IsEnum, IsOptional, IsString, ValidateIf, IsUrl, ValidateNested } from "class-validator";
+import { Type } from "class-transformer";
+
+export class ExternalLinkTranslationDto {
+    @IsString()
+    @IsNotEmpty()
+    locale: string;
+
+    @IsString()
+    @IsNotEmpty()
+    name: string;
+
+    @IsString()
+    @IsOptional()
+    description?: string;
+}
+
+export class ExternalLinkDto {
+    @IsString()
+    @IsOptional()
+    id?: string;
+
+    @IsString()
+    @IsNotEmpty()
+    icon: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @IsUrl({}, { message: 'External link URL must be a valid URL' })
+    url: string;
+
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => ExternalLinkTranslationDto)
+    translations: ExternalLinkTranslationDto[];
+}
 
 export class UpdateEstablishmentModuleSettingsDto {
     @IsBoolean()
@@ -33,4 +68,14 @@ export class UpdateEstablishmentModuleSettingsDto {
     @IsNotEmpty({ message: 'Reservations link is required when reservations module is active' })
     @IsUrl({}, { message: 'Reservations link must be a valid URL' })
     reservationsLink?: string;
+
+    @IsBoolean()
+    @IsNotEmpty()
+    externalLinksModule: boolean;
+
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => ExternalLinkDto)
+    @IsOptional()
+    externalLinks?: ExternalLinkDto[];
 }

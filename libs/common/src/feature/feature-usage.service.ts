@@ -93,6 +93,12 @@ export class FeatureUsageService {
         where: { establishmentId },
       });
     });
+
+
+    this.register(feature.external_links, async (establishmentId: string, req, tx) => {
+      const client = tx || this.corePrismaService;
+      return client.externalLink.count({ where: { establishmentId } });
+    });
   }
 
 
@@ -102,6 +108,8 @@ export class FeatureUsageService {
     }
     this.handlers.set(featureName, handler);
   }
+
+
 
   async getUsage(featureName: feature, establishmentId: string, request?: any, tx?: any) {
     const handler = this.handlers.get(featureName);

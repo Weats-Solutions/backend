@@ -670,6 +670,8 @@ model Establishment {
   reservationsModule   Boolean                @default(false)
   reservationsPlatform ReservationsPlataform?
   reservationsLink     String?
+  externalLinksModule  Boolean                @default(false)
+  externalLinks        ExternalLink[]
 
   takeAwayModule Boolean @default(false)
 
@@ -754,6 +756,28 @@ model Establishment {
   @@index([name])
   @@index([ownerId])
   @@index([scheduleId])
+}
+
+model ExternalLink {
+  id              String        @id @default(ulid())
+  establishmentId String
+  establishment   Establishment @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+
+  icon         String
+  url          String
+  position     Int                       @default(0)
+  translations ExternalLinkTranslation[]
+}
+
+model ExternalLinkTranslation {
+  id             String       @id @default(ulid())
+  locale         String
+  name           String
+  description    String?
+  externalLinkId String
+  externalLink   ExternalLink @relation(fields: [externalLinkId], references: [id], onDelete: Cascade)
+
+  @@unique([externalLinkId, locale])
 }
 
 enum ReservationsPlataform {
