@@ -71,126 +71,126 @@ async function main() {
     // PLANS
     // ======================
     //dev
-    const plans = [
-        {
-            name: 'Weats Starter',
-            cycles: [
-                { price: 14.99, priceId: 'price_1Tg4RWCsiqCEyBVBA0aDXa6w', cycle: 'MONTHLY' },
-                { price: 39.99, priceId: 'price_1TbnC5CsiqCEyBVBHrIdHu2z', cycle: 'TIMESTRAL' },
-            ],
-            features: {
-                menu: 1,
-                languages: 2,
-
-                products: 125,
-                images: 125,
-
-                custom_variants: 100,
-                custom_addons: 100,
-
-                zones: 2,
-                points: 50,
-
-                custom_qrcodes: true,
-                qrcode_rules: false,
-
-                call_staff: false,
-                reservations: false,
-                external_links: 0,
-
-
-                livechat: true,
-                theme_builder: false,
-
-                metadata: false,
-                google_analytics: false,
-                academy: false,
-
-                menu_categories: 10,
-                menu_subcategories: 25,
+    /*     const plans = [
+            {
+                name: 'Weats Starter',
+                cycles: [
+                    { price: 14.99, priceId: 'price_1Tg4RWCsiqCEyBVBA0aDXa6w', cycle: 'MONTHLY' },
+                    { price: 39.99, priceId: 'price_1TbnC5CsiqCEyBVBHrIdHu2z', cycle: 'TIMESTRAL' },
+                ],
+                features: {
+                    menu: 1,
+                    languages: 2,
+    
+                    products: 125,
+                    images: 125,
+    
+                    custom_variants: 100,
+                    custom_addons: 100,
+    
+                    zones: 2,
+                    points: 50,
+    
+                    custom_qrcodes: true,
+                    qrcode_rules: false,
+    
+                    call_staff: false,
+                    reservations: false,
+                    external_links: 0,
+    
+    
+                    livechat: true,
+                    theme_builder: false,
+    
+                    metadata: false,
+                    google_analytics: false,
+                    academy: false,
+    
+                    menu_categories: 10,
+                    menu_subcategories: 25,
+                },
             },
-        },
-
-        {
-            name: 'Weats Pro',
-            cycles: [
-                { price: 29.99, priceId: "price_1TbnCnCsiqCEyBVBDjfX0Swh", cycle: 'MONTHLY' },
-                { price: 79.99, priceId: "price_1TbnCmCsiqCEyBVBww2nOa48", cycle: 'TIMESTRAL' },
-            ],
-            features: {
-                menu: 3,
-                languages: 4,
-
-                products: 250,
-                images: 250,
-
-                custom_variants: 200,
-                custom_addons: 200,
-
-                zones: 5,
-                points: 150,
-
-                custom_qrcodes: true,
-                qrcode_rules: true,
-                external_links: 5,
-
-                call_staff: true,
-                reservations: true,
-
-                livechat: true,
-                theme_builder: true,
-
-                metadata: true,
-                google_analytics: true,
-                academy: true,
-
-                menu_categories: 10,
-                menu_subcategories: 25,
+    
+            {
+                name: 'Weats Pro',
+                cycles: [
+                    { price: 29.99, priceId: "price_1TbnCnCsiqCEyBVBDjfX0Swh", cycle: 'MONTHLY' },
+                    { price: 79.99, priceId: "price_1TbnCmCsiqCEyBVBww2nOa48", cycle: 'TIMESTRAL' },
+                ],
+                features: {
+                    menu: 3,
+                    languages: 4,
+    
+                    products: 250,
+                    images: 250,
+    
+                    custom_variants: 200,
+                    custom_addons: 200,
+    
+                    zones: 5,
+                    points: 150,
+    
+                    custom_qrcodes: true,
+                    qrcode_rules: true,
+                    external_links: 5,
+    
+                    call_staff: true,
+                    reservations: true,
+    
+                    livechat: true,
+                    theme_builder: true,
+    
+                    metadata: true,
+                    google_analytics: true,
+                    academy: true,
+    
+                    menu_categories: 10,
+                    menu_subcategories: 25,
+                },
             },
-        },
-
-        {
-            name: 'Weats Scale',
-            cycles: [
-                { price: 59.99, priceId: "price_1Tg4T1CsiqCEyBVBk3ao89CZ", cycle: 'MONTHLY' },
-                { price: 159.99, priceId: "price_1TbnDCCsiqCEyBVBfFPfFKA4", cycle: 'TIMESTRAL' },
-            ],
-            features: {
-                menu: 10,
-                languages: 6,
-
-                products: 500,
-                images: 500,
-
-                custom_variants: 350,
-                custom_addons: 350,
-
-                zones: 20,
-                points: 300,
-
-                custom_qrcodes: true,
-                qrcode_rules: true,
-                external_links: 10,
-
-                call_staff: true,
-                reservations: true,
-
-                livechat: true,
-                theme_builder: true,
-                expenses: true,
-
-                metadata: true,
-                google_analytics: true,
-                academy: true,
-
-                menu_categories: 10,
-                menu_subcategories: 25,
+    
+            {
+                name: 'Weats Scale',
+                cycles: [
+                    { price: 59.99, priceId: "price_1Tg4T1CsiqCEyBVBk3ao89CZ", cycle: 'MONTHLY' },
+                    { price: 159.99, priceId: "price_1TbnDCCsiqCEyBVBfFPfFKA4", cycle: 'TIMESTRAL' },
+                ],
+                features: {
+                    menu: 10,
+                    languages: 6,
+    
+                    products: 500,
+                    images: 500,
+    
+                    custom_variants: 350,
+                    custom_addons: 350,
+    
+                    zones: 20,
+                    points: 300,
+    
+                    custom_qrcodes: true,
+                    qrcode_rules: true,
+                    external_links: 10,
+    
+                    call_staff: true,
+                    reservations: true,
+    
+                    livechat: true,
+                    theme_builder: true,
+                    expenses: true,
+    
+                    metadata: true,
+                    google_analytics: true,
+                    academy: true,
+    
+                    menu_categories: 10,
+                    menu_subcategories: 25,
+                },
             },
-        },
-    ];
+        ]; */
 
     //prod
-    /* const plans = [
+    const plans = [
         {
             name: 'Weats Starter',
             cycles: [
@@ -212,6 +212,7 @@ async function main() {
 
                 custom_qrcodes: true,
                 qrcode_rules: false,
+                external_links: 0,
 
                 call_staff: false,
 
@@ -249,6 +250,7 @@ async function main() {
 
                 custom_qrcodes: true,
                 qrcode_rules: true,
+                external_links: 5,
 
                 call_staff: true,
 
@@ -285,6 +287,7 @@ async function main() {
 
                 custom_qrcodes: true,
                 qrcode_rules: true,
+                external_links: 10,
 
                 call_staff: true,
 
@@ -301,7 +304,7 @@ async function main() {
             },
         },
     ];
- */
+
     for (const p of plans) {
         // find or create plan
         let plan = await prisma.plan.findFirst({
