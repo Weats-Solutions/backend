@@ -5,7 +5,7 @@ import { IntegrationCategory } from '@weats/types';
 
 const CATEGORY_MAP: Record<IntegrationCategory, string[]> = {
     [IntegrationCategory.POS]: ['xdRestEnabled', 'vendusEnabled'],
-    [IntegrationCategory.PAYMENT]: ['eupagoEnabled', 'vivaEnabled', 'sumupEnabled'],
+    [IntegrationCategory.PAYMENT]: ['eupagoEnabled', 'vivaEnabled', 'sumupEnabled', 'ifthenpayEnabled'],
     [IntegrationCategory.INVOICING]: ['biziqEnabled'],
     [IntegrationCategory.OTHER]: [],
 };
@@ -16,6 +16,7 @@ const INTEGRATION_NAMES: Record<string, string> = {
     eupagoEnabled: 'EuPago',
     vivaEnabled: 'Viva Wallet',
     sumupEnabled: 'SumUp',
+    ifthenpayEnabled: 'Ifthenpay',
     biziqEnabled: 'Biziq',
 };
 

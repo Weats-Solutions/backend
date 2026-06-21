@@ -448,6 +448,8 @@ exports.Prisma.EstablishmentIntegrationsScalarFieldEnum = {
   eupagoEnabled: 'eupagoEnabled',
   eupagoApiKey: 'eupagoApiKey',
   eupagoCryptoKey: 'eupagoCryptoKey',
+  ifthenpayEnabled: 'ifthenpayEnabled',
+  ifthenpayAuthToken: 'ifthenpayAuthToken',
   biziqEnabled: 'biziqEnabled',
   biziqAccountId: 'biziqAccountId',
   biziqApiKey: 'biziqApiKey',

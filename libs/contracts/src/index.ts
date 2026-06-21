@@ -56,3 +56,4 @@ export * from './dashboard/dtos/item/variant-options/create-variant-option.dto';
 export * from './dashboard/dtos/item/variant-options/update-variant-option.dto';
 export * from './realtime';
 export * from './landing/dtos/contact.dto';
+export * from './dashboard/dtos/ifthenpay';

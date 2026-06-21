@@ -9,3 +9,4 @@ export * from './subscription';
 export * from './user';
 export * from './mail';
 export * from './integration';
+export * from './ifthenpay';

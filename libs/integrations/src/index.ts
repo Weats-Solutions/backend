@@ -7,6 +7,8 @@ export * from './clerk/clerk.module';
 export * from './clerk/clerk.service';
 export * from './eupago/eupago.module';
 export * from './eupago/eupago.service';
+export * from './ifthenpay/ifthenpay.module';
+export * from './ifthenpay/ifthenpay.service';
 export * from './xd-rest/xd-rest.module';
 export * from './xd-rest/xd-rest.service';
 export * from './xd-rest/xd-rest.dto';

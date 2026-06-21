@@ -37629,6 +37629,8 @@ export namespace Prisma {
     eupagoEnabled: boolean | null
     eupagoApiKey: string | null
     eupagoCryptoKey: string | null
+    ifthenpayEnabled: boolean | null
+    ifthenpayAuthToken: string | null
     biziqEnabled: boolean | null
     biziqAccountId: string | null
     biziqApiKey: string | null
@@ -37657,6 +37659,8 @@ export namespace Prisma {
     eupagoEnabled: boolean | null
     eupagoApiKey: string | null
     eupagoCryptoKey: string | null
+    ifthenpayEnabled: boolean | null
+    ifthenpayAuthToken: string | null
     biziqEnabled: boolean | null
     biziqAccountId: string | null
     biziqApiKey: string | null
@@ -37685,6 +37689,8 @@ export namespace Prisma {
     eupagoEnabled: number
     eupagoApiKey: number
     eupagoCryptoKey: number
+    ifthenpayEnabled: number
+    ifthenpayAuthToken: number
     biziqEnabled: number
     biziqAccountId: number
     biziqApiKey: number
@@ -37715,6 +37721,8 @@ export namespace Prisma {
     eupagoEnabled?: true
     eupagoApiKey?: true
     eupagoCryptoKey?: true
+    ifthenpayEnabled?: true
+    ifthenpayAuthToken?: true
     biziqEnabled?: true
     biziqAccountId?: true
     biziqApiKey?: true
@@ -37743,6 +37751,8 @@ export namespace Prisma {
     eupagoEnabled?: true
     eupagoApiKey?: true
     eupagoCryptoKey?: true
+    ifthenpayEnabled?: true
+    ifthenpayAuthToken?: true
     biziqEnabled?: true
     biziqAccountId?: true
     biziqApiKey?: true
@@ -37771,6 +37781,8 @@ export namespace Prisma {
     eupagoEnabled?: true
     eupagoApiKey?: true
     eupagoCryptoKey?: true
+    ifthenpayEnabled?: true
+    ifthenpayAuthToken?: true
     biziqEnabled?: true
     biziqAccountId?: true
     biziqApiKey?: true
@@ -37872,6 +37884,8 @@ export namespace Prisma {
     eupagoEnabled: boolean
     eupagoApiKey: string | null
     eupagoCryptoKey: string | null
+    ifthenpayEnabled: boolean
+    ifthenpayAuthToken: string | null
     biziqEnabled: boolean
     biziqAccountId: string | null
     biziqApiKey: string | null
@@ -37917,6 +37931,8 @@ export namespace Prisma {
     eupagoEnabled?: boolean
     eupagoApiKey?: boolean
     eupagoCryptoKey?: boolean
+    ifthenpayEnabled?: boolean
+    ifthenpayAuthToken?: boolean
     biziqEnabled?: boolean
     biziqAccountId?: boolean
     biziqApiKey?: boolean
@@ -37946,6 +37962,8 @@ export namespace Prisma {
     eupagoEnabled?: boolean
     eupagoApiKey?: boolean
     eupagoCryptoKey?: boolean
+    ifthenpayEnabled?: boolean
+    ifthenpayAuthToken?: boolean
     biziqEnabled?: boolean
     biziqAccountId?: boolean
     biziqApiKey?: boolean
@@ -37975,6 +37993,8 @@ export namespace Prisma {
     eupagoEnabled?: boolean
     eupagoApiKey?: boolean
     eupagoCryptoKey?: boolean
+    ifthenpayEnabled?: boolean
+    ifthenpayAuthToken?: boolean
     biziqEnabled?: boolean
     biziqAccountId?: boolean
     biziqApiKey?: boolean
@@ -38004,6 +38024,8 @@ export namespace Prisma {
     eupagoEnabled?: boolean
     eupagoApiKey?: boolean
     eupagoCryptoKey?: boolean
+    ifthenpayEnabled?: boolean
+    ifthenpayAuthToken?: boolean
     biziqEnabled?: boolean
     biziqAccountId?: boolean
     biziqApiKey?: boolean
@@ -38024,7 +38046,7 @@ export namespace Prisma {
     xdRestTokenExp?: boolean
   }
 
-  export type EstablishmentIntegrationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "createdAt" | "updatedAt" | "eupagoEnabled" | "eupagoApiKey" | "eupagoCryptoKey" | "biziqEnabled" | "biziqAccountId" | "biziqApiKey" | "biziqCompanyVat" | "vivaEnabled" | "vivaClientId" | "vivaClientSecret" | "sumupEnabled" | "sumupApiKey" | "sumupMerchantCode" | "vendusEnabled" | "vendusApiKey" | "xdRestEnabled" | "xdRestBaseUrl" | "xdRestUsername" | "xdRestPassword" | "xdRestToken" | "xdRestTokenExp", ExtArgs["result"]["establishmentIntegrations"]>
+  export type EstablishmentIntegrationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "establishmentId" | "createdAt" | "updatedAt" | "eupagoEnabled" | "eupagoApiKey" | "eupagoCryptoKey" | "ifthenpayEnabled" | "ifthenpayAuthToken" | "biziqEnabled" | "biziqAccountId" | "biziqApiKey" | "biziqCompanyVat" | "vivaEnabled" | "vivaClientId" | "vivaClientSecret" | "sumupEnabled" | "sumupApiKey" | "sumupMerchantCode" | "vendusEnabled" | "vendusApiKey" | "xdRestEnabled" | "xdRestBaseUrl" | "xdRestUsername" | "xdRestPassword" | "xdRestToken" | "xdRestTokenExp", ExtArgs["result"]["establishmentIntegrations"]>
   export type EstablishmentIntegrationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     establishment?: boolean | EstablishmentDefaultArgs<ExtArgs>
   }
@@ -38048,6 +38070,8 @@ export namespace Prisma {
       eupagoEnabled: boolean
       eupagoApiKey: string | null
       eupagoCryptoKey: string | null
+      ifthenpayEnabled: boolean
+      ifthenpayAuthToken: string | null
       biziqEnabled: boolean
       biziqAccountId: string | null
       biziqApiKey: string | null
@@ -38497,6 +38521,8 @@ export namespace Prisma {
     readonly eupagoEnabled: FieldRef<"EstablishmentIntegrations", 'Boolean'>
     readonly eupagoApiKey: FieldRef<"EstablishmentIntegrations", 'String'>
     readonly eupagoCryptoKey: FieldRef<"EstablishmentIntegrations", 'String'>
+    readonly ifthenpayEnabled: FieldRef<"EstablishmentIntegrations", 'Boolean'>
+    readonly ifthenpayAuthToken: FieldRef<"EstablishmentIntegrations", 'String'>
     readonly biziqEnabled: FieldRef<"EstablishmentIntegrations", 'Boolean'>
     readonly biziqAccountId: FieldRef<"EstablishmentIntegrations", 'String'>
     readonly biziqApiKey: FieldRef<"EstablishmentIntegrations", 'String'>
@@ -116298,6 +116324,8 @@ export namespace Prisma {
     eupagoEnabled: 'eupagoEnabled',
     eupagoApiKey: 'eupagoApiKey',
     eupagoCryptoKey: 'eupagoCryptoKey',
+    ifthenpayEnabled: 'ifthenpayEnabled',
+    ifthenpayAuthToken: 'ifthenpayAuthToken',
     biziqEnabled: 'biziqEnabled',
     biziqAccountId: 'biziqAccountId',
     biziqApiKey: 'biziqApiKey',
@@ -120226,6 +120254,8 @@ export namespace Prisma {
     eupagoEnabled?: BoolFilter<"EstablishmentIntegrations"> | boolean
     eupagoApiKey?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
     eupagoCryptoKey?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
+    ifthenpayEnabled?: BoolFilter<"EstablishmentIntegrations"> | boolean
+    ifthenpayAuthToken?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
     biziqEnabled?: BoolFilter<"EstablishmentIntegrations"> | boolean
     biziqAccountId?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
     biziqApiKey?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
@@ -120255,6 +120285,8 @@ export namespace Prisma {
     eupagoEnabled?: SortOrder
     eupagoApiKey?: SortOrderInput | SortOrder
     eupagoCryptoKey?: SortOrderInput | SortOrder
+    ifthenpayEnabled?: SortOrder
+    ifthenpayAuthToken?: SortOrderInput | SortOrder
     biziqEnabled?: SortOrder
     biziqAccountId?: SortOrderInput | SortOrder
     biziqApiKey?: SortOrderInput | SortOrder
@@ -120287,6 +120319,8 @@ export namespace Prisma {
     eupagoEnabled?: BoolFilter<"EstablishmentIntegrations"> | boolean
     eupagoApiKey?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
     eupagoCryptoKey?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
+    ifthenpayEnabled?: BoolFilter<"EstablishmentIntegrations"> | boolean
+    ifthenpayAuthToken?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
     biziqEnabled?: BoolFilter<"EstablishmentIntegrations"> | boolean
     biziqAccountId?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
     biziqApiKey?: StringNullableFilter<"EstablishmentIntegrations"> | string | null
@@ -120316,6 +120350,8 @@ export namespace Prisma {
     eupagoEnabled?: SortOrder
     eupagoApiKey?: SortOrderInput | SortOrder
     eupagoCryptoKey?: SortOrderInput | SortOrder
+    ifthenpayEnabled?: SortOrder
+    ifthenpayAuthToken?: SortOrderInput | SortOrder
     biziqEnabled?: SortOrder
     biziqAccountId?: SortOrderInput | SortOrder
     biziqApiKey?: SortOrderInput | SortOrder
@@ -120350,6 +120386,8 @@ export namespace Prisma {
     eupagoEnabled?: BoolWithAggregatesFilter<"EstablishmentIntegrations"> | boolean
     eupagoApiKey?: StringNullableWithAggregatesFilter<"EstablishmentIntegrations"> | string | null
     eupagoCryptoKey?: StringNullableWithAggregatesFilter<"EstablishmentIntegrations"> | string | null
+    ifthenpayEnabled?: BoolWithAggregatesFilter<"EstablishmentIntegrations"> | boolean
+    ifthenpayAuthToken?: StringNullableWithAggregatesFilter<"EstablishmentIntegrations"> | string | null
     biziqEnabled?: BoolWithAggregatesFilter<"EstablishmentIntegrations"> | boolean
     biziqAccountId?: StringNullableWithAggregatesFilter<"EstablishmentIntegrations"> | string | null
     biziqApiKey?: StringNullableWithAggregatesFilter<"EstablishmentIntegrations"> | string | null
@@ -128105,6 +128143,8 @@ export namespace Prisma {
     eupagoEnabled?: boolean
     eupagoApiKey?: string | null
     eupagoCryptoKey?: string | null
+    ifthenpayEnabled?: boolean
+    ifthenpayAuthToken?: string | null
     biziqEnabled?: boolean
     biziqAccountId?: string | null
     biziqApiKey?: string | null
@@ -128134,6 +128174,8 @@ export namespace Prisma {
     eupagoEnabled?: boolean
     eupagoApiKey?: string | null
     eupagoCryptoKey?: string | null
+    ifthenpayEnabled?: boolean
+    ifthenpayAuthToken?: string | null
     biziqEnabled?: boolean
     biziqAccountId?: string | null
     biziqApiKey?: string | null
@@ -128161,6 +128203,8 @@ export namespace Prisma {
     eupagoEnabled?: BoolFieldUpdateOperationsInput | boolean
     eupagoApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     eupagoCryptoKey?: NullableStringFieldUpdateOperationsInput | string | null
+    ifthenpayEnabled?: BoolFieldUpdateOperationsInput | boolean
+    ifthenpayAuthToken?: NullableStringFieldUpdateOperationsInput | string | null
     biziqEnabled?: BoolFieldUpdateOperationsInput | boolean
     biziqAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     biziqApiKey?: NullableStringFieldUpdateOperationsInput | string | null
@@ -128190,6 +128234,8 @@ export namespace Prisma {
     eupagoEnabled?: BoolFieldUpdateOperationsInput | boolean
     eupagoApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     eupagoCryptoKey?: NullableStringFieldUpdateOperationsInput | string | null
+    ifthenpayEnabled?: BoolFieldUpdateOperationsInput | boolean
+    ifthenpayAuthToken?: NullableStringFieldUpdateOperationsInput | string | null
     biziqEnabled?: BoolFieldUpdateOperationsInput | boolean
     biziqAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     biziqApiKey?: NullableStringFieldUpdateOperationsInput | string | null
@@ -128218,6 +128264,8 @@ export namespace Prisma {
     eupagoEnabled?: boolean
     eupagoApiKey?: string | null
     eupagoCryptoKey?: string | null
+    ifthenpayEnabled?: boolean
+    ifthenpayAuthToken?: string | null
     biziqEnabled?: boolean
     biziqAccountId?: string | null
     biziqApiKey?: string | null
@@ -128245,6 +128293,8 @@ export namespace Prisma {
     eupagoEnabled?: BoolFieldUpdateOperationsInput | boolean
     eupagoApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     eupagoCryptoKey?: NullableStringFieldUpdateOperationsInput | string | null
+    ifthenpayEnabled?: BoolFieldUpdateOperationsInput | boolean
+    ifthenpayAuthToken?: NullableStringFieldUpdateOperationsInput | string | null
     biziqEnabled?: BoolFieldUpdateOperationsInput | boolean
     biziqAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     biziqApiKey?: NullableStringFieldUpdateOperationsInput | string | null
@@ -128273,6 +128323,8 @@ export namespace Prisma {
     eupagoEnabled?: BoolFieldUpdateOperationsInput | boolean
     eupagoApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     eupagoCryptoKey?: NullableStringFieldUpdateOperationsInput | string | null
+    ifthenpayEnabled?: BoolFieldUpdateOperationsInput | boolean
+    ifthenpayAuthToken?: NullableStringFieldUpdateOperationsInput | string | null
     biziqEnabled?: BoolFieldUpdateOperationsInput | boolean
     biziqAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     biziqApiKey?: NullableStringFieldUpdateOperationsInput | string | null
@@ -136205,6 +136257,8 @@ export namespace Prisma {
     eupagoEnabled?: SortOrder
     eupagoApiKey?: SortOrder
     eupagoCryptoKey?: SortOrder
+    ifthenpayEnabled?: SortOrder
+    ifthenpayAuthToken?: SortOrder
     biziqEnabled?: SortOrder
     biziqAccountId?: SortOrder
     biziqApiKey?: SortOrder
@@ -136233,6 +136287,8 @@ export namespace Prisma {
     eupagoEnabled?: SortOrder
     eupagoApiKey?: SortOrder
     eupagoCryptoKey?: SortOrder
+    ifthenpayEnabled?: SortOrder
+    ifthenpayAuthToken?: SortOrder
     biziqEnabled?: SortOrder
     biziqAccountId?: SortOrder
     biziqApiKey?: SortOrder
@@ -136261,6 +136317,8 @@ export namespace Prisma {
     eupagoEnabled?: SortOrder
     eupagoApiKey?: SortOrder
     eupagoCryptoKey?: SortOrder
+    ifthenpayEnabled?: SortOrder
+    ifthenpayAuthToken?: SortOrder
     biziqEnabled?: SortOrder
     biziqAccountId?: SortOrder
     biziqApiKey?: SortOrder
@@ -153680,6 +153738,8 @@ export namespace Prisma {
     eupagoEnabled?: boolean
     eupagoApiKey?: string | null
     eupagoCryptoKey?: string | null
+    ifthenpayEnabled?: boolean
+    ifthenpayAuthToken?: string | null
     biziqEnabled?: boolean
     biziqAccountId?: string | null
     biziqApiKey?: string | null
@@ -153707,6 +153767,8 @@ export namespace Prisma {
     eupagoEnabled?: boolean
     eupagoApiKey?: string | null
     eupagoCryptoKey?: string | null
+    ifthenpayEnabled?: boolean
+    ifthenpayAuthToken?: string | null
     biziqEnabled?: boolean
     biziqAccountId?: string | null
     biziqApiKey?: string | null
@@ -155255,6 +155317,8 @@ export namespace Prisma {
     eupagoEnabled?: BoolFieldUpdateOperationsInput | boolean
     eupagoApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     eupagoCryptoKey?: NullableStringFieldUpdateOperationsInput | string | null
+    ifthenpayEnabled?: BoolFieldUpdateOperationsInput | boolean
+    ifthenpayAuthToken?: NullableStringFieldUpdateOperationsInput | string | null
     biziqEnabled?: BoolFieldUpdateOperationsInput | boolean
     biziqAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     biziqApiKey?: NullableStringFieldUpdateOperationsInput | string | null
@@ -155282,6 +155346,8 @@ export namespace Prisma {
     eupagoEnabled?: BoolFieldUpdateOperationsInput | boolean
     eupagoApiKey?: NullableStringFieldUpdateOperationsInput | string | null
     eupagoCryptoKey?: NullableStringFieldUpdateOperationsInput | string | null
+    ifthenpayEnabled?: BoolFieldUpdateOperationsInput | boolean
+    ifthenpayAuthToken?: NullableStringFieldUpdateOperationsInput | string | null
     biziqEnabled?: BoolFieldUpdateOperationsInput | boolean
     biziqAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     biziqApiKey?: NullableStringFieldUpdateOperationsInput | string | null
