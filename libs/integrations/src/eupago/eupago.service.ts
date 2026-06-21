@@ -17,7 +17,8 @@ import {
     EupagoDeleteResult,
     EupagoCryptoKeyResult,
     Establishment,
-    PaymentRequest
+    PaymentRequest,
+    IntegrationCategory
 } from '@weats/types';
 import { CorePrismaService } from '@weats/database';
 import { EncryptionService } from '@weats/encryption';
@@ -25,6 +26,7 @@ import { DEFAULT_MINUTES_FORM_UP, ERRORS, EupagoFormLangEnum } from '@weats/comm
 import { EupagoCreateMbwayPaymentDto } from '@weats/contracts/dashboard/dtos/eupago';
 import { EupagoCreatePaymentDto } from '@weats/contracts/dashboard/dtos/eupago/create-payment.dto';
 import { RpcException } from '@nestjs/microservices';
+import { IntegrationsValidationService } from '../validation/integrations-validation.service';
 
 // ─── Shared types ───────────────────────────────────────────────────────────
 
@@ -67,6 +69,7 @@ export class EupagoService {
         private readonly corePrismaService: CorePrismaService,
         private readonly encryption: EncryptionService,
         @Inject('EUPAGO_API_URL') private readonly eupagoApiUrl: string,
+        private readonly validationService: IntegrationsValidationService,
     ) { }
 
     // ─── Key management ─────────────────────────────────────────────────────
@@ -75,6 +78,13 @@ export class EupagoService {
         establishmentId: string,
         apiKey: string,
     ): Promise<EupagoKeyStatus> {
+        // Validate exclusivity before saving key and activating integration
+        await this.validationService.validateExclusivity(
+            establishmentId,
+            IntegrationCategory.PAYMENT,
+            'eupagoEnabled',
+        );
+
         const encrypted = this.encryption.encrypt(apiKey);
 
         const record = await this.corePrismaService.establishmentIntegrations.upsert({
@@ -136,6 +146,14 @@ export class EupagoService {
                 message: ERRORS.EUPAGO_INTEGRATION_NOT_CONFIGURED,
                 code: ERRORS.EUPAGO_INTEGRATION_NOT_CONFIGURED,
             });
+        }
+
+        if (enabled) {
+            await this.validationService.validateExclusivity(
+                establishmentId,
+                IntegrationCategory.PAYMENT,
+                'eupagoEnabled',
+            );
         }
 
         await this.corePrismaService.establishmentIntegrations.update({
