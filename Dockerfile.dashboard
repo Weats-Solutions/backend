@@ -52,7 +52,7 @@ RUN addgroup -g 1001 -S nodejs && \
 USER nodejs
 
 # Expose port (internal only, for TCP communication)
-EXPOSE 4002
+EXPOSE 4000
 
 # Start dashboard microservice
 CMD ["node", "dist/apps/dashboard/main"]

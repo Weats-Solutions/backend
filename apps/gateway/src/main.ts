@@ -40,7 +40,7 @@ async function bootstrap() {
   const corePrisma = app.get(CorePrismaService);
   const ordersPrisma = app.get(OrdersPrismaService);
 
-  const gatewayPort = appConfigService.getGatewayPort();
+  const dashboardPort = appConfigService.getDashboardPort();
   const nodeEnv = appConfigService.getNodeEnv();
   const eupagoEnvironment = eupagoConfigService.getEupagoEnvironment();
 
@@ -113,13 +113,13 @@ async function bootstrap() {
   await ordersPrisma.$connect();
 
   // Start server only after dependencies are ready
-  await app.listen(gatewayPort);
+  await app.listen(dashboardPort);
 
   // =========================
   // LOGS (AGRUPADOS NO FINAL)
   // =========================
   logger.log('===================================');
-  logger.log(`🚀 Gateway running on http://localhost:${gatewayPort}`);
+  logger.log(`🚀 Gateway running on http://localhost:${dashboardPort}`);
   logger.log(`🌍 Environment: ${nodeEnv}`);
   logger.log(`💳 Eupago mode: ${eupagoEnvironment}`);
   logger.log(`⏱ KeepAlive: ${server.keepAliveTimeout / 1000}s`);
