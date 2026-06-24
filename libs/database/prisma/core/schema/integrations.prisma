@@ -16,6 +16,11 @@ model EstablishmentIntegrations {
   eupagoApiKey    String?
   eupagoCryptoKey String?
 
+  // ─── Ifthenpay ─────────────────────────────────────────────────────────────
+  // Payment gateway: Multibanco, MB WAY, Payshop, Credit Card, Cofidis, PIX, Pay by Link.
+  ifthenpayEnabled   Boolean @default(false)
+  ifthenpayAuthToken String?
+
   // ─── Biziq ────────────────────────────────────────────────────────────────
   // Portuguese e-invoicing platform (AT / SAF-T compliant).
   // biziqAccountId  — encrypted Biziq account identifier

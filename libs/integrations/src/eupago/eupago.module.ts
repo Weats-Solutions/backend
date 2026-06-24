@@ -6,9 +6,10 @@ import { EupagoService } from "./eupago.service";
 import { EupagoConfigGuard } from "../../../common/src/guards/eupago-config.guard";
 import { DatabaseModule } from "@weats/database";
 import { EncryptionModule } from "@weats/encryption";
+import { IntegrationsValidationModule } from "../validation/integrations-validation.module";
 
 @Module({
-    imports: [HttpModule, ConfigsModule, DatabaseModule, EncryptionModule],
+    imports: [HttpModule, ConfigsModule, DatabaseModule, EncryptionModule, IntegrationsValidationModule],
     providers: [EupagoService, EupagoConfigGuard,
         {
             provide: 'EUPAGO_API_URL',

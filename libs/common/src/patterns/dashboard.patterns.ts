@@ -140,6 +140,19 @@ export const DASHBOARD_PATTERNS = {
   EUPAGO_GENERATE_HOSTED_PAYMENT: 'dashboard.eupago.generate_hosted_payment',
   EUPAGO_GENERATE_MBWAY_PAYMENT: 'dashboard.eupago.generate_mbway_payment',
 
+  IFTHENPAY_GET_STATUS: 'dashboard.ifthenpay.get_status',
+  IFTHENPAY_SAVE_KEY: 'dashboard.ifthenpay.save_key',
+  IFTHENPAY_DELETE_KEY: 'dashboard.ifthenpay.delete_key',
+  IFTHENPAY_TOGGLE: 'dashboard.ifthenpay.toggle',
+  IFTHENPAY_GENERATE_MBWAY_PAYMENT: 'dashboard.ifthenpay.generate_mbway_payment',
+  IFTHENPAY_GET_MBWAY_STATUS: 'dashboard.ifthenpay.get_mbway_status',
+  IFTHENPAY_GENERATE_MULTIBANCO_PAYMENT: 'dashboard.ifthenpay.generate_multibanco_payment',
+  IFTHENPAY_GENERATE_PAYSHOP_PAYMENT: 'dashboard.ifthenpay.generate_payshop_payment',
+  IFTHENPAY_GENERATE_CREDIT_CARD_PAYMENT: 'dashboard.ifthenpay.generate_credit_card_payment',
+  IFTHENPAY_GENERATE_COFIDIS_PAYMENT: 'dashboard.ifthenpay.generate_cofidis_payment',
+  IFTHENPAY_GENERATE_PIX_PAYMENT: 'dashboard.ifthenpay.generate_pix_payment',
+  IFTHENPAY_GENERATE_PAY_BY_LINK_PAYMENT: 'dashboard.ifthenpay.generate_pay_by_link_payment',
+
   // ─── XD Rest ───────────────────────────────────────────────────────────────
   XD_REST_GET_STATUS: 'dashboard.xd_rest.get_status',
   XD_REST_SAVE_CREDENTIALS: 'dashboard.xd_rest.save_credentials',
