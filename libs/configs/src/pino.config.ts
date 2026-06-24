@@ -34,11 +34,22 @@ export const getPinoConfig = (appConfig: AppConfigService): Params => {
       colorize: true,
       singleLine: true,
       translateTime: 'yyyy-mm-dd HH:MM:ss.l o',
-      ignore: 'pid,hostname,context,req,res,reqId,userId',
+      ignore: 'pid,hostname,context,req,res,reqId,userId,responseTime',
       messageFormat: (log: any, messageKey: string) => {
         const context = log.context ? `\x1b[36m[${log.context}]\x1b[0m ` : '';
-        const reqId = log.reqId ? `\x1b[32m(${log.reqId})\x1b[0m ` : '';
+        const reqIdVal = log.reqId || (log.req && log.req.id);
+        const reqId = reqIdVal ? `\x1b[32m(${reqIdVal})\x1b[0m ` : '';
         const userId = log.userId ? `\x1b[33m(user: ${log.userId})\x1b[0m ` : '';
+
+        // Check if this is an HTTP request completion log
+        if (log.req && log.res) {
+          const method = log.req.method;
+          const url = log.req.url;
+          const status = log.res.statusCode;
+          const responseTime = log.responseTime !== undefined ? `\x1b[33m${log.responseTime}ms\x1b[0m` : '';
+          return `${context}${reqId}${userId}\x1b[35m${method}\x1b[0m ${url} - \x1b[32m${status}\x1b[0m ${responseTime}`;
+        }
+
         const msg = log[messageKey];
         return `${context}${reqId}${userId}${msg}`;
       },
