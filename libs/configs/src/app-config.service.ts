@@ -25,8 +25,8 @@ export class AppConfigService {
     return this.configService.getOrThrow<string>('MENU_CACHE_TOKEN');
   }
 
-  getGatewayPort(): string {
-    return this.configService.getOrThrow<string>('GATEWAY_PORT');
+  getDashboardPort(): string {
+    return this.configService.getOrThrow<string>('DASHBOARD_PORT');
   }
 
   getWebhooksPort(): string {

@@ -56,6 +56,11 @@ export class ClerkGuard implements CanActivate {
 
       (request as Request & { user: User }).user = user;
 
+      // Inject the authenticated userId into the Pino request logger context
+      if ((request as any).log) {
+        (request as any).log = (request as any).log.child({ userId: user.id });
+      }
+
       return true;
     } catch (error) {
       this.logger.error('Authentication failed:', error.message);

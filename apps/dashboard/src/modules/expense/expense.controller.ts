@@ -1,34 +1,61 @@
-import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
+import { ApiAuthenticated, CurrentEstablishment, FeatureLimitGuard, RequiresFeature } from '@weats/common';
 import { CreateExpenseDto } from '@weats/contracts';
+import { Establishment, feature } from '@weats/types';
 import { ExpenseService } from './expense.service';
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiOkResponse, ApiParam } from '@nestjs/swagger';
 
-@Controller()
+@ApiTags('Expenses')
+@Controller('expenses')
+@RequiresFeature(feature.expenses)
+@UseGuards(FeatureLimitGuard)
 export class ExpenseController {
   constructor(private readonly expenseService: ExpenseService) { }
 
-  @MessagePattern(DASHBOARD_PATTERNS.EXPENSE_CREATE)
+  @Post()
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Criar uma nova despesa' })
+  @ApiCreatedResponse({ description: 'Despesa criada com sucesso' })
   async createExpense(
-    @Payload() payload: { establishmentId: string; createExpenseDto: CreateExpenseDto },
+    @CurrentEstablishment() establishment: Establishment,
+    @Body() createExpenseDto: CreateExpenseDto,
   ) {
     return this.expenseService.createExpense(
-      payload.establishmentId,
-      payload.createExpenseDto,
+      establishment.id,
+      createExpenseDto,
     );
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.EXPENSE_GET_BY_ESTABLISHMENT)
+  @Get()
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Listar todas as despesas do estabelecimento' })
+  @ApiOkResponse({ description: 'Lista de despesas obtida com sucesso' })
   async getExpensesByEstablishment(
-    @Payload() payload: { establishmentId: string },
+    @CurrentEstablishment() establishment: Establishment,
   ) {
-    return this.expenseService.getExpensesByEstablishment(payload.establishmentId);
+    return this.expenseService.getExpensesByEstablishment(establishment.id);
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.EXPENSE_DELETE)
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Remover uma despesa' })
+  @ApiParam({ name: 'id', description: 'ID da despesa a remover' })
+  @ApiOkResponse({ description: 'Despesa removida com sucesso' })
   async deleteExpense(
-    @Payload() payload: { id: string; establishmentId: string },
+    @Param('id') id: string,
+    @CurrentEstablishment() establishment: Establishment,
   ) {
-    return this.expenseService.deleteExpense(payload.id, payload.establishmentId);
+    return this.expenseService.deleteExpense(id, establishment.id);
   }
 }

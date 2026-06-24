@@ -1,105 +1,126 @@
-import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { ApiAuthenticated, CurrentEstablishment, CurrentUser, RateLimit, Roles } from '@weats/common';
 import { QrCodesService } from './qr-codes.service';
 import { GenerateQrCodesDto, UpdateQrCodeDto, BulkUpdateQrCodesDto, BulkDeleteQrCodesDto, ResendQrCodesDto } from '@weats/contracts';
-import { Establishment } from '@weats/types';
+import { Establishment, User } from '@weats/types';
+import { EmployeeRoles } from '@weats/database';
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiOkResponse, ApiParam } from '@nestjs/swagger';
 
-@Controller()
+
+@ApiTags('QR Codes')
+@Controller('zones/qr-codes')
 export class QrCodesController {
     constructor(private readonly qrCodesService: QrCodesService) { }
 
-    @MessagePattern(DASHBOARD_PATTERNS.QR_GET_ALL)
+
+    @Get()
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Listar todos os códigos QR do estabelecimento' })
+    @ApiOkResponse({ description: 'Lista de códigos QR obtida com sucesso' })
     async getQrCodes(
-        @Payload() payload: {
-            establishmentId: string;
-        },
+        @CurrentEstablishment() establishment: Establishment,
     ) {
-        return this.qrCodesService.findAll(payload.establishmentId);
+        return this.qrCodesService.findAll(establishment.id);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.QR_GENERATE)
+    @Roles(EmployeeRoles.MANAGER)
+    @Post('generate')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gerar e exportar novos códigos QR em lote' })
+    @ApiCreatedResponse({ description: 'Códigos QR gerados com sucesso' })
+    @RateLimit('STRICT') // 5 req/min — job pesado: gera ZIPs, envia email, consome Redis
     async generateQrCodes(
-        @Payload() payload: {
-            dto: GenerateQrCodesDto;
-            establishment: Establishment;
-            userEmail: string;
-        },
+        @CurrentEstablishment() establishment: Establishment,
+        @CurrentUser() user: User,
+        @Body() dto: GenerateQrCodesDto,
     ) {
         return this.qrCodesService.generateQrCodes(
-            payload.dto,
-            payload.establishment,
-            payload.userEmail,
+            dto,
+            establishment,
+            user.email,
         );
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.QR_UPDATE)
-    async updateQrCode(
-        @Payload() payload: {
-            id: string;
-            dto: UpdateQrCodeDto;
-            establishment: Establishment;
-        },
-    ) {
-        return this.qrCodesService.update(
-            payload.id,
-            payload.dto,
-            payload.establishment,
-        );
-    }
-
-    @MessagePattern(DASHBOARD_PATTERNS.QR_DELETE)
-    async deleteQrCode(
-        @Payload() payload: {
-            id: string;
-            establishment: Establishment;
-        },
-    ) {
-        return this.qrCodesService.delete(
-            payload.id,
-            payload.establishment,
-        );
-    }
-
-    @MessagePattern(DASHBOARD_PATTERNS.QR_BULK_UPDATE)
-    async bulkUpdateQrCodes(
-        @Payload() payload: {
-            dto: BulkUpdateQrCodesDto;
-            establishment: Establishment;
-        },
-    ) {
-        return this.qrCodesService.bulkUpdate(
-            payload.dto.ids,
-            payload.dto.data,
-            payload.establishment,
-        );
-    }
-
-    @MessagePattern(DASHBOARD_PATTERNS.QR_BULK_DELETE)
-    async bulkDeleteQrCodes(
-        @Payload() payload: {
-            dto: BulkDeleteQrCodesDto;
-            establishment: Establishment;
-        },
-    ) {
-        return this.qrCodesService.bulkDelete(
-            payload.dto.ids,
-            payload.establishment,
-        );
-    }
-
-    @MessagePattern(DASHBOARD_PATTERNS.QR_RESEND)
+    @Roles(EmployeeRoles.MANAGER)
+    @Post('resend')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Reenviar ficheiro ZIP com códigos QR por email' })
+    @ApiCreatedResponse({ description: 'Códigos QR reenviados com sucesso' })
+    @RateLimit('STRICT') // job pesado
     async resendQrCodes(
-        @Payload() payload: {
-            dto: ResendQrCodesDto;
-            establishment: Establishment;
-            userEmail: string;
-        },
+        @CurrentEstablishment() establishment: Establishment,
+        @CurrentUser() user: User,
+        @Body() dto: ResendQrCodesDto,
     ) {
         return this.qrCodesService.resendQrCodes(
-            payload.dto,
-            payload.establishment,
-            payload.userEmail,
+            dto,
+            establishment,
+            user.email,
+        );
+    }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @Patch('bulk')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar múltiplos códigos QR em lote' })
+    @ApiOkResponse({ description: 'Códigos QR atualizados com sucesso' })
+    async bulkUpdateQrCodes(
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: BulkUpdateQrCodesDto,
+    ) {
+        return this.qrCodesService.bulkUpdate(
+            dto.ids,
+            dto.data,
+            establishment,
+        );
+    }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @Delete('bulk')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Remover múltiplos códigos QR em lote' })
+    @ApiOkResponse({ description: 'Códigos QR removidos com sucesso' })
+    async bulkDeleteQrCodes(
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: BulkDeleteQrCodesDto,
+    ) {
+        return this.qrCodesService.bulkDelete(
+            dto.ids,
+            establishment,
+        );
+    }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @Patch(':id')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar detalhes de um código QR específico' })
+    @ApiParam({ name: 'id', description: 'ID do código QR' })
+    @ApiOkResponse({ description: 'Código QR atualizado com sucesso' })
+    async updateQrCode(
+        @Param('id') id: string,
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: UpdateQrCodeDto,
+    ) {
+        return this.qrCodesService.update(
+            id,
+            dto,
+            establishment,
+        );
+    }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @Delete(':id')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Remover um código QR específico' })
+    @ApiParam({ name: 'id', description: 'ID do código QR' })
+    @ApiOkResponse({ description: 'Código QR removido com sucesso' })
+    async deleteQrCode(
+        @Param('id') id: string,
+        @CurrentEstablishment() establishment: Establishment,
+    ) {
+        return this.qrCodesService.delete(
+            id,
+            establishment,
         );
     }
 }

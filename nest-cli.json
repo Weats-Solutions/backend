@@ -61,7 +61,16 @@
       "entryFile": "index",
       "sourceRoot": "libs/contracts/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/contracts/tsconfig.lib.json"
+        "tsConfigPath": "libs/contracts/tsconfig.lib.json",
+        "plugins": [
+          {
+            "name": "@nestjs/swagger",
+            "options": {
+              "classValidatorShim": true,
+              "introspectComments": true
+            }
+          }
+        ]
       }
     },
     "dashboard": {
@@ -70,7 +79,16 @@
       "entryFile": "main",
       "sourceRoot": "apps/dashboard/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/dashboard/tsconfig.app.json"
+        "tsConfigPath": "apps/dashboard/tsconfig.app.json",
+        "plugins": [
+          {
+            "name": "@nestjs/swagger",
+            "options": {
+              "classValidatorShim": true,
+              "introspectComments": true
+            }
+          }
+        ]
       }
     },
     "database": {

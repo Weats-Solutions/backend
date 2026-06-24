@@ -1,11 +1,13 @@
 import { SaveEupagoKeyDto, SaveEupagoCryptoKeyDto, EupagoCreatePaymentDto, EupagoCreateMbwayPaymentDto, EupagoCreateHostedPaymentDto } from '@weats/contracts/dashboard/dtos/eupago';
-import { MessagePattern, Payload } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
-import { Controller } from '@nestjs/common';
+import { Controller, Post, Get, Delete, Patch, Body, UseGuards } from '@nestjs/common';
+import { ApiAuthenticated, CurrentEstablishment, Roles, EupagoConfigGuard } from '@weats/common';
 import { EupagoService } from '@weats/integrations/eupago/eupago.service';
 import { Establishment } from '@weats/types';
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiOkResponse, ApiBody } from '@nestjs/swagger';
 
-@Controller()
+@ApiTags('Integrations - EuPago')
+@Roles()
+@Controller('integrations/eupago')
 export class EupagoIntegrationController {
     constructor(
         private readonly eupagoService: EupagoService
@@ -13,42 +15,96 @@ export class EupagoIntegrationController {
 
     // ─── API Key ─────────────────────────────────────────────────────────────
 
-    @MessagePattern(DASHBOARD_PATTERNS.EUPAGO_GET_STATUS)
-    getStatus(@Payload() establishmentId: string) {
-        return this.eupagoService.getStatus(establishmentId);
+    /**
+     * GET /v1/integrations/eupago/key
+     * Returns the connection status and masked key for the establishment.
+     */
+    @Get('key')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter estado e chave mascarada da integração EuPago' })
+    @ApiOkResponse({ description: 'Estado da integração obtido com sucesso' })
+    getStatus(@CurrentEstablishment() establishment: Establishment) {
+        return this.eupagoService.getStatus(establishment.id);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.EUPAGO_SAVE_KEY)
+    /**
+     * POST /v1/integrations/eupago/key
+     * Saves (or replaces) the EuPago API key for the establishment.
+     */
+    @Post('key')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gravar chave API da EuPago' })
+    @ApiCreatedResponse({ description: 'Chave API gravada com sucesso' })
     saveKey(
-        @Payload() payload: { establishmentId: string, dto: SaveEupagoKeyDto },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: SaveEupagoKeyDto,
     ) {
-        return this.eupagoService.saveKey(payload.establishmentId, payload.dto.apiKey);
+        return this.eupagoService.saveKey(establishment.id, dto.apiKey);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.EUPAGO_DELETE_KEY)
-    deleteKey(@Payload() establishmentId: string) {
-        return this.eupagoService.deleteKey(establishmentId);
+    /**
+     * DELETE /v1/integrations/eupago/key
+     * Removes the EuPago API key and disables the integration.
+     */
+    @Delete('key')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Remover chave API da EuPago' })
+    @ApiOkResponse({ description: 'Chave API removida com sucesso' })
+    deleteKey(@CurrentEstablishment() establishment: Establishment) {
+        return this.eupagoService.deleteKey(establishment.id);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.EUPAGO_TOGGLE)
+    /**
+     * PATCH /v1/integrations/eupago/toggle
+     * Enables or disables the EuPago integration without touching credentials.
+     */
+    @Patch('toggle')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Ativar ou desativar a integração EuPago' })
+    @ApiBody({
+        schema: {
+            type: 'object',
+            properties: {
+                enabled: { type: 'boolean', description: 'Ativar/desativar a integração' }
+            },
+            required: ['enabled']
+        }
+    })
+    @ApiOkResponse({ description: 'Integração alternada com sucesso' })
     toggle(
-        @Payload() payload: { establishmentId: string, enabled: boolean },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body('enabled') enabled: boolean,
     ) {
-        return this.eupagoService.toggle(payload.establishmentId, payload.enabled);
+        return this.eupagoService.toggle(establishment.id, enabled);
     }
 
     // ─── Crypto Key (Chave Criptográfica dos webhooks) ────────────────────────
 
-    @MessagePattern(DASHBOARD_PATTERNS.EUPAGO_SAVE_CRYPTO_KEY)
+    /**
+     * POST /v1/integrations/eupago/crypto-key
+     * Saves (or replaces) the Chave Criptográfica gerada no backoffice EuPago.
+     */
+    @Post('crypto-key')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gravar chave criptográfica dos webhooks EuPago' })
+    @ApiCreatedResponse({ description: 'Chave criptográfica gravada com sucesso' })
     saveCryptoKey(
-        @Payload() payload: { establishmentId: string, dto: SaveEupagoCryptoKeyDto },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: SaveEupagoCryptoKeyDto,
     ) {
-        return this.eupagoService.saveCryptoKey(payload.establishmentId, payload.dto.cryptoKey);
+        return this.eupagoService.saveCryptoKey(establishment.id, dto.cryptoKey);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.EUPAGO_DELETE_CRYPTO_KEY)
-    deleteCryptoKey(@Payload() establishmentId: string) {
-        return this.eupagoService.deleteCryptoKey(establishmentId);
+    /**
+     * DELETE /v1/integrations/eupago/crypto-key
+     * Removes the stored Chave Criptográfica.
+     */
+    @Delete('crypto-key')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Remover chave criptográfica dos webhooks EuPago' })
+    @ApiOkResponse({ description: 'Chave criptográfica removida com sucesso' })
+    deleteCryptoKey(@CurrentEstablishment() establishment: Establishment) {
+        return this.eupagoService.deleteCryptoKey(establishment.id);
     }
 
     // ─── Hosted Payment (Generic: CC, Google Pay, Apple Pay) ────────────────
@@ -56,29 +112,47 @@ export class EupagoIntegrationController {
     /**
      * POST /v1/integrations/eupago/hosted-payment
      */
-    @MessagePattern(DASHBOARD_PATTERNS.EUPAGO_GENERATE_HOSTED_PAYMENT)
+    @Post('hosted-payment')
+    @UseGuards(EupagoConfigGuard)
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gerar pagamento hospedado EuPago (Cartão de Crédito, Google Pay, Apple Pay)' })
+    @ApiCreatedResponse({ description: 'Pagamento hospedado criado com sucesso' })
     async generateHostedPayment(
-        @Payload() payload: { 
-            establishment: Establishment, 
-            type: 'CreditCard' | 'GooglePay' | 'ApplePay', 
-            identifier: string, 
-            dto: EupagoCreateHostedPaymentDto 
-        },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: EupagoCreateHostedPaymentDto,
     ) {
+        const typePrefixes = {
+            CreditCard: 'cc',
+            GooglePay: 'gp',
+            ApplePay: 'ap'
+        };
+
         return this.eupagoService.createHostedPayment(
-            payload.type, 
-            payload.establishment, 
-            payload.identifier, 
-            payload.dto
+            dto.type,
+            establishment,
+            `${typePrefixes[dto.type]}-${establishment.id}`,
+            dto
         );
     }
 
     // ─── MB WAY Payment ───────────────────────────────────────────────────────
 
-    @MessagePattern(DASHBOARD_PATTERNS.EUPAGO_GENERATE_MBWAY_PAYMENT)
+    /**
+     * POST /v1/integrations/eupago/mbway/generate
+     */
+    @Post('mbway/generate')
+    @UseGuards(EupagoConfigGuard)
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gerar pagamento por MB WAY' })
+    @ApiCreatedResponse({ description: 'Pagamento MB WAY iniciado com sucesso' })
     async generateMbwayPayment(
-        @Payload() payload: { establishment: Establishment, identifier: string, dto: EupagoCreateMbwayPaymentDto },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: EupagoCreateMbwayPaymentDto,
     ) {
-        return this.eupagoService.createMbwayPayment(payload.establishment, payload.identifier, payload.dto);
+        return this.eupagoService.createMbwayPayment(
+            establishment,
+            `mbw-${establishment.id}`,
+            dto
+        );
     }
 }

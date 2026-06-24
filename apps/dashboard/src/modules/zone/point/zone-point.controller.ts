@@ -1,46 +1,76 @@
-import { Controller } from '@nestjs/common';
-import { DASHBOARD_PATTERNS } from '@weats/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { ApiAuthenticated, FeatureLimitGuard, RequiresFeature, Roles } from '@weats/common';
 import { CreateServicePointDto, UpdateServicePointDto } from '@weats/contracts';
-import { Payload } from '@nestjs/microservices';
-import { MessagePattern } from '@nestjs/microservices';
 import { ZonePointService } from './zone-point.service';
+import { EmployeeRoles } from '@weats/database';
+import { feature } from '@weats/types';
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiOkResponse, ApiParam } from '@nestjs/swagger';
 
-@Controller()
+@ApiTags('Service Points')
+@ApiParam({ name: 'zoneId', description: 'ID da zona de serviço' })
+@Controller('zones/:zoneId/points')
 export class ZonePointController {
     constructor(private readonly zonePointService: ZonePointService) { }
 
-    @MessagePattern(DASHBOARD_PATTERNS.POINT_CREATE)
+    @Roles(EmployeeRoles.MANAGER)
+    @RequiresFeature(feature.points)
+    @UseGuards(FeatureLimitGuard)
+    @Post()
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Criar um novo ponto de serviço' })
+    @ApiCreatedResponse({ description: 'Ponto de serviço criado com sucesso' })
     async createServicePoint(
-        @Payload() payload: { zoneId: string, createServicePointDto: CreateServicePointDto },
+        @Param('zoneId') zoneId: string,
+        @Body() createServicePointDto: CreateServicePointDto,
     ) {
-        return this.zonePointService.createServicePoint(payload.zoneId, payload.createServicePointDto);
+        return this.zonePointService.createServicePoint(zoneId, createServicePointDto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.POINT_GET_ALL)
+    @Get()
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Listar todos os pontos de serviço de uma zona' })
+    @ApiOkResponse({ description: 'Lista de pontos de serviço obtida com sucesso' })
     async getServicePoints(
-        @Payload() payload: { zoneId: string },
+        @Param('zoneId') zoneId: string,
     ) {
-        return this.zonePointService.getServicePoints(payload.zoneId);
+        return this.zonePointService.getServicePoints(zoneId);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.POINT_GET_BY_ID)
+    @Get(':pointId')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter detalhes de um ponto de serviço específico' })
+    @ApiParam({ name: 'pointId', description: 'ID do ponto de serviço' })
+    @ApiOkResponse({ description: 'Detalhes do ponto de serviço obtidos com sucesso' })
     async getServicePointById(
-        @Payload() payload: { pointId: string, zoneId: string, establishmentId: string },
+        @Param('zoneId') zoneId: string,
+        @Param('pointId') pointId: string,
     ) {
-        return this.zonePointService.getServicePointById(payload.pointId, payload.zoneId);
+        return this.zonePointService.getServicePointById(pointId, zoneId);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.POINT_UPDATE)
+    @Roles(EmployeeRoles.MANAGER)
+    @Patch(':pointId')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar um ponto de serviço existente' })
+    @ApiParam({ name: 'pointId', description: 'ID do ponto de serviço' })
+    @ApiOkResponse({ description: 'Ponto de serviço atualizado com sucesso' })
     async updateServicePoint(
-        @Payload() payload: { pointId: string, updateServicePointDto: UpdateServicePointDto },
+        @Param('pointId') pointId: string,
+        @Body() updateServicePointDto: UpdateServicePointDto,
     ) {
-        return this.zonePointService.updateServicePoint(payload.pointId, payload.updateServicePointDto);
+        return this.zonePointService.updateServicePoint(pointId, updateServicePointDto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.POINT_DELETE)
+
+    @Roles(EmployeeRoles.MANAGER)
+    @Delete(':pointId')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Remover um ponto de serviço' })
+    @ApiParam({ name: 'pointId', description: 'ID do ponto de serviço' })
+    @ApiOkResponse({ description: 'Ponto de serviço removido com sucesso' })
     async deleteServicePoint(
-        @Payload() payload: { pointId: string },
+        @Param('pointId') pointId: string,
     ) {
-        return this.zonePointService.deleteServicePoint(payload.pointId);
+        return this.zonePointService.deleteServicePoint(pointId);
     }
 }

@@ -34,7 +34,6 @@ export class MenuCategoryController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-
     @RequiresFeature(feature.menu_categories)
     @UseGuards(FeatureLimitGuard)
     @Post()
@@ -46,7 +45,6 @@ export class MenuCategoryController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-
     @Get()
     listMenuCategories(
         @Param('menuId') menuId: string,
@@ -68,7 +66,6 @@ export class MenuCategoryController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-
     @Delete('/:categoryId')
     deleteCategory(
         @Param('menuId') menuId: string,

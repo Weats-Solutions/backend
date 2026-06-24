@@ -1,5 +1,5 @@
 // src/items/item.controller.ts
-import { Controller } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { ItemService } from './item.service';
 import {
   CreateItemDto,
@@ -7,141 +7,195 @@ import {
   BulkStatusDto,
   BulkDeleteDto,
   GetItemsQueryDto,
+  UpdateItemPlacementsDto,
 } from '@weats/contracts';
-import { Establishment } from '@weats/types';
-import { MessagePattern, Payload } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/common';
+import { Establishment, feature } from '@weats/types';
+import { ApiAuthenticated, CurrentEstablishment, FeatureLimitGuard, RequiresFeature } from '@weats/common';
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiOkResponse, ApiNoContentResponse, ApiParam } from '@nestjs/swagger';
 
-@Controller()
+@ApiTags('Items')
+@Controller('items')
 export class ItemController {
-  constructor(private readonly itemService: ItemService) {}
+  constructor(private readonly itemService: ItemService) { }
 
-  @MessagePattern(DASHBOARD_PATTERNS.ITEM_CREATE)
+
+  @Post()
+  @RequiresFeature(feature.products)
+  @UseGuards(FeatureLimitGuard)
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Criar um novo produto' })
+  @ApiCreatedResponse({ description: 'Produto criado com sucesso' })
   async createItem(
-    @Payload()
-    payload: {
-      establishmentId: string;
-      createItemDto: CreateItemDto;
-    },
+    @CurrentEstablishment() establishment: Establishment,
+    @Body() createItemDto: CreateItemDto,
   ) {
     return this.itemService.createItem(
-      payload.establishmentId,
-      payload.createItemDto,
+      establishment.id,
+      createItemDto,
     );
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.ITEM_UPDATE)
+
+  @Put(':id')
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Atualizar um produto existente' })
+  @ApiParam({ name: 'id', description: 'ID do produto' })
+  @ApiOkResponse({ description: 'Produto atualizado com sucesso' })
   async updateItem(
-    @Payload()
-    payload: {
-      id: string;
-      establishment: Establishment;
-      updateItemDto: UpdateItemDto;
-    },
+    @Param('id') id: string,
+    @CurrentEstablishment() establishment: Establishment,
+    @Body() updateItemDto: UpdateItemDto,
   ) {
     return this.itemService.updateItem(
-      payload.id,
-      payload.establishment,
-      payload.updateItemDto,
+      id,
+      establishment,
+      updateItemDto,
     );
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.ITEM_GET_ALL)
+
+
+  @Get('establishment')
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Listar produtos do estabelecimento' })
+  @ApiOkResponse({ description: 'Lista de produtos obtida com sucesso' })
   async getItems(
-    @Payload()
-    payload: {
-      establishment: Establishment;
-      query: GetItemsQueryDto;
-    },
+    @CurrentEstablishment() establishment: Establishment,
+    @Query() query: GetItemsQueryDto,
   ) {
     return this.itemService.getItemsForDashboard(
-      payload.establishment,
-      payload.query,
+      establishment,
+      query,
     );
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.ITEM_GET_ALLERGENS)
+
+
+  @Get('allergens')
+  @ApiOperation({ summary: 'Obter tabela de alergénios' })
+  @ApiOkResponse({ description: 'Lista de alergénios obtida com sucesso' })
   async getAllergens() {
     return this.itemService.getAllergens();
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.ITEM_GET_TAXES)
+
+
+
+  @Get('taxes')
+  @ApiOperation({ summary: 'Obter tabela de taxas de IVA' })
+  @ApiOkResponse({ description: 'Tabela de taxas de IVA obtida com sucesso' })
   async getTaxTables() {
     return this.itemService.getTaxTables();
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.ITEM_GET_BY_ID)
-  async getItem(@Payload() payload: { id: string }) {
-    return this.itemService.getItemById(payload.id);
+
+
+  @Get(':id')
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Obter detalhes de um produto' })
+  @ApiParam({ name: 'id', description: 'ID do produto' })
+  @ApiOkResponse({ description: 'Detalhes do produto' })
+  async getItem(@Param('id') id: string) {
+    return this.itemService.getItemById(id);
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.ITEM_DELETE)
-  async deleteItem(
-    @Payload() payload: { id: string; establishmentId: string },
-  ) {
-    return this.itemService.deleteItem(payload.id, payload.establishmentId);
-  }
-
-  @MessagePattern(DASHBOARD_PATTERNS.ITEM_DUPLICATE)
-  async duplicateItem(
-    @Payload() payload: { id: string; establishment: Establishment },
-  ) {
-    return this.itemService.duplicateItem(payload.id, payload.establishment);
-  }
-
-  @MessagePattern(DASHBOARD_PATTERNS.ITEM_BULK_UPDATE_STATUS)
-  async bulkUpdateStatus(
-    @Payload()
-    payload: {
-      establishmentId: string;
-      bulkStatusDto: BulkStatusDto;
-    },
-  ) {
-    return this.itemService.bulkUpdateStatus(
-      payload.bulkStatusDto,
-      payload.establishmentId,
-    );
-  }
-
-  @MessagePattern(DASHBOARD_PATTERNS.ITEM_BULK_DELETE)
+  @Delete('bulk')
+  @HttpCode(HttpStatus.OK)
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Apagar produtos em lote' })
+  @ApiOkResponse({ description: 'Produtos apagados em lote com sucesso' })
   async bulkDelete(
-    @Payload()
-    payload: {
-      establishmentId: string;
-      bulkDeleteDto: BulkDeleteDto;
-    },
+    @CurrentEstablishment() establishment: Establishment,
+    @Body() bulkDeleteDto: BulkDeleteDto,
   ) {
     return this.itemService.bulkDelete(
-      payload.bulkDeleteDto,
-      payload.establishmentId,
+      bulkDeleteDto,
+      establishment.id,
     );
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.ITEM_GET_PLACEMENTS)
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Apagar um produto' })
+  @ApiParam({ name: 'id', description: 'ID do produto' })
+  @ApiNoContentResponse({ description: 'Produto apagado com sucesso' })
+  async deleteItem(
+    @Param('id') id: string,
+    @CurrentEstablishment() establishment: Establishment,
+  ) {
+    return this.itemService.deleteItem(id, establishment.id);
+  }
+
+  @Post(':id/duplicate')
+  @RequiresFeature(feature.products)
+  @UseGuards(FeatureLimitGuard)
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Duplicar um produto' })
+  @ApiParam({ name: 'id', description: 'ID do produto' })
+  @ApiCreatedResponse({ description: 'Produto duplicado com sucesso' })
+  async duplicateItem(
+    @Param('id') id: string,
+    @CurrentEstablishment() establishment: Establishment,
+  ) {
+    return this.itemService.duplicateItem(id, establishment);
+  }
+
+  @Patch('bulk/status')
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Atualizar estado (ativo/inativo) de produtos em lote' })
+  @ApiOkResponse({ description: 'Estados atualizados com sucesso' })
+  async bulkUpdateStatus(
+    @CurrentEstablishment() establishment: Establishment,
+    @Body() bulkStatusDto: BulkStatusDto,
+  ) {
+    return this.itemService.bulkUpdateStatus(
+      bulkStatusDto,
+      establishment.id,
+    );
+  }
+
+  @Get(':id/placements')
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Obter menus e subcategorias onde o produto está associado' })
+  @ApiParam({ name: 'id', description: 'ID do produto' })
+  @ApiOkResponse({ description: 'Associações do produto obtidas com sucesso' })
   async getItemPlacements(
-    @Payload() payload: { itemId: string; establishment: Establishment },
+    @Param('id') id: string,
+    @CurrentEstablishment() establishment: Establishment,
   ) {
     return this.itemService.getItemPlacements(
-      payload.itemId,
-      payload.establishment,
+      id,
+      establishment,
     );
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.ITEM_UPDATE_PLACEMENTS)
+  @Put(':id/placements')
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Atualizar menus e subcategorias associados ao produto' })
+  @ApiParam({ name: 'id', description: 'ID do produto' })
+  @ApiOkResponse({ description: 'Associações do produto atualizadas com sucesso' })
   async updateItemPlacements(
-    @Payload()
-    payload: {
-      itemId: string;
-      establishment: Establishment;
-      subcategoryIds: string[];
-      menuIds?: string[];
-    },
+    @Param('id') id: string,
+    @CurrentEstablishment() establishment: Establishment,
+    @Body() body: UpdateItemPlacementsDto,
   ) {
+    const menuIds = body.menus?.map((menu) => menu.menuId) ?? [];
+    const subcategoryIdsFromMenus =
+      body.menus?.flatMap((menu) => menu.subcategoryIds) ?? [];
+    const subcategoryIds = Array.from(
+      new Set([...(body.subcategoryIds ?? []), ...subcategoryIdsFromMenus]),
+    );
+
+    if (!body.subcategoryIds && !body.menus) {
+      throw new BadRequestException('Provide either subcategoryIds or menus');
+    }
+
     return this.itemService.updateItemPlacements(
-      payload.itemId,
-      payload.establishment,
-      payload.subcategoryIds,
-      payload.menuIds,
+      id,
+      establishment,
+      subcategoryIds,
+      menuIds,
     );
   }
 }

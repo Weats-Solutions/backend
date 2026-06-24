@@ -1,34 +1,53 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { AddonService } from './addon.service';
 import { CreateAddonDto, UpdateAddonDto } from '@weats/contracts';
-import { MessagePattern, Payload } from '@nestjs/microservices';
-import { Establishment } from '@weats/types';
-import { DASHBOARD_PATTERNS } from '@weats/common';
+import { Establishment, feature } from '@weats/types';
+import { ApiAuthenticated, CurrentEstablishment, FeatureLimitGuard, RequiresFeature, Roles } from '@weats/common';
+import { EmployeeRoles } from '@weats/database';
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiOkResponse, ApiParam } from '@nestjs/swagger';
 
-@Controller()
+
+@ApiTags('Item Addons')
+@Controller('items/addons')
 export class AddonController {
     constructor(private readonly addonService: AddonService) { }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ADDON_CREATE)
+    @RequiresFeature(feature.custom_addons)
+    @UseGuards(FeatureLimitGuard)
+    @Roles(EmployeeRoles.MANAGER)
+    @Post()
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Criar um novo addon' })
+    @ApiCreatedResponse({ description: 'Addon criado com sucesso' })
     create(
-        @Payload() payload: { establishment: Establishment; createAddonDto: CreateAddonDto }
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() createAddonDto: CreateAddonDto,
     ) {
-        return this.addonService.create(payload.establishment, payload.createAddonDto);
+        return this.addonService.create(establishment, createAddonDto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ADDON_EDIT)
+    @Roles(EmployeeRoles.MANAGER)
+    @Patch(':id')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar um addon existente' })
+    @ApiParam({ name: 'id', description: 'ID do addon' })
+    @ApiOkResponse({ description: 'Addon atualizado com sucesso' })
     edit(
-        @Payload() payload: {
-            establishmentId: string;
-            addonId: string;
-            updateAddonDto: UpdateAddonDto;
-        }
+        @Param('id') id: string,
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() updateAddonDto: UpdateAddonDto,
     ) {
-        return this.addonService.edit(payload.establishmentId, payload.addonId, payload.updateAddonDto);
+        return this.addonService.edit(establishment.id, id, updateAddonDto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ADDON_GET_BY_ESTABLISHMENT)
-    findAddonsByEstablishment(@Payload() payload: { establishmentId: string }) {
-        return this.addonService.findAddonsByEstablishment(payload.establishmentId);
+
+
+    @Roles(EmployeeRoles.MANAGER, EmployeeRoles.WAITER, EmployeeRoles.KITCHEN)
+    @Get()
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Listar todos os addons do estabelecimento' })
+    @ApiOkResponse({ description: 'Lista de todos os addons' })
+    findAddonsByEstablishment(@CurrentEstablishment() establishment: Establishment) {
+        return this.addonService.findAddonsByEstablishment(establishment.id);
     }
 }

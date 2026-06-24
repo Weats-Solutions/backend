@@ -1,86 +1,204 @@
-import { Roles, ClerkGuard, EstablishmentStaffGuard } from "@weats/common";
-import { Controller, UseGuards, Param, Post, Body, Get, Patch, Delete } from "@nestjs/common";
+import { Roles, ClerkGuard, EstablishmentStaffGuard, CurrentEstablishment, FeatureLimitGuard, RequiresFeature, ApiAuthenticated } from "@weats/common";
+import { Controller, UseGuards, Param, Post, Body, Get, Patch, Delete, Put } from "@nestjs/common";
 import { EmployeeRoles } from "@weats/database";
 import { CreateSubcategoryDto, UpdateSubcategoryPositionsDto } from "@weats/contracts";
-import { DASHBOARD_PATTERNS } from "@weats/common";
 import { MenuSubcategoryService } from './subcategory.service';
-import { MessagePattern, Payload } from "@nestjs/microservices";
-import { Establishment } from "@weats/types";
+import { Establishment, feature } from "@weats/types";
 import { LinkItemToSubcategoryDto } from "@weats/contracts/dashboard/dtos/item/link-item-to-subcategory.dto";
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiOkResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 
-
-@Controller()
+@ApiTags('Menu Subcategories')
+@ApiParam({ name: 'menuId', description: 'ID do menu' })
+@ApiParam({ name: 'categoryId', description: 'ID da categoria' })
+@Controller('menus/:menuId/categories/:categoryId/subcategories')
 export class MenuSubcategoryController {
     constructor(private readonly subcategoryService: MenuSubcategoryService) { }
 
-    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_GET_ITEMS)
-    getSubcategoryItems(
-        @Payload() payload: { establishment: Establishment, subcategoryId: string },
-    ) {
-        return this.subcategoryService.getSubcategoryItems(payload.establishment, payload.subcategoryId);
-    }
-
-    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_UPDATE_POSITIONS)
+    @Roles(EmployeeRoles.MANAGER)
+    @Put('/positions')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar as posições/ordem das subcategorias de uma categoria' })
+    @ApiOkResponse({ description: 'Posições das subcategorias atualizadas com sucesso' })
     updateSubcategoryPositions(
-        @Payload() payload: { menuId: string, categoryId: string, updateSubcategoryPositionsDto: UpdateSubcategoryPositionsDto },
+        @Param('menuId') menuId: string,
+        @Param('categoryId') categoryId: string,
+        @Body() updateSubcategoryPositionsDto: UpdateSubcategoryPositionsDto,
     ) {
-        return this.subcategoryService.updateSubcategoryPositions(payload.menuId, payload.categoryId, payload.updateSubcategoryPositionsDto);
+        return this.subcategoryService.updateSubcategoryPositions(menuId, categoryId, updateSubcategoryPositionsDto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_GET_BY_CATEGORY)
+    @Roles(EmployeeRoles.MANAGER)
+    @Get()
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Listar todas as subcategorias de uma categoria' })
+    @ApiOkResponse({ description: 'Lista de subcategorias obtida com sucesso' })
     listSubcategories(
-        @Payload() payload: { menuId: string, categoryId: string },
+        @Param('menuId') menuId: string,
+        @Param('categoryId') categoryId: string,
     ) {
-        return this.subcategoryService.listSubcategories(payload.menuId, payload.categoryId);
+        return this.subcategoryService.listSubcategories(menuId, categoryId);
     }
 
-
-    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_CREATE)
+    @Roles(EmployeeRoles.MANAGER)
+    @RequiresFeature(feature.menu_subcategories)
+    @UseGuards(FeatureLimitGuard)
+    @Post()
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Criar uma nova subcategoria' })
+    @ApiCreatedResponse({ description: 'Subcategoria criada com sucesso' })
     createSubcategory(
-        @Payload() payload: { menuId: string, categoryId: string, createSubcategoryDto: CreateSubcategoryDto },
+        @Param('menuId') menuId: string,
+        @Param('categoryId') categoryId: string,
+        @Body() createSubcategoryDto: CreateSubcategoryDto,
     ) {
-        return this.subcategoryService.createSubcategory(payload.menuId, payload.categoryId, payload.createSubcategoryDto);
+        return this.subcategoryService.createSubcategory(menuId, categoryId, createSubcategoryDto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_EDIT)
+    @Roles(EmployeeRoles.MANAGER)
+    @RequiresFeature(feature.menu_subcategories)
+    @UseGuards(FeatureLimitGuard)
+    @Patch('/:subcategoryId')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar dados de uma subcategoria existente' })
+    @ApiParam({ name: 'subcategoryId', description: 'ID da subcategoria a atualizar' })
+    @ApiBody({ type: CreateSubcategoryDto })
+    @ApiOkResponse({ description: 'Subcategoria atualizada com sucesso' })
     updateSubcategory(
-        @Payload() payload: { menuId: string, subcategoryId: string, updateSubcategoryDto: any },
+        @Param('menuId') menuId: string,
+        @Param('subcategoryId') subcategoryId: string,
+        @Body() updateSubcategoryDto: any,
     ) {
-        return this.subcategoryService.updateSubcategory(payload.menuId, payload.subcategoryId, payload.updateSubcategoryDto);
+        return this.subcategoryService.updateSubcategory(menuId, subcategoryId, updateSubcategoryDto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_DELETE)
+    @Get('/:subcategoryId/items')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Listar itens de uma subcategoria' })
+    @ApiParam({ name: 'subcategoryId', description: 'ID da subcategoria' })
+    @ApiOkResponse({ description: 'Lista de itens obtida com sucesso' })
+    listSubcategoryItems(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('subcategoryId') subcategoryId: string,
+    ) {
+        return this.subcategoryService.getSubcategoryItems(establishment, subcategoryId);
+    }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @RequiresFeature(feature.menu_subcategories)
+    @UseGuards(FeatureLimitGuard)
+    @Delete('/:subcategoryId')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Remover uma subcategoria' })
+    @ApiParam({ name: 'subcategoryId', description: 'ID da subcategoria a remover' })
+    @ApiOkResponse({ description: 'Subcategoria removida com sucesso' })
     deleteSubcategory(
-        @Payload() payload: { menuId: string, subcategoryId: string },
+        @Param('menuId') menuId: string,
+        @Param('subcategoryId') subcategoryId: string,
     ) {
-        return this.subcategoryService.deleteSubcategory(payload.menuId, payload.subcategoryId);
+        return this.subcategoryService.deleteSubcategory(menuId, subcategoryId);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_LINK_ITEMS)
+    @Roles(EmployeeRoles.MANAGER)
+    @Post('/:subcategoryId/items')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Vincular itens a uma subcategoria' })
+    @ApiParam({ name: 'subcategoryId', description: 'ID da subcategoria' })
+    @ApiCreatedResponse({ description: 'Itens vinculados com sucesso' })
     linkItemsToSubcategory(
-        @Payload() payload: { linkItemToSubcategoryDto: LinkItemToSubcategoryDto },
+        @Body() linkItemToSubcategoryDto: LinkItemToSubcategoryDto,
     ) {
-        return this.subcategoryService.linkItemsToSubcategory(payload.linkItemToSubcategoryDto);
+        return this.subcategoryService.linkItemsToSubcategory(linkItemToSubcategoryDto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_UNLINK_ITEMS)
+    @Roles(EmployeeRoles.MANAGER)
+    @Delete('/:subcategoryId/items')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Desvincular itens de uma subcategoria em lote' })
+    @ApiParam({ name: 'subcategoryId', description: 'ID da subcategoria' })
+    @ApiBody({
+        schema: {
+            type: 'object',
+            properties: {
+                itemIds: {
+                    type: 'array',
+                    items: { type: 'string' },
+                    description: 'Lista de IDs dos itens a desvincular'
+                }
+            },
+            required: ['itemIds']
+        }
+    })
+    @ApiOkResponse({ description: 'Itens desvinculados com sucesso' })
     unlinkItemsFromSubcategory(
-        @Payload() payload: { subcategoryId: string, itemIds: string[] },
+        @Param('subcategoryId') subcategoryId: string,
+        @Body() body: { itemIds: string[] },
     ) {
-        return this.subcategoryService.unlinkItemsFromSubcategory(payload.subcategoryId, payload.itemIds);
+        return this.subcategoryService.unlinkItemsFromSubcategory(subcategoryId, body.itemIds);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_UPDATE_ITEM_POSITIONS)
+    @Roles(EmployeeRoles.MANAGER)
+    @Put('/:subcategoryId/items/positions')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar posições/ordem dos itens na subcategoria' })
+    @ApiParam({ name: 'subcategoryId', description: 'ID da subcategoria' })
+    @ApiBody({
+        schema: {
+            type: 'object',
+            properties: {
+                positions: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            id: { type: 'string', description: 'ID do item' },
+                            position: { type: 'number', description: 'Nova posição do item' }
+                        },
+                        required: ['id', 'position']
+                    },
+                    description: 'Lista com as novas posições dos itens'
+                }
+            },
+            required: ['positions']
+        }
+    })
+    @ApiOkResponse({ description: 'Posições dos itens atualizadas com sucesso' })
     updateItemPositions(
-        @Payload() payload: { subcategoryId: string, positions: { id: string, position: number }[] },
+        @Param('subcategoryId') subcategoryId: string,
+        @Body() body: { positions: { id: string, position: number }[] },
     ) {
-        return this.subcategoryService.updateItemPositions(payload.subcategoryId, payload.positions);
+        return this.subcategoryService.updateItemPositions(subcategoryId, body.positions);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.SUBCATEGORY_UPDATE_ITEMS_LINK)
+    @Roles(EmployeeRoles.MANAGER)
+    @Patch('/:subcategoryId/items/link')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar propriedades de vinculação dos itens' })
+    @ApiParam({ name: 'subcategoryId', description: 'ID da subcategoria' })
+    @ApiBody({
+        schema: {
+            type: 'object',
+            properties: {
+                itemIds: {
+                    type: 'array',
+                    items: { type: 'string' },
+                    description: 'Lista de IDs dos itens'
+                },
+                data: {
+                    type: 'object',
+                    properties: {
+                        isVisible: { type: 'boolean', description: 'Se o item está visível na subcategoria' },
+                        isIncluded: { type: 'boolean', description: 'Se o item está incluído na subcategoria' }
+                    }
+                }
+            },
+            required: ['itemIds', 'data']
+        }
+    })
+    @ApiOkResponse({ description: 'Propriedades de vinculação atualizadas com sucesso' })
     updateItemsLinkProperties(
-        @Payload() payload: { subcategoryId: string, itemIds: string[], data: any },
+        @Param('subcategoryId') subcategoryId: string,
+        @Body() body: { itemIds: string[], data: { isVisible?: boolean, isIncluded?: boolean } },
     ) {
-        return this.subcategoryService.updateItemsLinkProperties(payload.subcategoryId, payload.itemIds, payload.data);
+        return this.subcategoryService.updateItemsLinkProperties(subcategoryId, body.itemIds, body.data);
     }
 }

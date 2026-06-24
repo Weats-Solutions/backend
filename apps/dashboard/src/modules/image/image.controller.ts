@@ -1,75 +1,103 @@
-import { MessagePattern, Payload } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
 import { ImageService } from './image.service';
 import { CloudflareR2Service } from '@weats/integrations/cloudflare/cloudflare-r2.service';
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
+import { Establishment, feature } from '@weats/types';
+import { Roles, RateLimit, CurrentEstablishment, RequiresFeature, FeatureLimitGuard, ApiAuthenticated } from '@weats/common';
+import { UpdateImageDto, GenerateUploadUrlsDto, ConfirmUploadsDto } from '@weats/contracts';
+import { ApiTags, ApiOperation, ApiOkResponse, ApiCreatedResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
 
 
-@Controller()
+@ApiTags('Images')
+@Controller('images')
 export class ImageController {
     constructor(
         private readonly imageService: ImageService,
         private readonly cloudflareR2Service: CloudflareR2Service,
     ) { }
 
-
-    @MessagePattern(DASHBOARD_PATTERNS.IMAGE_GET_BY_ESTABLISHMENT)
+    @Roles()
+    @Get()
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Listar imagens do estabelecimento' })
+    @ApiQuery({ name: 'cursor', required: false, description: 'Cursor para paginação' })
+    @ApiQuery({ name: 'limit', required: false, description: 'Número de itens a retornar', schema: { default: '5' } })
+    @ApiQuery({ name: 'search', required: false, description: 'Termo de pesquisa por nome do ficheiro' })
+    @ApiOkResponse({ description: 'Lista de imagens obtida com sucesso' })
+    @RateLimit('RELAXED') // 120 req/min — listagem de imagens
     findImagesByEstablishment(
-        @Payload() payload: { establishmentId: string, cursor?: string, limit?: number, search?: string },
+        @CurrentEstablishment() establishment: Establishment,
+        @Query('cursor') cursor?: string,
+        @Query('limit') limit = '5',
+        @Query('search') search?: string,
     ) {
-        const parsedLimit = Number(payload.limit);
+        const parsedLimit = Number(limit);
         const take = Number.isInteger(parsedLimit)
             ? Math.min(100, Math.max(1, parsedLimit))
             : 18;
 
-        return this.imageService.findImagesByEstablishment(payload.establishmentId, {
-            cursor: payload.cursor,
+        return this.imageService.findImagesByEstablishment(establishment.id, {
+            cursor: cursor,
             limit: take,
-            search: payload.search,
+            search: search,
         });
     }
 
 
-    @MessagePattern(DASHBOARD_PATTERNS.IMAGE_UPDATE)
+    @Roles()
+    @Patch(':id')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar nome do ficheiro da imagem' })
+    @ApiParam({ name: 'id', description: 'ID da imagem' })
+    @ApiOkResponse({ description: 'Nome da imagem atualizado com sucesso' })
+    @RateLimit('MEDIUM') // 30 req/min — rename de imagem
     async updateImageName(
-        @Payload() payload: { id: string, establishmentId: string, fileName: string },
+        @Param('id') id: string,
+        @Body() body: UpdateImageDto,
+        @CurrentEstablishment() establishment: Establishment,
     ) {
         return this.imageService.updateImageName(
-            payload.id,
-            payload.establishmentId,
-            payload.fileName,
+            id,
+            establishment.id,
+            body.fileName,
         );
     }
 
 
-    @MessagePattern(DASHBOARD_PATTERNS.IMAGE_DELETE)
-    async deleteImages(
-        @Payload() payload: { imageIds: string[], establishmentId: string },
-    ) {
-        return this.imageService.deleteImagesIfNotInUse(
-            payload.imageIds,
-            payload.establishmentId,
-        );
-    }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IMAGE_GENERATE_R2_UPLOAD_URLS)
+    @Roles()
+    @RequiresFeature(feature.images)
+    @UseGuards(FeatureLimitGuard)
+    @Post('direct-upload-urls')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gerar URLs pré-assinados para upload direto para o Cloudflare R2' })
+    @ApiCreatedResponse({ description: 'URLs de upload gerados com sucesso' })
+    @RateLimit('MEDIUM') // 30 req/min — gera URLs de upload
     async generateR2DirectUploadUrls(
-        @Payload() payload: { count: number, establishmentId: string },
+        @Body() body: GenerateUploadUrlsDto,
+        @CurrentEstablishment() establishment: Establishment,
     ) {
         const urls = await this.cloudflareR2Service.generateUploadUrls(
-            payload.count,
-            payload.establishmentId,
+            body.count,
+            establishment.id,
         );
         return { urls };
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IMAGE_CONFIRM_UPLOAD)
+
+
+    @Roles()
+    @Post('confirm-direct-uploads')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Confirmar uploads diretos para o Cloudflare R2 concluídos' })
+    @ApiCreatedResponse({ description: 'Uploads confirmados e registados com sucesso' })
+    @RateLimit('MEDIUM') // 30 req/min — confirma uploads
     async confirmDirectUploads(
-        @Payload() payload: { images: { id: string, fileName: string, fileSize: number }[], establishmentId: string },
+        @Body() body: ConfirmUploadsDto,
+        @CurrentEstablishment() establishment: Establishment,
     ) {
         return this.imageService.confirmDirectUploads(
-            payload.images,
-            payload.establishmentId,
+            body.images,
+            establishment.id,
         );
     }
 }

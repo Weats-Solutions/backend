@@ -46,7 +46,6 @@ export class ZonesController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-
     @Patch(':zoneId')
     async updateServiceZone(
         @Param('zoneId') zoneId: string,

@@ -1,13 +1,19 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { PlanService } from './plan.service';
-import { MessagePattern } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
+import { ApiAuthenticated, SkipActiveSubscription, SkipEstablishmentStaff } from '@weats/common';
+import { ApiTags, ApiOperation, ApiOkResponse } from '@nestjs/swagger';
 
-@Controller('')
+@ApiTags('Plans')
+@Controller('plans')
 export class PlanController {
     constructor(private readonly planService: PlanService) { }
 
-    @MessagePattern(DASHBOARD_PATTERNS.PLAN_GET_PLANS)
+    @SkipEstablishmentStaff()
+    @SkipActiveSubscription()
+    @Get()
+    @ApiAuthenticated({ requireEstablishment: false })
+    @ApiOperation({ summary: 'Listar todos os planos de subscrição' })
+    @ApiOkResponse({ description: 'Lista de planos obtida com sucesso' })
     async getPlans() {
         return this.planService.getPlans();
     }

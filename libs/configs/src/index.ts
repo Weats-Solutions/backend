@@ -12,6 +12,8 @@ export * from './eupago-config.service';
 export * from './discord-config.service';
 export * from './zepto-config.service';
 export * from './resend-config.service';
+export * from './pino.config';
+
 
 
 

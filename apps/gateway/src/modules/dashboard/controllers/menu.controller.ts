@@ -40,7 +40,6 @@ export class MenuController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-
     @Get('/:menuId/details')
     getMenuDetails(
         @Param('menuId') menuId: string,
@@ -61,7 +60,6 @@ export class MenuController {
     }
 
     @Roles(EmployeeRoles.MANAGER)
-
     @Put('/positions')
     updateMenuPositions(
         @Body() updateMenuPositionsDto: UpdateMenuPositionsDto,

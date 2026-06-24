@@ -144,7 +144,6 @@ export class EstablishmentController {
   }
 
   @Roles()
-
   @Get(':id/schedule')
   getEstablishmentSchedule(
     @CurrentEstablishment() establishment: Establishment,
@@ -179,7 +178,6 @@ export class EstablishmentController {
   }
 
   @Roles()
-
   @Patch(':id/settings/modules')
   updateEstablishmentModuleSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -216,7 +214,6 @@ export class EstablishmentController {
   }
 
   @Roles()
-
   @Patch(':id/settings/general')
   updateEstablishmentGeneralSettings(
     @CurrentEstablishment() establishment: Establishment,
@@ -237,7 +234,6 @@ export class EstablishmentController {
   // -------------------------------------------------------------------------
 
   @Roles()
-
   @Get(':id/settings/branding')
   getEstablishmentBrandingSettings(
     @CurrentEstablishment() establishment: Establishment,

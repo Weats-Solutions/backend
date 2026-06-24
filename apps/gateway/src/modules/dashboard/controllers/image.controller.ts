@@ -33,7 +33,6 @@ export class ImageController {
     ) { }
 
     @Roles()
-
     @Get()
     @RateLimit('RELAXED') // 120 req/min — listagem de imagens
     findImagesByEstablishment(

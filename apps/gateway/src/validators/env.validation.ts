@@ -21,9 +21,6 @@ class EnvironmentVariables {
   WEATS_ENV: string;
 
   @IsNumber()
-  DASHBOARD_CLIENT_PORT: number;
-
-  @IsNumber()
   LANDING_CLIENT_PORT: number;
 
   @IsString()
@@ -33,7 +30,7 @@ class EnvironmentVariables {
   CORE_DB_URL: string;
 
   @IsInt()
-  GATEWAY_PORT: number;
+  DASHBOARD_PORT: number;
 
   @IsNumber()
   WEBHOOKS_PORT: number;

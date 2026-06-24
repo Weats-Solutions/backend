@@ -1,29 +1,42 @@
-import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload, RpcException } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
+import { Controller, Get } from '@nestjs/common';
+import { RpcException } from '@nestjs/microservices';
 import { UserService } from './user.service';
 import { Establishment } from '@weats/types/establishment';
 import { User } from '@weats/types/user';
-import { ERRORS } from '@weats/common';
+import { ApiAuthenticated, CurrentEstablishment, CurrentUser, ERRORS, SkipActiveSubscription, SkipEstablishmentStaff } from '@weats/common';
+import { ApiTags, ApiOperation, ApiOkResponse } from '@nestjs/swagger';
 
-@Controller()
+
+@ApiTags('Users')
+@Controller('users')
 export class UserController {
     constructor(private readonly userService: UserService) { }
 
-    @MessagePattern(DASHBOARD_PATTERNS.USER_GET_ESTABLISHMENTS)
-    getEstablishments(@Payload() payload: { user: User }) {
-        return this.userService.getEstablishments(payload.user.id);
+
+    @SkipActiveSubscription()
+    @SkipEstablishmentStaff()
+    @Get('establishments')
+    @ApiAuthenticated({ requireEstablishment: false })
+    @ApiOperation({ summary: 'Obter a lista de estabelecimentos associados ao utilizador' })
+    @ApiOkResponse({ description: 'Lista de estabelecimentos do utilizador' })
+    getEstablishments(@CurrentUser() user: User) {
+        return this.userService.getEstablishments(user.id);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.USER_MANAGE_SUBSCRIPTION)
-    manageSubscription(@Payload() payload: { establishment: Establishment }) {
-        if (!payload.establishment?.stripeCustomerId) {
+
+    @SkipActiveSubscription()
+    @Get('manage-subscription')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gerir subscrição do estabelecimento (obter URL do Stripe Portal)' })
+    @ApiOkResponse({ description: 'URL para o Stripe Billing Portal' })
+    manageSubscription(@CurrentEstablishment() establishment: Establishment) {
+        if (!establishment?.stripeCustomerId) {
             throw new RpcException({
                 status: 400,
                 message: ERRORS.STRIPE_CUSTOMER_ID_MISSING,
                 code: ERRORS.STRIPE_CUSTOMER_ID_MISSING,
             });
         }
-        return this.userService.manageEstablishmentSubscription(payload.establishment);
+        return this.userService.manageEstablishmentSubscription(establishment);
     }
 }

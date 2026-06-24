@@ -10,3 +10,5 @@ export * from './pipes';
 export * from './utils';
 export * from "./feature/feature-usage.service";
 export * from "./feature/feature-usage.module";
+export * from './middleware/request-id.middleware';
+

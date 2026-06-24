@@ -1,50 +1,92 @@
 import {
-    Controller
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    Post,
+    Put,
+    UseGuards
 } from '@nestjs/common';
-import { Establishment } from '@weats/types';
+import { Establishment, feature } from '@weats/types';
 import { CreateCategoryDto, UpdateCategoryPositionsDto } from '@weats/contracts';
-import { DASHBOARD_PATTERNS } from '@weats/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { ApiAuthenticated, CurrentEstablishment, FeatureLimitGuard, RequiresFeature, Roles } from '@weats/common';
 import { MenuCategoryService } from './category.service';
+import { EmployeeRoles } from '@weats/database';
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiOkResponse, ApiParam } from '@nestjs/swagger';
 
-@Controller()
+@ApiTags('Menu Categories')
+@ApiParam({ name: 'menuId', description: 'ID do menu' })
+@Controller('menus/:menuId/categories')
 export class MenuCategoryController {
     constructor(private readonly categoryService: MenuCategoryService) { }
 
-    @MessagePattern(DASHBOARD_PATTERNS.CATEGORY_UPDATE_POSITIONS)
+
+    @Roles(EmployeeRoles.MANAGER)
+    @Put('/positions')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar as posições/ordem das categorias de um menu' })
+    @ApiOkResponse({ description: 'Posições das categorias atualizadas com sucesso' })
     updateCategoryPositions(
-        @Payload() payload: { menuId: string, updateCategoryPositionsDto: UpdateCategoryPositionsDto, establishment: Establishment },
+        @Param('menuId') menuId: string,
+        @Body() updateCategoryPositionsDto: UpdateCategoryPositionsDto,
+        @CurrentEstablishment() currentEstablishment: Establishment,
     ) {
-        return this.categoryService.updateCategoryPositions(payload.menuId, payload.updateCategoryPositionsDto, payload.establishment);
+        return this.categoryService.updateCategoryPositions(menuId, updateCategoryPositionsDto, currentEstablishment);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.CATEGORY_CREATE)
+    @Roles(EmployeeRoles.MANAGER)
+    @RequiresFeature(feature.menu_categories)
+    @UseGuards(FeatureLimitGuard)
+    @Post()
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Criar uma nova categoria num menu' })
+    @ApiCreatedResponse({ description: 'Categoria criada com sucesso' })
     createCategory(
-        @Payload() payload: { menuId: string, createCategoryDto: CreateCategoryDto },
+        @Param('menuId') menuId: string,
+        @Body() createCategoryDto: CreateCategoryDto,
     ) {
-        return this.categoryService.createCategory(payload.menuId, payload.createCategoryDto);
+        return this.categoryService.createCategory(menuId, createCategoryDto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.CATEGORY_GET_BY_MENU)
+    @Roles(EmployeeRoles.MANAGER)
+    @Get()
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Listar todas as categorias de um menu' })
+    @ApiOkResponse({ description: 'Lista de categorias obtida com sucesso' })
     listMenuCategories(
-        @Payload() payload: { menuId: string, currentEstablishment: Establishment },
+        @Param('menuId') menuId: string,
+        @CurrentEstablishment() currentEstablishment: Establishment,
     ) {
-        return this.categoryService.listMenuCategories(payload.menuId, payload.currentEstablishment);
+        return this.categoryService.listMenuCategories(menuId, currentEstablishment);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.CATEGORY_EDIT)
+    @Roles(EmployeeRoles.MANAGER)
+    @Put('/:categoryId')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar dados de uma categoria existente' })
+    @ApiParam({ name: 'categoryId', description: 'ID da categoria a atualizar' })
+    @ApiOkResponse({ description: 'Categoria atualizada com sucesso' })
     updateCategory(
-        @Payload() payload: { menuId: string, categoryId: string, updateCategoryDto: CreateCategoryDto, currentEstablishment: Establishment },
+        @Param('menuId') menuId: string,
+        @Param('categoryId') categoryId: string,
+        @Body() updateCategoryDto: CreateCategoryDto,
+        @CurrentEstablishment() currentEstablishment: Establishment,
     ) {
-        return this.categoryService.updateCategory(payload.menuId, payload.categoryId, payload.updateCategoryDto, payload.currentEstablishment);
+        return this.categoryService.updateCategory(menuId, categoryId, updateCategoryDto, currentEstablishment);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.CATEGORY_DELETE)
+    @Roles(EmployeeRoles.MANAGER)
+    @Delete('/:categoryId')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Remover uma categoria de um menu' })
+    @ApiParam({ name: 'categoryId', description: 'ID da categoria a remover' })
+    @ApiOkResponse({ description: 'Categoria removida com sucesso' })
     deleteCategory(
-        @Payload() payload: { menuId: string, categoryId: string, currentEstablishment: Establishment },
+        @Param('menuId') menuId: string,
+        @Param('categoryId') categoryId: string,
+        @CurrentEstablishment() currentEstablishment: Establishment,
     ) {
-        return this.categoryService.deleteCategory(payload.menuId, payload.categoryId, payload.currentEstablishment);
+        return this.categoryService.deleteCategory(menuId, categoryId, currentEstablishment);
     }
-
 }
-

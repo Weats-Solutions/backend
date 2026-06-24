@@ -1,99 +1,206 @@
 import {
-    Controller
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    Patch,
+    Post,
+    Put,
+    UseGuards
 } from '@nestjs/common';
 import { CreateMenuDto, UpdateMenuDto, UpdateMenuPositionsDto } from '@weats/contracts';
 import { MenuService } from './menu.service';
 import { Establishment, User } from '@weats/types';
-import { MessagePattern, Payload } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/common';
+import { ActiveSubscriptionGuard, ApiAuthenticated, ClerkGuard, CurrentEstablishment, CurrentUser, EstablishmentStaffGuard, FeatureLimitGuard, RequiresFeature, Roles } from '@weats/common';
+import { EmployeeRoles } from '@weats/database';
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiOkResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 
-@Controller()
+@ApiTags('Menus')
+@Controller('menus')
 export class MenuController {
     constructor(private readonly menuService: MenuService) { }
 
-    @MessagePattern(DASHBOARD_PATTERNS.MENU_LIST)
-    listMenus(@Payload() payload: { establishment: Establishment }) {
-        return this.menuService.listMenus(payload.establishment);
+    @Get('list')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Listar todos os menus do estabelecimento' })
+    @ApiOkResponse({ description: 'Lista de menus obtida com sucesso' })
+    listMenus(@CurrentEstablishment() currentEstablishment: Establishment) {
+        return this.menuService.listMenus(currentEstablishment);
     }
 
-
-    @MessagePattern(DASHBOARD_PATTERNS.MENU_GET_BY_ID)
+    @Roles(EmployeeRoles.MANAGER)
+    @Get('/:menuId/details')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter detalhes de um menu' })
+    @ApiParam({ name: 'menuId', description: 'ID do menu' })
+    @ApiOkResponse({ description: 'Detalhes do menu obtidos com sucesso' })
     getMenuDetails(
-        @Payload() payload: { menuId: string, establishment: Establishment },
+        @Param('menuId') menuId: string,
+        @CurrentEstablishment() currentEstablishment: Establishment,
     ) {
-        return this.menuService.getMenuDetails(payload.menuId, payload.establishment);
+        return this.menuService.getMenuDetails(menuId, currentEstablishment);
     }
 
-
-    @MessagePattern(DASHBOARD_PATTERNS.MENU_CREATE)
+    @Roles(EmployeeRoles.MANAGER)
+    @RequiresFeature('menu')
+    @UseGuards(FeatureLimitGuard)
+    @Post()
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Criar um novo menu' })
+    @ApiCreatedResponse({ description: 'Menu criado com sucesso' })
     createMenu(
-        @Payload() payload: { createMenuDto: CreateMenuDto, establishment: Establishment },
+        @Body() createMenuDto: CreateMenuDto,
+        @CurrentEstablishment() currentEstablishment: Establishment,
     ) {
-        return this.menuService.createMenu(payload.createMenuDto, payload.establishment);
+        return this.menuService.createMenu(createMenuDto, currentEstablishment);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.MENU_UPDATE)
-    updateMenu(
-        @Payload() payload: { menuId: string, updateMenuDto: CreateMenuDto, establishment: Establishment },
-    ) {
-        return this.menuService.updateMenu(payload.menuId, payload.updateMenuDto, payload.establishment);
-    }
-
-
-    @MessagePattern(DASHBOARD_PATTERNS.MENU_UPDATE_SETTINGS)
-    updateMenuSettings(
-        @Payload() payload: { menuId: string, updateMenuDto: UpdateMenuDto, establishment: Establishment },
-    ) {
-        return this.menuService.updateMenuSettings(
-            payload.menuId,
-            payload.updateMenuDto,
-            payload.establishment,
-        );
-    }
-
-
-    @MessagePattern(DASHBOARD_PATTERNS.MENU_UPDATE_POSITIONS)
+    @Roles(EmployeeRoles.MANAGER)
+    @Put('/positions')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar as posições/ordem dos menus' })
+    @ApiOkResponse({ description: 'Posições dos menus atualizadas com sucesso' })
     updateMenuPositions(
-        @Payload() payload: { updateMenuPositionsDto: UpdateMenuPositionsDto, establishment: Establishment },
+        @Body() updateMenuPositionsDto: UpdateMenuPositionsDto,
+        @CurrentEstablishment() currentEstablishment: Establishment,
     ) {
         return this.menuService.updateMenuPositions(
-            payload.updateMenuPositionsDto,
-            payload.establishment,
+            updateMenuPositionsDto,
+            currentEstablishment,
         );
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.MENU_DELETE)
-    deleteMenu(@Payload() payload: { menuId: string, establishment: Establishment }) {
-        return this.menuService.deleteMenu(payload.menuId, payload.establishment);
+    @Roles(EmployeeRoles.MANAGER)
+    @Put('/:menuId')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar dados de um menu existente' })
+    @ApiParam({ name: 'menuId', description: 'ID do menu' })
+    @ApiOkResponse({ description: 'Menu atualizado com sucesso' })
+    updateMenu(
+        @Param('menuId') menuId: string,
+        @Body() updateMenuDto: CreateMenuDto,
+        @CurrentEstablishment() currentEstablishment: Establishment,
+    ) {
+        return this.menuService.updateMenu(menuId, updateMenuDto, currentEstablishment);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.MENU_DUPLICATE)
-    duplicateMenu(@Payload() payload: { menuId: string, establishment: Establishment }) {
-        return this.menuService.duplicateMenu(payload.menuId, payload.establishment);
+    @Roles(EmployeeRoles.MANAGER)
+    @Patch('/:menuId/settings')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar as configurações de um menu específico' })
+    @ApiParam({ name: 'menuId', description: 'ID do menu' })
+    @ApiOkResponse({ description: 'Configurações do menu atualizadas com sucesso' })
+    updateMenuSettings(
+        @Param('menuId') menuId: string,
+        @Body() updateMenuDto: UpdateMenuDto,
+        @CurrentEstablishment() currentEstablishment: Establishment,
+    ) {
+        return this.menuService.updateMenuSettings(
+            menuId,
+            updateMenuDto,
+            currentEstablishment,
+        );
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.MENU_DUPLICATE_PRECHECK)
+    @Roles(EmployeeRoles.MANAGER)
+    @Delete('/:menuId')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Remover um menu' })
+    @ApiParam({ name: 'menuId', description: 'ID do menu' })
+    @ApiOkResponse({ description: 'Menu removido com sucesso' })
+    deleteMenu(@Param('menuId') menuId: string, @CurrentEstablishment() currentEstablishment: Establishment) {
+        return this.menuService.deleteMenu(menuId, currentEstablishment);
+    }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @RequiresFeature('menu')
+    @UseGuards(
+        ClerkGuard,
+        EstablishmentStaffGuard,
+        ActiveSubscriptionGuard,
+        FeatureLimitGuard,
+    )
+    @Post('/:menuId/duplicate')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Duplicar um menu no mesmo estabelecimento' })
+    @ApiParam({ name: 'menuId', description: 'ID do menu a duplicar' })
+    @ApiCreatedResponse({ description: 'Menu duplicado com sucesso' })
+    duplicateMenu(
+        @Param('menuId') menuId: string,
+        @CurrentEstablishment() currentEstablishment: Establishment,
+    ) {
+        return this.menuService.duplicateMenu(menuId, currentEstablishment);
+    }
+
+    @Roles(EmployeeRoles.MANAGER)
+    @UseGuards(
+        ClerkGuard,
+        EstablishmentStaffGuard,
+        ActiveSubscriptionGuard,
+    )
+    @Post('/:menuId/duplicate-precheck')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Validar duplicação de menu para outro estabelecimento' })
+    @ApiParam({ name: 'menuId', description: 'ID do menu a duplicar' })
+    @ApiBody({
+        schema: {
+            type: 'object',
+            properties: {
+                targetEstablishmentId: { type: 'string', description: 'ID do estabelecimento de destino' },
+                reuseExistingItemsBySku: { type: 'boolean', description: 'Reutilizar itens existentes pelo SKU no destino', default: true }
+            },
+            required: ['targetEstablishmentId']
+        }
+    })
+    @ApiOkResponse({ description: 'Pré-verificação efetuada com sucesso' })
     duplicateMenuPrecheck(
-        @Payload() payload: { menuId: string; targetEstablishmentId: string; reuseExistingItemsBySku: boolean; user: User },
+        @Param('menuId') menuId: string,
+        @Body() body: { targetEstablishmentId: string; reuseExistingItemsBySku?: boolean },
+        @CurrentUser() user: User,
     ) {
         return this.menuService.duplicateMenuPrecheck(
-            payload.menuId,
-            payload.targetEstablishmentId,
-            payload.reuseExistingItemsBySku,
-            payload.user,
+            menuId,
+            body.targetEstablishmentId,
+            body.reuseExistingItemsBySku ?? true,
+            user,
         );
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.MENU_DUPLICATE_TO_ESTABLISHMENT)
+
+    @Roles(EmployeeRoles.MANAGER)
+    @UseGuards(
+        ClerkGuard,
+        EstablishmentStaffGuard,
+        ActiveSubscriptionGuard,
+    )
+    @Post('/:menuId/duplicate-to-establishment')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Executar a duplicação do menu para outro estabelecimento' })
+    @ApiParam({ name: 'menuId', description: 'ID do menu a duplicar' })
+    @ApiBody({
+        schema: {
+            type: 'object',
+            properties: {
+                targetEstablishmentId: { type: 'string', description: 'ID do estabelecimento de destino' },
+                idempotencyKey: { type: 'string', description: 'Chave de idempotência da transação' },
+                reuseExistingItemsBySku: { type: 'boolean', description: 'Reutilizar itens existentes pelo SKU no destino', default: true }
+            },
+            required: ['targetEstablishmentId', 'idempotencyKey']
+        }
+    })
+    @ApiCreatedResponse({ description: 'Menu duplicado para o estabelecimento de destino com sucesso' })
     duplicateMenuToEstablishment(
-        @Payload() payload: { menuId: string; targetEstablishmentId: string; idempotencyKey: string; reuseExistingItemsBySku: boolean; user: User },
+        @Param('menuId') menuId: string,
+        @Body() body: { targetEstablishmentId: string; idempotencyKey: string; reuseExistingItemsBySku?: boolean },
+        @CurrentUser() user: User,
     ) {
         return this.menuService.duplicateMenuToEstablishment(
-            payload.menuId,
-            payload.targetEstablishmentId,
-            payload.idempotencyKey,
-            payload.reuseExistingItemsBySku,
-            payload.user,
+            menuId,
+            body.targetEstablishmentId,
+            body.idempotencyKey,
+            body.reuseExistingItemsBySku ?? true,
+            user,
         );
     }
 }

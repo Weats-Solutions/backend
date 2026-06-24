@@ -1,6 +1,4 @@
-import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
+import { BadRequestException, Body, Controller, Delete, ForbiddenException, Get, Param, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { EstablishmentService } from './establishment.service';
 import { CreateEstablishmentDto } from '@weats/contracts/dashboard/dtos/establishment';
 import { User, Establishment } from '@weats/types';
@@ -9,8 +7,11 @@ import { UpdateEstablishmentGeneralSettingsDto, UpdateEstablishmentBrandingSetti
 import { FaviconService } from '@weats/integrations/favicon/favicon.service';
 import { UpdateEstablishmentFaviconDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-favicon';
 import { UpdateEstablishmentModuleSettingsDto } from '@weats/contracts/dashboard/dtos/establishment/settings/update-establishment-module-settings.dto';
+import { ApiAuthenticated, CurrentEstablishment, CurrentUser, ERRORS, RateLimit, Roles, SCHEDULE_VALIDATION_GROUPS, SkipActiveSubscription, SkipEstablishmentStaff } from '@weats/common';
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiOkResponse, ApiParam, ApiQuery, ApiBody } from '@nestjs/swagger';
 
-@Controller()
+@ApiTags('Establishments')
+@Controller('establishments')
 export class EstablishmentController {
     constructor(
         private readonly establishmentService: EstablishmentService,
@@ -20,183 +21,533 @@ export class EstablishmentController {
     // -------------------------------------------------------------------------
     // Life Cycle
     // -------------------------------------------------------------------------
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_CREATE)
-    createEstablishment(@Payload() payload: { createEstablishmentDto: CreateEstablishmentDto; user: User }) {
-        return this.establishmentService.createEstablishment(payload.createEstablishmentDto, payload.user);
-    }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_DELETE_TEST)
-    deleteEstablishmentTest(@Payload() payload: { id: string }) {
-        return this.establishmentService.deleteEstablishmentTest(payload.id);
-    }
-
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_DELETE_MENU_CACHE)
-    deleteEstablishmentMenuCache(
-        @Payload() payload: { id: string }
+    @Post()
+    @ApiAuthenticated({ requireEstablishment: false })
+    @ApiOperation({ summary: 'Criar estabelecimento' })
+    @ApiCreatedResponse({ description: 'Estabelecimento criado com sucesso' })
+    @SkipActiveSubscription()
+    @SkipEstablishmentStaff()
+    @RateLimit('STRICT') // 5 req/min — criar establishment é raro e envolve Stripe + DB
+    createEstablishment(
+        @Body() createEstablishmentDto: CreateEstablishmentDto,
+        @CurrentUser() user: User,
     ) {
-        return this.establishmentService.deleteEstablishmentMenuCache(payload.id);
+        return this.establishmentService.createEstablishment(createEstablishmentDto, user);
+    }
+
+    @Delete('test/:id')
+    @ApiOperation({ summary: 'Apagar estabelecimento de teste (Apenas em desenvolvimento)' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Estabelecimento apagado com sucesso' })
+    async testDelete(@Param('id') id: string) {
+        if (process.env.NODE_ENV !== 'development') {
+            throw new ForbiddenException('This route is only available in development mode.');
+        }
+
+        return this.establishmentService.deleteEstablishmentTest(id);
+    }
+
+
+    @Roles()
+    @Delete(':id/menu-cache')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Limpar cache do menu do estabelecimento' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Cache limpo com sucesso' })
+    deleteEstablishmentMenuCache(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+
+        return this.establishmentService.deleteEstablishmentMenuCache(id);
     }
 
     // -------------------------------------------------------------------------
     // Queries
     // -------------------------------------------------------------------------
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_BY_ID)
-    getEstablishmentInfo(@Payload() payload: { id: string }) {
-        return this.establishmentService.getEstablishmentInfo(payload.id);
+
+    @Get('verify-domain')
+    @ApiOperation({ summary: 'Verificar disponibilidade de domínio (slug)' })
+    @ApiQuery({ name: 'slug', required: true, description: 'Slug do domínio a verificar' })
+    @ApiOkResponse({ description: 'Estado da verificação do domínio' })
+    verifyDomain(
+        @Query('slug') slug: string,
+    ) {
+        if (!slug) {
+            throw new BadRequestException({
+                message: ERRORS.BAD_REQUEST,
+                code: ERRORS.BAD_REQUEST,
+            });
+        }
+        return this.establishmentService.verifyDomain(slug);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_ACCESS)
-    getEstablishmentAccess(@Payload() payload: { id: string }) {
-        return this.establishmentService.getEstablishmentAccess(payload.id);
+    @Roles()
+    @SkipActiveSubscription()
+    @Get(':id')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter informações do estabelecimento' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Informações do estabelecimento' })
+    getEstablishmentInfo(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+
+        return this.establishmentService.getEstablishmentInfo(id);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SCHEDULE_BY_ID)
-    getEstablishmentSchedule(@Payload() payload: { id: string }) {
-        return this.establishmentService.getEstablishmentSchedule(payload.id);
+    @SkipActiveSubscription()
+    @Roles()
+    @Get(':id/access')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter permissões de acesso do estabelecimento' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Permissões de acesso obtidas com sucesso' })
+    getEstablishmentAccess(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+    ) {
+        return this.establishmentService.getEstablishmentAccess(id);
+    }
+
+    @Roles()
+    @Get(':id/schedule')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter horário do estabelecimento' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Horário do estabelecimento' })
+    getEstablishmentSchedule(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.getEstablishmentSchedule(id);
     }
 
     // -------------------------------------------------------------------------
     // Modules Settings
     // -------------------------------------------------------------------------
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_MODULES_SETTINGS)
-    getEstablishmentModulesSettings(@Payload() payload: { id: string }) {
-        return this.establishmentService.getEstablishmentModuleSettings(payload.id);
+
+    @Roles()
+    @Get(':id/settings/modules')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter configurações de módulos' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Configurações dos módulos' })
+    getEstablishmentModulesSettings(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.getEstablishmentModuleSettings(id);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_MODULE)
-    updateEstablishmentModuleSettings(@Payload() payload: { id: string, updateEstablishmentModuleSettingsDto: UpdateEstablishmentModuleSettingsDto }) {
-        return this.establishmentService.updateEstablishmentModuleSettings(payload.id, payload.updateEstablishmentModuleSettingsDto);
+
+
+    @Roles()
+    @Patch(':id/settings/modules')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar configurações de módulos' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Configurações dos módulos atualizadas com sucesso' })
+    updateEstablishmentModuleSettings(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+        @Body() updateEstablishmentModuleSettingsDto: UpdateEstablishmentModuleSettingsDto,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.updateEstablishmentModuleSettings(id, updateEstablishmentModuleSettingsDto);
     }
 
     // -------------------------------------------------------------------------
     // General Settings
     // -------------------------------------------------------------------------
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_GENERAL)
-    getEstablishmentGeneralSettings(@Payload() payload: { id: string }) {
-        return this.establishmentService.getEstablishmentGeneralSettings(payload.id);
+  
+    @Roles()
+    @Get(':id/settings/general')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter configurações gerais' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Configurações gerais do estabelecimento' })
+    getEstablishmentGeneralSettings(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.getEstablishmentGeneralSettings(id);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_GENERAL)
-    updateEstablishmentGeneralSettings(@Payload() payload: { establishment: Establishment; updateEstablishmentGeneralSettingsDto: UpdateEstablishmentGeneralSettingsDto }) {
-        return this.establishmentService.updateEstablishmentGeneralSettings(payload.establishment, payload.updateEstablishmentGeneralSettingsDto);
+    @Roles()
+    @Patch(':id/settings/general')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar configurações gerais' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Configurações gerais atualizadas com sucesso' })
+    updateEstablishmentGeneralSettings(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+        @Body() updateEstablishmentGeneralSettingsDto: UpdateEstablishmentGeneralSettingsDto,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.updateEstablishmentGeneralSettings(establishment, updateEstablishmentGeneralSettingsDto);
     }
 
     // -------------------------------------------------------------------------
     // Branding Settings
     // -------------------------------------------------------------------------
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_BRANDING)
-    getEstablishmentBrandingSettings(@Payload() payload: { id: string }) {
-        return this.establishmentService.getEstablishmentBrandingSettings(payload.id);
-    }
-
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_BRANDING)
-    updateEstablishmentBrandingSettings(@Payload() payload: { establishment: Establishment; updateEstablishmentBrandingSettingsDto: UpdateEstablishmentBrandingSettingsDto }) {
-        return this.establishmentService.updateEstablishmentBrandingSettings(payload.establishment, payload.updateEstablishmentBrandingSettingsDto);
-    }
-
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_FAVICON_JOB_STATUS)
-    getEstablishmentFaviconJobStatus(@Payload() payload: { jobId: string }) {
-        return this.faviconService.getJobStatus(payload.jobId);
-    }
-
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_PROCESS_FAVICON)
-    processEstablishmentFavicon(
-        @Payload() payload: { establishment: Establishment; updateEstablishmentFaviconDto: UpdateEstablishmentFaviconDto },
+    @Roles()
+    @Get(':id/settings/branding')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter configurações de branding' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Configurações de branding' })
+    getEstablishmentBrandingSettings(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
     ) {
-        return this.faviconService.processFaviconFromImageId(payload.updateEstablishmentFaviconDto.favicon.id, payload.establishment.id);
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.getEstablishmentBrandingSettings(id);
+    }
+
+
+
+    @Roles()
+    @Patch(':id/settings/branding')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar configurações de branding' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Configurações de branding atualizadas com sucesso' })
+    updateEstablishmentBrandingSettings(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+        @Body() updateEstablishmentBrandingSettingsDto: UpdateEstablishmentBrandingSettingsDto,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.updateEstablishmentBrandingSettings(establishment, updateEstablishmentBrandingSettingsDto);
+    }
+
+    @Roles()
+    @Get(':id/settings/favicon/job/:jobId')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter estado do job de processamento de favicon' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiParam({ name: 'jobId', description: 'ID do Job de processamento do favicon' })
+    @ApiOkResponse({ description: 'Estado do job obtido com sucesso' })
+    getEstablishmentFaviconJobStatus(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+        @Param('jobId') jobId: string,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.faviconService.getJobStatus(jobId);
+
+    }
+
+    @Roles()
+    @Post(':id/settings/favicon/process')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Iniciar processamento do favicon' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Processamento do favicon iniciado com sucesso' })
+    @RateLimit('STRICT')
+    processEstablishmentFavicon(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+        @Body() updateEstablishmentFaviconDto: UpdateEstablishmentFaviconDto,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.faviconService.processFaviconFromImageId(updateEstablishmentFaviconDto.favicon.id, establishment.id);
     }
 
     // -------------------------------------------------------------------------
     // Billing Settings
     // -------------------------------------------------------------------------
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_BILLING)
-    getEstablishmentBillingSettings(@Payload() payload: { id: string }) {
-        return this.establishmentService.getEstablishmentBillingSettings(payload.id);
+    @Roles()
+    @Get(':id/settings/billing')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter configurações de faturação' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Configurações de faturação' })
+    getEstablishmentBillingSettings(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.getEstablishmentBillingSettings(id);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_BILLING)
+    @Roles()
+    @Patch(':id/settings/billing')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar configurações de faturação' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Configurações de faturação atualizadas com sucesso' })
     updateEstablishmentBillingSettings(
-        @Payload() payload: { establishment: Establishment; updateEstablishmentBillingSettingsDto: UpdateEstablishmentBillingSettingsDto },
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+        @Body() updateEstablishmentBillingSettingsDto: UpdateEstablishmentBillingSettingsDto,
     ) {
-        return this.establishmentService.updateEstablishmentBillingSettings(payload.establishment, payload.updateEstablishmentBillingSettingsDto);
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.updateEstablishmentBillingSettings(establishment, updateEstablishmentBillingSettingsDto);
     }
 
     // -------------------------------------------------------------------------
     // Digital Settings
     // -------------------------------------------------------------------------
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_DIGITAL)
-    getEstablishmentDigitalSettings(@Payload() payload: { establishment: Establishment }) {
-        return this.establishmentService.getEstablishmentDigitalSettings(payload.establishment);
+
+    @Roles()
+    @Get(':id/settings/digital')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter configurações digitais' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Configurações digitais' })
+    getEstablishmentDigitalSettings(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.getEstablishmentDigitalSettings(establishment);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_DIGITAL)
-    updateEstablishmentDigitalSettings(@Payload() payload: { establishment: Establishment; updateEstablishmentDigitalSettingsDto: UpdateEstablishmentDigitalSettingsDto }) {
-        return this.establishmentService.updateEstablishmentDigitalSettings(payload.establishment, payload.updateEstablishmentDigitalSettingsDto);
+    @Roles()
+    @Patch(':id/settings/digital')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar configurações digitais' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Configurações digitais atualizadas com sucesso' })
+    updateEstablishmentDigitalSettings(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+        @Body() updateEstablishmentDigitalSettingsDto: UpdateEstablishmentDigitalSettingsDto,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.updateEstablishmentDigitalSettings(establishment, updateEstablishmentDigitalSettingsDto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_VERIFY_DOMAIN)
-    verifyDomain(@Payload() payload: { slug: string }) {
-        return this.establishmentService.verifyDomain(payload.slug);
-    }
 
     // -------------------------------------------------------------------------
     // System Settings
     // -------------------------------------------------------------------------
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SETTINGS_SYSTEM)
-    getEstablishmentSystemSettings(@Payload() payload: { establishment: Establishment }) {
-        return this.establishmentService.getEstablishmentSystemSettings(payload.establishment);
+
+    @Roles()
+    @Get(':id/settings/system')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter configurações de sistema' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Configurações de sistema' })
+    getEstablishmentSystemSettings(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.getEstablishmentSystemSettings(establishment);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SETTINGS_SYSTEM)
-    updateEstablishmentSystemSettings(@Payload() payload: { establishment: Establishment; updateEstablishmentSystemSettingsDto: UpdateEstablishmentSystemSettingsDto }) {
-        return this.establishmentService.updateEstablishmentSystemSettings(payload.establishment, payload.updateEstablishmentSystemSettingsDto);
+
+    @Roles()
+    @Patch(':id/settings/system')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar configurações de sistema' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Configurações de sistema atualizadas com sucesso' })
+    updateEstablishmentSystemSettings(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+        @Body() updateEstablishmentSystemSettingsDto: UpdateEstablishmentSystemSettingsDto,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.updateEstablishmentSystemSettings(establishment, updateEstablishmentSystemSettingsDto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_LANGUAGES)
-    updateEstablishmentLanguages(@Payload() payload: { establishment: Establishment; updateEstablishmentLanguagesDto: EstablishmentLanguageDto }) {
-        return this.establishmentService.updateLanguages(payload.establishment, payload.updateEstablishmentLanguagesDto);
+
+    @Patch(':id/settings/languages')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar idiomas disponíveis do estabelecimento' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Idiomas atualizados com sucesso' })
+    updateEstablishmentLanguages(
+        @CurrentEstablishment() establishment: Establishment,
+        @Param('id') id: string,
+        @Body() updateEstablishmentLanguagesDto: EstablishmentLanguageDto,
+    ) {
+        if (establishment.id !== id) {
+            throw new ForbiddenException({
+                message: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+                code: ERRORS.ESTABLISHMENT_ACCESS_DENIED,
+            });
+        }
+        return this.establishmentService.updateLanguages(establishment, updateEstablishmentLanguagesDto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_LANGUAGE_SYNC_STATUS)
-    async getLanguageSyncStatus(@Payload() payload: { jobId: string }) {
-        return this.establishmentService.getLanguageSyncStatus(payload.jobId);
+
+    @Get('sync-status/:jobId')
+    @ApiOperation({ summary: 'Obter estado de sincronização de idiomas' })
+    @ApiParam({ name: 'jobId', description: 'ID do job de sincronização de idiomas' })
+    @ApiOkResponse({ description: 'Estado da sincronização' })
+    async getSyncStatus(@Param('jobId') jobId: string) {
+        return this.establishmentService.getLanguageSyncStatus(jobId);
     }
 
 
     // -------------------------------------------------------------------------
     // Subscription
     // -------------------------------------------------------------------------
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_SUBSCRIPTION)
-    getSubscription(@Payload() payload: { id: string }) {
-        return this.establishmentService.getSubscription(payload.id);
+
+    @Get('subscription')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter estado da subscrição' })
+    @ApiOkResponse({ description: 'Detalhes da subscrição' })
+    getSubscription(@CurrentEstablishment() establishment: Establishment) {
+        return this.establishmentService.getSubscription(establishment.id);
+
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_INVOICES)
-    getInvoices(@Payload() payload: { establishmentId: string }) {
-        return this.establishmentService.getInvoices(payload.establishmentId);
+    @SkipActiveSubscription()
+    @Get('portal-session')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Criar sessão do portal de cliente Stripe' })
+    @ApiOkResponse({ description: 'URL para o portal de faturação do Stripe' })
+    getPortalSession(@CurrentEstablishment() establishment: Establishment) {
+        return this.establishmentService.getPortalSession(establishment.id);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_GET_PORTAL_SESSION)
-    getPortalSession(@Payload() payload: { id: string }) {
-        return this.establishmentService.getPortalSession(payload.id);
+    @SkipActiveSubscription()
+    @Post('subscription')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Subscrever a um plano' })
+    @ApiBody({
+        schema: {
+            type: 'object',
+            properties: {
+                planCycleId: { type: 'string', description: 'ID do ciclo de faturação do plano a subscrever' }
+            },
+            required: ['planCycleId']
+        }
+    })
+    @ApiOkResponse({ description: 'Sessão de checkout ou subscrição criada com sucesso' })
+    subscribeToPlan(
+        @Body() { planCycleId }: { planCycleId: string },
+        @CurrentEstablishment() establishment: Establishment,
+    ) {
+        return this.establishmentService.subscribeToPlan(planCycleId, establishment);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_SUBSCRIBE_TO_PLAN)
-    subscribeToPlan(@Payload() payload: { planCycleId: string; establishment: Establishment }) {
-        return this.establishmentService.subscribeToPlan(payload.planCycleId, payload.establishment);
-    }
-
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_CANCEL_SUBSCRIPTION)
-    cancelSubscription(@Payload() payload: { id: string; user: User }) {
-        return this.establishmentService.cancelSubscription(payload.id, payload.user);
+    @SkipActiveSubscription()
+    @Get('cancel-subscription')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Cancelar a subscrição ativa' })
+    @ApiOkResponse({ description: 'Subscrição cancelada com sucesso' })
+    cancelSubscription(
+        @CurrentEstablishment() establishment: Establishment,
+        @CurrentUser() user: User,
+    ) {
+        return this.establishmentService.cancelSubscription(establishment.id, user);
     }
 
 
     // -------------------------------------------------------------------------
     // Others
     // -------------------------------------------------------------------------
-    @MessagePattern(DASHBOARD_PATTERNS.ESTABLISHMENT_UPDATE_SCHEDULE)
-    updateSchedule(@Payload() payload: { establishment: Establishment; updateEstablishmentScheduleDto: CreateScheduleDto }) {
-        return this.establishmentService.upsertEstablishmentSchedule(payload.establishment, payload.updateEstablishmentScheduleDto);
+    @UsePipes(new ValidationPipe({ groups: [SCHEDULE_VALIDATION_GROUPS.ESTABLISHMENT] }))
+    @Roles()
+    @Post(':id/schedule')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Atualizar horário do estabelecimento' })
+    @ApiParam({ name: 'id', description: 'ID do estabelecimento' })
+    @ApiOkResponse({ description: 'Horário atualizado com sucesso' })
+    updateEstablishmentSchedule(
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() updateEstablishmentScheduleDto: CreateScheduleDto,
+    ) {
+        return this.establishmentService.upsertEstablishmentSchedule(establishment, updateEstablishmentScheduleDto);
     }
 }

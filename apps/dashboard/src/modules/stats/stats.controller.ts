@@ -1,14 +1,19 @@
-import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
+import { Controller, Get } from '@nestjs/common';
+import { ApiAuthenticated, CurrentEstablishment } from '@weats/common';
+import { Establishment } from '@weats/types';
 import { StatsService } from './stats.service';
+import { ApiTags, ApiOperation, ApiOkResponse } from '@nestjs/swagger';
 
-@Controller()
+@ApiTags('Dashboard Stats')
+@Controller('dashboard')
 export class StatsController {
   constructor(private readonly statsService: StatsService) {}
 
-  @MessagePattern(DASHBOARD_PATTERNS.DASHBOARD_STATS_GET)
-  async getStats(@Payload() payload: { establishmentId: string }) {
-    return this.statsService.getDashboardStats(payload.establishmentId);
+  @Get('stats')
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Obter estatísticas globais do dashboard' })
+  @ApiOkResponse({ description: 'Estatísticas obtidas com sucesso' })
+  async getStats(@CurrentEstablishment() establishment: Establishment) {
+    return this.statsService.getDashboardStats(establishment.id);
   }
 }

@@ -1,45 +1,76 @@
 import {
-  Controller
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards
 } from '@nestjs/common';
 import { VariantOptionsService } from './variant-options.service';
 import { CreateVariantOptionDto, UpdateVariantOptionDto } from '@weats/contracts';
-import { Establishment } from '@weats/types';
-import { Payload } from '@nestjs/microservices';
-import { MessagePattern } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/common';
+import { Establishment, feature } from '@weats/types';
+import { ApiAuthenticated, CurrentEstablishment, FeatureLimitGuard, RequiresFeature } from '@weats/common';
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiOkResponse, ApiParam } from '@nestjs/swagger';
 
-@Controller()
+@ApiTags('Variant Options')
+@Controller('items/variants-options')
 export class VariantOptionsController {
   constructor(private readonly service: VariantOptionsService) { }
 
-  @MessagePattern(DASHBOARD_PATTERNS.VARIANT_OPTION_CREATE)
+  @RequiresFeature(feature.custom_variants)
+  @UseGuards(FeatureLimitGuard)
+  @Post()
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Criar uma nova opção de variante' })
+  @ApiCreatedResponse({ description: 'Opção de variante criada com sucesso' })
   async create(
-    @Payload() payload: { establishment: Establishment, createVariantOptionDto: CreateVariantOptionDto },
+    @CurrentEstablishment() establishment: Establishment,
+    @Body() createVariantOptionDto: CreateVariantOptionDto,
   ) {
-    return this.service.create(payload.establishment, payload.createVariantOptionDto);
+    return this.service.create(establishment, createVariantOptionDto);
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.VARIANT_OPTION_GET_BY_ESTABLISHMENT)
-  async listAll(@Payload() payload: { establishment: Establishment }) {
-    return this.service.findAll(payload.establishment);
+  @Get()
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Listar todas as opções de variante do estabelecimento' })
+  @ApiOkResponse({ description: 'Lista de opções de variante obtida com sucesso' })
+  async listAll(@CurrentEstablishment() establishment: Establishment) {
+    return this.service.findAll(establishment);
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.VARIANT_OPTION_GET_BY_ID)
-  async get(@Payload() payload: { id: string }) {
-    return this.service.getById(payload.id);
+  @Get(':id')
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Obter detalhes de uma opção de variante' })
+  @ApiParam({ name: 'id', description: 'ID da opção de variante' })
+  @ApiOkResponse({ description: 'Detalhes da opção de variante obtidos com sucesso' })
+  async get(@Param('id') id: string) {
+    return this.service.getById(id);
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.VARIANT_OPTION_EDIT)
+  @Patch(':id')
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Atualizar uma opção de variante existente' })
+  @ApiParam({ name: 'id', description: 'ID da opção de variante' })
+  @ApiOkResponse({ description: 'Opção de variante atualizada com sucesso' })
   async update(
-    @Payload() payload: { id: string, updateVariantOptionDto: UpdateVariantOptionDto, establishment: Establishment },
+    @Param('id') id: string,
+    @Body() updateVariantOptionDto: UpdateVariantOptionDto,
+    @CurrentEstablishment() establishment: Establishment,
   ) {
-    return this.service.update(payload.id, payload.updateVariantOptionDto, payload.establishment);
+    return this.service.update(id, updateVariantOptionDto, establishment);
   }
 
-  @MessagePattern(DASHBOARD_PATTERNS.VARIANT_OPTION_DELETE)
+  @Delete(':id')
+  @ApiAuthenticated()
+  @ApiOperation({ summary: 'Remover uma opção de variante' })
+  @ApiParam({ name: 'id', description: 'ID da opção de variante' })
+  @ApiOkResponse({ description: 'Opção de variante removida com sucesso' })
   async remove(
-    @Payload() payload: { id: string, establishment: Establishment },
+    @Param('id') id: string,
+    @CurrentEstablishment() establishment: Establishment,
   ) {
-    return this.service.remove(payload.id, payload.establishment);
+    return this.service.remove(id, establishment);
   }
 }
