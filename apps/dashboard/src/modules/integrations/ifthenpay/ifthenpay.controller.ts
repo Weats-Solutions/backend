@@ -1,7 +1,8 @@
-import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
-import { DASHBOARD_PATTERNS } from '@weats/common/patterns/dashboard.patterns';
+import { Controller, Post, Get, Delete, Patch, Body, UseGuards } from '@nestjs/common';
+import { CurrentEstablishment, Roles, IfthenpayConfigGuard, ApiAuthenticated } from '@weats/common';
+import { Establishment } from '@weats/types';
 import { IfthenpayService } from '@weats/integrations/ifthenpay/ifthenpay.service';
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiOkResponse, ApiBody } from '@nestjs/swagger';
 import {
     SaveIfthenpayKeyDto,
     IfthenpayCreateMbwayPaymentDto,
@@ -14,89 +15,154 @@ import {
     IfthenpayCreatePayByLinkPaymentDto,
 } from '@weats/contracts';
 
-@Controller()
+@ApiTags('Integrations - Ifthenpay')
+@Roles()
+@Controller('integrations/ifthenpay')
 export class IfthenpayIntegrationController {
     constructor(
         private readonly ifthenpayService: IfthenpayService
     ) { }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IFTHENPAY_GET_STATUS)
-    getStatus(@Payload() establishmentId: string) {
-        return this.ifthenpayService.getStatus(establishmentId);
+    @Get('key')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter estado e chave de autenticação da integração Ifthenpay' })
+    @ApiOkResponse({ description: 'Estado da integração obtido com sucesso' })
+    getStatus(@CurrentEstablishment() establishment: Establishment) {
+        return this.ifthenpayService.getStatus(establishment.id);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IFTHENPAY_SAVE_KEY)
+    @Post('key')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gravar chave de autenticação (authToken) da Ifthenpay' })
+    @ApiCreatedResponse({ description: 'Chave gravada com sucesso' })
     saveKey(
-        @Payload() payload: { establishmentId: string, dto: SaveIfthenpayKeyDto },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: SaveIfthenpayKeyDto,
     ) {
-        return this.ifthenpayService.saveKey(payload.establishmentId, payload.dto.authToken);
+        return this.ifthenpayService.saveKey(establishment.id, dto.authToken);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IFTHENPAY_DELETE_KEY)
-    deleteKey(@Payload() establishmentId: string) {
-        return this.ifthenpayService.deleteKey(establishmentId);
+    @Delete('key')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Remover chave da Ifthenpay' })
+    @ApiOkResponse({ description: 'Chave removida com sucesso' })
+    deleteKey(@CurrentEstablishment() establishment: Establishment) {
+        return this.ifthenpayService.deleteKey(establishment.id);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IFTHENPAY_TOGGLE)
+    @Patch('toggle')
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Ativar ou desativar a integração Ifthenpay' })
+    @ApiBody({
+        schema: {
+            type: 'object',
+            properties: {
+                enabled: { type: 'boolean', description: 'Ativar/desativar a integração' }
+            },
+            required: ['enabled']
+        }
+    })
+    @ApiOkResponse({ description: 'Integração alternada com sucesso' })
     toggle(
-        @Payload() payload: { establishmentId: string, enabled: boolean },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body('enabled') enabled: boolean,
     ) {
-        return this.ifthenpayService.toggle(payload.establishmentId, payload.enabled);
+        return this.ifthenpayService.toggle(establishment.id, enabled);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IFTHENPAY_GENERATE_MBWAY_PAYMENT)
+    @Post('mbway/generate')
+    @UseGuards(IfthenpayConfigGuard)
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gerar pagamento por MB WAY' })
+    @ApiCreatedResponse({ description: 'Pagamento iniciado com sucesso' })
     async generateMbwayPayment(
-        @Payload() payload: { establishmentId: string, dto: IfthenpayCreateMbwayPaymentDto },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: IfthenpayCreateMbwayPaymentDto,
     ) {
-        return this.ifthenpayService.createMbwayPayment(payload.establishmentId, payload.dto);
+        return this.ifthenpayService.createMbwayPayment(establishment.id, dto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IFTHENPAY_GET_MBWAY_STATUS)
+    @Post('mbway/status')
+    @UseGuards(IfthenpayConfigGuard)
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Obter estado de um pagamento MB WAY' })
+    @ApiOkResponse({ description: 'Estado do pagamento obtido com sucesso' })
     async getMbwayStatus(
-        @Payload() payload: { establishmentId: string, dto: IfthenpayGetMbwayStatusDto },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: IfthenpayGetMbwayStatusDto,
     ) {
-        return this.ifthenpayService.getMbwayStatus(payload.establishmentId, payload.dto.transactionId);
+        return this.ifthenpayService.getMbwayStatus(establishment.id, dto.transactionId);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IFTHENPAY_GENERATE_MULTIBANCO_PAYMENT)
+    @Post('multibanco/generate')
+    @UseGuards(IfthenpayConfigGuard)
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gerar pagamento por Multibanco' })
+    @ApiCreatedResponse({ description: 'Referência Multibanco gerada com sucesso' })
     async generateMultibancoPayment(
-        @Payload() payload: { establishmentId: string, dto: IfthenpayCreateMultibancoPaymentDto },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: IfthenpayCreateMultibancoPaymentDto,
     ) {
-        return this.ifthenpayService.createMultibancoPayment(payload.establishmentId, payload.dto);
+        return this.ifthenpayService.createMultibancoPayment(establishment.id, dto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IFTHENPAY_GENERATE_PAYSHOP_PAYMENT)
+    @Post('payshop/generate')
+    @UseGuards(IfthenpayConfigGuard)
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gerar pagamento por Payshop' })
+    @ApiCreatedResponse({ description: 'Referência Payshop gerada com sucesso' })
     async generatePayshopPayment(
-        @Payload() payload: { establishmentId: string, dto: IfthenpayCreatePayshopPaymentDto },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: IfthenpayCreatePayshopPaymentDto,
     ) {
-        return this.ifthenpayService.createPayshopPayment(payload.establishmentId, payload.dto);
+        return this.ifthenpayService.createPayshopPayment(establishment.id, dto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IFTHENPAY_GENERATE_CREDIT_CARD_PAYMENT)
+    @Post('credit-card/generate')
+    @UseGuards(IfthenpayConfigGuard)
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gerar pagamento por Cartão de Crédito' })
+    @ApiCreatedResponse({ description: 'Pagamento por cartão iniciado com sucesso' })
     async generateCreditCardPayment(
-        @Payload() payload: { establishmentId: string, dto: IfthenpayCreateCreditCardPaymentDto },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: IfthenpayCreateCreditCardPaymentDto,
     ) {
-        return this.ifthenpayService.createCreditCardPayment(payload.establishmentId, payload.dto);
+        return this.ifthenpayService.createCreditCardPayment(establishment.id, dto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IFTHENPAY_GENERATE_COFIDIS_PAYMENT)
+    @Post('cofidis/generate')
+    @UseGuards(IfthenpayConfigGuard)
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gerar pagamento Cofidis Pay' })
+    @ApiCreatedResponse({ description: 'Pagamento Cofidis iniciado com sucesso' })
     async generateCofidisPayment(
-        @Payload() payload: { establishmentId: string, dto: IfthenpayCreateCofidisPaymentDto },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: IfthenpayCreateCofidisPaymentDto,
     ) {
-        return this.ifthenpayService.createCofidisPayment(payload.establishmentId, payload.dto);
+        return this.ifthenpayService.createCofidisPayment(establishment.id, dto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IFTHENPAY_GENERATE_PIX_PAYMENT)
+    @Post('pix/generate')
+    @UseGuards(IfthenpayConfigGuard)
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gerar pagamento por Pix' })
+    @ApiCreatedResponse({ description: 'Pagamento Pix gerado com sucesso' })
     async generatePixPayment(
-        @Payload() payload: { establishmentId: string, dto: IfthenpayCreatePixPaymentDto },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: IfthenpayCreatePixPaymentDto,
     ) {
-        return this.ifthenpayService.createPixPayment(payload.establishmentId, payload.dto);
+        return this.ifthenpayService.createPixPayment(establishment.id, dto);
     }
 
-    @MessagePattern(DASHBOARD_PATTERNS.IFTHENPAY_GENERATE_PAY_BY_LINK_PAYMENT)
+    @Post('pay-by-link/generate')
+    @UseGuards(IfthenpayConfigGuard)
+    @ApiAuthenticated()
+    @ApiOperation({ summary: 'Gerar pagamento Pay by Link' })
+    @ApiCreatedResponse({ description: 'Link de pagamento gerado com sucesso' })
     async generatePayByLinkPayment(
-        @Payload() payload: { establishmentId: string, dto: IfthenpayCreatePayByLinkPaymentDto },
+        @CurrentEstablishment() establishment: Establishment,
+        @Body() dto: IfthenpayCreatePayByLinkPaymentDto,
     ) {
-        return this.ifthenpayService.createPayByLinkPayment(payload.establishmentId, payload.dto);
+        return this.ifthenpayService.createPayByLinkPayment(establishment.id, dto);
     }
 }
