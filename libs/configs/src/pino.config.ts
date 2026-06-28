@@ -25,6 +25,23 @@ export const getPinoConfig = (appConfig: AppConfigService): Params => {
         randomUUID()
       );
     },
+    // Exclude noise from monitoring endpoints
+    autoLogging: {
+      ignore: (req: any) => {
+        return ['/health', '/metrics'].some(path => req.url.includes(path));
+      },
+    },
+    // Clean up serialized request and response object fields to keep logs tiny
+    serializers: {
+      req: (req: any) => ({
+        id: req.id,
+        method: req.method,
+        url: req.url,
+      }),
+      res: (res: any) => ({
+        statusCode: res.statusCode,
+      }),
+    },
   };
 
   if (isLocal) {
