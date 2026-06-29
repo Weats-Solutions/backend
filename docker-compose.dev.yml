@@ -4,10 +4,8 @@ services:
   realtime:
     build:
       context: .
-      dockerfile: Dockerfile.realtime
-      args:
-        CORE_DB_URL: ${CORE_DB_URL}
-        ORDERS_DB_URL: ${ORDERS_DB_URL}
+      dockerfile: Dockerfile
+      target: realtime
     container_name: weats-dev-realtime
     restart: always
     ports:
@@ -24,10 +22,8 @@ services:
   webhooks:
     build:
       context: .
-      dockerfile: Dockerfile.webhooks
-      args:
-        CORE_DB_URL: ${CORE_DB_URL}
-        ORDERS_DB_URL: ${ORDERS_DB_URL}
+      dockerfile: Dockerfile
+      target: webhooks
     container_name: weats-dev-webhooks
     restart: always
     ports:
@@ -49,10 +45,8 @@ services:
   dashboard:
     build:
       context: .
-      dockerfile: Dockerfile.dashboard
-      args:
-        CORE_DB_URL: ${CORE_DB_URL}
-        ORDERS_DB_URL: ${ORDERS_DB_URL}
+      dockerfile: Dockerfile
+      target: dashboard
     container_name: weats-dev-dashboard
     restart: always
     ports:
@@ -74,9 +68,8 @@ services:
   landing:
     build:
       context: .
-      dockerfile: Dockerfile.landing
-      args:
-        CORE_DB_URL: ${CORE_DB_URL}
+      dockerfile: Dockerfile
+      target: landing
     container_name: weats-dev-landing
     restart: always
     env_file:
@@ -98,10 +91,8 @@ services:
   workers:
     build:
       context: .
-      dockerfile: Dockerfile.workers
-      args:
-        CORE_DB_URL: ${CORE_DB_URL}
-        ORDERS_DB_URL: ${ORDERS_DB_URL}
+      dockerfile: Dockerfile
+      target: workers
     container_name: weats-dev-workers
     restart: always
     env_file:
@@ -121,10 +112,8 @@ services:
   catalog:
     build:
       context: .
-      dockerfile: Dockerfile.catalog
-      args:
-        CORE_DB_URL: ${CORE_DB_URL}
-        ORDERS_DB_URL: ${ORDERS_DB_URL}
+      dockerfile: Dockerfile
+      target: catalog
     container_name: weats-dev-catalog
     restart: always
     ports:
